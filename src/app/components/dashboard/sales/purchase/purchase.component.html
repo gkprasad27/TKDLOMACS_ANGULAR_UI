@@ -1,0 +1,151 @@
+<div class="pt-1">
+  <h5 >   {{ 'PURCHASE.TITLE' | translate }} </h5>
+</div>
+
+
+<mat-card>
+  <mat-card-content class="mt-2">
+    <form [formGroup]="dateForm" autocomplete="off">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex p-2">
+          <div class="range-picker p-2">
+            <input type="text" ngxDaterangepickerMd startKey="start" [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}" endKey="end" placeholder="Choose date"
+              formControlName="selected" class="form-control" />
+            </div>
+            <div>
+              <mat-form-field class="form-element">
+                <input
+                  matInput
+                  placeholder="{{ 'PURCHASE.INVOICENO' | translate }}"
+                  formControlName="invoiceNo"
+                  appFocusOnEnter
+                  tabIndex="3"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="p-2 pl-3 d-flex">
+                <button
+                  mat-raised-button
+                  class="button-color-bule text-white m-2"
+                  (click)="search()"
+                  >
+
+                  {{ "COMMON.SEARCH" | translate }}
+                </button>
+                <button
+                  mat-raised-button
+                  class="button-color-red text-white m-2"
+                  (click)="reset()"
+                  >
+
+                  {{ "COMMON.RESET" | translate }}
+                </button>
+              </div>
+            </div>
+            <div>
+              <button
+                mat-raised-button
+                class="button-color-bule text-white m-2"
+                [routerLink]="['CreatePurchase']"
+                >
+                {{ "PURCHASE.NEWPURCHASE" | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- <mat-card class="mt-2">
+        <mat-card-content> -->
+
+          <div class="table">
+            <table
+              mat-table
+              [dataSource]="dataSource"
+              class="mat-elevation-z8 w-100"
+              >
+              <!-- <ng-container matColumnDef="slNo">
+              <th mat-header-cell *matHeaderCellDef>Sl No</th>
+              <td mat-cell *matCellDef="let element">
+                {{ dataSource.filteredData.indexOf(element) + 1 }}
+              </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="purchaseInvNo">
+              <th mat-header-cell *matHeaderCellDef>{{ "PURCHASE.purchaseInvNo" | translate }}</th>
+              <td mat-cell *matCellDef="let element">{{ element.purchaseInvNo }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="purchaseInvDate">
+              <th mat-header-cell *matHeaderCellDef>{{ "PURCHASE.purchaseInvDate" | translate }}</th>
+              <td mat-cell *matCellDef="let element">{{ element.purchaseInvDate | date: 'dd/MM/yyyy  hh:mm:ss' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="pranchCode">
+              <th mat-header-cell *matHeaderCellDef>{{ "PURCHASE.pranchCode" | translate }}</th>
+              <td mat-cell *matCellDef="let element">{{ element.pranchCode }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="pranchName">
+              <th mat-header-cell *matHeaderCellDef>{{ "PURCHASE.pranchName" | translate }}</th>
+              <td mat-cell *matCellDef="let element">{{ element.pranchName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ledgerCode">
+              <th mat-header-cell *matHeaderCellDef>{{ "PURCHASE.ledgerCode" | translate }}</th>
+              <td mat-cell *matCellDef="let element">{{ element.ledgerCode }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ledgerName">
+              <th mat-header-cell *matHeaderCellDef>{{ "PURCHASE.ledgerName" | translate }}</th>
+              <td mat-cell *matCellDef="let element">{{ element.ledgerName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="totalAmount">
+              <th mat-header-cell *matHeaderCellDef>{{ "PURCHASE.totalAmount" | translate }}</th>
+              <td mat-cell *matCellDef="let element">{{ element.grandTotal }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="purchaseReturn">
+              <th mat-header-cell *matHeaderCellDef> Purchase Invoice </th>
+              <td mat-cell *matCellDef="let element">
+                <u (click)="returnPurchase(element)" class="text-danger"> Purchase Return </u>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="stateCode">
+              <th mat-header-cell *matHeaderCellDef>{{ "PURCHASE.stateCode" | translate }}</th>
+              <td mat-cell *matCellDef="let element">{{ element.stateCode }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="userId">
+              <th mat-header-cell *matHeaderCellDef>{{ "PURCHASE.userId" | translate }}</th>
+              <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="shiftId">
+              <th mat-header-cell *matHeaderCellDef>{{ "PURCHASE.shiftId" | translate }}</th>
+              <td mat-cell *matCellDef="let element">{{ element.shiftId }}</td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns" (dblclick)="openPurchase(row)"></tr>
+          </table>
+        </div>
+        @if (!dataSource) {
+          <div class="d-flex justify-content-center p-2">
+            <strong> No records found </strong>
+          </div>
+        }
+
+        <mat-paginator
+          [pageSizeOptions]="[8, 10, 20]"
+          showFirstLastButtons
+        ></mat-paginator>
+
+      <!-- </mat-card-content>
+    </mat-card> -->
+
+  </mat-card-content>
+</mat-card>
+

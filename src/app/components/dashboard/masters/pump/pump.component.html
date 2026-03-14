@@ -1,0 +1,81 @@
+<div class="position-relative popup-class">
+
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span>{{'pump.title' | translate }}</span>
+    <mat-icon class="p-2  cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+      <div class="d--flex">
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'pump.pumpNo' | translate }}" formControlName="pumpNo" appFocusOnEnter tabIndex="4">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Branch Name</mat-label>
+          <mat-select placeholder="{{'pump.branchName' | translate }}" formControlName="branchName" (selectionChange)="getbranchCodeList()">
+            @for (bnchlist of BranchesList; track bnchlist) {
+              <mat-option [value]="bnchlist.text">
+                {{bnchlist.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="form-element">
+        <input matInput placeholder="{{'pump.branchCode' | translate }}" formControlName="branchCode" appFocusOnEnter tabIndex="1">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Product Code</mat-label>
+        <mat-select placeholder="{{'pump.productCode' | translate }}" formControlName="productId" (selectionChange)="getGetProductGroupsNamesList()" >
+          <mat-option *ngFor="let pglist of ProductGroupsList" [value]="pglist.id">
+            {{pglist.id}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'pump.productName' | translate }}" formControlName="productName" appFocusOnEnter tabIndex="2">
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'pump.tankNo' | translate }}" formControlName="tankNo" appFocusOnEnter tabIndex="3">
+      </mat-form-field>
+
+
+
+      <!-- <mat-form-field class="form-element">
+      <input matInput placeholder="{{'pump.pumpCapacityinLtrs' | translate }}" formControlName="pumpCapacityinLtrs" appFocusOnEnter tabIndex="5">
+    </mat-form-field> -->
+
+    <mat-form-field class="form-element">
+      <input matInput placeholder="{{'pump.meterReading' | translate }}" formControlName="meterReading" appFocusOnEnter tabIndex="6">
+    </mat-form-field>
+
+    <mat-label>Is Working</mat-label>
+    <mat-radio-group aria-label="Select an option" formControlName="isWorking" >
+      <mat-radio-button value="1">Yes</mat-radio-button>
+      <mat-radio-button value="0">No</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <mat-divider></mat-divider>
+
+</form>
+
+</mat-card-content>
+
+<div  class="form-element p-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mr-1"  (click)="cancel()">
+
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button  type="submit" class="button-color-bule text-white ml-1"  (click)="save()" appFocusOnEnter tabIndex="7">
+
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
+
+</div>

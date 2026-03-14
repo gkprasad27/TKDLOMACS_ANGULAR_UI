@@ -1,0 +1,65 @@
+<mat-card>
+  <div class="table-boarder">
+    <mat-card-title class="table-boarder-color">
+      {{ ( routeParam + ' Report') | translate }}
+    </mat-card-title>
+    <div class="m-2 table-boarder">
+      <div class="d-flex align-items-center ">
+        <button class="ml-2" mat-raised-button (click)="exportToExcel()">
+          <mat-icon>file_copy</mat-icon> Excel
+        </button>
+        <button class="ml-2" mat-raised-button (click)="exportToPdf()">
+          <mat-icon>picture_as_pdf</mat-icon> Pdf
+        </button>
+        <div class="btn-group d-flex">
+          <mat-form-field class="pl-2">
+            <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter" />
+          </mat-form-field>
+        </div>
+        <div id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
+          aria-labelledby="button-triggers-manual">
+          <div class="dropdown--width d-flex">
+            <mat-select class="p-2" [formControl]="tableMultiCtrl" placeholder="Search columns" [multiple]="true"
+              #multiSelect>
+              <ngx-mat-select-search (toggleAll)="toggleSelectAll($event)" >
+              </ngx-mat-select-search>
+              @for (bank of filteredTableMulti | async; track bank; let i = $index) {
+                <mat-option [value]="bank">
+                  <mat-checkbox [checked]="bank.hide" (change)="checkboxCheck(i)">
+                    {{ bank.label }}
+                  </mat-checkbox>
+                </mat-option>
+              }
+            </mat-select>
+            <div class="p-2 d-flex">
+              <button mat-raised-button class="button-color-bule text-white ml-1"
+                (click)="saveChanges();"> Save
+              </button>
+              <button mat-raised-button class="ml-1 button-color-red text-white"> Close </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table">
+        <table id="excelTable" #excelTable class="w-100" mat-table [dataSource]="dataSource" matSort #mytable>
+          @for (column of getDisplayedColumns(); track column) {
+            <ng-container [matColumnDef]="column">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <strong>{{ column }}</strong>
+                <!-- <strong> {{ ( routeParam + '.' +  column) | translate }} </strong> -->
+              </th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{ element[column] }}
+                <!-- <input matInput [value]="element[column]" [(ngModel)]="element[column]" /> -->
+              </td>
+            </ng-container>
+          }
+          <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+          <tr mat-row *matRowDef="let row; columns: getDisplayedColumns(); let i = index"></tr>
+        </table>
+      </div>
+      <mat-paginator [pageSizeOptions]="[5,10, 15]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</mat-card>

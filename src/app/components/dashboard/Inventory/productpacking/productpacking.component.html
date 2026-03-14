@@ -1,0 +1,39 @@
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'productpacking.title' | translate }} </span>
+    <mat-icon class="p-2  cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="d--flex">
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'productpacking.packingCode' | translate }}" formControlName="packingCode" appFocusOnEnter tabIndex="2">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'productpacking.packingName' | translate }}" formControlName="packingName" appFocusOnEnter tabIndex="1">
+        </mat-form-field>     
+
+        <mat-checkbox formControlName="batchVerify" style="margin-top: 25px;margin-left: 10px;" (input)="setbatchVerify()" #batchVerify>Batch Verify</mat-checkbox>
+
+        <mat-checkbox formControlName="barrelVerify" style="margin-top: 25px;margin-left: 10px;"  (input)="setbarrelVerify()" #barrelVerify>Barrel Verify</mat-checkbox>
+
+      </div>
+
+      <mat-divider></mat-divider>
+
+        <div  class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1"  (click)="cancel()">
+      
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+        <button mat-raised-button  type="submit" class="button-color-bule text-white ml-1"  (click)="save()" appFocusOnEnter tabIndex="3">
+          
+          {{ 'COMMON.SAVE' | translate }}
+         </button>
+  </div>
+
+    </form>
+
+  </mat-card-content>
+</div>

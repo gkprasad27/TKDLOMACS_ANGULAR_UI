@@ -1,0 +1,14 @@
+<input type="text" matInput [formControl]="objectControl" [matAutocomplete]="autoObject" />
+<mat-autocomplete #autoObject="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onItemSelect($event.option.value)">
+  @for (option of filteredObjectOptions$ | async; track option) {
+    <mat-option [value]="option[dataConfig.id]">
+      @if (option.displayMul) {
+        <span>
+          {{ option[dataConfig.id] }} - {{ option[dataConfig.text] }}
+        </span>
+      } @else {
+        {{ option[dataConfig.text] }}
+      }
+    </mat-option>
+  }
+</mat-autocomplete>

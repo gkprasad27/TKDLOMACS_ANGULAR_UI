@@ -1,0 +1,14 @@
+<mat-sidenav-container>
+  <mat-sidenav #appDrawer mode="over" opened="false">
+    <mat-nav-list>
+      @for (item of navItems; track item) {
+        <app-sidebar  [item]="item"></app-sidebar>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+  <div class="p-2">
+    <router-outlet></router-outlet>
+  </div>
+  <div fxFlex></div>
+</mat-sidenav-container>
+

@@ -1,0 +1,64 @@
+<div class="position-relative popup-class">
+
+  <mat-card-title  class="boader--color d-flex justify-content-between position-absolute w-100" >
+    <span> {{'sizes.title' | translate }} </span>
+    <mat-icon class="p-2  cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="d--flex">
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.code.valid }">
+          <input matInput placeholder="{{'sizes.code' | translate }}" disabled formControlName="code" appFocusOnEnter tabIndex="1">
+          @if (formControls.code.errors) {
+            <mat-error class="help-block">
+              @if (formControls.code.errors.required) {
+                <div>Code is required Min-2 Letters</div>
+              }
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.description.valid }">
+          <input matInput placeholder="{{'sizes.description' | translate }}" formControlName="description" appFocusOnEnter tabIndex="2">
+          @if (formControls.description.errors) {
+            <mat-error class="help-block">
+              @if (formControls.description.errors.required) {
+                <div>Description is required</div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'sizes.ext1' | translate }}" formControlName="ext1" appFocusOnEnter tabIndex="3">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'sizes.ext2' | translate }}" formControlName="ext2" appFocusOnEnter tabIndex="4">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'sizes.active' | translate }}" formControlName="active" appFocusOnEnter tabIndex="5">
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+    </form>
+
+  </mat-card-content>
+
+
+  <div  class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1"  (click)="cancel()">
+
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button  type="submit" class="button-color-bule text-white ml-1"  (click)="save()" appFocusOnEnter tabIndex="6">
+
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

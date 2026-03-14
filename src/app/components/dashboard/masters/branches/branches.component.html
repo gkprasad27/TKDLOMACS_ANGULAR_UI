@@ -1,0 +1,200 @@
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'branches.title' | translate }} </span>
+    <mat-icon class="p-2  cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
+    <form [formGroup]="modelFormData" autocomplete="off">
+      <div class="d--flex">
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.branchCode.valid }">
+          <input matInput placeholder="{{'branches.branchCode' | translate }}" formControlName="branchCode" appFocusOnEnter tabIndex="1">
+          @if (formControls.branchCode.errors) {
+            <mat-error class="help-block">
+              @if (formControls.branchCode.errors.required) {
+                <div>Code is required </div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.branchName.valid }">
+          <input matInput placeholder="{{'branches.branchName' | translate }}" formControlName="branchName" appFocusOnEnter tabIndex="2">
+          @if (formControls.branchName.errors) {
+            <mat-error class="help-block">
+              @if (formControls.branchName.errors.required) {
+                <div>Name is required</div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label [translate]="'profitCenter.compCode'"></mat-label>
+          <mat-select formControlName="companyId">
+            @for (comp of companyList; track comp) {
+              <mat-option [value]="comp.companyId">
+                {{comp.companyId}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field class="form-element">
+        <input matInput placeholder="{{'branches.isMainBranch' | translate }}" formControlName="isMainBranch" appFocusOnEnter tabIndex="3">
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'branches.subBranchof' | translate }}" formControlName="subBranchof" appFocusOnEnter tabIndex="4">
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'branches.branchImage' | translate }}" formControlName="branchImage" appFocusOnEnter tabIndex="5">
+      </mat-form-field> -->
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'branches.address' | translate }}" formControlName="address" appFocusOnEnter tabIndex="6">
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'branches.city' | translate }}" formControlName="city" appFocusOnEnter tabIndex="7">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label [translate]="'branches.state'"></mat-label>
+        <select matNativeControl id="state" placeholder="{{'branches.state' | translate }}">
+          <option value="" disabled selected></option>
+          <option value="AndharaPradesh">AndharaPradesh</option>
+          <option value="Telangana">Telangana</option>
+        </select>
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'branches.country' | translate }}" formControlName="country" appFocusOnEnter tabIndex="9">
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'branches.pinCode' | translate }}" formControlName="pinCode" appFocusOnEnter tabIndex="10">
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'branches.phone' | translate }}" formControlName="phone" appFocusOnEnter tabIndex="11">
+      </mat-form-field>
+      <!-- <mat-form-field class="form-element">
+      <input matInput placeholder="{{'branches.fax' | translate }}" formControlName="fax" appFocusOnEnter tabIndex="12">
+    </mat-form-field> -->
+    <mat-form-field class="form-element">
+      <input matInput placeholder="{{'branches.email' | translate }}" formControlName="email" appFocusOnEnter tabIndex="13">
+    </mat-form-field>
+    <mat-form-field class="form-element">
+      <input matInput placeholder="{{'branches.gstin' | translate }}" formControlName="gstin" appFocusOnEnter tabIndex="14">
+    </mat-form-field>
+    <!-- <mat-form-field class="form-element">
+    <input matInput placeholder="{{'branches.narration' | translate }}" formControlName="narration" appFocusOnEnter tabIndex="15">
+  </mat-form-field>
+  <mat-form-field class="form-element">
+    <input matInput placeholder="{{'branches.sapCode' | translate }}" formControlName="sapCode" appFocusOnEnter tabIndex="16">
+  </mat-form-field> -->
+  <!--<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.address1' | translate }}" formControlName="address1" appFocusOnEnter tabIndex="3">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.address2' | translate }}" formControlName="address2" appFocusOnEnter tabIndex="4">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.address3' | translate }}" formControlName="address3" appFocusOnEnter tabIndex="5">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.address4' | translate }}" formControlName="address4" appFocusOnEnter tabIndex="6">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.advanceAmount' | translate }}" formControlName="advanceAmount" appFocusOnEnter tabIndex="7">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.bankAccountNumber' | translate }}" formControlName="bankAccountNumber" appFocusOnEnter tabIndex="8">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.bankBranch' | translate }}" formControlName="bankBranch" appFocusOnEnter tabIndex="9">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.bankName' | translate }}" formControlName="bankName" appFocusOnEnter tabIndex="10">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.building' | translate }}" formControlName="building" appFocusOnEnter tabIndex="11">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label [translate]="'profitCenter.compCode'"></mat-label>
+  <mat-select formControlName="compCode" >
+    <mat-option *ngFor="let comp of companyList" [value]="comp.companyId">
+      {{comp.companyId}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.email' | translate }}" formControlName="email" appFocusOnEnter tabIndex="12">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.gstno' | translate }}" formControlName="gstNo" appFocusOnEnter tabIndex="13">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.ifsccode' | translate }}" formControlName="ifsccode" appFocusOnEnter tabIndex="14">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.leaseAmount' | translate }}" formControlName="leaseAmount" appFocusOnEnter tabIndex="15">
+</mat-form-field>
+<mat-form-field>
+  <input matInput [matDatepicker]="picker1" placeholder="{{'branches.leaseStartDate' | translate }}" formControlName="leaseStartDate" >
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+  <input matInput [matDatepicker]="picker2" placeholder="{{'branches.leaseExpiryDate' | translate }}" formControlName="leaseExpiryDate" >
+  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2></mat-datepicker>
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.ownerName' | translate }}" formControlName="ownerName" appFocusOnEnter tabIndex="16">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.phoneNo' | translate }}" formControlName="phoneNo" appFocusOnEnter tabIndex="17">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.phone1' | translate }}" formControlName="phone1" appFocusOnEnter tabIndex="18">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.phone2' | translate }}" formControlName="phone2" appFocusOnEnter tabIndex="19">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.phone3' | translate }}" formControlName="phone3" appFocusOnEnter tabIndex="20">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.active' | translate }}" formControlName="active" appFocusOnEnter tabIndex="21">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.place' | translate }}" formControlName="place" appFocusOnEnter tabIndex="22">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label [translate]="'branches.state'"></mat-label>
+  <select matNativeControl id="state" placeholder="{{'branches.state' | translate }}" >
+    <option value="" disabled selected></option>
+    <option value="AndharaPradesh">AndharaPradesh</option>
+    <option value="Telangana">Telangana</option>
+  </select>
+</mat-form-field>
+
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.pinCode' | translate }}" formControlName="pinCode" appFocusOnEnter tabIndex="23">
+</mat-form-field>
+<mat-form-field class="form-element">
+  <input matInput placeholder="{{'branches.companyCodeNavigation' | translate }}" formControlName="companyCodeNavigation" appFocusOnEnter tabIndex="24">
+</mat-form-field>-->
+
+</div>
+<mat-divider></mat-divider>
+</form>
+</mat-card-content>
+
+<div  class="form-element p-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mr-1"  (click)="cancel()">
+
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button  type="submit" class="button-color-bule text-white ml-1"  (click)="save()" appFocusOnEnter tabIndex="25">
+
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
+
+</div>

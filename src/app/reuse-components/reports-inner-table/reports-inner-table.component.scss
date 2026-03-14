@@ -1,0 +1,72 @@
+$color-custome: #e8dbdb;
+$color-gray: #dee2e6;
+$color-blue: #027ff4;
+$color-white: white;
+
+// @import '../../../'
+
+.table {
+  overflow-x: scroll;
+}
+
+:host ::ng-deep table {
+  font-family: "Verdana", Geneva, Tahoma, sans-serif;
+  & > tbody  {
+    & tr {
+      border-bottom: 1px solid #ddd;
+    }
+    & tr:nth-child(even) {
+    background-color: #f9f9f9
+    }
+    & tr:nth-child(odd) {
+      background-color: $color-white
+      }
+      & tr:nth-child(even):hover {
+        background-color: $color-gray
+        }
+        & tr:nth-child(odd):hover {
+          background-color: $color-white
+          }
+  }
+}
+
+mat-card {
+  box-shadow: none !important;
+}
+
+.mat-header-cell, .mat-cell {
+    min-width: 150px;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  border: none !important;
+}
+
+.table th {
+  background-color: $color-blue;
+  color: $color-white;
+}
+
+.dropdown--width {
+  width: 20rem;
+}
+
+.table tr {
+  height: 40px !important;
+  cursor: pointer;
+}
+
+.table-boarder {
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}
+
+.table-boarder-color {
+  padding: 0rem 1.25rem;
+      margin-bottom: 0;
+      background-color: rgba(0,0,0,.03);
+      border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+

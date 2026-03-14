@@ -1,0 +1,88 @@
+<div class="position-relative">
+
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'componentmaster.title' | translate }} </span>
+    <mat-icon class="p-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="d--flex">
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.componentCode.valid }">
+          <input matInput placeholder="{{'componentmaster.componentCode' | translate }}" disabled
+            formControlName="componentCode" appFocusOnEnter tabIndex="1">
+            @if (formControls.componentCode.errors) {
+              <mat-error class="help-block">
+                @if (formControls.componentCode.errors.required) {
+                  <div>Component Code is required </div>
+                }
+              </mat-error>
+            }
+
+          </mat-form-field>
+
+          <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.componentName.valid }">
+            <input matInput placeholder="{{'componentmaster.componentName' | translate }}" formControlName="componentName"
+              appFocusOnEnter tabIndex="2">
+              @if (formControls.componentName.errors) {
+                <mat-error class="help-block">
+                  @if (formControls.componentName.errors.required) {
+                    <div>Component Name is required</div>
+                  }
+                </mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>{{'componentmaster.componentType' | translate }}</mat-label>
+              <mat-select formControlName="componentType">
+                @for (conflist of configureList; track conflist) {
+                  <mat-option [value]="conflist.id">
+                    {{conflist.text}}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>{{'componentmaster.duration' | translate }}</mat-label>
+              <mat-select formControlName="duration">
+                @for (conflist of duration; track conflist) {
+                  <mat-option [value]="conflist.value">
+                    {{conflist.viewValue}}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>{{'componentmaster.specificMonth' | translate }}</mat-label>
+              <mat-select formControlName="specificMonth">
+                @for (conflist of months; track conflist) {
+                  <mat-option [value]="conflist.value">
+                    {{conflist.viewValue}}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <mat-divider></mat-divider>
+
+
+
+        </form>
+
+      </mat-card-content>
+      <div class="form-element p-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
+
+          {{ 'COMMON.CANCEL' | translate }}
+        </button>
+        <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
+          tabIndex="6">
+
+          {{ 'COMMON.SAVE' | translate }}
+        </button>
+      </div>
+    </div>

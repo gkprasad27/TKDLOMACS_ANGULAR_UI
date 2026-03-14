@@ -1,0 +1,121 @@
+<div class="p-1">
+  <h4> {{ 'rolePrevilages.title' | translate }} </h4>
+</div>
+
+
+<mat-card>
+  <mat-card-content class="m-2">
+
+    <form [formGroup]="formData" autocomplete="off">
+      <div class="d--flex">
+
+        <mat-form-field>
+          <mat-label>{{ 'rolePrevilages.role' | translate }}</mat-label>
+          <mat-select formControlName="role"  (selectionChange)="onRuleChange($event)" appFocusOnEnter tabIndex="1">
+            @for (role of roleArray; track role) {
+              <mat-option [value]="role.id">
+                {{ role.text }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ 'rolePrevilages.headerMenu' | translate }}</mat-label>
+          <mat-select formControlName="parentMenu" (selectionChange)="selectedParentMenu();" appFocusOnEnter
+            tabIndex="2">
+            @for (pm of parentMenu; track pm) {
+              <mat-option [value]="pm.id">
+                {{ pm.text }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+    </form>
+
+  </mat-card-content>
+
+  <mat-card-content>
+    <div class="table">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+        <ng-container matColumnDef="ext4">
+          <th mat-header-cell *matHeaderCellDef>{{ "rolePrevilages.menuName" | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.ext4 }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="active">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox [hidden]="!dataSource" (change)="checkboxCheck($event, 'active')">
+            </mat-checkbox>
+            <span class="m-1"> {{ "rolePrevilages.active" | translate }} </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox [(ngModel)]="element.active" [checked]="element.active">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="canAdd">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox [hidden]="!dataSource"  (change)="checkboxCheck($event, 'canAdd')">
+            </mat-checkbox>
+            <span class="m-1"> {{ "rolePrevilages.add" | translate }} </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox [(ngModel)]="element.canAdd" [checked]="element.canAdd">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="canEdit">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox [hidden]="!dataSource"  (change)="checkboxCheck($event, 'canEdit')">
+            </mat-checkbox>
+            <span class="m-1"> {{ "rolePrevilages.edit" | translate }} </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox [(ngModel)]="element.canEdit" [checked]="element.canEdit">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="canDelete">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox [hidden]="!dataSource"  (change)="checkboxCheck($event, 'canDelete')">
+            </mat-checkbox>
+            <span class="m-1"> {{ "rolePrevilages.delete" | translate }} </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox [(ngModel)]="element.canDelete" [checked]="element.canDelete">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    @if (!dataSource) {
+      <div  class="d-flex justify-content-center align-items-center no_data_height">
+        <img class="text-bottom" width="500" height="300" src="assets/images/Data_not_found.png">
+      </div>
+    }
+
+    <mat-paginator [pageSizeOptions]="[8, 10, 20]" showFirstLastButtons></mat-paginator>
+
+
+    <div class="form-element p-2 d-flex justify-content-end border">
+      <button mat-raised-button class="button-color-red text-white mr-1" (click)="reset()">
+
+        {{ 'COMMON.RESET' | translate }}
+      </button>
+      <button mat-raised-button class="button-color-bule text-white" (click)="save()">
+
+        {{ 'COMMON.SAVE' | translate }}
+      </button>
+    </div>
+
+  </mat-card-content>
+
+</mat-card>

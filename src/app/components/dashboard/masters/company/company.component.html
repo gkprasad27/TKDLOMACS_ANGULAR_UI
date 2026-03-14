@@ -1,0 +1,97 @@
+<div class="position-relative popup-class">
+
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'company.title' | translate }} </span>
+    <mat-icon class="p-2  cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="d--flex">
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.companyId.valid }">
+          <input matInput placeholder="{{'company.companyId' | translate }}" disabled formControlName="companyId" appFocusOnEnter tabIndex="1">
+          @if (formControls.companyId.errors) {
+            <mat-error class="help-block">
+              @if (formControls.companyId.errors.required) {
+                <div>Code is required</div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.companyName.valid }">
+          <input matInput placeholder="{{'company.companyName' | translate }}" formControlName="companyName" appFocusOnEnter tabIndex="2">
+          @if (formControls.companyName.errors) {
+            <mat-error class="help-block">
+              @if (formControls.companyName.errors.required) {
+                <div>Name is required</div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'company.mailingName' | translate }}" formControlName="mailingName" appFocusOnEnter tabIndex="3">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'company.address' | translate }}" formControlName="address" appFocusOnEnter tabIndex="4">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'company.phone' | translate }}" formControlName="phone" appFocusOnEnter tabIndex="5">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'company.emailId' | translate }}" formControlName="emailId" appFocusOnEnter tabIndex="6">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'company.web' | translate }}" formControlName="web" appFocusOnEnter tabIndex="7">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'company.country' | translate }}" formControlName="country" appFocusOnEnter tabIndex="8">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'company.state' | translate }}" formControlName="state" appFocusOnEnter tabIndex="9">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'company.pin' | translate }}" formControlName="pin" appFocusOnEnter tabIndex="10">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'company.currencyId' | translate }}" formControlName="currencyId" appFocusOnEnter tabIndex="11">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="{{'company.financialYearFrom' | translate }}" formControlName="financialYearFrom" tabIndex="12">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker2" placeholder="{{'company.booksBeginingFrom' | translate }}" formControlName="booksBeginingFrom" tabIndex="13">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'company.gstin' | translate }}" formControlName="gstin" appFocusOnEnter tabIndex="14">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'company.city' | translate }}" formControlName="city" appFocusOnEnter tabIndex="20">
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+
+    </form>
+
+  </mat-card-content>
+
+
+  <div  class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1"  (click)="cancel()">
+
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button  type="submit" class="button-color-bule text-white ml-1"  (click)="save()" appFocusOnEnter tabIndex="21">
+
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

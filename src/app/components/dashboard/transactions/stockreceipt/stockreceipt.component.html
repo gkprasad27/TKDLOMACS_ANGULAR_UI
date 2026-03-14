@@ -1,0 +1,120 @@
+<mat-card>
+  <div class="table-boarder">
+    <mat-card-title class="table-boarder-color">
+      Stock Receipts
+    </mat-card-title>
+
+    <mat-card-content class="m-2">
+      <div>
+        <form [formGroup]="dateForm" autocomplete="off">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex">
+              <div class="range-picker p-2">
+                <input type="text"
+                  ngxDaterangepickerMd
+                  startKey="start"
+                  endKey="end"
+                  placeholder="Choose date"
+                  formControlName="selected"
+                  class="form-control" />
+                </div>
+                <div>
+                  <mat-form-field class="form-element">
+                    <input matInput
+                      placeholder="{{ 'stockreceipts.receiptNo' | translate }}"
+                      formControlName="receiptNo"
+                      appFocusOnEnter
+                      tabIndex="3" />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="p-2 pl-3 d-flex">
+                    <button mat-raised-button
+                      class="button-color-bule text-white m-2"
+                      (click)="search()">
+                      <!-- <mat-icon>search</mat-icon> -->
+                      {{ "COMMON.SEARCH" | translate }}
+                    </button>
+                    <button mat-raised-button
+                      class="button-color-red text-white m-2"
+                      (click)="reset()">
+                      <!-- <mat-icon>clear</mat-icon> -->
+                      {{ "COMMON.RESET" | translate }}
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <button mat-raised-button class="button-color-bule text-white m-2" [routerLink]="['CreateStockreceipts']">Create New StockReciept</button>
+                </div>
+              </div>
+            </form>
+
+            <div class="table">
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+                <!--<ng-container matColumnDef="slNo">
+                <th mat-header-cell *matHeaderCellDef> Sl No </th>
+                <td mat-cell *matCellDef="let element;"> {{dataSource.filteredData.indexOf(element) + 1}} </td>
+              </ng-container>-->
+
+              <ng-container matColumnDef="fromBranchCode">
+                <th mat-header-cell *matHeaderCellDef> FromBranchCode </th>
+                <td mat-cell *matCellDef="let element;"> {{element.fromBranchCode}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="fromBranchName">
+                <th mat-header-cell *matHeaderCellDef> FromBranchName </th>
+                <td mat-cell *matCellDef="let element;"> {{element.fromBranchName}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="toBranchCode">
+                <th mat-header-cell *matHeaderCellDef> ToBranchCode </th>
+                <td mat-cell *matCellDef="let element;"> {{element.toBranchCode}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="toBranchName">
+                <th mat-header-cell *matHeaderCellDef> ToBranchName </th>
+                <td mat-cell *matCellDef="let element;"> {{element.toBranchName}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="receiptNo">
+                <th mat-header-cell *matHeaderCellDef> ReceiptNo </th>
+                <td mat-cell *matCellDef="let element;"> {{element.receiptNo}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="receiptDate">
+                <th mat-header-cell *matHeaderCellDef> ReceiptDate </th>
+                <td mat-cell *matCellDef="let element;"> {{element.receiptDate | date:'dd/MM/yyyy  hh:mm:ss'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="userId">
+                <th mat-header-cell *matHeaderCellDef> UserId </th>
+                <td mat-cell *matCellDef="let element;"> {{element.userId}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="shiftId">
+                <th mat-header-cell *matHeaderCellDef> ShiftId </th>
+                <td mat-cell *matCellDef="let element;"> {{element.shiftId}} </td>
+              </ng-container>
+
+
+
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns" (dblclick)="openStockreceipt(row)"></tr>
+            </table>
+
+
+          </div>
+          @if (!dataSource) {
+            <div class="d-flex justify-content-center p-2">
+              <strong> No records found </strong>
+            </div>
+          }
+
+          <mat-paginator [pageSizeOptions]="[8, 10, 20]" showFirstLastButtons></mat-paginator>
+
+        </div>
+
+      </mat-card-content>
+    </div>
+  </mat-card>

@@ -1,0 +1,17 @@
+<div class="container pb-2">
+  <span>Are you sure you want to save? </span>
+</div>
+
+<mat-divider></mat-divider>
+
+
+<div  class="form-element p-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mr-1"  (click)="closeDialog()">
+    
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+      <button mat-raised-button  type="submit" class="button-color-bule text-white ml-1"  (click)="doAction()">
+        
+        {{ 'COMMON.SAVE' | translate }}
+       </button>
+</div>

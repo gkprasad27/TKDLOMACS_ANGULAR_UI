@@ -1,0 +1,96 @@
+<div class="position-relative popup-class">
+
+  <mat-card-title  class="boader--color d-flex justify-content-between position-absolute w-100" >
+    <span> {{'pfmaster.title' | translate }} </span>
+    <mat-icon class="p-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="d--flex">
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.pftypeName.valid }" >
+          <input matInput placeholder="{{'pfmaster.pftypeName' | translate }}" disabled formControlName="pftypeName" appFocusOnEnter tabIndex="1">
+          @if (formControls.pftypeName.errors) {
+            <mat-error class="help-block">
+              @if (formControls.pftypeName.errors.required) {
+                <div>PF TypeName is required </div>
+              }
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'pfmaster.componentCode' | translate }}</mat-label>
+          <mat-select formControlName="componentCode">
+            @for (componentList of componentList; track componentList) {
+              <mat-option [value]="componentList.id">
+                {{componentList.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.employeeContribution.valid }">
+          <input matInput placeholder="{{'pfmaster.employeeContribution' | translate }}" formControlName="employeeContribution" appFocusOnEnter tabIndex="2" type="number">
+          @if (formControls.employeeContribution.errors) {
+            <mat-error class="help-block">
+              @if (formControls.employeeContribution.errors.required) {
+                <div>Employee Contribution is required and Number only Allow</div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.employerContribution.valid }" >
+          <input matInput placeholder="{{'pfmaster.employerContribution' | translate }}" formControlName="employerContribution" appFocusOnEnter tabIndex="3" type="number">
+          @if (formControls.employerContribution.errors) {
+            <mat-error class="help-block">
+              @if (formControls.employerContribution.errors.required) {
+                <div>Employer Contribution is required and Number only Allow</div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Limit</mat-label>
+          <mat-select formControlName="limit" placeholder="Limit">
+            @for (limit of limit; track limit) {
+              <mat-option [value]="limit.value">
+                {{limit.viewValue}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Contribution Type</mat-label>
+          <mat-select formControlName="contributionType" placeholder="Contribution Type" >
+            @for (contributionType of contributionType; track contributionType) {
+              <mat-option [value]="contributionType.value">
+                {{contributionType.viewValue}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+
+
+
+    </form>
+
+  </mat-card-content>
+  <div class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
+
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" >
+
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

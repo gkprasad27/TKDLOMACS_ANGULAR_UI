@@ -1,0 +1,79 @@
+<div class="position-relative popup-class" >
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
+    <form [formGroup]="modelFormData" autocomplete="off">
+      <div class="d--flex">
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'AdditionalShareTransfer.shareTransferCode' | translate }}" formControlName="shareTransferCode"
+            appFocusOnEnter tabIndex="1">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="{{'AdditionalShareTransfer.transferDate' | translate }}"
+            formControlName="transferDate">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="form-element">
+          <mat-label>{{ 'ShareTransfer.fromMemberCode' | translate }}</mat-label>
+          <input matInput placeholder="{{'AdditionalShareTransfer.fromMemberCode' | translate }}" formControlName="fromMemberCode"
+          appFocusOnEnter tabIndex="1">
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'AdditionalShareTransfer.toMemberCode' | translate }}" formControlName="toMemberCode"
+          appFocusOnEnter tabIndex="2">
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'AdditionalShareTransfer.toMemberName' | translate }}" formControlName="toMemberName"
+          appFocusOnEnter tabIndex="3">
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'AdditionalShareTransfer.fromMemberSharesBefore' | translate }}" formControlName="fromMemberSharesBefore"
+          appFocusOnEnter tabIndex="4">
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'AdditionalShareTransfer.fromMemberSharesAfter' | translate }}" formControlName="fromMemberSharesAfter"
+          appFocusOnEnter tabIndex="5">
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'AdditionalShareTransfer.toMemberSharesBefore' | translate }}" formControlName="toMemberSharesBefore"
+          appFocusOnEnter tabIndex="4">
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="{{'AdditionalShareTransfer.toMemberSharesAfter' | translate }}" formControlName="toMemberSharesAfter"
+          appFocusOnEnter tabIndex="5">
+      </mat-form-field>
+        <!-- <mat-form-field class="form-element">
+          <input matInput placeholder="{{'vehicle.vehicleModel' | translate }}" formControlName="vehicleModel"
+            appFocusOnEnter tabIndex="6">
+        </mat-form-field> -->
+        <!-- <mat-form-field>
+          <mat-label [translate]="'vehicle.vehicleTypeName'"></mat-label>
+          <select matNativeControl placeholder="{{'vehicle.vehicleTypeName' | translate }}"
+            formControlName="vehicleTypeName">
+            <option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.text">
+              {{vehicleType.text}}</option>
+          </select>
+        </mat-form-field> -->
+
+      </div>
+      <mat-divider></mat-divider>
+    </form>
+  </mat-card-content>
+
+  <div class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1" (click)="reset()">
+
+      {{ 'COMMON.RESET' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
+      tabIndex="25">
+
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+
+</div>
+
+<app-table [tableData]="shareTableData" (addOrUpdateEvent)="addOrUpdateEvent($event)" [isSharetransfer]="true">
+</app-table>

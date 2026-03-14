@@ -1,0 +1,42 @@
+ <div *ngIf="tableUrl">
+  <div *ngIf="tableUrl.coustom">
+    <app-table [tableData]="tableData"
+               (addOrUpdateEvent)="addOrUpdateEvent($event)"></app-table>
+  </div>
+  <div *ngIf="!tableUrl.coustom && routeParams == 'cashpayment'">
+    <app-cashpayment></app-cashpayment>
+  </div>
+  <div *ngIf="!tableUrl.coustom && routeParams == 'cashreceipt'">
+    <app-cashreceipt></app-cashreceipt>
+  </div>
+  <div *ngIf="!tableUrl.coustom && routeParams == 'bankpayment'">
+    <app-bankpayment></app-bankpayment>
+  </div>
+  <div *ngIf="!tableUrl.coustom && routeParams == 'bankreceipt'">
+    <app-bankreceipt></app-bankreceipt>
+  </div>
+  <div *ngIf="!tableUrl.coustom && routeParams == 'journalvoucher'">
+    <app-journalvoucher></app-journalvoucher>
+  </div>
+  <div *ngIf="!tableUrl.coustom && routeParams == 'stockissues'">
+    <app-stockissues></app-stockissues>
+  </div>
+  <div *ngIf="!tableUrl.coustom && routeParams == 'purchaserequisition'">
+    <app-purchaserequisition></app-purchaserequisition>
+  </div>
+  <div *ngIf="!tableUrl.coustom && routeParams == 'purchaserequisitionapproval'">
+    <app-purchaserequisitionapproval></app-purchaserequisitionapproval>
+  </div>
+  <div *ngIf="!tableUrl.coustom && routeParams == 'stockreceipt'">
+    <app-stockreceipt></app-stockreceipt>
+  </div>
+
+  <div *ngIf="!tableUrl.coustom && routeParams == 'stockshort'">
+    <app-stockshort></app-stockshort>
+  </div>
+  <div *ngIf="!tableUrl.coustom && routeParams == 'oilconversion'">
+    <app-oilconversion></app-oilconversion>
+  </div>
+  <div *ngIf="!tableUrl.coustom && routeParams == 'stockexcess'">
+    <app-stockexcess></app-stockexcess>
+  </div>

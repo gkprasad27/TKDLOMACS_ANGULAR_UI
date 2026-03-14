@@ -1,0 +1,73 @@
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'approvalType.title' | translate }} </span>
+    <mat-icon class="p-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="d--flex">
+        <mat-form-field>
+          <mat-label>ApprovalType</mat-label>
+          <mat-select formControlName="approvalType1" placeholder="approvalType1" >
+            @for (aptype of aptypes; track aptype) {
+              <mat-option [value]="aptype.value">
+                {{aptype.viewValue}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'approvaltype.branchCode' | translate }}</mat-label>
+          <mat-select formControlName="department">
+            @for (branch of branchesList; track branch) {
+              <mat-option [value]="branch.id">
+                {{branch.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'approvaltype.company' | translate }}</mat-label>
+          <mat-select formControlName="company">
+            @for (comp of compiniesList; track comp) {
+              <mat-option [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'approvaltype.approvedBy' | translate }}</mat-label>
+          <mat-select formControlName="approvedBy">
+            @for (emp of employeesList; track emp) {
+              <mat-option [value]="emp.id">
+                {{emp.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="form-element p-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
+
+          {{ 'COMMON.CANCEL' | translate }}
+        </button>
+        <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
+          tabIndex="5">
+
+          ApplyApprovalType
+        </button>
+      </div>
+
+    </form>
+
+  </mat-card-content>
+</div>

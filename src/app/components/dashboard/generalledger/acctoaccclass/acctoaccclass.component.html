@@ -1,0 +1,86 @@
+<div class="position-relative popup-class">
+
+  <mat-card-title  class="boader--color d-flex justify-content-between position-absolute w-100" >
+    <span> {{'acctoaccclass.title' | translate }} </span>
+    <mat-icon class="p-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="d--flex">
+        <mat-form-field>
+          <mat-label>{{'acctoaccclass.accClass' | translate }}</mat-label>
+          <mat-select formControlName="accClass">
+            @for (acc of accClassList; track acc) {
+              <mat-option [value]="acc.id">
+                {{acc.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'acctoaccclass.transactionType' | translate }}</mat-label>
+          <mat-select formControlName="transactionType">
+            @for (tranList of tranTypes; track tranList) {
+              <mat-option [value]="tranList.id">
+                {{tranList.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <!--tranTypes-->
+        <mat-form-field>
+          <mat-label>{{'acctoaccclass.saleAcc' | translate }}</mat-label>
+          <mat-select formControlName="saleAcc">
+            @for (saleAccList of salesGlAcc; track saleAccList) {
+              <mat-option [value]="saleAccList.id">
+                {{saleAccList.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'acctoaccclass.purchaseAcc' | translate }}</mat-label>
+          <mat-select formControlName="purchaseAcc">
+            @for (purchAcc of purchaseAcc; track purchAcc) {
+              <mat-option [value]="purchAcc.id">
+                {{purchAcc.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'acctoaccclass.inventoryAcc' | translate }}</mat-label>
+          <mat-select formControlName="inventoryAcc">
+            @for (invenAcc of invAcc; track invenAcc) {
+              <mat-option [value]="invenAcc.id">
+                {{invenAcc.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+      <mat-divider></mat-divider>
+
+
+
+    </form>
+
+  </mat-card-content>
+  <div  class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1"  (click)="cancel()">
+
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button  type="submit" class="button-color-bule text-white ml-1"  (click)="save()" >
+
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

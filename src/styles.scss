@@ -1,0 +1,200 @@
+@use "reuse";
+
+body {
+  background-color: reuse.$background-color !important;
+}
+
+.mat-card {
+  padding: 0px !important;
+}
+
+.background--color {
+  background-color: reuse.$color-blue !important;
+}
+
+
+.mat-input-element:disabled {
+  color: rgba(0,0,0,.87);
+}
+
+
+ .mat-form-field  {
+  & .mat-select-value {
+  color: rgba(0,0,0,.87) !important;
+  }
+}
+
+.mat-raised-button {
+  box-shadow: none !important;
+  padding: 0 8px !important;
+ & .mat-icon {
+    font-size: 18px;
+    height: 18px !important;
+    width: 18px !important;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.ng--valid {
+  & .mat-form-field-label {
+    color: reuse.$color-green !important;
+  }
+  & .mat-form-field-ripple {
+    background-color: reuse.$color-green !important;
+  }
+}
+
+.cursor--pointer {
+  cursor: pointer;
+}
+
+.style-success {
+  background:  reuse.$color-green;
+}
+
+.style-error {
+  background:  reuse.$color-red;
+}
+
+.style-warning {
+  background:  reuse.$color-yellow;
+}
+
+.style-normal {
+  background:  reuse.$color-gray;
+}
+
+.background-header-boarder {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.background-header-style {
+  padding: 0rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.d--flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button-color-bule {
+  background-color:  reuse.$color-blue !important;
+}
+
+.button-color-red {
+  background-color:  reuse.$color-red !important;
+}
+
+mat-form-field {
+  margin: 5px;
+  flex: 0 0 24%;
+}
+
+.table {
+  overflow-x: scroll;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  & > tbody {
+    & tr {
+      border-bottom: 1px solid #ddd;
+      height: 40px !important;
+      cursor: pointer;
+      & th {
+        background-color:  reuse.$color-blue;
+        color:  reuse.$color-white;
+        vertical-align: middle;
+        border: none !important;
+      }
+    }
+    & td {
+      font-size: 12px;
+      vertical-align: middle;
+      border: none !important;
+    }
+    & tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    & tr:nth-child(odd) {
+      background-color:  reuse.$color-white;
+    }
+    & tr:nth-child(even):hover {
+      background-color: #f9f6f6;
+    }
+    & tr:nth-child(odd):hover {
+      background-color: #f9f6f6;
+    }
+  }
+}
+
+mat-option  {
+  & > mat-pseudo-checkbox {
+   display: none !important;
+  }
+}
+
+.cdk-overlay-pane-select-search.cdk-overlay-pane-select-search-with-offset {
+  margin: 50px 0px 0px 30px !important;
+ }
+
+ .popup-class {
+  & mat-form-field {
+    margin: 5px;
+    flex: 0 0 24%;
+  }
+  & mat-card-title {
+    min-height: 50px;
+    height: 50px;
+    z-index: 1000;
+  }
+  & mat-card-content {
+    max-height: 400px;
+  }
+}
+
+.boader--color {
+  padding: .30rem 1.25rem;
+  margin-bottom: 0;
+  background-color:  reuse.$color-poptitle;
+  color:  reuse.$color-white;
+}
+
+.custom-dialog-container {
+  & .mat-dialog-container {
+    padding: 0px !important;
+ }
+ 
+}
+
+.typeAhead {
+  border: none;
+  outline: none;
+  text-align: center;
+}
+
+table {
+  & input:focus {
+    background: #f6ff0091;
+  }
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

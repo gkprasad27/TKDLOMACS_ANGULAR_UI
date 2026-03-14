@@ -1,0 +1,84 @@
+<div class="position-relative popup-class">
+  <mat-card-title  class="boader--color d-flex justify-content-between position-absolute w-100" >
+    <span>  {{'taxintegration.title' | translate }} </span>
+    <mat-icon class="p-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="d--flex">
+        <mat-form-field>
+          <mat-label>T{{'taxintegration.taxCode' | translate }}</mat-label>
+          <mat-select formControlName="taxCode">
+            @for (taxcodeList of taxcodeList; track taxcodeList) {
+              <mat-option [value]="taxcodeList.id">
+                {{taxcodeList.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'taxintegration.sgst' | translate }}</mat-label>
+          <mat-select formControlName="sgst">
+            @for (taxcodeList of taxaccList; track taxcodeList) {
+              <mat-option [value]="taxcodeList.id">
+                {{taxcodeList.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'taxintegration.cgst' | translate }}</mat-label>
+          <mat-select formControlName="cgst">
+            @for (taxcodeList of taxaccList; track taxcodeList) {
+              <mat-option [value]="taxcodeList.id">
+                {{taxcodeList.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'taxintegration.ugst' | translate }}</mat-label>
+          <mat-select formControlName="ugst">
+            @for (taxcodeList of taxaccList; track taxcodeList) {
+              <mat-option [value]="taxcodeList.id">
+                {{taxcodeList.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'taxintegration.igst' | translate }}</mat-label>
+          <mat-select formControlName="igst">
+            @for (taxcodeList of taxaccList; track taxcodeList) {
+              <mat-option [value]="taxcodeList.id">
+                {{taxcodeList.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+      <mat-divider></mat-divider>
+
+
+
+    </form>
+
+  </mat-card-content>
+  <div  class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1"  (click)="cancel()">
+
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button  type="submit" class="button-color-bule text-white ml-1"  (click)="save()" >
+
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

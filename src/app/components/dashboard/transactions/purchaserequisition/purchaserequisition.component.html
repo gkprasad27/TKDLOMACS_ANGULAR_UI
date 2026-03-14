@@ -1,0 +1,100 @@
+<mat-card>
+  <div class="table-boarder">
+    <mat-card-title class="table-boarder-color">
+      PurchaseRequisition
+    </mat-card-title>
+
+    <mat-card-content class="m-2">
+      <div>
+        <form [formGroup]="dateForm" autocomplete="off">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex">
+              <div class="range-picker p-2">
+                <input type="text"
+                  ngxDaterangepickerMd
+                  startKey="start"
+                  endKey="end"
+                  placeholder="Choose date"
+                  formControlName="selected"
+                  class="form-control" />
+                </div>
+
+                <div>
+                  <mat-form-field class="form-element">
+                    <input matInput
+                      placeholder="{{ 'purchaserequisition.requisitionNo' | translate }}"
+                      formControlName="requisitionNo"
+                      appFocusOnEnter
+                      tabIndex="3" />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="p-2 pl-3 d-flex">
+                    <button mat-raised-button
+                      class="button-color-bule text-white m-2"
+                      (click)="search()">
+                      <mat-icon>search</mat-icon>
+                      {{ "COMMON.SEARCH" | translate }}
+                    </button>
+                    <button mat-raised-button
+                      class="button-color-red text-white m-2"
+                      (click)="reset()">
+                      <mat-icon>clear</mat-icon>
+                      {{ "COMMON.RESET" | translate }}
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <button mat-raised-button class="button-color-bule text-white m-2" [routerLink]="['CreatePurchaserequisition']">Create New PurchaseRequisition</button>
+                </div>
+              </div>
+            </form>
+
+            <div class="table">
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+
+
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef>RequisitionId </th>
+                  <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="requisitionNo">
+                  <th mat-header-cell *matHeaderCellDef> RequisitionNo </th>
+                  <td mat-cell *matCellDef="let element;"> {{element.requisitionNo}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="requisitionDate">
+                  <th mat-header-cell *matHeaderCellDef> RequisitionDate </th>
+                  <td mat-cell *matCellDef="let element;"> {{element.requisitionDate}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="company">
+                  <th mat-header-cell *matHeaderCellDef> Company </th>
+                  <td mat-cell *matCellDef="let element;"> {{element.company}} </td>
+                </ng-container>
+                <ng-container matColumnDef="branch">
+                  <th mat-header-cell *matHeaderCellDef> branch </th>
+                  <td mat-cell *matCellDef="let element;"> {{element.branch}} </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns" (dblclick)="openStockissues(row)"></tr>
+              </table>
+
+
+            </div>
+            @if (!dataSource) {
+              <div class="d-flex justify-content-center p-2">
+                <strong> No records found </strong>
+              </div>
+            }
+
+            <mat-paginator [pageSizeOptions]="[8, 10, 20]" showFirstLastButtons></mat-paginator>
+
+          </div>
+
+        </mat-card-content>
+      </div>
+    </mat-card>

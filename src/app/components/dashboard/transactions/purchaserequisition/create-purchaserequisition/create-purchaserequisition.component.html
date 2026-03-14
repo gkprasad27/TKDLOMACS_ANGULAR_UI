@@ -1,0 +1,196 @@
+<div class="p-1 d-flex">
+  <h4 [routerLink]="['/dashboard/transactions/purchaserequisition']"> <u class="cursor--pointer"> {{ 'purchaserequisition.title' | translate }}  </u>  </h4>
+  &nbsp; 	&nbsp; <h4>  / </h4> 	&nbsp;
+  <h5 class="p-1">  {{ 'purchaserequisition.newpurchaserequisition' | translate }} </h5>
+</div>
+
+<div class="">
+  <mat-card>
+
+    <mat-card-content>
+      <form [formGroup]="branchFormData" autocomplete="off">
+
+        <div class="d--flex mat-form-field-height">
+
+          <mat-form-field>
+            <mat-label>{{'purchaserequisition.company' | translate }}</mat-label>
+            <mat-select formControlName="company">
+              @for (comp of compiniesList; track comp) {
+                <mat-option [value]="comp.id">
+                  {{comp.text}}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="form-element">
+            <mat-label>{{ 'stockreceipts.fromBranchName' | translate }}</mat-label>
+            <mat-select formControlName="branch" appFocusOnEnter tabIndex="3" (selectionChange)="genaratereceiptNo();setBranchCode();">
+              @for (branch of GetBranchesListArray; track branch) {
+                <mat-option [value]="branch.id">
+                  {{ branch.id }} - {{branch.text}}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field class="form-element">
+            <input matInput placeholder="{{ 'stockreceipts.receiptNo' | translate }}" formControlName="requisitionNo"
+              appFocusOnEnter tabIndex="1">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="{{'stockreceipts.receiptDate' | translate }}"
+                formControlName="requisitionDate" appFocusOnEnter tabIndex="4" (click)="picker.open()" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </form>
+        </mat-card-content>
+
+      </mat-card>
+
+
+      <mat-card class="mt-2">
+
+
+        <mat-card-content>
+          <div class="table mt-3 mat-form-field-height">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+
+              <ng-container matColumnDef="productCode">
+                <th mat-header-cell *matHeaderCellDef>  {{ 'stockreceipts.productCode' | translate }} </th>
+                <td mat-cell *matCellDef="let element;">
+
+                  <input class="typeAhead" [(ngModel)]="element.productCode" type="search"
+                    [disabled]="element.text != 'obj'" (typeaheadOnSelect)="getdata($event)"
+                    (input)="getProductByProductCode($event.target.value)"
+                    [typeahead]="getProductByProductCodeArray" typeaheadOptionField='id'>
+
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="productName">
+                  <th mat-header-cell *matHeaderCellDef> {{ 'stockreceipts.productName' | translate }} </th>
+                  <td mat-cell *matCellDef="let element;">
+                    <input class="typeAhead" [(ngModel)]="element.productName" type="search"
+                      [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setProductName($event)"
+                      (input)="getProductByProductName($event.target.value)"
+                      [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="qty">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'purchaserequisition.qty' | translate }} </th>
+                    <td mat-cell *matCellDef="let element;">
+                      <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.qty"
+                        [(ngModel)]="element.qty"
+                        (input)="setToFormModel(element.text, 'qty', element.qty); clearQty(dataSource.filteredData.indexOf(element), element.qty, 'qty');" />
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="availbleQtyinBranch">
+                      <th mat-header-cell *matHeaderCellDef>{{ 'purchaserequisition.availbleQtyinBranch' | translate }}</th>
+                      <td mat-cell *matCellDef="let element">
+              <input matInput [value]="element.availbleQtyinBranch" [(ngModel)]="element.availbleQtyinBranch" (input)="
+                  setToFormModel(
+                    element.text,
+                    'availbleQtyinBranch',
+                    element.availbleQtyinBranch
+                  )
+                " />
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="availbleQtyinGowdown" hidden="hidden">
+                        <th mat-header-cell *matHeaderCellDef hidden="hidden">{{ 'purchaserequisition.availbleQtyinGowdown' | translate }}</th>
+                        <td mat-cell *matCellDef="let element" hidden="hidden">
+              <input matInput [value]="element.availbleQtyinGowdown" [(ngModel)]="element.availbleQtyinGowdown" (input)="
+                  setToFormModel(
+                    element.text,
+                    'availbleQtyinGowdown',
+                    element.availbleQtyinGowdown
+                  )
+                " />
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="approvedQty" hidden="hidden">
+                          <th mat-header-cell *matHeaderCellDef hidden="hidden">{{ 'purchaserequisition.approvedQty' | translate }}</th>
+                          <td mat-cell *matCellDef="let element" hidden="hidden">
+              <input matInput [value]="element.approvedQty" [(ngModel)]="element.approvedQty" (input)="
+                  setToFormModel(
+                    element.text,
+                    'approvedQty',
+                    element.approvedQty
+                  )
+                " />
+                            </td>
+                          </ng-container>
+
+
+                          <ng-container matColumnDef="delete">
+                            <th mat-header-cell *matHeaderCellDef>  </th>
+                            <td mat-cell *matCellDef="let element;">
+                              @if ((element.text == 'obj' && dataSource.filteredData.indexOf(element) != 0)) {
+                                <mat-icon class="cursor--pointer delete-icon"
+                                (click)="deleteRow(dataSource.filteredData.indexOf(element))">delete</mat-icon>
+                              }
+                            </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                          </tr>
+                        </table>
+
+                        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+                      </div>
+
+
+
+                    </mat-card-content>
+                  </mat-card>
+
+
+                  <mat-card class="mt-2">
+
+                    <mat-card-content>
+
+                      <form [formGroup]="branchFormData" autocomplete="off">
+
+                        <!--<div class="d-flex justify-content-between m-2">
+                        <div class="w-50">
+                          <mat-form-field>
+                            <mat-label>{{ 'stockreceipts.remarks' | translate }}</mat-label>
+                            <textarea matInput formControlName="remarks" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                            cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+                          </mat-form-field>
+                        </div>
+
+                      </div>-->
+
+                      <div class="d-flex justify-content-end mr-4">
+                        <div class="d-flex flex-column mr-2">
+                          <!--<mat-label>{{ 'COMMON.PRINT' | translate }}</mat-label>-->
+                          <!--<mat-slide-toggle formControlName="printBill"></mat-slide-toggle>-->
+                        </div>
+                        <button mat-raised-button type="submit" class="button-color-bule mr-2 text-white"
+                          (click)="save()">
+                          <!-- <mat-icon>save</mat-icon> -->
+                          {{ 'COMMON.SAVE' | translate }}
+                        </button>
+                        <button mat-raised-button class="button-color-red text-white mr-2" [disabled]="routeUrl != ''"
+                          (click)="reset();">
+                          <!-- <mat-icon>close</mat-icon> -->
+                          {{ 'COMMON.RESET' | translate }}
+                        </button>
+                      </div>
+
+                    </form>
+                  </mat-card-content>
+                </mat-card>
+
+              </div>
+

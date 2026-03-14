@@ -1,0 +1,46 @@
+@if (tableUrl) {
+  <div>
+    @if (tableUrl.coustom) {
+      <div>
+        <app-table [tableData]="tableData"
+          (addOrUpdateEvent)="addOrUpdateEvent($event)">
+        </app-table>
+      </div>
+    }
+    @if (!tableUrl.coustom && routeParams == 'leaveApproval') {
+      <div>
+        <app-leaveapproval></app-leaveapproval>
+      </div>
+    }
+    @if (!tableUrl.coustom && routeParams == 'odApproval') {
+      <div>
+        <app-odapproval></app-odapproval>
+      </div>
+    }
+    @if (!tableUrl.coustom && routeParams == 'advanceApproval') {
+      <div>
+        <app-advanceapproval></app-advanceapproval>
+      </div>
+    }
+    @if (!tableUrl.coustom && routeParams == 'permissionapproval') {
+      <div>
+        <app-permissionapproval></app-permissionapproval>
+      </div>
+    }
+    @if (!tableUrl.coustom && routeParams == 'vehicleapproval') {
+      <div>
+        <app-vehicleapproval></app-vehicleapproval>
+      </div>
+    }
+    @if (!tableUrl.coustom && routeParams == 'CTCBreakup') {
+      <div>
+        <app-ctcbreakup></app-ctcbreakup>
+      </div>
+    }
+    @if (!tableUrl.coustom && routeParams == 'salaryprocess') {
+      <div>
+        <app-salaryprocess></app-salaryprocess>
+      </div>
+    }
+  </div>
+}

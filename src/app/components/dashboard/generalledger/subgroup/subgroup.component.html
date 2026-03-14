@@ -1,0 +1,64 @@
+<div class="position-relative popup-class">
+
+
+  <mat-card-title  class="boader--color d-flex justify-content-between position-absolute w-100" >
+    <span>  {{'subgroup.title' | translate }} </span>
+    <mat-icon class="p-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="d--flex">
+        <mat-form-field>
+          <mat-label>{{'subgroup.accGroup' | translate }}</mat-label>
+          <mat-select formControlName="accGroup">
+            @for (accgrp of accGroupList; track accgrp) {
+              <mat-option [value]="accgrp.id">
+                {{accgrp.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.subGroupCode.valid }">
+          <input matInput placeholder="{{'subgroup.subGroupCode' | translate }}" formControlName="subGroupCode" appFocusOnEnter tabIndex="1">
+          @if (formControls.subGroupCode.errors) {
+            <mat-error class="help-block">
+              @if (formControls.subGroupCode.errors.required) {
+                <div>Subgroup Code is required</div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.subGroupName.valid }">
+          <input matInput placeholder="{{'subgroup.subGroupName' | translate }}" formControlName="subGroupName" appFocusOnEnter tabIndex="2">
+          @if (formControls.subGroupName.errors) {
+            <mat-error class="help-block">
+              @if (formControls.subGroupName.errors.required) {
+                <div>Subgroup Name is required</div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+      </div>
+      <mat-divider></mat-divider>
+
+
+
+    </form>
+
+  </mat-card-content>
+  <div  class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1"  (click)="cancel()">
+
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button  type="submit" class="button-color-bule text-white ml-1"  (click)="save()" appFocusOnEnter tabIndex="3">
+
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

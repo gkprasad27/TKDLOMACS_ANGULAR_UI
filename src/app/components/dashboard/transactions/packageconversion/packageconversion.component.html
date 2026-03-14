@@ -1,0 +1,59 @@
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'packageconversion.title' | translate }} </span>
+    <mat-icon class="p-2" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="d--flex">
+        <mat-form-field>
+          <mat-label>Inputproduct Code</mat-label>
+          <mat-select placeholder="{{'packageconversion.inputproductCode' | translate }}" formControlName="inputproductCode"   (selectionChange)="getproductCodeList()" appFocusOnEnter tabIndex="4">
+            @for (ptlist of inputcodeList; track ptlist) {
+              <mat-option [value]="ptlist.id">
+                {{ptlist.id}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'packageconversion.inputproductName' | translate }}" formControlName="inputproductName" appFocusOnEnter tabIndex="2">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Outputproduct Code</mat-label>
+          <mat-select formControlName="outputproductCode" placeholder="outputproductCode" (selectionChange)="getoutproductCodeList()" appFocusOnEnter tabIndex="8">
+            @for (ptlist of inputcodeList; track ptlist) {
+              <mat-option [value]="ptlist.id">
+                {{ptlist.id}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'packageconversion.outputproductName' | translate }}" formControlName="outputproductName" appFocusOnEnter tabIndex="2">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'packageconversion.inputQty' | translate }}" formControlName="inputQty" appFocusOnEnter tabIndex="2">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'packageconversion.outputQty' | translate }}" formControlName="outputQty" appFocusOnEnter tabIndex="2">
+        </mat-form-field>
+
+      </div>
+      <mat-divider></mat-divider>
+      <div class="form-element p-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>
+        <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()">Save</button>
+      </div>
+
+    </form>
+
+  </mat-card-content>
+</div>

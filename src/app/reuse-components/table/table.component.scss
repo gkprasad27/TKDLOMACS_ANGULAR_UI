@@ -1,0 +1,73 @@
+@use "reuse";
+
+.table {
+  overflow-x: scroll;
+}
+
+:host ::ng-deep table {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  & > tbody  {
+    & tr {
+      border-bottom: 1px solid reuse.$color-ddd;
+    }
+    & td {
+      font-size: 12px;
+      vertical-align: middle;
+      border: none !important;
+    }
+    & th {
+      vertical-align: middle;
+      border: none !important;
+    }
+    & tr:nth-child(even) {
+    background-color: reuse.$color-f9f9f9;
+    }
+    & tr:nth-child(odd) {
+      background-color: reuse.$color-white;
+      }
+      & tr:nth-child(even):hover {
+        background-color: reuse.$color-f9f9f9;
+        }
+        & tr:nth-child(odd):hover {
+          background-color: reuse.$color-f9f9f9;
+          }
+  }
+}
+
+
+.mat-header-cell, .mat-cell {
+  min-width: 150px;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  border: none !important;
+}
+
+.table th {
+  background-color: reuse.$color-blue;
+  color: reuse.$color-white;
+}
+
+.table tr {
+  height: 40px !important;
+  cursor: pointer;
+}
+
+:host ::ng-deep .filter {
+  & .mat-form-field-wrapper {
+      padding-bottom: 0em !important;
+  }
+  & .mat-form-field-underline {
+    bottom: 0.1em;
+  }
+  & .mat-form-field-infix {
+    border: none;
+  }
+}
+
+.dropdown--width {
+  width: 20rem;
+}
+
+

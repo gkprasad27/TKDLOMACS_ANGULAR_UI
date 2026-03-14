@@ -1,0 +1,79 @@
+<div class="position-relative popup-class">
+
+  <mat-card-title  class="boader--color d-flex justify-content-between position-absolute w-100" >
+    <span>{{'materialgroups.title' | translate }}</span>
+    <mat-icon class="p-2  cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="d--flex">
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.groupCode.valid }">
+          <input matInput placeholder="{{'materialgroups.groupCode' | translate }}" disabled formControlName="groupCode" appFocusOnEnter tabIndex="1">
+          @if (formControls.groupCode.errors) {
+            <mat-error class="help-block">
+              @if (formControls.groupCode.errors.required) {
+                <div>Code is required Min-2 Letters</div>
+              }
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+        <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.groupName.valid }">
+          <input matInput placeholder="{{'materialgroups.groupName' | translate }}" formControlName="groupName" appFocusOnEnter tabIndex="2">
+          @if (formControls.groupName.errors) {
+            <mat-error class="help-block">
+              @if (formControls.groupName.errors.required) {
+                <div>groupName is required</div>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="{{'materialgroups.narration' | translate }}" formControlName="narration" appFocusOnEnter tabIndex="4">
+        </mat-form-field>
+
+        <!--
+        <mat-form-field>
+          <mat-label [translate]="'materialgroups.accClass'"></mat-label>
+          <mat-select formControlName="accClass" >
+            <mat-option *ngFor="let aclist of AccountingClassList" [value]="aclist.code">
+              {{aclist.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+        <!-- <mat-form-field>
+        <mat-label [translate]="'materialgroups.compCode'"></mat-label>
+        <mat-select formControlName="compCode">
+          <mat-option *ngFor="let comp of companyList" [value]="comp.companyCode">
+            {{comp.companyCode}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+
+      <!-- <mat-form-field class="form-element">
+      <input matInput placeholder="{{'materialgroups.active' | translate }}" formControlName="active" appFocusOnEnter tabIndex="4">
+    </mat-form-field> -->
+  </div>
+  <mat-divider></mat-divider>
+</form>
+
+</mat-card-content>
+
+
+<div  class="form-element p-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mr-1"  (click)="cancel()">
+
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button  type="submit" class="button-color-bule text-white ml-1"  (click)="save()" appFocusOnEnter tabIndex="5">
+
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
+
+</div>

@@ -1,0 +1,14 @@
+@import '../../../reuse.scss';
+
+.boxshadow {
+  box-shadow: 0 15px 20px $background-shadow
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
+
+
+
