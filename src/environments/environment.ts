@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   //baseUrl: `http://183.82.48.82:89`
   //baseUrl: `http://192.168.2.26:89`
-  baseUrl: `http://localhost:51414`
+  baseUrl: `http://localhost:51414/`
 };
 
 /*
