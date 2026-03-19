@@ -19,7 +19,8 @@
   "LOGIN": {
     "USERNAME": "Username",
     "PASSWORD": "Password",
-    "LOGIN": "Login"
+    "LOGIN": "Login",
+    "tkdlomacs": "TKDLOMACS"
   },
   "accountsgroup": {
     "title": "Accounts Group",

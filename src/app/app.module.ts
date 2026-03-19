@@ -56,6 +56,5 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

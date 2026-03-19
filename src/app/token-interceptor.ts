@@ -12,10 +12,10 @@ export class TokenInterceptor implements HttpInterceptor{
     constructor(private router: Router ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (localStorage.getItem('Token') != null) {
+        if (localStorage.getItem('token') != null) {
             request = request.clone({
                 setHeaders: {
-                    Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('Token'))
+                    Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token'))
                 }
             });
         }

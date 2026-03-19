@@ -73,28 +73,29 @@ export class LoginComponent implements OnInit {
     this.apiService.apiPostRequest(getLoginUrl, requestObj)
       .subscribe(
         response => {
+          this.spinner.hide();
           const res = response.body;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
-              this.getBranchesForUser(res.response['User']);
-              localStorage.setItem('Token', JSON.stringify(res.response['Token']));
+              this.getBranchesForUser(res.response['user']);
+              localStorage.setItem('token', JSON.stringify(res.response['token']));
             }
           }
-          this.spinner.hide();
         });
   }
 
   getBranchesForUser(obj) {
-    const getBranchesForUserUrl = ['/', this.apiConfigService.getBranchesForUser, obj.seqId].join('/');
+
+    const getBranchesForUserUrl = [this.apiConfigService.getBranchesForUser, obj.seqId].join('/');
     this.apiService.apiGetRequest(getBranchesForUserUrl).subscribe(
       response => {
         this.spinner.hide();
         const res = response.body;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
-            if ((res.response['Branches'] != null)) {
-              obj.branchCode = res.response['Branches'][0];
-              localStorage.setItem('branchList', JSON.stringify(res.response['Branches']));
+            if ((res.response['branches'] != null)) {
+              obj.branchCode = res.response['branches'][0];
+              localStorage.setItem('branchList', JSON.stringify(res.response['branches']));
               this.authService.login(obj);
               this.alertService.openSnackBar(Static.LoginSussfull, Static.Close, SnackBar.success);
               this.router.navigate(['dashboard']);
