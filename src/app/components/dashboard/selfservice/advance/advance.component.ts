@@ -100,7 +100,7 @@ export class AdvanceComponent implements OnInit {
   
 
   getTableDatas() {
-    const getCompanyUrl = ['/', this.apiConfigService.getAdvancetypeList].join('/');
+    const getCompanyUrl = [this.apiConfigService.getAdvancetypeList].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
@@ -118,7 +118,7 @@ export class AdvanceComponent implements OnInit {
   getProductByProductCode(value) {
 
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = ['/', this.apiConfigService.getEmpCode].join('/');
+      const getProductByProductCodeUrl = [this.apiConfigService.getEmpCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
         response => {
           const res = response.body;

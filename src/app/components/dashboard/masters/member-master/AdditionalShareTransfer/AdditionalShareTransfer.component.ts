@@ -147,7 +147,7 @@ export class AdditionalShareTransferComponent implements OnInit, OnChanges {
   }
 
   getShareMembersList(){
-    const getShareMembersListUrl = ['/', this.apiConfigService.getShareMembersList].join('/');
+    const getShareMembersListUrl = [this.apiConfigService.getShareMembersList].join('/');
     this.apiService.apiGetRequest(getShareMembersListUrl).subscribe(
       response => {
         const res = response.body;

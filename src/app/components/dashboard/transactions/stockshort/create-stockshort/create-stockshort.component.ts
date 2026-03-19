@@ -201,7 +201,7 @@ export class CreateStockshortsComponent implements OnInit {
 
   getStockshortDeatilList(id) {
     //debugger;
-    const getInvoiceDeatilListUrl = ['/', this.apiConfigService.getStockshortsDeatilList, id].join('/');
+    const getInvoiceDeatilListUrl = [this.apiConfigService.getStockshortsDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
         const res = response.body;
@@ -216,7 +216,7 @@ export class CreateStockshortsComponent implements OnInit {
 
 
   getBranchesList() {
-    const getCashPaymentBranchesListUrl = ['/', this.apiConfigService.getCashPaymentBranchesList].join('/');
+    const getCashPaymentBranchesListUrl = [this.apiConfigService.getCashPaymentBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -232,7 +232,7 @@ export class CreateStockshortsComponent implements OnInit {
   }
 
   GetCostCentersList() {
-    const getCashPaymentBranchesListUrl = ['/', this.apiConfigService.GetCostCentersList].join('/');
+    const getCashPaymentBranchesListUrl = [this.apiConfigService.GetCostCentersList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -253,9 +253,9 @@ export class CreateStockshortsComponent implements OnInit {
     //debugger;
     let genarateVoucherNoUrl;
     if (branch != null) {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getstockshortvochernosList, branch].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getstockshortvochernosList, branch].join('/');
     } else {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getstockshortvochernosList, this.branchFormData.get('branchCode').value].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getstockshortvochernosList, this.branchFormData.get('branchCode').value].join('/');
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
@@ -351,7 +351,7 @@ export class CreateStockshortsComponent implements OnInit {
 
   getProductByProductCode(value) {
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = ['/', this.apiConfigService.getProductByProductCode].join('/');
+      const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
           const res = response.body;
@@ -373,7 +373,7 @@ export class CreateStockshortsComponent implements OnInit {
   getProductByProductName(value) {
     //debugger;
     if (value != null && value !== '') {
-      const getProductByProductNameUrl = ['/', this.apiConfigService.getProductByProductName].join('/');
+      const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
           const res = response.body;
@@ -393,7 +393,7 @@ export class CreateStockshortsComponent implements OnInit {
 
   //getProductByProductCode(value) {
   //  if (value != null && value !== '') {
-  //    const getProductByProductCodeUrl = ['/', this.apiConfigService.getProductByProductCode, value].join('/');
+  //    const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode, value].join('/');
   //    this.apiService.apiGetRequest(getProductByProductCodeUrl).subscribe(
   //      response => {
   //        const res = response.body;
@@ -413,7 +413,7 @@ export class CreateStockshortsComponent implements OnInit {
   ////Autocomplete code
   //getProductByProductName(value) {
   //  if (value != null && value !== '') {
-  //    const getProductByProductNameUrl = ['/', this.apiConfigService.getProductByProductName, value].join('/');
+  //    const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName, value].join('/');
   //    this.apiService.apiGetRequest(getProductByProductNameUrl).subscribe(
   //      response => {
   //        const res = response.body;
@@ -441,7 +441,7 @@ const pCode = productCode?.value;
 
 if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
-      const getBillingDetailsRcdUrl = ['/', this.apiConfigService.GetProductListsforStockshortsList, productCode.value,
+      const getBillingDetailsRcdUrl = [this.apiConfigService.GetProductListsforStockshortsList, productCode.value,
         this.branchFormData.get('branchCode').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
@@ -531,7 +531,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
   registerStackshorts() {
     //debugger;
-    const registerStackreceiptsUrl = ['/', this.apiConfigService.registerStockshorts].join('/');
+    const registerStackreceiptsUrl = [this.apiConfigService.registerStockshorts].join('/');
     const requestObj = { StockshortHdr: this.branchFormData.value, StockshortDtl: this.dataSource.data };
     this.apiService.apiPostRequest(registerStackreceiptsUrl, requestObj).subscribe(
       response => {

@@ -115,7 +115,7 @@ export class LeaveApprovalComponent implements OnInit {
   getLeaveApplDetailsList() {
     //debugger;
     const user = JSON.parse(localStorage.getItem('user'));
-    const getLeaveApplDetailsListUrl = ['/', this.apiConfigService.getLeaveApplDetailsList, user.userName].join('/');
+    const getLeaveApplDetailsListUrl = [this.apiConfigService.getLeaveApplDetailsList, user.userName].join('/');
     this.apiService.apiGetRequest(getLeaveApplDetailsListUrl)
       .subscribe(
         response => {
@@ -136,7 +136,7 @@ export class LeaveApprovalComponent implements OnInit {
     //this.dataSource = new MatTableDataSource(res.response['StockissuesDeatilList']);
 
     const user = JSON.parse(localStorage.getItem('user'));
-    const registerInvoiceUrl = ['/', this.apiConfigService.RegisterLeaveApprovalDetails].join('/');
+    const registerInvoiceUrl = [this.apiConfigService.RegisterLeaveApprovalDetails].join('/');
     const requestObj = { StockissueHdr: this.leaveRequestForm.value, code: user.userName, StockissueDtl: this.leaveApprovalList };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {

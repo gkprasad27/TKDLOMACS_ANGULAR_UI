@@ -123,7 +123,7 @@ export class VehicleRequisitionsComponent implements OnInit {
   getLeaveApplDetailsList() {
     // debugger;
     const user = JSON.parse(localStorage.getItem('user'));
-    const getLeaveApplDetailsListUrl = ['/', this.apiConfigService.getLeaveRequestList, user.userName].join('/');
+    const getLeaveApplDetailsListUrl = [this.apiConfigService.getLeaveRequestList, user.userName].join('/');
     this.apiService.apiGetRequest(getLeaveApplDetailsListUrl)
       .subscribe(
         response => {
@@ -150,7 +150,7 @@ export class VehicleRequisitionsComponent implements OnInit {
     var session2 = this.modelFormData.get('session2').value
 
     if (date1 != null) {
-      const getProductByProductCodeUrl = ['/', this.apiConfigService.getnoofdayscount].join('/');
+      const getProductByProductCodeUrl = [this.apiConfigService.getnoofdayscount].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: date1, date2, session1, session2 }).subscribe(
         response => {
           const res = response.body;
@@ -175,7 +175,7 @@ export class VehicleRequisitionsComponent implements OnInit {
   //getTableDataonempcodechangevent() {
 
   //  this.spinner.show();
-  //  const getCompanyUrl = ['/', this.apiConfigService.getLeaveTypeatList, this.modelFormData.get('empCode').value].join('/');
+  //  const getCompanyUrl = [this.apiConfigService.getLeaveTypeatList, this.modelFormData.get('empCode').value].join('/');
   //  this.apiService.apiGetRequest(getCompanyUrl)
   //    .subscribe(
   //      response => {
@@ -197,7 +197,7 @@ export class VehicleRequisitionsComponent implements OnInit {
   //  const user = JSON.parse(localStorage.getItem('user'));
   //  let username = user.userName;
   //  this.spinner.show();
-  //  const getCompanyUrl = ['/', this.apiConfigService.getLeaveTypeatList, username].join('/');
+  //  const getCompanyUrl = [this.apiConfigService.getLeaveTypeatList, username].join('/');
   //  this.apiService.apiGetRequest(getCompanyUrl)
   //    .subscribe(
   //      response => {
@@ -219,7 +219,7 @@ export class VehicleRequisitionsComponent implements OnInit {
     //debugger;
 
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = ['/', this.apiConfigService.getEmpCode].join('/');
+      const getProductByProductCodeUrl = [this.apiConfigService.getEmpCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
         response => {
           const res = response.body;
@@ -242,9 +242,9 @@ export class VehicleRequisitionsComponent implements OnInit {
     //debugger;
     let genarateVoucherNoUrl;
     if (code != null) {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getEmpName, code.value].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getEmpName, code.value].join('/');
     } else {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getEmpName, this.modelFormData.get('empCode').value].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getEmpName, this.modelFormData.get('empCode').value].join('/');
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {

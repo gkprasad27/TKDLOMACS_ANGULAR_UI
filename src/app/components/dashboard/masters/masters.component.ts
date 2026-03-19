@@ -77,7 +77,7 @@ export class MastersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
       this.spinner.show();
-      const deleteCompanyUrl = ['/', this.tableUrl.deleteUrl, result.item[this.tableUrl.primaryKey]].join('/');
+      const deleteCompanyUrl = [this.tableUrl.deleteUrl, result.item[this.tableUrl.primaryKey]].join('/');
       this.apiService.apiDeleteRequest(deleteCompanyUrl, result.item)
         .subscribe(
           response => {
@@ -110,7 +110,7 @@ export class MastersComponent implements OnInit {
         if (result != null) {
           this.spinner.show();
           if (result.action === 'Add') {
-            const addCompanyUrl = ['/', this.tableUrl.registerUrl].join('/');
+            const addCompanyUrl = [this.tableUrl.registerUrl].join('/');
             this.apiService.apiPostRequest(addCompanyUrl, result.item)
               .subscribe(
                 response => {
@@ -127,7 +127,7 @@ export class MastersComponent implements OnInit {
                   this.spinner.hide();
                 });
           } else if (result.action === 'Edit') {
-            const updateCompanyUrl = ['/', this.tableUrl.updateUrl].join('/');
+            const updateCompanyUrl = [this.tableUrl.updateUrl].join('/');
             this.apiService.apiUpdateRequest(updateCompanyUrl, result.item)
               .subscribe(
                 response => {
@@ -148,7 +148,7 @@ export class MastersComponent implements OnInit {
   }
 
   getTableData() {
-    const getUrl = ['/', this.tableUrl.url].join('/');
+    const getUrl = [this.tableUrl.url].join('/');
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
         response => {

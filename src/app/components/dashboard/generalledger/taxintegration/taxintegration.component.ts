@@ -68,7 +68,7 @@ this.getGLTaxAccountList();
   }
 
   getTaxCodesList() {
-    const getTaxCodesList = ['/', this.apiConfigService.getTaxCodesList].join('/');
+    const getTaxCodesList = [this.apiConfigService.getTaxCodesList].join('/');
     this.apiService.apiGetRequest(getTaxCodesList)
       .subscribe(
         response => {
@@ -84,7 +84,7 @@ this.getGLTaxAccountList();
   }
 
   getGLTaxAccountList() {
-    const getGLTaxAccountList = ['/', this.apiConfigService.getGLTaxAccountList].join('/');
+    const getGLTaxAccountList = [this.apiConfigService.getGLTaxAccountList].join('/');
     this.apiService.apiGetRequest(getGLTaxAccountList)
       .subscribe(
         response => {

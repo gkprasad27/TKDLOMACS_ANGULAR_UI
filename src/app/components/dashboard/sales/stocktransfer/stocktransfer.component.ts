@@ -65,7 +65,7 @@ export class StocktransferComponent implements OnInit {
   }
 
   getInvoiceList() {
-    const getInvoiceListUrl = ['/', this.apiConfigService.getStockTransferList, this.branchCode.branchCode].join('/');
+    const getInvoiceListUrl = [this.apiConfigService.getStockTransferList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceListUrl, this.dateForm.value).subscribe(
       response => {
         const res = response.body;

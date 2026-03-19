@@ -83,7 +83,7 @@ this.getProductList();
   }
 
   getMshsdBranchesList() {
-    const getMshsdBranchesList = ['/', this.apiConfigService.getMshsdBranchesList].join('/');
+    const getMshsdBranchesList = [this.apiConfigService.getMshsdBranchesList].join('/');
     this.apiService.apiGetRequest(getMshsdBranchesList)
       .subscribe(
         response => {
@@ -99,7 +99,7 @@ this.getProductList();
   }
 
   getProductList() {
-    const getProductList = ['/', this.apiConfigService.getProductList].join('/');
+    const getProductList = [this.apiConfigService.getProductList].join('/');
     this.apiService.apiGetRequest(getProductList)
       .subscribe(
         response => {

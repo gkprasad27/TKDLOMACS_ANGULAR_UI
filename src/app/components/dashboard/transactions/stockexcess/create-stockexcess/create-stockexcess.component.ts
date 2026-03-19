@@ -119,7 +119,7 @@ export class CreateStockExcessComponent implements OnInit {
   }
 
   getStockExcessDetailsList(id) {
-    const getStockExcessDetailsListUrl = ['/', this.apiConfigService.getStockExcessDetailsList, id].join('/');
+    const getStockExcessDetailsListUrl = [this.apiConfigService.getStockExcessDetailsList, id].join('/');
     this.apiService.apiGetRequest(getStockExcessDetailsListUrl).subscribe(
       response => {
         const res = response.body;
@@ -148,7 +148,7 @@ export class CreateStockExcessComponent implements OnInit {
 
 
   getStockExcessBranchesList() {
-    const getStockExcessBranchesListUrl = ['/', this.apiConfigService.getStockExcessBranchesList].join('/');
+    const getStockExcessBranchesListUrl = [this.apiConfigService.getStockExcessBranchesList].join('/');
     this.apiService.apiGetRequest(getStockExcessBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -166,9 +166,9 @@ export class CreateStockExcessComponent implements OnInit {
   genarateVoucherNo(branch?) {
     let genarateVoucherNoUrl;
     if (branch != null) {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getstockexcessNo, branch].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getstockexcessNo, branch].join('/');
     } else {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getstockexcessNo, this.branchFormData.get('branchCode').value].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getstockexcessNo, this.branchFormData.get('branchCode').value].join('/');
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
@@ -187,7 +187,7 @@ export class CreateStockExcessComponent implements OnInit {
   }
 
   getStockExcessCostCentersList() {
-    const getStockExcessCostCentersListUrl = ['/', this.apiConfigService.getStockExcessCostCentersList].join('/');
+    const getStockExcessCostCentersListUrl = [this.apiConfigService.getStockExcessCostCentersList].join('/');
     this.apiService.apiGetRequest(getStockExcessCostCentersListUrl).subscribe(
       response => {
         const res = response.body;
@@ -278,7 +278,7 @@ export class CreateStockExcessComponent implements OnInit {
 
   getProductByProductCode(value) {
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = ['/', this.apiConfigService.getProductByProductCode].join('/');
+      const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
           const res = response.body;
@@ -313,7 +313,7 @@ export class CreateStockExcessComponent implements OnInit {
 
 getProductByProductName(value) {
   if (value != null && value !== '') {
-    const getProductByProductNameUrl = ['/', this.apiConfigService.getProductByProductName].join('/');
+    const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
     this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
       response => {
         const res = response.body;
@@ -338,7 +338,7 @@ const pCode = productCode?.value;
 
 if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
-      const getBillingDetailsRcdUrl = ['/', this.apiConfigService.getProductListsforStockexcessList, productCode.value,
+      const getBillingDetailsRcdUrl = [this.apiConfigService.getProductListsforStockexcessList, productCode.value,
         this.branchFormData.get('branchCode').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
@@ -415,7 +415,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
     this.branchFormData.patchValue({
       stockExcessMasterId: 0
     });
-    const registerStockexcessUrl = ['/', this.apiConfigService.registerStockexcess].join('/');
+    const registerStockexcessUrl = [this.apiConfigService.registerStockexcess].join('/');
     const requestObj = { StockexcessHdr: this.branchFormData.value, StockexcessDtl: data };
     this.apiService.apiPostRequest(registerStockexcessUrl, requestObj).subscribe(
       response => {

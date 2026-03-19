@@ -53,7 +53,7 @@ import { TranslateModule } from '@ngx-translate/core';
       }
 
       getTableData() {
-        const getUrl = ['/', this.tableUrl.url].join('/');
+        const getUrl = [this.tableUrl.url].join('/');
         this.apiService.apiGetRequest(getUrl)
         .subscribe(
           response => {
@@ -75,7 +75,7 @@ import { TranslateModule } from '@ngx-translate/core';
         });
         dialogRef.afterClosed().subscribe(result => {
           if (result != null) {
-          const deleteCompanyUrl = ['/', this.tableUrl.deleteUrl, result.item[this.tableUrl.primaryKey]].join('/');
+          const deleteCompanyUrl = [this.tableUrl.deleteUrl, result.item[this.tableUrl.primaryKey]].join('/');
           this.apiService.apiDeleteRequest(deleteCompanyUrl, result.item)
               .subscribe(
                 response => {
@@ -106,7 +106,7 @@ import { TranslateModule } from '@ngx-translate/core';
         dialogRef.afterClosed().subscribe(result => {
           if (result != null) {
             if (result.action === 'Add') {
-             const addCompanyUrl = ['/', this.tableUrl.registerUrl].join('/');
+             const addCompanyUrl = [this.tableUrl.registerUrl].join('/');
              this.apiService.apiPostRequest(addCompanyUrl, result.item)
                 .subscribe(
                   response => {
@@ -121,7 +121,7 @@ import { TranslateModule } from '@ngx-translate/core';
                   this.spinner.hide();
                   });
             } else if (result.action === 'Edit') {
-             const updateCompanyUrl = ['/', this.tableUrl.updateUrl].join('/');
+             const updateCompanyUrl = [this.tableUrl.updateUrl].join('/');
              this.apiService.apiUpdateRequest(updateCompanyUrl, result.item)
                 .subscribe(
                   response => {

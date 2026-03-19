@@ -63,7 +63,7 @@ branchCode:any;
   }
   
   getBankReceiptBranchesList() {
-    const getBankReceiptBranchesListUrl = ['/', this.apiConfigService.getBankReceiptBranchesList].join('/');
+    const getBankReceiptBranchesListUrl = [this.apiConfigService.getBankReceiptBranchesList].join('/');
     this.apiService.apiGetRequest(getBankReceiptBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -79,7 +79,7 @@ branchCode:any;
   }
  
   getBankreceiptList() {
-    const getBankreceiptListUrl = ['/', this.apiConfigService.getBankreceiptList, this.branchCode.branchCode].join('/');
+    const getBankreceiptListUrl = [this.apiConfigService.getBankreceiptList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getBankreceiptListUrl, this.dateForm.value).subscribe(
       response => {
         const res = response.body;

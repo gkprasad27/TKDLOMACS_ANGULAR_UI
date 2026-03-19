@@ -63,7 +63,7 @@ branchCode:any;
   }
 
   getJournalVoucherBranchesList() {
-    const getJournalVoucherBranchesListUrl = ['/', this.apiConfigService.getJournalVoucherBranchesList].join('/');
+    const getJournalVoucherBranchesListUrl = [this.apiConfigService.getJournalVoucherBranchesList].join('/');
     this.apiService.apiGetRequest(getJournalVoucherBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -79,7 +79,7 @@ branchCode:any;
   }
 
   getJournalvoucherList() {
-    const getJournalvoucherListUrl = ['/', this.apiConfigService.getJournalvoucherList, this.branchCode.branchCode].join('/');
+    const getJournalvoucherListUrl = [this.apiConfigService.getJournalvoucherList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getJournalvoucherListUrl, this.dateForm.value).subscribe(
       response => {
         const res = response.body;

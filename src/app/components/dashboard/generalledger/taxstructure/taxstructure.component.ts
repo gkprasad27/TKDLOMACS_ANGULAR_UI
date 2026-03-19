@@ -84,7 +84,7 @@ export class TaxstructuresComponent implements OnInit {
   }
 
   GetTaxGroupsList() {
-    const getTaxGroupsListUrl = ['/', this.apiConfigService.TaxGroupsLists].join('/');
+    const getTaxGroupsListUrl = [this.apiConfigService.TaxGroupsLists].join('/');
     this.apiService.apiGetRequest(getTaxGroupsListUrl)
       .subscribe(
         response => {
@@ -99,7 +99,7 @@ export class TaxstructuresComponent implements OnInit {
 
   }
   GetPurchaseAccountsList() {
-    const getTaxGroupsListUrl = ['/', this.apiConfigService.PurchaseAccountsList].join('/');
+    const getTaxGroupsListUrl = [this.apiConfigService.PurchaseAccountsList].join('/');
     this.apiService.apiGetRequest(getTaxGroupsListUrl)
       .subscribe(
         response => {

@@ -39,8 +39,8 @@ export class PayrollService {
       case 'componentmaster':
         this.dynamicData.url = this.apiConfigService.getComponentsList;
         this.dynamicData.component = ComponentMasterComponent;
-        this.dynamicData.registerUrl = ['/', this.apiConfigService.registerComponent, user.companyCode ? user.companyCode : "0"].join('/');
-        this.dynamicData.updateUrl = ['/', this.apiConfigService.updateComponent, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.registerUrl = [this.apiConfigService.registerComponent, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.updateUrl = [this.apiConfigService.updateComponent, user.companyCode ? user.companyCode : "0"].join('/');
         this.dynamicData.deleteUrl = this.apiConfigService.deleteComponent;
         this.dynamicData.listName = 'componentsList';
         this.dynamicData.primaryKey = 'componentCode';
@@ -61,8 +61,8 @@ export class PayrollService {
         case 'pfmaster':
         this.dynamicData.url = this.apiConfigService.getPfList;
         this.dynamicData.component = PFMasterComponent;
-        this.dynamicData.registerUrl = ['/', this.apiConfigService.registerPF, user.companyCode ? user.companyCode : "0"].join('/');
-        this.dynamicData.updateUrl = ['/', this.apiConfigService.updatePF, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.registerUrl = [this.apiConfigService.registerPF, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.updateUrl = [this.apiConfigService.updatePF, user.companyCode ? user.companyCode : "0"].join('/');
         this.dynamicData.deleteUrl = this.apiConfigService.deletePF;
         this.dynamicData.listName = 'pfList';
         this.dynamicData.primaryKey = 'id';

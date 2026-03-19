@@ -89,7 +89,7 @@ export class PFMasterComponent  implements OnInit {
   }
 
   getPfComponentsList() {
-    const getPfComponentsList = ['/', this.apiConfigService.getPfComponentsList].join('/');
+    const getPfComponentsList = [this.apiConfigService.getPfComponentsList].join('/');
     this.apiService.apiGetRequest(getPfComponentsList)
       .subscribe(
         response => {

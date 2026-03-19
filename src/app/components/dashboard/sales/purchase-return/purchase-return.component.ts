@@ -63,7 +63,7 @@ selectedDate = {start : moment().add(0, 'day'), end: moment().add(0, 'day')};
   }
 
   getPurchaseInvoiceList() {
-    const getPurchaseInvoiceListUrl = ['/', this.apiConfigService.getPurchaseReturns, this.branchCode.branchCode].join('/');
+    const getPurchaseInvoiceListUrl = [this.apiConfigService.getPurchaseReturns, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getPurchaseInvoiceListUrl, this.dateForm.value).subscribe(
       response => {
         const res = response.body;

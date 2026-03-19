@@ -64,7 +64,7 @@ export class StockreceiptsComponent implements OnInit {
   }
   getInvoiceDetails() {
     //debugger;
-    const getInvoiceDetailstUrl = ['/', this.apiConfigService.getStockreceiptsDeatilListLoad, this.branchCode.branchCode].join('/');
+    const getInvoiceDetailstUrl = [this.apiConfigService.getStockreceiptsDeatilListLoad, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceDetailstUrl, this.dateForm.value).subscribe(
       response => {
         const res = response.body;
@@ -113,7 +113,7 @@ export class StockreceiptsComponent implements OnInit {
   getStockreceiptList()
   {
     //debugger;
-    const getInvoiceListUrl = ['/', this.apiConfigService.getStockreceiptsList, this.branchCode.branchCode].join('/');
+    const getInvoiceListUrl = [this.apiConfigService.getStockreceiptsList, this.branchCode.branchCode].join('/');
 
     this.apiService.apiPostRequest(getInvoiceListUrl, this.dateForm.value).subscribe(
       response => {

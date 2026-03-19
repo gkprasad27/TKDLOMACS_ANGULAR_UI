@@ -81,7 +81,7 @@ export class OpeningBalanceComponent implements OnInit {
   }
  
   getOpeningBalBranchesList() {
-    const getOpeningBalBranchesListUrl = ['/', this.apiConfigService.getObBranchesList].join('/');
+    const getOpeningBalBranchesListUrl = [this.apiConfigService.getObBranchesList].join('/');
    this.apiService.apiGetRequest(getOpeningBalBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -97,7 +97,7 @@ export class OpeningBalanceComponent implements OnInit {
   }
 
   getPaymentType() {
-    const getPaymentTypeListUrl = ['/', this.apiConfigService.getPaymentType].join('/');
+    const getPaymentTypeListUrl = [this.apiConfigService.getPaymentType].join('/');
    this.apiService.apiGetRequest(getPaymentTypeListUrl).subscribe(
       response => {
         const res = response.body;
@@ -115,9 +115,9 @@ export class OpeningBalanceComponent implements OnInit {
   genarateVoucherNo(branch?) {
     let genarateVoucherNoUrl;
     if (branch != null) {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getObVoucherNo, branch].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getObVoucherNo, branch].join('/');
     } else {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getObVoucherNo, this.modelFormData.get('branchCode').value].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getObVoucherNo, this.modelFormData.get('branchCode').value].join('/');
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
@@ -136,7 +136,7 @@ export class OpeningBalanceComponent implements OnInit {
   }
   getBankPAccountLedgerList(value) {
     if (value != null && value !== '') {
-      const getBankPAccountLedgerListUrl = ['/', this.apiConfigService.getBPAccountLedgerList, value].join('/');
+      const getBankPAccountLedgerListUrl = [this.apiConfigService.getBPAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getBankPAccountLedgerListUrl).subscribe(
         response => {
           const res = response.body;

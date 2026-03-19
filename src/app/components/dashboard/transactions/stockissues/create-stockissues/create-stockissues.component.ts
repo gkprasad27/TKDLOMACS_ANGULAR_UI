@@ -161,11 +161,11 @@ export class CreateStockissuesComponent implements OnInit {
       let genaratebranchNoUrl;
     if ((branch != null))
     {
-      genaratebranchNoUrl = ['/', this.apiConfigService.getbranchesnosList, branch].join('/');
+      genaratebranchNoUrl = [this.apiConfigService.getbranchesnosList, branch].join('/');
     }
     else
     {
-      genaratebranchNoUrl = ['/', this.apiConfigService.getbranchesnosList, this.branchFormData.get('fromBranchCode').value].join('/');
+      genaratebranchNoUrl = [this.apiConfigService.getbranchesnosList, this.branchFormData.get('fromBranchCode').value].join('/');
     }
     this.apiService.apiGetRequest(genaratebranchNoUrl).subscribe(
       response =>
@@ -204,7 +204,7 @@ export class CreateStockissuesComponent implements OnInit {
   getStockissuesDeatilList(id)
   {
    // debugger;
-    const getInvoiceDeatilListUrl = ['/', this.apiConfigService.getStockissuesDeatilList, id].join('/');
+    const getInvoiceDeatilListUrl = [this.apiConfigService.getStockissuesDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
         const res = response.body;
@@ -220,7 +220,7 @@ export class CreateStockissuesComponent implements OnInit {
   getCashPaymentBranchesList()
   {
     //debugger;
-    const getCashPaymentBranchesListUrl = ['/', this.apiConfigService.GetBranchesList].join('/');
+    const getCashPaymentBranchesListUrl = [this.apiConfigService.GetBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -243,11 +243,11 @@ export class CreateStockissuesComponent implements OnInit {
     
     let genarateVoucherNoUrl;
     if (branch != null) {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getStockissuesnosList, branch].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getStockissuesnosList, branch].join('/');
     }
     else
     {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getStockissuesnosList, this.branchFormData.get('fromBranchCode').value].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getStockissuesnosList, this.branchFormData.get('fromBranchCode').value].join('/');
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response =>
@@ -278,10 +278,10 @@ export class CreateStockissuesComponent implements OnInit {
     let gettingtobranchesListUrl;
     if (this.branchFormData.get('fromBranchCode').value == null)
     {
-      gettingtobranchesListUrl = ['/', this.apiConfigService.GetToBranchesList].join('/');
+      gettingtobranchesListUrl = [this.apiConfigService.GetToBranchesList].join('/');
     }
     else {
-      gettingtobranchesListUrl = ['/', this.apiConfigService.gettingtobranchesList, this.branchFormData.get('fromBranchCode').value].join('/');
+      gettingtobranchesListUrl = [this.apiConfigService.gettingtobranchesList, this.branchFormData.get('fromBranchCode').value].join('/');
     }
     this.apiService.apiGetRequest(gettingtobranchesListUrl).subscribe(
       response => {
@@ -391,7 +391,7 @@ export class CreateStockissuesComponent implements OnInit {
 
   getProductByProductCode(value) {
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = ['/', this.apiConfigService.getProductByProductCode].join('/');
+      const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
           const res = response.body;
@@ -413,7 +413,7 @@ export class CreateStockissuesComponent implements OnInit {
   getProductByProductName(value) {
     //debugger;
     if (value != null && value !== '') {
-      const getProductByProductNameUrl = ['/', this.apiConfigService.getProductByProductName].join('/');
+      const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
           const res = response.body;
@@ -434,7 +434,7 @@ export class CreateStockissuesComponent implements OnInit {
 
   //getProductByProductCode(value) {
   //  if (value != null && value !== '') {
-  //    const getProductByProductCodeUrl = ['/', this.apiConfigService.getProductByProductCode, value].join('/');
+  //    const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode, value].join('/');
   //    this.apiService.apiGetRequest(getProductByProductCodeUrl).subscribe(
   //      response => {
   //        const res = response.body;
@@ -455,7 +455,7 @@ export class CreateStockissuesComponent implements OnInit {
   ////Autocomplete code
   //getProductByProductName(value) {
   //  if (value != null && value !== '') {
-  //    const getProductByProductNameUrl = ['/', this.apiConfigService.getProductByProductName, value].join('/');
+  //    const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName, value].join('/');
   //    this.apiService.apiGetRequest(getProductByProductNameUrl).subscribe(
   //      response => {
   //        const res = response.body;
@@ -482,7 +482,7 @@ export class CreateStockissuesComponent implements OnInit {
 
 if (fromBranchCode != null && fromBranchCode !== '' &&
     productCode?.value != null && productCode.value !== '') {
-      const getBillingDetailsRcdUrl = ['/', this.apiConfigService.GetProductLists, productCode.value,
+      const getBillingDetailsRcdUrl = [this.apiConfigService.GetProductLists, productCode.value,
         this.branchFormData.get('fromBranchCode').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
@@ -583,7 +583,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
 
   registerStackissues() {
    // debugger;
-    const registerInvoiceUrl = ['/', this.apiConfigService.registerStockissues].join('/');
+    const registerInvoiceUrl = [this.apiConfigService.registerStockissues].join('/');
     const requestObj = { StockissueHdr: this.branchFormData.value, StockissueDtl: this.dataSource.data };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {

@@ -116,7 +116,7 @@ export class VehicleApprovalsComponent implements OnInit {
   getLeaveApplDetailsList() {
     //debugger;
     const user = JSON.parse(localStorage.getItem('user'));
-    const getLeaveApplDetailsListUrl = ['/', this.apiConfigService.getVehicleApplDetailsList, user.userName].join('/');
+    const getLeaveApplDetailsListUrl = [this.apiConfigService.getVehicleApplDetailsList, user.userName].join('/');
     this.apiService.apiGetRequest(getLeaveApplDetailsListUrl)
       .subscribe(
         response => {
@@ -135,7 +135,7 @@ export class VehicleApprovalsComponent implements OnInit {
   save() {
     console.log(this.leaveApprovalList);
     const user = JSON.parse(localStorage.getItem('user'));
-    const registerInvoiceUrl = ['/', this.apiConfigService.RegisterVehicleApprovalDetails].join('/');
+    const registerInvoiceUrl = [this.apiConfigService.RegisterVehicleApprovalDetails].join('/');
     const requestObj = { StockissueHdr: this.leaveRequestForm.value, code: user.userName, StockissueDtl: this.leaveApprovalList };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {

@@ -71,7 +71,7 @@ this.getCompaniesList();
   }
 
   getVoucherClassList() {
-    const getVoucherClassList = ['/', this.apiConfigService.getVoucherClassList].join('/');
+    const getVoucherClassList = [this.apiConfigService.getVoucherClassList].join('/');
     this.apiService.apiGetRequest(getVoucherClassList)
       .subscribe(
         response => {
@@ -88,7 +88,7 @@ this.getCompaniesList();
   }
 
   getCompaniesList() {
-    const getCompaniesList = ['/', this.apiConfigService.getCompaniesList].join('/');
+    const getCompaniesList = [this.apiConfigService.getCompaniesList].join('/');
     this.apiService.apiGetRequest(getCompaniesList)
       .subscribe(
         response => {
@@ -104,7 +104,7 @@ this.getCompaniesList();
   }
 
   getVoucherBranchesList() {
-    const getVoucherBranchesList = ['/', this.apiConfigService.getVoucherBranchesList].join('/');
+    const getVoucherBranchesList = [this.apiConfigService.getVoucherBranchesList].join('/');
     this.apiService.apiGetRequest(getVoucherBranchesList)
       .subscribe(
         response => {

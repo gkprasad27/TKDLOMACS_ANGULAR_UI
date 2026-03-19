@@ -117,7 +117,7 @@ export class advanceApprovalComponent implements OnInit {
   getOdApplDetailsList() {
     //debugger;
     const user = JSON.parse(localStorage.getItem('user'));
-    const getOdApplDetailsListUrl = ['/', this.apiConfigService.getAdvanceApplDetailsList, user.userName].join('/');
+    const getOdApplDetailsListUrl = [this.apiConfigService.getAdvanceApplDetailsList, user.userName].join('/');
     this.apiService.apiGetRequest(getOdApplDetailsListUrl)
       .subscribe(
         response => {
@@ -137,7 +137,7 @@ export class advanceApprovalComponent implements OnInit {
   save() {
     console.log(this.leaveApprovalList);
     const user = JSON.parse(localStorage.getItem('user'));
-    const registerInvoiceUrl = ['/', this.apiConfigService.RegisterAdvanceApprovalDetails].join('/');
+    const registerInvoiceUrl = [this.apiConfigService.RegisterAdvanceApprovalDetails].join('/');
     const requestObj = { StockissueHdr: this.leaveRequestForm.value, code: user.userName, StockissueDtl: this.leaveApprovalList };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {

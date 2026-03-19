@@ -117,7 +117,7 @@ calculateSales(){
 }
 
 getSaledUnits() {
-  const getSaledUnitsUrl = ['/', this.apiConfigService.getSaledUnits,this.modelFormData.get('branchCode').value,this.modelFormData.get('pumpNo').value,this.modelFormData.get('shiftId').value].join('/');
+  const getSaledUnitsUrl = [this.apiConfigService.getSaledUnits,this.modelFormData.get('branchCode').value,this.modelFormData.get('pumpNo').value,this.modelFormData.get('shiftId').value].join('/');
   this.apiService.apiPostRequest(getSaledUnitsUrl)
     .subscribe(
       response => {
@@ -145,7 +145,7 @@ getSaledUnits() {
   }
 
   getMeterReadingBranchesList() {
-    const getMeterReadingBranchesList = ['/', this.apiConfigService.getMeterReadingBranchesList].join('/');
+    const getMeterReadingBranchesList = [this.apiConfigService.getMeterReadingBranchesList].join('/');
     this.apiService.apiGetRequest(getMeterReadingBranchesList)
       .subscribe(
         response => {
@@ -163,9 +163,9 @@ getSaledUnits() {
 
   getShift(userId) {
     let getShiftUrl
-    //const getShift = ['/', this.apiConfigService.getShift,userId].join('/');
+    //const getShift = [this.apiConfigService.getShift,userId].join('/');
     if (userId != null) {
-      getShiftUrl = ['/', this.apiConfigService.getShift, userId].join('/');
+      getShiftUrl = [this.apiConfigService.getShift, userId].join('/');
     }
     this.apiService.apiGetRequest(getShiftUrl)
       .subscribe(
@@ -186,7 +186,7 @@ getSaledUnits() {
   }
 
   getOBFromPump() {
-    const getOBFromPumpUrl = ['/', this.apiConfigService.getOBFromPump,this.modelFormData.get('branchCode').value,this.modelFormData.get('pumpNo').value].join('/');
+    const getOBFromPumpUrl = [this.apiConfigService.getOBFromPump,this.modelFormData.get('branchCode').value,this.modelFormData.get('pumpNo').value].join('/');
     this.apiService.apiPostRequest(getOBFromPumpUrl)
       .subscribe(
         response => {
@@ -208,13 +208,13 @@ getSaledUnits() {
 
   getPump(branch?) {
     let getPumpUrl;
-    //const getPump = ['/', this.apiConfigService.getPump,branch].join('/');
+    //const getPump = [this.apiConfigService.getPump,branch].join('/');
     if (branch != null) {
-      getPumpUrl = ['/', this.apiConfigService.getPump, branch].join('/');
+      getPumpUrl = [this.apiConfigService.getPump, branch].join('/');
       this.getmemberNames(this.modelFormData.get('pumpNo').value);
     }
     else {
-      getPumpUrl = ['/', this.apiConfigService.getPump, this.modelFormData.get('branchCode').value].join('/');
+      getPumpUrl = [this.apiConfigService.getPump, this.modelFormData.get('branchCode').value].join('/');
       //this.getmemberNames(this.modelFormData.get('pumpNo').value);
     }
     
@@ -245,13 +245,13 @@ getSaledUnits() {
   getpumpNo(val?)
    {
     let getPumpUrl;
-    //const getPump = ['/', this.apiConfigService.getPump,branch].join('/');
+    //const getPump = [this.apiConfigService.getPump,branch].join('/');
     if ((val != null))
     {
-      getPumpUrl = ['/', this.apiConfigService.getPump, val].join('/');
+      getPumpUrl = [this.apiConfigService.getPump, val].join('/');
     }
     else {
-      getPumpUrl = ['/', this.apiConfigService.getPump, this.modelFormData.get('branchCode').value].join('/');
+      getPumpUrl = [this.apiConfigService.getPump, this.modelFormData.get('branchCode').value].join('/');
     }
     this.apiService.apiGetRequest(getPumpUrl)
       .subscribe(
@@ -277,7 +277,7 @@ getSaledUnits() {
 
   getmemberNames(value) {
     if (value != null && value !== '') {
-      const getmemberNamesUrl = ['/', this.apiConfigService.getPump, value, this.modelFormData.get('branchCode').value].join('/');
+      const getmemberNamesUrl = [this.apiConfigService.getPump, value, this.modelFormData.get('branchCode').value].join('/');
       this.apiService.apiGetRequest(getmemberNamesUrl).subscribe(
         response => {
           const res = response.body;

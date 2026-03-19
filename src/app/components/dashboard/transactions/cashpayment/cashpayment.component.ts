@@ -64,7 +64,7 @@ branchCode: any;
 
   
   getCashPaymentBranchesList() {
-    const getCashPaymentBranchesListUrl = ['/', this.apiConfigService.getCashPaymentBranchesList].join('/');
+    const getCashPaymentBranchesListUrl = [this.apiConfigService.getCashPaymentBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -81,7 +81,7 @@ branchCode: any;
 
 
   getCashPaymentList() {
-    const getCashPaymentListUrl = ['/', this.apiConfigService.getCashPaymentList, this.branchCode.branchCode].join('/');
+    const getCashPaymentListUrl = [this.apiConfigService.getCashPaymentList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getCashPaymentListUrl, this.dateForm.value).subscribe(
       response => {
         const res = response.body;

@@ -83,7 +83,7 @@ export class UndersubGroupComponent implements OnInit {
   }
 
   getglAccgrpList() {
-    const getglAccgrpList = ['/', this.apiConfigService.getglAccgrpList].join('/');
+    const getglAccgrpList = [this.apiConfigService.getglAccgrpList].join('/');
     this.apiService.apiGetRequest(getglAccgrpList)
       .subscribe(
         response => {
@@ -98,7 +98,7 @@ export class UndersubGroupComponent implements OnInit {
   }
 
   getAccountNamelist() {
-    const getAccountNamelist = ['/', this.apiConfigService.getAccountNamelist, this.modelFormData.get('nature').value].join('/');
+    const getAccountNamelist = [this.apiConfigService.getAccountNamelist, this.modelFormData.get('nature').value].join('/');
     this.apiService.apiGetRequest(getAccountNamelist)
       .subscribe(
         response => {
@@ -113,7 +113,7 @@ export class UndersubGroupComponent implements OnInit {
   }
 
   getGLUnderGroupList() {
-    const getGLUnderGroupList = ['/', this.apiConfigService.getGLUnderGroupList, this.modelFormData.get('groupUnder').value].join('/');
+    const getGLUnderGroupList = [this.apiConfigService.getGLUnderGroupList, this.modelFormData.get('groupUnder').value].join('/');
     this.apiService.apiGetRequest(getGLUnderGroupList)
       .subscribe(
         response => {
@@ -128,7 +128,7 @@ export class UndersubGroupComponent implements OnInit {
   }
 
   getAccountSubGrouplist() {
-    const getAccountSubGrouplist = ['/', this.apiConfigService.getAccountSubGrouplist,
+    const getAccountSubGrouplist = [this.apiConfigService.getAccountSubGrouplist,
       this.modelFormData.get('groupName').value].join('/');
     this.apiService.apiGetRequest(getAccountSubGrouplist)
       .subscribe(

@@ -144,7 +144,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
 
   getprreqDeatilList(id) {
     //debugger;
-    const getInvoiceDeatilListUrl = ['/', this.apiConfigService.getprreqDeatilList, id].join('/');
+    const getInvoiceDeatilListUrl = [this.apiConfigService.getprreqDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
         const res = response.body;
@@ -158,7 +158,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
       });
   }
   getCompiniesList() {
-    const getCompiniesListList = ['/', this.apiConfigService.getCompaniesList].join('/');
+    const getCompiniesListList = [this.apiConfigService.getCompaniesList].join('/');
     this.apiService.apiGetRequest(getCompiniesListList)
       .subscribe(
         response => {
@@ -173,7 +173,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
         });
   }
   getBranchesList() {
-    const getCashPaymentBranchesListUrl = ['/', this.apiConfigService.getCashPaymentBranchesList].join('/');
+    const getCashPaymentBranchesListUrl = [this.apiConfigService.getCashPaymentBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -195,9 +195,9 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
     //setbranch
     let genarateVoucherNoUrl;
     if (branch != null) {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getprreqreceiptnosList, branch].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getprreqreceiptnosList, branch].join('/');
     } else {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getprreqreceiptnosList, this.branchFormData.get('branch').value].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getprreqreceiptnosList, this.branchFormData.get('branch').value].join('/');
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
@@ -294,7 +294,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
 
   getProductByProductCode(value) {
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = ['/', this.apiConfigService.getProductByProductCode].join('/');
+      const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
           const res = response.body;
@@ -316,7 +316,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
   getProductByProductName(value) {
     //debugger;
     if (value != null && value !== '') {
-      const getProductByProductNameUrl = ['/', this.apiConfigService.getProductByProductName].join('/');
+      const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
           const res = response.body;
@@ -342,7 +342,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
 
 if (branch != null && branch !== '' &&
     productCode?.value != null && productCode.value !== '') {
-      const getBillingDetailsRcdUrl = ['/', this.apiConfigService.GetProductListsforpreq, productCode.value,
+      const getBillingDetailsRcdUrl = [this.apiConfigService.GetProductListsforpreq, productCode.value,
         this.branchFormData.get('branch').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
@@ -435,7 +435,7 @@ if (branch != null && branch !== '' &&
 
   registerpurreq() {
     debugger;
-    const registerStackreceiptsUrl = ['/', this.apiConfigService.registerPurchaserequisitionaaprovalDetails].join('/');
+    const registerStackreceiptsUrl = [this.apiConfigService.registerPurchaserequisitionaaprovalDetails].join('/');
     const requestObj = { PurreqHdr: this.branchFormData.value, PurreqDetail: this.dataSource.data };
     this.apiService.apiPostRequest(registerStackreceiptsUrl, requestObj).subscribe(
       response => {

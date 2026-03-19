@@ -68,7 +68,7 @@ export class DepartmentComponent implements OnInit {
 
  
   getCompaniesList() {
-    const getCompaniesList = ['/', this.apiConfigService.getCompaniesList].join('/');
+    const getCompaniesList = [this.apiConfigService.getCompaniesList].join('/');
     this.apiService.apiGetRequest(getCompaniesList)
       .subscribe(
         response => {

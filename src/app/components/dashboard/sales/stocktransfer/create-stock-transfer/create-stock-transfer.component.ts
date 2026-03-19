@@ -128,7 +128,7 @@ export class CreateStockTransferComponent implements OnInit {
   }
 
   getStockTransferDetilsaRecords(id) {
-    const getStockTransferDetilsaRecordsUrl = ['/', this.apiConfigService.getStockTransferDetilsaRecords, id].join('/');
+    const getStockTransferDetilsaRecordsUrl = [this.apiConfigService.getStockTransferDetilsaRecords, id].join('/');
     this.apiService.apiGetRequest(getStockTransferDetilsaRecordsUrl).subscribe(
       response => {
         const res = response.body;
@@ -163,7 +163,7 @@ export class CreateStockTransferComponent implements OnInit {
   }
 
   GetBranchesList() {
-    const getBranchesListUrl = ['/', this.apiConfigService.getBillingBranchesList].join('/');
+    const getBranchesListUrl = [this.apiConfigService.getBillingBranchesList].join('/');
     this.apiService.apiGetRequest(getBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -291,7 +291,7 @@ export class CreateStockTransferComponent implements OnInit {
   }
 
   generateStockTranfNo() {
-    const generateStockTranfNoUrl = ['/', this.apiConfigService.generateStockTranfNo, this.formData.get('fromBranchCode').value].join('/');
+    const generateStockTranfNoUrl = [this.apiConfigService.generateStockTranfNo, this.formData.get('fromBranchCode').value].join('/');
     this.apiService.apiGetRequest(generateStockTranfNoUrl).subscribe(
       response => {
         const res = response.body;
@@ -312,7 +312,7 @@ export class CreateStockTransferComponent implements OnInit {
   getProductByProductCode(value) {
     // this.getltrs(value);
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = ['/', this.apiConfigService.getProductByProductCode].join('/');
+      const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
           const res = response.body;
@@ -339,7 +339,7 @@ export class CreateStockTransferComponent implements OnInit {
 
 if (fromBranchCode != null && fromBranchCode !== '' &&
     productCode?.value != null && productCode.value !== '') {
-      const getStockTransferDetailsSectionUrl = ['/', this.apiConfigService.getStockTransferDetailsSection].join('/');
+      const getStockTransferDetailsSectionUrl = [this.apiConfigService.getStockTransferDetailsSection].join('/');
       this.apiService.apiPostRequest(getStockTransferDetailsSectionUrl, {
         branchCode: this.formData.get('fromBranchCode').value, productCode: productCode.value
       }).subscribe(
@@ -396,7 +396,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
   getProductByProductName(value) {
 
     if (value != null && value !== '') {
-      const getProductByProductNameUrl = ['/', this.apiConfigService.getProductByProductName].join('/');
+      const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
           const res = response.body;
@@ -415,7 +415,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
   }
   getltrs(value, index?) {
     if (value?.productCode != null && value.productCode !== '') {
-    const getProductByProductNameUrl = ['/', this.apiConfigService.getLtrs].join('/');
+    const getProductByProductNameUrl = [this.apiConfigService.getLtrs].join('/');
     this.apiService.apiPostRequest(getProductByProductNameUrl, { code: value.productCode }).subscribe(
       response => {
         const res = response.body;
@@ -567,7 +567,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
 
 
   registerStockTransfer(data) {
-    const registerStockTransferUrl = ['/', this.apiConfigService.registerStockTransfer].join('/');
+    const registerStockTransferUrl = [this.apiConfigService.registerStockTransfer].join('/');
     const requestObj = { stockTransferMaster: this.formData.value, stockTransferDetail: data };
     this.apiService.apiPostRequest(registerStockTransferUrl, requestObj).subscribe(
       response => {
@@ -591,7 +591,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
 
   exportToPdf() {
     const requestObj = { StockHdr: this.formData.value, StockDetail: this.dataSource.data };
-    let tableUrl = ['/', this.apiConfigService.getStockTransferPrintReportData].join('/');
+    let tableUrl = [this.apiConfigService.getStockTransferPrintReportData].join('/');
     const user = JSON.parse(localStorage.getItem('user'));
     this.params = this.params.append('userName', user.userName);
     this.params = this.params.append('fromBranchCode', this.formData.value.fromBranchCode);

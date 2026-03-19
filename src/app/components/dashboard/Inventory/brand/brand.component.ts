@@ -61,7 +61,7 @@ export class BrandComponent implements OnInit {
   }
 
   getTableData() {
-    const getCompanyUrl = ['/', this.apiConfigService.getCompaniesList].join('/');
+    const getCompanyUrl = [this.apiConfigService.getCompaniesList].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {

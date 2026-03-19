@@ -106,8 +106,8 @@ export class GeneralledgerService {
       case 'taxintegration':
             this.dynamicData.url = this.apiConfigService.getTaxintigrationList;
             this.dynamicData.component = TaxIntegrationComponent;
-            this.dynamicData.registerUrl = ['/', this.apiConfigService.registerTaxIntegration, user.branchCode, user.companyCode ? user.companyCode : "0"].join('/');
-       //    this.dynamicData.registerUrl = ['/', this.apiConfigService.registerTaxIntegration, user.branchCode, user.companyCode);
+            this.dynamicData.registerUrl = [this.apiConfigService.registerTaxIntegration, user.branchCode, user.companyCode ? user.companyCode : "0"].join('/');
+       //    this.dynamicData.registerUrl = [this.apiConfigService.registerTaxIntegration, user.branchCode, user.companyCode);
            // this.dynamicData.registerUrl = this.apiConfigService.registerTaxIntegration;
             this.dynamicData.updateUrl = this.apiConfigService.updateTaxIntegration;
             this.dynamicData.deleteUrl = this.apiConfigService.deleteTaxIntegration;

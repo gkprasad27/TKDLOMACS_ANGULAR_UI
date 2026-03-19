@@ -46,7 +46,7 @@ export class StructureCreationComponent implements OnInit {
   }
 
   getComponentsList() {
-    const getComponentsListUrl = ['/', this.apiConfigService.getStructureComponentsList].join('/');
+    const getComponentsListUrl = [this.apiConfigService.getStructureComponentsList].join('/');
     this.apiService.apiGetRequest(getComponentsListUrl)
       .subscribe(
         response => {

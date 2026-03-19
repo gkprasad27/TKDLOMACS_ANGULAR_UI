@@ -129,7 +129,7 @@ export class CreateCashpaymentComponent implements OnInit {
   }
 
   getCashPaymentDetailsList(id) {
-    const getCashPaymentDetailsListUrl = ['/', this.apiConfigService.getCashPaymentDetailsList, id].join('/');
+    const getCashPaymentDetailsListUrl = [this.apiConfigService.getCashPaymentDetailsList, id].join('/');
     this.apiService.apiGetRequest(getCashPaymentDetailsListUrl).subscribe(
       response => {
         const res = response.body;
@@ -159,7 +159,7 @@ export class CreateCashpaymentComponent implements OnInit {
 
 
   getCashPaymentBranchesList() {
-    const getCashPaymentBranchesListUrl = ['/', this.apiConfigService.getCashPaymentBranchesList].join('/');
+    const getCashPaymentBranchesListUrl = [this.apiConfigService.getCashPaymentBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -177,9 +177,9 @@ export class CreateCashpaymentComponent implements OnInit {
   genarateVoucherNo(branch?) {
     let genarateVoucherNoUrl;
     if (branch != null) {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getCashPaymentVoucherNo, branch].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getCashPaymentVoucherNo, branch].join('/');
     } else {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getCashPaymentVoucherNo, this.branchFormData.get('branchCode').value].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getCashPaymentVoucherNo, this.branchFormData.get('branchCode').value].join('/');
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
@@ -273,7 +273,7 @@ export class CreateCashpaymentComponent implements OnInit {
 
   getAccountByAccountCode(value) {
     if (value != null && value !== '') {
-      const getAccountLedgerListUrl = ['/', this.apiConfigService.getAccountLedgerList, value].join('/');
+      const getAccountLedgerListUrl = [this.apiConfigService.getAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
           const res = response.body;
@@ -293,7 +293,7 @@ export class CreateCashpaymentComponent implements OnInit {
 
   getAccountByAccountName(value) {
     if (value != null && value !== '') {
-      const getAccountLedgerListUrl = ['/', this.apiConfigService.getAccountLedgerListByName, value].join('/');
+      const getAccountLedgerListUrl = [this.apiConfigService.getAccountLedgerListByName, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
           const res = response.body;
@@ -456,7 +456,7 @@ export class CreateCashpaymentComponent implements OnInit {
       cashPaymentMasterId: 0,
       cashPaymentDate: this.commonService.formatDate(this.branchFormData.get('cashPaymentDate').value)
     });
-    const registerCashPaymentUrl = ['/', this.apiConfigService.registerCashPayment].join('/');
+    const registerCashPaymentUrl = [this.apiConfigService.registerCashPayment].join('/');
     const requestObj = { CashpaymentHdr: this.branchFormData.value, CashpaymentDetail: data };
     this.apiService.apiPostRequest(registerCashPaymentUrl, requestObj).subscribe(
       response => {

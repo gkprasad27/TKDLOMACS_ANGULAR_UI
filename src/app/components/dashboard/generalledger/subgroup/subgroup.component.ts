@@ -62,7 +62,7 @@ this.getAccgrpList();
   }
 
   getAccgrpList() {
-    const getAccgrpList = ['/', this.apiConfigService.getAccgrpList].join('/');
+    const getAccgrpList = [this.apiConfigService.getAccgrpList].join('/');
     this.apiService.apiGetRequest(getAccgrpList)
       .subscribe(
         response => {

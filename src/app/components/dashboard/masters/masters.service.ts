@@ -117,7 +117,7 @@ export class MastersService {
       break;
     
       case 'employeeInBranch':
-        this.dynamicData.url = ['/', this.apiConfigService.getAllEmployeesInBranch, user.branchCode].join('/');
+        this.dynamicData.url = [this.apiConfigService.getAllEmployeesInBranch, user.branchCode].join('/');
       //this.dynamicData.url = this.apiConfigService.getAllEmployeesInBranch;
       this.dynamicData.component = EmployeeInBranchComponent;
       this.dynamicData.registerUrl = this.apiConfigService.registerEmployeeInBranch;

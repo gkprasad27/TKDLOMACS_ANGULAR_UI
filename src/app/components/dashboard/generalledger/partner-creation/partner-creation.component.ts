@@ -99,7 +99,7 @@ export class PartnerCreationComponent implements OnInit {
   }
 
   companiesListData() {
-    const getCompanyUrl = ['/', this.apiConfigService.getCompanysList].join('/');
+    const getCompanyUrl = [this.apiConfigService.getCompanysList].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
@@ -115,7 +115,7 @@ export class PartnerCreationComponent implements OnInit {
   }
 
   branchesListData() {
-    const getCompanyUrl = ['/', this.apiConfigService.getBranchesPartnerCreationList].join('/');
+    const getCompanyUrl = [this.apiConfigService.getBranchesPartnerCreationList].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
@@ -131,7 +131,7 @@ export class PartnerCreationComponent implements OnInit {
   }
   PartnerTypesListData()
   {
-    const getCompanyUrl = ['/', this.apiConfigService.getPartnerPartnerCreationTypes].join('/');
+    const getCompanyUrl = [this.apiConfigService.getPartnerPartnerCreationTypes].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
@@ -147,7 +147,7 @@ export class PartnerCreationComponent implements OnInit {
   }
   getBalanceTypesData()
   {
-    const getCompanyUrl = ['/', this.apiConfigService.getBalanceTypes].join('/');
+    const getCompanyUrl = [this.apiConfigService.getBalanceTypes].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
@@ -162,7 +162,7 @@ export class PartnerCreationComponent implements OnInit {
         });
   }
   getNatureListData() {
-    const getCompanyUrl = ['/', this.apiConfigService.getNatureList].join('/');
+    const getCompanyUrl = [this.apiConfigService.getNatureList].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {

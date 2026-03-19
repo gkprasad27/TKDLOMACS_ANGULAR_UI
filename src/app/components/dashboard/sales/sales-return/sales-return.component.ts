@@ -65,7 +65,7 @@ export class SalesReturnComponent implements OnInit {
   }
 
   getInvoiceList() {
-    const getInvoiceListUrl = ['/', this.apiConfigService.getInvoiceGetInvoiceReturnList, this.branchCode.branchCode].join('/');
+    const getInvoiceListUrl = [this.apiConfigService.getInvoiceGetInvoiceReturnList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceListUrl, this.dateForm.value).subscribe(
       response => {
         const res = response.body;

@@ -133,7 +133,7 @@ export class CreateBankreceiptComponent implements OnInit {
     });
   }
   getBankReceiptDetailsList(id) {
-    const getBankReceiptDetailsListUrl = ['/', this.apiConfigService.getBankReceiptDetailsList, id].join('/');
+    const getBankReceiptDetailsListUrl = [this.apiConfigService.getBankReceiptDetailsList, id].join('/');
     this.apiService.apiGetRequest(getBankReceiptDetailsListUrl).subscribe(
       response => {
         const res = response.body;
@@ -167,7 +167,7 @@ export class CreateBankreceiptComponent implements OnInit {
 
 
   getBankReceiptBranchesList() {
-    const getBankReceiptBranchesListUrl = ['/', this.apiConfigService.getBankReceiptBranchesList].join('/');
+    const getBankReceiptBranchesListUrl = [this.apiConfigService.getBankReceiptBranchesList].join('/');
     this.apiService.apiGetRequest(getBankReceiptBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -183,7 +183,7 @@ export class CreateBankreceiptComponent implements OnInit {
   }
 
   // getBRAccountLedgerList() {
-  //   const getBRAccountLedgerListUrl = ['/', this.apiConfigService.getBRAccountLedgerList].join('/');
+  //   const getBRAccountLedgerListUrl = [this.apiConfigService.getBRAccountLedgerList].join('/');
   //   this.apiService.apiGetRequest(getBRAccountLedgerListUrl).subscribe(
   //     response => {
   //       const res = response.body;
@@ -199,7 +199,7 @@ export class CreateBankreceiptComponent implements OnInit {
   // }
 
   getBankRAccountLedgerList() {
-    const getBankRAccountLedgerListUrl = ['/', this.apiConfigService.getBankRAccountLedgerList].join('/');
+    const getBankRAccountLedgerListUrl = [this.apiConfigService.getBankRAccountLedgerList].join('/');
     this.apiService.apiGetRequest(getBankRAccountLedgerListUrl).subscribe(
       response => {
         const res = response.body;
@@ -215,7 +215,7 @@ export class CreateBankreceiptComponent implements OnInit {
   }
   getBRAccountLedgerList(value) {
     if (value != null && value !== '') {
-      const getBRAccountLedgerListUrl = ['/', this.apiConfigService.getBRAccountLedgerList, value].join('/');
+      const getBRAccountLedgerListUrl = [this.apiConfigService.getBRAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getBRAccountLedgerListUrl).subscribe(
         response => {
           const res = response.body;
@@ -250,9 +250,9 @@ export class CreateBankreceiptComponent implements OnInit {
   genarateVoucherNo(branch?) {
     let genarateVoucherNoUrl;
     if (branch != null) {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getBankReceiptVoucherNo, branch].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getBankReceiptVoucherNo, branch].join('/');
     } else {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getBankReceiptVoucherNo, this.branchFormData.get('branchCode').value].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getBankReceiptVoucherNo, this.branchFormData.get('branchCode').value].join('/');
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
@@ -347,7 +347,7 @@ export class CreateBankreceiptComponent implements OnInit {
 
   getAccountByAccountCode(value) {
     if (value != null && value !== '') {
-      const getAccountLedgerListUrl = ['/', this.apiConfigService.getBPAccountLedgerList, value].join('/');
+      const getAccountLedgerListUrl = [this.apiConfigService.getBPAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
           const res = response.body;
@@ -367,7 +367,7 @@ export class CreateBankreceiptComponent implements OnInit {
 
   getAccountByAccountName(value) {
     if (value != null && value !== '') {
-      const getAccountLedgerListUrl = ['/', this.apiConfigService.getBRAccountLedgerListByName, value].join('/');
+      const getAccountLedgerListUrl = [this.apiConfigService.getBRAccountLedgerListByName, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
           const res = response.body;
@@ -537,7 +537,7 @@ export class CreateBankreceiptComponent implements OnInit {
       bankReceiptDate: this.commonService.formatDate(this.branchFormData.get('bankReceiptDate').value),
       postingDate: this.commonService.formatDate(this.branchFormData.get('postingDate').value),
     });
-    const registerBankReceiptUrl = ['/', this.apiConfigService.registerBankReceipt].join('/');
+    const registerBankReceiptUrl = [this.apiConfigService.registerBankReceipt].join('/');
     const requestObj = { BankreceiptHdr: this.branchFormData.value, BankreceiptDetail: data };
     this.apiService.apiPostRequest(registerBankReceiptUrl, requestObj).subscribe(
       response => {

@@ -63,7 +63,7 @@ branchCode:any;
   }
 
   getCashReceiptBranchesList() {
-    const getCashReceiptBranchesListUrl = ['/', this.apiConfigService.getCashReceiptBranchesList].join('/');
+    const getCashReceiptBranchesListUrl = [this.apiConfigService.getCashReceiptBranchesList].join('/');
     this.apiService.apiGetRequest(getCashReceiptBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -80,7 +80,7 @@ branchCode:any;
   
 
   getCashReceiptList() {
-    const getCashReceiptListUrl = ['/', this.apiConfigService.getCashReceiptList, this.branchCode.branchCode].join('/');
+    const getCashReceiptListUrl = [this.apiConfigService.getCashReceiptList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getCashReceiptListUrl, this.dateForm.value).subscribe(
       response => {
         const res = response.body;

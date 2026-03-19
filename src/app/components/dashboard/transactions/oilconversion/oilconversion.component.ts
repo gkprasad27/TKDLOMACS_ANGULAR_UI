@@ -62,7 +62,7 @@ export class OilconversionComponent implements OnInit {
   }
   getInvoiceDetails() {
     //debugger;
-    const getInvoiceDetailstUrl = ['/', this.apiConfigService.getoilcnvsnDeatilListLoad, this.branchCode.branchCode].join('/');
+    const getInvoiceDetailstUrl = [this.apiConfigService.getoilcnvsnDeatilListLoad, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceDetailstUrl, this.dateForm.value).subscribe(
       response => {
         const res = response.body;
@@ -108,7 +108,7 @@ export class OilconversionComponent implements OnInit {
   }
   getOilconversionList()
   {
-    const getOilconversionListUrl = ['/', this.apiConfigService.getOilconversionList, this.branchCode.branchCode].join('/');
+    const getOilconversionListUrl = [this.apiConfigService.getOilconversionList, this.branchCode.branchCode].join('/');
 
     this.apiService.apiPostRequest(getOilconversionListUrl, this.dateForm.value).subscribe(
       response => {

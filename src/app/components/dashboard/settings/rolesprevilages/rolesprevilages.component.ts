@@ -90,7 +90,7 @@ export class RolesprevilagesComponent implements OnInit {
   }
 
   selectedParentMenu() {
-    const getRolesUrl = ['/', this.apiConfigService.getMenuList, this.formData.get('role').value,
+    const getRolesUrl = [this.apiConfigService.getMenuList, this.formData.get('role').value,
       this.formData.get('parentMenu').value].join('/');
     this.apiService.apiGetRequest(getRolesUrl).subscribe(
       response => {
@@ -127,7 +127,7 @@ export class RolesprevilagesComponent implements OnInit {
       }
     }
     
-    const getAccessUrl = ['/', this.apiConfigService.giveAccess, this.formData.get('role').value].join('/');
+    const getAccessUrl = [this.apiConfigService.giveAccess, this.formData.get('role').value].join('/');
     this.apiService.apiPostRequest(getAccessUrl, filterData).subscribe(
       response => {
         const res = response.body;

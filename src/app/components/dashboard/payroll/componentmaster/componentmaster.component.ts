@@ -98,7 +98,7 @@ this.getConfigurationList();
   }
 
   getConfigurationList() {
-    const getConfigurationList = ['/', this.apiConfigService.getConfigurationList].join('/');
+    const getConfigurationList = [this.apiConfigService.getConfigurationList].join('/');
     this.apiService.apiGetRequest(getConfigurationList)
       .subscribe(
         response => {

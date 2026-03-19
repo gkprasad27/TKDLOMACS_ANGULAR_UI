@@ -69,7 +69,7 @@ export class MaterialGroupsComponent implements OnInit {
 
 
   companiesListData() {
-    const getCompanyUrl = ['/', this.apiConfigService.getCompanysList].join('/');
+    const getCompanyUrl = [this.apiConfigService.getCompanysList].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
@@ -87,7 +87,7 @@ export class MaterialGroupsComponent implements OnInit {
   }
 
   getAccountingClassList() {
-    const getCompanyUrl = ['/', this.apiConfigService.getAccountingClassList].join('/');
+    const getCompanyUrl = [this.apiConfigService.getAccountingClassList].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {

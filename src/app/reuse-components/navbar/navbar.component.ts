@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit {
   }
 
   GetShiftId() {
-    const getShiftIdUrl = ['/', this.apiConfigService.getShiftId, this.loginUser.seqId, this.loginUser.branchCode].join('/');
+    const getShiftIdUrl = [this.apiConfigService.getShiftId, this.loginUser.seqId, this.loginUser.branchCode].join('/');
     this.apiService.apiGetRequest(getShiftIdUrl).subscribe(
       response => {
         const res = response.body;
@@ -72,7 +72,7 @@ export class NavbarComponent implements OnInit {
 
 
   logout() {
-    const logoutUrl = ['/', this.apiConfigService.logoutUrl, this.loginUser.seqId].join('/');
+    const logoutUrl = [this.apiConfigService.logoutUrl, this.loginUser.seqId].join('/');
     this.apiService.apiGetRequest(logoutUrl).subscribe(
       response => {
         const res = response.body;
@@ -88,9 +88,9 @@ export class NavbarComponent implements OnInit {
   shift() {
     var logoutUrl;
     if (this.shiftButton == 'ShiftIN') {
-      logoutUrl = ['/', this.apiConfigService.shiftStart, this.loginUser.seqId, this.loginUser.branchCode].join('/');
+      logoutUrl = [this.apiConfigService.shiftStart, this.loginUser.seqId, this.loginUser.branchCode].join('/');
     } else {
-      logoutUrl = ['/', this.apiConfigService.shiftTerminate, this.employeeShift].join('/');
+      logoutUrl = [this.apiConfigService.shiftTerminate, this.employeeShift].join('/');
     }
 
     this.apiService.apiGetRequest(logoutUrl).subscribe(

@@ -72,7 +72,7 @@ export class NoSeriesComponent implements OnInit {
   }
 
   PartnetTypeListData() {
-    const getPartnetTypeUrl = ['/', this.apiConfigService.getPartnerTypesList].join('/');
+    const getPartnetTypeUrl = [this.apiConfigService.getPartnerTypesList].join('/');
     this.apiService.apiGetRequest(getPartnetTypeUrl)
       .subscribe(
         response => {

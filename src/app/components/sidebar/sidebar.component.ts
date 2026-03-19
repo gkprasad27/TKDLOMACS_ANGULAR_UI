@@ -51,7 +51,7 @@ export class SidebarComponent implements OnInit {
 
     }
     if (!item.children || !item.children.length) {
-      const route = ['/', 'dashboard', this.commonService.parentItem].join('/');
+      const route = ['dashboard', this.commonService.parentItem].join('/');
       console.log( route, item.route);
 
       this.router.navigate([ route, item.route ]);

@@ -47,7 +47,7 @@ export class CTCBreakupComponent implements OnInit {
   }
 
   getStructureList() {
-    const getStructureList = ['/', this.apiConfigService.getStructureList].join('/');
+    const getStructureList = [this.apiConfigService.getStructureList].join('/');
     this.apiService.apiGetRequest(getStructureList)
       .subscribe(
         response => {
@@ -62,7 +62,7 @@ export class CTCBreakupComponent implements OnInit {
   }
 
   getctcComponentsList() {
-    const getctcComponentsListUrl = ['/', this.apiConfigService.getctcComponentsList].join('/');
+    const getctcComponentsListUrl = [this.apiConfigService.getctcComponentsList].join('/');
     this.apiService.apiGetRequest(getctcComponentsListUrl)
       .subscribe(
         response => {

@@ -80,7 +80,7 @@ export class BrandModelComponent implements OnInit {
   }
 
   getCompiniesList() {
-    const getCompiniesListList = ['/', this.apiConfigService.getCompaniesList].join('/');
+    const getCompiniesListList = [this.apiConfigService.getCompaniesList].join('/');
     this.apiService.apiGetRequest(getCompiniesListList)
       .subscribe(
         response => {
@@ -95,7 +95,7 @@ export class BrandModelComponent implements OnInit {
         });
   }
   //getTableData() {
-  //  const getCompanyUrl = ['/', this.apiConfigService.getCompaniesList].join('/');
+  //  const getCompanyUrl = [this.apiConfigService.getCompaniesList].join('/');
   //  this.apiService.apiGetRequest(getCompanyUrl)
   //    .subscribe(
   //      response => {
@@ -111,7 +111,7 @@ export class BrandModelComponent implements OnInit {
   //}
 
   getbrandTableData() {
-    const getCompanyUrl = ['/', this.apiConfigService.getBrandList].join('/');
+    const getCompanyUrl = [this.apiConfigService.getBrandList].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
@@ -126,7 +126,7 @@ export class BrandModelComponent implements OnInit {
         });
   }
   getMaterialGroupsList() {
-    const getCompanyUrl = ['/', this.apiConfigService.getMaterialGroupsList].join('/');
+    const getCompanyUrl = [this.apiConfigService.getMaterialGroupsList].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
@@ -142,7 +142,7 @@ export class BrandModelComponent implements OnInit {
   }
 
   getSizesList()  {
-    const getCompanyUrl = ['/', this.apiConfigService.getSizesList].join('/');
+    const getCompanyUrl = [this.apiConfigService.getSizesList].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {

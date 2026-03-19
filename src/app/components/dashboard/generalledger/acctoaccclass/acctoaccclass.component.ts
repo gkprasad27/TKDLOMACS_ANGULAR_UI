@@ -70,7 +70,7 @@ export class AccToAccClassComponent  implements OnInit {
   }
 
   getAccountingClass() {
-    const getAccountingClass = ['/', this.apiConfigService.getAccountingClass].join('/');
+    const getAccountingClass = [this.apiConfigService.getAccountingClass].join('/');
     this.apiService.apiGetRequest(getAccountingClass)
       .subscribe(
         response => {
@@ -85,7 +85,7 @@ export class AccToAccClassComponent  implements OnInit {
   }
 
   getMatTranTypes() {
-    const getMatTranTypes = ['/', this.apiConfigService.getMatTranTypes].join('/');
+    const getMatTranTypes = [this.apiConfigService.getMatTranTypes].join('/');
     this.apiService.apiGetRequest(getMatTranTypes)
       .subscribe(
         response => {
@@ -100,7 +100,7 @@ export class AccToAccClassComponent  implements OnInit {
   }
 
   getSalesGlAccounts() {
-    const getSalesGlAccounts = ['/', this.apiConfigService.getSalesGlAccounts].join('/');
+    const getSalesGlAccounts = [this.apiConfigService.getSalesGlAccounts].join('/');
     this.apiService.apiGetRequest(getSalesGlAccounts)
       .subscribe(
         response => {
@@ -116,7 +116,7 @@ export class AccToAccClassComponent  implements OnInit {
   }
 
   getPurchaseGlAccounts() {
-    const getPurchaseGlAccounts = ['/', this.apiConfigService.getPurchaseGlAccounts].join('/');
+    const getPurchaseGlAccounts = [this.apiConfigService.getPurchaseGlAccounts].join('/');
     this.apiService.apiGetRequest(getPurchaseGlAccounts)
       .subscribe(
         response => {
@@ -132,7 +132,7 @@ export class AccToAccClassComponent  implements OnInit {
   }
 
   getInventoryGlAccounts() {
-    const getInventoryGlAccounts = ['/', this.apiConfigService.getInventoryGlAccounts].join('/');
+    const getInventoryGlAccounts = [this.apiConfigService.getInventoryGlAccounts].join('/');
     this.apiService.apiGetRequest(getInventoryGlAccounts)
       .subscribe(
         response => {

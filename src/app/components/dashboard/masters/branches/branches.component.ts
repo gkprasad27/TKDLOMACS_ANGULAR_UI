@@ -105,7 +105,7 @@ export class BranchesComponent implements OnInit {
   }
 
   getTableData() {
-    const getCompanyUrl = ['/', this.apiConfigService.getCompanysList].join('/');
+    const getCompanyUrl = [this.apiConfigService.getCompanysList].join('/');
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {

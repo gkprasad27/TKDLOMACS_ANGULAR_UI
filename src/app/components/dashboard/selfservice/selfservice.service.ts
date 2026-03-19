@@ -36,8 +36,8 @@ export class selfService {
         
         this.dynamicData.url = this.apiConfigService.getLeaveopeningbalanceList;
         this.dynamicData.component = LeaveopeningbalanceComponent;
-        this.dynamicData.registerUrl = ['/', this.apiConfigService.registerLeaveopeningbalance, user.userName, user.companyCode ? user.companyCode : "0"].join('/');
-        this.dynamicData.updateUrl = ['/', this.apiConfigService.updateLeaveopeningbalance, user.userName, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.registerUrl = [this.apiConfigService.registerLeaveopeningbalance, user.userName, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.updateUrl = [this.apiConfigService.updateLeaveopeningbalance, user.userName, user.companyCode ? user.companyCode : "0"].join('/');
         //this.dynamicData.registerUrl = this.apiConfigService.registerLeaveopeningbalance;
         //this.dynamicData.updateUrl = this.apiConfigService.updateLeaveopeningbalance;
         this.dynamicData.deleteUrl = this.apiConfigService.deleteLeaveopeningbalance;
@@ -47,7 +47,7 @@ export class selfService {
         return this.dynamicData;
         break;
       case 'Leaverequest':
-        this.dynamicData.url = ['/', this.apiConfigService.getLeaveRequestList,user.userName].join('/');
+        this.dynamicData.url = [this.apiConfigService.getLeaveRequestList,user.userName].join('/');
         this.dynamicData.component = LeaveRequestComponent;
         this.dynamicData.registerUrl = this.apiConfigService.registerLeaveRequests;
         this.dynamicData.updateUrl = this.apiConfigService.updateLeaveRequests;
@@ -59,7 +59,7 @@ export class selfService {
         break;
 
       case 'approvaltype':
-        //this.dynamicData.url = ['/', this.apiConfigService.getapprovaltypeList);
+        //this.dynamicData.url = [this.apiConfigService.getapprovaltypeList);
         this.dynamicData.url = this.apiConfigService.getapprovaltypeList;
         this.dynamicData.component = ApprovalTypeComponent;
         this.dynamicData.registerUrl = this.apiConfigService.registerapprovaltype;
@@ -71,7 +71,7 @@ export class selfService {
         return this.dynamicData;
         break;
       case 'applyod':
-        this.dynamicData.url = ['/', this.apiConfigService.applyodRequestList, user.userName].join('/');
+        this.dynamicData.url = [this.apiConfigService.applyodRequestList, user.userName].join('/');
         this.dynamicData.component = ApplyodComponent;
         this.dynamicData.registerUrl = this.apiConfigService.registerodRequest;
         this.dynamicData.updateUrl = this.apiConfigService.updateapplyodRequest;
@@ -81,7 +81,7 @@ export class selfService {
         return this.dynamicData;
         break;
       case 'vehiclerequisition':
-        this.dynamicData.url = ['/', this.apiConfigService.applyvehiclerqsnRequestList, user.userName].join('/');
+        this.dynamicData.url = [this.apiConfigService.applyvehiclerqsnRequestList, user.userName].join('/');
         this.dynamicData.component = VehicleRequisitionsComponent;
         this.dynamicData.registerUrl = this.apiConfigService.registervehiclerqsnRequest;
         this.dynamicData.updateUrl = this.apiConfigService.updatevehiclerqsnRequest;
@@ -92,7 +92,7 @@ export class selfService {
         break;
 
       case 'advance':
-        this.dynamicData.url = ['/', this.apiConfigService.applyadvanceRequestList, user.userName].join('/');
+        this.dynamicData.url = [this.apiConfigService.applyadvanceRequestList, user.userName].join('/');
         this.dynamicData.component = AdvanceComponent;
         this.dynamicData.registerUrl = this.apiConfigService.registeradvanceRequest;
         this.dynamicData.updateUrl = this.apiConfigService.updateapplyadvanceRequest;
@@ -103,7 +103,7 @@ export class selfService {
         break;
 
       case 'permissionrequest':
-        this.dynamicData.url = ['/', this.apiConfigService.permissionRequestList, user.userName].join('/');
+        this.dynamicData.url = [this.apiConfigService.permissionRequestList, user.userName].join('/');
         this.dynamicData.component = PermissionRequestComponent;
         this.dynamicData.registerUrl = this.apiConfigService.registerpermissionRequest;
         this.dynamicData.updateUrl = this.apiConfigService.updatepermissionRequest;
@@ -156,8 +156,8 @@ export class selfService {
       case 'leavetype':
         this.dynamicData.url = this.apiConfigService.getLeaveTypeatLists;
         this.dynamicData.component = LeavetypeComponent;
-        this.dynamicData.registerUrl = ['/', this.apiConfigService.registerLeaveTypes, user.companyCode ? user.companyCode : "0"].join('/');
-        this.dynamicData.updateUrl = ['/', this.apiConfigService.updateLeaveTypes, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.registerUrl = [this.apiConfigService.registerLeaveTypes, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.updateUrl = [this.apiConfigService.updateLeaveTypes, user.companyCode ? user.companyCode : "0"].join('/');
         //this.dynamicData.updateUrl = this.apiConfigService.updateLeaveTypes;
         this.dynamicData.deleteUrl = this.apiConfigService.deleteLeaveTypes;
         this.dynamicData.listName = 'leavetypeList';

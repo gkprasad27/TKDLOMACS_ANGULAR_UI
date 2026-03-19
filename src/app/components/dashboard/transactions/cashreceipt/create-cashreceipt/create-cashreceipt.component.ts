@@ -131,7 +131,7 @@ export class CreateCashreceiptComponent implements OnInit {
   }
 
   getCashReceiptDetailsList(id) {
-    const getCashReceiptDetailsListUrl = ['/', this.apiConfigService.getCashReceiptDetailsList, id].join('/');
+    const getCashReceiptDetailsListUrl = [this.apiConfigService.getCashReceiptDetailsList, id].join('/');
     this.apiService.apiGetRequest(getCashReceiptDetailsListUrl).subscribe(
       response => {
         const res = response.body;
@@ -161,7 +161,7 @@ export class CreateCashreceiptComponent implements OnInit {
 
 
   getCashReceiptBranchesList() {
-    const getCashReceiptBranchesListUrl = ['/', this.apiConfigService.getCashReceiptBranchesList].join('/');
+    const getCashReceiptBranchesListUrl = [this.apiConfigService.getCashReceiptBranchesList].join('/');
     this.apiService.apiGetRequest(getCashReceiptBranchesListUrl).subscribe(
       response => {
         const res = response.body;
@@ -179,9 +179,9 @@ export class CreateCashreceiptComponent implements OnInit {
   genarateVoucherNo(branch?) {
     let genarateVoucherNoUrl;
     if (branch != null) {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getCashReceiptVoucherNo, branch].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getCashReceiptVoucherNo, branch].join('/');
     } else {
-      genarateVoucherNoUrl = ['/', this.apiConfigService.getCashReceiptVoucherNo, this.branchFormData.get('branchCode').value].join('/');
+      genarateVoucherNoUrl = [this.apiConfigService.getCashReceiptVoucherNo, this.branchFormData.get('branchCode').value].join('/');
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
@@ -276,7 +276,7 @@ export class CreateCashreceiptComponent implements OnInit {
 
   getAccountByAccountCode(value) {
     if (value != null && value !== '') {
-      const getAccountLedgerListUrl = ['/', this.apiConfigService.getCashRAccountLedgerList, value].join('/');
+      const getAccountLedgerListUrl = [this.apiConfigService.getCashRAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
           const res = response.body;
@@ -384,7 +384,7 @@ export class CreateCashreceiptComponent implements OnInit {
 
   getAccountByAccountName(value) {
     if (value != null && value !== '') {
-      const getAccountLedgerListUrl = ['/', this.apiConfigService.getCRAccountLedgerListByName, value].join('/');
+      const getAccountLedgerListUrl = [this.apiConfigService.getCRAccountLedgerListByName, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
           const res = response.body;
@@ -464,7 +464,7 @@ export class CreateCashreceiptComponent implements OnInit {
       cashReceiptMasterId: 0,
       cashReceiptDate:this.commonService.formatDate(this.branchFormData.get('cashReceiptDate').value)
     });
-    const registerCashReceiptUrl = ['/', this.apiConfigService.registerCashReceipt].join('/');
+    const registerCashReceiptUrl = [this.apiConfigService.registerCashReceipt].join('/');
     const requestObj = { CashreceiptHdr: this.branchFormData.value, CashreceiptDetail: data };
     this.apiService.apiPostRequest(registerCashReceiptUrl, requestObj).subscribe(
       response => {

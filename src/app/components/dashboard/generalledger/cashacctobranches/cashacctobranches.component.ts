@@ -66,7 +66,7 @@ this.getCashAccounts();
   }
 
   getCashAccBranchesList() {
-    const getCashAccBranchesList = ['/', this.apiConfigService.getCashAccBranchesList].join('/');
+    const getCashAccBranchesList = [this.apiConfigService.getCashAccBranchesList].join('/');
     this.apiService.apiGetRequest(getCashAccBranchesList)
       .subscribe(
         response => {
@@ -82,7 +82,7 @@ this.getCashAccounts();
   }
 
   getBankAccounts() {
-    const getBankAccounts = ['/', this.apiConfigService.getBankAccounts].join('/');
+    const getBankAccounts = [this.apiConfigService.getBankAccounts].join('/');
     this.apiService.apiGetRequest(getBankAccounts)
       .subscribe(
         response => {
@@ -98,7 +98,7 @@ this.getCashAccounts();
   }
 
   getCashAccounts() {
-    const getCashAccounts = ['/', this.apiConfigService.getCashAccounts].join('/');
+    const getCashAccounts = [this.apiConfigService.getCashAccounts].join('/');
     this.apiService.apiGetRequest(getCashAccounts)
       .subscribe(
         response => {
