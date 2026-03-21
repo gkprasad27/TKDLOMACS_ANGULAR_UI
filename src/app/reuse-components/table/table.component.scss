@@ -1,17 +1,18 @@
-@use "reuse";
+@use "../../../reuse" as reuse;
 
 .table {
   overflow-x: scroll;
+  // min-height: 70vh;
 }
 
 :host ::ng-deep table {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: sans-serif;
   & > tbody  {
     & tr {
       border-bottom: 1px solid reuse.$color-ddd;
     }
     & td {
-      font-size: 12px;
+      font-size: 11px;
       vertical-align: middle;
       border: none !important;
     }
@@ -20,23 +21,28 @@
       border: none !important;
     }
     & tr:nth-child(even) {
-    background-color: reuse.$color-f9f9f9;
+    background-color: reuse.$color-f9f9f9
     }
     & tr:nth-child(odd) {
-      background-color: reuse.$color-white;
+      background-color: reuse.$color-white
       }
       & tr:nth-child(even):hover {
-        background-color: reuse.$color-f9f9f9;
+        background-color: reuse.$color-f9f9f9
         }
         & tr:nth-child(odd):hover {
-          background-color: reuse.$color-f9f9f9;
+          background-color: reuse.$color-f9f9f9
           }
+
+          .highlight {
+  background-color: yellow !important;
+}
   }
 }
 
 
 .mat-header-cell, .mat-cell {
-  min-width: 150px;
+  white-space:nowrap;
+  padding: 5px;
 }
 
 .table th, .table td {
@@ -45,24 +51,24 @@
 }
 
 .table th {
-  background-color: reuse.$color-blue;
+  font-size: 11px;
+  background-color: reuse.$color-blue !important;
   color: reuse.$color-white;
 }
 
 .table tr {
-  height: 40px !important;
+  height: 25px !important;
   cursor: pointer;
 }
 
 :host ::ng-deep .filter {
-  & .mat-form-field-wrapper {
-      padding-bottom: 0em !important;
+  width: 500px;
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
   }
-  & .mat-form-field-underline {
-    bottom: 0.1em;
-  }
-  & .mat-form-field-infix {
-    border: none;
+  & .mat-mdc-form-field-infix {
+    min-height: 30px !important;
+    padding: 5px !important;
   }
 }
 
@@ -70,4 +76,67 @@
   width: 20rem;
 }
 
+::ng-deep .mat-pseudo-checkbox {
+  display: none !important; 
+}
 
+
+.link--val {
+  text-decoration: underline;
+  color: blue;
+}
+
+
+.mw-23 {
+  min-width: 23px;
+  mat-icon {
+      color: orange;
+  }
+}
+
+// #page{
+//   background-color: skyblue !important;
+//   position:absolute;
+//   top:0;
+//   width:fit-content;
+// }
+
+#ng{
+  // background-color:  #174154 !important;
+  
+  height: 44px;
+  
+  width: 64%;
+}
+
+#filt{
+  // background-color:  #174154;
+  border-top-right-radius: 0%;
+  border-bottom-right-radius: 0%;
+  height: 44px;
+
+}
+.btn-group align-items-center{
+  background-color: blue !important;
+  width:80%;
+}
+
+ng-container{
+  background-color:  #174154 !important;
+  border-radius: 20%;
+  
+
+}
+#filterinput{
+  color: red !important;
+  background-color: white;
+  height: 33px;
+
+  
+}
+
+// .paginator-container {
+//   width: 10%; /* Increase the width of the paginator container */
+//   display: flex; /* Use flexbox to control alignment */
+//   justify-content: center; /* Center-align paginator horizontally */
+// }

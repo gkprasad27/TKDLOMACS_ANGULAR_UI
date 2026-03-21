@@ -44,6 +44,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   @Input() tableData: any;
   @Output() addOrUpdateEvent = new EventEmitter();
+  @Output() onEditEmit = new EventEmitter();
   @Input() addOrUpdateData: any;
   @Input() isVehicle: boolean;
   @Input() isGiftmaster: boolean;
@@ -121,6 +122,10 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     this.filterColData = [];
     this.keys = [];
     this.showDataNotFound = false;
+  }
+
+  onEditClick(row: any) {
+    this.onEditEmit.emit(row);
   }
 
   highlightRows(row?) {
