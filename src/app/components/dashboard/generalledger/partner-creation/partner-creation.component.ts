@@ -103,7 +103,7 @@ export class PartnerCreationComponent implements OnInit {
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -119,7 +119,7 @@ export class PartnerCreationComponent implements OnInit {
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.branchesList = res.response['branchesList'];
@@ -135,7 +135,7 @@ export class PartnerCreationComponent implements OnInit {
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.partnerTypeList = res.response['partnerTypeList'];
@@ -151,7 +151,7 @@ export class PartnerCreationComponent implements OnInit {
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.balanceTypeList = res.response['partnerCreationList'];
@@ -166,7 +166,7 @@ export class PartnerCreationComponent implements OnInit {
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.getNatureList = res.response['partnerCreationList'];

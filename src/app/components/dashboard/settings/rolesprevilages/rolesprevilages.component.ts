@@ -57,7 +57,7 @@ export class RolesprevilagesComponent implements OnInit {
     const getRolesUrl = this.apiConfigService.getRoles;
     this.apiService.apiGetRequest(getRolesUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.roleArray = res.response['Roles'];
@@ -79,7 +79,7 @@ export class RolesprevilagesComponent implements OnInit {
     const getRolesUrl = this.apiConfigService.getParentMenus;
     this.apiService.apiGetRequest(getRolesUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.parentMenu = res.response['ParentMenus'];
@@ -94,7 +94,7 @@ export class RolesprevilagesComponent implements OnInit {
       this.formData.get('parentMenu').value].join('/');
     this.apiService.apiGetRequest(getRolesUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.actualData = res.response.map(x => ({...x}));
@@ -130,7 +130,7 @@ export class RolesprevilagesComponent implements OnInit {
     const getAccessUrl = [this.apiConfigService.giveAccess, this.formData.get('role').value].join('/');
     this.apiService.apiPostRequest(getAccessUrl, filterData).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar(Static.LoginSussfull, Static.Close, SnackBar.success);

@@ -22,6 +22,10 @@
     "LOGIN": "Login",
     "tkdlomacs": "TKDLOMACS"
   },
+  
+  "dashboard": {
+    "title": "Dashboard"
+  },
   "accountsgroup": {
     "title": "Accounts Group",
     "groupCode": "Code",

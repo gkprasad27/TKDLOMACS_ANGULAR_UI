@@ -65,7 +65,7 @@ export class OilconversionComponent implements OnInit {
     const getInvoiceDetailstUrl = [this.apiConfigService.getoilcnvsnDeatilListLoad, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceDetailstUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.OilconversionsDeatilList?.length) {
             this.dataSource = new MatTableDataSource(res.response['OilconversionsDeatilList']);
@@ -112,7 +112,7 @@ export class OilconversionComponent implements OnInit {
 
     this.apiService.apiPostRequest(getOilconversionListUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.oilconversionsList?.length) {
             this.dataSource = new MatTableDataSource(res.response['oilconversionsList']);

@@ -66,7 +66,7 @@ branchCode:any;
     const getBankReceiptBranchesListUrl = [this.apiConfigService.getBankReceiptBranchesList].join('/');
     this.apiService.apiGetRequest(getBankReceiptBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -82,7 +82,7 @@ branchCode:any;
     const getBankreceiptListUrl = [this.apiConfigService.getBankreceiptList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getBankreceiptListUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
         if (res?.response?.BankReceiptList?.length) {
           this.dataSource = new MatTableDataSource( res.response['BankReceiptList']);

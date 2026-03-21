@@ -86,7 +86,7 @@ this.getPricingLevellist();
     this.apiService.apiGetRequest(getAccountGrouplist)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -102,7 +102,7 @@ this.getPricingLevellist();
     this.apiService.apiGetRequest(getAccountTypelist)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -118,7 +118,7 @@ this.getPricingLevellist();
     this.apiService.apiGetRequest(getPaymentTypelist)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -134,7 +134,7 @@ this.getPricingLevellist();
     this.apiService.apiGetRequest(getPricingLevellist)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);

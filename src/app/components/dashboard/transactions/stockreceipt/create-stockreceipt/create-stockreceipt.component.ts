@@ -157,7 +157,7 @@ export class CreateStockreceiptsComponent implements OnInit {
     const getInvoiceDeatilListUrl = [this.apiConfigService.getStockreceiptDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.StockreceiptDeatilList?.length) {
             this.dataSource = new MatTableDataSource(res.response['StockreceiptDeatilList']);
@@ -172,7 +172,7 @@ export class CreateStockreceiptsComponent implements OnInit {
     const getCashPaymentBranchesListUrl = [this.apiConfigService.getCashPaymentBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -198,7 +198,7 @@ export class CreateStockreceiptsComponent implements OnInit {
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if ((res.response['ReceiptNo'] != null)) {
@@ -227,7 +227,7 @@ export class CreateStockreceiptsComponent implements OnInit {
     }
     this.apiService.apiGetRequest(gettingtobranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response != null)
           {
@@ -334,7 +334,7 @@ export class CreateStockreceiptsComponent implements OnInit {
       const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -357,7 +357,7 @@ export class CreateStockreceiptsComponent implements OnInit {
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -378,7 +378,7 @@ export class CreateStockreceiptsComponent implements OnInit {
   //    const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName, value].join('/');
   //    this.apiService.apiGetRequest(getProductByProductNameUrl).subscribe(
   //      response => {
-  //        const res = response.body;
+  //        const res = response;
   //        if (res != null && res.status === StatusCodes.pass) {
   //          if (res.response != null) {
   //            if (res?.response?.Products != null) {
@@ -404,7 +404,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
         this.branchFormData.get('fromBranchCode').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.productsList != null) {
@@ -497,7 +497,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
     const requestObj = { StackreceiptsHdr: this.branchFormData.value, StackreceiptsDetail: this.dataSource.data };
     this.apiService.apiPostRequest(registerStackreceiptsUrl, requestObj).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res?.status === StatusCodes.pass)
         {
           if (res.response != null) {

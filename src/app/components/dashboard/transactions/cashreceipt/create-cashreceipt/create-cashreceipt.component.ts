@@ -134,7 +134,7 @@ export class CreateCashreceiptComponent implements OnInit {
     const getCashReceiptDetailsListUrl = [this.apiConfigService.getCashReceiptDetailsList, id].join('/');
     this.apiService.apiGetRequest(getCashReceiptDetailsListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.CashReceiptDetails?.length) {
             this.dataSource = new MatTableDataSource(res.response['CashReceiptDetails']);
@@ -164,7 +164,7 @@ export class CreateCashreceiptComponent implements OnInit {
     const getCashReceiptBranchesListUrl = [this.apiConfigService.getCashReceiptBranchesList].join('/');
     this.apiService.apiGetRequest(getCashReceiptBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -185,7 +185,7 @@ export class CreateCashreceiptComponent implements OnInit {
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList != null) {
@@ -279,7 +279,7 @@ export class CreateCashreceiptComponent implements OnInit {
       const getAccountLedgerListUrl = [this.apiConfigService.getCashRAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList != null) {
@@ -387,7 +387,7 @@ export class CreateCashreceiptComponent implements OnInit {
       const getAccountLedgerListUrl = [this.apiConfigService.getCRAccountLedgerListByName, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList != null) {
@@ -468,7 +468,7 @@ export class CreateCashreceiptComponent implements OnInit {
     const requestObj = { CashreceiptHdr: this.branchFormData.value, CashreceiptDetail: data };
     this.apiService.apiPostRequest(registerCashReceiptUrl, requestObj).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Cash Receipt Created Successfully..', Static.Close, SnackBar.success);

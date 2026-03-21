@@ -104,7 +104,7 @@ export class AdvanceComponent implements OnInit {
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);
@@ -121,7 +121,7 @@ export class AdvanceComponent implements OnInit {
       const getProductByProductCodeUrl = [this.apiConfigService.getEmpCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.['Empcodes'] != null) {

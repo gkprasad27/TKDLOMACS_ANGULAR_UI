@@ -147,7 +147,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
     const getInvoiceDeatilListUrl = [this.apiConfigService.getprreqDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.PrreqDeatilList?.length) {
             this.dataSource = new MatTableDataSource(res.response['PrreqDeatilList']);
@@ -162,7 +162,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
     this.apiService.apiGetRequest(getCompiniesListList)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);
@@ -176,7 +176,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
     const getCashPaymentBranchesListUrl = [this.apiConfigService.getCashPaymentBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -201,7 +201,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.StackissueNo != null) {
@@ -297,7 +297,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
       const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -319,7 +319,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -346,7 +346,7 @@ if (branch != null && branch !== '' &&
         this.branchFormData.get('branch').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.productsList != null) {
@@ -439,7 +439,7 @@ if (branch != null && branch !== '' &&
     const requestObj = { PurreqHdr: this.branchFormData.value, PurreqDetail: this.dataSource.data };
     this.apiService.apiPostRequest(registerStackreceiptsUrl, requestObj).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('PurchaseRequisitionapproval Created Successfully..', Static.Close, SnackBar.success);

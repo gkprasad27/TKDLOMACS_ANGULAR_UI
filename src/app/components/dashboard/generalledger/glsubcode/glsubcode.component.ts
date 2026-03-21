@@ -66,7 +66,7 @@ this.getGLSubCodeAccountsList();
     this.apiService.apiGetRequest(getGLSubCodeAccountsList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);

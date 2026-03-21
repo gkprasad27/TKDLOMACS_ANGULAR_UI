@@ -93,7 +93,7 @@ export class PFMasterComponent  implements OnInit {
     this.apiService.apiGetRequest(getPfComponentsList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.componentList = res.response['ComponentList'];

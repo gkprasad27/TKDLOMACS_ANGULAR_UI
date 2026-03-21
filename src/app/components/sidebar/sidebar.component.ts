@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 import { CommonService } from '../../services/common.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
-@Component({ 
-    selector: 'app-sidebar',
-    templateUrl: './sidebar.component.html',
+@Component({
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss'],
   animations: [
         trigger('indicatorRotate', [
@@ -28,8 +28,8 @@ export class SidebarComponent implements OnInit {
   @Input() depth: number;
 
   constructor(public commonService: CommonService,
-              public router: Router
-              ) {
+    public router: Router
+  ) {
     if (this.depth === undefined) {
       this.depth = 0;
     }

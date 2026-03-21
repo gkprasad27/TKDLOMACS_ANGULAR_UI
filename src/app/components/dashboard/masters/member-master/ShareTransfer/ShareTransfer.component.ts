@@ -116,7 +116,7 @@ export class ShareTransferComponent implements OnInit, OnChanges {
     this.apiService.apiGetRequest(this.apiConfigService.getShareTransfer + '/' + memberCode)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
@@ -132,7 +132,7 @@ export class ShareTransferComponent implements OnInit, OnChanges {
     this.apiService.apiGetRequest(this.apiConfigService.getShareTransferNo)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.modelFormData.patchValue({
@@ -149,7 +149,7 @@ export class ShareTransferComponent implements OnInit, OnChanges {
     const getShareMembersListUrl = [this.apiConfigService.getShareMembersList].join('/');
     this.apiService.apiGetRequest(getShareMembersListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.memberList?.length) {
@@ -165,7 +165,7 @@ export class ShareTransferComponent implements OnInit, OnChanges {
     this.apiService.apiGetRequest(this.apiConfigService.getNoOfShares + '/' + this.modelFormData.get('fromMemberCode').value)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // this.getNoOfShares1 = res.response['noOfsharesList'];
@@ -185,7 +185,7 @@ export class ShareTransferComponent implements OnInit, OnChanges {
     this.apiService.apiGetRequest(this.apiConfigService.getNoOfShares + '/' + this.modelFormData.get('toMemberCode').value)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // this.getNoOfShares1 = res.response['noOfsharesList'];
@@ -203,7 +203,7 @@ export class ShareTransferComponent implements OnInit, OnChanges {
     this.apiService.apiGetRequest(this.apiConfigService.getToMemberName + '/' + this.modelFormData.get('toMemberCode').value)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.modelFormData.patchValue({
@@ -264,7 +264,7 @@ export class ShareTransferComponent implements OnInit, OnChanges {
       this.apiService.apiPostRequest(this.apiConfigService.registerShareTransfer + '/' + memberCode, this.modelFormData.value)
         .subscribe(
           response => {
-            const res = response.body;
+            const res = response;
             if (res != null && res.status === StatusCodes.pass) {
               if (res.response != null) {
                 this.alertService.openSnackBar('Record Added...', 'close', SnackBar.success);
@@ -282,7 +282,7 @@ export class ShareTransferComponent implements OnInit, OnChanges {
       this.apiService.apiUpdateRequest(this.tableUrl.updateUrl, this.modelFormData.value)
         .subscribe(
           response => {
-            const res = response.body;
+            const res = response;
             if (res != null && res.status === StatusCodes.pass) {
               if (res.response != null) {
                 this.alertService.openSnackBar('Record Updated...', 'close', SnackBar.success);

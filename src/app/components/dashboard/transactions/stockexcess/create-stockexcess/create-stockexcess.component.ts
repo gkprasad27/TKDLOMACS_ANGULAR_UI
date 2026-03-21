@@ -122,7 +122,7 @@ export class CreateStockExcessComponent implements OnInit {
     const getStockExcessDetailsListUrl = [this.apiConfigService.getStockExcessDetailsList, id].join('/');
     this.apiService.apiGetRequest(getStockExcessDetailsListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.StockExcessDetails?.length) {
             this.dataSource = new MatTableDataSource(res.response['StockExcessDetails']);
@@ -151,7 +151,7 @@ export class CreateStockExcessComponent implements OnInit {
     const getStockExcessBranchesListUrl = [this.apiConfigService.getStockExcessBranchesList].join('/');
     this.apiService.apiGetRequest(getStockExcessBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -172,7 +172,7 @@ export class CreateStockExcessComponent implements OnInit {
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if ((res.response['stockexcessNo'] != null)) {
@@ -190,7 +190,7 @@ export class CreateStockExcessComponent implements OnInit {
     const getStockExcessCostCentersListUrl = [this.apiConfigService.getStockExcessCostCentersList].join('/');
     this.apiService.apiGetRequest(getStockExcessCostCentersListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.CostCentersList?.length) {
@@ -281,7 +281,7 @@ export class CreateStockExcessComponent implements OnInit {
       const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -316,7 +316,7 @@ getProductByProductName(value) {
     const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
     this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.Products != null) {
@@ -342,7 +342,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
         this.branchFormData.get('branchCode').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.productsList != null) {
@@ -419,7 +419,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
     const requestObj = { StockexcessHdr: this.branchFormData.value, StockexcessDtl: data };
     this.apiService.apiPostRequest(registerStockexcessUrl, requestObj).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Stock Excess Created Successfully..', Static.Close, SnackBar.success);

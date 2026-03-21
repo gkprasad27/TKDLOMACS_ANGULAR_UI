@@ -68,7 +68,7 @@ export class StocktransferComponent implements OnInit {
     const getInvoiceListUrl = [this.apiConfigService.getStockTransferList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceListUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
         if (res?.response?.InvoiceList?.length > 0) {
           this.dataSource = new MatTableDataSource( res.response['InvoiceList']);

@@ -132,7 +132,7 @@ export class CreateCashpaymentComponent implements OnInit {
     const getCashPaymentDetailsListUrl = [this.apiConfigService.getCashPaymentDetailsList, id].join('/');
     this.apiService.apiGetRequest(getCashPaymentDetailsListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.CashpaymentDetails?.length) {
             this.dataSource = new MatTableDataSource(res.response['CashpaymentDetails']);
@@ -162,7 +162,7 @@ export class CreateCashpaymentComponent implements OnInit {
     const getCashPaymentBranchesListUrl = [this.apiConfigService.getCashPaymentBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -183,7 +183,7 @@ export class CreateCashpaymentComponent implements OnInit {
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList != null) {
@@ -276,7 +276,7 @@ export class CreateCashpaymentComponent implements OnInit {
       const getAccountLedgerListUrl = [this.apiConfigService.getAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList != null) {
@@ -296,7 +296,7 @@ export class CreateCashpaymentComponent implements OnInit {
       const getAccountLedgerListUrl = [this.apiConfigService.getAccountLedgerListByName, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList != null) {
@@ -460,7 +460,7 @@ export class CreateCashpaymentComponent implements OnInit {
     const requestObj = { CashpaymentHdr: this.branchFormData.value, CashpaymentDetail: data };
     this.apiService.apiPostRequest(registerCashPaymentUrl, requestObj).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Cash Payment Created Successfully..', Static.Close, SnackBar.success);

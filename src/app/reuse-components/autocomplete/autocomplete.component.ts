@@ -83,7 +83,7 @@ export class AutocompleteComponent implements OnInit {
     return this.apiService.apiGetRequest(url)
       .pipe(map(r => r.json()))
       .subscribe(response => {          
-        const res = response.body;
+        const res = response;
           this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             return res.response[this.dataConfig.list];

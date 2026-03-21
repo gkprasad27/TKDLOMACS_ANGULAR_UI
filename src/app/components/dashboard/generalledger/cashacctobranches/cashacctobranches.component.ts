@@ -70,7 +70,7 @@ this.getCashAccounts();
     this.apiService.apiGetRequest(getCashAccBranchesList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -86,7 +86,7 @@ this.getCashAccounts();
     this.apiService.apiGetRequest(getBankAccounts)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -102,7 +102,7 @@ this.getCashAccounts();
     this.apiService.apiGetRequest(getCashAccounts)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);

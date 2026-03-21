@@ -89,7 +89,7 @@ membercode:any;
           .subscribe(
             response => {
                
-              const res = response.body;
+              const res = response;
               if (res != null && res.status === StatusCodes.pass) {
                 if (res.response != null) {
                    //console.log(res);
@@ -146,7 +146,7 @@ membercode:any;
               this.apiService.apiPostRequest(this.apiConfigService.addGift,this.modelFromData.value)
               .subscribe(
                 response => {
-                  const res = response.body;
+                  const res = response;
                   if (res != null && res.status === StatusCodes.pass) {
                     if (res.response != null) {
                       this.alertService.openSnackBar('Record Added...', 'close', SnackBar.success);
@@ -167,7 +167,7 @@ membercode:any;
             this.apiService.apiPostRequest(this.apiConfigService.updateGift,this.modelFromData.value)
             .subscribe(
               response => {
-                const res = response.body;
+                const res = response;
                 if (res != null && res.status === StatusCodes.pass) {
                   if (res.response != null) {
                     this.alertService.openSnackBar('Record Updated successfully', 'close', SnackBar.success);

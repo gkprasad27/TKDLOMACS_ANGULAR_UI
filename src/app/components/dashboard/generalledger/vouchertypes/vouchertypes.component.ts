@@ -75,7 +75,7 @@ this.getCompaniesList();
     this.apiService.apiGetRequest(getVoucherClassList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -92,7 +92,7 @@ this.getCompaniesList();
     this.apiService.apiGetRequest(getCompaniesList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -108,7 +108,7 @@ this.getCompaniesList();
     this.apiService.apiGetRequest(getVoucherBranchesList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);

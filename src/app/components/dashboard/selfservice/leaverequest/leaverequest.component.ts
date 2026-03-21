@@ -143,7 +143,7 @@ export class LeaveRequestComponent implements OnInit {
     this.apiService.apiGetRequest(getLeaveApplDetailsListUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.dataSource = new MatTableDataSource(res.response['LeaveApplDetailsList']);
@@ -170,7 +170,7 @@ export class LeaveRequestComponent implements OnInit {
       const getProductByProductCodeUrl = [this.apiConfigService.getnoofdayscount].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: date1, date2, session1, session2 }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.days != null) {
@@ -219,7 +219,7 @@ export class LeaveRequestComponent implements OnInit {
       const getProductByProductCodeUrl = [this.apiConfigService.getnoofdayscount].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: date1, date2,session1,session2 }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.days != null) {
@@ -247,7 +247,7 @@ export class LeaveRequestComponent implements OnInit {
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);
@@ -269,7 +269,7 @@ export class LeaveRequestComponent implements OnInit {
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);
@@ -290,7 +290,7 @@ export class LeaveRequestComponent implements OnInit {
       const getProductByProductCodeUrl = [this.apiConfigService.getEmpCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.['Empcodes'] != null) {
@@ -316,7 +316,7 @@ export class LeaveRequestComponent implements OnInit {
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.empname != null) {

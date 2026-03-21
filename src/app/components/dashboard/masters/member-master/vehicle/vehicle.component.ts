@@ -96,7 +96,7 @@ export class VehicleComponent implements OnInit, OnChanges {
       .subscribe(
         response => {
           // debugger
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
@@ -113,7 +113,7 @@ export class VehicleComponent implements OnInit, OnChanges {
     this.apiService.apiGetRequest(this.apiConfigService.getVehicles + '/' + memberCode)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
@@ -157,7 +157,7 @@ export class VehicleComponent implements OnInit, OnChanges {
       this.apiService.apiPostRequest(this.apiConfigService.registerMemberMaster + '/' + memberCode, this.modelFormData.value)
         .subscribe(
           response => {
-            const res = response.body;
+            const res = response;
             if (res != null && res.status === StatusCodes.pass) {
               if (res.response != null) {
                 this.alertService.openSnackBar('Record Added...', 'close', SnackBar.success);
@@ -175,7 +175,7 @@ export class VehicleComponent implements OnInit, OnChanges {
       this.apiService.apiUpdateRequest(this.apiConfigService.updateVehicle, this.modelFormData.value)
         .subscribe(
           response => {
-            const res = response.body;
+            const res = response;
             if (res != null && res.status === StatusCodes.pass) {
               if (res.response != null) {
                 this.alertService.openSnackBar('Record Updated...', 'close', SnackBar.success);

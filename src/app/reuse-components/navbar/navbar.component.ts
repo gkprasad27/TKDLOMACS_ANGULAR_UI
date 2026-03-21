@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonService } from '../../services/common.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 
@@ -10,10 +10,14 @@ import { AlertService } from '../../services/alert.service';
 import { Static } from '../../enums/common/static';
 import { SnackBar, StatusCodes } from '../../enums/common/common';
 
-import { SharedImportModule } from 'src/app/shared/shared-import';
-import { TranslateModule } from '@ngx-translate/core';
 
-@Component({ 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { SharedImportModule } from 'src/app/shared/shared-import';
+
+@Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
@@ -58,7 +62,7 @@ export class NavbarComponent implements OnInit {
     const getShiftIdUrl = [this.apiConfigService.getShiftId, this.loginUser.seqId, this.loginUser.branchCode].join('/');
     this.apiService.apiGetRequest(getShiftIdUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.shiftButton = (res.response['ShiftId'] != null) ? 'ShiftOUT' : 'ShiftIN'
@@ -75,7 +79,7 @@ export class NavbarComponent implements OnInit {
     const logoutUrl = [this.apiConfigService.logoutUrl, this.loginUser.seqId].join('/');
     this.apiService.apiGetRequest(logoutUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         this.spinner.hide();
         if (res.response != null) {
           this.alertService.openSnackBar(res.response, Static.Close, SnackBar.success);
@@ -95,7 +99,7 @@ export class NavbarComponent implements OnInit {
 
     this.apiService.apiGetRequest(logoutUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         this.spinner.hide();
         if (res.response != null) {
           this.shiftButton = (res.response['ShiftId'] != null) ? 'ShiftOUT' : 'ShiftIN'

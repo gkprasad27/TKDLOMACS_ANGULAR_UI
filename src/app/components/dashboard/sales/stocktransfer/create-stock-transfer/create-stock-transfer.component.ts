@@ -131,7 +131,7 @@ export class CreateStockTransferComponent implements OnInit {
     const getStockTransferDetilsaRecordsUrl = [this.apiConfigService.getStockTransferDetilsaRecords, id].join('/');
     this.apiService.apiGetRequest(getStockTransferDetilsaRecordsUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.InvoiceList?.length > 0) {
             this.getltrs(res.response['InvoiceList'][0]);
@@ -166,7 +166,7 @@ export class CreateStockTransferComponent implements OnInit {
     const getBranchesListUrl = [this.apiConfigService.getBillingBranchesList].join('/');
     this.apiService.apiGetRequest(getBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -294,7 +294,7 @@ export class CreateStockTransferComponent implements OnInit {
     const generateStockTranfNoUrl = [this.apiConfigService.generateStockTranfNo, this.formData.get('fromBranchCode').value].join('/');
     this.apiService.apiGetRequest(generateStockTranfNoUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.SateteList?.length) {
@@ -315,7 +315,7 @@ export class CreateStockTransferComponent implements OnInit {
       const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode].join('/');
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -344,7 +344,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
         branchCode: this.formData.get('fromBranchCode').value, productCode: productCode.value
       }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if ((res.response['SateteList'] != null)) {
@@ -399,7 +399,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -418,7 +418,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
     const getProductByProductNameUrl = [this.apiConfigService.getLtrs].join('/');
     this.apiService.apiPostRequest(getProductByProductNameUrl, { code: value.productCode }).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.Ltrs != null) {
@@ -571,7 +571,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
     const requestObj = { stockTransferMaster: this.formData.value, stockTransferDetail: data };
     this.apiService.apiPostRequest(registerStockTransferUrl, requestObj).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Stock Trasfer Created Successfully..', Static.Close, SnackBar.success);
@@ -598,7 +598,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
     this.params = this.params.append('stockTransferNo', this.formData.value.stockTransferNo);
     this.apiService.apiGetRequest(tableUrl, this.params).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.StockList != null) {

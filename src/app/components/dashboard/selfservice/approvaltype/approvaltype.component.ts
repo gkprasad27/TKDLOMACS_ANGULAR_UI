@@ -99,7 +99,7 @@ export class ApprovalTypeComponent implements OnInit {
     this.apiService.apiGetRequest(getCashAccBranchesList)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);
@@ -115,7 +115,7 @@ export class ApprovalTypeComponent implements OnInit {
     this.apiService.apiGetRequest(getCompiniesListList)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);
@@ -132,7 +132,7 @@ export class ApprovalTypeComponent implements OnInit {
     this.apiService.apiGetRequest(getEmployeeList)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);

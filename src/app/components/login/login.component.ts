@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         response => {
           this.spinner.hide();
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.getBranchesForUser(res.response['user']);
@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
     this.apiService.apiGetRequest(getBranchesForUserUrl).subscribe(
       response => {
         this.spinner.hide();
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if ((res.response['branches'] != null)) {

@@ -66,7 +66,7 @@ branchCode:any;
     const getCashReceiptBranchesListUrl = [this.apiConfigService.getCashReceiptBranchesList].join('/');
     this.apiService.apiGetRequest(getCashReceiptBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -83,7 +83,7 @@ branchCode:any;
     const getCashReceiptListUrl = [this.apiConfigService.getCashReceiptList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getCashReceiptListUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
         if (res?.response?.CashReceiptList?.length) {
           this.dataSource = new MatTableDataSource( res.response['CashReceiptList']);

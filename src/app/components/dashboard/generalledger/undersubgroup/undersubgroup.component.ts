@@ -87,7 +87,7 @@ export class UndersubGroupComponent implements OnInit {
     this.apiService.apiGetRequest(getglAccgrpList)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.glAccgrpList = res.response['GLAccGroupList'];
@@ -102,7 +102,7 @@ export class UndersubGroupComponent implements OnInit {
     this.apiService.apiGetRequest(getAccountNamelist)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.glAccNameList = res.response['GetAccountNamelist'];
@@ -117,7 +117,7 @@ export class UndersubGroupComponent implements OnInit {
     this.apiService.apiGetRequest(getGLUnderGroupList)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.getAccSubGrpList = res.response['GetAccountSubGrouplist'];
@@ -133,7 +133,7 @@ export class UndersubGroupComponent implements OnInit {
     this.apiService.apiGetRequest(getAccountSubGrouplist)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);

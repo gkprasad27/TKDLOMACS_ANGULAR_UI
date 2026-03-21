@@ -84,7 +84,7 @@ export class OpeningBalanceComponent implements OnInit {
     const getOpeningBalBranchesListUrl = [this.apiConfigService.getObBranchesList].join('/');
    this.apiService.apiGetRequest(getOpeningBalBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -100,7 +100,7 @@ export class OpeningBalanceComponent implements OnInit {
     const getPaymentTypeListUrl = [this.apiConfigService.getPaymentType].join('/');
    this.apiService.apiGetRequest(getPaymentTypeListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -121,7 +121,7 @@ export class OpeningBalanceComponent implements OnInit {
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList != null) {
@@ -139,7 +139,7 @@ export class OpeningBalanceComponent implements OnInit {
       const getBankPAccountLedgerListUrl = [this.apiConfigService.getBPAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getBankPAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList?.length > 0) {

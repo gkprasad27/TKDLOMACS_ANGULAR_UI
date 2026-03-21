@@ -135,7 +135,7 @@ export class CreateBankpaymentComponent implements OnInit {
     const getBankPaymentDetailsListUrl = [this.apiConfigService.getBankPaymentDetailsList, id].join('/');
     this.apiService.apiGetRequest(getBankPaymentDetailsListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.BankPaymentDetails?.length) {
             this.dataSource = new MatTableDataSource(res.response['BankPaymentDetails']);
@@ -169,7 +169,7 @@ export class CreateBankpaymentComponent implements OnInit {
     const getBankPaymentBranchesListUrl = [this.apiConfigService.getBankPaymentBranchesList].join('/');
     this.apiService.apiGetRequest(getBankPaymentBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -185,7 +185,7 @@ export class CreateBankpaymentComponent implements OnInit {
     const getBPAccountLedgerListUrl = [this.apiConfigService.getBPAccountLedgerList].join('/');
     this.apiService.apiGetRequest(getBPAccountLedgerListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -201,7 +201,7 @@ export class CreateBankpaymentComponent implements OnInit {
   //   const getBankPAccountLedgerListUrl = [this.apiConfigService.getBankPAccountLedgerList].join('/');
   //   this.apiService.apiGetRequest(getBankPAccountLedgerListUrl).subscribe(
   //     response => {
-  //       const res = response.body;
+  //       const res = response;
   //       if (res != null && res.status === StatusCodes.pass) {
   //         if (res.response != null) {
   //           if (res?.response?.AccountLedgerList?.length > 0) {
@@ -218,7 +218,7 @@ export class CreateBankpaymentComponent implements OnInit {
       const getBankPAccountLedgerListUrl = [this.apiConfigService.getBPAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getBankPAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList?.length > 0) {
@@ -257,7 +257,7 @@ export class CreateBankpaymentComponent implements OnInit {
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList != null) {
@@ -351,7 +351,7 @@ export class CreateBankpaymentComponent implements OnInit {
       const getAccountLedgerListUrl = [this.apiConfigService.getBPAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList != null) {
@@ -371,7 +371,7 @@ export class CreateBankpaymentComponent implements OnInit {
       const getAccountLedgerListUrl = [this.apiConfigService.getBPAccountLedgerListByName, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList != null) {
@@ -537,7 +537,7 @@ export class CreateBankpaymentComponent implements OnInit {
     const requestObj = { BankpaymentHdr: this.branchFormData.value, BankpaymentDetail: data };
     this.apiService.apiPostRequest(registerBankPaymentUrl, requestObj).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Bank Payment Created Successfully..', Static.Close, SnackBar.success);

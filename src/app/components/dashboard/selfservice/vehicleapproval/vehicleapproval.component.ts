@@ -120,7 +120,7 @@ export class VehicleApprovalsComponent implements OnInit {
     this.apiService.apiGetRequest(getLeaveApplDetailsListUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.dataSource = new MatTableDataSource(res.response['VehicleApprovalApplDetailsList']);
@@ -139,7 +139,7 @@ export class VehicleApprovalsComponent implements OnInit {
     const requestObj = { StockissueHdr: this.leaveRequestForm.value, code: user.userName, StockissueDtl: this.leaveApprovalList };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Vehicle Approval  Successfully..', Static.Close, SnackBar.success);

@@ -73,7 +73,7 @@ export class TaxgroupsComponent implements OnInit {
     this.apiService.apiGetRequest(getProductGroupsListUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.ProductGroupsList = res.response['ProductGroupsList'];

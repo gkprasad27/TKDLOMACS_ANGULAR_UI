@@ -84,7 +84,7 @@ export class BrandModelComponent implements OnInit {
     this.apiService.apiGetRequest(getCompiniesListList)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);
@@ -99,7 +99,7 @@ export class BrandModelComponent implements OnInit {
   //  this.apiService.apiGetRequest(getCompanyUrl)
   //    .subscribe(
   //      response => {
-  //        const res = response.body;
+  //        const res = response;
   //        if (res != null && res.status === StatusCodes.pass) {
   //          if (res.response != null) {
   //            console.log(res);
@@ -115,7 +115,7 @@ export class BrandModelComponent implements OnInit {
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);
@@ -130,7 +130,7 @@ export class BrandModelComponent implements OnInit {
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);
@@ -146,7 +146,7 @@ export class BrandModelComponent implements OnInit {
     this.apiService.apiGetRequest(getCompanyUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);

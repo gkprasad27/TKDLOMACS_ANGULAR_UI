@@ -66,7 +66,7 @@ export class StockshortComponent  implements OnInit {
     const getInvoiceDetailstUrl = [this.apiConfigService.getStockshortDeatilListLoad, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceDetailstUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.StockshortsList?.length) {
             this.dataSource = new MatTableDataSource(res.response['StockshortsList']);
@@ -110,7 +110,7 @@ export class StockshortComponent  implements OnInit {
 
     this.apiService.apiPostRequest(getInvoiceListUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.StockshortsList?.length) {
             this.dataSource = new MatTableDataSource(res.response['StockshortsList']);

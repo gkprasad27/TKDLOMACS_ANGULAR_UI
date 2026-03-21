@@ -1,0 +1,20 @@
+.menu-list-item {
+    height: 35px !important;
+}
+.menu-list-item:hover {
+    background-color: #3bc99e !important;
+}
+.active {
+    background-color: #3bc99e !important;
+}
+
+::ng-deep .mat-mdc-list-item-unscoped-content {
+    justify-content: space-between;
+    display: flex;
+    
+}
+
+.font-style {
+    font-size: 12px;
+    font-weight: 500;
+}

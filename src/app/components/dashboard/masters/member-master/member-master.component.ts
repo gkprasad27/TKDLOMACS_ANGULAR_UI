@@ -143,7 +143,7 @@ export class MemberMasterComponent implements OnInit {
     this.apiService.apiPostRequest(this.tableUrl.url, event)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.tableData = [];
@@ -165,7 +165,7 @@ export class MemberMasterComponent implements OnInit {
     this.apiService.apiGetRequest(this.apiConfigService.getTitles)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
@@ -181,7 +181,7 @@ export class MemberMasterComponent implements OnInit {
     this.apiService.apiGetRequest(this.apiConfigService.getStates)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
@@ -197,7 +197,7 @@ export class MemberMasterComponent implements OnInit {
     this.apiService.apiGetRequest(this.apiConfigService.getPassbookStatuses)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
@@ -213,7 +213,7 @@ export class MemberMasterComponent implements OnInit {
     this.apiService.apiGetRequest(this.apiConfigService.getRelations)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
@@ -231,7 +231,7 @@ export class MemberMasterComponent implements OnInit {
       .subscribe(
         response => {
           
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
@@ -248,7 +248,7 @@ export class MemberMasterComponent implements OnInit {
     this.apiService.apiGetRequest(this.apiConfigService.getShareTransfer + '/' + memberCode)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
@@ -265,7 +265,7 @@ export class MemberMasterComponent implements OnInit {
     this.apiService.apiGetRequest(this.apiConfigService.getAdditionalShareTransfer + '/' + memberCode)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
@@ -330,7 +330,7 @@ export class MemberMasterComponent implements OnInit {
       this.apiService.apiPostRequest(this.tableUrl.registerUrl, this.modelFormData.value)
         .subscribe(
           response => {
-            const res = response.body;
+            const res = response;
             if (res != null && res.status === StatusCodes.pass) {
               if (res.response != null) {
                 this.searchEvent({});
@@ -355,7 +355,7 @@ export class MemberMasterComponent implements OnInit {
       this.apiService.apiUpdateRequest(this.tableUrl.updateUrl, this.modelFormData.value)
         .subscribe(
           response => {
-            const res = response.body;
+            const res = response;
             if (res != null && res.status === StatusCodes.pass) {
               if (res.response != null) {
                 if (localStorage.getItem('memberObj')) {

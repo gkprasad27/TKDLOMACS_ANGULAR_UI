@@ -193,7 +193,7 @@ export class SalesReturnViewComponent implements OnInit {
     const generateSalesReturnInvNoUrl = [this.apiConfigService.generateSalesReturnInvNo, branchCode].join('/');
     this.apiService.apiGetRequest(generateSalesReturnInvNoUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.SalesReturnInvNo != null) {
@@ -209,7 +209,7 @@ export class SalesReturnViewComponent implements OnInit {
     const getInvoiceDeatilListUrl = [this.apiConfigService.getInvoiceReturnDetail, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.InvoiceReturnDtlsList?.length) {
             this.dataSource = new MatTableDataSource(res.response['InvoiceReturnDtlsList']);
@@ -255,7 +255,7 @@ export class SalesReturnViewComponent implements OnInit {
     const getBranchesListUrl = [this.apiConfigService.getBillingBranchesList].join('/');
     this.apiService.apiGetRequest(getBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -293,7 +293,7 @@ export class SalesReturnViewComponent implements OnInit {
       }
       this.apiService.apiGetRequest(generateBillUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.BillNo != null) {
@@ -346,7 +346,7 @@ if (ledgerCode != null && ledgerCode !== '') {
         this.branchFormData.get('ledgerCode').value].join('/');
       this.apiService.apiGetRequest(getAccountBalanceUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountBalance != null) {
@@ -366,7 +366,7 @@ if (ledgerCode != null && ledgerCode !== '') {
       const getmemberNamesUrl = [this.apiConfigService.getmemberNames, value].join('/');
       this.apiService.apiGetRequest(getmemberNamesUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Members?.length) {
@@ -390,7 +390,7 @@ if (ledgerCode != null && ledgerCode !== '') {
       const getVechielsUrl = [this.apiConfigService.getVechiels, value, this.branchFormData.get('memberCode').value].join('/');
       this.apiService.apiGetRequest(getVechielsUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Members?.length) {
@@ -413,7 +413,7 @@ if (ledgerCode != null && ledgerCode !== '') {
       const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, value].join('/');
       this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.CashPartyAccountList?.length > 0) {
@@ -443,7 +443,7 @@ if (ledgerCode != null && ledgerCode !== '') {
       this.branchFormData.get('ledgerCode').value].join('/');
     this.apiService.apiGetRequest(getCashPartyAccountUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.CashPartyAccount != null) {
@@ -464,7 +464,7 @@ if (ledgerCode != null && ledgerCode !== '') {
     const getStateListUrl = [this.apiConfigService.getStateList].join('/');
     this.apiService.apiGetRequest(getStateListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.StateList?.length > 0) {
@@ -517,7 +517,7 @@ if (ledgerCode != null && ledgerCode !== '') {
       this.branchFormData.get('stateCode').value].join('/');
     this.apiService.apiGetRequest(getSelectedStateUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.StateList?.length > 0) {
@@ -639,7 +639,7 @@ if (ledgerCode != null && ledgerCode !== '') {
       const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode, value].join('/');
       this.apiService.apiGetRequest(getProductByProductCodeUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -659,7 +659,7 @@ if (ledgerCode != null && ledgerCode !== '') {
     const getmemberNamesByCodeUrl = [this.apiConfigService.getmemberNamesByCode, event.item.memberCode].join('/');
     this.apiService.apiGetRequest(getmemberNamesByCodeUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.Members != null) {
@@ -721,7 +721,7 @@ if (branchCode != null && branchCode !== '' &&
           this.branchFormData.get('branchCode').value].join('/');
         this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
           response => {
-            const res = response.body;
+            const res = response;
             if (res != null && res.status === StatusCodes.pass) {
               if (res.response != null) {
                 if (res?.response?.BillingDetailsSection != null) {
@@ -783,7 +783,7 @@ if (branchCode != null && branchCode !== '' &&
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName, value].join('/');
       this.apiService.apiGetRequest(getProductByProductNameUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -809,7 +809,7 @@ if (branchCode != null && branchCode !== '' &&
           this.branchFormData.get('branchCode').value].join('/');
         this.apiService.apiGetRequest(getPupmsUrl).subscribe(
           response => {
-            const res = response.body;
+            const res = response;
             if (res != null && res.status === StatusCodes.pass) {
               if (res.response != null) {
                 if (res?.response?.PumpsList != null) {
@@ -912,7 +912,7 @@ if (branchCode != null && branchCode !== '' &&
     const requestObj = { InvoiceHdr: this.branchFormData.value, InvoiceDetail: data };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Billing Successfully..', Static.Close, SnackBar.success);
@@ -934,7 +934,7 @@ if (branchCode != null && branchCode !== '' &&
     const registerInvoiceReturnUrl = [this.apiConfigService.registerInvoiceReturn, this.isSalesReturnInvoice, this.branchFormData.get('invoiceMasterId').value].join('/');
     this.apiService.apiGetRequest(registerInvoiceReturnUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Billing Return Successfully..', Static.Close, SnackBar.success);

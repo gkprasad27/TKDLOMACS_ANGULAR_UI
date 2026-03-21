@@ -1,6 +1,6 @@
 <mat-sidenav-container>
   <mat-sidenav #appDrawer mode="over" opened="false">
-    <mat-nav-list>
+    <mat-nav-list class="m-2">
       @for (item of navItems; track item) {
         <app-sidebar  [item]="item"></app-sidebar>
       }
@@ -9,6 +9,12 @@
   <div class="p-2">
     <router-outlet></router-outlet>
   </div>
-  <div fxFlex></div>
+  <!-- <div fxFlex></div> -->
+  <!-- <section>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="btnSample()">Sample Requisition Form</button>
+    <button mat-raised-button color="accent" (click)="btnService()">Sample Service</button>
+  </div>
+</section> -->
 </mat-sidenav-container>
 

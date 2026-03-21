@@ -72,7 +72,7 @@ this.getGLTaxAccountList();
     this.apiService.apiGetRequest(getTaxCodesList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -88,7 +88,7 @@ this.getGLTaxAccountList();
     this.apiService.apiGetRequest(getGLTaxAccountList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);

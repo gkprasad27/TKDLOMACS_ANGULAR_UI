@@ -57,7 +57,7 @@ import { TranslateModule } from '@ngx-translate/core';
         this.apiService.apiGetRequest(getUrl)
         .subscribe(
           response => {
-            const res = response.body;
+            const res = response;
             if (res != null && res.status === StatusCodes.pass) {
               if (res.response != null) {
                 this.tableData = res.response[this.tableUrl.listName];
@@ -79,7 +79,7 @@ import { TranslateModule } from '@ngx-translate/core';
           this.apiService.apiDeleteRequest(deleteCompanyUrl, result.item)
               .subscribe(
                 response => {
-                  const res = response.body;
+                  const res = response;
                   if (res != null && res.status === StatusCodes.pass) {
                     if (res.response != null) {
                       this.tableComponent.defaultValues();
@@ -110,7 +110,7 @@ import { TranslateModule } from '@ngx-translate/core';
              this.apiService.apiPostRequest(addCompanyUrl, result.item)
                 .subscribe(
                   response => {
-                    const res = response.body;
+                    const res = response;
                     if (res != null && res.status === StatusCodes.pass) {
                     if (res.response != null) {
                       this.tableComponent.defaultValues();
@@ -125,7 +125,7 @@ import { TranslateModule } from '@ngx-translate/core';
              this.apiService.apiUpdateRequest(updateCompanyUrl, result.item)
                 .subscribe(
                   response => {
-                    const res = response.body;
+                    const res = response;
                     if (res != null && res.status === StatusCodes.pass) {
                       if (res.response != null) {
                         this.tableComponent.defaultValues();

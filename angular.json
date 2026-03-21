@@ -29,6 +29,7 @@
             ],
             "tsConfig": "tsconfig.app.json",
               "aot": true,
+              "sourceMap": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src"

@@ -225,7 +225,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.apiService.apiGetRequest(getLoginUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res?.status === 'PASS') {
             if (res?.response?.AccountLedgerList != null) {
               this.AccountLedgers = res.response['accountLedgerList'];
@@ -238,7 +238,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.apiService.apiGetRequest(getLoginUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res?.status === 'PASS') {
             if ((res.response['reportBranchesList'] != null)) {
               this.ReportBranches = res.response['reportBranchesList'];
@@ -251,7 +251,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.apiService.apiGetRequest(getLoginUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res?.status === 'PASS') {
             if ((res.response['reportPGList'] != null)) {
               this.ReportPGList = res.response['reportPGList'];
@@ -264,7 +264,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.apiService.apiGetRequest(getLoginUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res?.status === 'PASS') {
             if ((res.response['reportSGList'] != null)) {
               this.ReportSGList = res.response['reportSGList'];
@@ -277,7 +277,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
   //   this.apiService.apiGetRequest(getLoginUrl)
   //     .subscribe(
   //       response => {
-  //         const res = response.body;
+  //         const res = response;
   //         if (res?.status === 'PASS') {
   //           if ((res.response['productList'] != null)) {
   //             this.Products = res.response['productList'];
@@ -291,7 +291,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       const getProductListUrl = [this.apiConfigService.getStockProducts, value].join('/');
       this.apiService.apiGetRequest(getProductListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.ProductList?.length) {
@@ -314,7 +314,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       const getBankPAccountLedgerListUrl = [this.apiConfigService.getBPAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getBankPAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList?.length > 0) {
@@ -887,7 +887,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
                 .subscribe(
                   response => {
                     let innerReportName = this.Reports[this.dateForm.get('selectedReport').value - 2].reportName;
-                    const res = response.body;
+                    const res = response;
                     if (res != null && res.status === StatusCodes.pass) {
                       if (res.response != null) {
                         const dialogRef = this.dialog.open(ReportsInnerTableComponent, {

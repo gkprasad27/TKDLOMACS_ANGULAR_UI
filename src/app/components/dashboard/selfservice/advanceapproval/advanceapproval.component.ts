@@ -121,7 +121,7 @@ export class advanceApprovalComponent implements OnInit {
     this.apiService.apiGetRequest(getOdApplDetailsListUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.dataSource = new MatTableDataSource(res.response['AdvanceApprovalApplDetailsList']);
@@ -141,7 +141,7 @@ export class advanceApprovalComponent implements OnInit {
     const requestObj = { StockissueHdr: this.leaveRequestForm.value, code: user.userName, StockissueDtl: this.leaveApprovalList };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Advance Approval  Successfully..', Static.Close, SnackBar.success);

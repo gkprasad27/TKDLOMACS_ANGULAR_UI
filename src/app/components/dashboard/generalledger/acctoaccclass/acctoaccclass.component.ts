@@ -74,7 +74,7 @@ export class AccToAccClassComponent  implements OnInit {
     this.apiService.apiGetRequest(getAccountingClass)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.accClassList = res.response['AccountingclassList'];
@@ -89,7 +89,7 @@ export class AccToAccClassComponent  implements OnInit {
     this.apiService.apiGetRequest(getMatTranTypes)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.tranTypes = res.response['mattranstype'];
@@ -104,7 +104,7 @@ export class AccToAccClassComponent  implements OnInit {
     this.apiService.apiGetRequest(getSalesGlAccounts)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -120,7 +120,7 @@ export class AccToAccClassComponent  implements OnInit {
     this.apiService.apiGetRequest(getPurchaseGlAccounts)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -136,7 +136,7 @@ export class AccToAccClassComponent  implements OnInit {
     this.apiService.apiGetRequest(getInventoryGlAccounts)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);

@@ -68,7 +68,7 @@ export class SalesReturnComponent implements OnInit {
     const getInvoiceListUrl = [this.apiConfigService.getInvoiceGetInvoiceReturnList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceListUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.InvoiceReturnList?.length) {
             this.dataSource = new MatTableDataSource(res.response['InvoiceReturnList']);

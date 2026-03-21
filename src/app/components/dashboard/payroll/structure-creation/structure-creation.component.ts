@@ -50,7 +50,7 @@ export class StructureCreationComponent implements OnInit {
     this.apiService.apiGetRequest(getComponentsListUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.dataSource = new MatTableDataSource(res.response['ComponentsList']);

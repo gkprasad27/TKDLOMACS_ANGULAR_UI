@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef, ViewEncapsulation, AfterViewInit, OnInit, Input} from '@angular/core';
+import {Component, ViewChild, ElementRef, ViewEncapsulation, AfterViewInit, OnInit, Input, OnDestroy} from '@angular/core';
 
 import { ApiService } from '../../services/api.service';
 import { SharedImportModule } from 'src/app/shared/shared-import';
@@ -7,6 +7,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { CommonService } from '../../services/common.service';
 import { ApiConfigService } from '../../services/api-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({ 
   selector: 'app-dashboard',
@@ -15,21 +16,21 @@ import { NgxSpinnerService } from 'ngx-spinner';
   standalone: true,
   imports: [SharedImportModule, TranslateModule, SidebarComponent]
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
+export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  
-
-  @ViewChild('appDrawer') appDrawer: ElementRef;
+  @ViewChild('appDrawer', { static: false }) appDrawer: ElementRef;
   navItems = [];
-  
-  
 
   constructor(
     private apiService: ApiService,
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private spinner: NgxSpinnerService,
+    private router: Router,
+    route: ActivatedRoute
   ) {
+    this.commonService.routeParam = route.snapshot.routeConfig.path;
+    console.log(this.commonService.routeParam, 'routeParam');
     commonService.showNavbar.next(true);
   }
 
@@ -48,14 +49,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
          
           console.log(menu);
           this.spinner.hide();
-          this.navItems = menu.body["response"];
+          this.navItems = menu["response"];
           this.spinner.hide();
         });
   }
-  
+
   ngAfterViewInit() {
     this.commonService.appDrawer = this.appDrawer;
-    // console.log(this.navItems);
+  // console.log(this.navItems);
+  }
+
+  ngOnDestroy() {
+    this.commonService.routeParam = null;
   }
 
 /*

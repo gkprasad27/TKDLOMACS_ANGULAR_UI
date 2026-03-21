@@ -111,7 +111,7 @@ export class ProductComponent implements OnInit {
     this.apiService.apiGetRequest(getSupplierGroupList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -127,7 +127,7 @@ export class ProductComponent implements OnInit {
             this.modelFormData.get('taxStructureCode').value].join('/');
           this.apiService.apiGetRequest(getTaxListUrl).subscribe(
             response => {
-              const res = response.body;
+              const res = response;
               if (res != null && res.status === StatusCodes.pass) {
                 if (res.response != null) {
                   if (res.response['TaxList'] != null) {
@@ -151,7 +151,7 @@ export class ProductComponent implements OnInit {
     this.apiService.apiGetRequest(getProductGroupList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -167,7 +167,7 @@ export class ProductComponent implements OnInit {
     this.apiService.apiGetRequest(getTaxApplicableList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -183,7 +183,7 @@ export class ProductComponent implements OnInit {
     this.apiService.apiGetRequest(getProductPackingList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -199,7 +199,7 @@ export class ProductComponent implements OnInit {
     this.apiService.apiGetRequest(getTaxGrouplist)
     .subscribe(
       response => {
-      const res = response.body;
+      const res = response;
       if (res != null && res.status === StatusCodes.pass) {
         if (res.response != null) {
           console.log(res);
@@ -215,7 +215,7 @@ export class ProductComponent implements OnInit {
     this.apiService.apiGetRequest(getUnitList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -231,7 +231,7 @@ export class ProductComponent implements OnInit {
     this.apiService.apiGetRequest(getTaxStructure)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);

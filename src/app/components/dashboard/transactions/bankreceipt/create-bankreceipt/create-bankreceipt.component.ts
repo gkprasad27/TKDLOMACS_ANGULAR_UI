@@ -136,7 +136,7 @@ export class CreateBankreceiptComponent implements OnInit {
     const getBankReceiptDetailsListUrl = [this.apiConfigService.getBankReceiptDetailsList, id].join('/');
     this.apiService.apiGetRequest(getBankReceiptDetailsListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.BankReceiptDetails?.length) {
             this.dataSource = new MatTableDataSource(res.response['BankReceiptDetails']);
@@ -170,7 +170,7 @@ export class CreateBankreceiptComponent implements OnInit {
     const getBankReceiptBranchesListUrl = [this.apiConfigService.getBankReceiptBranchesList].join('/');
     this.apiService.apiGetRequest(getBankReceiptBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -186,7 +186,7 @@ export class CreateBankreceiptComponent implements OnInit {
   //   const getBRAccountLedgerListUrl = [this.apiConfigService.getBRAccountLedgerList].join('/');
   //   this.apiService.apiGetRequest(getBRAccountLedgerListUrl).subscribe(
   //     response => {
-  //       const res = response.body;
+  //       const res = response;
   //       if (res != null && res.status === StatusCodes.pass) {
   //         if (res.response != null) {
   //           if (res?.response?.BranchesList?.length > 0) {
@@ -202,7 +202,7 @@ export class CreateBankreceiptComponent implements OnInit {
     const getBankRAccountLedgerListUrl = [this.apiConfigService.getBankRAccountLedgerList].join('/');
     this.apiService.apiGetRequest(getBankRAccountLedgerListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.AccountLedgerList?.length > 0) {
@@ -218,7 +218,7 @@ export class CreateBankreceiptComponent implements OnInit {
       const getBRAccountLedgerListUrl = [this.apiConfigService.getBRAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getBRAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList?.length > 0) {
@@ -256,7 +256,7 @@ export class CreateBankreceiptComponent implements OnInit {
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList != null) {
@@ -350,7 +350,7 @@ export class CreateBankreceiptComponent implements OnInit {
       const getAccountLedgerListUrl = [this.apiConfigService.getBPAccountLedgerList, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList != null) {
@@ -370,7 +370,7 @@ export class CreateBankreceiptComponent implements OnInit {
       const getAccountLedgerListUrl = [this.apiConfigService.getBRAccountLedgerListByName, value].join('/');
       this.apiService.apiGetRequest(getAccountLedgerListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList != null) {
@@ -541,7 +541,7 @@ export class CreateBankreceiptComponent implements OnInit {
     const requestObj = { BankreceiptHdr: this.branchFormData.value, BankreceiptDetail: data };
     this.apiService.apiPostRequest(registerBankReceiptUrl, requestObj).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Bank Receipt Created Successfully..', Static.Close, SnackBar.success);

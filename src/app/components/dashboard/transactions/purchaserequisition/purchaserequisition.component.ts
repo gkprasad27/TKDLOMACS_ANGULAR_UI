@@ -67,7 +67,7 @@ export class PurchaserequisitionComponent implements OnInit {
     const getInvoiceDetailstUrl = [this.apiConfigService.getPurchaserequisitionDetailsListLoad, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceDetailstUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.PurchaseequisitionDetailslist?.length) {
             this.dataSource = new MatTableDataSource(res.response['PurchaseequisitionDetailslist']);
@@ -112,7 +112,7 @@ export class PurchaserequisitionComponent implements OnInit {
     const getInvoiceListUrl = [this.apiConfigService.getpurchaserequisitionList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceListUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.PurchaseRequisitionList?.length) {
             this.dataSource = new MatTableDataSource(res.response['PurchaseRequisitionList']);

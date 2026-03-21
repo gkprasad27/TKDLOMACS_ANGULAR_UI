@@ -88,7 +88,7 @@ export class TaxstructuresComponent implements OnInit {
     this.apiService.apiGetRequest(getTaxGroupsListUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.TaxGroupsList = res.response['TaxGroupsList'];
@@ -103,7 +103,7 @@ export class TaxstructuresComponent implements OnInit {
     this.apiService.apiGetRequest(getTaxGroupsListUrl)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.PSGroupsList = res.response['PSGroupsList'];

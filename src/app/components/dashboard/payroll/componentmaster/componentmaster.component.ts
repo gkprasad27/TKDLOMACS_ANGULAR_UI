@@ -102,7 +102,7 @@ this.getConfigurationList();
     this.apiService.apiGetRequest(getConfigurationList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);

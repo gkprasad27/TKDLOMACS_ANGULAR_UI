@@ -176,7 +176,7 @@ export class PurchaseReturnViewComponent implements OnInit {
     const getPurchaseReturnsDetailsUrl = [this.apiConfigService.getPurchaseReturnsDetails, id].join('/');
     this.apiService.apiGetRequest(getPurchaseReturnsDetailsUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.PurchaseReturnDetails?.length > 0) {
             this.dataSource = new MatTableDataSource(res.response['PurchaseReturnDetails']);
@@ -215,7 +215,7 @@ export class PurchaseReturnViewComponent implements OnInit {
     const getBranchesListUrl = [this.apiConfigService.getBillingBranchesList].join('/');
     this.apiService.apiGetRequest(getBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -232,7 +232,7 @@ export class PurchaseReturnViewComponent implements OnInit {
       const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, value].join('/');
       this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.CashPartyAccountList?.length > 0) {
@@ -290,7 +290,7 @@ export class PurchaseReturnViewComponent implements OnInit {
       }
       this.apiService.apiGetRequest(generateBillUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.PurchaseInvoiceNo != null) {
@@ -340,7 +340,7 @@ export class PurchaseReturnViewComponent implements OnInit {
       this.branchFormData.get('ledgerCode').value].join('/');
     this.apiService.apiGetRequest(getCashPartyAccountUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.CashPartyAccount != null) {
@@ -361,7 +361,7 @@ export class PurchaseReturnViewComponent implements OnInit {
     const getStateListUrl = [this.apiConfigService.getStateList].join('/');
     this.apiService.apiGetRequest(getStateListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.StateList?.length > 0) {
@@ -383,7 +383,7 @@ export class PurchaseReturnViewComponent implements OnInit {
       this.branchFormData.get('stateCode').value].join('/');
     this.apiService.apiGetRequest(getSelectedStateUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.StateList?.length > 0) {
@@ -507,7 +507,7 @@ export class PurchaseReturnViewComponent implements OnInit {
       const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode, value].join('/');
       this.apiService.apiGetRequest(getProductByProductCodeUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -566,7 +566,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
         this.branchFormData.get('branchCode').value, productCode.value].join('/');
       this.apiService.apiGetRequest(getProductDeatilsSectionRcdUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if ((res.response['ProductDeatilsSectionRcd'] != null)) {
@@ -629,7 +629,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName, value].join('/');
       this.apiService.apiGetRequest(getProductByProductNameUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {

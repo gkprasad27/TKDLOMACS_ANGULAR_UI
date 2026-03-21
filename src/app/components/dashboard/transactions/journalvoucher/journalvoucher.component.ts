@@ -66,7 +66,7 @@ branchCode:any;
     const getJournalVoucherBranchesListUrl = [this.apiConfigService.getJournalVoucherBranchesList].join('/');
     this.apiService.apiGetRequest(getJournalVoucherBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -82,7 +82,7 @@ branchCode:any;
     const getJournalvoucherListUrl = [this.apiConfigService.getJournalvoucherList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getJournalvoucherListUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
         if (res?.response?.JournalVoucherList?.length) {
           this.dataSource = new MatTableDataSource( res.response['JournalVoucherList']);

@@ -76,7 +76,7 @@ export class TanksComponent implements OnInit {
     this.apiService.apiGetRequest(getBranchesListUrl)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.BranchesList = res.response['BranchesList'];
@@ -91,7 +91,7 @@ export class TanksComponent implements OnInit {
     const getCashPaymentBranchesListUrl = [this.apiConfigService.getCashPaymentBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -115,7 +115,7 @@ export class TanksComponent implements OnInit {
     this.apiService.apiGetRequest(getbranchcodeList)
       .subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               console.log(res);

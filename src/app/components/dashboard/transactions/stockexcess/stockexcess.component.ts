@@ -64,7 +64,7 @@ branchCode: any;
     const getStockexcessListUrl = [this.apiConfigService.getStockexcessList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getStockexcessListUrl, this.dateForm.value).subscribe(
       response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
         if (res?.response?.StockexcessList?.length) {
           this.dataSource = new MatTableDataSource( res.response['StockexcessList']);

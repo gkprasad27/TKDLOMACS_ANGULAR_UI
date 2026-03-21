@@ -121,7 +121,7 @@ getSaledUnits() {
   this.apiService.apiPostRequest(getSaledUnitsUrl)
     .subscribe(
       response => {
-      const res = response.body;
+      const res = response;
       if (res != null && res.status === StatusCodes.pass) {
         if (res.response != null) {
           if (res?.response?.saledList != null) {
@@ -149,7 +149,7 @@ getSaledUnits() {
     this.apiService.apiGetRequest(getMeterReadingBranchesList)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             console.log(res);
@@ -170,7 +170,7 @@ getSaledUnits() {
     this.apiService.apiGetRequest(getShiftUrl)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if ((res.response['ShiftList'] != null)) {
@@ -190,7 +190,7 @@ getSaledUnits() {
     this.apiService.apiPostRequest(getOBFromPumpUrl)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if ((res.response['OBList'] != null)) {
@@ -226,7 +226,7 @@ getSaledUnits() {
     // this.apiService.apiGetRequest(getPumpUrl)
     //   .subscribe(
     //     response => {
-    //     const res = response.body;
+    //     const res = response;
     //     if (res != null && res.status === StatusCodes.pass) {
     //       if (res.response != null) {
     //         if (res?.response?.PumpList?.length) {
@@ -256,7 +256,7 @@ getSaledUnits() {
     this.apiService.apiGetRequest(getPumpUrl)
       .subscribe(
         response => {
-        const res = response.body;
+        const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.PumpList?.length) {
@@ -280,7 +280,7 @@ getSaledUnits() {
       const getmemberNamesUrl = [this.apiConfigService.getPump, value, this.modelFormData.get('branchCode').value].join('/');
       this.apiService.apiGetRequest(getmemberNamesUrl).subscribe(
         response => {
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.PumpList?.length) {
