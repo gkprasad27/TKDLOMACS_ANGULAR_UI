@@ -1,0 +1,161 @@
+@use "../../../reuse" as reuse;
+
+.table {
+  overflow-x: scroll;
+  min-height: 70vh;
+}
+
+
+:host ::ng-deep table {
+  font-family: sans-serif;
+  & > tbody  {
+    & tr {
+      border-bottom: 1px solid reuse.$color-ddd;
+    }
+    & td {
+      font-size: 11px;
+      vertical-align: middle;
+      border: none !important;
+    }
+    & th {
+      vertical-align: middle;
+      border: none !important;
+    }
+    & tr:nth-child(even) {
+    background-color: reuse.$color-f9f9f9
+    }
+    & tr:nth-child(odd) {
+      background-color: reuse.$color-white
+      }
+      & tr:nth-child(even):hover {
+        background-color: reuse.$color-f9f9f9
+        }
+        & tr:nth-child(odd):hover {
+          background-color: reuse.$color-f9f9f9
+          }
+  }
+}
+
+
+.mat-header-cell, .mat-cell {
+  white-space:nowrap;
+  padding: 5px;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  border: none !important;
+}
+
+.table th {
+  font-size: 11px;
+  background-color: reuse.$bg-color !important;
+  color: reuse.$color-white;
+}
+
+.table tr {
+  height: 25px !important;
+  cursor: pointer;
+}
+
+:host ::ng-deep .filter {
+  & .mat-form-field-wrapper {
+      padding-bottom: 0em !important;
+  }
+  & .mat-form-field-underline {
+    bottom: 0.1em;
+  }
+  & .mat-form-field-infix {
+    border: none;
+  }
+}
+
+.dropdown--width {
+  width: 20rem;
+}
+
+.range-picker {
+  width: 200px;
+  & input {
+    border: none;
+    border-radius : unset;
+    border-bottom: 1px solid reuse.$color-color;
+    padding: 0rem;
+    font-size: 0.9rem;
+    height: 53px;
+  }
+}
+
+
+
+.background-red {
+  color: red;
+}
+.background-green {
+  color: gree
+}
+
+.my-2{
+  
+  padding: 0;
+  margin: 0;
+}
+
+// .my-2 #headerForm{ 
+//   position: relative;
+//   top:0;
+  
+//   padding: 0;
+  
+//   margin: 0;            width: 100%;  align-content: center; justify-items: center; left: auto; right: auto;
+  
+// }
+
+form{
+  margin-top:0;
+
+}
+#header{
+padding-top: 0; margin-top: 0;
+}
+
+// #for{
+//   position:absolute;
+//   right:12px;
+  
+//   width: fit-content;
+//   height: fit-content;
+//   top:12px;
+
+// }
+
+
+// #pag{
+//   font-size: 20px;
+// }
+
+// .mat-paginator-navigation {
+//   padding: 10px;}
+
+// .table{
+//   position: absolute;
+//   top: 0;
+// }
+.buttons{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  row-gap: 20px !important;
+  // flex-direction: row;
+  // width: 10%;
+  // justify-content: space-evenly;
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-top: 0;
+  
+ 
+ 
+}
+
+
+
+

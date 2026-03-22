@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormGroup, UntypedFormBuilder } from '@angular/forms';
 import { CommonService } from '../../../../services/common.service';
 
 import { ApiConfigService } from '../../../../services/api-config.service';
@@ -12,7 +12,6 @@ import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { Static } from '../../../../enums/common/static';
 import { AlertService } from '../../../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import moment from 'moment';
 
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core'; 
@@ -25,9 +24,8 @@ import { TranslateModule } from '@ngx-translate/core';
     imports: [SharedImportModule, TranslateModule]
 })
 export class SalesInvoiceComponent implements OnInit {
-  selectedDate = {start : moment().add(0, 'day'), end: moment().add(0, 'day')};
 
-  dateForm: UntypedFormGroup;
+  dateForm: FormGroup;
   // table
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -49,7 +47,6 @@ export class SalesInvoiceComponent implements OnInit {
 
   ) {
     this.dateForm = this.formBuilder.group({
-      selected: [null],
       fromDate: [null],
       toDate: [null],
       invoiceNo: [null],
@@ -93,13 +90,13 @@ export class SalesInvoiceComponent implements OnInit {
 
   search() {
     if (this.dateForm?.value?.invoiceNo == null) {
-      if (this.dateForm?.value?.selected == null) {
+      if (this.dateForm?.value?.fromDate == null || this.dateForm?.value?.toDate == null) {
         this.alertService.openSnackBar('Select Invoice or Date', Static.Close, SnackBar.error);
         return;
       } else {
         this.dateForm.patchValue({
-          fromDate: this.commonService.formatDate(this.dateForm.value.selected.start._d),
-          toDate: this.commonService.formatDate(this.dateForm.value.selected.end._d),
+          fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
+          toDate: this.commonService.formatDate(this.dateForm.value.toDate),
           role:this.branchCode.role
         });
       }

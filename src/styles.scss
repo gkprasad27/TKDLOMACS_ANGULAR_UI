@@ -331,8 +331,7 @@ mat-tab-header {
 
 *h6,
 .header-bg {
-  background-color: reuse.$bg-color !important;
-  background-image: reuse.$bg-color-image !important;
+  background-color: reuse.$color-blue !important;
   color: rgb(252, 252, 252) !important;
   padding: 12px 12px 12px 12px;
   font-weight: bold;
@@ -512,11 +511,6 @@ typeahead-container {
 
 .button-green {
   background-color: #3ea33a !important;
-}
-
-.background--color {
-  background-color: reuse.$bg-color !important;
-  background-image: reuse.$bg-color-image !important;
 }
 
 
