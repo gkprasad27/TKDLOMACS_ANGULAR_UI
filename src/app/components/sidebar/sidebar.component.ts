@@ -46,15 +46,14 @@ export class SidebarComponent implements OnInit {
 
   onItemSelected(item: any) {
 
-    if ((item.children != null)) {
+    if (!this.commonService.checkNullOrUndefined(item.children)) {
       this.commonService.parentItem = item.route;
 
     }
     if (!item.children || !item.children.length) {
-      const route = ['dashboard', this.commonService.parentItem].join('/');
-      console.log( route, item.route);
-
-      this.router.navigate([ route, item.route ]);
+      this.commonService.routeParam = item.route;
+      // Navigate using the route path directly; dashboard will handle param resolution
+      this.router.navigate(['dashboard', item.screenType, item.route]);
       this.commonService.toggleSidebar();
     }
     if (item.children && item.children.length) {

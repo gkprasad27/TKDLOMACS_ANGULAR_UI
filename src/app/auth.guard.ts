@@ -20,7 +20,7 @@ export class AuthGuard  {
     // route: ActivatedRoute,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     // return this.authService.isLoggedIn();
-    if (this.authService.isLoggedIn()) {
+    // if (this.authService.isLoggedIn()) {
       // console.log(next, state)
       // if (this.getStatus(state)) {
         return true;
@@ -31,12 +31,12 @@ export class AuthGuard  {
       // console.log('das', this.authService.isLoggedIn());
       // this.router.navigateByUrl('/dashboard');
       // this.router.navigate(['/dashboard']);
-    } else {
+    // } else {
       // console.log('login');
       // this.router.navigateByUrl('/login');
-      this.router.navigate(['/login']);
-      return false;
-    }
+      // this.router.navigate(['/login']);
+      // return false;
+    // }
   }
 
   getStatus(state) {

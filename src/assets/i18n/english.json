@@ -852,7 +852,7 @@
     "fixedComponents": "Fixed Components",
     "structionName": "Struction Name"
   },
-  "SALESINVOICE": {
+  "salesInvoice": {
     "title": "Sales Invoice",
     "RETURNTITLE": "Sales Return",
     "ViewSales": "Sales Invoice List View",

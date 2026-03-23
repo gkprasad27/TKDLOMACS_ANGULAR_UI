@@ -6,8 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RuntimeConfigService } from '../../services/runtime-config.service';
-import { String } from 'typescript-string-operations';
-import { AddOrEditService } from '../../components/dashboard/comp-list/add-or-edit.service';
+// import { String } from 'typescript-string-operations';
+// import { AddOrEditService } from '../../components/dashboard/comp-list/add-or-edit.service';
 import { ApiConfigService } from '../../services/api-config.service';
 import { ApiService } from '../../services/api.service';
 import { StatusCodes, SnackBar } from '../../enums/common/common';
@@ -24,14 +24,16 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
+import { SharedImportModule } from 'src/app/shared/shared-import';
 
 @Component({
   selector: 'app-trans-table',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslatePipe, TranslateModule,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, SharedImportModule,
     MatCardModule, MatPaginatorModule, MatTableModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatCheckboxModule
   ],
   templateUrl: './trans-table.component.html',
-  styleUrls: ['./trans-table.component.scss']
+  styleUrls: ['./trans-table.component.scss'],
+  standalone: true
 })
 export class TransTableComponent implements OnInit {
 
@@ -74,17 +76,18 @@ export class TransTableComponent implements OnInit {
     private router: Router,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
-    private addOrEditService: AddOrEditService,
+    // private addOrEditService: AddOrEditService,
     private spinner: NgxSpinnerService,
     private transListService: TransListService,
     public commonService: CommonService,
     private alertService: AlertService
   ) {
     this.headerForm = this.formBuilder.group({
-      FromDate: [null],
-      ToDate: [null],
+      fromDate: [null],
+      toDate: [null],
       searchCriteria: [null],
-      companyCode: ''
+      companyCode: '',
+      role: ''
     });
     activatedRoute.params.subscribe(params => {
       this.routeParam = params.id;
@@ -107,16 +110,18 @@ export class TransTableComponent implements OnInit {
 
 
   getTableList() {
+    const branchCode = JSON.parse(localStorage.getItem('user'));
     let obj = JSON.parse(localStorage.getItem("user"));
     this.headerForm.patchValue({
-      companyCode: obj.companyCode
+      companyCode: obj.companyCode,
+      role: branchCode.role
     })
     const newObj = this.headerForm.value;
-    if (!this.commonService.checkNullOrUndefined(this.headerForm.value.FromDate)) {
-      newObj.FromDate = this.commonService.formatDate(this.headerForm.value.FromDate);
-      newObj.ToDate = this.commonService.formatDate(this.headerForm.value.ToDate);
+    if (!this.commonService.checkNullOrUndefined(this.headerForm.value.fromDate)) {
+      newObj.fromDate = this.commonService.formatDate(this.headerForm.value.fromDate);
+      newObj.toDate = this.commonService.formatDate(this.headerForm.value.toDate);
     }
-    const getInvoiceListUrl = String.Join('/', this.transListService.getDynComponents(this.routeParam).tableUrl);
+    const getInvoiceListUrl = [this.transListService.getDynComponents(this.routeParam).tableUrl, this.headerForm.value.role].join('/');
     this.apiService.apiPostRequest(getInvoiceListUrl, newObj).subscribe(
       response => {
         this.spinner.hide();
@@ -133,12 +138,12 @@ export class TransTableComponent implements OnInit {
   }
 
   openEditTrans(row) {
-    this.addOrEditService.editData = 'Edit';
+    // this.addOrEditService.editData = 'Edit';
     this.router.navigate(['dashboard/transaction', this.routeParam, 'Edit', { value: row[this.transListService.getDynComponents(this.routeParam).editKey] }]);
   }
 
   newTransOpen() {
-    this.addOrEditService.editData = 'New';
+    // this.addOrEditService.editData = 'New';
     this.router.navigate(['dashboard/transaction', this.routeParam, 'New']);
   }
 
@@ -258,15 +263,15 @@ export class TransTableComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('user'));
     let registerInvoiceUrl = '';
     // const registerInvoiceUrl = String.Join('/', this.routeParam == 'PurchaseorderApproval' ? this.apiConfigService.savePurchaseOrder: this.apiConfigService.saveGoodsReceipt);
-    if (this.routeParam === 'PurchaseorderApproval') {
-      registerInvoiceUrl = String.Join('/', this.apiConfigService.savePurchaseOrder);
-    }
-    if (this.routeParam === 'saleorderapproval') {
-      registerInvoiceUrl = String.Join('/', this.apiConfigService.saveSaleOrderApproval);
-    }
-    if (this.routeParam === 'GoodsReceiptApproval') {
-      registerInvoiceUrl = String.Join('/', this.apiConfigService.saveGoodsReceipt);
-    }
+    // if (this.routeParam === 'PurchaseorderApproval') {
+    //   registerInvoiceUrl = String.Join('/', this.apiConfigService.savePurchaseOrder);
+    // }
+    // if (this.routeParam === 'saleorderapproval') {
+    //   registerInvoiceUrl = String.Join('/', this.apiConfigService.saveSaleOrderApproval);
+    // }
+    // if (this.routeParam === 'GoodsReceiptApproval') {
+    //   registerInvoiceUrl = String.Join('/', this.apiConfigService.saveGoodsReceipt);
+    // }
     const requestObj = this.tableData.filter((f: any) => f.checked).map((t: any) => { return { ...t, approvalStatus: flag, approvedBy: user.userName, addWho: user.userName, editWho: user.userName } });
     this.apiService.apiPostRequest(registerInvoiceUrl, { dtl: requestObj }).subscribe(
       response => {
