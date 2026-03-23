@@ -31,14 +31,15 @@
           </mat-form-field>
 
           <mat-form-field class="col-2">
-            <input matInput [matDatepicker]="picker" placeholder="{{'salesInvoice.invoiceDate' | translate }}"
-              formControlName="invoiceDate" (click)="picker.open()" readonly>
+            <mat-label>{{ 'salesInvoice.invoiceDate' | translate }}</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="invoiceDate" (click)="picker.open()" readonly>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field class="col-2">
-            <input matInput placeholder="{{ 'salesInvoice.INVOICENO' | translate }}" formControlName="invoiceNo">
+            <mat-label>{{ 'salesInvoice.invoiceNo' | translate }}</mat-label>
+            <input matInput formControlName="invoiceNo">
           </mat-form-field>
 
           <mat-form-field class="col-2">
@@ -55,77 +56,79 @@
           </mat-form-field>
 
           <mat-form-field class="col-2">
-            <input matInput placeholder="Account Name" formControlName="ledgerName">
+            <mat-label>{{ 'salesInvoice.accountName' | translate }}</mat-label>
+            <input matInput formControlName="ledgerName">
           </mat-form-field>
 
           <mat-form-field class="col-2">
             <mat-label>{{ 'salesInvoice.paymentMode' | translate }}</mat-label>
-            <input matInput placeholder="{{ 'salesInvoice.paymentMode' | translate }}" formControlName="paymentMode"
+            <input matInput formControlName="paymentMode" (keydown.enter)="save()">
+          </mat-form-field>
+
+          <mat-form-field class="col-2">
+            <mat-label>{{ 'salesInvoice.vehicleRegNo' | translate }}</mat-label>
+            <input class="typeahead" matInput formControlName="vehicleRegNo"
+              (typeaheadOnSelect)="getmemberNamesByCode($event)" (input)="getVechiels($event.target.value)"
+              [typeahead]="getVechielsArray" id="vehicleRegNo" typeaheadOptionField='text' autocomplete="off"
+              [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" pattern="^[A-Z0-9]+$" ng-pattern-restrict
               (keydown.enter)="save()">
           </mat-form-field>
 
-          <mat-form-field class="col-2">
-            <input class="typeahead" matInput placeholder="{{ 'salesInvoice.vehicleRegNo' | translate }}"
-              formControlName="vehicleRegNo" (typeaheadOnSelect)="getmemberNamesByCode($event)"
-              (input)="getVechiels($event.target.value)" [typeahead]="getVechielsArray" id="vehicleRegNo"
-              typeaheadOptionField='text' autocomplete="off" [typeaheadMinLength]="0" [minLength]="1"
-              [typeaheadWaitMs]="200" pattern="^[A-Z0-9]+$" ng-pattern-restrict (keydown.enter)="save()">
-          </mat-form-field>
-
 
           <mat-form-field class="col-2">
-            <input matInput type="number" placeholder="{{ 'salesInvoice.mobile' | translate }}"
-              (input)="getCustomerGstNumList($event.target.value)" formControlName="mobile"
+            <mat-label>{{ 'salesInvoice.mobile' | translate }}</mat-label>
+            <input matInput type="number" (input)="getCustomerGstNumList($event.target.value)" formControlName="mobile"
               onKeyPress="if(this.value.length==10) return false;" (keydown.enter)="save()">
           </mat-form-field>
 
           <mat-form-field class="col-2">
-            <input matInput placeholder="{{ 'salesInvoice.customerName' | translate }}" formControlName="customerName"
-              id="customerName" (keydown.enter)="save()">
+            <mat-label>{{ 'salesInvoice.customerName' | translate }}</mat-label>
+            <input matInput formControlName="customerName" id="customerName" (keydown.enter)="save()">
           </mat-form-field>
 
           <mat-form-field class="col-2">
-            <input matInput placeholder="{{ 'salesInvoice.suppliedTo' | translate }}" formControlName="suppliedTo"
-              id="suppliedTo" (keydown.enter)="save()">
+            <mat-label>{{ 'salesInvoice.suppliedTo' | translate }}</mat-label>
+            <input matInput formControlName="suppliedTo" id="suppliedTo" (keydown.enter)="save()">
           </mat-form-field>
 
           <mat-form-field class="col-2">
-            <input matInput placeholder="{{ 'salesInvoice.customerGstin' | translate }}" formControlName="customerGstin"
-              id="customerGstin" (keydown.enter)="save()">
+            <mat-label>{{ 'salesInvoice.customerGstin' | translate }}</mat-label>
+            <input matInput formControlName="customerGstin" id="customerGstin" (keydown.enter)="save()">
           </mat-form-field>
 
 
 
           <mat-form-field class="col-2">
-            <input matInput placeholder="{{ 'salesInvoice.memberName' | translate }}" formControlName="memberName"
-              id="memberName" (typeaheadOnSelect)="setMemberName($event)" (input)="getmemberNames($event.target.value)"
-              [typeahead]="getmemberNamesArray" typeaheadOptionField='text' autocomplete="off" [typeaheadMinLength]="0"
-              [minLength]="1" [typeaheadWaitMs]="200" [typeaheadItemTemplate]="customMemberName"
-              (keydown.enter)="save()">
+            <mat-label>{{ 'salesInvoice.memberName' | translate }}</mat-label>
+            <input matInput formControlName="memberName" id="memberName" (typeaheadOnSelect)="setMemberName($event)"
+              (input)="getmemberNames($event.target.value)" [typeahead]="getmemberNamesArray"
+              typeaheadOptionField='text' autocomplete="off" [typeaheadMinLength]="0" [minLength]="1"
+              [typeaheadWaitMs]="200" [typeaheadItemTemplate]="customMemberName" (keydown.enter)="save()">
             <ng-template #customMemberName let-model="item">
               <span>{{model.text}}</span>
             </ng-template>
           </mat-form-field>
 
           <mat-form-field class="col-2">
-            <input matInput placeholder="{{ 'salesInvoice.generalNo' | translate }}" formControlName="generalNo"
-              (keydown.enter)="save()">
+            <mat-label>{{ 'salesInvoice.generalNo' | translate }}</mat-label>
+            <input matInput formControlName="generalNo" (keydown.enter)="save()">
           </mat-form-field>
 
           <mat-form-field class="col-2">
-            <input matInput placeholder="{{ 'salesInvoice.accountBalance' | translate }}"
-              formControlName="accountBalance" (keydown.enter)="save()">
+            <mat-label>{{ 'salesInvoice.accountBalance' | translate }}</mat-label>
+            <input matInput formControlName="accountBalance" (keydown.enter)="save()">
           </mat-form-field>
 
         </div>
 
-        <!-- @if (routeUrl == 'return') { -->
-          <div class="row">
-            <mat-form-field class="col-2">
-              <input matInput readonly placeholder="Sales Return Invoice Number" formControlName="isSalesReturnInvoice">
-            </mat-form-field>
-          </div>
-        <!-- } -->
+        @if (routeUrl == 'return') {
+        <div class="row">
+          <mat-form-field class="col-2">
+            <mat-label>{{ 'salesInvoice.salesReturnInvoiceNo' | translate }}</mat-label>
+            <input matInput readonly formControlName="isSalesReturnInvoice">
+          </mat-form-field>
+        </div>
+        }
 
       </form>
 
@@ -344,18 +347,19 @@
           <div class="d-flex justify-content-end">
             <div class="w-75">
               <mat-form-field class="w-100">
-                <b><input matInput placeholder="{{ 'salesInvoice.totalCgst' | translate }}" formControlName="totalCgst"
-                    (keydown.enter)="save()"></b>
+                <mat-label>{{ 'salesInvoice.totalCgst' | translate }}</mat-label>
+                <input matInput placeholder="{{ 'salesInvoice.totalCgst' | translate }}" formControlName="totalCgst"
+                  (keydown.enter)="save()">
               </mat-form-field>
 
               <mat-form-field class="w-100">
-                <b><input matInput placeholder="{{ 'salesInvoice.totalSgst' | translate }}" formControlName="totalSgst"
-                    (keydown.enter)="save()"></b>
+                <mat-label>{{ 'salesInvoice.totalSgst' | translate }}</mat-label>
+                <input matInput formControlName="totalSgst" (keydown.enter)="save()">
               </mat-form-field>
 
               <mat-form-field class="w-100">
-                <b><input matInput placeholder="{{ 'salesInvoice.totalIgst' | translate }}" formControlName="totalIgst"
-                    (keydown.enter)="save()"></b>
+                <mat-label>{{ 'salesInvoice.totalIgst' | translate }}</mat-label>
+                <input matInput formControlName="totalIgst" (keydown.enter)="save()">
               </mat-form-field>
             </div>
           </div>
@@ -363,18 +367,18 @@
           <div class="d-flex justify-content-end">
             <div class="w-75">
               <mat-form-field class="w-100">
-                <b><input matInput placeholder="{{ 'salesInvoice.totalAmount' | translate }}"
-                    formControlName="totalAmount" (keydown.enter)="save()"></b>
+                <mat-label>{{ 'salesInvoice.totalAmount' | translate }}</mat-label>
+                <input matInput formControlName="totalAmount" (keydown.enter)="save()">
               </mat-form-field>
 
               <mat-form-field class="w-100">
-                <b><input matInput placeholder="{{ 'salesInvoice.totaltaxAmount' | translate }}"
-                    formControlName="totaltaxAmount" (keydown.enter)="save()"></b>
+                <mat-label>{{ 'salesInvoice.totaltaxAmount' | translate }}</mat-label>
+                <input matInput formControlName="totaltaxAmount" (keydown.enter)="save()">
               </mat-form-field>
 
               <mat-form-field class="w-100">
-                <b><input matInput placeholder="{{ 'salesInvoice.grandTotal' | translate }}"
-                    formControlName="grandTotal" (keydown.enter)="save()"></b>
+                <mat-label>{{ 'salesInvoice.grandTotal' | translate }}</mat-label>
+                <input matInput formControlName="grandTotal" (keydown.enter)="save()">
               </mat-form-field>
             </div>
           </div>

@@ -23,7 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatCheckboxModule } from '@angular/material/checkbox'; 
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 
 @Component({
@@ -72,7 +72,7 @@ export class TransTableComponent implements OnInit {
     private formBuilder: FormBuilder,
     private translate: TranslateService,
     activatedRoute: ActivatedRoute,
-    private runtimeConfigService: RuntimeConfigService,
+    public runtimeConfigService: RuntimeConfigService,
     private router: Router,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
@@ -128,13 +128,23 @@ export class TransTableComponent implements OnInit {
         const res = response;
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.response[this.transListService.getDynComponents(this.routeParam).list]) && res.response[this.transListService.getDynComponents(this.routeParam).list].length) {
-            this.tableData = res.response[this.transListService.getDynComponents(this.routeParam).list];
+            const data = res.response[this.transListService.getDynComponents(this.routeParam).list];
+            if (this.routeParam == 'salesInvoice') {
+              data.map(res => res.salesInvoice = 'Sales Invoice');
+            }
+            this.tableData = data;
           }
         } else if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.fail) {
           this.tableData = [];
         }
         this.tableDataFunc();
       });
+  }
+
+  openItem(value) {
+    if (this.routeParam == 'salesInvoice') {
+      this.router.navigate(['dashboard/transaction/salesInvoice', 'return', value.invoiceNo]);
+    }
   }
 
   openEditTrans(row) {

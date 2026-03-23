@@ -28,8 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-trans-list',
   imports: [ReactiveFormsModule, TransTableComponent, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './trans-list.component.html',
-  styleUrls: ['./trans-list.component.scss'],
-  standalone: true
+  styleUrls: ['./trans-list.component.scss']
 })
 
 export class TransListComponent implements OnInit, OnDestroy {

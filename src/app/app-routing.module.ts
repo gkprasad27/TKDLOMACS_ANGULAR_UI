@@ -29,13 +29,15 @@ const routes: Routes = [
       { path: 'transaction/:id/:id1', loadComponent: () => import('./components/dashboard/trans-list/trans-list.component').then(m => m.TransListComponent) },
       { path: 'transaction/:id', loadComponent: () => import('./components/dashboard/trans-list/trans-list.component').then(m => m.TransListComponent) },
 
-
-
-
-
+      { path: 'generalledger/:id', component: GeneralledgerComponent, data: { title: 'Generalledger' } },
+      { path: 'inventory/:id', component: InventoryComponent, data: { title: 'Inventory' } },
+      { path: 'selfservice/:id', component: SelfserviceComponent, data: { title: 'Selfservice' } },
 
       { path: 'sales/:id', component: SalesComponent, data: { title: 'Sales' } },
+
+
       { path: 'sales/:id/createSale', component: CreateBillComponent, data: { title: 'Create Sale' } },
+
       { path: 'sales/:id/viewSaleInvoice/:id1/:id2', component: CreateBillComponent, data: { title: 'Create Sale' } },
       { path: 'sales/:id/salesReturnView', component: SalesReturnViewComponent, data: { title: 'Create Sale' } },
       { path: 'sales/:id/salesReturnView/:id1', component: SalesReturnViewComponent, data: { title: 'Create Sale' } },
@@ -66,9 +68,6 @@ const routes: Routes = [
       { path: 'transactions/:id/CreateOilconversions/:id1', component: CreateOilconversionsComponent, data: { title: 'Create Oilconversions' } },
       { path: 'transactions/:id/createStockExcess', component: CreateStockExcessComponent, data: { title: 'Create StockExcess' } },
       { path: 'transactions/:id/createStockExcess/:id1', component: CreateStockExcessComponent, data: { title: 'Create StockExcess' } },
-      { path: 'generalledger/:id', component: GeneralledgerComponent, data: { title: 'Generalledger' } },
-      { path: 'inventory/:id', component: InventoryComponent, data: { title: 'Inventory' } },
-      { path: 'selfservice/:id', component: SelfserviceComponent, data: { title: 'Selfservice' } },
       { path: 'payroll/:id', component: PayrollComponent, data: { title: 'Payroll' } },
       { path: 'settings/:id', component: SettingsComponent, data: { title: 'Payroll' } },
       { path: 'reports/:id', component: ReportsComponent, data: { title: 'Report' }  }
