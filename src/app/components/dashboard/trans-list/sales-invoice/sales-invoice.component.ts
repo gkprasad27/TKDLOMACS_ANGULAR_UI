@@ -374,8 +374,7 @@ export class SalesInvoiceComponent implements OnInit {
 
 
   getCashPartyAccount() {
-    const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount,
-    this.branchFormData.get('ledgerCode').value].join('/');
+    const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount, this.branchFormData.get('ledgerCode').value].join('/');
     this.apiService.apiGetRequest(getCashPartyAccountUrl).subscribe(
       response => {
         const res = response;
@@ -419,8 +418,7 @@ export class SalesInvoiceComponent implements OnInit {
     const ledgerCode = this.branchFormData.get('ledgerCode')?.value;
 
     if (ledgerCode != null && ledgerCode !== '') {
-      const getAccountBalanceUrl = [this.apiConfigService.getAccountBalance,
-      this.branchFormData.get('ledgerCode').value].join('/');
+      const getAccountBalanceUrl = [this.apiConfigService.getAccountBalance, this.branchFormData.get('ledgerCode').value].join('/');
       this.apiService.apiGetRequest(getAccountBalanceUrl).subscribe(
         response => {
           const res = response;
@@ -760,7 +758,7 @@ export class SalesInvoiceComponent implements OnInit {
 
   getProductByProductCode(value) {
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode].join('/');
+      const getProductByProductCodeUrl = this.apiConfigService.getProductByProductCode;
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
           const res = response;
@@ -812,7 +810,7 @@ export class SalesInvoiceComponent implements OnInit {
 
     if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
-      const getBillingDetailsRcdUrl = [this.apiConfigService.getBillingDetailsRcd].join('/');
+      const getBillingDetailsRcdUrl = this.apiConfigService.getBillingDetailsRcd;
       this.apiService.apiPostRequest(getBillingDetailsRcdUrl, { productCode: productCode.value, branchCode: this.branchFormData.get('branchCode').value }).subscribe(
         response => {
           const res = response;
@@ -875,7 +873,7 @@ export class SalesInvoiceComponent implements OnInit {
 
   getProductByProductName(value) {
     if (value != null && value !== '') {
-      const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
+      const getProductByProductNameUrl = this.apiConfigService.getProductByProductName;
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
           const res = response;
@@ -901,8 +899,7 @@ export class SalesInvoiceComponent implements OnInit {
       if (branchCode != null && branchCode !== '' &&
         pump != null && pump !== '' &&
         productCode != null && productCode !== '') {
-        const getPupmsUrl = [this.apiConfigService.getPupms, pump,
-        this.branchFormData.get('branchCode').value, productCode].join('/');
+        const getPupmsUrl = [this.apiConfigService.getPupms, pump, this.branchFormData.get('branchCode').value, productCode].join('/');
         this.apiService.apiGetRequest(getPupmsUrl).subscribe(
           response => {
             const res = response;
@@ -1093,7 +1090,7 @@ export class SalesInvoiceComponent implements OnInit {
       paymentMode: 0,
       invoiceDate: this.commonService.formatDate(this.branchFormData.get('invoiceDate').value)
     });
-    const registerInvoiceUrl = [this.apiConfigService.registerInvoice].join('/');
+    const registerInvoiceUrl = this.apiConfigService.registerInvoice;
     const requestObj = { InvoiceHdr: this.branchFormData.value, InvoiceDetail: data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
