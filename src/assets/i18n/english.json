@@ -853,7 +853,7 @@
     "structionName": "Struction Name"
   },
   "SALESINVOICE": {
-    "TITLE": "Sales Invoice",
+    "title": "Sales Invoice",
     "RETURNTITLE": "Sales Return",
     "ViewSales": "Sales Invoice List View",
     "SlNo": "Sl No",

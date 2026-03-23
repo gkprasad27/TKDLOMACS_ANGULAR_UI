@@ -39,7 +39,7 @@
           <button class="text-white" mat-button [matMenuTriggerFor]="menu">{{loginUser.userName}}</button>
         }
         <mat-menu #menu="matMenu" class="mt-2 bg-light">
-          <button  (click)="shift()"  mat-menu-item> {{ shiftButton }}</button>
+          <button *ngIf="shiftButton" (click)="shift()"  mat-menu-item> {{ shiftButton }}</button>
           @if (showExpandButtons) {
             <button (click)="logout()" mat-menu-item>Logout</button>
           }
