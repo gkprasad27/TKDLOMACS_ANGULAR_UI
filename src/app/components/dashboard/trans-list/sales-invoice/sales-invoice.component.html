@@ -42,18 +42,18 @@
             <input matInput formControlName="invoiceNo">
           </mat-form-field>
 
-          <mat-form-field class="col-2">
-            <mat-label>{{ 'salesInvoice.ledgerCode' | translate }}</mat-label>
-            <input class="typeahead" matInput placeholder="{{ 'salesInvoice.ledgerCode' | translate }}"
-              formControlName="ledgerCode" (typeaheadOnSelect)="setLedgerName()"
-              (input)="getCashPartyAccountList($event.target.value)" id="ledgerCode" shortcutkey="f2"
-              [typeahead]="getCashPartyAccountListArray" typeaheadOptionField='id' autocomplete="off"
-              [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
-              [typeaheadWaitMs]="200" (keydown.enter)="save()">
+          <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
+            [class.filled]="branchFormData.value?.ledgerCode?.length > 0">
+            <label> {{ 'salesInvoice.ledgerCode' | translate }} </label>
+            <input placeholder=" " formControlName="ledgerCode"
+              (input)="getCashPartyAccountList($event.target.value, false)" id="ledgerCode" shortcutkey="f2"
+              autocomplete="off" [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray"
+              typeaheadOptionField='id' class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
+              (typeaheadOnSelect)="setLedgerName()" [typeaheadWaitMs]="200" (keydown.enter)="save()">
             <ng-template #customItemTemplate let-model="item">
               <span><strong>{{model.id}}</strong> - {{model.text}}</span>
             </ng-template>
-          </mat-form-field>
+          </div>
 
           <mat-form-field class="col-2">
             <mat-label>{{ 'salesInvoice.accountName' | translate }}</mat-label>
@@ -65,15 +65,15 @@
             <input matInput formControlName="paymentMode" (keydown.enter)="save()">
           </mat-form-field>
 
-          <mat-form-field class="col-2">
-            <mat-label>{{ 'salesInvoice.vehicleRegNo' | translate }}</mat-label>
-            <input class="typeahead" matInput formControlName="vehicleRegNo"
-              (typeaheadOnSelect)="getmemberNamesByCode($event)" (input)="getVechiels($event.target.value)"
-              [typeahead]="getVechielsArray" id="vehicleRegNo" typeaheadOptionField='text' autocomplete="off"
-              [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" pattern="^[A-Z0-9]+$" ng-pattern-restrict
-              (keydown.enter)="save()">
-          </mat-form-field>
-
+          <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
+            [class.filled]="branchFormData.value?.vehicleRegNo?.length > 0">
+            <label> {{ 'salesInvoice.vehicleRegNo' | translate }} </label>
+            <input placeholder=" " formControlName="vehicleRegNo"
+              (typeaheadOnSelect)="getmemberNamesByCode($event)"  (input)="getVechiels($event.target.value)" 
+              id="vehicleRegNo" [typeahead]="getVechielsArray"
+              autocomplete="off" [typeaheadOptionsLimit]="100000"
+              typeaheadOptionField='text' class="form-control typeahead"[typeaheadWaitMs]="200" (keydown.enter)="save()">
+          </div>
 
           <mat-form-field class="col-2">
             <mat-label>{{ 'salesInvoice.mobile' | translate }}</mat-label>
@@ -96,18 +96,18 @@
             <input matInput formControlName="customerGstin" id="customerGstin" (keydown.enter)="save()">
           </mat-form-field>
 
-
-
-          <mat-form-field class="col-2">
-            <mat-label>{{ 'salesInvoice.memberName' | translate }}</mat-label>
-            <input matInput formControlName="memberName" id="memberName" (typeaheadOnSelect)="setMemberName($event)"
-              (input)="getmemberNames($event.target.value)" [typeahead]="getmemberNamesArray"
-              typeaheadOptionField='text' autocomplete="off" [typeaheadMinLength]="0" [minLength]="1"
-              [typeaheadWaitMs]="200" [typeaheadItemTemplate]="customMemberName" (keydown.enter)="save()">
-            <ng-template #customMemberName let-model="item">
-              <span>{{model.text}}</span>
+          <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
+            [class.filled]="branchFormData.value?.memberName?.length > 0">
+            <label> {{ 'salesInvoice.memberName' | translate }} </label>
+            <input placeholder=" " formControlName="memberName"
+              (typeaheadOnSelect)="setMemberName($event)"  (input)="getmemberNames($event.target.value)" 
+              id="memberName" [typeahead]="getmemberNamesArray"
+              autocomplete="off" [typeaheadOptionsLimit]="100000" [typeaheadItemTemplate]="customMemberName"
+              typeaheadOptionField='text' class="form-control typeahead"[typeaheadWaitMs]="200" (keydown.enter)="save()">
+              <ng-template #customMemberName let-model="item">
+              <span><strong>{{model.id}}</strong> - {{model.text}}</span>
             </ng-template>
-          </mat-form-field>
+          </div>
 
           <mat-form-field class="col-2">
             <mat-label>{{ 'salesInvoice.generalNo' | translate }}</mat-label>
