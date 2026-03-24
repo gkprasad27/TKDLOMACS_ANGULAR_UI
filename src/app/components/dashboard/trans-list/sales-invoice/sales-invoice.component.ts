@@ -94,7 +94,7 @@ export class SalesInvoiceComponent implements OnInit {
       branchCode: [null],
       branchName: [null],
       invoiceDate: [(new Date()).toISOString()],
-      invoiceNo: [null],
+      invoiceNo: [0],
       ledgerCode: [null],
       vehicleRegNo: [null],
       stateCode: [null],
@@ -106,7 +106,7 @@ export class SalesInvoiceComponent implements OnInit {
       amountInWords: [null],
       totalAmount: [null],
       totaltaxAmount: [null],
-      invoiceMasterId: [null],
+      invoiceMasterId: [0],
       voucherNo: [null],
       voucherTypeId: [null],
       ledgerId: [null],
@@ -582,7 +582,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   disabledPump(code) {
-    if (this.disablePump.length > 0 ) {
+    if (this.disablePump.length > 0) {
       for (let p = 0; p < this.disablePump.length; p++) {
         if (this.disablePump[p] == code) {
           return false;
@@ -736,10 +736,10 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   clearQty(index, value, column, row) {
-    this.dataSource.data[index].qty = null;
-    this.dataSource.data[index].fQty = null;
     if (row.availStock < value) {
       this.alertService.openSnackBar(`This Product(${row.productCode}) qty or Fqty cannot be greater than available stock`, Static.Close, SnackBar.error);
+      this.dataSource.data[index].qty = null;
+      this.dataSource.data[index].fQty = null;
       return;
     }
     this.dataSource.data[index][column] = value;
