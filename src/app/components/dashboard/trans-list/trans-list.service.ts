@@ -254,6 +254,13 @@ export class TransListService {
         this.dynamicComp.editKey = 'invoiceNo';
         return this.dynamicComp;
       }
+      case 'purchaseInvoice': {
+        this.dynamicComp.component = SalesInvoiceComponent;
+        this.dynamicComp.tableUrl = this.apiConfigService.getPurchaseInvoiceList;
+        this.dynamicComp.list = 'InvoiceList';
+        this.dynamicComp.editKey = 'purchaseInvNo';
+        return this.dynamicComp;
+      }
       // // create a case for swap order
       // case 'swaporder': {
       //   this.dynamicComp.component = SwapOrderComponent;
