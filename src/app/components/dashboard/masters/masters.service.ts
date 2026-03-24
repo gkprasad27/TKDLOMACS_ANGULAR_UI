@@ -189,7 +189,7 @@ export class MastersService {
         this.dynamicData.primaryKey = 'VehicleId';
         return this.dynamicData;
         break;
-        case 'openingBalance':
+        case 'openingbalance':
         this.dynamicData.url = this.apiConfigService.getOpeningBalanceList;
         this.dynamicData.component = OpeningBalanceComponent;
         this.dynamicData.registerUrl = this.apiConfigService.registerOpeningBalance;

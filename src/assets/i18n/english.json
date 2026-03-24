@@ -1277,7 +1277,7 @@
     "todate": "Todate"
   },
 
-  "openingBalance":{
+  "openingbalance":{
     "title":"Opening Balance",
     "branchCode": "Branch Code",
     "branchName": "Branch Name",
