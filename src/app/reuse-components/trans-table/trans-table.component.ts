@@ -143,7 +143,7 @@ export class TransTableComponent implements OnInit {
 
   openItem(value) {
     if (this.routeParam == 'salesInvoice') {
-      this.router.navigate(['dashboard/transaction/salesInvoice', 'return', value.invoiceNo]);
+      this.router.navigate(['dashboard/transaction', this.routeParam, 'return', { value: value.invoiceNo }]);
     }
   }
 

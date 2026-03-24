@@ -62,7 +62,7 @@
             <mat-checkbox [checked]="element[column]" [(ngModel)]="element[column]"
             (change)="checkboxCheck($event, element)"> </mat-checkbox>
           } @else if (runtimeConfigService.tableColumnsData[this.routeParam][column] == 'link') {
-            <a (click)="openItem(element[column])">{{ element[column] }}</a>
+            <a (click)="openItem(element)">{{ element[column] }}</a>
           } @else {
             {{ element[column] }}
           }

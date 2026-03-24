@@ -206,9 +206,6 @@ export class SalesInvoiceComponent implements OnInit {
         if (params.value != null) {
           this.getInvoiceDeatilList(params.value);
         }
-        if (this.routeUrl == 'return') {
-          this.generateSalesReturnInvNo();
-        }
         this.disableForm(params.id1);
       } else {
         this.addTableRow();
@@ -451,6 +448,9 @@ export class SalesInvoiceComponent implements OnInit {
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.InvoiceDetailList?.length > 0) {
             this.dataSource = new MatTableDataSource(res.response['InvoiceDetailList']);
+          }
+          if (this.routeUrl == 'return') {
+            this.generateSalesReturnInvNo();
           }
         }
       });
