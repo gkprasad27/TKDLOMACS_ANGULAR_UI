@@ -203,13 +203,10 @@ export class SalesInvoiceComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if (params.id1 != 'New') {
         this.routeUrl = params.id1;
-        // const billHeader = JSON.parse(localStorage.getItem('selectedBill'));
-        // this.branchFormData.patchValue(billHeader);
-        if (params.id2 != null) {
-          this.getInvoiceDeatilList(params.id2);
+        if (params.value != null) {
+          this.getInvoiceDeatilList(params.value);
         }
         if (this.routeUrl == 'return') {
-          const user = JSON.parse(localStorage.getItem('user'));
           this.generateSalesReturnInvNo();
         }
         this.disableForm(params.id1);
@@ -994,6 +991,7 @@ export class SalesInvoiceComponent implements OnInit {
     let tableData = [];
     for (let d = 0; d < this.dataSource.data.length; d++) {
       if (this.dataSource.data[d]['productCode'] != '') {
+        this.dataSource.data[d]['invoiceNo'] = this.branchFormData.get('invoiceNo').value;
         tableData.push(this.dataSource.data[d]);
       }
     }
@@ -1145,7 +1143,9 @@ export class SalesInvoiceComponent implements OnInit {
     }
   }
 
-
+  back() {
+    this.router.navigate(['/dashboard/transaction/salesInvoice']);
+  }
 
 
 

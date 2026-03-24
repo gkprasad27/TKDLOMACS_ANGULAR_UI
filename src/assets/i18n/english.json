@@ -14,7 +14,8 @@
     "WELCOME": "Welcome",
     "SEARCH": "Search",
     "RESET": "Reset",
-    "UPDATE": "Update"
+    "UPDATE": "Update",
+    "BACK": "Back"
   },
   "LOGIN": {
     "USERNAME": "Username",
