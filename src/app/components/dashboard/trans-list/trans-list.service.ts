@@ -278,6 +278,13 @@ export class TransListService {
         this.dynamicComp.editKey = 'stockTransferMasterId';
         return this.dynamicComp;
       }
+      case 'purchaseReturn': {
+        this.dynamicComp.component = StockTransferComponent;
+        this.dynamicComp.tableUrl = this.apiConfigService.getPurchaseReturns;
+        this.dynamicComp.list = 'PurchaseReturnHdr';
+        this.dynamicComp.editKey = 'purchaseInvNo';
+        return this.dynamicComp;
+      }
       // // create a case for swap order
       // case 'swaporder': {
       //   this.dynamicComp.component = SwapOrderComponent;

@@ -5,7 +5,6 @@ import { ApiConfigService } from '../../../../services/api-config.service';
 
 import { ApiService } from '../../../../services/api.service';
 
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { AlertService } from '../../../../services/alert.service';
@@ -16,16 +15,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 var curValue = require("multilingual-number-to-words");
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
-import { SaveItemComponent } from '../../../../reuse-components/save-item/save-item.component';
-import { MatSlideToggleChange as MatSlideToggleChange } from '@angular/material/slide-toggle';
-
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-purchase',
-  templateUrl: './purchase.component.html',
-  styleUrls: ['./purchase.component.scss'],
+  selector: 'app-purchase-return-view',
+  templateUrl: './purchase-return-view.component.html',
+  styleUrls: ['./purchase-return-view.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
@@ -33,12 +29,9 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [SharedImportModule, TranslateModule]
 })
-export class PurchaseComponent implements OnInit {
+export class PurchaseReturnViewComponent implements OnInit {
 
   branchFormData: FormGroup;
-
-
-  setFocus: any;
   getBranchesListArray = [];
   getCashPartyAccountListArray = [];
   myControl = new FormControl();
@@ -60,10 +53,9 @@ export class PurchaseComponent implements OnInit {
   modelFormData: FormGroup;
   tableFormData: FormGroup;
   printBill = false;
-  tcs: boolean = false;
   routeUrl = '';
   taxPercentage: any;
-  // tableLength = 6;
+  tableLength = 6;
   isPurchaseReturnInvoice: any;
 
   constructor(
@@ -74,7 +66,6 @@ export class PurchaseComponent implements OnInit {
     private alertService: AlertService,
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    public dialog: MatDialog,
     private router: Router
   ) {
 
@@ -83,7 +74,10 @@ export class PurchaseComponent implements OnInit {
 
   formDataGroup() {
     this.branchFormData = this.formBuilder.group({
-      purchaseInvId: [0],
+      purchaseReturnId: [null],
+      purchaseReturnInvNo: [null],
+      purchaseReturnInvDate: [null],
+      purchaseMasterInvId: [null],
       branchCode: [null],
       branchName: [null],
       voucherNo: [null],
@@ -115,21 +109,18 @@ export class PurchaseComponent implements OnInit {
       roundOffMinus: [null],
       totalAmount: [null],
       amountInWords: [null],
-      narration: [null],
-      isPurchaseReturned: [null],
-      totalTcsAmount: [null]
+      narration: [null]
     });
   }
 
   ngOnInit() {
     this.allApis();
-    this.commonService.setFocus('ledgerCode');
   }
 
 
   allApis() {
     const getBranchesListUrl = this.apiConfigService.getBillingBranchesList;
-    const getMasterBranchesListUrl = this.apiConfigService.getBranchesList;
+    // const getMasterBranchesListUrl = this.apiConfigService.getBranchesList;
     const getStateListUrl = this.apiConfigService.getStateList;
     // const getSlipListUrl = '../../../../../../assets/settings/bill.json';
     const getPerchaseListUrl = '../../../../../../assets/settings/perchase.json';
@@ -139,12 +130,12 @@ export class PurchaseComponent implements OnInit {
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
         this.apiService.apiGetRequest(getBranchesListUrl),
-        this.apiService.apiGetRequest(getMasterBranchesListUrl),
+        // this.apiService.apiGetRequest(getMasterBranchesListUrl),
         this.apiService.apiGetRequest(getStateListUrl),
         // this.apiService.apiGetRequest(getSlipListUrl),
         this.apiService.apiGetRequest(getPerchaseListUrl),
         // this.apiService.apiGetRequest(getPerchaseBranchListUrl)
-      ]).subscribe(([branchesList, masterBranchesList, stateList, perchaseList]) => {
+      ]).subscribe(([branchesList, stateList, perchaseList]) => {
         this.spinner.hide();
 
         if (!this.commonService.checkNullOrUndefined(branchesList) && branchesList.status === StatusCodes.pass) {
@@ -154,11 +145,11 @@ export class PurchaseComponent implements OnInit {
           }
         }
 
-        if (!this.commonService.checkNullOrUndefined(masterBranchesList) && masterBranchesList.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(masterBranchesList.response)) {
-            this.branchesList = masterBranchesList.response['branchesList'];
-          }
-        }
+        // if (!this.commonService.checkNullOrUndefined(masterBranchesList) && masterBranchesList.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(masterBranchesList.response)) {
+        //     this.branchesList = masterBranchesList.response['branchesList'];
+        //   }
+        // }
 
         if (!this.commonService.checkNullOrUndefined(stateList) && stateList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(stateList.response)) {
@@ -181,7 +172,7 @@ export class PurchaseComponent implements OnInit {
         //   this.itemsLength = perchaseBranchList;
         // }
 
-        this.getPCashPartyAccountList("100", false);
+        this.getCashPartyAccountList("100", false);
 
       });
     });
@@ -190,11 +181,7 @@ export class PurchaseComponent implements OnInit {
       if (params.id1 != 'New') {
         this.routeUrl = params.id1;
         this.disableForm(params.id1);
-        this.getPurchaseInvoiceDeatilList(params.value);
-        if (this.routeUrl == 'return') {
-          const user = JSON.parse(localStorage.getItem('user'));
-          this.getPurchasePurchaseReturnInvNo(user.branchCode);
-        }
+        this.getPurchaseReturnsDetails(params.value);
       } else {
         this.disableForm();
         this.addTableRow();
@@ -210,7 +197,6 @@ export class PurchaseComponent implements OnInit {
             stateCode: '37',
             stateName: 'ANDHRA PRADESH'
           });
-          // this.getCashPartyAccount();
           this.setBranchCode();
           this.genarateBillNo(user.branchCode);
           this.formGroup();
@@ -270,14 +256,13 @@ export class PurchaseComponent implements OnInit {
     });
     if (bname.length) {
       this.branchFormData.patchValue({
-        branchName: (bname[0] != null) ? bname[0].text : null
+        branchName: bname?.[0] != null ? bname[0].text : null
       });
     }
   }
 
-
   getSelectedState() {
-    const getSelectedStateUrl = [this.apiConfigService.getPurchaseSelectedState, this.branchFormData.get('stateCode').value].join('/');
+    const getSelectedStateUrl = [this.apiConfigService.getSelectedState,  this.branchFormData.get('stateCode').value].join('/');
     this.apiService.apiGetRequest(getSelectedStateUrl).subscribe(
       response => {
         const res = response;
@@ -288,7 +273,7 @@ export class PurchaseComponent implements OnInit {
               const taxP = res.response['StateList'][0];
               this.branchFormData.patchValue({
                 stateCode: taxP.stateCode,
-                stateName: taxP.stateName
+                StateName: taxP.stateName
               });
               if (taxP.igst == 0) {
                 this.taxPercentage = true;
@@ -302,63 +287,51 @@ export class PurchaseComponent implements OnInit {
   }
 
 
-  calculateAmount(row?, index?) {
-    if ((row != null)) {
-      if ((row.qty != null) && (row.qty != '')) {
-        this.dataSource.data[index].grossAmount = (this.calculateLiter(row.productCode)) ? (row.qty * row.rate).toFixed(2) : (row.rate * row.qty).toFixed(2);
-      } else if ((row.fQty != null) && (row.fQty != '')) {
-        this.dataSource.data[index].grossAmount = (this.calculateLiter(row.productCode)) ? (0 * row.rate).toFixed(2) : (0 * row.rate).toFixed(2);
-      }
+  calculateAmount(row, index) {
+    if (row?.qty != null && row.qty !== '') {
+      this.dataSource.data[index].grossAmount = (row.qty * row.rate).toFixed(2);
+    } else if ((row.fQty != null) && (row.fQty != '')) {
+      this.dataSource.data[index].grossAmount = (0 * row.rate).toFixed(2);
     }
     this.dataSource = new MatTableDataSource(this.dataSource.data);
     let totaltaxAmount = 0;
     let totalAmount = 0;
-    let gTotal = 0;
-    let TcsAmt = 0;
     for (let a = 0; a < this.dataSource.data.length; a++) {
       if (this.dataSource.data[a].grossAmount) {
         let tax = (this.taxPercentage) ? (this.dataSource.data[a].cgst + this.dataSource.data[a].sgst) : this.dataSource.data[a].igst;
-        let amountTax = (+this.dataSource.data[a].grossAmount * (tax + 100)) / 100;
-        let totalTax = (amountTax - (+this.dataSource.data[a].grossAmount));
-        totalAmount = totalAmount + (+this.dataSource.data[a].grossAmount);
+        let amountTax = (+this.dataSource.data[a].grossAmount * 100) / (tax + 100);
+        let totalTax = (+this.dataSource.data[a].grossAmount - amountTax);
+        totalAmount = totalAmount + amountTax;
         totaltaxAmount = totaltaxAmount + totalTax;
-        gTotal = totalAmount + totaltaxAmount;
-        let totalTcs = (this.tcs) ? (gTotal * 0.1 / 100) : 0;
-        TcsAmt = totalTcs;
       }
     }
     this.branchFormData.patchValue({
-      totalAmount: (totalAmount != null) ? totalAmount.toFixed(2) : null,
-      totaltaxAmount: (totaltaxAmount != null) ? (totaltaxAmount + TcsAmt).toFixed(2) : null,
+      totalAmount: totalAmount != null ? totalAmount.toFixed(2) : null,
+      totaltaxAmount: totaltaxAmount != null ? totaltaxAmount.toFixed(2) : null,
     });
     this.branchFormData.patchValue({
-      grandTotal: (totalAmount + totaltaxAmount + TcsAmt).toFixed(2),
+      grandTotal: (totalAmount + totaltaxAmount).toFixed(2),
       totalCgst: (this.taxPercentage) ? (totaltaxAmount / 2).toFixed(2) : 0,
       totalSgst: (this.taxPercentage) ? (totaltaxAmount / 2).toFixed(2) : 0,
       totalIgst: (!this.taxPercentage) ? (totaltaxAmount).toFixed(2) : 0,
-      totalTcsAmount: (this.tcs) ? (gTotal * 0.1 / 100).toFixed(2) : 0,
     })
     this.branchFormData.patchValue({
       amountInWords: curValue.lakhWord(this.branchFormData.get('grandTotal').value)[0],
     });
-
   }
 
 
-  getPurchaseInvoiceDeatilList(id) {
-    const getPurchaseInvoiceDeatilListUrl = [this.apiConfigService.getPurchaseInvoiceDeatilList, id].join('/');
-    this.apiService.apiGetRequest(getPurchaseInvoiceDeatilListUrl).subscribe(
+  getPurchaseReturnsDetails(id) {
+    const getPurchaseReturnsDetailsUrl = [this.apiConfigService.getPurchaseReturnsDetails, id].join('/');
+    this.apiService.apiGetRequest(getPurchaseReturnsDetailsUrl).subscribe(
       response => {
         const res = response;
         if (res != null && res.status === StatusCodes.pass) {
-          if (res?.response?.InvoiceDetailList?.length > 0) {
-            this.dataSource = new MatTableDataSource(res.response['InvoiceDetailList']);
+          if (res?.response?.PurchaseReturnDetails?.length > 0) {
+            this.dataSource = new MatTableDataSource(res.response['PurchaseReturnDetails']);
           }
           if (res?.response?.invoiceMasterData != null) {
             this.branchFormData.patchValue(res.response['invoiceMasterData']);
-          }
-          if (res?.response?.invoiceMasterData?.totalTcsAmount != 0) {
-            this.tcs = true;
           }
         }
       });
@@ -366,7 +339,8 @@ export class PurchaseComponent implements OnInit {
 
 
   getCashPartyAccount() {
-    const getCashPartyAccountUrl = [this.apiConfigService.getPurchaseCashPartyAccount, this.branchFormData.get('ledgerCode').value].join('/');
+    const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount,
+    this.branchFormData.get('ledgerCode').value].join('/');
     this.apiService.apiGetRequest(getCashPartyAccountUrl).subscribe(
       response => {
         const res = response;
@@ -396,8 +370,6 @@ export class PurchaseComponent implements OnInit {
       this.branchFormData.controls['supplierInvNo'].disable();
       this.branchFormData.controls['gstin'].disable();
       this.branchFormData.controls['narration'].disable();
-      this.branchFormData.controls['roundOffPlus'].disable();
-      this.branchFormData.controls['roundOffMinus'].disable();
     }
     this.branchFormData.controls['paymentMode'].disable();
     this.branchFormData.controls['purchaseInvNo'].disable();
@@ -410,32 +382,12 @@ export class PurchaseComponent implements OnInit {
     this.branchFormData.controls['amountInWords'].disable();
     this.branchFormData.controls['userName'].disable();
     this.branchFormData.controls['ledgerName'].disable();
-    this.branchFormData.controls['totalTcsAmount'].disable();
   }
 
-  getPurchasePurchaseReturnInvNo(branch) {
-    const generateBillUrl = [this.apiConfigService.getPurchasePurchaseReturnInvNo, this.branchFormData.get('branchCode').value].join('/');
-    this.apiService.apiGetRequest(generateBillUrl).subscribe(
-      response => {
-        const res = response;
-        this.spinner.hide();
-        if (res != null && res.status === StatusCodes.pass) {
-          if (res.response != null) {
-            if (res?.response?.PurchaseInvoiceNo != null) {
-              this.isPurchaseReturnInvoice = res.response['PurchaseInvoiceNo'];
-            }
-          }
-        } else if (res.status === StatusCodes.fail) {
-          this.branchFormData.patchValue({
-            purchaseInvNo: null
-          });
-        }
-      });
-  }
 
-  getPCashPartyAccountList(value, flag = true) {
+  getCashPartyAccountList(value, flag = true) {
     if (value != null && value !== '') {
-      const getCashPartyAccountListUrl = [this.apiConfigService.getPCashPartyAccountList, value].join('/');
+      const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, value].join('/');
       this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
         response => {
           const res = response;
@@ -458,19 +410,19 @@ export class PurchaseComponent implements OnInit {
     }
   }
 
-  // setBranchLenght() {
-  //   let flag = true;
-  //   for (let b = 0; b < this.itemsLength.length; b++) {
-  //     if (this.branchFormData.get('branchCode').value == this.itemsLength[b]) {
-  //       this.tableLength = 3;
-  //       flag = false;
-  //       break;
-  //     }
-  //   }
-  //   if (flag) {
-  //     this.tableLength = 6;
-  //   }
-  // }
+  setBranchLenght() {
+    let flag = true;
+    for (let b = 0; b < this.itemsLength.length; b++) {
+      if (this.branchFormData.get('branchCode').value == this.itemsLength[b]) {
+        this.tableLength = 3;
+        flag = false;
+        break;
+      }
+    }
+    if (flag) {
+      this.tableLength = 6;
+    }
+  }
 
   genarateBillNo(branch?) {
     let flag = false;
@@ -489,12 +441,12 @@ export class PurchaseComponent implements OnInit {
       });
     } else {
       this.setBranchCode();
-      // this.setBranchLenght();
+      this.setBranchLenght();
       let generateBillUrl;
       if (branch != null) {
-        generateBillUrl = [this.apiConfigService.generatePurchaseInvNo, branch].join('/');
+        generateBillUrl = [this.apiConfigService.getPurchasePurchaseReturnInvNo, branch].join('/');
       } else {
-        generateBillUrl = [this.apiConfigService.generatePurchaseInvNo, this.branchFormData.get('branchCode').value].join('/');
+        generateBillUrl = [this.apiConfigService.getPurchasePurchaseReturnInvNo, this.branchFormData.get('branchCode').value].join('/');
       }
       this.apiService.apiGetRequest(generateBillUrl).subscribe(
         response => {
@@ -503,9 +455,10 @@ export class PurchaseComponent implements OnInit {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.PurchaseInvoiceNo != null) {
-                this.branchFormData.patchValue({
-                  purchaseInvNo: res.response['PurchaseInvoiceNo']
-                });
+                // this.branchFormData.patchValue({
+                //   purchaseInvNo: res.response['PurchaseInvoiceNo']
+                // });
+                this.isPurchaseReturnInvoice = res.response['PurchaseInvoiceNo'];
               }
             }
           } else if (res.status === StatusCodes.fail) {
@@ -525,66 +478,17 @@ export class PurchaseComponent implements OnInit {
       }
     });
     this.branchFormData.patchValue({
-      ledgerName: (lname[0] != null) ? lname[0].text : null
+      ledgerName: lname?.[0] != null ? lname[0].text : null
     });
     this.getCashPartyAccount();
-    this.commonService.setFocus('productCode0');
   }
 
-
-  setBackGroundColor(value, prop) {
-    if ((this.calculateLiters) != null) {
-      if (value == null && this.calculateLiters.length) {
-        let flag = true;
-        for (let s = 0; s < this.calculateLiters.length; s++) {
-          if (this.calculateLiters[s] == prop) {
-            flag = false;
-          }
-        }
-        if (flag) {
-          return '';
-        } else {
-          return 'flashLight';
-        }
-      } else {
-        return '';
-      }
-    }
-  }
-
-  getTankas(no, index) {
-    if ((no != null)) {
-      const getTankasUrl = [this.apiConfigService.getTankas, no, this.branchFormData.get('branchCode').value].join('/');
-      this.apiService.apiGetRequest(getTankasUrl).subscribe(
-        response => {
-          const res = response;
-          this.spinner.hide();
-          if (res != null && res.status === StatusCodes.pass) {
-            if (res.response != null) {
-              if (res?.response?.TankList?.length > 0) {
-                this.dataSource.data[index].TankId = res.response['TankList'][0].id;
-                this.dataSource.data[index].TankNo = res.response['TankList'][0].text;
-                this.dataSource = new MatTableDataSource(this.dataSource.data);
-              } else {
-                // this.dataSource.data[index].TankId = null;
-                this.dataSource.data[index].TankNo = null;
-                this.dataSource = new MatTableDataSource(this.dataSource.data);
-              }
-            }
-          }
-        });
-    } else {
-      this.dataSource.data[index].TankId = null;
-      this.dataSource.data[index].TankNo = null;
-      this.dataSource = new MatTableDataSource(this.dataSource.data);
-    }
-  }
 
 
 
   addTableRow() {
     const tableObj = {
-      productCode: '', productName: '', hsnNo: '', unitName: '', qty: '', fQty: '', totalLiters: '', tankNo: null,
+      productCode: '', productName: '', hsnNo: '', unitName: '', qty: '', fQty: '', totalLiters: '', tankNo: '',
       rate: '', discount: 0.00, grossAmount: '', delete: '', text: 'obj'
     };
     if (this.dataSource != null) {
@@ -593,9 +497,7 @@ export class PurchaseComponent implements OnInit {
     } else {
       this.dataSource = new MatTableDataSource([tableObj]);
     }
-    this.commonService.setFocus(this.setFocus);
   }
-
 
   setToFormModel(text, column, value) {
     if (text == 'obj') {
@@ -604,12 +506,11 @@ export class PurchaseComponent implements OnInit {
       });
     }
     if (this.tableFormData.valid) {
-      // if (this.dataSource.data.length) {
-      if (this.dataSource.data[this.dataSource.data.length - 1].productCode != '') {
+
+      if (this.dataSource.data.length < this.tableLength) {
         this.addTableRow();
+        this.formGroup();
       }
-      this.formGroup();
-      // }
     }
   }
 
@@ -640,13 +541,12 @@ export class PurchaseComponent implements OnInit {
       return index !== i;
     });
     this.dataSource = new MatTableDataSource(this.dataSource.data);
-    this.calculateAmount();
   }
 
   getProductByProductCode(value) {
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = this.apiConfigService.getProductByProductCode;
-      this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
+      const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode, value].join('/');
+      this.apiService.apiGetRequest(getProductByProductCodeUrl).subscribe(
         response => {
           const res = response;
           this.spinner.hide();
@@ -663,36 +563,17 @@ export class PurchaseComponent implements OnInit {
     }
   }
 
-  calculateLiter(code) {
-    if ((this.calculateLiters != null)) {
-      for (let p = 0; p < this.calculateLiters.length; p++) {
-        if (this.calculateLiters[p] == code) {
-          return false;
-        }
-      }
-      return true;
-    }
-    return true;
-  }
 
-
-  toggleChanges($event: MatSlideToggleChange) {
-    this.tcs = $event.checked;
-  }
-
-
-
-  getProductDeatilsSectionRcd(productCode, index, id) {
-    this.setFocus = id + index;
-    this.commonService.setFocus(id + index)
+  getProductDeatilsSectionRcd(productCode, index) {
     // if (this.checkProductCode(productCode, index)) {
-    if ((this.branchFormData.get('branchCode').value != null) && this.branchFormData.get('branchCode').value != '' &&
-      (productCode.value != null) && productCode.value != '') {
-      const getProductDeatilsSectionRcdUrl = this.apiConfigService.getProductDeatilsSectionRcd;
-      this.apiService.apiPostRequest(getProductDeatilsSectionRcdUrl, {
-        branchCode:
-          this.branchFormData.get('branchCode').value, productCode: productCode.value
-      }).subscribe(
+    const branchCode = this.branchFormData.get('branchCode')?.value;
+    const pCode = productCode?.value;
+
+    if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
+
+      const getProductDeatilsSectionRcdUrl = [this.apiConfigService.getProductDeatilsSectionRcd,
+      this.branchFormData.get('branchCode').value, productCode.value].join('/');
+      this.apiService.apiGetRequest(getProductDeatilsSectionRcdUrl).subscribe(
         response => {
           const res = response;
           this.spinner.hide();
@@ -726,9 +607,9 @@ export class PurchaseComponent implements OnInit {
 
 
   billingDetailsSection(obj, index) {
-    // if ((obj.availStock == null) || (obj.availStock == 0)) {
-    //   this.alertService.openSnackBar(`This Product(${obj.productCode}) available stock is 0`, Static.Close, SnackBar.error);
-    // }
+    if ((obj.availStock == null) || (obj.availStock == 0)) {
+      this.alertService.openSnackBar(`This Product(${obj.productCode}) available stock is 0`, Static.Close, SnackBar.error);
+    }
     obj.text = 'obj';
     this.dataSource.data[index] = obj;
     this.dataSource = new MatTableDataSource(this.dataSource.data);
@@ -754,8 +635,8 @@ export class PurchaseComponent implements OnInit {
 
   getProductByProductName(value) {
     if (value != null && value !== '') {
-      const getProductByProductNameUrl = this.apiConfigService.getProductByProductName;
-      this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
+      const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName, value].join('/');
+      this.apiService.apiGetRequest(getProductByProductNameUrl).subscribe(
         response => {
           const res = response;
           this.spinner.hide();
@@ -779,93 +660,40 @@ export class PurchaseComponent implements OnInit {
     this.setToFormModel(null, null, null);
   }
 
-  roundOff(prop) {
-    if (this.branchFormData.get('totalAmount')?.value != null && this.branchFormData.get('totalAmount')?.value > 0) {
-      if (prop == 'roundOffPlus') {
-        this.branchFormData.patchValue({
-          grandTotal: ((+this.branchFormData.get('totalAmount').value) + (+this.branchFormData.get('totaltaxAmount').value) + (+this.branchFormData.get('roundOffPlus').value)).toFixed(2),
-          roundOffMinus: null
-        })
-      } else if (prop == 'roundOffMinus') {
-        this.branchFormData.patchValue({
-          grandTotal: ((+this.branchFormData.get('totalAmount').value) + (+this.branchFormData.get('totaltaxAmount').value) - (+this.branchFormData.get('roundOffMinus').value)).toFixed(2),
-          roundOffPlus: null
-        })
-      }
-    }
-  }
-
   print() {
 
   }
 
-
   save() {
-    if (this.routeUrl == 'return') {
-      this.registerReturnPurchase();
-      return;
-    }
-    if (this.routeUrl != '' || this.dataSource.data.length == 0) {
-      return;
-    }
-    let tableData = [];
-    for (let d = 0; d < this.dataSource.data.length; d++) {
-      if (this.dataSource.data[d]['productCode'] != '') {
-        tableData.push(this.dataSource.data[d]);
-      }
-    }
-    let content = '';
-    let availStock = tableData.filter(stock => {
-      // if (stock.availStock == 0) {
-      //   content = '0 Availablilty Stock';
-      //   return stock;
-      // }
-      if ((stock.qty == null) && (stock.fQty == null)) {
-        content = 'qty or Fqty is null';
-        return stock;
-      }
-      if ((stock.qty > stock.availStock) || (stock.fQty > stock.availStock)) {
-        content = 'qty or Fqty cannot be greater than available stock';
-        return stock;
-      }
-    });
-    if (availStock.length) {
-      this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
-      return;
-    }
-
-    const dialogRef = this.dialog.open(SaveItemComponent, {
-      width: '1024px',
-      data: '',
-      disableClose: true
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result != null) {
-        this.enableFileds();
-        this.registerPurchase(tableData);
-      }
-    });
-    // this.enableFileds();
-    // this.registerPurchase(tableData);
-  }
-
-  registerReturnPurchase() {
-    this.branchFormData.patchValue({
-      paymentMode: 0,
-      purchaseInvDate: this.commonService.formatDate(this.branchFormData.get('purchaseInvDate').value)
-    });
-    const registerPurchaseUrl = [this.apiConfigService.getPurchaseRegisterPurchaseReturn, this.isPurchaseReturnInvoice, this.branchFormData.get('purchaseInvId').value].join('/');
-    this.apiService.apiGetRequest(registerPurchaseUrl).subscribe(
-      response => {
-        const res = response;
-        this.spinner.hide();
-        if (res != null && res.status === StatusCodes.pass) {
-          if (res.response != null) {
-            this.alertService.openSnackBar('Purchase Created Successfully..', Static.Close, SnackBar.success);
-          }
-          this.reset();
-        }
-      });
+    // if (this.routeUrl != '' || this.dataSource.data.length == 0) {
+    //   return;
+    // }
+    // let tableData = [];
+    // for (let d = 0; d < this.dataSource.data.length; d++) {
+    //   if (this.dataSource.data[d]['productCode'] != '') {
+    //     tableData.push(this.dataSource.data[d]);
+    //   }
+    // }
+    // let content = '';
+    // let availStock = tableData.filter(stock => {
+    //   if (stock.availStock == 0) {
+    //     content = '0 Availablilty Stock';
+    //     return stock;
+    //   }
+    //   if (stock?.qty == null && stock?.fQty == null) {
+    //     content = 'qty or Fqty is null';
+    //     return stock;
+    //   }
+    //   if ((stock.qty > stock.availStock) || (stock.fQty > stock.availStock)) {
+    //     content = 'qty or Fqty cannot be greater than available stock';
+    //     return stock;
+    //   }
+    // });
+    // if (availStock.length) {
+    //   this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
+    //   return;
+    // }
+    this.enableFileds();
   }
 
   enableFileds() {
@@ -880,7 +708,6 @@ export class PurchaseComponent implements OnInit {
     this.branchFormData.controls['amountInWords'].enable();
     this.branchFormData.controls['userName'].enable();
     this.branchFormData.controls['ledgerName'].enable();
-    this.branchFormData.controls['totalTcsAmount'].enable();
   }
 
   reset() {
@@ -889,29 +716,10 @@ export class PurchaseComponent implements OnInit {
     this.formDataGroup();
   }
 
-  registerPurchase(data) {
-    this.branchFormData.patchValue({
-      paymentMode: 0,
-      purchaseInvDate: this.commonService.formatDate(this.branchFormData.get('purchaseInvDate').value)
-    });
-    const registerPurchaseUrl = this.apiConfigService.registerPurchase;
-    const requestObj = { purchaseHdr: this.branchFormData.value, purchaseDetail: data };
-    this.apiService.apiPostRequest(registerPurchaseUrl, requestObj).subscribe(
-      response => {
-        const res = response;
-        this.spinner.hide();
-        if (res != null && res.status === StatusCodes.pass) {
-          if (res.response != null) {
-            this.alertService.openSnackBar('Purchase Created Successfully..', Static.Close, SnackBar.success);
-          }
-          this.reset();
-        }
-      });
+  back() {
+    this.router.navigate(['/dashboard/transaction/purchaseReturn']);
   }
 
-  back() {
-    this.router.navigate(['/dashboard/transaction/purchaseInvoice']);
-  }
 
 }
 

@@ -658,6 +658,19 @@
     "userId": "User Id",
     "shiftId": "Shift Id"
   },
+  "purchaseReturn": {
+    "purchaseReturnInvNo": "Purchase Return Invoice No",
+    "purchaseInvNo": "Purchase Invoice No",
+    "purchaseInvDate": "Purchase Invoice Date",
+    "branchCode": "Branch Code",
+    "branchName": "Branch Name",
+    "ledgerCode": "Ledger Code",
+    "ledgerName": "Ledger Name",
+    "totalAmount": "Total Amount",
+    "stateCode": "State Code",
+    "userId": "User Id",
+    "shiftId": "Shift Id"
+  },
   "stockTransfer": {
     "fromBranchCode": "From Branch Code",
     "fromBranchName": "From Branch Name",
