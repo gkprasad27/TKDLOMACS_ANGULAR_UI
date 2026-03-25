@@ -19,9 +19,9 @@ import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-purchase-return-view',
-  templateUrl: './purchase-return-view.component.html',
-  styleUrls: ['./purchase-return-view.component.scss'],
+  selector: 'app-purchase-return',
+  templateUrl: './purchase-return.component.html',
+  styleUrls: ['./purchase-return.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
@@ -29,7 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [SharedImportModule, TranslateModule]
 })
-export class PurchaseReturnViewComponent implements OnInit {
+export class PurchaseReturnComponent implements OnInit {
 
   branchFormData: FormGroup;
   getBranchesListArray = [];

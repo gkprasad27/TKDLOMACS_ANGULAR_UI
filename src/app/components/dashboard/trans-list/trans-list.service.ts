@@ -11,7 +11,7 @@ import { SalesInvoiceComponent } from './sales-invoice/sales-invoice.component';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { SalesReturnComponent } from './sales-return/sales-return.component';
 import { StockTransferComponent } from './stock-transfer/stock-transfer.component';
-import { PurchaseReturnViewComponent } from './purchase-return/purchase-return.component';
+import { PurchaseReturnComponent } from './purchase-return/purchase-return.component';
 // import { BillOfMaterialComponent } from './bom/bom.component'
 // import { GoodsissueComponent } from './goodsissue/goodsissue.component'
 // import { GoodsissueApprovalComponent} from './goodsissueapproval/goodsissueapproval.component'
@@ -280,7 +280,7 @@ export class TransListService {
         return this.dynamicComp;
       }
       case 'purchaseReturn': {
-        this.dynamicComp.component = PurchaseReturnViewComponent;
+        this.dynamicComp.component = PurchaseReturnComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getPurchaseReturns;
         this.dynamicComp.list = 'PurchaseReturnHdr';
         this.dynamicComp.editKey = 'purchaseInvNo';
