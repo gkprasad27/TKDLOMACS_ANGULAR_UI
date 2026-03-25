@@ -132,6 +132,9 @@ export class TransTableComponent implements OnInit {
             if (this.routeParam == 'salesInvoice') {
               data.map(res => res.salesInvoice = 'Sales Invoice');
             }
+            if (this.routeParam == 'purchaseInvoice') {
+              data.map(res => res.purchaseReturn = 'Purchase Return');
+            }
             this.tableData = data;
           }
         } else if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.fail) {

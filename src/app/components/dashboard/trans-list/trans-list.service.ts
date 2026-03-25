@@ -8,6 +8,7 @@ import { ApiConfigService } from '../../../services/api-config.service';
 // import { SaleassetComponent } from './saleasset/saleasset.component';
 import { NotFoundComponent } from '../../not-found/not-found.component';
 import { SalesInvoiceComponent } from './sales-invoice/sales-invoice.component';
+import { PurchaseComponent } from './purchase/purchase.component';
 // import { BillOfMaterialComponent } from './bom/bom.component'
 // import { GoodsissueComponent } from './goodsissue/goodsissue.component'
 // import { GoodsissueApprovalComponent} from './goodsissueapproval/goodsissueapproval.component'
@@ -255,7 +256,7 @@ export class TransListService {
         return this.dynamicComp;
       }
       case 'purchaseInvoice': {
-        this.dynamicComp.component = SalesInvoiceComponent;
+        this.dynamicComp.component = PurchaseComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getPurchaseInvoiceList;
         this.dynamicComp.list = 'InvoiceList';
         this.dynamicComp.editKey = 'purchaseInvNo';

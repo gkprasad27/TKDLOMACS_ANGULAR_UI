@@ -940,8 +940,8 @@
     "batchNo": "Batch No",
     "NARRATION": "Narration"
   },
-  "PURCHASE": {
-    "TITLE": "Purchase Invoice",
+  "purchaseInvoice": {
+    "title": "Purchase Invoice",
     "SUBTITLE": "Purchase Return",
     "purchaseInvNo": "Purchase Invoice No",
     "purchaseInvDate": "Purchase Invoice Date",
@@ -952,7 +952,7 @@
     "totalAmount": "Total Amount",
     "stateCode": "State Code",
     "viewPurchase": "Purchase Invoice List View",
-
+    "purchaseReturn": "Purchase Invoice",
     "userId": "User Id",
     "shiftId": "Shift Id",
     "NEWPURCHASE": "Create New Purchase",

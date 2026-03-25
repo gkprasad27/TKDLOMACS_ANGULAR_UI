@@ -631,6 +631,18 @@
     "shiftId": "Shift Id",
     "customerGstin": "Customer GSTIN"
   },
+  "purchaseInvoice": {
+    "purchaseInvNo": "Purchase Invoice No",
+    "purchaseInvDate": "Purchase Invoice Date",
+    "branchCode": "Branch Code",
+    "branchName": "Branch Name",
+    "ledgerCode": "Ledger Code",
+    "ledgerName": "Ledger Name",
+    "totalAmount": "Total Amount",
+    "purchaseReturn": "link",
+    "userId": "User Id",
+    "shiftId": "Shift Id"
+  },
   "vehiclerequisition": {
     "title": "VehicleRequisition",
     "sno": "sno",
