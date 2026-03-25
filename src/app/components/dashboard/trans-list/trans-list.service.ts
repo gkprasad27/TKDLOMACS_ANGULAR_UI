@@ -10,6 +10,7 @@ import { NotFoundComponent } from '../../not-found/not-found.component';
 import { SalesInvoiceComponent } from './sales-invoice/sales-invoice.component';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { SalesReturnComponent } from './sales-return/sales-return.component';
+import { StockTransferComponent } from './stock-transfer/stock-transfer.component';
 // import { BillOfMaterialComponent } from './bom/bom.component'
 // import { GoodsissueComponent } from './goodsissue/goodsissue.component'
 // import { GoodsissueApprovalComponent} from './goodsissueapproval/goodsissueapproval.component'
@@ -268,6 +269,13 @@ export class TransListService {
         this.dynamicComp.tableUrl = this.apiConfigService.getInvoiceGetInvoiceReturnList;
         this.dynamicComp.list = 'InvoiceReturnList';
         this.dynamicComp.editKey = 'invoiceNo';
+        return this.dynamicComp;
+      }
+      case 'stockTransfer': {
+        this.dynamicComp.component = StockTransferComponent;
+        this.dynamicComp.tableUrl = this.apiConfigService.getStockTransferList;
+        this.dynamicComp.list = 'InvoiceList';
+        this.dynamicComp.editKey = 'stockTransferMasterId';
         return this.dynamicComp;
       }
       // // create a case for swap order

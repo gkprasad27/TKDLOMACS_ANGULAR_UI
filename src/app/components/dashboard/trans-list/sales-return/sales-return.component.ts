@@ -944,7 +944,7 @@ export class SalesReturnComponent implements OnInit {
       paymentMode: 0,
       invoiceDate: this.commonService.formatDate(this.branchFormData.get('invoiceDate').value)
     });
-    const registerInvoiceUrl = [this.apiConfigService.registerInvoice].join('/');
+    const registerInvoiceUrl = this.apiConfigService.registerInvoice;
     const requestObj = { InvoiceHdr: this.branchFormData.value, InvoiceDetail: data };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
@@ -983,7 +983,7 @@ export class SalesReturnComponent implements OnInit {
 
 
   back() {
-    this.router.navigate(['/dashboard/transaction/salesInvoice']);
+    this.router.navigate(['/dashboard/transaction/salesReturn']);
   }
 
 }

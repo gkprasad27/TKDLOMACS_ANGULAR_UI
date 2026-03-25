@@ -277,8 +277,7 @@ export class PurchaseComponent implements OnInit {
 
 
   getSelectedState() {
-    const getSelectedStateUrl = [this.apiConfigService.getPurchaseSelectedState,
-    this.branchFormData.get('stateCode').value].join('/');
+    const getSelectedStateUrl = [this.apiConfigService.getPurchaseSelectedState, this.branchFormData.get('stateCode').value].join('/');
     this.apiService.apiGetRequest(getSelectedStateUrl).subscribe(
       response => {
         const res = response;
@@ -367,8 +366,7 @@ export class PurchaseComponent implements OnInit {
 
 
   getCashPartyAccount() {
-    const getCashPartyAccountUrl = [this.apiConfigService.getPurchaseCashPartyAccount,
-    this.branchFormData.get('ledgerCode').value].join('/');
+    const getCashPartyAccountUrl = [this.apiConfigService.getPurchaseCashPartyAccount, this.branchFormData.get('ledgerCode').value].join('/');
     this.apiService.apiGetRequest(getCashPartyAccountUrl).subscribe(
       response => {
         const res = response;
@@ -436,7 +434,7 @@ export class PurchaseComponent implements OnInit {
   }
 
   GetBranchesList() {
-    const getBranchesListUrl = [this.apiConfigService.getBillingBranchesList].join('/');
+    const getBranchesListUrl = this.apiConfigService.getBillingBranchesList;
     this.apiService.apiGetRequest(getBranchesListUrl).subscribe(
       response => {
         const res = response;
@@ -601,7 +599,7 @@ export class PurchaseComponent implements OnInit {
 
 
   getStateList() {
-    const getStateListUrl = [this.apiConfigService.getPurchaseStateList].join('/');
+    const getStateListUrl = this.apiConfigService.getPurchaseStateList;
     this.apiService.apiGetRequest(getStateListUrl).subscribe(
       response => {
         const res = response;
@@ -686,7 +684,7 @@ export class PurchaseComponent implements OnInit {
 
   getProductByProductCode(value) {
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode].join('/');
+      const getProductByProductCodeUrl = this.apiConfigService.getProductByProductCode;
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
           const res = response;
@@ -729,7 +727,7 @@ export class PurchaseComponent implements OnInit {
     // if (this.checkProductCode(productCode, index)) {
     if ((this.branchFormData.get('branchCode').value != null) && this.branchFormData.get('branchCode').value != '' &&
       (productCode.value != null) && productCode.value != '') {
-      const getProductDeatilsSectionRcdUrl = [this.apiConfigService.getProductDeatilsSectionRcd].join('/');
+      const getProductDeatilsSectionRcdUrl = this.apiConfigService.getProductDeatilsSectionRcd;
       this.apiService.apiPostRequest(getProductDeatilsSectionRcdUrl, {
         branchCode:
           this.branchFormData.get('branchCode').value, productCode: productCode.value
@@ -795,7 +793,7 @@ export class PurchaseComponent implements OnInit {
 
   getProductByProductName(value) {
     if (value != null && value !== '') {
-      const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
+      const getProductByProductNameUrl = this.apiConfigService.getProductByProductName;
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
           const res = response;
@@ -935,7 +933,7 @@ export class PurchaseComponent implements OnInit {
       paymentMode: 0,
       purchaseInvDate: this.commonService.formatDate(this.branchFormData.get('purchaseInvDate').value)
     });
-    const registerPurchaseUrl = [this.apiConfigService.registerPurchase].join('/');
+    const registerPurchaseUrl = this.apiConfigService.registerPurchase;
     const requestObj = { purchaseHdr: this.branchFormData.value, purchaseDetail: data };
     this.apiService.apiPostRequest(registerPurchaseUrl, requestObj).subscribe(
       response => {

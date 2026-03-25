@@ -658,6 +658,16 @@
     "userId": "User Id",
     "shiftId": "Shift Id"
   },
+  "stockTransfer": {
+    "fromBranchCode": "From Branch Code",
+    "fromBranchName": "From Branch Name",
+    "toBranchCode": "To Branch Code",
+    "toBranchName": "To Branch Name",
+    "stockTransferDate": "Stock Transfer Date",
+    "userId": "User Id",
+    "stockTransferNo": "Stock Transfer No",
+    "shiftId": "Shift Id"
+  },
   "vehiclerequisition": {
     "title": "VehicleRequisition",
     "sno": "sno",

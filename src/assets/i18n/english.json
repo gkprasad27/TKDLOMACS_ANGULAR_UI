@@ -956,20 +956,24 @@
     "shiftId": "Shift Id",
     "customerGstin": "Customer GSTIN"
   },
-  "STOCKTRANSFER": {
-    "TITLE": "Stock Transfer",
+  "stockTransfer": {
+    "title": "Stock Transfer",
     "SUBTITLE": "Stock Transfer",
-    "CreatenewStock": "Create New Stock",
-    "FromBranchCode": "From Branch Code",
-    "FromBranchName": "From Branch Name",
-    "ToBranchCode": "To Branch Code",
-    "ToBranchName": "To Branch Name",
-    "StockTransferDate": "Stock Transfer Date",
-    "UserId": "User Id",
-    "StockTransferNo": "Stock Transfer No",
-    "ShiftId": "Shift Id",
-    "NEWSTOCK": "New Stock",
+    "createnewStock": "Create New Stock",
+    "fromBranchCode": "From Branch Code",
+    "fromBranchName": "From Branch Name",
+    "toBranchCode": "To Branch Code",
+    "toBranchName": "To Branch Name",
+    "stockTransferDate": "Stock Transfer Date",
+    "userId": "User Id",
+    "stockTransferNo": "Stock Transfer No",
+    "shiftId": "Shift Id",
+    "newStock": "New Stock",
     "viewStock": "Stock Invoice List View",
+
+    "userName": "User Name",
+    "totalQty": "Total Qty",
+    "totalLtrs": "Total Ltrs",
 
 
     "productCode": "Product Code",
@@ -983,7 +987,7 @@
     "availStock": "Avail Stock",
     "fQty": "F/Qty",
     "batchNo": "Batch No",
-    "NARRATION": "Narration"
+    "narration": "Narration"
   },
   "purchaseInvoice": {
     "title": "Purchase Invoice",
