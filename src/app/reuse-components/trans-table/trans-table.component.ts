@@ -148,6 +148,9 @@ export class TransTableComponent implements OnInit {
     if (this.routeParam == 'salesInvoice') {
       this.router.navigate(['dashboard/transaction', this.routeParam, 'return', { value: value.invoiceNo }]);
     }
+    if (this.routeParam == 'purchaseInvoice') {
+      this.router.navigate(['dashboard/transaction', this.routeParam, 'return', { value: value.purchaseInvNo }]);
+    }
   }
 
   openEditTrans(row) {

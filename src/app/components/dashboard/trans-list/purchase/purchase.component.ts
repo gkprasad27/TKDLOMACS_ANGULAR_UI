@@ -189,7 +189,7 @@ export class PurchaseComponent implements OnInit {
       if (params.id1 != 'New') {
         this.routeUrl = params.id1;
         this.disableForm(params.id1);
-        this.getPurchaseInvoiceDeatilList(params.id2);
+        this.getPurchaseInvoiceDeatilList(params.value);
         if (this.routeUrl == 'return') {
           const user = JSON.parse(localStorage.getItem('user'));
           this.getPurchasePurchaseReturnInvNo(user.branchCode);
