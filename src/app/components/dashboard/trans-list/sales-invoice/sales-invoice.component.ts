@@ -135,6 +135,12 @@ export class SalesInvoiceComponent implements OnInit {
       manualInvoiceNo: [null],
       isSalesReturnInvoice: [null]
     });
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user?.role != '1') {
+      this.branchFormData.controls['invoiceDate'].disable();
+    }
   }
 
   ngOnInit() {
@@ -213,7 +219,7 @@ export class SalesInvoiceComponent implements OnInit {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user?.branchCode != null) {
           this.branchFormData.patchValue({
-            branchCode: user.branchCode,
+            branchCode: +user.branchCode,
             userId: user.seqId,
             userName: user.userName,
             ledgerCode: "100"
@@ -449,7 +455,7 @@ export class SalesInvoiceComponent implements OnInit {
           if (res?.response?.InvoiceDetailList?.length > 0) {
             this.dataSource = new MatTableDataSource(res.response['InvoiceDetailList']);
           }
-          if(res?.response?.invoiceMasterData != null) {
+          if (res?.response?.invoiceMasterData != null) {
             this.branchFormData.patchValue(res.response['invoiceMasterData']);
           }
           if (this.routeUrl == 'return') {

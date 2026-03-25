@@ -5,9 +5,9 @@
   </mat-card-title>
   <mat-card-content class="p-0">
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form mt-3" autocomplete="off">
+    <form [formGroup]="loginForm"  class="row mt-3" autocomplete="off">
 
-      <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.username.valid }">
+      <mat-form-field class="col-4" [ngClass]="{ 'ng--valid': formControls.username.valid }">
         <mat-label [translate]="'LOGIN.USERNAME'"></mat-label>
         <input matInput formControlName="username">
         @if (isSubmitted && formControls.username.errors) {
@@ -19,7 +19,7 @@
         }
       </mat-form-field>
 
-      <mat-form-field class="form-element" [ngClass]="{ 'ng--valid': formControls.password.valid }">
+      <mat-form-field class="col-4" [ngClass]="{ 'ng--valid': formControls.password.valid }">
         <mat-label [translate]="'LOGIN.PASSWORD'"></mat-label>
         <input matInput formControlName="password">
         @if (isSubmitted && formControls.password.errors) {
@@ -31,7 +31,7 @@
         }
       </mat-form-field>
 
-      <mat-form-field  class="form-element">
+      <mat-form-field  class="col-4">
         <mat-label [translate]="'COMMON.LANGUAGEPREFERENCE'"></mat-label>
         <mat-select (selectionChange)="setLang(langSelect.value)" #langSelect>
           @for (lang of translate.getLangs(); track lang) {
@@ -42,13 +42,15 @@
         </mat-select>
       </mat-form-field>
 
-      <div class="form-element mt-2">
-        <button mat-raised-button class="background--color text-white mat-raised-button" type="submit">
+      
+
+    </form>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button mat-raised-button class="background--color text-white mat-raised-button" type="button" (click)="onSubmit()">
           {{ 'LOGIN.LOGIN' | translate}}
         </button>
       </div>
-
-    </form>
 
   </mat-card-content>
 </mat-card>

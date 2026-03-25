@@ -11,7 +11,7 @@ import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { AlertService } from '../../../../services/alert.service';
 import { Static } from '../../../../enums/common/static';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 var curValue = require("multilingual-number-to-words");
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
@@ -75,6 +75,7 @@ export class PurchaseComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
     public dialog: MatDialog,
+    private router: Router
   ) {
 
     this.formDataGroup();
@@ -82,7 +83,7 @@ export class PurchaseComponent implements OnInit {
 
   formDataGroup() {
     this.branchFormData = this.formBuilder.group({
-      purchaseInvId: [null],
+      purchaseInvId: [0],
       branchCode: [null],
       branchName: [null],
       voucherNo: [null],
@@ -200,7 +201,7 @@ export class PurchaseComponent implements OnInit {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user?.branchCode != null) {
           this.branchFormData.patchValue({
-            branchCode: user.branchCode,
+            branchCode: +user.branchCode,
             userId: user.seqId,
             userName: user.userName,
             ledgerCode: "100"
@@ -947,6 +948,10 @@ export class PurchaseComponent implements OnInit {
           this.spinner.hide();
         }
       });
+  }
+
+  back() {
+    this.router.navigate(['/dashboard/transaction/salesInvoice']);
   }
 
 }
