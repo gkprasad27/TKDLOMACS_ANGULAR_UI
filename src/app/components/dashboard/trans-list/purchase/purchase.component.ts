@@ -88,7 +88,7 @@ export class PurchaseComponent implements OnInit {
       branchName: [null],
       voucherNo: [null],
       voucherTypeId: [null],
-      purchaseInvNo: [null],
+      purchaseInvNo: [0],
       supplierInvNo: [null],
       purchaseInvDate: [(new Date()).toISOString()],
       serverDateTime: [null],
@@ -544,7 +544,7 @@ export class PurchaseComponent implements OnInit {
         if (flag) {
           return '';
         } else {
-          return 'flashLight';
+          return 'flash-light';
         }
       } else {
         return '';

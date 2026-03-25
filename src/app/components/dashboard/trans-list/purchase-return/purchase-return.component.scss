@@ -1,8 +1,8 @@
 
-@import "../../../../../../reuse";
+@import "../../../../../reuse";
 
 .table {
-  overflow-x: unset;
+  // overflow-x: unset;
 }
 
 ::ng-deep typeahead-container {
@@ -101,6 +101,3 @@
   color: #337ab7;
 }
 
-mat-form-field {
-  height: 40px;
-}

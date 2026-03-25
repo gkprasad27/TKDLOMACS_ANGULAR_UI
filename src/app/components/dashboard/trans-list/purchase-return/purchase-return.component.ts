@@ -82,7 +82,7 @@ export class PurchaseReturnViewComponent implements OnInit {
       branchName: [null],
       voucherNo: [null],
       voucherTypeId: [null],
-      purchaseInvNo: [null],
+      purchaseInvNo: [0],
       supplierInvNo: [null],
       purchaseInvDate: [(new Date()).toISOString()],
       serverDateTime: [null],

@@ -271,7 +271,7 @@ export class StockTransferComponent implements OnInit {
   formGroup() {
     this.tableFormData = this.formBuilder.group({
       stockTransferDetailId: [null],
-      stockTransferMasterId: [null],
+      stockTransferMasterId: [0],
       stockTransferDetailsDate: [null],
       productId: [null],
       STockTransferDetail: [null],

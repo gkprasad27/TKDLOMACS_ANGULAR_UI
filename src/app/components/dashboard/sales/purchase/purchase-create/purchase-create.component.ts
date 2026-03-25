@@ -385,7 +385,7 @@ export class PurchaseCreateComponent implements OnInit {
         if (flag) {
           return '';
         } else {
-          return 'flashLight';
+          return 'flash-light';
         }
       } else {
         return '';

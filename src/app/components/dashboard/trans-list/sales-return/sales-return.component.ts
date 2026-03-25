@@ -661,7 +661,7 @@ export class SalesReturnComponent implements OnInit {
     } else if (value == 0) {
       return '';
     } else if (value == '' || value == null) {
-      return 'flashLight';
+      return 'flash-light';
     } else {
       return '';
     }
@@ -705,8 +705,8 @@ export class SalesReturnComponent implements OnInit {
 
   getProductByProductCode(value) {
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode, value].join('/');
-      this.apiService.apiGetRequest(getProductByProductCodeUrl).subscribe(
+      const getProductByProductCodeUrl = this.apiConfigService.getProductByProductCode;
+      this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
           const res = response;
             this.spinner.hide();

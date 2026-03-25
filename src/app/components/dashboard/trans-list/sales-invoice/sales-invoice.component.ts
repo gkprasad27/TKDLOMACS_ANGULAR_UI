@@ -713,15 +713,29 @@ export class SalesInvoiceComponent implements OnInit {
     }
   }
 
-  setBackGroundColor(value, disabled) {
+  setBackGroundColor(value, disabled, prop) {
+    console.log(value, disabled, prop);
     if (disabled) {
       return '';
     } else if (value == 0) {
       return '';
-    } else if (value == '' || value == null) {
-      return 'flashLight';
-    } else {
-      return '';
+    }
+    if ((this.disableSlipList) != null) {
+      if (value == null && this.disableSlipList.length) {
+        let flag = true;
+        for (let s = 0; s < this.disableSlipList.length; s++) {
+          if (this.disableSlipList[s] == prop) {
+            flag = false;
+          }
+        }
+        if (flag) {
+          return '';
+        } else {
+          return 'flash-light';
+        }
+      } else {
+        return '';
+      }
     }
   }
 

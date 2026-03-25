@@ -543,7 +543,7 @@ if (ledgerCode != null && ledgerCode !== '') {
     } else if (value == 0) {
       return '';
     } else if (value == '' || value == null) {
-      return 'flashLight';
+      return 'flash-light';
     } else {
       return '';
     }

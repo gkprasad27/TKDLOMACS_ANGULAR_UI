@@ -130,7 +130,7 @@ export class TransTableComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res.response[this.transListService.getDynComponents(this.routeParam).list]) && res.response[this.transListService.getDynComponents(this.routeParam).list].length) {
             const data = res.response[this.transListService.getDynComponents(this.routeParam).list];
             if (this.routeParam == 'salesInvoice') {
-              data.map(res => res.salesInvoice = 'Sales Invoice');
+              data.map(res => res.salesInvoice = 'Sales Return');
             }
             if (this.routeParam == 'purchaseInvoice') {
               data.map(res => res.purchaseReturn = 'Purchase Return');

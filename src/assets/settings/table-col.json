@@ -617,7 +617,7 @@
   },
   "salesInvoice": {
     "invoiceNo": "Invoice No",
-    "invoiceDate": "Invoice Date",
+    "invoiceDate": "Date",
     "branchCode": "Branch Code",
     "branchName": "Branch Name",
     "ledgerCode": "Cash/Pary Name",
@@ -633,7 +633,7 @@
   },
   "salesReturn": {
     "invoiceNo": "Invoice No",
-    "invoiceDate": "Invoice Date",
+    "invoiceDate": "Date",
     "branchCode": "Branch Code",
     "branchName": "Branch Name",
     "ledgerCode": "Cash/Pary Name",
@@ -648,7 +648,7 @@
   },
   "purchaseInvoice": {
     "purchaseInvNo": "Purchase Invoice No",
-    "purchaseInvDate": "Purchase Invoice Date",
+    "purchaseInvDate": "Date",
     "branchCode": "Branch Code",
     "branchName": "Branch Name",
     "ledgerCode": "Ledger Code",
@@ -661,7 +661,7 @@
   "purchaseReturn": {
     "purchaseReturnInvNo": "Purchase Return Invoice No",
     "purchaseInvNo": "Purchase Invoice No",
-    "purchaseInvDate": "Purchase Invoice Date",
+    "purchaseInvDate": "Date",
     "branchCode": "Branch Code",
     "branchName": "Branch Name",
     "ledgerCode": "Ledger Code",
@@ -676,7 +676,7 @@
     "fromBranchName": "From Branch Name",
     "toBranchCode": "To Branch Code",
     "toBranchName": "To Branch Name",
-    "stockTransferDate": "Stock Transfer Date",
+    "stockTransferDate": "Date",
     "userId": "User Id",
     "stockTransferNo": "Stock Transfer No",
     "shiftId": "Shift Id"

@@ -512,3 +512,7 @@ typeahead-container {
 .typeahead:has(input:disabled) {
   opacity: 0.4;
 }
+
+.flash-light {
+  -webkit-animation: _ngcontent-ng-c1539275210_glowing 1.5s infinite !important;
+}
