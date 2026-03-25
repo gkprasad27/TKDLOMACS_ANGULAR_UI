@@ -538,11 +538,11 @@ export class ApiConfigService {
    getAdditionalShareTransferNo = `${environment.baseUrl}MemberMaster/GetAdditionalShareTransferNo`;
 
    // opening balance
-   getOpeningBalanceList = `http://localhost:51414/api/masters/OpeningBalance/GetOpeningBalanceList`;
-   getObBranchesList = `http://localhost:51414/api/masters/OpeningBalance/GetBranchesList`;
-   getObVoucherNo = `http://localhost:51414/api/masters/OpeningBalance/GetVoucherNo`;
-   getPaymentType = `http://localhost:51414/api/masters/OpeningBalance/GetPaymentType`;
-   registerOpeningBalance = `http://localhost:51414/api/masters/OpeningBalance/RegisterOpeningBalance`;
+   getOpeningBalanceList = `${environment.baseUrl}masters/OpeningBalance/GetOpeningBalanceList`;
+   getObBranchesList = `${environment.baseUrl}masters/OpeningBalance/GetBranchesList`;
+   getObVoucherNo = `${environment.baseUrl}masters/OpeningBalance/GetVoucherNo`;
+   getPaymentType = `${environment.baseUrl}masters/OpeningBalance/GetPaymentType`;
+   registerOpeningBalance = `${environment.baseUrl}masters/OpeningBalance/RegisterOpeningBalance`;
   // updatedepartment = `${environment.baseUrl}masters/Department/updatedepartment`;
   // deletedepartment = `${environment.baseUrl}masters/Department/deletedepartment`;
    // ******************************* End  master *****************************************
@@ -669,10 +669,10 @@ export class ApiConfigService {
   addGift=`${environment.baseUrl}MemberMaster/AddGifts`;
   updateGift=`${environment.baseUrl}MemberMaster/UpdateGift`;
 
-//   getGiftProductList=`http://localhost:51414/api/MemberMaster/GetProducts`;
-//   getGiftList=`http://localhost:51414/api/MemberMaster/GetGifts`;
-//   addGift=`http://localhost:51414/api/MemberMaster/AddGifts`;
-//   updateGift=`http://localhost:51414/api/MemberMaster/UpdateGift`;
+//   getGiftProductList=`${environment.baseUrl}MemberMaster/GetProducts`;
+//   getGiftList=`${environment.baseUrl}MemberMaster/GetGifts`;
+//   addGift=`${environment.baseUrl}MemberMaster/AddGifts`;
+//   updateGift=`${environment.baseUrl}MemberMaster/UpdateGift`;
   // ******************************* End  master *****************************************
 
 
