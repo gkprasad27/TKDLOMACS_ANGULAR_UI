@@ -34,9 +34,9 @@
             [class.filled]="branchFormData.value?.ledgerCode?.length > 0">
             <label> {{ 'salesInvoice.ledgerCode' | translate }} </label>
             <input placeholder=" " formControlName="ledgerCode"
-              (input)="getPCashPartyAccountList($event.target.value, false)" id="ledgerCode"
-              autocomplete="off" [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray"
-              typeaheadOptionField='id' class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
+              (input)="getPCashPartyAccountList($event.target.value, false)" id="ledgerCode" autocomplete="off"
+              [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray" typeaheadOptionField='id'
+              class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
               (typeaheadOnSelect)="setLedgerName()" [typeaheadWaitMs]="200" (keydown.enter)="save()">
             <ng-template #customItemTemplate let-model="item">
               <span><strong>{{model.id}}</strong> - {{model.text}}</span>
@@ -263,17 +263,18 @@
 
           <div class="d-flex justify-content-end">
             <div class="w-75">
-              <mat-form-field class="form-element">
-                <input matInput placeholder="{{ 'purchaseInvoice.userName' | translate }}" formControlName="userName">
+              <mat-form-field class="w-100">
+                <mat-label>{{ 'purchaseInvoice.userName' | translate }}</mat-label>
+                <input matInput formControlName="userName">
               </mat-form-field>
 
-              <mat-form-field>
+              <mat-form-field class="w-100">
                 <mat-label>{{ 'purchaseInvoice.AMOUNTINWORDS' | translate }}</mat-label>
                 <textarea matInput formControlName="amountInWords" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
                   cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"></textarea>
               </mat-form-field>
 
-              <mat-form-field>
+              <mat-form-field class="w-100">
                 <mat-label>{{ 'purchaseInvoice.narration' | translate }}</mat-label> <textarea matInput
                   formControlName="narration" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"
                   cdkAutosizeMaxRows="5"></textarea>
@@ -286,33 +287,38 @@
 
           <div class="d-flex justify-content-end">
             <div class="w-75">
-              <mat-form-field class="form-element">
-                <input matInput placeholder="{{ 'purchaseInvoice.totalCgst' | translate }}" formControlName="totalCgst">
+              <mat-form-field class="w-100">
+                <mat-label>{{ 'purchaseInvoice.totalCgst' | translate }}</mat-label>
+                <input matInput formControlName="totalCgst">
               </mat-form-field>
 
-              <mat-form-field class="form-element">
-                <input matInput placeholder="{{ 'purchaseInvoice.totalSgst' | translate }}" formControlName="totalSgst">
+              <mat-form-field class="w-100">
+                <mat-label>{{ 'purchaseInvoice.totalSgst' | translate }}</mat-label>
+                <input matInput formControlName="totalSgst">
               </mat-form-field>
 
-              <mat-form-field class="form-element">
-                <input matInput placeholder="{{ 'purchaseInvoice.totalIgst' | translate }}" formControlName="totalIgst">
+              <mat-form-field class="w-100">
+                <mat-label>{{ 'purchaseInvoice.totalIgst' | translate }}</mat-label>
+                <input matInput formControlName="totalIgst">
               </mat-form-field>
 
-              <mat-form-field class="form-element">
-                <input matInput placeholder="{{ 'purchaseInvoice.totalTcs' | translate }}"
-                  formControlName="totalTcsAmount">
+              <mat-form-field class="w-100">
+                <mat-label>{{ 'purchaseInvoice.totalTcs' | translate }}</mat-label>
+                <input matInput formControlName="totalTcsAmount">
               </mat-form-field>
             </div>
           </div>
 
           <div class="d-flex justify-content-end">
             <div class="w-75">
-              <mat-form-field class="form-element">
+              <mat-form-field class="w-100">
+                <mat-label>{{ 'purchaseInvoice.roundOffPlus' | translate }}</mat-label>
                 <input matInput type="number" (input)="roundOff('roundOffPlus')" placeholder="Round Off(+)"
                   formControlName="roundOffPlus">
               </mat-form-field>
 
-              <mat-form-field class="form-element">
+              <mat-form-field class="w-100">
+                <mat-label>{{ 'purchaseInvoice.roundOffMinus' | translate }}</mat-label>
                 <input matInput type="number" (input)="roundOff('roundOffMinus')" placeholder="Round Off(-)"
                   formControlName="roundOffMinus">
               </mat-form-field>
@@ -322,19 +328,19 @@
 
           <div class="d-flex justify-content-end">
             <div class="w-75">
-              <mat-form-field class="form-element">
-                <input matInput placeholder="{{ 'purchaseInvoice.totalAmount' | translate }}"
-                  formControlName="totalAmount">
+              <mat-form-field class="w-100">
+                  <mat-label>{{ 'purchaseInvoice.totalAmount' | translate }}</mat-label>
+                <input matInput formControlName="totalAmount">
               </mat-form-field>
 
-              <mat-form-field class="form-element">
-                <input matInput placeholder="{{ 'purchaseInvoice.totaltaxAmount' | translate }}"
-                  formControlName="totaltaxAmount">
+              <mat-form-field class="w-100">
+                <mat-label>{{ 'purchaseInvoice.totaltaxAmount' | translate }}</mat-label>
+                <input matInput formControlName="totaltaxAmount">
               </mat-form-field>
 
-              <mat-form-field class="form-element">
-                <input matInput placeholder="{{ 'purchaseInvoice.grandTotal' | translate }}"
-                  formControlName="grandTotal">
+              <mat-form-field class="w-100">
+                <mat-label>{{ 'purchaseInvoice.grandTotal' | translate }}</mat-label>
+                <input matInput formControlName="grandTotal">
               </mat-form-field>
             </div>
           </div>

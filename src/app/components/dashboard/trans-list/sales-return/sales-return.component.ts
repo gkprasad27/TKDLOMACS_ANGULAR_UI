@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../../services/common.service';
 import { ApiConfigService } from '../../../../services/api-config.service';
 
@@ -10,23 +10,20 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { AlertService } from '../../../../services/alert.service';
 import { Static } from '../../../../enums/common/static';
-import { UntypedFormControl } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PrintComponent } from '../../../../reuse-components/print/print.component';
-import { PrintPetrolComponent } from '../../../../reuse-components/printPetrol/printPetrol.component';
-import { SaveItemComponent } from '../../../../reuse-components/save-item/save-item.component';
 var curValue = require("multilingual-number-to-words");
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
-import { HostListener } from '@angular/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../directives/format-datepicker';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-sales-invoice',
-  templateUrl: './sales-invoice.component.html',
-  styleUrls: ['./sales-invoice.component.scss'],
+  selector: 'app-sales-return',
+  templateUrl: './sales-return.component.html',
+  styleUrls: ['./sales-return.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
@@ -34,10 +31,10 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [SharedImportModule, TranslateModule]
 })
-export class SalesInvoiceComponent implements OnInit {
+export class SalesReturnComponent implements OnInit {
 
   branchFormData: FormGroup;
-
+ 
   branchesBillingList: any[] = [];
   branchesList: any[] = [];
   getStateListArray: any[] = [];
@@ -50,31 +47,26 @@ export class SalesInvoiceComponent implements OnInit {
 
 
   myControl = new FormControl();
-  getmemberNamesArray: any[] = [];
-  getProductByProductCodeArray: any[] = [];
-  getProductByProductNameArray: any[] = [];
-  getVechielsArray: any[] = [];
-  getPumpsArray: any[] = [];
-  getSalesBranchListArray: any[] = [];
-  memberNamesList: any[] = [];
+  getmemberNamesArray = [];
+  getProductByProductCodeArray = [];
+  getProductByProductNameArray = [];
+  getVechielsArray = [];
+  getPupmsArray = [];
+  getSalesBranchListArray = [];
+  memberNamesList = [];
   displayedColumns: string[] = ['SlNo', 'productCode', 'productName', 'hsnNo', 'pumpNo', 'qty', 'fQty',
     'slipNo', 'unitName', 'discount', 'taxGroupName', 'rate', 'grossAmount', 'availStock', 'delete'
   ];
   dataSource: MatTableDataSource<any>;
-  isSaveDisabled = false;
+
   date = new Date((new Date().getTime() - 3888000000));
-  modelFormData: UntypedFormGroup;
-  tableFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
+  tableFormData: FormGroup;
   printBill = false;
   taxPercentage: any;
-  setFocus: any;
-  tableLength = 6;
-  allowedChars = new Set('0123456789'.split('').map(c => c.charCodeAt(0)));
-  GetPumpsListArray: any;
-  pumpList = [];
-  getCustomerGstNumListArray: any[];
+  isSalesReturnInvoice: any;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
@@ -82,12 +74,16 @@ export class SalesInvoiceComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
     public dialog: MatDialog,
-    private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router: Router
   ) {
+
     this.formDataGroup();
   }
 
+  ngAfterViewChecked() {
+    this.cd.detectChanges();
+  }
 
   formDataGroup() {
     this.branchFormData = this.formBuilder.group({
@@ -95,6 +91,9 @@ export class SalesInvoiceComponent implements OnInit {
       branchName: [null],
       invoiceDate: [(new Date()).toISOString()],
       invoiceNo: [0],
+      invoiceMasterReturnId: [null],
+      invoiceReturnNo: [null],
+      invoiceReturnDate: [null],
       ledgerCode: [null],
       vehicleRegNo: [null],
       stateCode: [null],
@@ -106,7 +105,7 @@ export class SalesInvoiceComponent implements OnInit {
       amountInWords: [null],
       totalAmount: [null],
       totaltaxAmount: [null],
-      invoiceMasterId: [0],
+      invoiceMasterId: [null],
       voucherNo: [null],
       voucherTypeId: [null],
       ledgerId: [null],
@@ -130,10 +129,9 @@ export class SalesInvoiceComponent implements OnInit {
       roundOffPlus: [null],
       roundOffMinus: [null],
       serverDateTime: [null],
-      isSalesReturned: [null],
+      // isSalesReturned: [null],
       isManualEntry: [null],
       manualInvoiceNo: [null],
-      isSalesReturnInvoice: [null]
     });
 
     const user = JSON.parse(localStorage.getItem('user'));
@@ -147,24 +145,25 @@ export class SalesInvoiceComponent implements OnInit {
     this.allApis();
     this.commonService.setFocus('ledgerCode');
   }
+
   allApis() {
     const getBranchesListUrl = this.apiConfigService.getBillingBranchesList;
-    const getMasterBranchesListUrl = this.apiConfigService.getBranchesList;
+    // const getMasterBranchesListUrl = this.apiConfigService.getBranchesList;
     const getStateListUrl = this.apiConfigService.getStateList;
     const getSlipListUrl = '../../../../../../assets/settings/bill.json';
     const getPerchaseListUrl = '../../../../../../assets/settings/perchase.json';
-    const getPerchaseBranchListUrl = '../../../../../../assets/settings/perchase-branch.json';
+    // const getPerchaseBranchListUrl = '../../../../../../assets/settings/perchase-branch.json';
 
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
         this.apiService.apiGetRequest(getBranchesListUrl),
-        this.apiService.apiGetRequest(getMasterBranchesListUrl),
+        // this.apiService.apiGetRequest(getMasterBranchesListUrl),
         this.apiService.apiGetRequest(getStateListUrl),
         this.apiService.apiGetRequest(getSlipListUrl),
         this.apiService.apiGetRequest(getPerchaseListUrl),
-        this.apiService.apiGetRequest(getPerchaseBranchListUrl)
-      ]).subscribe(([branchesList, masterBranchesList, stateList, slipList, perchaseList, perchaseBranchList]) => {
+        // this.apiService.apiGetRequest(getPerchaseBranchListUrl)
+      ]).subscribe(([branchesList, stateList, slipList, perchaseList]) => {
         this.spinner.hide();
 
         if (!this.commonService.checkNullOrUndefined(branchesList) && branchesList.status === StatusCodes.pass) {
@@ -174,15 +173,18 @@ export class SalesInvoiceComponent implements OnInit {
           }
         }
 
-        if (!this.commonService.checkNullOrUndefined(masterBranchesList) && masterBranchesList.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(masterBranchesList.response)) {
-            this.branchesList = masterBranchesList.response['branchesList'];
-          }
-        }
+        // if (!this.commonService.checkNullOrUndefined(masterBranchesList) && masterBranchesList.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(masterBranchesList.response)) {
+        //     this.branchesList = masterBranchesList.response['branchesList'];
+        //   }
+        // }
 
         if (!this.commonService.checkNullOrUndefined(stateList) && stateList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(stateList.response)) {
             this.getStateListArray = stateList.response['StateList'];
+            this.branchFormData.patchValue({
+              stateCode: '37'
+            });
             if (this.branchFormData.get('stateCode').value != null) {
               this.getSelectedState();
             }
@@ -197,9 +199,9 @@ export class SalesInvoiceComponent implements OnInit {
           this.disablePump = perchaseList;
         }
 
-        if (!this.commonService.checkNullOrUndefined(perchaseBranchList)) {
-          this.itemsLength = perchaseBranchList;
-        }
+        // if (!this.commonService.checkNullOrUndefined(perchaseBranchList)) {
+        //   this.itemsLength = perchaseBranchList;
+        // }
 
         this.getCashPartyAccountList("100", false);
 
@@ -239,12 +241,14 @@ export class SalesInvoiceComponent implements OnInit {
 
   }
 
+
+
   formGroup() {
     this.tableFormData = this.formBuilder.group({
       invoiceNo: [null],
       invoiceDate: [null],
       stateCode: [null],
-    shiftId: [null],
+      shiftId: [null],
       userId: [null],
       employeeId: [null],
       productId: [null],
@@ -290,11 +294,12 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getSelectedState() {
-    const getSelectedStateUrl = [this.apiConfigService.getSelectedState, this.branchFormData.get('stateCode').value].join('/');
+    const getSelectedStateUrl = [this.apiConfigService.getSelectedState,
+    this.branchFormData.get('stateCode').value].join('/');
     this.apiService.apiGetRequest(getSelectedStateUrl).subscribe(
       response => {
         const res = response;
-        this.spinner.hide();
+              this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.StateList?.length > 0) {
@@ -307,20 +312,18 @@ export class SalesInvoiceComponent implements OnInit {
               } else {
                 this.taxPercentage = false;
               }
-              this.calculateAmount();
             }
           }
         }
       });
   }
 
-  calculateAmount(row?, index?) {
-    if (row != null) {
-      if (row?.qty != null && row.qty !== '') {
-        this.dataSource.data[index].grossAmount = (row.qty * row.rate).toFixed(2);
-      } else if ((row.fQty != null) && (row.fQty != '')) {
-        this.dataSource.data[index].grossAmount = (0 * row.rate).toFixed(2);
-      }
+
+  calculateAmount(row, index) {
+    if (row?.qty != null && row.qty !== '') {
+      this.dataSource.data[index].grossAmount = (row.qty * row.rate).toFixed(2);
+    } else if ((row.fQty != null) && (row.fQty != '')) {
+      this.dataSource.data[index].grossAmount = (0 * row.rate).toFixed(2);
     }
     this.dataSource = new MatTableDataSource(this.dataSource.data);
     let totaltaxAmount = 0;
@@ -349,13 +352,14 @@ export class SalesInvoiceComponent implements OnInit {
     });
   }
 
+
   getCashPartyAccountList(value, flag = true) {
     if (value != null && value !== '') {
       const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, value].join('/');
       this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
         response => {
           const res = response;
-          this.spinner.hide();
+            this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.CashPartyAccountList?.length > 0) {
@@ -376,7 +380,8 @@ export class SalesInvoiceComponent implements OnInit {
 
 
   getCashPartyAccount() {
-    const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount, this.branchFormData.get('ledgerCode').value].join('/');
+    const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount,
+    this.branchFormData.get('ledgerCode').value].join('/');
     this.apiService.apiGetRequest(getCashPartyAccountUrl).subscribe(
       response => {
         const res = response;
@@ -387,57 +392,31 @@ export class SalesInvoiceComponent implements OnInit {
               this.branchFormData.patchValue({
                 ledgerName: res.response['CashPartyAccount']['ledgerName'],
                 paymentMode: res.response['CashPartyAccount']['crOrDr'],
-                ledgerId: res.response['CashPartyAccount']['ledgerId'],
-                // mobile: res.response['CashPartyAccount']['mobile'],
-                // customerGstin: res.response['CashPartyAccount']['tin']
+                ledgerId: res.response['CashPartyAccount']['ledgerId']
               });
-              this.getAccountBalance(res.response['CashPartyAccount']['accountGroupId']);
-              this.spinner.hide();
-            }
-            if (this.branchFormData.get('ledgerCode').value != '100') {
-              this.branchFormData.patchValue({
-                mobile: res.response['CashPartyAccount']['mobile'],
-                customerGstin: res.response['CashPartyAccount']['tin']
-              });
-            }
-            if (this.branchFormData.get('ledgerCode').value != '2295') {
-              this.branchFormData.patchValue({
-                mobile: res.response['CashPartyAccount']['mobile'],
-                customerGstin: res.response['CashPartyAccount']['tin']
-              });
-            }
-            if (this.branchFormData.get('ledgerCode').value != '2403') {
-              this.branchFormData.patchValue({
-                mobile: res.response['CashPartyAccount']['mobile'],
-                customerGstin: res.response['CashPartyAccount']['tin']
-              });
+              this.getAccountBalance();
             }
           }
         }
       });
   }
 
-  getAccountBalance(accountGroupId) {
-    const ledgerCode = this.branchFormData.get('ledgerCode')?.value;
 
+  getAccountBalance() {
+    const ledgerCode = this.branchFormData.get('ledgerCode')?.value;
     if (ledgerCode != null && ledgerCode !== '') {
-      const getAccountBalanceUrl = [this.apiConfigService.getAccountBalance, this.branchFormData.get('ledgerCode').value].join('/');
+      const getAccountBalanceUrl = [this.apiConfigService.getAccountBalance,
+      this.branchFormData.get('ledgerCode').value].join('/');
       this.apiService.apiGetRequest(getAccountBalanceUrl).subscribe(
         response => {
           const res = response;
-          this.spinner.hide();
+            this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountBalance != null) {
                 this.branchFormData.patchValue({
                   accountBalance: res.response['AccountBalance']
                 });
-                if (accountGroupId === 7576 && res.response['AccountBalance'] <= 0) {
-                  this.isSaveDisabled = true;
-                  this.alertService.openSnackBar(`Advance Party Account Balance Should not Be Less Than or Equal To Zero(${accountGroupId}) code`, Static.Close, SnackBar.error);
-                } else {
-                  this.isSaveDisabled = false;
-                }
               }
             }
           }
@@ -446,27 +425,24 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getInvoiceDeatilList(id) {
-    const getInvoiceDeatilListUrl = [this.apiConfigService.getInvoiceDeatilList, id].join('/');
+    const getInvoiceDeatilListUrl = [this.apiConfigService.getInvoiceReturnDetail, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
         const res = response;
-        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
-          if (res?.response?.InvoiceDetailList?.length > 0) {
-            this.dataSource = new MatTableDataSource(res.response['InvoiceDetailList']);
+          if (res?.response?.InvoiceReturnDtlsList?.length) {
+            this.dataSource = new MatTableDataSource(res.response['InvoiceReturnDtlsList']);
           }
           if (res?.response?.invoiceMasterData != null) {
             this.branchFormData.patchValue(res.response['invoiceMasterData']);
-          }
-          if (this.routeUrl == 'return') {
-            this.generateSalesReturnInvNo();
           }
         }
       });
   }
 
-  generateSalesReturnInvNo() {
-    const generateSalesReturnInvNoUrl = [this.apiConfigService.generateSalesReturnInvNo, this.branchFormData.get('branchCode').value].join('/');
+
+  generateSalesReturnInvNo(branchCode, invoice) {
+    const generateSalesReturnInvNoUrl = [this.apiConfigService.generateSalesReturnInvNo, branchCode].join('/');
     this.apiService.apiGetRequest(generateSalesReturnInvNoUrl).subscribe(
       response => {
         const res = response;
@@ -474,14 +450,13 @@ export class SalesInvoiceComponent implements OnInit {
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.SalesReturnInvNo != null) {
-              this.branchFormData.patchValue({
-                isSalesReturnInvoice: res.response['SalesReturnInvNo']
-              });
+              this.isSalesReturnInvoice = res.response['SalesReturnInvNo'];
             }
           }
         }
       });
   }
+
 
   disableForm(route?) {
     if (route != null) {
@@ -511,7 +486,9 @@ export class SalesInvoiceComponent implements OnInit {
     this.branchFormData.controls['totalIgst'].disable();
     this.branchFormData.controls['amountInWords'].disable();
     this.branchFormData.controls['userName'].disable();
+
   }
+
 
   addTableRow() {
     const tableObj = {
@@ -524,7 +501,6 @@ export class SalesInvoiceComponent implements OnInit {
     } else {
       this.dataSource = new MatTableDataSource([tableObj]);
     }
-    this.commonService.setFocus(this.setFocus);
   }
 
   genarateBillNo(branch?) {
@@ -544,7 +520,6 @@ export class SalesInvoiceComponent implements OnInit {
       });
     } else {
       this.setBranchCode();
-      this.setBranchLength();
       let generateBillUrl;
       if (branch != null) {
         generateBillUrl = [this.apiConfigService.generateBillNo, branch].join('/');
@@ -573,22 +548,9 @@ export class SalesInvoiceComponent implements OnInit {
     }
   }
 
-  setBranchLength() {
-    let flag = true;
-    for (let b = 0; b < this.itemsLength.length; b++) {
-      if (this.branchFormData.get('branchCode').value == this.itemsLength[b]) {
-        this.tableLength = 3;
-        flag = false;
-        break;
-      }
-    }
-    if (flag) {
-      this.tableLength = 6;
-    }
-  }
 
   disabledPump(code) {
-    if (this.disablePump.length > 0) {
+    if (this.disablePump != null) {
       for (let p = 0; p < this.disablePump.length; p++) {
         if (this.disablePump[p] == code) {
           return false;
@@ -609,15 +571,8 @@ export class SalesInvoiceComponent implements OnInit {
       ledgerName: lname?.[0] != null ? lname[0].text : null
     });
     this.getCashPartyAccount();
-    this.commonService.setFocus('vehicleRegNo');
   }
 
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'F2') {
-      this.commonService.setFocus('productCode0');
-    }
-  }
 
   getmemberNames(value) {
     if (value != null && value !== '') {
@@ -625,7 +580,7 @@ export class SalesInvoiceComponent implements OnInit {
       this.apiService.apiGetRequest(getmemberNamesUrl).subscribe(
         response => {
           const res = response;
-          this.spinner.hide();
+            this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Members?.length) {
@@ -642,20 +597,14 @@ export class SalesInvoiceComponent implements OnInit {
     }
   }
 
+
   getVechiels(value) {
-    this.branchFormData.patchValue({
-      memberCode: null,
-      memberName: null,
-      // mobile: null,
-      generalNo: null,
-      vehicleId: null
-    })
     if (value != null && value !== '') {
       const getVechielsUrl = [this.apiConfigService.getVechiels, value, this.branchFormData.get('memberCode').value].join('/');
       this.apiService.apiGetRequest(getVechielsUrl).subscribe(
         response => {
           const res = response;
-          this.spinner.hide();
+            this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Members?.length) {
@@ -672,26 +621,6 @@ export class SalesInvoiceComponent implements OnInit {
     }
   }
 
-  getCustomerGstNumList(value) {
-    if (value != null && value !== '') {
-      const getCashPartyAccountListUrl = [this.apiConfigService.getCustomerGstNumList, value].join('/');
-      this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
-        response => {
-          const res = response;
-          this.spinner.hide();
-          if (res != null && res.status === StatusCodes.pass) {
-            if (res.response != null) {
-              if (res?.response?.CustomerGstNum != null) {
-                this.branchFormData.patchValue({
-                  customerGstin: res.response['CustomerGstNum']['customerGstin'],
-                });
-
-              }
-            }
-          }
-        });
-    }
-  }
 
   setMemberName(member) {
     this.branchFormData.patchValue({
@@ -699,6 +628,8 @@ export class SalesInvoiceComponent implements OnInit {
       mobile: member.item.phoneNo
     });
   }
+
+
 
   disableSlipVal(column) {
     let flag = true;
@@ -713,6 +644,17 @@ export class SalesInvoiceComponent implements OnInit {
     }
   }
 
+  // disableSlipValData(column) {
+  //   if (this.disableSlipVal(column.productCode)) {
+  //     return true;
+  //   } else if ((column.slipNo == null)) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+
+
   setBackGroundColor(value, disabled) {
     if (disabled) {
       return '';
@@ -725,6 +667,7 @@ export class SalesInvoiceComponent implements OnInit {
     }
   }
 
+
   setToFormModel(text, column, value) {
     if (text == 'obj') {
       this.tableFormData.patchValue({
@@ -732,20 +675,18 @@ export class SalesInvoiceComponent implements OnInit {
       });
     }
     if (this.tableFormData.valid) {
-      if (this.dataSource.data.length < this.tableLength) {
-        if (this.dataSource.data[this.dataSource.data.length - 1].productCode != '') {
-          this.addTableRow();
-        }
+      if (this.dataSource.data.length < 6) {
+        this.addTableRow();
         this.formGroup();
       }
     }
   }
 
   clearQty(index, value, column, row) {
+    this.dataSource.data[index].qty = null;
+    this.dataSource.data[index].fQty = null;
     if (row.availStock < value) {
       this.alertService.openSnackBar(`This Product(${row.productCode}) qty or Fqty cannot be greater than available stock`, Static.Close, SnackBar.error);
-      this.dataSource.data[index].qty = null;
-      this.dataSource.data[index].fQty = null;
       return;
     }
     this.dataSource.data[index][column] = value;
@@ -760,17 +701,15 @@ export class SalesInvoiceComponent implements OnInit {
       return index !== i;
     });
     this.dataSource = new MatTableDataSource(this.dataSource.data);
-    this.calculateAmount();
-
   }
 
   getProductByProductCode(value) {
     if (value != null && value !== '') {
-      const getProductByProductCodeUrl = this.apiConfigService.getProductByProductCode;
-      this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
+      const getProductByProductCodeUrl = [this.apiConfigService.getProductByProductCode, value].join('/');
+      this.apiService.apiGetRequest(getProductByProductCodeUrl).subscribe(
         response => {
           const res = response;
-          this.spinner.hide();
+            this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -790,7 +729,7 @@ export class SalesInvoiceComponent implements OnInit {
     this.apiService.apiGetRequest(getmemberNamesByCodeUrl).subscribe(
       response => {
         const res = response;
-        this.spinner.hide();
+          this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.Members != null) {
@@ -801,7 +740,7 @@ export class SalesInvoiceComponent implements OnInit {
                 generalNo: res.response['Members']['generalNo'],
                 vehicleId: event.item.id
               });
-              //this.getAccountBalance();
+              this.getAccountBalance();
             }
           }
         }
@@ -809,20 +748,18 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
 
-  getBillingDetailsRcd(productCode, index, id) {
-    this.setFocus = id + index;
-    this.commonService.setFocus(id + index);
+  getBillingDetailsRcd(productCode, index) {
     // if (this.checkProductCode(productCode, index)) {
     const branchCode = this.branchFormData.get('branchCode')?.value;
-    const pCode = productCode?.value;
 
-    if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
-
-      const getBillingDetailsRcdUrl = this.apiConfigService.getBillingDetailsRcd;
-      this.apiService.apiPostRequest(getBillingDetailsRcdUrl, { productCode: productCode.value, branchCode: this.branchFormData.get('branchCode').value }).subscribe(
+    if (branchCode != null && branchCode !== '' &&
+      productCode?.value != null && productCode.value !== '') {
+      const getBillingDetailsRcdUrl = [this.apiConfigService.getBillingDetailsRcd, productCode.value,
+      this.branchFormData.get('branchCode').value].join('/');
+      this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
           const res = response;
-          this.spinner.hide();
+            this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.BillingDetailsSection != null) {
@@ -876,16 +813,15 @@ export class SalesInvoiceComponent implements OnInit {
     // if (this.disableSlipValData(obj)) {
     this.setToFormModel(null, null, null);
     // }
-    this.commonService.setFocus(this.setFocus);
   }
 
   getProductByProductName(value) {
     if (value != null && value !== '') {
-      const getProductByProductNameUrl = this.apiConfigService.getProductByProductName;
-      this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
+      const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName, value].join('/');
+      this.apiService.apiGetRequest(getProductByProductNameUrl).subscribe(
         response => {
           const res = response;
-          this.spinner.hide();
+            this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Products != null) {
@@ -899,54 +835,34 @@ export class SalesInvoiceComponent implements OnInit {
     }
   }
 
-  getPupms(pump, productCode) {
+  getPupms(pump) {
     const pNumber = +pump;
     if (!isNaN(pNumber)) {
       const branchCode = this.branchFormData.get('branchCode')?.value;
 
       if (branchCode != null && branchCode !== '' &&
-        pump != null && pump !== '' &&
-        productCode != null && productCode !== '') {
-        const getPupmsUrl = [this.apiConfigService.getPupms, pump, this.branchFormData.get('branchCode').value, productCode].join('/');
+        pump != null && pump !== '') {
+        const getPupmsUrl = [this.apiConfigService.getPupms, pump,
+        this.branchFormData.get('branchCode').value].join('/');
         this.apiService.apiGetRequest(getPupmsUrl).subscribe(
           response => {
             const res = response;
-            this.spinner.hide();
+              this.spinner.hide();
             if (res != null && res.status === StatusCodes.pass) {
               if (res.response != null) {
                 if (res?.response?.PumpsList != null) {
-                  this.getPumpsArray = res.response['PumpsList'];
+                  this.getPupmsArray = res.response['PumpsList'];
                 }
               }
             }
-            if (this.getPumpsArray.length == 0) {
-              this.alertService.openSnackBar('Select Valid PumpNo', Static.Close, SnackBar.error);
-            }
           });
       } else {
-        this.getPumpsArray = [];
+        this.getPupmsArray = [];
       }
     } else {
       this.alertService.openSnackBar('Only Number', Static.Close, SnackBar.error);
     }
   }
-
-  // getPumpsList(productCode) {
-  //   const getPumpsListUrl = [this.apiConfigService.getPumps, this.branchFormData.get('branchCode').value, productCode].join('/');
-  //   this.apiService.apiGetRequest(getPumpsListUrl).subscribe(
-  //     response => {
-  //       const res = response;
-  //      this.spinner.hide();
-  //       if (res != null && res.status === StatusCodes.pass) {
-  //         if (res.response != null) {
-  //           if (res?.response?.PumpsList != null && res.response['PumpsList'].length) {
-  //             this.GetPumpsListArray = res.response['PumpsList'];
-  //             this.setBranchCode();
-  //           }
-  //         }
-  //       }
-  //     });
-  // }
 
   setProductName(name, column) {
     this.tableFormData.patchValue({
@@ -959,48 +875,23 @@ export class SalesInvoiceComponent implements OnInit {
 
   print() {
     this.enableFileds();
-    const requestObj = { InvoiceHdr: this.branchFormData.value, InvoiceDetail: this.dataSource.data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };
-    if (requestObj.InvoiceDetail || requestObj.InvoiceHdr)
-      this.printBill = true;
-    //if (this.printBill) {
-
-    //  this.dialog.open(PrintComponent, {
-    //    width: '1024px',
-    //    data: requestObj,
-    //    disableClose: true
-    //  });
-    //}
+    const requestObj = { InvoiceHdr: this.branchFormData.value, InvoiceDetail: this.dataSource.data };
     if (this.printBill) {
-      if (this.branchFormData.get('branchCode').value == 2 || (this.branchFormData.get('branchCode').value == 3) || (this.branchFormData.get('branchCode').value == 4) || (this.branchFormData.get('branchCode').value == 7)) {
-        this.dialog.open(PrintPetrolComponent, {
-          width: '1024px',
-          data: requestObj,
-          disableClose: true
-        });
-      }
-      else {
-        this.dialog.open(PrintComponent, {
-          width: '1024px',
-          data: requestObj,
-          disableClose: true
-        });
-      }
-
+      this.dialog.open(PrintComponent, {
+        width: '1024px',
+        data: requestObj,
+        disableClose: true
+      });
     }
   }
 
   save() {
-    if (this.routeUrl == 'return') {
-      this.registerInvoiceReturn();
-      return;
-    }
     if (this.routeUrl != '' || this.dataSource.data.length == 0) {
       return;
     }
     let tableData = [];
     for (let d = 0; d < this.dataSource.data.length; d++) {
       if (this.dataSource.data[d]['productCode'] != '') {
-        this.dataSource.data[d]['invoiceNo'] = this.branchFormData.get('invoiceNo').value;
         tableData.push(this.dataSource.data[d]);
       }
     }
@@ -1018,43 +909,13 @@ export class SalesInvoiceComponent implements OnInit {
         content = 'qty or Fqty cannot be greater than available stock';
         return stock;
       }
-      if (stock.productCode == 'D') {
-        if ((stock.slipNo == null)) {
-          content = 'SlipNo is null';
-          return stock;
-        }
-      }
-      if (stock.productCode == 'D' || stock.productCode == 'P' || stock.productCode == 'XP') {
-        if ((stock.pumpNo == null)) {
-          content = 'PumpNo is null';
-          return stock;
-        }
-      }
-      if ((stock.pumpNo != null)) {
-        if (this.getPumpsArray.length == 0) {
-          content = 'PumpNo is not valid';
-          return stock;
-        }
-      }
-
     });
     if (availStock.length) {
       this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
       return;
     }
-
-    const dialogRef = this.dialog.open(SaveItemComponent, {
-      width: '1024px',
-      data: '',
-      disableClose: true
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result != null) {
-        this.enableFileds();
-        this.registerInvoice(tableData);
-        this.isSaveDisabled = true;
-      }
-    });
+    this.enableFileds();
+    this.registerInvoice(tableData);
   }
 
   enableFileds() {
@@ -1072,25 +933,9 @@ export class SalesInvoiceComponent implements OnInit {
     this.branchFormData.controls['userName'].enable();
   }
 
-  enableEditFields() {
-    this.branchFormData.controls['ledgerCode'].enable();
-    this.branchFormData.controls['branchCode'].enable();
-    this.branchFormData.controls['invoiceDate'].enable();
-    this.branchFormData.controls['vehicleRegNo'].enable();
-    this.branchFormData.controls['stateCode'].enable();
-    this.branchFormData.controls['paymentMode'].enable();
-    this.branchFormData.controls['memberName'].enable();
-    this.branchFormData.controls['customerGstin'].enable();
-    this.branchFormData.controls['generalNo'].enable();
-    this.branchFormData.controls['suppliedTo'].enable();
-    this.branchFormData.controls['customerName'].enable();
-    this.branchFormData.controls['mobile'].enable();
-  }
-
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.getVechielsArray = [];
     this.formDataGroup();
   }
 
@@ -1099,30 +944,21 @@ export class SalesInvoiceComponent implements OnInit {
       paymentMode: 0,
       invoiceDate: this.commonService.formatDate(this.branchFormData.get('invoiceDate').value)
     });
-    const registerInvoiceUrl = this.apiConfigService.registerInvoice;
-    const requestObj = { InvoiceHdr: this.branchFormData.value, InvoiceDetail: data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };
+    const registerInvoiceUrl = [this.apiConfigService.registerInvoice].join('/');
+    const requestObj = { InvoiceHdr: this.branchFormData.value, InvoiceDetail: data };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
         const res = response;
-        this.spinner.hide();
+          this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Billing Successfully..', Static.Close, SnackBar.success);
             if (this.printBill) {
-              if (this.branchFormData.get('branchCode').value == 2 || (this.branchFormData.get('branchCode').value == 3) || (this.branchFormData.get('branchCode').value == 4) || (this.branchFormData.get('branchCode').value == 7)) {
-                this.dialog.open(PrintPetrolComponent, {
-                  width: '1024px',
-                  data: requestObj,
-                  disableClose: true
-                });
-              }
-              else {
-                this.dialog.open(PrintComponent, {
-                  width: '1024px',
-                  data: requestObj,
-                  disableClose: true
-                });
-              }
+              this.dialog.open(PrintComponent, {
+                width: '1024px',
+                data: requestObj,
+                disableClose: true
+              });
             }
           }
           this.reset();
@@ -1131,11 +967,11 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   registerInvoiceReturn() {
-    const registerInvoiceReturnUrl = [this.apiConfigService.registerInvoiceReturn, this.branchFormData.value.isSalesReturnInvoice, this.branchFormData.get('invoiceMasterId').value].join('/');
+    const registerInvoiceReturnUrl = [this.apiConfigService.registerInvoiceReturn, this.isSalesReturnInvoice, this.branchFormData.get('invoiceMasterId').value].join('/');
     this.apiService.apiGetRequest(registerInvoiceReturnUrl).subscribe(
       response => {
         const res = response;
-        this.spinner.hide();
+          this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Billing Return Successfully..', Static.Close, SnackBar.success);
@@ -1145,29 +981,9 @@ export class SalesInvoiceComponent implements OnInit {
       });
   }
 
-  check(event: KeyboardEvent) {
-    // 31 and below are control keys, don't block them.
-    if (event.keyCode > 31 && !this.allowedChars.has(event.keyCode)) {
-      event.preventDefault();
-    }
-  }
 
   back() {
     this.router.navigate(['/dashboard/transaction/salesInvoice']);
   }
-
-
-
-
-  // disableSlipValData(column) {
-  //   if (this.disableSlipVal(column.productCode)) {
-  //     return true;
-  //   } else if ((column.slipNo == null)) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-
 
 }
