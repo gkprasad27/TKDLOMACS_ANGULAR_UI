@@ -449,6 +449,9 @@ export class SalesInvoiceComponent implements OnInit {
           if (res?.response?.InvoiceDetailList?.length > 0) {
             this.dataSource = new MatTableDataSource(res.response['InvoiceDetailList']);
           }
+          if(res?.response?.invoiceMasterData != null) {
+            this.branchFormData.patchValue(res.response['invoiceMasterData']);
+          }
           if (this.routeUrl == 'return') {
             this.generateSalesReturnInvNo();
           }
