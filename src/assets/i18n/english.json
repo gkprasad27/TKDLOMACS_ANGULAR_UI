@@ -1064,6 +1064,7 @@
   },
   "purchaseReturn": {
     "title": "Purchase Return",
+    "SlNo": "Sl No",
     "SUBTITLE": "Purchase Return",
     "purchaseInvNo": "Purchase Invoice No",
     "purchaseInvDate": "Purchase Invoice Date",
