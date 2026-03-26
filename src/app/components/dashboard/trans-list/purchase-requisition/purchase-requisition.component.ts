@@ -171,7 +171,6 @@ export class PurchaseRequisitionComponent  implements OnInit {
 
 
   getprreqDeatilList(id) {
-    debugger;
     const getInvoiceDeatilListUrl = [this.apiConfigService.getprreqDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
@@ -187,7 +186,6 @@ export class PurchaseRequisitionComponent  implements OnInit {
 
   //issueno code;
   genaratereceiptNo(branch?) {
-    debugger;
     //setbranch
     let genarateVoucherNoUrl;
     if (branch != null) {

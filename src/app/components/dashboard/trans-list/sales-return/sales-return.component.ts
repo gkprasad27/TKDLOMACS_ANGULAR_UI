@@ -94,7 +94,7 @@ export class SalesReturnComponent implements OnInit {
       invoiceMasterReturnId: [null],
       invoiceReturnNo: [null],
       invoiceReturnDate: [null],
-      ledgerCode: [null],
+      ledgerCode: ['100'],
       vehicleRegNo: [null],
       stateCode: [null],
       memberName: [null],
@@ -203,7 +203,6 @@ export class SalesReturnComponent implements OnInit {
         //   this.itemsLength = perchaseBranchList;
         // }
 
-        this.getCashPartyAccountList("100", false);
 
       });
     });
@@ -223,17 +222,17 @@ export class SalesReturnComponent implements OnInit {
           this.branchFormData.patchValue({
             branchCode: +user.branchCode,
             userId: user.seqId,
-            userName: user.userName,
-            ledgerCode: "100"
+            userName: user.userName
           });
           this.branchFormData.patchValue({
-            stateCode: '37',
+            stateCode: 37,
             stateName: 'ANDHRA PRADESH'
           });
           // this.getCashPartyAccount();
           this.setBranchCode();
           this.genarateBillNo(user.branchCode);
           this.formGroup();
+          this.getCashPartyAccountList();
         }
         this.disableForm();
       }
@@ -353,9 +352,9 @@ export class SalesReturnComponent implements OnInit {
   }
 
 
-  getCashPartyAccountList(value, flag = true) {
-    if (value != null && value !== '') {
-      const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, value].join('/');
+  getCashPartyAccountList() {
+    if (this.branchFormData.get('ledgerCode').value != null && this.branchFormData.get('ledgerCode').value !== '') {
+      const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, this.branchFormData.get('ledgerCode').value].join('/');
       this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
         response => {
           const res = response;
@@ -364,9 +363,7 @@ export class SalesReturnComponent implements OnInit {
             if (res.response != null) {
               if (res?.response?.CashPartyAccountList?.length > 0) {
                 this.getCashPartyAccountListArray = res.response['CashPartyAccountList'];
-                if (flag) {
-                  this.getCashPartyAccount();
-                }
+                this.getCashPartyAccount();
               } else {
                 this.getCashPartyAccountListArray = [];
               }
@@ -380,8 +377,7 @@ export class SalesReturnComponent implements OnInit {
 
 
   getCashPartyAccount() {
-    const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount,
-    this.branchFormData.get('ledgerCode').value].join('/');
+    const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount, this.branchFormData.get('ledgerCode').value].join('/');
     this.apiService.apiGetRequest(getCashPartyAccountUrl).subscribe(
       response => {
         const res = response;

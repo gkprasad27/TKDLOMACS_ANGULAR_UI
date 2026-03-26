@@ -88,7 +88,7 @@ export class PurchaseReturnComponent implements OnInit {
       serverDateTime: [null],
       ledgerId: [null],
       ledgerName: [null],
-      ledgerCode: [null],
+      ledgerCode: ['100'],
       paymentMode: [null],
       stateCode: [null],
       stateName: [null],
@@ -172,7 +172,6 @@ export class PurchaseReturnComponent implements OnInit {
         //   this.itemsLength = perchaseBranchList;
         // }
 
-        this.getCashPartyAccountList("100", false);
 
       });
     });
@@ -190,16 +189,16 @@ export class PurchaseReturnComponent implements OnInit {
           this.branchFormData.patchValue({
             branchCode: +user.branchCode,
             userId: user.seqId,
-            userName: user.userName,
-            ledgerCode: "100"
+            userName: user.userName
           });
           this.branchFormData.patchValue({
-            stateCode: '37',
+            stateCode: 37,
             stateName: 'ANDHRA PRADESH'
           });
           this.setBranchCode();
           this.genarateBillNo(user.branchCode);
           this.formGroup();
+          this.getCashPartyAccountList();
         }
       }
     });
@@ -385,9 +384,9 @@ export class PurchaseReturnComponent implements OnInit {
   }
 
 
-  getCashPartyAccountList(value, flag = true) {
-    if (value != null && value !== '') {
-      const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, value].join('/');
+  getCashPartyAccountList() {
+    if (this.branchFormData.get('ledgerCode').value != null && this.branchFormData.get('ledgerCode').value !== '') {
+      const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, this.branchFormData.get('ledgerCode').value].join('/');
       this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
         response => {
           const res = response;
@@ -396,9 +395,7 @@ export class PurchaseReturnComponent implements OnInit {
             if (res.response != null) {
               if (res?.response?.CashPartyAccountList?.length > 0) {
                 this.getCashPartyAccountListArray = res.response['CashPartyAccountList'];
-                if (flag) {
-                  this.getCashPartyAccount();
-                }
+                this.getCashPartyAccount();
               } else {
                 this.getCashPartyAccountListArray = [];
               }

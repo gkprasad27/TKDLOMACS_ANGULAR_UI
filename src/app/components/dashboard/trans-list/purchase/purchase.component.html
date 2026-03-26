@@ -31,10 +31,10 @@
           </mat-form-field>
 
           <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
-            [class.filled]="branchFormData.value?.ledgerCode?.length > 0">
+            [class.filled]="branchFormData.get('ledgerCode')?.value">
             <label> {{ 'salesInvoice.ledgerCode' | translate }} </label>
             <input placeholder=" " formControlName="ledgerCode"
-              (input)="getPCashPartyAccountList($event.target.value, false)" id="ledgerCode" autocomplete="off"
+              (input)="getPCashPartyAccountList($event.target.value)" id="ledgerCode" autocomplete="off"
               [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray" typeaheadOptionField='id'
               class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
               (typeaheadOnSelect)="setLedgerName()" [typeaheadWaitMs]="200" (keydown.enter)="save()">

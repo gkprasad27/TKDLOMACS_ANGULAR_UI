@@ -43,10 +43,10 @@
           </mat-form-field>
 
           <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
-            [class.filled]="branchFormData.value?.ledgerCode?.length > 0">
+            [class.filled]="branchFormData.get('ledgerCode')?.value">
             <label> {{ 'salesInvoice.ledgerCode' | translate }} </label>
             <input placeholder=" " formControlName="ledgerCode"
-              (input)="getCashPartyAccountList($event.target.value, false)" id="ledgerCode" shortcutkey="f2"
+              (input)="getCashPartyAccountList()" id="ledgerCode" shortcutkey="f2"
               autocomplete="off" [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray"
               typeaheadOptionField='id' class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
               (typeaheadOnSelect)="setLedgerName()" [typeaheadWaitMs]="200" (keydown.enter)="save()">
@@ -66,7 +66,7 @@
           </mat-form-field>
 
           <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
-            [class.filled]="branchFormData.value?.vehicleRegNo?.length > 0">
+            [class.filled]="branchFormData.get('vehicleRegNo')?.value">
             <label> {{ 'salesInvoice.vehicleRegNo' | translate }} </label>
             <input placeholder=" " formControlName="vehicleRegNo"
               (typeaheadOnSelect)="getmemberNamesByCode($event)"  (input)="getVechiels($event.target.value)" 
@@ -97,7 +97,7 @@
           </mat-form-field>
 
           <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
-            [class.filled]="branchFormData.value?.memberName?.length > 0">
+            [class.filled]="branchFormData.get('memberName')?.value">
             <label> {{ 'salesInvoice.memberName' | translate }} </label>
             <input placeholder=" " formControlName="memberName"
               (typeaheadOnSelect)="setMemberName($event)"  (input)="getmemberNames($event.target.value)" 
