@@ -283,7 +283,7 @@ export class TransListService {
         this.dynamicComp.component = PurchaseReturnComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getPurchaseReturns;
         this.dynamicComp.list = 'PurchaseReturnHdr';
-        this.dynamicComp.editKey = 'purchaseInvNo';
+        this.dynamicComp.editKey = 'purchaseReturnInvNo';
         return this.dynamicComp;
       }
       // // create a case for swap order
