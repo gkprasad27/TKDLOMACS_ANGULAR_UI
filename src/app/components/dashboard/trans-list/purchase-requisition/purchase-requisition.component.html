@@ -20,7 +20,7 @@
           <mat-form-field class="col-2">
             <mat-label>{{ 'purchaserequisition.fromBranchName' | translate }}</mat-label>
             <mat-select formControlName="branch" (selectionChange)="genaratereceiptNo();setBranchCode();">
-              @for (branch of GetBranchesListArray; track branch) {
+              @for (branch of getBranchesListArray; track branch) {
               <mat-option [value]="branch.id">
                 {{ branch.id }} - {{branch.text}}
               </mat-option>
@@ -178,11 +178,10 @@
             <!-- <mat-icon>save</mat-icon> -->
             {{ 'COMMON.SAVE' | translate }}
           </button>
-          <button mat-raised-button class="button-color-red text-white mr-2" [disabled]="routeUrl != ''"
+          <!-- <button mat-raised-button class="button-color-red text-white mr-2" [disabled]="routeUrl != ''"
             (click)="reset();">
-            <!-- <mat-icon>close</mat-icon> -->
             {{ 'COMMON.RESET' | translate }}
-          </button>
+          </button> -->
         </div>
 
       </form>

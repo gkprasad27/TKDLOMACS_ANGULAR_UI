@@ -3,7 +3,7 @@ import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../../services/common.service';
 import { ApiConfigService } from '../../../../services/api-config.service';
 
@@ -14,7 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { AlertService } from '../../../../services/alert.service';
 import { Static } from '../../../../enums/common/static';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -29,9 +29,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class PurchaseRequisitionComponent  implements OnInit {
 
-  branchFormData: UntypedFormGroup;
-  GetBranchesListArray = [];
-  myControl = new UntypedFormControl();
+  branchFormData: FormGroup;
+  getBranchesListArray = [];
+  myControl = new FormControl();
   filteredOptions: Observable<any[]>;
   getAccountLedgerListArray = [];
   getAccountLedgerListNameArray = [];
@@ -49,8 +49,8 @@ export class PurchaseRequisitionComponent  implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   date = new Date((new Date().getTime() - 3888000000));
-  modelFormData: UntypedFormGroup;
-  tableFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
+  tableFormData: FormGroup;
   // printBill: any;
   issueno = null;
   totalamount = null;
@@ -93,43 +93,70 @@ export class PurchaseRequisitionComponent  implements OnInit {
     }
   }
   ngOnInit() {
-    this.loadData();
+    this.allApis();
   }
 
-  loadData() {
-    //debugger;
-    const user = JSON.parse(localStorage.getItem('user'));
-    this.getCompiniesList();
-    this.getBranchesList();
+  allApis() {
+    const getCompiniesListList = this.apiConfigService.getCompaniesList;
+    const getCashPaymentBranchesListUrl = this.apiConfigService.getCashPaymentBranchesList;
+
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getCompiniesListList),
+        this.apiService.apiGetRequest(getCashPaymentBranchesListUrl),
+      ]).subscribe(([companiesList, branchesList]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(companiesList) && companiesList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(companiesList.response)) {
+            this.compiniesList = companiesList.response['CompaniesList'];
+            this.setBranchCode();
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(branchesList) && branchesList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(branchesList.response)) {
+            this.getBranchesListArray = branchesList.response['BranchesList'];
+          }
+        }
+
+      });
+    });
+
     this.activatedRoute.params.subscribe(params => {
-      if (params.id1 != null) {
+      if (params.id1 != 'New') {
         this.routeUrl = params.id1;
-        //this.disableForm(params.id1);
-        this.getprreqDeatilList(params.id1);
-        let billHeader = JSON.parse(localStorage.getItem('selectedstockissues'));
-        console.log(billHeader);
-        this.branchFormData.setValue(billHeader);
+        if (params.value != null) {
+          this.getprreqDeatilList(params.value);
+        }
       } else {
-        //this.disableForm();
+        this.addTableRow();
+        // this.getCashPartyAccountList("100");
+        const user = JSON.parse(localStorage.getItem('user'));
         if (user?.branchCode != null) {
           this.branchFormData.patchValue({
-            fromBranchCode: user.branchCode,
-            branch: user.branchCode,
+            branch: +user.branchCode,
             userId: user.seqId,
             userName: user.userName
           });
+          this.branchFormData.patchValue({
+            stateCode: '37',
+            stateName: 'ANDHRA PRADESH'
+          });
+          // this.getCashPartyAccount();
           this.setBranchCode();
           this.genaratereceiptNo(user.branchCode);
           this.formGroup();
         }
-        this.addTableRow();
       }
     });
+
   }
 
   setBranchCode() {
     //sebranch
-    const bname = this.GetBranchesListArray.filter(fromBranchCode => {
+    const bname = this.getBranchesListArray.filter(fromBranchCode => {
       if (fromBranchCode.id == this.branchFormData.get('branch').value) {
         return fromBranchCode;
       }
@@ -152,41 +179,9 @@ export class PurchaseRequisitionComponent  implements OnInit {
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.PrreqDeatilList?.length) {
             this.dataSource = new MatTableDataSource(res.response['PrreqDeatilList']);
-            ////console.log(res.response['StockissuesDeatilList']);
-            this.spinner.hide();
           }
+          this.branchFormData.patchValue(res?.response?.PrreqMasterData);
         }
-      });
-  }
-  getCompiniesList() {
-    const getCompiniesListList = [this.apiConfigService.getCompaniesList].join('/');
-    this.apiService.apiGetRequest(getCompiniesListList)
-      .subscribe(
-        response => {
-          const res = response;
-          if (res != null && res.status === StatusCodes.pass) {
-            if (res.response != null) {
-              console.log(res);
-              this.compiniesList = res.response['CompaniesList'];
-            }
-          }
-          this.spinner.hide();
-        });
-  }
-  getBranchesList() {
-    const getCashPaymentBranchesListUrl = [this.apiConfigService.getCashPaymentBranchesList].join('/');
-    this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
-      response => {
-        const res = response;
-        if (res != null && res.status === StatusCodes.pass) {
-          if (res.response != null) {
-            if (res?.response?.BranchesList?.length > 0) {
-              this.GetBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
-            }
-          }
-        }
-
       });
   }
 
