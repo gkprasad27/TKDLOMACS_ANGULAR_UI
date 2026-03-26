@@ -78,7 +78,7 @@ export class StockTransferComponent implements OnInit {
 
   formDataGroup() {
     this.formData = this.formBuilder.group({
-      stockTransferMasterId: [null],
+      stockTransferMasterId: [0],
       stockTransferNo: [null],
       stockTransferDate: [(new Date()).toISOString()],
       fromBranchCode: [null],
