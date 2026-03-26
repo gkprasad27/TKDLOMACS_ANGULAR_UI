@@ -516,3 +516,18 @@ typeahead-container {
 .flash-light {
   -webkit-animation: _ngcontent-ng-c1539275210_glowing 1.5s infinite !important;
 }
+
+.mat-mdc-form-field.mat-form-field-disabled {
+  opacity: 1 !important;
+}
+
+.mat-mdc-form-field.mat-form-field-disabled .mdc-floating-label {
+  font-weight: 400 !important; /* medium instead of bold */
+  color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.mat-mdc-form-field.mat-form-field-disabled .mdc-text-field__input {
+  font-weight: 400 !important;
+  color: rgba(0, 0, 0, 0.75) !important;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.75) !important;
+}

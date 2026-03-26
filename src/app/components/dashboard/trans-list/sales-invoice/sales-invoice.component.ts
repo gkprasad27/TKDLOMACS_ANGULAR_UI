@@ -214,29 +214,33 @@ export class SalesInvoiceComponent implements OnInit {
         }
         this.disableForm(params.id1);
       } else {
-        this.addTableRow();
-        // this.getCashPartyAccountList("100");
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user?.branchCode != null) {
-          this.branchFormData.patchValue({
-            branchCode: +user.branchCode,
-            userId: user.seqId,
-            userName: user.userName,
-            ledgerCode: "100"
-          });
-          this.branchFormData.patchValue({
-            stateCode: '37',
-            stateName: 'ANDHRA PRADESH'
-          });
-          // this.getCashPartyAccount();
-          this.setBranchCode();
-          this.genarateBillNo(user.branchCode);
-          this.formGroup();
-        }
-        this.disableForm();
+        this.resetData();
       }
     });
 
+  }
+
+  resetData() {
+    this.addTableRow();
+    // this.getCashPartyAccountList("100");
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.branchCode != null) {
+      this.branchFormData.patchValue({
+        branchCode: +user.branchCode,
+        userId: user.seqId,
+        userName: user.userName,
+        ledgerCode: "100"
+      });
+      this.branchFormData.patchValue({
+        stateCode: '37',
+        stateName: 'ANDHRA PRADESH'
+      });
+      // this.getCashPartyAccount();
+      this.setBranchCode();
+      this.genarateBillNo(user.branchCode);
+      this.formGroup();
+    }
+    this.disableForm();
   }
 
   formGroup() {
@@ -244,7 +248,7 @@ export class SalesInvoiceComponent implements OnInit {
       invoiceNo: [null],
       invoiceDate: [null],
       stateCode: [null],
-    shiftId: [null],
+      shiftId: [null],
       userId: [null],
       employeeId: [null],
       productId: [null],
@@ -1106,15 +1110,18 @@ export class SalesInvoiceComponent implements OnInit {
     this.dataSource = new MatTableDataSource();
     this.getVechielsArray = [];
     this.formDataGroup();
+    this.resetData();
   }
 
   registerInvoice(data) {
     this.branchFormData.patchValue({
-      paymentMode: 0,
-      invoiceDate: this.commonService.formatDate(this.branchFormData.get('invoiceDate').value)
+      paymentMode: 0
     });
+    let obj = { ...this.branchFormData.getRawValue() };
+    obj.invoiceDate = this.commonService.formatDate(this.branchFormData.get('invoiceDate').value);
+    obj.paymentMode = 0;
     const registerInvoiceUrl = this.apiConfigService.registerInvoice;
-    const requestObj = { InvoiceHdr: this.branchFormData.value, InvoiceDetail: data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };
+    const requestObj = { InvoiceHdr: obj, InvoiceDetail: data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
         const res = response;
