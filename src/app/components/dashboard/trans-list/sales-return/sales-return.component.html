@@ -52,7 +52,7 @@
             [class.filled]="branchFormData.get('ledgerCode')?.value">
             <label> {{ 'salesReturn.ledgerCode' | translate }} </label>
             <input placeholder=" " formControlName="ledgerCode"
-              (input)="getCashPartyAccountList($event.target.value)" id="ledgerCode" shortcutkey="f2"
+              (input)="getCashPartyAccountList()" id="ledgerCode" shortcutkey="f2"
               autocomplete="off" [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray"
               typeaheadOptionField='id' class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
               (typeaheadOnSelect)="setLedgerName()" [typeaheadWaitMs]="200" (keydown.enter)="save()">
