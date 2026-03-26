@@ -921,6 +921,7 @@
     "mobile": "Mobile",
     "ledgerCode": "Cash/Pary Name",
     "accountName": "Account Name",
+    "invoiceReturnNo": "Invoice Return No",
     "ledgerName": "Ledger Name",
     "customerName": "Customer Name",
     "totalAmount": "Total Amount",

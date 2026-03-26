@@ -121,7 +121,7 @@ export class TransTableComponent implements OnInit {
       newObj.fromDate = this.commonService.formatDate(this.headerForm.value.fromDate);
       newObj.toDate = this.commonService.formatDate(this.headerForm.value.toDate);
     }
-    const getInvoiceListUrl = [this.transListService.getDynComponents(this.routeParam).tableUrl, this.headerForm.value.role].join('/');
+    const getInvoiceListUrl = [this.transListService.getDynComponents(this.routeParam).tableUrl, obj.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceListUrl, newObj).subscribe(
       response => {
         this.spinner.hide();

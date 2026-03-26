@@ -270,7 +270,7 @@ export class TransListService {
         this.dynamicComp.component = SalesReturnComponent;
         this.dynamicComp.tableUrl = this.apiConfigService.getInvoiceGetInvoiceReturnList;
         this.dynamicComp.list = 'InvoiceReturnList';
-        this.dynamicComp.editKey = 'invoiceNo';
+        this.dynamicComp.editKey = 'invoiceMasterReturnId';
         return this.dynamicComp;
       }
       case 'stockTransfer': {

@@ -633,6 +633,7 @@
   },
   "salesReturn": {
     "invoiceNo": "Invoice No",
+    "invoiceReturnNo": "Invoice Return No",
     "invoiceDate": "Date",
     "branchCode": "Branch Code",
     "branchName": "Branch Name",
