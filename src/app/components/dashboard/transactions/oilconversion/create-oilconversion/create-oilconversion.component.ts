@@ -114,7 +114,7 @@ export class CreateOilconversionsComponent implements OnInit {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user?.branchCode != null) {
           this.branchFormData.patchValue({
-            branchCode: user.branchCode,
+            branchCode: +user.branchCode,
             userId: user.seqId,
             userName: user.userName
           });
@@ -490,7 +490,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
     const user = JSON.parse(localStorage.getItem('user'));
     this.branchFormData = this.formBuilder.group({
       oilConversionDate: [(new Date()).toISOString()],
-      branchCode: user.branchCode,
+      branchCode: +user.branchCode,
       oilConversionVchNo: user.branchCode
     });
     this.ngOnInit();

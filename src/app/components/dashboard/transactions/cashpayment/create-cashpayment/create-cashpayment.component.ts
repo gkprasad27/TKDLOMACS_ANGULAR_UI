@@ -112,7 +112,7 @@ export class CreateCashpaymentComponent implements OnInit {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user?.branchCode != null) {
           this.branchFormData.patchValue({
-            branchCode: user.branchCode,
+            branchCode: +user.branchCode,
             userId: user.seqId,
             userName: user.userName
           });

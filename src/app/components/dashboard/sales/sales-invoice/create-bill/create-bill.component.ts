@@ -173,7 +173,7 @@ export class CreateBillComponent implements OnInit {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user?.branchCode != null) {
           this.branchFormData.patchValue({
-            branchCode: user.branchCode,
+            branchCode: +user.branchCode,
             userId: user.seqId,
             userName: user.userName,
             ledgerCode: "100"

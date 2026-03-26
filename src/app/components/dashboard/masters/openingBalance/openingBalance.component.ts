@@ -27,7 +27,7 @@ export class OpeningBalanceComponent implements OnInit {
   formData: any;
   voucherClass: any;
   compList: any;
-  GetBranchesListArray: any[] = [];
+  getBranchesListArray: any[] = [];
   GetPaymentListArray: any[] = [];
   GetBankPAccountLedgerListArray: any[] = [];
 
@@ -72,7 +72,7 @@ export class OpeningBalanceComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user?.branchCode != null) {
       this.modelFormData.patchValue({
-        branchCode: user.branchCode,
+        branchCode: +user.branchCode,
         userId: user.seqId,
         userName: user.userName
       });
@@ -88,7 +88,7 @@ export class OpeningBalanceComponent implements OnInit {
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
-              this.GetBranchesListArray = res.response['BranchesList'];
+              this.getBranchesListArray = res.response['BranchesList'];
               this.spinner.hide();
             }
           }
@@ -168,7 +168,7 @@ export class OpeningBalanceComponent implements OnInit {
   // }
 
   // setBranchCode() {
-  //   const bname = this.GetBranchesListArray.filter(branchCode => {
+  //   const bname = this.getBranchesListArray.filter(branchCode => {
   //     if (branchCode.id == this.modelFormData.get('branchCode').value) {
   //       return branchCode;
   //     }

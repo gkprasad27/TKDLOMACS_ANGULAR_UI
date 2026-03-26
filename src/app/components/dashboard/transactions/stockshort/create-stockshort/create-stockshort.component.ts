@@ -174,7 +174,7 @@ export class CreateStockshortsComponent implements OnInit {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user?.branchCode != null) {
           this.branchFormData.patchValue({
-            branchCode: user.branchCode,
+            branchCode: +user.branchCode,
             userId: user.seqId,
             userName: user.userName
           });
@@ -556,7 +556,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
     const user = JSON.parse(localStorage.getItem('user'));
     this.branchFormData = this.formBuilder.group({
       stockshortDate: [(new Date()).toISOString()],
-      branchCode: user.branchCode,
+      branchCode: +user.branchCode,
       stockshortNo: user.branchCode
     });
     this.ngOnInit();

@@ -86,7 +86,7 @@ export class MeterReadingComponent  implements OnInit {
         const user = JSON.parse(localStorage.getItem('user'));
        if (user?.branchCode != null) {
         this.modelFormData.patchValue({
-          branchCode: user.branchCode,
+          branchCode: +user.branchCode,
           userId: user.seqId,
           userName: user.userName
         });

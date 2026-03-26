@@ -1,6 +1,6 @@
 <div class="position-relative popup-class">
   <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
-    <span> {{'openingBalance.title' | translate }} </span>
+    <span> {{'openingbalance.title' | translate }} </span>
     <mat-icon class="p-2  cursor--pointer" (click)="cancel()">close</mat-icon>
   </mat-card-title>
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
@@ -8,9 +8,9 @@
 
       <div class="d--flex">
         <mat-form-field class="form-element">
-          <mat-label>{{ 'openingBalance.branchName' | translate }}</mat-label>
+          <mat-label>{{ 'openingbalance.branchName' | translate }}</mat-label>
           <mat-select formControlName="branchCode" appFocusOnEnter tabIndex="3"  (selectionChange)="genarateVoucherNo();">
-            @for (branch of GetBranchesListArray; track branch) {
+            @for (branch of getBranchesListArray; track branch) {
               <mat-option [value]="branch.id">
                 {{ branch.id }} - {{branch.text}}
               </mat-option>
@@ -19,9 +19,8 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>{{ 'openingBalance.ledgerName' | translate }}</mat-label>
-          <input class="typeahead" matInput
-            placeholder="{{ 'openingBalance.ledgerName' | translate }}" formControlName="ledgerCode"
+          <mat-label>{{ 'openingbalance.ledgerName' | translate }}</mat-label>
+          <input class="typeahead" matInput formControlName="ledgerCode"
             (input)="getBankPAccountLedgerList($event.target.value)"
             [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' autocomplete="off"
             [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
@@ -32,7 +31,7 @@
           </mat-form-field>
 
           <mat-form-field class="form-element">
-            <mat-label>{{ 'openingBalance.paymentTypeName' | translate }}</mat-label>
+            <mat-label>{{ 'openingbalance.paymentTypeName' | translate }}</mat-label>
             <mat-select formControlName="paymentTypeId" appFocusOnEnter tabIndex="3">
               @for (payment of GetPaymentListArray; track payment) {
                 <mat-option [value]="payment.id">
@@ -43,25 +42,26 @@
           </mat-form-field>
 
           <mat-form-field class="form-element">
-            <input matInput placeholder="{{ 'openingBalance.voucherNo' | translate }}" formControlName="voucherNo"
-              appFocusOnEnter tabIndex="1" >
-            </mat-form-field>
+            <mat-label>{{ 'openingbalance.voucherNo' | translate }}</mat-label>
+            <input matInput formControlName="voucherNo" appFocusOnEnter tabIndex="1">
+          </mat-form-field>
 
             <mat-form-field>
-              <input matInput [matDatepicker]="picker" placeholder="{{'openingBalance.openingBalanceDate' | translate }}"
-                formControlName="openingBalanceDate" appFocusOnEnter  tabIndex="4" (click)="picker.open()" readonly>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <mat-label>{{ 'openingbalance.openingBalanceDate' | translate }}</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="openingBalanceDate" appFocusOnEnter  tabIndex="4" (click)="picker.open()" readonly>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+              <mat-form-field class="form-element">
+                  <mat-label>{{ 'openingbalance.amount' | translate }}</mat-label>
+                <input matInput formControlName="amount" appFocusOnEnter tabIndex="2">
               </mat-form-field>
 
               <mat-form-field class="form-element">
-                <input matInput placeholder="{{'openingBalance.amount' | translate }}" formControlName="amount" appFocusOnEnter tabIndex="2">
+                  <mat-label>{{ 'openingbalance.narration' | translate }}</mat-label>
+                <input matInput formControlName="narration" appFocusOnEnter tabIndex="2">
               </mat-form-field>
-
-              <mat-form-field class="form-element">
-                <input matInput placeholder="{{ 'openingBalance.narration' | translate }}"
-                  formControlName="narration" appFocusOnEnter tabIndex="2" >
-                </mat-form-field>
 
               </div>
               <mat-divider></mat-divider>
