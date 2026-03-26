@@ -681,6 +681,13 @@
     "stockTransferNo": "Stock Transfer No",
     "shiftId": "Shift Id"
   },
+  "purchaserequisition": {
+    "id": "Requisition Id",
+    "requisitionNo": "Requisition No",
+    "requisitionDate": "Date",
+    "company": "Company",
+    "branch": "Branch"
+  },
   "vehiclerequisition": {
     "title": "VehicleRequisition",
     "sno": "sno",

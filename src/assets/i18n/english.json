@@ -989,6 +989,21 @@
     "batchNo": "Batch No",
     "narration": "Narration"
   },
+  "purchaserequisition": {
+    "title": "Purchase Requisition",
+    "id": "Requisition Id",
+    "requisitionNo": "Requisition No",
+    "requisitionDate": "Date",
+    "company": "Company",
+    "fromBranchName": "From Branch Name",
+    "receiptNo": "Receipt No",
+    "receiptDate": "Receipt Date",
+    "productCode": "Product Code",
+    "productName": "Product Name",
+    "qty": "Qty",
+    "availbleQtyinBranch": "Available Qty in Branch",
+    "branch": "Branch"
+  },
   "purchaseInvoice": {
     "title": "Purchase Invoice",
     "SUBTITLE": "Purchase Return",
