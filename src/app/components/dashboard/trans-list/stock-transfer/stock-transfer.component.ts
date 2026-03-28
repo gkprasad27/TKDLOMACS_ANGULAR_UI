@@ -247,8 +247,8 @@ export class StockTransferComponent implements OnInit {
   }
 
   clearQty(index, value, column, row) {
-    this.dataSource.data[index].qty = null;
-    this.dataSource.data[index].fQty = null;
+    this.dataSource.data[index].qty = 0;
+    this.dataSource.data[index].fQty = 0;
     if (row.availStock < value) {
       this.alertService.openSnackBar(`This Product(${row.productCode}) qty or Fqty cannot be greater than available stock`, Static.Close, SnackBar.error);
       return;
@@ -283,7 +283,7 @@ export class StockTransferComponent implements OnInit {
       productGroupCode: [null],
       qty: [null],
       ltrs: [null],
-      fQty: [null],
+      fQty: [0],
       batchNo: [null],
       unitId: [null],
       unitName: [null],
