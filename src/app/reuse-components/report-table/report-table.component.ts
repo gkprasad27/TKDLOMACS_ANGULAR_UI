@@ -399,11 +399,15 @@ export class ReportTableComponent implements OnInit, OnChanges {
     })
     this.params = new HttpParams();
     this.params = this.params.append('UserID', 'admin');//this.user.userName);
+    this.params = this.params.append('userName', 'admin');//this.user.userName);
+    this.params = this.params.append('companyId', 0);//this.user.userName);
     this.params = this.params.append('fromDate', this.dateForm.value.formDate);
     this.params = this.params.append('toDate', this.dateForm.value.toDate);
     this.params = this.params.append('reportID', this.dateForm.value.selectedReport);
+    this.params = this.params.append('shiftId', this.dateForm.value.selectedReport);
     this.params = this.params.append('ledgerCode', this.dateForm.value.selectedAccountLedger);
     this.params = this.params.append('branchCode', +this.dateForm.value.selectedBranch);
+    this.params = this.params.append('branchID', +this.dateForm.value.selectedBranch);
     this.params = this.params.append('productCode', this.dateForm.value.selectedProduct);
     this.params = this.params.append('selectedCriteria', this.dateForm.value.selectedCriteria);
     this.params = this.params.append('search', this.dateForm.value.search);

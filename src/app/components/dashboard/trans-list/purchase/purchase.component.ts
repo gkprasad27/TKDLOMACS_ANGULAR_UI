@@ -94,7 +94,7 @@ export class PurchaseComponent implements OnInit {
       serverDateTime: [null],
       ledgerId: ['100'],
       ledgerName: [null],
-      ledgerCode: [null],
+      ledgerCode: [null, Validators.required],
       paymentMode: [null],
       stateCode: [null],
       stateName: [null],

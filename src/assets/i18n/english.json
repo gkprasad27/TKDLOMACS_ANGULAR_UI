@@ -1444,6 +1444,69 @@
     "shiftId": "Shift",
     "userName": "User Name"
     
+  },
+  "24HrsSaleValue": {
+    "title": "24 Hrs Sale Value"
+  },
+  "24HrsSalesStock": {
+    "title": "24 Hrs Sales Stock"
+  },
+  "Shift": {
+    "title": "Shift"
+  },
+  "Vehical Enquiry": {
+    "title": "Vehical Enquiry"
+  },
+  "Intimate Sale": {
+    "title": "Intimate Sale"
+  },
+  "Stock Verification": {
+    "title": "Stock Verification"
+  },
+  "Stock Ledger": {
+    "title": "Stock Ledger"
+  },
+  "Sales analysis by branch": {
+    "title": "Sales analysis by branch"
+  },
+  "Product Wise Monthly Purchase": {
+    "title": "Product Wise Monthly Purchase"
+  },
+  "Daily Sales": {
+    "title": "Daily Sales"
+  },
+  "Product Price List": {
+    "title": "Product Price List"
+  },
+  "Receipts And Payments Detailed": {
+    "title": "Receipts And Payments Detailed"
+  },
+  "Receipts And Payments Summary": {
+    "title": "Receipts And Payments Summary"
+  },
+  "SMS Summary": {
+    "title": "SMS Summary"
+  },
+  "Sales GST": {
+    "title": "Sales GST"
+  },
+  "24Hrs Sale%20Value%206Am%20To%206Am": {
+    "title": "24 Hrs Sale Value 6Am To 6Am"
+  }, 
+  "Trial Balance": {
+    "title": "Trial Balance"
+  },
+  "24Hrs Meter Reading": {
+    "title": "24 Hrs Meter Reading"
+  },
+  "Closing Balance": {
+    "title": "Closing Balance"
+  },
+  "Bank Reconciliation": {
+    "title": "Bank Reconciliation"
+  },
+  "Stock Valuation": {
+    "title": "Stock Valuation"
   }
 
 }
