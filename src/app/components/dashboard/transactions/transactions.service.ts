@@ -75,17 +75,6 @@ export class TransactionsService {
         this.dynamicData.coustom = false;
         return this.dynamicData;
         break;
-        case 'meterreading':
-            this.dynamicData.url = `${this.apiConfigService.getMeterReadingList}/${this.branchCode}/${this.role}`;
-            this.dynamicData.component = MeterReadingComponent;
-            this.dynamicData.registerUrl = this.apiConfigService.registerMeterReading;
-            this.dynamicData.updateUrl = this.apiConfigService.updateMeterReading;
-            this.dynamicData.deleteUrl = this.apiConfigService.deleteMeterReading;
-            this.dynamicData.listName = 'MeterReadingList';
-            this.dynamicData.primaryKey = 'meterReadingId';
-            this.dynamicData.coustom = true;
-            return this.dynamicData;
-            break;
      default:
     }
    }
