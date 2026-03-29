@@ -22,7 +22,6 @@ export class PayrollService {
   ) { }
 
   getRouteUrls(data) {
-    //debugger;
     const user = JSON.parse(localStorage.getItem('user'));
     switch (data) {
       case 'ptmaster':

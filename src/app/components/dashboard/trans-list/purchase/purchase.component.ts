@@ -195,29 +195,34 @@ export class PurchaseComponent implements OnInit {
           this.getPurchasePurchaseReturnInvNo(user.branchCode);
         }
       } else {
-        this.disableForm();
-        this.addTableRow();
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user?.branchCode != null) {
-          this.branchFormData.patchValue({
-            branchCode: +user.branchCode,
-            userId: user.seqId,
-            userName: user.userName
-          });
-          this.branchFormData.patchValue({
-            stateCode: 37,
-            stateName: 'ANDHRA PRADESH'
-          });
-          // this.getCashPartyAccount();
-          this.setBranchCode();
-          this.genarateBillNo(user.branchCode);
-          this.formGroup();
-          this.getPCashPartyAccountList();
-        }
+        this.resetData();
       }
     });
 
   }
+
+  resetData() {
+    this.disableForm();
+    this.addTableRow();
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.branchCode != null) {
+      this.branchFormData.patchValue({
+        branchCode: +user.branchCode,
+        userId: user.seqId,
+        userName: user.userName
+      });
+      this.branchFormData.patchValue({
+        stateCode: 37,
+        stateName: 'ANDHRA PRADESH'
+      });
+      // this.getCashPartyAccount();
+      this.setBranchCode();
+      this.genarateBillNo(user.branchCode);
+      this.formGroup();
+      this.getPCashPartyAccountList();
+    }
+  }
+
 
 
   formGroup() {
@@ -817,8 +822,8 @@ export class PurchaseComponent implements OnInit {
       //   content = '0 Availablilty Stock';
       //   return stock;
       // }
-      if ((stock.qty == null) && (stock.fQty == null)) {
-        content = 'qty or Fqty is null';
+      if ((stock.qty == null || stock.qty <= 0) && (stock.fQty == null || stock.fQty <= 0)) {
+        content = 'qty or Fqty is null/0';
         return stock;
       }
       if ((stock.qty > stock.availStock) || (stock.fQty > stock.availStock)) {
@@ -884,6 +889,7 @@ export class PurchaseComponent implements OnInit {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
     this.formDataGroup();
+    this.resetData();
   }
 
   registerPurchase(data) {

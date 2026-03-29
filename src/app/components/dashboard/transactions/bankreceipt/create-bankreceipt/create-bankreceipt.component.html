@@ -51,7 +51,7 @@
                 (typeaheadOnSelect)="setLedgerName($event)" (input)="getBRAccountLedgerList($event.target.value)"
                 [typeahead]="GetBPAccountLedgerListArray" typeaheadOptionField='id' autocomplete="off"
                 [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
-                [typeaheadWaitMs]="200" id="bankLedgerName" (keydown.enter)="save()">
+                [typeaheadWaitMs]="200" id="bankLedgerName" >
                 <ng-template #customItemTemplate let-model="item">
                   <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                 </ng-template>
@@ -59,19 +59,19 @@
 
               <mat-form-field>
                 <input matInput [matDatepicker]="picker1" placeholder="{{'bankreceipt.postingDate' | translate }}"
-                  formControlName="postingDate" (keydown.enter)="save()">
+                  formControlName="postingDate" >
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field class="form-element">
                   <input matInput placeholder="{{ 'bankreceipt.realized' | translate }}"
-                    formControlName="realized" appFocusOnEnter tabIndex="2" (keydown.enter)="save()">
+                    formControlName="realized" appFocusOnEnter tabIndex="2" >
                   </mat-form-field>
 
                   <mat-form-field class="form-element">
                     <input matInput placeholder="{{ 'bankreceipt.chequeNo' | translate }}"
-                      formControlName="chequeNo" appFocusOnEnter tabIndex="3" (keydown.enter)="save()">
+                      formControlName="chequeNo" appFocusOnEnter tabIndex="3" >
                     </mat-form-field>
 
                   </div>
@@ -99,7 +99,7 @@
                         <input class="typeAhead" [(ngModel)]="element.toLedgerCode" type="search"
                           [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setAccountName($event)"
                           (input)="getAccountByAccountCode($event.target.value)"
-                          [typeahead]="getAccountLedgerListArray" typeaheadOptionField='id' (keydown.enter)="save()">
+                          [typeahead]="getAccountLedgerListArray" typeaheadOptionField='id' >
                         </td>
                       </ng-container>
 
@@ -117,7 +117,7 @@
                           <input class="typeAhead" id="LedgerName" [(ngModel)]="element.toLedgerName" type="search"
                             [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setAccountCode($event)"
                             (input)="getAccountByAccountName($event.target.value)"
-                            [typeahead]="getAccountLedgerListArray" typeaheadOptionField='text' (keydown.enter)="save()">
+                            [typeahead]="getAccountLedgerListArray" typeaheadOptionField='text' >
                           </td>
                         </ng-container>
 
@@ -126,7 +126,7 @@
                           <td mat-cell *matCellDef="let element;">
                             <input matInput [disabled]="element.text != 'obj'" type="number" matInput disabled [value]="element.amount"
                               [(ngModel)]="element.amount" (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
-                            (input)="setToFormModel(element.text, 'amount', element.amount)" (keydown.enter)="save()"/> </td>
+                            (input)="setToFormModel(element.text, 'amount', element.amount)" /> </td>
                           </ng-container>
 
                           <ng-container matColumnDef="delete">
@@ -181,7 +181,7 @@
                               <div class="w-75">
                                 <mat-form-field class="form-element">
                                   <input matInput placeholder="{{ 'bankreceipt.totalAmount' | translate }}"
-                                    formControlName="totalAmount" appFocusOnEnter tabIndex="2" (keydown.enter)="save()">
+                                    formControlName="totalAmount" appFocusOnEnter tabIndex="2" >
                                   </mat-form-field>
 
                                 </div>

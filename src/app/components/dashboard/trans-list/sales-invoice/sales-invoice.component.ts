@@ -1025,8 +1025,8 @@ export class SalesInvoiceComponent implements OnInit {
         content = '0 Availablilty Stock';
         return stock;
       }
-      if (stock?.qty == null && stock?.fQty == null) {
-        content = 'qty or Fqty is null';
+      if ((stock?.qty == null || stock?.qty <= 0) && (stock?.fQty == null || stock?.fQty <= 0)) {
+        content = 'qty or Fqty is null/0';
         return stock;
       }
       if ((stock.qty > stock.availStock) || (stock.fQty > stock.availStock)) {

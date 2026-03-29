@@ -60,7 +60,7 @@
                       (typeaheadOnSelect)="getdata($event,dataSource.filteredData.indexOf(element),'qty')"
                       (input)="getProductByProductCode($event.target.value)"
                       [typeahead]="getProductByProductCodeArray" typeaheadOptionField='text'
-                    autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" (keydown.enter)="save()"></strong>
+                    autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" ></strong>
                   </td>
                 </ng-container>
 

@@ -63,7 +63,7 @@
                   id="ledgerCode"shortcutkey="f2"
                   [typeahead]="getCashPartyAccountListArray" typeaheadOptionField='id' autocomplete="off"
                   [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
-                  [typeaheadWaitMs]="200" (keydown.enter)="save()">
+                  [typeaheadWaitMs]="200" >
                   <ng-template #customItemTemplate let-model="item">
                     <span><strong>{{model.id}}</strong> - {{model.text}}</span>
                   </ng-template>
@@ -76,7 +76,7 @@
                 <mat-form-field>
                   <mat-label>{{ 'SALESINVOICE.paymentMode' | translate }}</mat-label>
                   <input matInput placeholder="{{ 'SALESINVOICE.paymentMode' | translate }}"
-                    formControlName="paymentMode" (keydown.enter)="save()">
+                    formControlName="paymentMode" >
                   </mat-form-field>
 
                   <mat-form-field class="form-element">
@@ -84,29 +84,29 @@
                       formControlName="vehicleRegNo" (typeaheadOnSelect)="getmemberNamesByCode($event)"
                       (input)="getVechiels($event.target.value)" [typeahead]="getVechielsArray" id="vehicleRegNo"
                       typeaheadOptionField='text' autocomplete="off" [typeaheadMinLength]="0" [minLength]="1"
-                      [typeaheadWaitMs]="200" pattern="^[A-Z0-9]+$" ng-pattern-restrict (keydown.enter)="save()">
+                      [typeaheadWaitMs]="200" pattern="^[A-Z0-9]+$" ng-pattern-restrict >
                     </mat-form-field>
 
 
                     <mat-form-field class="form-element">
                       <input matInput type="number" placeholder="{{ 'SALESINVOICE.mobile' | translate }}"
                         (input)="getCustomerGstNumList($event.target.value)" formControlName="mobile" onKeyPress="if(this.value.length==10) return false;"
-                        (keydown.enter)="save()">
+                        >
                       </mat-form-field>
 
                       <mat-form-field class="form-element">
                         <input matInput placeholder="{{ 'SALESINVOICE.customerName' | translate }}"
-                          formControlName="customerName" id="customerName" (keydown.enter)="save()">
+                          formControlName="customerName" id="customerName" >
                         </mat-form-field>
 
                         <mat-form-field class="form-element">
                           <input matInput placeholder="{{ 'SALESINVOICE.suppliedTo' | translate }}"
-                            formControlName="suppliedTo" id="suppliedTo" (keydown.enter)="save()">
+                            formControlName="suppliedTo" id="suppliedTo" >
                           </mat-form-field>
 
                           <mat-form-field class="form-element">
                             <input matInput placeholder="{{ 'SALESINVOICE.customerGstin' | translate }}"
-                              formControlName="customerGstin" id="customerGstin" (keydown.enter)="save()">
+                              formControlName="customerGstin" id="customerGstin" >
                             </mat-form-field>
 
 
@@ -116,7 +116,7 @@
                                 formControlName="memberName"id="memberName" (typeaheadOnSelect)="setMemberName($event)"
                                 (input)="getmemberNames($event.target.value)" [typeahead]="getmemberNamesArray"
                                 typeaheadOptionField='text' autocomplete="off" [typeaheadMinLength]="0" [minLength]="1"
-                                [typeaheadWaitMs]="200" [typeaheadItemTemplate]="customMemberName" (keydown.enter)="save()">
+                                [typeaheadWaitMs]="200" [typeaheadItemTemplate]="customMemberName" >
                                 <ng-template #customMemberName let-model="item">
                                   <span>{{model.text}}</span>
                                 </ng-template>
@@ -124,12 +124,12 @@
 
                               <mat-form-field class="form-element">
                                 <input matInput placeholder="{{ 'SALESINVOICE.generalNo' | translate }}"
-                                  formControlName="generalNo" (keydown.enter)="save()">
+                                  formControlName="generalNo" >
                                 </mat-form-field>
 
                                 <mat-form-field class="form-element">
                                   <input matInput placeholder="{{ 'SALESINVOICE.accountBalance' | translate }}"
-                                    formControlName="accountBalance" (keydown.enter)="save()">
+                                    formControlName="accountBalance" >
                                   </mat-form-field>
 
 
@@ -174,7 +174,7 @@
                                 (disabledPump(element.productCode) ? 'qty' : 'pumpNo'))"
                                         (input)="getProductByProductCode($event.target.value)"
                                         [typeahead]="getProductByProductCodeArray" typeaheadOptionField='text'
-                                      autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" (keydown.enter)="save()"></strong>
+                                      autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" ></strong>
                                     </td>
                                   </ng-container>
 
@@ -185,7 +185,7 @@
                                         disabled (typeaheadOnSelect)="setProductName($event, element)"
                                         (input)="getProductByProductName($event.target.value)"
                                         [typeahead]="getProductByProductNameArray" typeaheadOptionField='text'
-                                      autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" (keydown.enter)="save()"></strong>
+                                      autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" ></strong>
                                     </td>
                                   </ng-container>
 
@@ -194,7 +194,7 @@
                                     <td mat-cell *matCellDef="let element;">
                                       <strong><input matInput type="number" disabled [value]="element.hsnNo"
                                         [(ngModel)]="element.hsnNo"
-                                      (input)="setToFormModel(element.text, 'hsnNo', element.hsnNo)" (keydown.enter)="save()" /></strong> </td>
+                                      (input)="setToFormModel(element.text, 'hsnNo', element.hsnNo)"  /></strong> </td>
                                     </ng-container>
 
 
@@ -207,7 +207,7 @@
                                           [disabled]="element.text != 'obj' || disabledPump(element.productCode)"
                                           (input)="getPupms($event.target.value, element.productCode)" [typeahead]="getPupmsArray"
                                           typeaheadOptionField='text' autocomplete="off" [typeaheadMinLength]="0" [minLength]="1"
-                                        [typeaheadWaitMs]="200" (keydown.enter)="save()"></strong>
+                                        [typeaheadWaitMs]="200" ></strong>
 
 
                                       </td>
@@ -220,7 +220,7 @@
                                           id="qty{{ dataSource.filteredData.indexOf(element) }}"
                                           (keyup)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
                                           [(ngModel)]="element.qty"
-                                        (input)="setToFormModel(element.text, 'qty', element.qty); clearQty(dataSource.filteredData.indexOf(element), element.qty, 'qty', element);" (keydown.enter)="save()" /></strong>
+                                        (input)="setToFormModel(element.text, 'qty', element.qty); clearQty(dataSource.filteredData.indexOf(element), element.qty, 'qty', element);"  /></strong>
                                       </td>
                                     </ng-container>
 
@@ -236,7 +236,7 @@
                                             [disabled]="element.text != 'obj' || !disabledPump(element.productCode)"
                                             [value]="element.fQty" [(ngModel)]="element.fQty"
                                             (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
-                                            (input)="setToFormModel(element.text, 'fQty', element.fQty); clearQty(dataSource.filteredData.indexOf(element), element.fQty, 'fQty', element);" (keydown.enter)="save()"/>
+                                            (input)="setToFormModel(element.text, 'fQty', element.fQty); clearQty(dataSource.filteredData.indexOf(element), element.fQty, 'fQty', element);" />
                                         }</strong>
                                       </td>
                                     </ng-container>
@@ -248,7 +248,7 @@
                                           [ngClass]="setBackGroundColor(element.slipNo, disableSlipVal(element.productCode))"
                                           [disabled]="element.text != 'obj' || disableSlipVal(element.productCode)"
                                           [value]="element.slipNo" [(ngModel)]="element.slipNo"
-                                        (input)="setToFormModel(element.text, 'slipNo', element.slipNo)" (keydown.enter)="save()" /></strong> </td>
+                                        (input)="setToFormModel(element.text, 'slipNo', element.slipNo)"  /></strong> </td>
                                       </ng-container>
 
                                       <ng-container matColumnDef="unitName">
@@ -256,7 +256,7 @@
                                         <td mat-cell *matCellDef="let element;">
                                           <input matInput [disabled]="element.text != 'obj'" [value]="element.unitName"
                                             [(ngModel)]="element.unitName"
-                                          (input)="setToFormModel(element.text, 'unitName', element.unitName)" (keydown.enter)="save()" /> </td>
+                                          (input)="setToFormModel(element.text, 'unitName', element.unitName)"  /> </td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="discount">
@@ -264,14 +264,14 @@
                                           <td mat-cell *matCellDef="let element;">
                                             <strong> <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.discount"
                                               [(ngModel)]="element.discount"
-                                            (input)="setToFormModel(element.text, 'discount', element.discount)" (keydown.enter)="save()"/></strong> </td>
+                                            (input)="setToFormModel(element.text, 'discount', element.discount)" /></strong> </td>
                                           </ng-container>
 
                                           <ng-container matColumnDef="taxGroupName">
                                             <th mat-header-cell *matHeaderCellDef> {{ 'SALESINVOICE.taxGroupName' | translate }} </th>
                                             <td mat-cell *matCellDef="let element;">
                                               <input matInput disabled [value]="element.taxGroupName" [(ngModel)]="element.taxGroupName"
-                                                (input)="setToFormModel(element.text, 'taxGroupName', element.taxGroupName)" (keydown.enter)="save()" />
+                                                (input)="setToFormModel(element.text, 'taxGroupName', element.taxGroupName)"  />
                                               </td>
                                             </ng-container>
 
@@ -280,7 +280,7 @@
                                               <td mat-cell *matCellDef="let element;">
                                                 <strong>  <input matInput disabled [value]="element.rate" [(ngModel)]="element.rate"
                                                   (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
-                                                (input)="setToFormModel(element.text, 'rate', element.rate)" (keydown.enter)="save()" /></strong>
+                                                (input)="setToFormModel(element.text, 'rate', element.rate)"  /></strong>
                                               </td>
                                             </ng-container>
 
@@ -289,14 +289,14 @@
                                               <td mat-cell *matCellDef="let element;">
                                                 <strong> <input type="number" matInput disabled [value]="element.grossAmount"
                                                   [(ngModel)]="element.grossAmount"
-                                                (input)="setToFormModel(element.text, 'grossAmount', element.grossAmount)" (keydown.enter)="save()"/></strong> </td>
+                                                (input)="setToFormModel(element.text, 'grossAmount', element.grossAmount)" /></strong> </td>
                                               </ng-container>
 
                                               <ng-container matColumnDef="availStock">
                                                 <th mat-header-cell *matHeaderCellDef> {{ 'SALESINVOICE.availStock' | translate }} </th>
                                                 <td mat-cell *matCellDef="let element;">
                                                   <strong> <input matInput disabled [value]="element.availStock" [(ngModel)]="element.availStock"
-                                                  (input)="setToFormModel(element.text, 'availStock', element.availStock);" (keydown.enter)="save()" /></strong>
+                                                  (input)="setToFormModel(element.text, 'availStock', element.availStock);"  /></strong>
                                                 </td>
                                               </ng-container>
 
@@ -358,17 +358,17 @@
                                                   <div class="w-75">
                                                     <mat-form-field class="form-element">
                                                       <b><input matInput placeholder="{{ 'SALESINVOICE.totalCgst' | translate }}"
-                                                      formControlName="totalCgst" (keydown.enter)="save()"></b>
+                                                      formControlName="totalCgst" ></b>
                                                     </mat-form-field>
 
                                                     <mat-form-field class="form-element">
                                                       <b><input matInput placeholder="{{ 'SALESINVOICE.totalSgst' | translate }}"
-                                                      formControlName="totalSgst" (keydown.enter)="save()"></b>
+                                                      formControlName="totalSgst" ></b>
                                                     </mat-form-field>
 
                                                     <mat-form-field class="form-element">
                                                       <b><input matInput placeholder="{{ 'SALESINVOICE.totalIgst' | translate }}"
-                                                      formControlName="totalIgst" (keydown.enter)="save()"></b>
+                                                      formControlName="totalIgst" ></b>
                                                     </mat-form-field>
                                                   </div>
                                                 </div>
@@ -377,17 +377,17 @@
                                                   <div class="w-75">
                                                     <mat-form-field class="form-element">
                                                       <b><input matInput placeholder="{{ 'SALESINVOICE.totalAmount' | translate }}"
-                                                      formControlName="totalAmount" (keydown.enter)="save()"></b>
+                                                      formControlName="totalAmount" ></b>
                                                     </mat-form-field>
 
                                                     <mat-form-field class="form-element">
                                                       <b><input matInput placeholder="{{ 'SALESINVOICE.totaltaxAmount' | translate }}"
-                                                      formControlName="totaltaxAmount" (keydown.enter)="save()"></b>
+                                                      formControlName="totaltaxAmount" ></b>
                                                     </mat-form-field>
 
                                                     <mat-form-field class="form-element">
                                                       <b><input matInput placeholder="{{ 'SALESINVOICE.grandTotal' | translate }}"
-                                                      formControlName="grandTotal" (keydown.enter)="save()"></b>
+                                                      formControlName="grandTotal" ></b>
                                                     </mat-form-field>
                                                   </div>
                                                 </div>

@@ -110,8 +110,6 @@ export class SelfserviceComponent implements OnInit {
   }
 
   addOrUpdateEvent(value) {
-    //debugger;
-    //alert("hi");
     if (value.action === 'Delete') {
       this.deleteRecord(value);
     } else {

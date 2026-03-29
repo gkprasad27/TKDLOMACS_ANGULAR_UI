@@ -55,7 +55,7 @@
               (input)="getCashPartyAccountList()" id="ledgerCode" shortcutkey="f2"
               autocomplete="off" [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray"
               typeaheadOptionField='id' class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
-              (typeaheadOnSelect)="setLedgerName()" [typeaheadWaitMs]="200" (keydown.enter)="save()">
+              (typeaheadOnSelect)="setLedgerName()" [typeaheadWaitMs]="200" >
             <ng-template #customItemTemplate let-model="item">
               <span><strong>{{model.id}}</strong> - {{model.text}}</span>
             </ng-template>
@@ -72,7 +72,7 @@
             <input placeholder=" " formControlName="vehicleRegNo" (typeaheadOnSelect)="getmemberNamesByCode($event)"
               (input)="getVechiels($event.target.value)" id="vehicleRegNo" [typeahead]="getVechielsArray"
               autocomplete="off" [typeaheadOptionsLimit]="100000" typeaheadOptionField='text'
-              class="form-control typeahead" [typeaheadWaitMs]="200" (keydown.enter)="save()">
+              class="form-control typeahead" [typeaheadWaitMs]="200" >
           </div>
 
 
@@ -103,7 +103,7 @@
               (input)="getmemberNames($event.target.value)" id="memberName" [typeahead]="getmemberNamesArray"
               autocomplete="off" [typeaheadOptionsLimit]="100000" [typeaheadItemTemplate]="customMemberName"
               typeaheadOptionField='text' class="form-control typeahead" [typeaheadWaitMs]="200"
-              (keydown.enter)="save()">
+              >
             <ng-template #customMemberName let-model="item">
               <span><strong>{{model.id}}</strong> - {{model.text}}</span>
             </ng-template>

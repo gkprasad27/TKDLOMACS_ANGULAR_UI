@@ -75,7 +75,7 @@
                       (typeaheadOnSelect)="getdata($event,  dataSource.filteredData.indexOf(element), 'qty')"
                       (input)="getProductByProductCode($event.target.value)"
                       [typeahead]="getProductByProductCodeArray" typeaheadOptionField='text'
-                    autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" (keydown.enter)="save()"></strong>
+                    autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" ></strong>
                   </td>
                 </ng-container>
 
@@ -133,7 +133,7 @@
                             id="qty{{ dataSource.filteredData.indexOf(element) }}"
                             (keyup)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
                             [(ngModel)]="element.qty"
-                          (input)="setToFormModel(element.text, 'qty', element.qty); clearQty(dataSource.filteredData.indexOf(element), element.qty, 'qty', element);" (keydown.enter)="save()" /></strong>
+                          (input)="setToFormModel(element.text, 'qty', element.qty); clearQty(dataSource.filteredData.indexOf(element), element.qty, 'qty', element);"  /></strong>
                         </td>
                       </ng-container>
 

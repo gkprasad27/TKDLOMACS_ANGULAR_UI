@@ -37,7 +37,7 @@
               (input)="getCashPartyAccountList()" id="ledgerCode" autocomplete="off"
               [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray" typeaheadOptionField='id'
               class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
-              (typeaheadOnSelect)="setLedgerName()" [typeaheadWaitMs]="200" (keydown.enter)="save()">
+              (typeaheadOnSelect)="setLedgerName()" [typeaheadWaitMs]="200" >
             <ng-template #customItemTemplate let-model="item">
               <span><strong>{{model.id}}</strong> - {{model.text}}</span>
             </ng-template>

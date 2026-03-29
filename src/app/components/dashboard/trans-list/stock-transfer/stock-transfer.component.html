@@ -41,7 +41,7 @@
 
           <mat-form-field class="col-2">
             <mat-label>{{ 'stockTransfer.stockTransferNo' | translate }}</mat-label>
-            <input matInput formControlName="stockTransferNo" (keydown.enter)="save()">
+            <input matInput formControlName="stockTransferNo" >
           </mat-form-field>
 
 
@@ -72,7 +72,7 @@
                 (typeaheadOnSelect)="getStockTransferDetailsSection($event, dataSource.filteredData.indexOf(element), 'qty')"
                 (input)="getProductByProductCode($event.target.value)" [typeahead]="getProductByProductCodeArray"
                 typeaheadOptionField='text' autocomplete="off" [typeaheadMinLength]="0" [minLength]="1"
-                [typeaheadWaitMs]="200" (keydown.enter)="save()">
+                [typeaheadWaitMs]="200" >
             </td>
           </ng-container>
 
@@ -83,7 +83,7 @@
                 [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setProductName($event)"
                 (input)="getProductByProductName($event.target.value)" [typeahead]="getProductByProductNameArray"
                 typeaheadOptionField='text' autocomplete="off" [typeaheadMinLength]="0" [minLength]="1"
-                [typeaheadWaitMs]="200" (keydown.enter)="save()">
+                [typeaheadWaitMs]="200" >
             </td>
           </ng-container>
 
@@ -92,7 +92,7 @@
             <td mat-cell *matCellDef="let element;">
               <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.hsnNo"
                 [(ngModel)]="element.hsnNo" (input)="setToFormModel(element.text, 'hsnNo', element.hsnNo)"
-                (keydown.enter)="save()" />
+                 />
             </td>
           </ng-container>
 
@@ -101,7 +101,7 @@
             <td mat-cell *matCellDef="let element;">
               <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.unitId"
                 [(ngModel)]="element.unitId" (input)="setToFormModel(element.text, 'unitId', element.unitId)"
-                (keydown.enter)="save()" />
+                 />
             </td>
           </ng-container>
 
@@ -112,7 +112,7 @@
                 id="qty{{ dataSource.filteredData.indexOf(element) }}"
                 (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))" [(ngModel)]="element.qty"
                 (input)="setToFormModel(element.text, 'qty', element.qty); clearQty(dataSource.filteredData.indexOf(element), element.qty, 'qty', element)"
-                (keydown.enter)="save()" />
+                 />
             </td>
           </ng-container>
           <ng-container matColumnDef="ltrs">
@@ -122,7 +122,7 @@
                 id="ltrs{{ dataSource.filteredData.indexOf(element) }}"
                 (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))" [(ngModel)]="element.ltrs"
                 (input)="setToFormModel(element.text, 'ltrs', element.ltrs); clearQty(dataSource.filteredData.indexOf(element), element.ltrs, 'ltrs', element)"
-                (keydown.enter)="save()" />
+                 />
             </td>
           </ng-container>
 
@@ -136,7 +136,7 @@
               <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.fQty"
                 [(ngModel)]="element.fQty" (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
                 (input)="setToFormModel(element.text, 'fQty', element.fQty); clearQty(dataSource.filteredData.indexOf(element), element.fQty, 'fQty', element);"
-                (keydown.enter)="save()" />
+                 />
               }
             </td>
           </ng-container>
@@ -146,7 +146,7 @@
             <td mat-cell *matCellDef="let element;">
               <input matInput [value]="element.rate" [(ngModel)]="element.rate"
                 (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
-                (input)="setToFormModel(element.text, 'rate', element.rate)" (keydown.enter)="save()" />
+                (input)="setToFormModel(element.text, 'rate', element.rate)"  />
             </td>
           </ng-container>
 
@@ -154,7 +154,7 @@
             <th mat-header-cell *matHeaderCellDef> {{ 'stockTransfer.totalAmount' | translate }} </th>
             <td mat-cell *matCellDef="let element;">
               <input type="number" matInput disabled [value]="element.totalAmount" [(ngModel)]="element.totalAmount"
-                (input)="setToFormModel(element.text, 'totalAmount', element.totalAmount)" (keydown.enter)="save()" />
+                (input)="setToFormModel(element.text, 'totalAmount', element.totalAmount)"  />
             </td>
           </ng-container>
 
@@ -162,7 +162,7 @@
             <th mat-header-cell *matHeaderCellDef> {{ 'stockTransfer.availStock' | translate }} </th>
             <td mat-cell *matCellDef="let element;">
               <input matInput disabled [value]="element.availStock" [(ngModel)]="element.availStock"
-                (input)="setToFormModel(element.text, 'availStock', element.availStock)" (keydown.enter)="save()" />
+                (input)="setToFormModel(element.text, 'availStock', element.availStock)"  />
             </td>
           </ng-container>
 
@@ -170,7 +170,7 @@
             <th mat-header-cell *matHeaderCellDef> {{ 'stockTransfer.batchNo' | translate }} </th>
             <td mat-cell *matCellDef="let element;">
               <input matInput disabled [value]="element.batchNo" [(ngModel)]="element.batchNo"
-                (input)="setToFormModel(element.text, 'batchNo', element.batchNo)" (keydown.enter)="save()" />
+                (input)="setToFormModel(element.text, 'batchNo', element.batchNo)"  />
             </td>
           </ng-container>
 
