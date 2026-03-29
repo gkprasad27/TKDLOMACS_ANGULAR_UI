@@ -16,6 +16,7 @@ import { SnackBar } from '../../../enums/common/common';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core'; 
 import { MemberMasterComponent } from './member-master/member-master.component';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({ 
     selector: 'app-masters',
@@ -42,11 +43,14 @@ export class MastersComponent implements OnInit {
     private mastersService: MastersService,
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
+    private commonService: CommonService
 
   ) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.mastersService.branchCode = user.branchCode;
     this.mastersService.role = user.role;
+    this.commonService.routeParam = activatedRoute.snapshot.params.id;
+
     activatedRoute.params.subscribe(params => {
       this.tableUrl = mastersService.getRouteUrls(params.id);
       this.paramId = params.id;
@@ -148,17 +152,17 @@ export class MastersComponent implements OnInit {
   }
 
   getTableData() {
-    const getUrl = [this.tableUrl.url].join('/');
+    const getUrl = this.tableUrl.url;
     this.apiService.apiGetRequest(getUrl)
       .subscribe(
         response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.tableData = res.response[this.tableUrl.listName];
           }
         }
-        this.spinner.hide();
       });
   }
 

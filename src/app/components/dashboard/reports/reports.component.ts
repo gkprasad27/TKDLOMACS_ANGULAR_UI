@@ -69,7 +69,7 @@ export class ReportsComponent implements OnInit {
     this.apiService.apiReportGetRequest(getUrl,value)
       .subscribe(
         response => {
-          const res = response;
+          const res = response['body'];
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (this.route == 'Intimate Sale') {

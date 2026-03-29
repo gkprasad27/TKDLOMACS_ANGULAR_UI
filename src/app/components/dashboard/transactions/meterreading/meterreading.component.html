@@ -8,94 +8,102 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
+      <div class="row">
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'meterreading.branchName' | translate }}</mat-label>
           <mat-select formControlName="branchCode" (selectionChange)="getPump();" appFocusOnEnter tabIndex="1">
             @for (branch of getMeterReadingBranches; track branch) {
-              <mat-option [value]="branch.id">
-                {{branch.id}} - {{branch.text}}
-              </mat-option>
+            <mat-option [value]="branch.id">
+              {{branch.id}} - {{branch.text}}
+            </mat-option>
             }
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
-          <input matInput placeholder="{{'meterreading.shiftId' | translate }}" formControlName="shiftId"
-            appFocusOnEnter tabIndex="2">
-          </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.shiftId' | translate }}</mat-label>
+          <input matInput formControlName="shiftId" appFocusOnEnter tabIndex="2">
+        </mat-form-field>
+
+        <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+          [class.filled]="modelFormData.get('pumpNo')?.value">
+          <label> {{ 'salesInvoice.pumpNo' | translate }} </label>
+          <input placeholder=" " formControlName="pumpNo" (typeaheadOnSelect)="setMemberName($event); getOBFromPump(); getSaledUnits()"
+            (input)="getmemberNames($event.target.value)" id="pumpNo" shortcutkey="f2" autocomplete="off"
+            [typeaheadOptionsLimit]="100000" [typeahead]="getmemberNamesArray" typeaheadOptionField='text'
+            class="form-control typeahead" [typeaheadItemTemplate]="customMemberName" [typeaheadWaitMs]="200">
+          <ng-template #customMemberName let-model="item">
+            <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+          </ng-template>
+        </div>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.inMeterReading' | translate }}</mat-label>
+          <input matInput formControlName="inMeterReading"
+            appFocusOnEnter tabIndex="4" (change)="calculateAmount()" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.outMeterReading' | translate }}</mat-label>
+          <input matInput formControlName="outMeterReading" id="outMeterReading" appFocusOnEnter tabIndex="5"
+            (change)="calculateAmount()" (change)="calculateSales()" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.totalSales' | translate }}</mat-label>
+          <input matInput formControlName="totalSales"
+            appFocusOnEnter tabIndex="6">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.testing' | translate }}</mat-label>
+          <input matInput formControlName="testing"
+            appFocusOnEnter tabIndex="7" (change)="calculateAmount()" (change)="calculateSales()" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.density' | translate }}</mat-label>
+          <input matInput formControlName="density"
+            appFocusOnEnter tabIndex="8" (change)="calculateAmount()" (change)="calculateSales()" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.consumption' | translate }}</mat-label>
+          <input matInput formControlName="consumption"
+            appFocusOnEnter tabIndex="9" (change)="calculateAmount()" (change)="calculateSales()" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.invoiceSales' | translate }}</mat-label>
+          <input matInput formControlName="invoiceSales"
+            appFocusOnEnter tabIndex="10">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.variation' | translate }}</mat-label>
+          <input matInput formControlName="variation"
+            appFocusOnEnter tabIndex="11" type="number">
+        </mat-form-field>
 
 
-          <mat-form-field class="form-element">
-            <input matInput placeholder="{{ 'meterreading.pumpNo' | translate }}"
-              formControlName="pumpNo" (typeaheadOnSelect)="setMemberName($event)"
-              (input)="getmemberNames($event.target.value)" [typeahead]="getmemberNamesArray"
-              typeaheadOptionField='text' autocomplete="off" [typeaheadMinLength]="0" [minLength]="1" (typeaheadOnSelect)="getOBFromPump();" (typeaheadOnSelect)="getSaledUnits()"
-              appFocusOnEnter tabIndex="3" [typeaheadWaitMs]="200" [typeaheadItemTemplate]="customMemberName">
-              <ng-template #customMemberName let-model="item">
-                <span>{{model.text}}</span>
-              </ng-template>
-            </mat-form-field>
-
-            <mat-form-field class="form-element">
-              <input matInput placeholder="{{'meterreading.inMeterReading' | translate }}" formControlName="inMeterReading"
-                appFocusOnEnter tabIndex="4" (change)="calculateAmount()" type="number">
-              </mat-form-field>
-
-              <mat-form-field class="form-element">
-                <input matInput placeholder="{{'meterreading.outMeterReading' | translate }}"
-                  formControlName="outMeterReading" id="outMeterReading" appFocusOnEnter tabIndex="5"
-                  (change)="calculateAmount()" (change)="calculateSales()" type="number">
-                </mat-form-field>
-
-                <mat-form-field class="form-element">
-                  <input matInput placeholder="{{'meterreading.totalSales' | translate }}" formControlName="totalSales"
-                    appFocusOnEnter tabIndex="6">
-                  </mat-form-field>
-
-                  <mat-form-field class="form-element">
-                    <input matInput placeholder="{{'meterreading.testing' | translate }}" formControlName="testing"
-                      appFocusOnEnter tabIndex="7" (change)="calculateAmount()" (change)="calculateSales()" type="number">
-                    </mat-form-field>
-
-                    <mat-form-field class="form-element">
-                      <input matInput placeholder="{{'meterreading.density' | translate }}" formControlName="density"
-                        appFocusOnEnter tabIndex="8" (change)="calculateAmount()" (change)="calculateSales()" type="number">
-                      </mat-form-field>
-
-                      <mat-form-field class="form-element">
-                        <input matInput placeholder="{{'meterreading.consumption' | translate }}" formControlName="consumption"
-                          appFocusOnEnter tabIndex="9" (change)="calculateAmount()" (change)="calculateSales()" type="number">
-                        </mat-form-field>
-
-                        <mat-form-field class="form-element">
-                          <input matInput placeholder="{{'meterreading.invoiceSales' | translate }}" formControlName="invoiceSales"
-                            appFocusOnEnter tabIndex="10">
-                          </mat-form-field>
-
-                          <mat-form-field class="form-element">
-                            <input matInput placeholder="{{'meterreading.variation' | translate }}" formControlName="variation"
-                              appFocusOnEnter tabIndex="11" type="number"  >
-                            </mat-form-field>
-
-
-                          </div>
-                          <mat-divider></mat-divider>
+      </div>
+      <mat-divider></mat-divider>
 
 
 
-                        </form>
+    </form>
 
-                      </mat-card-content>
-                      <div class="form-element p-2 d-flex justify-content-end">
-                        <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
+  </mat-card-content>
+  <div class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
 
-                          {{ 'COMMON.CANCEL' | translate }}
-                        </button>
-                        <button mat-raised-button type="submit"  [disabled]="formData.item" class="button-color-bule text-white ml-1" (click)="save()">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" *ngIf="!formData.item" class="button-color-bule text-white ml-1"
+      (click)="save()">
 
-                          {{ 'COMMON.SAVE' | translate }}
-                        </button>
-                      </div>
-                    </div>
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>
