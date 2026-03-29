@@ -1,8 +1,5 @@
 <mat-card>
   <div class="table-boarder">
-    <mat-card-title class="table-boarder-color">
-      {{ ( routeParam + ' Report') | translate }}
-    </mat-card-title>
     <div class="m-2 table-boarder">
       <form [formGroup]="dateForm" autocomplete="off" class="ml-2 row">
 
@@ -194,8 +191,10 @@
         ||routeParam=='Receipts And Payments Detailed'||routeParam=='Receipts And Payments Summary'||routeParam=='SMS Summary'||routeParam=='Sales GST'||routeParam=='24Hrs Sale Value 6Am To 6Am'
         ||routeParam=='Trial Balance'||routeParam=='24Hrs Meter Reading'||routeParam=='Closing Balance'||routeParam=='Bank Reconciliation'||routeParam=='Stock Valuation'||routeParam=='Four Column Cash Book'||routeParam=='ProductMonthWise PurchaseLtrs'
         ||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement Ltrs'||routeParam=='BranchWise StockStatement Qty') {
+          <div class="d-flex align-items-center">
           <button mat-raised-button class="button-color-bule text-white ml-2"
             (click)="GenerateReport()">Generate</button>
+        </div>
         }
       </form>
     </div>
@@ -209,16 +208,19 @@
     </div>
 
     <div class="m-2 table-boarder">
-      <div class="d-flex align-items-center ">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
         <button class="ml-2" mat-raised-button (click)="exportToExcel()">
           <mat-icon>file_copy</mat-icon> Excel
         </button>
         <button class="ml-2" mat-raised-button (click)="exportToPdf()">
           <mat-icon>picture_as_pdf</mat-icon> Pdf
         </button>
-        <div class="btn-group d-flex">
-          <mat-form-field class="pl-2">
-            <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter" />
+        </div>
+        <div class="w-25 row">
+          <mat-form-field class="pl-2 col-12">
+            <mat-label>FIlter</mat-label>
+            <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder=" " />
           </mat-form-field>
         </div>
         <div id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"

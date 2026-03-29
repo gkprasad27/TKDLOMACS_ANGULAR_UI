@@ -1224,6 +1224,9 @@
     "userId":"User Id",
     "shiftId":"Shift Id"
   },
+  "AccountLedger": {
+    "title": "Account Ledger"
+  },
   "bankreceipt": {
     "title": "Bank Receipt",
     "voucherNo": "Voucher No",
