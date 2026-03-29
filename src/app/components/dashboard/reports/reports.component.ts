@@ -15,6 +15,7 @@ import { SnackBar } from '../../../enums/common/common';
 
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core'; 
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({ 
     selector: 'app-reports',
@@ -39,9 +40,13 @@ export class ReportsComponent implements OnInit {
     private reportsService: ReportsService,
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
+    private commonService: CommonService,
   ) { 
     const user = JSON.parse(localStorage.getItem('user'));
     this.reportsService.branchCode = user.branchCode;
+    
+    this.commonService.routeParam = activatedRoute.snapshot.params.id;
+    console.log(this.commonService.routeParam, 'routeParam');
     activatedRoute.params.subscribe(params => {
       this.tableUrl = reportsService.getRouteUrls(params.id);
       this.route = params.id;

@@ -281,7 +281,6 @@ export class MemberMasterComponent implements OnInit {
 //     this.apiService.apiGetRequest(this.apiConfigService.getGiftList+'/'+memberCode)
 //         .subscribe(
 //            response=>{
-//                debugger;
 //               const res=response.body;
 //               if (res != null && res.status === StatusCodes.pass) {
 //                   if (res?.response != null) {

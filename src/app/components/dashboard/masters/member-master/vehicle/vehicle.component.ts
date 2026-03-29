@@ -95,7 +95,6 @@ export class VehicleComponent implements OnInit, OnChanges {
     this.apiService.apiGetRequest(this.apiConfigService.getVehicleTypes)
       .subscribe(
         response => {
-          // debugger
           const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {

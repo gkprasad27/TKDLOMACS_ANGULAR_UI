@@ -23,7 +23,6 @@ export class InventoryService {
 
   getRouteUrls(data)
   {
-   // debugger;
     switch (data) {
       case 'brandmodel':
         this.dynamicData.url = this.apiConfigService.getBrandModelList;

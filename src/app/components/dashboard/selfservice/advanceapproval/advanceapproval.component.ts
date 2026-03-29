@@ -73,7 +73,6 @@ export class advanceApprovalComponent implements OnInit {
   }
 
   singleChecked(flag, column, row) {
-    // debugger;
     console.log(flag, row, column)
     let statusFlag = true;
     if (this.leaveApprovalList.length) {
