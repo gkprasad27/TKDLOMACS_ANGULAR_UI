@@ -41,6 +41,22 @@ export class ApiService {
         catchError(this.handleError('apiGetRequest')));
   }
 
+    // get API requests
+  public apiReportGetRequest(url: any, obj?: any): Observable<any> {
+    
+    setTimeout(() => this.spinner.show());
+    return this.http.get(url, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), observe: 'response', params:obj })
+      .pipe((tap<any>(res => {
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.fail) {
+          this.alertService.openSnackBar(res.response, Static.Close, SnackBar.error);
+          setTimeout(() => this.spinner.hide());
+          return;
+        }
+        return res['body']['response'];
+      })),
+        catchError(this.handleError('apiGetRequest')));
+  }
+
   // Post API request
   public apiPostRequest(url: any, obj?: any): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user'));

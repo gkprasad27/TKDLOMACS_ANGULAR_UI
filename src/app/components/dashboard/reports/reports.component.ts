@@ -59,9 +59,9 @@ export class ReportsComponent implements OnInit {
   }
   generateTableEvent(value) {
     this.spinner.show();
-    const getUrl = [this.tableUrl.url].join('/');
+    const getUrl = this.tableUrl.url;
 
-    this.apiService.apiGetRequest(getUrl,value)
+    this.apiService.apiReportGetRequest(getUrl,value)
       .subscribe(
         response => {
           const res = response;
@@ -83,9 +83,9 @@ export class ReportsComponent implements OnInit {
   }
   getTableData() {
     this.spinner.show();
-    const getUrl = [this.tableUrl.url].join('/');
+    const getUrl = this.tableUrl.url;
 
-    this.apiService.apiGetRequest(getUrl)
+    this.apiService.apiReportGetRequest(getUrl)
       .subscribe(
         response => {
           const res = response;

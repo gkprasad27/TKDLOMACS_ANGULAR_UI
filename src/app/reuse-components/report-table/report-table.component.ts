@@ -221,7 +221,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
   }
 
   getAccountLedgersList() {
-    const getLoginUrl = [this.apiConfigService.getAccountLedgersList].join('/');
+    const getLoginUrl = this.apiConfigService.getAccountLedgersList;
     this.apiService.apiGetRequest(getLoginUrl)
       .subscribe(
         response => {
@@ -234,7 +234,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
         });
   }
   getReportBranchesList() {
-    const getLoginUrl = [this.apiConfigService.getReportBranchList].join('/');
+    const getLoginUrl = this.apiConfigService.getReportBranchList;
     this.apiService.apiGetRequest(getLoginUrl)
       .subscribe(
         response => {
@@ -247,7 +247,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
         });
   }
   getReportPGList() {
-    const getLoginUrl = [this.apiConfigService.getReportPGList].join('/');
+    const getLoginUrl = this.apiConfigService.getReportPGList;
     this.apiService.apiGetRequest(getLoginUrl)
       .subscribe(
         response => {
@@ -260,7 +260,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
         });
   }
   getReportSGList() {
-    const getLoginUrl = [this.apiConfigService.getReportSGList].join('/');
+    const getLoginUrl = this.apiConfigService.getReportSGList;
     this.apiService.apiGetRequest(getLoginUrl)
       .subscribe(
         response => {
@@ -378,8 +378,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
   GenerateReport() {
     this.dateForm.patchValue({
-      formDate: this.commonService.formatReportDate(this.dateForm.value.selected.start._d),
-      toDate: this.commonService.formatReportDate(this.dateForm.value.selected.end._d),
+      formDate: this.commonService.formatReportDate(this.dateForm.value.formDate),
+      toDate: this.commonService.formatReportDate(this.dateForm.value.toDate),
       selectedReport: this.dateForm.get('selectedReport').value,
       selectedAccountLedger: this.dateForm.get('selectedAccountLedger').value,
       selectedBranch: this.dateForm.get('selectedBranch').value,
@@ -883,7 +883,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
               let tableUrl = this.reportsService.getRouteUrls('InnerShift');
               const getUrl = [tableUrl.url].join('/');
-              this.apiService.apiGetRequest(getUrl, this.params)
+              this.apiService.apiReportGetRequest(getUrl, this.params)
                 .subscribe(
                   response => {
                     let innerReportName = this.Reports[this.dateForm.get('selectedReport').value - 2].reportName;
