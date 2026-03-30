@@ -27,17 +27,17 @@
       {{ invoiceHdr.customerGstin }}
     </div>
     <div class="sub-container1"
-      style="min-height: 20px; font-family: Verdana; font-size:10px; position:fixed; top: 3%;left: 82%;">{{
+      style="min-height: 20px; font-family: Verdana; font-size:10px; position:fixed; top: 3.2%;left: 82%;">{{
     invoiceHdr.stateCode }} </div>
     <div class="sub-container2"
-      style="position:fixed;top:5.5%; left:24%; min-height: 20px;font-size: 10px;font-family: Verdana;">
+      style="position:fixed;top:5.2%; left:24%; min-height: 20px;font-size: 10px;font-family: Verdana;">
       {{ (invoiceHdr.branchName)}} : {{(BranchPhone.phone)}} , {{(invoiceHdr.ledgerName=='CASH A/C')? 'Cash Bill' :
       'Credit Bill'}}
     </div>
     <div class="sub-container3" style="min-height: 20px;position:fixed; font-size:10px; font-family: Verdana;">
-      <span class="sub-container3-span1" style="position:fixed; left: 23%; top:7.3%;"> {{ invoiceHdr.ledgerName }}
+      <span class="sub-container3-span1" style="position:fixed; left: 23%; top:7.1%;"> {{ invoiceHdr.ledgerName }}
       </span>
-      <span class="sub-container3-span2" style="position:fixed; top:7.3%; left: 69%;">
+      <span class="sub-container3-span2" style="position:fixed; top:7.1%; left: 69%;">
         {{ invoiceHdr.invoiceNo }}
       </span>
     </div>
@@ -79,7 +79,7 @@
         </tbody>
       </table>
     </div>
-    <div style="position: fixed;top: 23%;">
+    <div style="position: fixed;top: 25%;">
       <table>
         <tbody>
           @for (detail of invoiceDetail; track detail; let i = $index) {
@@ -103,19 +103,19 @@
               (detail.grossAmount)*100/(100+(detail.cgst + detail.sgst))| number: '1.2-2'}} </td>
               @if (detail.cgst != '0') {
                 <td
-                  style="padding-left: 15px; font-size: 10px; font-family: Verdana; white-space: nowrap;max-width:40px;min-width:40px;">
+                  style="padding-left: 20px; font-size: 10px; font-family: Verdana; white-space: nowrap;max-width:40px;min-width:40px;">
                   {{(invoiceHdr.stateCode!=37)?(0| number: '1.2-2'): (detail.grossAmount)*100/(100+(detail.cgst +
                 detail.sgst))*(18/100)/2| number: '1.2-2'}} </td>
               }
               @if (detail.cgst == '0') {
                 <td
-                  style="padding-left: 15px; font-size: 10px; font-family: Verdana; white-space: nowrap;max-width:40px;min-width:40px;">
+                  style="padding-left: 18px; font-size: 10px; font-family: Verdana; white-space: nowrap;max-width:40px;min-width:40px;">
                   {{(0| number:
                 '1.2-2')}} </td>
               }
               @if (detail.sgst != '0') {
                 <td
-                  style="padding-left: 10px; font-size: 10px; font-family: Verdana; white-space: nowrap;max-width:40px;min-width:40px;">
+                  style="padding-left: 13px; font-size: 10px; font-family: Verdana; white-space: nowrap;max-width:40px;min-width:40px;">
                   {{
                   (invoiceHdr.stateCode!=37)?(0| number: '1.2-2'):(detail.grossAmount)*100/(100+(detail.cgst +
                 detail.sgst))*(18/100)/2| number: '1.2-2'}} </td>
@@ -150,23 +150,23 @@
         <tbody>
           <tr>
             <td class="form-style-control3"
-              style="word-break: break-all;width: 18%;position:fixed; left:40.5%;font-family: Verdana;font-size: 10px;white-space: nowrap;">
+              style="padding-left: 150px;word-break: break-all;width: 18%;font-family: Verdana;font-size: 10px;white-space: nowrap;">
               {{
             invoiceHdr.totalAmount| number: '1.2-2'}} </td>
             <td class="form-style-control3"
-              style="word-break: break-all;width: 18%;position:fixed; left:40.5%;font-family: Verdana;font-size: 10px;white-space: nowrap;">
+              style="padding-left: 8px;word-break: break-all;width: 18%;font-family: Verdana;font-size: 10px;white-space: nowrap;">
               {{
             invoiceHdr.tt| number: '1.2-2'}} </td>
             <td class="form-style-control3"
-              style="word-break: break-all;width: 18%; position:fixed; left:52%;font-family: Verdana;font-size: 10px;white-space: nowrap;">
+              style="padding-left: 8px;word-break: break-all;width: 18%;font-family: Verdana;font-size: 10px;white-space: nowrap;">
               {{
             invoiceHdr.totalCgst| number: '1.2-2'}} </td>
             <td class="form-style-control3"
-              style="word-break: break-all;width: 18%; position:fixed; left:63%;font-family: Verdana;font-size: 10px;white-space: nowrap; ">
+              style="padding-left: 8px;word-break: break-all;width: 18%;font-family: Verdana;font-size: 10px;white-space: nowrap; ">
               {{
             invoiceHdr.totalSgst| number: '1.2-2'}} </td>
             <td class="form-style-control3"
-              style="word-break: break-all;width: 18%; position:fixed; left:72%;font-family: Verdana;font-size: 10px;white-space: nowrap; ">
+              style="padding-left: 8px;word-break: break-all;width: 18%;font-family: Verdana;font-size: 10px;white-space: nowrap; ">
               {{
             invoiceHdr.totalIgst| number: '1.2-2'}} </td>
           </tr>
