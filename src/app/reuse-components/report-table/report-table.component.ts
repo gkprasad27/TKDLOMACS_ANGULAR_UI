@@ -144,6 +144,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       toDate: ['', Validators.required],
       selectedReport: [''],
       selectedAccountLedger: [''],
+      ledgerName: [''],
       selectedBranch: [],
       selectedProduct: [],
       selectedCriteria: [''],
@@ -339,7 +340,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
       }
     });
     this.dateForm.patchValue({
-      selectedAccountLedger: lname?.[0] != null ? lname[0].id : null
+      selectedAccountLedger: lname?.[0] != null ? lname[0].id : null,
+      ledgerName: lname?.[0] != null ? lname[0].text : null
     });
   }
 
@@ -406,6 +408,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.params = this.params.append('reportID', this.dateForm.value.selectedReport);
     this.params = this.params.append('shiftId', this.dateForm.value.selectedReport);
     this.params = this.params.append('ledgerCode', this.dateForm.value.selectedAccountLedger);
+    this.params = this.params.append('ledgerName', this.dateForm.value.ledgerName);
     this.params = this.params.append('branchCode', +this.dateForm.value.selectedBranch);
     this.params = this.params.append('branchID', +this.dateForm.value.selectedBranch);
     this.params = this.params.append('productCode', this.dateForm.value.selectedProduct);
