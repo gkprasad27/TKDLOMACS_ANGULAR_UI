@@ -593,7 +593,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
         body: rows,
         startY: (doc as any).lastAutoTable.finalY + 2,
         styles: {
-          font: 'Tahoma',
+          font: 'Helvetica',
           fontSize: 10
         },
         theme: 'plain'
@@ -633,7 +633,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
     }
 
     if (this.routeParam == 'Four Column Cash Book') {
-      let doc = new jsPDF('p', 'in', [1008, 792]);
+      // Create PDF with landscape orientation for wider content
+      let doc = new jsPDF('l', 'mm', 'a4');
 
       let columns = []; //["ID", "Name", "Country"];
       for (const key in this.tableData[0]) {
@@ -696,7 +697,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
         head: [columns],
         body: rows,
         startY: (doc as any).lastAutoTable.finalY + 2,
-        styles: { font: 'Tahoma', fontSize: 10 },
+        styles: { font: 'Helvetica', fontSize: 10 },
         columnStyles: {
           0: { cellWidth: 2 },
           1: { cellWidth: 3 }
@@ -737,8 +738,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
     }
 
     else {
-      // let doc = new jsPDF('p', 'cm', 'legal');
-      let doc = new jsPDF('p', 'in', [1008, 792]);
+      // Create PDF with landscape orientation for wider content
+      let doc = new jsPDF('l', 'mm', 'a4');
       let columns = []; //["ID", "Name", "Country"];
 
       for (const key in this.tableData[0]) {
@@ -803,7 +804,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
         head: [columns],
         body: rows,
         startY: (doc as any).lastAutoTable.finalY + 1,
-        styles: { font: 'Tahoma', fontSize: 10 },
+        styles: { font: 'Helvetica', fontSize: 10 },
         theme: 'plain'
       });
 
