@@ -406,7 +406,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.params = this.params.append('fromDate', this.dateForm.value.formDate);
     this.params = this.params.append('toDate', this.dateForm.value.toDate);
     this.params = this.params.append('reportID', this.dateForm.value.selectedReport);
-    this.params = this.params.append('shiftId', this.dateForm.value.selectedReport);
+    // this.params = this.params.append('shiftId', this.dateForm.value.selectedReport);
     this.params = this.params.append('ledgerCode', this.dateForm.value.selectedAccountLedger);
     this.params = this.params.append('ledgerName', this.dateForm.value.ledgerName);
     this.params = this.params.append('branchCode', +this.dateForm.value.selectedBranch);
