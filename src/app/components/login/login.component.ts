@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
     this.form = this.formBuilder.group({
-      otp: ['', Validators.required],
+      otp: [0, Validators.required],
     });
   }
 
