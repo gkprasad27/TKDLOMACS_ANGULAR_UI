@@ -1165,8 +1165,8 @@
     "narration": "Narration",
     "SlNo": "SL.No",
     "userName": "Created By",
-    "UserId": "User Id",
-    "ShiftId": "Shift Id"
+    "userId": "User Id",
+    "shiftId": "Shift Id"
   },
   "cashreceipt": {
     "title": "Cash Receipt",
@@ -1217,7 +1217,7 @@
     "UserId": "User Id",
     "ShiftId": "Shift Id"
   },
-  "accountLedger": {
+  "AccountLedger": {
     "title": "Account Ledger"
   },
   "bankreceipt": {
