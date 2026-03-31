@@ -29,6 +29,7 @@ export class ApiConfigService {
    shiftStart = `${environment.baseUrl}Auth/ShiftStart`;
    getBranchesForUser = `${environment.baseUrl}Auth/GetBranchesForUser`;
    getShiftId=`${environment.baseUrl}Auth/GetShiftId`;
+   getAuthentication=`${environment.baseUrl}Auth/GetAuthentication`;
 
 
 

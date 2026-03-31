@@ -1,56 +1,80 @@
 <mat-card class="boxshadow p-3">
   <mat-card-title class="background--color rounded text-white p-2 d-flex">
     <mat-icon >lock</mat-icon>
-    <small  [translate]="'LOGIN.LOGIN'"> </small>
+    <small  [translate]="!showOtp ? 'LOGIN.LOGIN' : 'LOGIN.OTP'"> </small>
   </mat-card-title>
   <mat-card-content class="p-0">
 
-    <form [formGroup]="loginForm"  class="row mt-3" autocomplete="off">
+    @if (!showOtp) {
+      <form [formGroup]="loginForm"  class="row mt-3" autocomplete="off">
 
-      <mat-form-field class="col-4" [ngClass]="{ 'ng--valid': formControls.username.valid }">
-        <mat-label [translate]="'LOGIN.USERNAME'"></mat-label>
-        <input matInput formControlName="username">
-        @if (isSubmitted && formControls.username.errors) {
-          <mat-error class="help-block">
-            @if (formControls.username.errors.required) {
-              Username is required
-            }
-          </mat-error>
-        }
-      </mat-form-field>
-
-      <mat-form-field class="col-4" [ngClass]="{ 'ng--valid': formControls.password.valid }">
-        <mat-label [translate]="'LOGIN.PASSWORD'"></mat-label>
-        <input matInput formControlName="password">
-        @if (isSubmitted && formControls.password.errors) {
-          <mat-error class="help-block">
-            @if (formControls.password.errors.required) {
-              Password is required
-            }
-          </mat-error>
-        }
-      </mat-form-field>
-
-      <mat-form-field  class="col-4">
-        <mat-label [translate]="'COMMON.LANGUAGEPREFERENCE'"></mat-label>
-        <mat-select (selectionChange)="setLang(langSelect.value)" #langSelect>
-          @for (lang of translate.getLangs(); track lang) {
-            <mat-option [value]="lang">
-              {{lang}}
-            </mat-option>
+        <mat-form-field class="col-4" [ngClass]="{ 'ng--valid': formControls.username.valid }">
+          <mat-label [translate]="'LOGIN.USERNAME'"></mat-label>
+          <input matInput formControlName="username">
+          @if (isSubmitted && formControls.username.errors) {
+            <mat-error class="help-block">
+              @if (formControls.username.errors.required) {
+                Username is required
+              }
+            </mat-error>
           }
-        </mat-select>
-      </mat-form-field>
+        </mat-form-field>
 
-      
+        <mat-form-field class="col-4" [ngClass]="{ 'ng--valid': formControls.password.valid }">
+          <mat-label [translate]="'LOGIN.PASSWORD'"></mat-label>
+          <input matInput formControlName="password">
+          @if (isSubmitted && formControls.password.errors) {
+            <mat-error class="help-block">
+              @if (formControls.password.errors.required) {
+                Password is required
+              }
+            </mat-error>
+          }
+        </mat-form-field>
 
-    </form>
+        <mat-form-field  class="col-4">
+          <mat-label [translate]="'COMMON.LANGUAGEPREFERENCE'"></mat-label>
+          <mat-select (selectionChange)="setLang(langSelect.value)" #langSelect>
+            @for (lang of translate.getLangs(); track lang) {
+              <mat-option [value]="lang">
+                {{lang}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
-    <div class="d-flex justify-content-end mt-2">
-        <button mat-raised-button class="background--color text-white mat-raised-button" type="button" (click)="onSubmit()">
-          {{ 'LOGIN.LOGIN' | translate}}
-        </button>
-      </div>
+      </form>
+
+      <div class="d-flex justify-content-end mt-2">
+          <button mat-raised-button class="background--color text-white mat-raised-button" type="button" (click)="onSubmit()">
+            {{ 'LOGIN.LOGIN' | translate}}
+          </button>
+        </div>
+    }
+
+    @if (showOtp) {
+      <form [formGroup]="form"  class="row mt-3" autocomplete="off">
+
+        <mat-form-field class="col-12" [ngClass]="{ 'ng--valid': form.get('otp').valid }">
+          <mat-label [translate]="'LOGIN.OTP'"></mat-label>
+          <input matInput formControlName="otp" type="number">
+          @if (isSubmitted && form.get('otp').errors) {
+            <mat-error class="help-block">
+              @if (form.get('otp').errors.required) {
+                OTP is required
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+      </form>
+
+      <div class="d-flex justify-content-end mt-2">
+          <button mat-raised-button class="background--color text-white mat-raised-button" type="button" (click)="onotp()">
+            {{ 'LOGIN.VERIFY' | translate}}
+          </button>
+        </div>
+    }
 
   </mat-card-content>
 </mat-card>

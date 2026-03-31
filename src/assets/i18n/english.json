@@ -21,7 +21,9 @@
     "USERNAME": "Username",
     "PASSWORD": "Password",
     "LOGIN": "Login",
-    "tkdlomacs": "TKDLOMACS"
+    "tkdlomacs": "TKDLOMACS",
+    "OTP": "OTP",
+    "VERIFY": "Verify"
   },
   "dashboard": {
     "title": "Dashboard"
