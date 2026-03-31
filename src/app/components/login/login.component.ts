@@ -120,7 +120,7 @@ export class LoginComponent implements OnInit {
             if ((res.response['branches'] != null)) {
               obj.branchCode = res.response['branches'][0];
               localStorage.setItem('branchList', JSON.stringify(res.response['branches']));
-              // this.authService.login(obj);
+              this.authService.login(obj);
               this.alertService.openSnackBar(Static.LoginSussfull, Static.Close, SnackBar.success);
               this.router.navigate(['dashboard']);
             }
