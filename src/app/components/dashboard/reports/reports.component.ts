@@ -65,6 +65,9 @@ export class ReportsComponent implements OnInit {
   generateTableEvent(value) {
     this.spinner.show();
     const getUrl = this.tableUrl.url;
+    this.tableData = null;
+    this.headerData = null;
+    this.footerData = null;
 
     this.apiService.apiReportGetRequest(getUrl,value)
       .subscribe(

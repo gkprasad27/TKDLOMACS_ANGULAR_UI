@@ -426,6 +426,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.params = this.params.append('SupplierGroup', this.dateForm.value.selectedSupplierGroup);
     if (this.dateForm.value.selectedCriteria == "shiftId") {
       this.params = this.params.append('shiftId', this.dateForm.value.search);
+    } else {
+      this.params = this.params.append('shiftId', this.dateForm.value.selectedReport);
     }
     if (this.routeParam == 'Shift' && this.dateForm.value.selectedCriteria == 'branchCode') {
       this.reportsService.branchCode = this.dateForm.value.search;
