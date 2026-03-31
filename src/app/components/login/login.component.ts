@@ -94,16 +94,27 @@ export class LoginComponent implements OnInit {
   }
 
   loginAPICall() {
+    if (this.form.value.otp == this.otp) {
+      this.apiCall();
+      return;
+    }
     if (!(this.loginForm.value.username.toLowerCase() === 'raju' || this.loginForm.value.password.toLowerCase() === 'dev' || this.loginForm.value.username.toLowerCase() === 'admin')) {
       if (this.ipAddress != null && this.ipAddress != '') {
         const ipAddressObj = this.IPAddressList.find(x => x.ipAddress === this.ipAddress);
         if (!ipAddressObj) {
           this.otpApi(null);
+          return;
         }
       } else {
         this.alertService.openSnackBar('Unable to fetch IP Address. Please try again later.', Static.Close, SnackBar.error);
+        return;
       }
     }
+    this.apiCall();
+
+  }
+
+  apiCall() {
     // // this.spinner.show();
     const requestObj = { UserName: this.loginForm.get('username').value, Password: this.loginForm.get('password').value };
     const getLoginUrl = [this.apiConfigService.loginUrl].join('/');
@@ -117,8 +128,6 @@ export class LoginComponent implements OnInit {
               this.getBranchesForUser(res.response['user']);
               localStorage.setItem('token', JSON.stringify(res.response['token']));
             }
-          } else if (res != null && res.status === StatusCodes.fail && res.response == 'Access denied from this IP address. Ask SMS for your Admin for Access') {
-            this.otpApi();
           }
         });
   }
