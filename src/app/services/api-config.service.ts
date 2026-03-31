@@ -30,7 +30,6 @@ export class ApiConfigService {
    getBranchesForUser = `${environment.baseUrl}Auth/GetBranchesForUser`;
    getShiftId=`${environment.baseUrl}Auth/GetShiftId`;
    getAuthentication=`${environment.baseUrl}Auth/GetAuthentication`;
-   ipify=`https://api.ipify.org/?format=json`;
    getIPAddress=`${environment.baseUrl}Auth/getIPAddress`;
 
 
