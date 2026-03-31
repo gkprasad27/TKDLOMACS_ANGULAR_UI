@@ -106,7 +106,7 @@ export class LoginComponent implements OnInit {
     }
     // // this.spinner.show();
     const requestObj = { UserName: this.loginForm.get('username').value, Password: this.loginForm.get('password').value };
-    const getLoginUrl = [this.apiConfigService.loginUrl, this.form.get('otp').value].join('/');
+    const getLoginUrl = [this.apiConfigService.loginUrl].join('/');
     this.apiService.apiPostRequest(getLoginUrl, requestObj)
       .subscribe(
         response => {
