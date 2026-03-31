@@ -97,10 +97,8 @@ export class LoginComponent implements OnInit {
     if (!(this.loginForm.value.username.toLowerCase() === 'raju' || this.loginForm.value.password.toLowerCase() === 'dev' || this.loginForm.value.username.toLowerCase() === 'admin')) {
       if (this.ipAddress != null && this.ipAddress != '') {
         const ipAddressObj = this.IPAddressList.find(x => x.ipAddress === this.ipAddress);
-        if (ipAddressObj != null) {
-          this.otpApi(ipAddressObj.companyCode);
-        } else {
-          this.alertService.openSnackBar('Access denied from this IP address. Ask SMS for your Admin for Access', Static.Close, SnackBar.error);
+        if (!ipAddressObj) {
+          this.otpApi(null);
         }
       } else {
         this.alertService.openSnackBar('Unable to fetch IP Address. Please try again later.', Static.Close, SnackBar.error);
@@ -155,7 +153,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         response => {
           this.spinner.hide();
-          this.IPAddressList = response;
+          this.IPAddressList = response.response;
         });
   }
 
