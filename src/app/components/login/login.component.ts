@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
   showOtp = false;
   otp: number;
   loginUrlData: any;
+  ipAddress: string = '';
+  IPAddressList: any[] = [];
 
   constructor(
     public translate: TranslateService,
@@ -56,6 +58,8 @@ export class LoginComponent implements OnInit {
     this.form = this.formBuilder.group({
       otp: [0, Validators.required],
     });
+    this.ipifyApi();
+    this.getIPAddress();
   }
 
   // Language Preference
@@ -88,6 +92,16 @@ export class LoginComponent implements OnInit {
   }
 
   loginAPICall() {
+    if (this.ipAddress != null && this.ipAddress != '') {
+      const ipAddressObj = this.IPAddressList.find(x => x.ipAddress === this.ipAddress);
+      if (ipAddressObj != null) {
+        this.otpApi(ipAddressObj.companyCode);
+      } else {
+        this.alertService.openSnackBar('Access denied from this IP address. Ask SMS for your Admin for Access', Static.Close, SnackBar.error);
+      }
+    } else {
+      this.alertService.openSnackBar('Unable to fetch IP Address. Please try again later.', Static.Close, SnackBar.error);
+    }
     // // this.spinner.show();
     const requestObj = { UserName: this.loginForm.get('username').value, Password: this.loginForm.get('password').value };
     const getLoginUrl = [this.apiConfigService.loginUrl, this.form.get('otp').value].join('/');
@@ -104,6 +118,26 @@ export class LoginComponent implements OnInit {
           } else if (res != null && res.status === StatusCodes.fail && res.response == 'Access denied from this IP address. Ask SMS for your Admin for Access') {
               this.otpApi();
           }
+        });
+  }
+
+  ipifyApi() {
+    const getipifyUrl = this.apiConfigService.ipify;
+    this.apiService.apiGetRequest(getipifyUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          this.ipAddress = response.ip;
+        });
+  }
+
+  getIPAddress() {
+    const getIPAddress = this.apiConfigService.getIPAddress;
+    this.apiService.apiGetRequest(getIPAddress)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          this.IPAddressList = response;
         });
   }
 
