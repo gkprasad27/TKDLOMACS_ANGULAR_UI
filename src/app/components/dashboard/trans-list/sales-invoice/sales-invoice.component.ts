@@ -1039,7 +1039,7 @@ export class SalesInvoiceComponent implements OnInit {
           return stock;
         }
       }
-      if (stock.productCode == 'D' || stock.productCode == 'P' || stock.productCode == 'XP') {
+      if (stock.productCode == 'D' || stock.productCode == 'P' || stock.productCode == 'XP'|| stock.productCode == 'CNG'|| stock.productCode == 'XG') {
         if ((stock.pumpNo == null)) {
           content = 'PumpNo is null';
           return stock;

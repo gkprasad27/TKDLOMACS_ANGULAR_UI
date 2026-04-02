@@ -86,7 +86,9 @@ export class ReportTableComponent implements OnInit, OnChanges {
     { id: '5', reportName: 'Shift wise  fleet card account' },
     { id: '6', reportName: 'Shift wise daily sales report' },
     { id: '7', reportName: 'Shift wise Sale Value' },
-    { id: '8', reportName: 'Shift wise ICICI SWIPE RECEIVABLES A/c' }
+    { id: '8', reportName: 'Shift wise ICICI SWIPE RECEIVABLES A/c' },
+    { id: '9', reportName: 'Shift wise PINE LAB' },
+    { id: '10',reportName: 'Shift wise PAYTM' }
   ];
   AccountLedgers = [];
   ReportBranches = [];
