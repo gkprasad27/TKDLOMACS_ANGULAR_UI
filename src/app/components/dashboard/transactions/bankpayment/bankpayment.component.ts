@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../../services/common.service';
 
 import { ApiConfigService } from '../../../../services/api-config.service';
@@ -26,7 +26,7 @@ import moment from 'moment';
 export class BankPaymentComponent implements OnInit {
   selectedDate = {start : moment().add(-1, 'day'), end: moment().add(0, 'day')};
   GetBranchesListArray:any;
-  dateForm: UntypedFormGroup;
+  dateForm: FormGroup;
   // table
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -35,7 +35,7 @@ export class BankPaymentComponent implements OnInit {
 ];
 branchCode:any;
   constructor(
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
@@ -45,7 +45,6 @@ branchCode:any;
 
   ) {
     this.dateForm = this.formBuilder.group({
-      selected: [null],
       fromDate: [null],
       toDate: [null],
       voucherNo: [null],
@@ -101,13 +100,13 @@ branchCode:any;
   search() {
     if (this.dateForm?.value?.voucherNo == null) {
       if (this.dateForm?.value?.branchCode == null) {
-        if (this.dateForm?.value?.selected == null) {
+        if (this.dateForm?.value?.fromDate == null) {
           this.alertService.openSnackBar('Select VoucherNO or Date', Static.Close, SnackBar.error);
           return;
         } else {
           this.dateForm.patchValue({
-            fromDate:  this.commonService.formatDate(this.dateForm.value.selected.start._d),
-            toDate:  this.commonService.formatDate(this.dateForm.value.selected.end._d),
+            fromDate:  this.commonService.formatDate(this.dateForm.value.fromDate),
+            toDate:  this.commonService.formatDate(this.dateForm.value.toDate),
             voucherNo:this.dateForm.value.voucherNo,
             role:this.branchCode.role,
             branchCode:this.dateForm.value.branchCode

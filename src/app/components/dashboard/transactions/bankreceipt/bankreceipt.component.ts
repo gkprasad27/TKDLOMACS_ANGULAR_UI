@@ -45,7 +45,6 @@ branchCode:any;
 
   ) {
     this.dateForm = this.formBuilder.group({
-      selected: [null],
       fromDate: [null],
       toDate: [null],
       voucherNo: [null],
@@ -101,13 +100,13 @@ branchCode:any;
   search() {
     if (this.dateForm?.value?.voucherNo == null) {
        if (this.dateForm?.value?.branchCode == null) {
-        if (this.dateForm?.value?.selected == null) {
+        if (this.dateForm?.value?.fromDate == null) {
           this.alertService.openSnackBar('Select VoucherNo or Date', Static.Close, SnackBar.error);
           return;
         } else {
           this.dateForm.patchValue({
-            fromDate:  this.commonService.formatDate(this.dateForm.value.selected.start._d),
-            toDate:  this.commonService.formatDate(this.dateForm.value.selected.end._d),
+            fromDate:  this.commonService.formatDate(this.dateForm.value.fromDate),
+            toDate:  this.commonService.formatDate(this.dateForm.value.toDate),
             voucherNo:this.dateForm.value.voucherNo,
             role:this.branchCode.role,
             branchCode:this.dateForm.value.branchCode
