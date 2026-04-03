@@ -732,6 +732,9 @@ export class PurchaseComponent implements OnInit {
     //   this.alertService.openSnackBar(`This Product(${obj.productCode}) available stock is 0`, Static.Close, SnackBar.error);
     // }
     obj.text = 'obj';
+    if (obj.qty == 0) {
+      obj.qty = '';
+    }
     this.dataSource.data[index] = obj;
     this.dataSource = new MatTableDataSource(this.dataSource.data);
     this.tableFormData.patchValue({
