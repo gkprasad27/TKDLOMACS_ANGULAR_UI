@@ -94,7 +94,7 @@ export class SalesInvoiceComponent implements OnInit {
       branchCode: [null],
       branchName: [null],
       invoiceDate: [(new Date()).toISOString()],
-      invoiceNo: [0],
+      invoiceNo: [0, Validators.required],
       ledgerCode: ['100'],
       vehicleRegNo: [null],
       stateCode: [null],
@@ -1057,7 +1057,14 @@ export class SalesInvoiceComponent implements OnInit {
       this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
       return;
     }
-
+    if(this.branchFormData.get('invoiceNo').value == null || this.branchFormData.get('invoiceNo').value == '' || this.branchFormData.get('invoiceNo').value == 0) {
+      this.alertService.openSnackBar("Invoice No can't be empty", Static.Close, SnackBar.error);
+      return;
+    }
+    if(this.branchFormData.get('ledgerCode').value !== '100' && (+(this.branchFormData.get('accountBalance').value) < +(this.branchFormData.get('grandTotal').value))) {
+      this.alertService.openSnackBar("Your Balance is low Please Add Balance", Static.Close, SnackBar.error);
+      return;
+    }
     const dialogRef = this.dialog.open(SaveItemComponent, {
       width: '1024px',
       data: '',
