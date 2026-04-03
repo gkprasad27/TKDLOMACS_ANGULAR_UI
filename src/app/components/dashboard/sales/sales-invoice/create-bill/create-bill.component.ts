@@ -1073,7 +1073,7 @@ if (branchCode != null && branchCode !== '' &&
           return stock;
         }
       }
-      if (stock.productCode == 'D' || stock.productCode == 'P' || stock.productCode == 'XP'|| stock.productCode == 'CNG'|| stock.productCode == 'XG') {
+      if (stock.productCode == 'D' || stock.productCode == 'P' || stock.productCode == 'XP'|| stock.productCode == 'CNG'|| stock.productCode == 'XG'|| stock.productCode == 'X1') {
         if ((stock.pumpNo == null)) {
           content = 'PumpNo is null';
           return stock;
