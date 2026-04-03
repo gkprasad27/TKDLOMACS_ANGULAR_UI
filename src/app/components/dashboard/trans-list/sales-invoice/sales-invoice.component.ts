@@ -1064,10 +1064,23 @@ export class SalesInvoiceComponent implements OnInit {
       this.alertService.openSnackBar("Invoice No can't be empty", Static.Close, SnackBar.error);
       return;
     }
-    if(this.branchFormData.get('ledgerCode').value !== '100' && (+(this.branchFormData.get('accountBalance').value) < +(this.branchFormData.get('grandTotal').value))) {
-      this.alertService.openSnackBar("Your Balance is low Please Add Balance", Static.Close, SnackBar.error);
-      return;
-    }
+    // if(this.branchFormData.get('ledgerCode').value !== '100' && (+(this.branchFormData.get('accountBalance').value) < +(this.branchFormData.get('grandTotal').value))) {
+    //   this.alertService.openSnackBar("Your Balance is low Please Add Balance", Static.Close, SnackBar.error);
+    //   return;
+    // }
+    const allowedLedgerCodes = ['100', '2295', '2696', '2600', '2041', '2403'];
+
+if (
+  !allowedLedgerCodes.includes(this.branchFormData.get('ledgerCode').value) &&
+  (+this.branchFormData.get('accountBalance').value < +this.branchFormData.get('grandTotal').value)
+) {
+  this.alertService.openSnackBar(
+    "Your Balance is low Please Add Balance",
+    Static.Close,
+    SnackBar.error
+  );
+  return;
+}
     const dialogRef = this.dialog.open(SaveItemComponent, {
       width: '1024px',
       data: '',
