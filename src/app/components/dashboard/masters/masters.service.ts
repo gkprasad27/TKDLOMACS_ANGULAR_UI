@@ -17,6 +17,7 @@ import { DesignationComponent } from './designation/designation.component';
 import { DepartmentComponent } from './department/department.component';
 import { OpeningBalanceComponent } from './openingBalance/openingBalance.component';
 import { MeterReadingComponent } from '../transactions/meterreading/meterreading.component';
+import { PackageconversionComponent } from '../transactions/packageconversion/packageconversion.component';
 
 
 @Injectable({
@@ -212,6 +213,16 @@ export class MastersService {
         // this.dynamicData.coustom = true;
         return this.dynamicData;
         break;
+      case 'packageconversion':
+        this.dynamicData.url = this.apiConfigService.getPackageconversionList;
+        this.dynamicData.component = PackageconversionComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerPackageconversion;
+        this.dynamicData.updateUrl = this.apiConfigService.updatePackageconversions;
+        this.dynamicData.deleteUrl = this.apiConfigService.deletePackageconversions;
+        this.dynamicData.listName = 'packageconversionsList';
+        this.dynamicData.primaryKey = 'packingConversionId';
+        // this.dynamicData.coustom = true;
+        return this.dynamicData;
       default:
     }
   }

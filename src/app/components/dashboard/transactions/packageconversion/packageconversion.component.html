@@ -8,8 +8,8 @@
 
       <div class="d--flex">
         <mat-form-field>
-          <mat-label>Inputproduct Code</mat-label>
-          <mat-select placeholder="{{'packageconversion.inputproductCode' | translate }}" formControlName="inputproductCode"   (selectionChange)="getproductCodeList()" appFocusOnEnter tabIndex="4">
+          <mat-label>{{'packageconversion.inputproductCode' | translate }}</mat-label>
+          <mat-select formControlName="inputproductCode"   (selectionChange)="getproductCodeList()" appFocusOnEnter tabIndex="4">
             @for (ptlist of inputcodeList; track ptlist) {
               <mat-option [value]="ptlist.id">
                 {{ptlist.id}}
@@ -19,12 +19,13 @@
         </mat-form-field>
 
         <mat-form-field class="form-element">
-          <input matInput placeholder="{{'packageconversion.inputproductName' | translate }}" formControlName="inputproductName" appFocusOnEnter tabIndex="2">
+          <mat-label>{{'packageconversion.inputproductName' | translate }}</mat-label>
+          <input matInput formControlName="inputproductName" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Outputproduct Code</mat-label>
-          <mat-select formControlName="outputproductCode" placeholder="outputproductCode" (selectionChange)="getoutproductCodeList()" appFocusOnEnter tabIndex="8">
+          <mat-label>{{'packageconversion.outputproductCode' | translate }}</mat-label>
+          <mat-select formControlName="outputproductCode" (selectionChange)="getoutproductCodeList()" appFocusOnEnter tabIndex="8">
             @for (ptlist of inputcodeList; track ptlist) {
               <mat-option [value]="ptlist.id">
                 {{ptlist.id}}
@@ -35,15 +36,18 @@
 
 
         <mat-form-field class="form-element">
-          <input matInput placeholder="{{'packageconversion.outputproductName' | translate }}" formControlName="outputproductName" appFocusOnEnter tabIndex="2">
+            <mat-label>{{'packageconversion.outputproductName' | translate }}</mat-label>
+          <input matInput formControlName="outputproductName" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
         <mat-form-field class="form-element">
-          <input matInput placeholder="{{'packageconversion.inputQty' | translate }}" formControlName="inputQty" appFocusOnEnter tabIndex="2">
+          <mat-label>{{'packageconversion.inputQty' | translate }}</mat-label>
+          <input matInput formControlName="inputQty" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
         <mat-form-field class="form-element">
-          <input matInput placeholder="{{'packageconversion.outputQty' | translate }}" formControlName="outputQty" appFocusOnEnter tabIndex="2">
+          <mat-label>{{'packageconversion.outputQty' | translate }}</mat-label>
+          <input matInput formControlName="outputQty" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
       </div>

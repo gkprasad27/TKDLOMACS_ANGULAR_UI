@@ -1284,7 +1284,7 @@
     "delete": "Delete"
   },
    "packageconversion": {
-    "title": "PackageConversion List",
+    "title": "Package Conversion",
     "inputproductCode": "Input ProductCode",
     "inputproductName": "Input ProductName",
     "inputQty": "Input Qty",
