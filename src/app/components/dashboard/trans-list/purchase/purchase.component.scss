@@ -1,59 +1,77 @@
-
 @import "../../../../../reuse";
 
+/* ===============================
+   TABLE CONTAINER
+================================= */
 .table {
-  // overflow-x: unset;
+  width: 100%;
+  overflow-x: hidden; // prevent horizontal scroll
 }
 
+/* ===============================
+   TYPEAHEAD DROPDOWN
+================================= */
 ::ng-deep typeahead-container {
   max-height: 300px !important;
 }
 
+/* ===============================
+   TABLE BASE
+================================= */
 :host ::ng-deep table {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  width: 100%;
+  table-layout: fixed; // key fix
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
   & > thead {
     & th {
       text-align: center;
     }
   }
-  & > tbody  {
+
+  & > tbody {
     & tr {
       border-bottom: 1px solid $color-ddd;
     }
+
     & td {
       font-size: 12px;
       vertical-align: middle;
-            // border: none !important;
       border: 1px solid $color-gray;
       text-align: center;
-      padding-left: 0% !important;
+      padding: 0.5% !important;
+
+      /* Prevent overflow */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
+
     & th {
       vertical-align: middle;
-      // border: none !important;
     }
+
     & tr:nth-child(even) {
-    background-color: $color-f9f9f9
+      background-color: $color-f9f9f9;
     }
+
     & tr:nth-child(odd) {
-      background-color: $color-white
-      }
-      & tr:nth-child(even):hover {
-        background-color: $color-f9f9f9
-        }
-        & tr:nth-child(odd):hover {
-          background-color: $color-f9f9f9
-          }
+      background-color: $color-white;
+    }
+
+    & tr:nth-child(even):hover,
+    & tr:nth-child(odd):hover {
+      background-color: $color-f9f9f9;
+    }
   }
 }
 
-// .mat-header-cell, .mat-cell {
-//   min-width: 150px;
-// }
-
-.table th, .table td {
+/* ===============================
+   HEADER & CELL FIXES
+================================= */
+.table th,
+.table td {
   vertical-align: middle;
-  // border: none !important;
 }
 
 .table th {
@@ -61,58 +79,143 @@
   color: $color-white;
 }
 
+/* ===============================
+   ROW FIX
+================================= */
 .table tr {
   height: 40px !important;
   cursor: pointer;
 }
 
-  .mat-form-field-height {
-    .mat-form-field {
-      margin: 5px;
-      flex: 0 0 19%;
-      height: 40px;
+/* ===============================
+   FIX ANGULAR MATERIAL MIN WIDTH
+================================= */
+::ng-deep .mat-header-cell,
+::ng-deep .mat-cell {
+  min-width: unset !important;
+}
 
-    //   & .mat-form-field-wrapper {
-    //     padding-bottom: 0em !important;
-    // }
-    // & .mat-form-field-underline {
-    //   bottom: 0.1em;
-    // }
-    // & .mat-form-field-infix {
-    //   border: none;
-    // }
-    }
+/* ===============================
+   INPUT + TYPEAHEAD FIX
+================================= */
+td input,
+.typeAhead,
+.mat-form-field {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===============================
+   FORM FIELD LAYOUT FIX
+================================= */
+.mat-form-field-height {
+  display: flex;
+  flex-wrap: wrap; // allows wrapping instead of overflow
+
+  .mat-form-field {
+    margin: 5px;
+    flex: 1 1 19%; // responsive instead of fixed width
+    min-width: 120px;
+    height: 40px;
   }
+}
 
-
+/* ===============================
+   BILL LAYOUT
+================================= */
 .bill--width {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap; // responsive
+
   & mat-card:first-child {
     width: 61%;
   }
+
   & mat-card:last-child {
     width: 38%;
   }
 }
 
+/* ===============================
+   DELETE ICON
+================================= */
 .delete-icon {
   font-size: 17px;
   color: #337ab7;
 }
 
+/* ===============================
+   INPUT FOCUS
+================================= */
 mat-form-field {
-& input:focus {
-  background: #f6ff0091;
-}
+  & input:focus {
+    background: #f6ff0091;
+  }
 }
 
+/* ===============================
+   FLASH EFFECT
+================================= */
 .flashLight {
   -webkit-animation: glowing 1500ms infinite;
 }
 
 @-webkit-keyframes glowing {
-  0% { border: #B20000; -webkit-box-shadow: 0 0 1px #B20000; }
-  50% { border: #FF0000; -webkit-box-shadow: 0 0 20px #FF0000; }
-  100% { border: #B20000; -webkit-box-shadow: 0 0 1px #B20000; }
+  0% {
+    border: #B20000;
+    -webkit-box-shadow: 0 0 1px #B20000;
+  }
+  50% {
+    border: #FF0000;
+    -webkit-box-shadow: 0 0 20px #FF0000;
+  }
+  100% {
+    border: #B20000;
+    -webkit-box-shadow: 0 0 1px #B20000;
+  }
 }
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================= */
+@media (max-width: 768px) {
+  table {
+    font-size: 11px;
+  }
+
+  th,
+  td {
+    padding: 4px !important;
+  }
+
+  .table tr {
+    height: auto !important;
+  }
+
+  /* Form fields adjust */
+  .mat-form-field-height .mat-form-field {
+    flex: 1 1 45%;
+  }
+
+  /* Stack layout */
+  .bill--width {
+    flex-direction: column;
+
+    & mat-card:first-child,
+    & mat-card:last-child {
+      width: 100%;
+    }
+  }
+}
+
+/* ===============================
+   OPTIONAL WRAP MODE
+   (Enable if text cut is not desired)
+================================= */
+/*
+td {
+  white-space: normal !important;
+}
+*/
