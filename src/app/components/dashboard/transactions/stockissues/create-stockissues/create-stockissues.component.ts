@@ -122,7 +122,7 @@ export class CreateStockissuesComponent implements OnInit {
         {
           this.branchFormData.patchValue
           ({
-            frombranchCode: +user.branchCode,
+            fromBranchCode: +user.branchCode,
             userId: user.seqId,
             userName: user.userName
           });
