@@ -1140,6 +1140,7 @@ if (
     let obj = { ...this.branchFormData.getRawValue() };
     obj.invoiceDate = this.commonService.formatDate(this.branchFormData.get('invoiceDate').value);
     obj.paymentMode = 0;
+    data.map(val => val.qty = val.qty != null && val.qty != '' ? +val.qty : 0);
     const registerInvoiceUrl = this.apiConfigService.registerInvoice;
     const requestObj = { InvoiceHdr: obj, InvoiceDetail: data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
