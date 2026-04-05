@@ -112,8 +112,8 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
         //this.disableForm();
         if (user?.branchCode != null) {
           this.branchFormData.patchValue({
-            frombranchCode: +user.branchCode,
-            branch: user.branchCode,
+            fromBranchCode: +user.branchCode,
+            branch: +user.branchCode,
             userId: user.seqId,
             userName: user.userName
           });
