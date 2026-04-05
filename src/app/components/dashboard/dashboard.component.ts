@@ -29,8 +29,6 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     route: ActivatedRoute
   ) {
-    this.commonService.routeParam = route.snapshot.routeConfig.path;
-    console.log(this.commonService.routeParam, 'routeParam');
     commonService.showNavbar.next(true);
   }
 
@@ -60,7 +58,6 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.commonService.routeParam = null;
   }
 
 /*

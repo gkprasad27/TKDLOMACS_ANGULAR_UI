@@ -51,7 +51,6 @@ export class SidebarComponent implements OnInit {
 
     }
     if (!item.children || !item.children.length) {
-      this.commonService.routeParam = item.route;
       // Navigate using the route path directly; dashboard will handle param resolution
       this.router.navigate(['dashboard', item.screenType, item.route]);
       this.commonService.toggleSidebar();

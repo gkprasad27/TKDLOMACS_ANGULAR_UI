@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonService } from '../../services/common.service';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 
@@ -16,6 +16,7 @@ import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedImportModule } from 'src/app/shared/shared-import';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -51,11 +52,37 @@ export class NavbarComponent implements OnInit {
     private apiConfigService: ApiConfigService,
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
+    private route: ActivatedRoute
 
   ) {
   }
 
   ngOnInit() {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const root = this.router.routerState.snapshot.root;
+        const allParams = this.getAllParams(root);
+        console.log(this.router.routerState.snapshot.url);
+        if (allParams && allParams.hasOwnProperty('id') && allParams.id) {
+          this.commonService.routeParam = allParams.id;
+        } else {
+          this.commonService.routeParam = this.router.routerState.snapshot.url.replace('/', '');
+        }
+      });
+  }
+
+  getAllParams(route: any): any {
+    let params = {
+      ...route.params,
+      ...route.queryParams
+    };
+
+    if (route.firstChild) {
+      params = { ...params, ...this.getAllParams(route.firstChild) };
+    }
+
+    return params;
   }
 
   GetShiftId() {

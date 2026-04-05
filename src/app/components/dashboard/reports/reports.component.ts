@@ -45,8 +45,6 @@ export class ReportsComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('user'));
     this.reportsService.branchCode = user.branchCode;
     
-    this.commonService.routeParam = activatedRoute.snapshot.params.id;
-    console.log(this.commonService.routeParam, 'routeParam');
     activatedRoute.params.subscribe(params => {
       this.tableUrl = reportsService.getRouteUrls(params.id);
       this.route = params.id;

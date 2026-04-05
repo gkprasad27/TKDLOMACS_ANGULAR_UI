@@ -51,7 +51,6 @@ export class TransListComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef
   ) {
     activatedRoute.params.subscribe(params => {
-      this.commonService.routeParam = params.id
       if (!this.commonService.checkNullOrUndefined(params.id1)) {
         this.params = params.id;
       } else {
@@ -75,7 +74,6 @@ export class TransListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.commonService.routeParam = null;
 }
 
 }
