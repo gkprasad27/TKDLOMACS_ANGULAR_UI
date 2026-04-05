@@ -4,7 +4,6 @@ import { AuthGuard } from './auth.guard';
 import { LoginComponent, DashboardComponent, NotFoundComponent } from './components/index';
 import { GeneralledgerComponent } from './components/dashboard/generalledger/index';
 import { InventoryComponent } from './components/dashboard/Inventory/index';
-import { SalesComponent, CreateBillComponent , SalesReturnViewComponent, CreateStockTransferComponent , PurchaseCreateComponent} from './components/dashboard/sales/index';
 import { MastersComponent } from './components/dashboard/masters/index';
 import { PayrollComponent } from './components/dashboard/payroll/index';
 import { SelfserviceComponent } from './components/dashboard/selfservice/index';
@@ -16,7 +15,6 @@ import {
 } from './components/dashboard/settings/index';
 
 import { ReportsComponent } from './components/dashboard/reports/index';
-import { PurchaseReturnViewComponent } from './components/dashboard/sales/purchase-return/purchase-return-view/purchase-return-view.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, data: { title: 'Login' } },
@@ -33,20 +31,6 @@ const routes: Routes = [
       { path: 'inventory/:id', component: InventoryComponent, data: { title: 'Inventory' } },
       { path: 'selfservice/:id', component: SelfserviceComponent, data: { title: 'Selfservice' } },
 
-      { path: 'sales/:id', component: SalesComponent, data: { title: 'Sales' } },
-
-
-      { path: 'sales/:id/createSale', component: CreateBillComponent, data: { title: 'Create Sale' } },
-
-      { path: 'sales/:id/viewSaleInvoice/:id1/:id2', component: CreateBillComponent, data: { title: 'Create Sale' } },
-      { path: 'sales/:id/salesReturnView', component: SalesReturnViewComponent, data: { title: 'Create Sale' } },
-      { path: 'sales/:id/salesReturnView/:id1', component: SalesReturnViewComponent, data: { title: 'Create Sale' } },
-      { path: 'sales/:id/createStockTransfer', component: CreateStockTransferComponent, data: { title: 'Create Sale' } },
-      { path: 'sales/:id/createStockTransfer/:id1', component: CreateStockTransferComponent, data: { title: 'Create Sale' } },
-      { path: 'sales/:id/CreatePurchase', component: PurchaseCreateComponent, data: { title: 'Create Sale' } },
-      { path: 'sales/:id/viewPurchaseInvoice/:id1/:id2', component: PurchaseCreateComponent, data: { title: 'Create Sale' } },
-      { path: 'sales/:id/purchaseReturnView', component: PurchaseReturnViewComponent, data: { title: 'Create Sale' } },
-      { path: 'sales/:id/purchaseReturnView/:id1', component: PurchaseReturnViewComponent, data: { title: 'Create Sale' } },
       { path: 'transactions/:id', component: TransactionsComponent, data: { title: 'Transactions' } },
       { path: 'transactions/:id/createCashpayment', component: CreateCashpaymentComponent, data: { title: 'Create CashPayment' } },
       { path: 'transactions/:id/createCashpayment/:id1', component: CreateCashpaymentComponent, data: { title: 'Create CashPayment' } },
