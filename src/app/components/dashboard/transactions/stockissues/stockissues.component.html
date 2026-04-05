@@ -8,17 +8,18 @@
             <div class="row">
 
               <mat-form-field class="col-4">
-                <mat-label>Choose date</mat-label>
+                <mat-label> {{ 'COMMON.CHOOSEDATE' | translate }} </mat-label>
                 <mat-date-range-input [rangePicker]="picker">
-                  <input matInput matStartDate placeholder="Start date" formControlName="fromDate">
-                  <input matInput matEndDate placeholder="End date" formControlName="toDate">
+                  <input matInput matStartDate placeholder="{{ 'COMMON.STARTDATE' | translate }}" formControlName="fromDate">
+                  <input matInput matEndDate placeholder="{{ 'COMMON.ENDDATE' | translate }}" formControlName="toDate">
                 </mat-date-range-input>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-date-range-picker #picker></mat-date-range-picker>
               </mat-form-field>
 
                 <mat-form-field class="col-4">
-                  <input matInput placeholder="{{ 'stockissues.issueNo' | translate }}" formControlName="issueNo"
+                  <mat-label>{{ 'stockissues.issueNo' | translate }}</mat-label>
+                  <input matInput formControlName="issueNo"
                     appFocusOnEnter tabIndex="3" />
                 </mat-form-field>
 
@@ -50,42 +51,42 @@
 
 
             <ng-container matColumnDef="fromBranchCode">
-              <th mat-header-cell *matHeaderCellDef> FromBranchCode </th>
+              <th mat-header-cell *matHeaderCellDef> {{ 'stockissues.fromBranchCode' | translate }} </th>
               <td mat-cell *matCellDef="let element;"> {{element.fromBranchCode}} </td>
             </ng-container>
 
             <ng-container matColumnDef="fromBranchName">
-              <th mat-header-cell *matHeaderCellDef> FromBranchName </th>
+              <th mat-header-cell *matHeaderCellDef> {{ 'stockissues.fromBranchName' | translate }} </th>
               <td mat-cell *matCellDef="let element;"> {{element.fromBranchName}} </td>
             </ng-container>
 
             <ng-container matColumnDef="toBranchCode">
-              <th mat-header-cell *matHeaderCellDef> ToBranchCode </th>
+              <th mat-header-cell *matHeaderCellDef> {{ 'stockissues.toBranchCode' | translate }} </th>
               <td mat-cell *matCellDef="let element;"> {{element.toBranchCode}} </td>
             </ng-container>
 
             <ng-container matColumnDef="toBranchName">
-              <th mat-header-cell *matHeaderCellDef> ToBranchName </th>
+              <th mat-header-cell *matHeaderCellDef> {{ 'stockissues.toBranchName' | translate }} </th>
               <td mat-cell *matCellDef="let element;"> {{element.toBranchName}} </td>
             </ng-container>
 
             <ng-container matColumnDef="issueNo">
-              <th mat-header-cell *matHeaderCellDef> IssueNo </th>
+              <th mat-header-cell *matHeaderCellDef> {{ 'stockissues.issueNo' | translate }} </th>
               <td mat-cell *matCellDef="let element;"> {{element.issueNo}} </td>
             </ng-container>
 
             <ng-container matColumnDef="issueDate">
-              <th mat-header-cell *matHeaderCellDef> IssueDate </th>
+              <th mat-header-cell *matHeaderCellDef> {{ 'stockissues.issueDate' | translate }} </th>
               <td mat-cell *matCellDef="let element;"> {{element.issueDate| date:'dd/MM/yyyy hh:mm:ss'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="userId">
-              <th mat-header-cell *matHeaderCellDef> UserId </th>
+              <th mat-header-cell *matHeaderCellDef> {{ 'stockissues.userId' | translate }} </th>
               <td mat-cell *matCellDef="let element;"> {{element.userId}} </td>
             </ng-container>
 
             <ng-container matColumnDef="shiftId">
-              <th mat-header-cell *matHeaderCellDef> Shift Id </th>
+              <th mat-header-cell *matHeaderCellDef> {{ 'stockissues.shiftId' | translate }} </th>
               <td mat-cell *matCellDef="let element;"> {{element.shiftId}} </td>
             </ng-container>
 

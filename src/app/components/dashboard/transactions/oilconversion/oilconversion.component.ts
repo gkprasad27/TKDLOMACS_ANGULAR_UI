@@ -46,7 +46,6 @@ export class OilconversionComponent implements OnInit {
     private spinner: NgxSpinnerService,
   ) {
     this.dateForm = this.formBuilder.group({
-      selected: [null],
       fromDate: [null],
       toDate: [null],
       oilConversionVchNo: [null],
@@ -91,14 +90,14 @@ export class OilconversionComponent implements OnInit {
   search()
   {
     if (this.dateForm?.value?.oilConversionVchNo == null) {
-      if (this.dateForm?.value?.selected == null) {
+      if (this.dateForm?.value?.fromDate == null) {
         this.alertService.openSnackBar('Select oilConversionVchNo or Date', Static.Close, SnackBar.error);
         return;
       }
       else {
         this.dateForm.patchValue({
-          fromDate: this.commonService.formatDate(this.dateForm.value.selected.start._d),
-          toDate: this.commonService.formatDate(this.dateForm.value.selected.end._d),
+          fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
+          toDate: this.commonService.formatDate(this.dateForm.value.toDate),
           oilConversionVchNo: this.dateForm.value.oilConversionVchNo
         });
       }

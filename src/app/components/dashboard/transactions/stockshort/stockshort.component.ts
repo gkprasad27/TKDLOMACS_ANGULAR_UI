@@ -46,7 +46,6 @@ export class StockshortComponent  implements OnInit {
 
   ) {
     this.dateForm = this.formBuilder.group({
-      selected: [this.selectedDate],
       fromDate: [null],
       toDate: [null],
       stockshortNo: [null],
@@ -91,14 +90,14 @@ export class StockshortComponent  implements OnInit {
   //Search and datadisplay code
   search() {
     if ((this.dateForm.value.stockshortNo == null)) {
-      if (this.dateForm?.value?.selected == null) {
+      if (this.dateForm?.value?.fromDate == null) {
         this.alertService.openSnackBar('Select issueNo or Date', Static.Close, SnackBar.error);
         return;
       }
       else {
         this.dateForm.patchValue({
-          fromDate: this.commonService.formatDate(this.dateForm.value.selected.start._d),
-          toDate: this.commonService.formatDate(this.dateForm.value.selected.end._d),
+          fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
+          toDate: this.commonService.formatDate(this.dateForm.value.toDate),
           stockshortNo: this.dateForm.value.stockshortNo
         });
       }

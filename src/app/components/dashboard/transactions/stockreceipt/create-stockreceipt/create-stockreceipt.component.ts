@@ -120,7 +120,7 @@ export class CreateStockreceiptsComponent implements OnInit {
         //this.disableForm();
         if (user?.branchCode != null) {
           this.branchFormData.patchValue({
-            frombranchCode: +user.branchCode,
+            fromBranchCode: +user.branchCode,
             userId: user.seqId,
             userName: user.userName
           });

@@ -48,7 +48,6 @@ export class StockreceiptsComponent implements OnInit {
   {
    
     this.dateForm = this.formBuilder.group({
-      selected: [null],
       fromDate: [null],
       toDate: [null],
       receiptNo: [null],
@@ -94,15 +93,15 @@ export class StockreceiptsComponent implements OnInit {
   {
     if ((this.dateForm.value.receiptNo == null))
     {
-      if ((this.dateForm.value.selected == null))
+      if ((this.dateForm.value.fromDate == null))
       {
         this.alertService.openSnackBar('Select issueNo or Date', Static.Close, SnackBar.error);
         return;
       }
       else {
         this.dateForm.patchValue({
-          fromDate: this.commonService.formatDate(this.dateForm.value.selected.start._d),
-          toDate: this.commonService.formatDate(this.dateForm.value.selected.end._d),
+          fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
+          toDate: this.commonService.formatDate(this.dateForm.value.toDate),
           receiptNo: this.dateForm.value.receiptNo
         });
       }
