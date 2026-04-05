@@ -874,7 +874,7 @@ export class SalesReturnComponent implements OnInit {
 
   print() {
     this.enableFileds();
-    const requestObj = { InvoiceHdr: this.branchFormData.value, InvoiceDetail: this.dataSource.data };
+    const requestObj = { InvoiceHdr: this.branchFormData.value, InvoiceDetail: this.dataSource.data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };
     if (this.printBill) {
       this.dialog.open(PrintComponent, {
         width: '1024px',
