@@ -395,11 +395,11 @@ export class CreateStockissuesComponent implements OnInit {
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
           const res = response;
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
-              if (res?.response?.products != null) {
-                this.getProductByProductCodeArray = res.response['products'];
-                this.spinner.hide();
+              if (res?.response?.Products != null) {
+                this.getProductByProductCodeArray = res.response['Products'];
               }
             }
           }

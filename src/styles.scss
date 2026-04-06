@@ -538,3 +538,9 @@ typeahead-container {
 .table-link, .table-link:hover {
   color: rgb(187, 6, 6);
 }
+
+.typeAhead {
+    border: 1px solid rgb(118, 118, 118) !important;
+    border-radius: 3px !important;
+    padding: 3px !important;
+}
