@@ -397,8 +397,8 @@ export class CreateStockissuesComponent implements OnInit {
           const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
-              if (res?.response?.Products != null) {
-                this.getProductByProductCodeArray = res.response['Products'];
+              if (res?.response?.products != null) {
+                this.getProductByProductCodeArray = res.response['products'];
                 this.spinner.hide();
               }
             }
@@ -419,8 +419,8 @@ export class CreateStockissuesComponent implements OnInit {
           const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
-              if (res?.response?.Products != null) {
-                this.getProductByProductNameArray = res.response['Products'];
+              if (res?.response?.products != null) {
+                this.getProductByProductNameArray = res.response['products'];
                 this.spinner.hide();
               }
             }
