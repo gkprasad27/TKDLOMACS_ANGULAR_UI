@@ -199,7 +199,7 @@
           <ng-container matColumnDef="rate">
             <th mat-header-cell *matHeaderCellDef> {{ 'purchaseInvoice.rate' | translate }} </th>
             <td mat-cell *matCellDef="let element;">
-              <input matInput [value]="element.rate" [(ngModel)]="element.rate"
+              <input matInput [value]="element.rate" [disabled]="element.text != 'obj'" [(ngModel)]="element.rate"
                 (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
                 (input)="setToFormModel(element.text, 'rate', element.rate)"  />
             </td>
@@ -340,7 +340,7 @@
 
               <mat-form-field class="w-100">
                 <mat-label>{{ 'purchaseInvoice.grandTotal' | translate }}</mat-label>
-                <input matInput formControlName="grandTotal">
+                <input matInput formControlName="grandTotal" class="bold-text">
               </mat-form-field>
             </div>
           </div>

@@ -225,8 +225,8 @@
     "emailId":"Email",
     "web":"Web",    
     "currencyId":"Currency",
-    "financialYearFrom":"FinancialYearFrom",
-    "booksBeginingFrom":"BooksBeginingFrom",
+    "financialYearFrom":"Financial Year From",
+    "booksBeginingFrom":"Books Beginning From",
     "gstin":"GST"
     
   },
@@ -238,7 +238,7 @@
     "city":"City",
     "state":"State",
     "country":"Country",
-    "pinCode":"PinCode",
+    "pinCode":"Pin Code",
     "phone":"Phone",
     "email":"Email",
     "gstin":"GST"
@@ -327,12 +327,12 @@
     "responsiblePerson": "Responsible Person",
     "active": "Active",
     "compCodeNavigation": "Company Code Navigation",
-    "addDate": "AddDate"
+    "addDate": "Add Date"
   },
   "stockissues": {
     "title": "Stock Issues",
-    "issueNo": "IssueNo",
-    "issueDate": "IssueDate",
+    "issueNo": "Issue No",
+    "issueDate": "Issue Date",
     "newstockissues": "New Stock Issues",
     "fromBranchCode": "From Branch Code",
     "fromBranchName": "From Branch Name",
@@ -1027,6 +1027,8 @@
     "totalLiters": "Total Liters",
     "tankNo": "Tank No",
     "narration": "Narration",
+
+    "SlNo": "Sl No",
 
     "RETURNTITLE": "Sales Return",
     "VIEWSALESRETURN": "Sales Return View",

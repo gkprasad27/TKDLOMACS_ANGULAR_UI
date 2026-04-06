@@ -116,20 +116,20 @@ mat-error {
   cursor: pointer;
 }
 
-.style-success {
-  background: reuse.$color-green;
+.style-success .mdc-snackbar__surface{
+  background: reuse.$color-green !important;
 }
 
-.style-error {
-  background: reuse.$color-red;
+.style-error .mdc-snackbar__surface {
+  background: reuse.$color-red !important;
 }
 
-.style-warning {
-  background: reuse.$color-yellow;
+.style-warning .mdc-snackbar__surface{
+  background: reuse.$color-yellow !important;
 }
 
-.style-normal {
-  background: reuse.$color-gray;
+.style-normal .mdc-snackbar__surface{
+  background: reuse.$color-gray !important;
 }
 
 .background-header-boarder {
@@ -509,9 +509,9 @@ typeahead-container {
 }
 
 
-.typeahead:has(input:disabled) {
-  opacity: 0.4;
-}
+// .typeahead:has(input:disabled) {
+//   opacity: 0.4;
+// }
 
 .flash-light {
   -webkit-animation: _ngcontent-ng-c1539275210_glowing 1.5s infinite !important;
@@ -526,8 +526,15 @@ typeahead-container {
   color: rgba(0, 0, 0, 0.75) !important;
 }
 
-.mat-mdc-form-field.mat-form-field-disabled .mdc-text-field__input {
-  font-weight: 400 !important;
-  color: rgba(0, 0, 0, 0.75) !important;
-  -webkit-text-fill-color: rgba(0, 0, 0, 0.75) !important;
+.mat-mdc-form-field.mat-form-field-disabled {
+  .mdc-text-field__input,
+  .mat-mdc-select {
+    font-weight: 400 !important;
+    color: rgba(0, 0, 0, 0.75) !important;
+    -webkit-text-fill-color: rgba(0, 0, 0, 0.75) !important;
+  }
+}
+
+.table-link, .table-link:hover {
+  color: rgb(187, 6, 6);
 }

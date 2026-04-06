@@ -119,6 +119,13 @@ export class PurchaseComponent implements OnInit {
       isPurchaseReturned: [null],
       totalTcsAmount: [null]
     });
+
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user?.role != '1') {
+      this.branchFormData.controls['branchCode'].disable();
+    }
   }
 
   ngOnInit() {

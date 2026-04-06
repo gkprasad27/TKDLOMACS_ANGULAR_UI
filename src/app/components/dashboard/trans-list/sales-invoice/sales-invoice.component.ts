@@ -140,6 +140,7 @@ export class SalesInvoiceComponent implements OnInit {
 
     if (user?.role != '1') {
       this.branchFormData.controls['invoiceDate'].disable();
+      this.branchFormData.controls['branchCode'].disable();
     }
   }
 
