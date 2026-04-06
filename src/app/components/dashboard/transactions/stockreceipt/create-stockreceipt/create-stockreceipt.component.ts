@@ -227,6 +227,7 @@ export class CreateStockreceiptsComponent implements OnInit {
     this.apiService.apiGetRequest(gettingtobranchesListUrl).subscribe(
       response => {
         const res = response;
+              this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response != null)
           {
@@ -234,12 +235,10 @@ export class CreateStockreceiptsComponent implements OnInit {
             if (res?.response?.branch?.length)
             {
               this.toBranchCode = res.response['branch']
-              this.branchFormData.patchValue
-                ({
+              this.branchFormData.patchValue({
                   toBranchCode: res.response['branch']
-                });
+              });
               //this.GettoBranchesListArray = res.response['branch'];
-              this.spinner.hide();
             }
           }
         }
