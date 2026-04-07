@@ -429,8 +429,8 @@ export class SalesReturnComponent implements OnInit {
           if (res?.response?.InvoiceReturnDtlsList?.length) {
             this.dataSource = new MatTableDataSource(res.response['InvoiceReturnDtlsList']);
           }
-          if (res?.response?.invoiceMasterData != null) {
-            this.branchFormData.patchValue(res.response['invoiceMasterData']);
+          if (res?.response?.invoiceReturnData != null) {
+            this.branchFormData.patchValue(res.response['invoiceReturnData']);
           }
         }
       });

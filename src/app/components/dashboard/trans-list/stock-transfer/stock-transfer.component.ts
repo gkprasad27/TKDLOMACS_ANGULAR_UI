@@ -185,6 +185,10 @@ export class StockTransferComponent implements OnInit {
             this.dataSource = new MatTableDataSource(res.response['InvoiceList']);
             if (res?.response?.invoiceMasterData != null) {
               this.formData.patchValue(res.response['invoiceMasterData']);
+              this.formData.patchValue({
+                fromBranchCode: +res.response['invoiceMasterData'].fromBranchCode,
+                toBranchCode: +res.response['invoiceMasterData'].toBranchCode,
+              });
             }
             this.calculateAmount();
             this.spinner.hide();
