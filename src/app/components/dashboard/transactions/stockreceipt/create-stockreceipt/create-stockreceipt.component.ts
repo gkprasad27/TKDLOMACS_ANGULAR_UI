@@ -336,8 +336,8 @@ export class CreateStockreceiptsComponent implements OnInit {
                 this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
-              if (res?.response?.Products != null) {
-                this.getProductByProductCodeArray = res.response['Products'];
+              if (res?.response?.products != null) {
+                this.getProductByProductCodeArray = res.response['products'];
               }
             }
           }
