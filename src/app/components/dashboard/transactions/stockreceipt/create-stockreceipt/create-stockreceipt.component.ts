@@ -20,7 +20,7 @@ import { map, startWith } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-@Component({ 
+@Component({
   selector: 'app-create-stockreceipt',
   templateUrl: './create-stockreceipt.component.html',
   styleUrls: ['./create-stockreceipt.component.scss'],
@@ -48,7 +48,7 @@ export class CreateStockreceiptsComponent implements OnInit {
   date = new Date((new Date().getTime() - 3888000000));
   modelFormData: FormGroup;
   tableFormData: FormGroup;
- // printBill: any;
+  // printBill: any;
   issueno = null;
   totalamount = null;
   tableFormObj = false;
@@ -65,32 +65,32 @@ export class CreateStockreceiptsComponent implements OnInit {
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private alertService: AlertService,
-        private router: Router,
+    private router: Router,
 
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
   ) {
     this.branchFormData = this.formBuilder.group
       ({
-      receiptNo: [null],
-      receiptDate: [(new Date()).toISOString()],
-      fromBranchCode: [null],
-      fromBranchName: [null],
-      toBranchCode: [null],
-      toBranchName: [null],
-      serverDateTime: [null],
-      shiftId: [null],
+        receiptNo: [null],
+        receiptDate: [(new Date()).toISOString()],
+        fromBranchCode: [null],
+        fromBranchName: [null],
+        toBranchCode: [null],
+        toBranchName: [null],
+        serverDateTime: [null],
+        shiftId: [null],
         userId: '0',
-      operatorStockReceiptId: '0',
-      userName: [null],
-      employeeId: [null],
-      remarks: [null],
-      //printBill: [false],
+        operatorStockReceiptId: '0',
+        userName: [null],
+        employeeId: [null],
+        remarks: [null],
+        //printBill: [false],
 
-    });
+      });
     const user = JSON.parse(localStorage.getItem('user'));
     if (user != null) {
-      //debugger;
+      ;
       this.branchFormData.patchValue
         ({
           userId: user.userId,
@@ -99,14 +99,12 @@ export class CreateStockreceiptsComponent implements OnInit {
         })
     }
   }
-  ngOnInit()
-  {
+  ngOnInit() {
     this.loadData();
     this.commonService.setFocus('productCode');
   }
 
   loadData() {
-    //debugger;
     const user = JSON.parse(localStorage.getItem('user'));
     this.getBranchesList();
     this.activatedRoute.params.subscribe(params => {
@@ -117,8 +115,7 @@ export class CreateStockreceiptsComponent implements OnInit {
         let billHeader = JSON.parse(localStorage.getItem('selectedstockissues'));
         this.branchFormData.setValue(billHeader);
         this.gettingtobranches();
-      } else
-      {
+      } else {
         //this.disableForm();
         if (user?.branchCode != null) {
           this.branchFormData.patchValue({
@@ -152,9 +149,7 @@ export class CreateStockreceiptsComponent implements OnInit {
 
 
 
-  getStockreceiptDeatilList(id)
-  {
-    //debugger;
+  getStockreceiptDeatilList(id) {
     const getInvoiceDeatilListUrl = [this.apiConfigService.getStockreceiptDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
@@ -168,8 +163,7 @@ export class CreateStockreceiptsComponent implements OnInit {
       });
   }
 
-  getBranchesList()
-  {
+  getBranchesList() {
     const getCashPaymentBranchesListUrl = [this.apiConfigService.getCashPaymentBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
@@ -182,7 +176,7 @@ export class CreateStockreceiptsComponent implements OnInit {
             }
           }
         }
-      
+
       });
   }
 
@@ -190,7 +184,6 @@ export class CreateStockreceiptsComponent implements OnInit {
 
   //issueno code;
   genaratereceiptNo(branch?) {
-    //debugger;
     let genarateVoucherNoUrl;
     if (branch != null) {
       genarateVoucherNoUrl = [this.apiConfigService.getStockissuesreceiptnosList, branch].join('/');
@@ -200,7 +193,7 @@ export class CreateStockreceiptsComponent implements OnInit {
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
         const res = response;
-              this.spinner.hide();
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if ((res.response['ReceiptNo'] != null)) {
@@ -218,7 +211,6 @@ export class CreateStockreceiptsComponent implements OnInit {
 
   //tobranch Name;
   gettingtobranches() {
-    //debugger;
     let gettingtobranchesListUrl;
     if (this.branchFormData.get('fromBranchCode').value == null) {
       gettingtobranchesListUrl = [this.apiConfigService.GetToBranchesStockreceiptsList].join('/');
@@ -229,23 +221,21 @@ export class CreateStockreceiptsComponent implements OnInit {
     this.apiService.apiGetRequest(gettingtobranchesListUrl).subscribe(
       response => {
         const res = response;
-              this.spinner.hide();
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
-          if (res?.response != null)
-          {
+          if (res?.response != null) {
             console.log(res.response['branch']);
-            if (res?.response?.branch?.length)
-            {
+            if (res?.response?.branch?.length) {
               this.toBranchCode = res.response['branch']
               this.branchFormData.patchValue({
-                  toBranchCode: res.response['branch']
+                toBranchCode: res.response['branch']
               });
               //this.GettoBranchesListArray = res.response['branch'];
             }
           }
         }
       });
-    
+
   }
 
   private filter(value: string): string[] {
@@ -254,7 +244,6 @@ export class CreateStockreceiptsComponent implements OnInit {
   }
 
   addTableRow() {
-    //debugger;
     const tableObj =
     {
       productCode: '', productName: '', hsnNo: '', unit: '', qty: '', rate: '', grossAmount: '', availStock: '', batchNo: '', delete: '', text: 'obj'
@@ -317,7 +306,7 @@ export class CreateStockreceiptsComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.dataSource.data);
     this.dataSource.paginator = this.paginator;
   }
-    
+
 
   deleteRow(i) {
     this.dataSource.data = this.dataSource.data.filter((value, index, array) => {
@@ -335,7 +324,7 @@ export class CreateStockreceiptsComponent implements OnInit {
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
           const res = response;
-                this.spinner.hide();
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.products != null) {
@@ -348,11 +337,9 @@ export class CreateStockreceiptsComponent implements OnInit {
       this.getProductByProductCodeArray = [];
     }
   }
-  
+
   //Autocomplete code
-  getProductByProductName(value)
-  {
-    //debugger;
+  getProductByProductName(value) {
     if (value != null && value !== '') {
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
@@ -373,7 +360,6 @@ export class CreateStockreceiptsComponent implements OnInit {
   }
 
   //getProductByProductName(value) {
-  //  debugger;
   //  if (value != null && value !== '') {
   //    const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName, value].join('/');
   //    this.apiService.apiGetRequest(getProductByProductNameUrl).subscribe(
@@ -398,10 +384,10 @@ export class CreateStockreceiptsComponent implements OnInit {
     this.setFocus = id + index;
     const fromBranchCode = this.branchFormData.get('fromBranchCode')?.value;
 
-if (fromBranchCode != null && fromBranchCode !== '' &&
-    productCode?.value != null && productCode.value !== '') {
+    if (fromBranchCode != null && fromBranchCode !== '' &&
+      productCode?.value != null && productCode.value !== '') {
       const getBillingDetailsRcdUrl = [this.apiConfigService.GetProductListsforStockreceipts, productCode.value,
-        this.branchFormData.get('fromBranchCode').value].join('/');
+      this.branchFormData.get('fromBranchCode').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
           const res = response;
@@ -429,7 +415,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
         val = obj;
       }
       val.text = 'obj';
-      if(val.qty == 0) {
+      if (val.qty == 0) {
         val.qty = '';
       }
       return val;
@@ -438,9 +424,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
     this.commonService.setFocus(this.setFocus);
   }
 
-  setProductName(name)
-  {
-    //debugger;
+  setProductName(name) {
     this.tableFormData.patchValue
       ({
         productName: name.value
@@ -451,7 +435,6 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
 
   //Calaculating code
   calculateAmount(row, index) {
-    //debugger;
     let amount = 0;
     for (let a = 0; a < this.dataSource.data.length; a++) {
       if (this.dataSource.data[a].qty) {
@@ -468,15 +451,14 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
 
   //Save Code
   save() {
-    //debugger;
+    ;
     var index = this.dataSource.data.indexOf(1);
     this.dataSource.data.splice(index, 1);
     if (this.routeUrl != '') {
       return;
     }
     let availStock = this.dataSource.filteredData.filter(stock => {
-      if (stock.availStock == 0 || ((stock.qty == null) && (stock.rate == null)))
-      {
+      if (stock.availStock == 0 || ((stock.qty == null) && (stock.rate == null))) {
         return stock;
       }
     });
@@ -490,22 +472,20 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
     if (this.dataSource.data.length == 0) {
       return;
     }
-    
+
     this.registerStackreceipts();
   }
 
   registerStackreceipts() {
-    //debugger;
     const registerStackreceiptsUrl = [this.apiConfigService.registerStockreceipts].join('/');
     const requestObj = { StackreceiptsHdr: this.branchFormData.value, StackreceiptsDetail: this.dataSource.data };
     this.apiService.apiPostRequest(registerStackreceiptsUrl, requestObj).subscribe(
       response => {
         const res = response;
-        if (res?.status === StatusCodes.pass)
-        {
+        if (res?.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Stock Receipt Created Successfully..', Static.Close, SnackBar.success);
-           // this.branchFormData.reset();
+            // this.branchFormData.reset();
           }
         }
         this.reset();
@@ -519,13 +499,13 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
     this.loadData();
     this.branchFormData.patchValue({
       receiptDate: (new Date()).toISOString(),
-    }); 
+    });
     this.commonService.setFocus('productCode');
   }
 
 
   back() {
-      this.router.navigate(['dashboard/transactions/stockreceipt']);
+    this.router.navigate(['dashboard/transactions/stockreceipt']);
   }
 
 }

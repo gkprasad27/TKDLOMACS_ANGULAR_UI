@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
-@Component({ 
+@Component({
   selector: 'app-create-oilconversion',
   templateUrl: './create-oilconversion.component.html',
   styleUrls: ['./create-oilconversion.component.scss'],
@@ -39,7 +39,7 @@ export class CreateOilconversionsComponent implements OnInit {
   branchesList = [];
   getmemberNamesArray = [];
 
-  displayedColumns: string[] = ['productCode', 'productName', 'hsnNo', 'unitName', 'qty',  'damageQty', 'newQty', 'batchNo', 'delete'
+  displayedColumns: string[] = ['productCode', 'productName', 'hsnNo', 'unitName', 'qty', 'damageQty', 'newQty', 'batchNo', 'delete'
   ];
 
   dataSource: MatTableDataSource<any>;
@@ -62,19 +62,19 @@ export class CreateOilconversionsComponent implements OnInit {
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private alertService: AlertService,
-        private router: Router,
+    private router: Router,
 
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
   ) {
     this.branchFormData = this.formBuilder.group({
-      oilConversionVchNo : [null],
-      oilConversionDate : [(new Date()).toISOString()],
+      oilConversionVchNo: [null],
+      oilConversionDate: [(new Date()).toISOString()],
       branchCode: [null],
       branchName: [null],
       branchId: [null],
       voucherTypeId: [null],
-      serverDate:[null],
+      serverDate: [null],
       shiftId: [null],
       userId: '0',
       userName: [null],
@@ -86,7 +86,6 @@ export class CreateOilconversionsComponent implements OnInit {
     });
     const user = JSON.parse(localStorage.getItem('user'));
     if (user != null) {
-      //debugger;
       this.branchFormData.patchValue
         ({
           userId: user.userId,
@@ -102,8 +101,7 @@ export class CreateOilconversionsComponent implements OnInit {
   }
 
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.loadData();
     this.commonService.setFocus('productCode');
   }
@@ -147,7 +145,6 @@ export class CreateOilconversionsComponent implements OnInit {
   }
 
   getOilconversionDeatilList(id) {
-    //debugger;
     const getInvoiceDeatilListUrl = [this.apiConfigService.getOilconversionDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
@@ -178,9 +175,8 @@ export class CreateOilconversionsComponent implements OnInit {
   }
 
 
-   //issueno code;
-   genarateVoucherNo(branch?) {
-    //debugger;
+  //issueno code;
+  genarateVoucherNo(branch?) {
     this.branchFormData.patchValue
       ({
         oilConversionVchNo: ''
@@ -215,10 +211,9 @@ export class CreateOilconversionsComponent implements OnInit {
   }
 
   addTableRow() {
-    //debugger;
     const tableObj =
     {
-      productCode: '', productName: '', hsnNo: '', unit: '', qty: '',  damageqty: '', newqty: '',  batchNo: '', delete: '', text: 'obj'
+      productCode: '', productName: '', hsnNo: '', unit: '', qty: '', damageqty: '', newqty: '', batchNo: '', delete: '', text: 'obj'
     };
 
     if (this.dataSource != null) {
@@ -305,7 +300,6 @@ export class CreateOilconversionsComponent implements OnInit {
 
   //Autocomplete code
   getProductByProductName(value) {
-    //debugger;
     if (value != null && value !== '') {
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
@@ -368,14 +362,13 @@ export class CreateOilconversionsComponent implements OnInit {
 
   //Code based getting data
   getdata(productCode) {
-    //debugger;
     const branchCode = this.branchFormData.get('branchCode')?.value;
-const pCode = productCode?.value;
+    const pCode = productCode?.value;
 
-if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
+    if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
       const getBillingDetailsRcdUrl = [this.apiConfigService.GetProductListsforoilconversionList, productCode.value,
-        this.branchFormData.get('branchCode').value].join('/');
+      this.branchFormData.get('branchCode').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
           const res = response;
@@ -403,7 +396,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
         val = obj;
       }
       val.text = 'obj';
-      if(val.qty == 0) {
+      if (val.qty == 0) {
         val.qty = '';
       }
       return val;
@@ -424,12 +417,10 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
   calculateAmount(row?, index?) {
     //GetBranchesListArray
     let amount = 0;
-    for (let a = 0; a < this.dataSource.data.length; a++)
-    {
-      if (this.dataSource.data[a].qty)
-      {
+    for (let a = 0; a < this.dataSource.data.length; a++) {
+      if (this.dataSource.data[a].qty) {
         amount = (this.dataSource.data[a].qty)
-       // amount = (this.dataSource.data[a].qty) * (this.dataSource.data[a].rate);
+        // amount = (this.dataSource.data[a].qty) * (this.dataSource.data[a].rate);
         this.dataSource.data[a]['newQty'] = amount;
       }
     }
@@ -442,22 +433,19 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
   //Save Code
   save() {
-  // debugger;
     var index = this.dataSource.data.indexOf(1);
     this.dataSource.data.splice(index, 1);
-    if (this.routeUrl != '')
-    {
+    if (this.routeUrl != '') {
       return;
     }
-   let a = 0;
+    let a = 0;
     //if (this.dataSource.data[a].grossAmount==0)
     //{
     //  this.alertService.openSnackBar(`This Product("availStock") 0 Availablilty Stock`, Static.Close, SnackBar.error);
     //  return;
     //}
     let availStock = this.dataSource.filteredData.filter(stock => {
-      if (stock.availStock == 0 || ((stock.qty == null) && (stock.rate == null) && (stock.grossAmount == null)))
-      {
+      if (stock.availStock == 0 || ((stock.qty == null) && (stock.rate == null) && (stock.grossAmount == null))) {
         return stock;
       }
     });
@@ -471,12 +459,11 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
     if (this.dataSource.data.length == 0) {
       return;
     }
-    
+
     this.registerOilcoversions();
   }
 
   registerOilcoversions() {
-    //debugger;
     const registerInvoiceUrl = [this.apiConfigService.registerOilconversion].join('/');
     const requestObj = { OilcnvsHdr: this.branchFormData.value, OilcnvsDtl: this.dataSource.data };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
@@ -509,7 +496,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
 
   back() {
-      this.router.navigate(['dashboard/transactions/oilconversion']);
+    this.router.navigate(['dashboard/transactions/oilconversion']);
   }
 
 }

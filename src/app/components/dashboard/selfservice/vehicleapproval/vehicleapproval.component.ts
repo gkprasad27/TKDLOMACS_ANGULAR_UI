@@ -57,7 +57,7 @@ export class VehicleApprovalsComponent implements OnInit {
   }
 
   approveOrReject(event) {
-    //debugger;
+    ;
     if (event) {
       this.leaveRequestForm.patchValue({
         ApprBy: "Accept",
@@ -72,8 +72,6 @@ export class VehicleApprovalsComponent implements OnInit {
   }
 
   singleChecked(flag, column, row) {
-    // debugger;
-    console.log(flag, row, column)
     let statusFlag = true;
     if (this.leaveApprovalList.length) {
       for (let l = 0; l < this.leaveApprovalList.length; l++) {
@@ -114,7 +112,7 @@ export class VehicleApprovalsComponent implements OnInit {
   }
 
   getLeaveApplDetailsList() {
-    //debugger;
+    ;
     const user = JSON.parse(localStorage.getItem('user'));
     const getLeaveApplDetailsListUrl = [this.apiConfigService.getVehicleApplDetailsList, user.userName].join('/');
     this.apiService.apiGetRequest(getLeaveApplDetailsListUrl)

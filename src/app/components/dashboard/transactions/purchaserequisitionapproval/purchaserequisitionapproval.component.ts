@@ -63,7 +63,6 @@ export class PurchaserequisitionapprovalComponent implements OnInit {
   }
 
   getPurchaserequisitionDetails() {
-    //debugger;
     const getInvoiceDetailstUrl = [this.apiConfigService.getPurchaserequisitionDetailsListLoad, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceDetailstUrl, this.dateForm.value).subscribe(
       response => {
@@ -79,7 +78,6 @@ export class PurchaserequisitionapprovalComponent implements OnInit {
   }
 
   openStockissues(row) {
-    debugger;
     localStorage.setItem('selectedstockissues', JSON.stringify(row));
     this.router.navigate(['dashboard/transactions/purchaserequisition/CreatePurchaserequisitionapproval', row.id]);
   }
@@ -108,7 +106,6 @@ export class PurchaserequisitionapprovalComponent implements OnInit {
     this.getpurchaserequisitionList();
   }
   getpurchaserequisitionList() {
-    //debugger;
     const getInvoiceListUrl = [this.apiConfigService.getpurchaserequisitionList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceListUrl, this.dateForm.value).subscribe(
       response => {

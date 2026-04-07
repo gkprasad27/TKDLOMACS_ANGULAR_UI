@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
-@Component({ 
+@Component({
   selector: 'app-create-purchaserequisitionapproval',
   templateUrl: './create-purchaserequisitionapproval.component.html',
   styleUrls: ['./create-purchaserequisitionapproval.component.scss'],
@@ -67,7 +67,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
-        private router: Router,
+    private router: Router,
 
     private alertService: AlertService,
     private activatedRoute: ActivatedRoute,
@@ -84,7 +84,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
       });
     const user = JSON.parse(localStorage.getItem('user'));
     if (user != null) {
-      //debugger;
+      ;
       this.branchFormData.patchValue
         ({
           userId: user.userId,
@@ -98,7 +98,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
   }
 
   loadData() {
-    //debugger;
+    ;
     const user = JSON.parse(localStorage.getItem('user'));
     this.getCompiniesList();
     this.getBranchesList();
@@ -145,7 +145,6 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
 
 
   getprreqDeatilList(id) {
-    //debugger;
     const getInvoiceDeatilListUrl = [this.apiConfigService.getprreqDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
@@ -193,7 +192,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
 
   //issueno code;
   genaratereceiptNo(branch?) {
-    //debugger;
+    //;
     //setbranch
     let genarateVoucherNoUrl;
     if (branch != null) {
@@ -228,11 +227,10 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
   }
 
   addTableRow() {
-    //debugger;
     const tableObj =
     {
       productCode: '', productName: '', qty: '', availbleQtyinBranch: '', availbleQtyinGowdown: '', approvedQty: '', delete: '', text: 'obj'
-     // productCode: '', productName: '', hsnNo: '', unit: '', qty: '', availbleQtyinBranch: '', availbleQtyinGowdown: '', approvedQty:'', rate: '', grossAmount: '', availStock: '', availStockinbranch: '', batchNo: '', delete: '', text: 'obj'
+      // productCode: '', productName: '', hsnNo: '', unit: '', qty: '', availbleQtyinBranch: '', availbleQtyinGowdown: '', approvedQty:'', rate: '', grossAmount: '', availStock: '', availStockinbranch: '', batchNo: '', delete: '', text: 'obj'
     };
 
     if (this.dataSource != null) {
@@ -260,8 +258,6 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
 
 
   setToFormModel(text, column, value) {
-    // debugger;
-    //alert("hi");
     this.tableFormObj = true;
     if (text == 'obj') {
       this.tableFormData.patchValue
@@ -316,7 +312,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
 
   //Autocomplete code
   getProductByProductName(value) {
-    //debugger;
+    ;
     if (value != null && value !== '') {
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
@@ -338,14 +334,13 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
 
 
   getdata(productCode) {
-    debugger;
     //set branch
     const branch = this.branchFormData.get('branch')?.value;
 
-if (branch != null && branch !== '' &&
-    productCode?.value != null && productCode.value !== '') {
+    if (branch != null && branch !== '' &&
+      productCode?.value != null && productCode.value !== '') {
       const getBillingDetailsRcdUrl = [this.apiConfigService.GetProductListsforpreq, productCode.value,
-        this.branchFormData.get('branch').value].join('/');
+      this.branchFormData.get('branch').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
           const res = response;
@@ -364,7 +359,6 @@ if (branch != null && branch !== '' &&
 
   //assign data
   DetailsSection(obj) {
-    debugger;
     console.log(obj);
     this.dataSource.data = this.dataSource.data.map(val => {
       if (val.productCode == obj.productCode) {
@@ -376,7 +370,7 @@ if (branch != null && branch !== '' &&
         val = obj;
       }
       val.text = 'obj';
-      if(val.qty == 0) {
+      if (val.qty == 0) {
         val.qty = '';
       }
       return val;
@@ -385,7 +379,7 @@ if (branch != null && branch !== '' &&
   }
 
   setProductName(name) {
-    //debugger;
+    ;
     this.tableFormData.patchValue
       ({
         productName: name.value
@@ -396,7 +390,7 @@ if (branch != null && branch !== '' &&
 
   //Calaculating code
   //calculateAmount(row, index) {
-  //  //debugger;
+  //  ;
   //  let amount = 0;
   //  for (let a = 0; a < this.dataSource.data.length; a++) {
   //    if (this.dataSource.data[a].qty) {
@@ -413,7 +407,6 @@ if (branch != null && branch !== '' &&
 
   //Save Code
   save() {
-    debugger;
     //var index = this.dataSource.data.indexOf(1);
     //this.dataSource.data.splice(index, 1);
     //if (this.routeUrl != '') {
@@ -439,7 +432,6 @@ if (branch != null && branch !== '' &&
   }
 
   registerpurreq() {
-    debugger;
     const registerStackreceiptsUrl = [this.apiConfigService.registerPurchaserequisitionaaprovalDetails].join('/');
     const requestObj = { PurreqHdr: this.branchFormData.value, PurreqDetail: this.dataSource.data };
     this.apiService.apiPostRequest(registerStackreceiptsUrl, requestObj).subscribe(
@@ -477,7 +469,7 @@ if (branch != null && branch !== '' &&
 
 
   back() {
-      this.router.navigate(['dashboard/transactions/purchaserequisition']);
+    this.router.navigate(['dashboard/transactions/purchaserequisition']);
   }
 
 }

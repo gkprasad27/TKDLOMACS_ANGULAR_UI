@@ -116,7 +116,6 @@ export class PackageconversionComponent implements OnInit {
  
   
   getproductCodeList() {
-    //debugger;
     this.spinner.show();
     const getbranchcodeList = [this.apiConfigService.GetproductNames, this.modelFormData.get('inputproductCode').value].join('/');
     this.apiService.apiGetRequest(getbranchcodeList)
@@ -138,7 +137,6 @@ export class PackageconversionComponent implements OnInit {
         });
   }
   getoutproductCodeList() {
-   // debugger;
     this.spinner.show();
     const getbranchcodeList = [this.apiConfigService.GetproductNames, this.modelFormData.get('outputproductCode').value].join('/');
     this.apiService.apiGetRequest(getbranchcodeList)
@@ -167,7 +165,6 @@ export class PackageconversionComponent implements OnInit {
 
 
   save() {
-    //debugger;
     if (this.modelFormData.invalid) {
       return;
     }

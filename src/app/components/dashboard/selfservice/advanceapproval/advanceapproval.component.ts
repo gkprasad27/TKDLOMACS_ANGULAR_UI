@@ -58,7 +58,6 @@ export class advanceApprovalComponent implements OnInit {
   }
 
   approveOrReject(event) {
-    //debugger;
     if (event) {
       this.leaveRequestForm.patchValue({
         ApprBy: "Accept",
@@ -114,7 +113,6 @@ export class advanceApprovalComponent implements OnInit {
   }
 
   getOdApplDetailsList() {
-    //debugger;
     const user = JSON.parse(localStorage.getItem('user'));
     const getOdApplDetailsListUrl = [this.apiConfigService.getAdvanceApplDetailsList, user.userName].join('/');
     this.apiService.apiGetRequest(getOdApplDetailsListUrl)

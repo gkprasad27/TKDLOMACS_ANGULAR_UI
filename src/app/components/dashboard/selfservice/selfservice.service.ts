@@ -28,8 +28,6 @@ export class selfService {
   ) { }
 
   getRouteUrls(data) {
-    //debugger;
-    //alert("hi");
     const user = JSON.parse(localStorage.getItem('user'));
     switch (data) {
       case 'leaveopeningbalance':

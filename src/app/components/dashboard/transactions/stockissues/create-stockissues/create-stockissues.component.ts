@@ -20,7 +20,7 @@ import { map, startWith } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-@Component({ 
+@Component({
   selector: 'app-create-stockissues',
   templateUrl: './create-stockissues.component.html',
   styleUrls: ['./create-stockissues.component.scss'],
@@ -38,7 +38,7 @@ export class CreateStockissuesComponent implements OnInit {
   getSalesBranchListArray = [];
   branchesList = [];
   getmemberNamesArray = [];
-  fromBranchCode= null;
+  fromBranchCode = null;
   setFocus = '';
 
   displayedColumns: string[] = ['productCode', 'productName', 'hsnNo', 'unitName', 'qty', 'rate', 'grossAmount', 'availStock', 'batchNo', 'delete'
@@ -50,7 +50,7 @@ export class CreateStockissuesComponent implements OnInit {
   date = new Date((new Date().getTime() - 3888000000));
   modelFormData: FormGroup;
   tableFormData: FormGroup;
- // printBill: any;
+  // printBill: any;
   issueno = null;
   totalamount = null;
   tableFormObj = false;
@@ -59,8 +59,8 @@ export class CreateStockissuesComponent implements OnInit {
   getProductByProductNameArray: any[];
   orders: any;
   GettoBranchesListArray: any;
-  toBranchCode:any;
-  
+  toBranchCode: any;
+
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -87,14 +87,13 @@ export class CreateStockissuesComponent implements OnInit {
       employeeId: [null],
       remarks: [null],
       operatorStockIssueId: '0',
-     // printBill: [false],
+      // printBill: [false],
 
     });
     //String data= null;
     const user = JSON.parse(localStorage.getItem('user'));
-    if ((user != null))
-    {
-     // debugger;
+    if ((user != null)) {
+      ;
       this.branchFormData.patchValue
         ({
           userId: user.userId,
@@ -104,9 +103,8 @@ export class CreateStockissuesComponent implements OnInit {
     }
   }
 
-  loadData()
-  {
-    //debugger;
+  loadData() {
+    ;
     this.getCashPaymentBranchesList();
     // this.gettingtobranches();
     this.activatedRoute.params.subscribe(params => {
@@ -120,36 +118,33 @@ export class CreateStockissuesComponent implements OnInit {
       } else {
         //this.disableForm();
         const user = JSON.parse(localStorage.getItem('user'));
-        if ((user.branchCode != null))
-        {
+        if ((user.branchCode != null)) {
           this.branchFormData.patchValue
-          ({
-            fromBranchCode: +user.branchCode,
-            userId: user.seqId,
-            userName: user.userName
-          });
+            ({
+              fromBranchCode: +user.branchCode,
+              userId: user.seqId,
+              userName: user.userName
+            });
           this.genaratebranchcode();
           ////this.setBranchCode();
           ////this.genarateVoucherNo(user.branchCode);
           this.formGroup();
           ////this.gettingtobranches();
-         // this.settoBranchCode();
+          // this.settoBranchCode();
         }
         this.addTableRow();
       }
     });
   }
 
-  setBranchCode()
-  {
-    //debugger;
+  setBranchCode() {
+    ;
     const bname = this.GetBranchesListArray.filter(fromBranchCode => {
       if (fromBranchCode.id == this.branchFormData.get('fromBranchCode').value) {
         return fromBranchCode;
       }
     });
-    if (bname.length)
-    {
+    if (bname.length) {
       this.branchFormData.patchValue({
         fromBranchName: bname?.[0] != null ? bname[0].text : null
       });
@@ -159,19 +154,16 @@ export class CreateStockissuesComponent implements OnInit {
 
   //issueno code;
   genaratebranchcode(branch?) {
-   //debugger;
-      let genaratebranchNoUrl;
-    if ((branch != null))
-    {
+    ;
+    let genaratebranchNoUrl;
+    if ((branch != null)) {
       genaratebranchNoUrl = [this.apiConfigService.getbranchesnosList, branch].join('/');
     }
-    else
-    {
+    else {
       genaratebranchNoUrl = [this.apiConfigService.getbranchesnosList, this.branchFormData.get('fromBranchCode').value].join('/');
     }
     this.apiService.apiGetRequest(genaratebranchNoUrl).subscribe(
-      response =>
-      {
+      response => {
         const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
@@ -186,25 +178,23 @@ export class CreateStockissuesComponent implements OnInit {
               this.genarateVoucherNo(this.fromBranchCode);
               this.gettingtobranches();
               this.spinner.hide();
-             
+
             }
           }
         }
       });
-   
+
     //this.gettingtobranches();
   }
 
-  ngOnInit()
-  {
-    //debugger;
+  ngOnInit() {
+    ;
     this.loadData();
     this.commonService.setFocus('productCode');
   }
 
-  getStockissuesDeatilList(id)
-  {
-   // debugger;
+  getStockissuesDeatilList(id) {
+    ;
     const getInvoiceDeatilListUrl = [this.apiConfigService.getStockissuesDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
@@ -218,9 +208,8 @@ export class CreateStockissuesComponent implements OnInit {
       });
   }
 
-  getCashPaymentBranchesList()
-  {
-    //debugger;
+  getCashPaymentBranchesList() {
+    ;
     const getCashPaymentBranchesListUrl = [this.apiConfigService.GetBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
@@ -237,32 +226,28 @@ export class CreateStockissuesComponent implements OnInit {
   }
 
 
-   //issueno code;
-  genarateVoucherNo(branch?)
-  {
-    //debugger;
-    
+  //issueno code;
+  genarateVoucherNo(branch?) {
+    ;
+
     let genarateVoucherNoUrl;
     if (branch != null) {
       genarateVoucherNoUrl = [this.apiConfigService.getStockissuesnosList, branch].join('/');
     }
-    else
-    {
+    else {
       genarateVoucherNoUrl = [this.apiConfigService.getStockissuesnosList, this.branchFormData.get('fromBranchCode').value].join('/');
     }
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
-      response =>
-      {
+      response => {
         const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
-            if ((res.response['StackissueNo'] != null))
-            {
-              this.issueno= res.response['StackissueNo']
+            if ((res.response['StackissueNo'] != null)) {
+              this.issueno = res.response['StackissueNo']
               this.branchFormData.patchValue
-              ({
-                issueNo: res.response['StackissueNo']
-              });
+                ({
+                  issueNo: res.response['StackissueNo']
+                });
               this.spinner.hide();
             }
           }
@@ -273,12 +258,10 @@ export class CreateStockissuesComponent implements OnInit {
 
 
   //tobranch Name;
-  gettingtobranches()
-  {
-   // debugger;
+  gettingtobranches() {
+    ;
     let gettingtobranchesListUrl;
-    if (this.branchFormData.get('fromBranchCode').value == null)
-    {
+    if (this.branchFormData.get('fromBranchCode').value == null) {
       gettingtobranchesListUrl = [this.apiConfigService.GetToBranchesList].join('/');
     }
     else {
@@ -289,8 +272,7 @@ export class CreateStockissuesComponent implements OnInit {
         const res = response;
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
-            if (res?.response?.branch?.length)
-            {
+            if (res?.response?.branch?.length) {
               console.log(res.response['branch']);
               this.toBranchCode = res.response['branch']
               this.branchFormData.patchValue
@@ -306,15 +288,13 @@ export class CreateStockissuesComponent implements OnInit {
   }
 
 
-  private filter(value: string): string[]
-  {
+  private filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.getmemberNamesArray.filter(option => option.text.toLowerCase().includes(filterValue));
   }
 
-  addTableRow()
-  {
-    //debugger;
+  addTableRow() {
+    ;
     const tableObj =
     {
       productCode: '', productName: '', hsnNo: '', unit: '', qty: '', rate: '', grossAmount: '', availStock: '', batchNo: '', delete: '', text: 'obj'
@@ -329,9 +309,8 @@ export class CreateStockissuesComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  formGroup()
-  {
-    
+  formGroup() {
+
     this.tableFormData = this.formBuilder.group({
       issueNo: [null],
       issueDate: [null],
@@ -340,7 +319,7 @@ export class CreateStockissuesComponent implements OnInit {
       employeeId: [null],
       productCode: [null, [Validators.required]],
       productName: [null, [Validators.required]],
-      hsnNo:'0',
+      hsnNo: '0',
       unit: [null],
       qty: [null],
       rate: [null],
@@ -352,17 +331,15 @@ export class CreateStockissuesComponent implements OnInit {
   }
 
 
-  setToFormModel(text, column, value)
-  {
+  setToFormModel(text, column, value) {
     this.tableFormObj = true;
     if (text == 'obj') {
       this.tableFormData.patchValue
-      ({
-        [column]: value
-      });
+        ({
+          [column]: value
+        });
     }
-    if (this.tableFormData.valid)
-    {
+    if (this.tableFormData.valid) {
       this.addTableRow();
       this.formGroup();
       this.tableFormObj = false;
@@ -412,7 +389,7 @@ export class CreateStockissuesComponent implements OnInit {
 
   //Autocomplete code
   getProductByProductName(value) {
-    //debugger;
+    ;
     if (value != null && value !== '') {
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
@@ -475,20 +452,18 @@ export class CreateStockissuesComponent implements OnInit {
   //}
 
   //Code based getting data
-  getdata(productCode, index, id)
-  {
+  getdata(productCode, index, id) {
     this.setFocus = id + index;
-    //debugger;
-  const fromBranchCode = this.branchFormData.get('fromBranchCode')?.value;
+    const fromBranchCode = this.branchFormData.get('fromBranchCode')?.value;
 
-if (fromBranchCode != null && fromBranchCode !== '' &&
-    productCode?.value != null && productCode.value !== '') {
+    if (fromBranchCode != null && fromBranchCode !== '' &&
+      productCode?.value != null && productCode.value !== '') {
       const getBillingDetailsRcdUrl = [this.apiConfigService.GetProductLists, productCode.value,
-        this.branchFormData.get('fromBranchCode').value].join('/');
+      this.branchFormData.get('fromBranchCode').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
           const res = response;
-                this.spinner.hide();
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.productsList != null) {
@@ -499,7 +474,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
         });
     }
   }
-  
+
   //assign data
   DetailsSection(obj) {
     this.dataSource.data = this.dataSource.data.map(val => {
@@ -512,7 +487,7 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
         val = obj;
       }
       val.text = 'obj';
-      if(val.qty == 0) {
+      if (val.qty == 0) {
         val.qty = '';
       }
       return val;
@@ -522,80 +497,68 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
   }
 
 
-  setProductName(name)
-  {
+  setProductName(name) {
     this.tableFormData.patchValue
-    ({
-      productName: name.value
-    });
+      ({
+        productName: name.value
+      });
     this.setToFormModel(null, null, null);
   }
-   
-  
+
+
   //Calaculating code
-  calculateAmount(row, index)
-  {
-    //debugger;
+  calculateAmount(row, index) {
+    ;
     let amount = 0;
-    for (let a = 0; a < this.dataSource.data.length; a++)
-    {
-      if (this.dataSource.data[a].qty)
-      {
+    for (let a = 0; a < this.dataSource.data.length; a++) {
+      if (this.dataSource.data[a].qty) {
         amount = (this.dataSource.data[a].qty) * (this.dataSource.data[a].rate);
         this.dataSource.data[a]['grossAmount'] = amount;
       }
     }
     this.tableFormData.patchValue
-    ({
-      grossAmount: amount
-      
-    });
+      ({
+        grossAmount: amount
+
+      });
   }
- 
+
   //Save Code
-  save()
-  {
-    //debugger;
+  save() {
+    ;
     var index = this.dataSource.data.indexOf(1);
     this.dataSource.data.splice(index, 1);
-    if (this.routeUrl != '')
-    {
+    if (this.routeUrl != '') {
       return;
     }
-    let availStock = this.dataSource.filteredData.filter(stock =>
-    {
+    let availStock = this.dataSource.filteredData.filter(stock => {
       if (stock?.availStock === 0 || (stock?.qty == null && stock?.rate == null)) {
         return stock;
       }
     });
-    if (availStock.length)
-    {
+    if (availStock.length) {
       this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) 0 Availablilty Stock`, Static.Close, SnackBar.error);
       return;
     }
-    if (!this.tableFormObj)
-    {
+    if (!this.tableFormObj) {
       this.dataSource.data.pop();
     }
-    if (this.dataSource.data.length == 0)
-    {
+    if (this.dataSource.data.length == 0) {
       return;
     }
-    
+
     this.registerStackissues();
   }
 
   registerStackissues() {
-   // debugger;
+    ;
     const registerInvoiceUrl = [this.apiConfigService.registerStockissues].join('/');
     const requestObj = { StockissueHdr: this.branchFormData.value, StockissueDtl: this.dataSource.data };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
         const res = response;
-        if (res?.status === StatusCodes.pass)
-        {
-          if (res?.response != null)
-          {
+        if (res?.status === StatusCodes.pass) {
+          if (res?.response != null) {
             this.alertService.openSnackBar('Stock Issues Created Successfully..', Static.Close, SnackBar.success);
             //this.branchFormData.reset();
           }
@@ -628,11 +591,11 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
       // printBill: [false],
 
     });
-   this.ngOnInit();
+    this.ngOnInit();
   }
 
   back() {
-      this.router.navigate(['dashboard/transactions/stockissues']);
+    this.router.navigate(['dashboard/transactions/stockissues']);
   }
 
 }

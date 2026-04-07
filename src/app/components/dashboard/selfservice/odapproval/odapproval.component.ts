@@ -58,7 +58,6 @@ export class odApprovalComponent implements OnInit {
   }
 
   approveOrReject(event) {
-    //debugger;
     if (event) {
       this.leaveRequestForm.patchValue({
         ApprBy: "Accept",
@@ -73,7 +72,6 @@ export class odApprovalComponent implements OnInit {
   }
 
   singleChecked(flag, column, row) {
-    // debugger;
     console.log(flag, row, column)
     let statusFlag = true;
     if (this.leaveApprovalList.length) {
@@ -115,7 +113,6 @@ export class odApprovalComponent implements OnInit {
   }
 
   getOdApplDetailsList() {
-    //debugger;
     const user = JSON.parse(localStorage.getItem('user'));
     const getOdApplDetailsListUrl = [this.apiConfigService.getOdApplDetailsList, user.userName].join('/');
     this.apiService.apiGetRequest(getOdApplDetailsListUrl)

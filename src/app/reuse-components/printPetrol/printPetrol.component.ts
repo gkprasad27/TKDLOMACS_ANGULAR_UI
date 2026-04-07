@@ -40,7 +40,7 @@ export class PrintPetrolComponent implements OnInit, AfterViewInit {
        this.BranchPhone= object;
        console.log(this.BranchPhone);
       
-// debugger;
+;
 // let printContents, popupWin;
 // printContents = document.getElementById('print-section').innerHTML;
 // popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');

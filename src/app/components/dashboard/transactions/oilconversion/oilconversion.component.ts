@@ -16,7 +16,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import moment from 'moment';
 
-@Component({ 
+@Component({
   selector: 'app-oilconversion',
   templateUrl: './oilconversion.component.html',
   styleUrls: ['./oilconversion.component.scss'],
@@ -30,11 +30,11 @@ export class OilconversionComponent implements OnInit {
   // table
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  displayedColumns: string[] = ['branchCode', 'branchName','oilConversionVchNo', 'oilConversionDate', 'userId',
-     'shiftId'
+  displayedColumns: string[] = ['branchCode', 'branchName', 'oilConversionVchNo', 'oilConversionDate', 'userId',
+    'shiftId'
   ];
-    branchCode: any;
-    oilConversionVchNo: any;
+  branchCode: any;
+  oilConversionVchNo: any;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -53,14 +53,12 @@ export class OilconversionComponent implements OnInit {
     });
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.branchCode = JSON.parse(localStorage.getItem('user'));
     this.dateForm.patchValue({ role: this.branchCode.role })
     this.getInvoiceDetails();
   }
   getInvoiceDetails() {
-    //debugger;
     const getInvoiceDetailstUrl = [this.apiConfigService.getoilcnvsnDeatilListLoad, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceDetailstUrl, this.dateForm.value).subscribe(
       response => {
@@ -78,7 +76,6 @@ export class OilconversionComponent implements OnInit {
 
 
   openOilconversion(row) {
-    //debugger;
     localStorage.setItem('selectedOilconversion', JSON.stringify(row));
     this.router.navigate(['dashboard/transactions/oilconversion/CreateOilconversions', row.oilConversionMasterId]);
   }
@@ -87,8 +84,7 @@ export class OilconversionComponent implements OnInit {
   }
 
   //Search and datadisplay code
-  search()
-  {
+  search() {
     if (this.dateForm?.value?.oilConversionVchNo == null) {
       if (this.dateForm?.value?.fromDate == null) {
         this.alertService.openSnackBar('Select oilConversionVchNo or Date', Static.Close, SnackBar.error);
@@ -105,8 +101,7 @@ export class OilconversionComponent implements OnInit {
 
     this.getOilconversionList();
   }
-  getOilconversionList()
-  {
+  getOilconversionList() {
     const getOilconversionListUrl = [this.apiConfigService.getOilconversionList, this.branchCode.branchCode].join('/');
 
     this.apiService.apiPostRequest(getOilconversionListUrl, this.dateForm.value).subscribe(
@@ -125,7 +120,7 @@ export class OilconversionComponent implements OnInit {
 
 
 
- 
+
 
   reset() {
     this.dateForm.reset();

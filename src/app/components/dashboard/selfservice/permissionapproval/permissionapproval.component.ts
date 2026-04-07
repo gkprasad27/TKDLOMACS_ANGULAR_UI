@@ -58,7 +58,6 @@ export class PermissionApprovalsComponent implements OnInit {
   }
 
   approveOrReject(event) {
-    //debugger;
     if (event) {
       this.leaveRequestForm.patchValue({
         ApprBy: "Accept",
@@ -73,7 +72,6 @@ export class PermissionApprovalsComponent implements OnInit {
   }
 
   singleChecked(flag, column, row) {
-    // debugger;
     console.log(flag, row, column)
     let statusFlag = true;
     if (this.leaveApprovalList.length) {
@@ -115,7 +113,6 @@ export class PermissionApprovalsComponent implements OnInit {
   }
 
   getPermissionRequestApplDetailsList() {
-    //debugger;
     const user = JSON.parse(localStorage.getItem('user'));
     const getPermissionRequestApplDetailsListUrl = [this.apiConfigService.getPermissionrqstApplDetailsList, user.userName].join('/');
     this.apiService.apiGetRequest(getPermissionRequestApplDetailsListUrl)

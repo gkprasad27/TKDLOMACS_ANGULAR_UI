@@ -170,7 +170,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   ngOnChanges() {
     // this.highlightedRows = [];
-    // debugger
+    
     // this.columnDefinitions = [];
 
     this.defaultValues();

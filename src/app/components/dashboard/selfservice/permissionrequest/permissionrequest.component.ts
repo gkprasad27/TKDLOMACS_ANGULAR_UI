@@ -149,7 +149,6 @@ export class PermissionRequestComponent implements OnInit {
   get formControls() { return this.modelFormData.controls; }
   fromdateValueChange()
   {
-   // debugger;
     this.modelFormData.patchValue
       ({
         todate: this.modelFormData.get('fromdate').value
@@ -174,7 +173,6 @@ export class PermissionRequestComponent implements OnInit {
 
  
   save() {
-    // debugger;
     if (this.modelFormData.invalid) {
       return;
     }

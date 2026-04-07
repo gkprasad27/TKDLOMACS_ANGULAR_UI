@@ -85,7 +85,7 @@ export class CreateStockshortsComponent implements OnInit {
     });
     const user = JSON.parse(localStorage.getItem('user'));
     if (user != null) {
-      //debugger;
+      ;
       this.branchFormData.patchValue
         ({
           userId: user.userId,
@@ -103,7 +103,7 @@ export class CreateStockshortsComponent implements OnInit {
 
   //ngOnInit()
   //{
-  //  //debugger;
+  //  ;
   //  this.formGroup();
   //  this.getBranchesList();
   //  this.GetCostCentersList();
@@ -133,10 +133,10 @@ export class CreateStockshortsComponent implements OnInit {
   //}
 
   ngOnInit() {
-    //debugger;
+    ;
     this.loadData();
     this.commonService.setFocus('costCenter');
-    //debugger;
+    ;
     //this.formGroup();
     //this.getBranchesList();
     //this.GetCostCentersList();
@@ -206,7 +206,7 @@ export class CreateStockshortsComponent implements OnInit {
   }
 
   getStockshortDeatilList(id) {
-    //debugger;
+    ;
     const getInvoiceDeatilListUrl = [this.apiConfigService.getStockshortsDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
@@ -256,7 +256,7 @@ export class CreateStockshortsComponent implements OnInit {
 
   //stockshortvocherno code;
   genaratestockshortvocherNo(branch?) {
-    //debugger;
+    ;
     let genarateVoucherNoUrl;
     if (branch != null) {
       genarateVoucherNoUrl = [this.apiConfigService.getstockshortvochernosList, branch].join('/');
@@ -287,7 +287,7 @@ export class CreateStockshortsComponent implements OnInit {
   }
 
   addTableRow() {
-    //debugger;
+    ;
     const tableObj =
     {
       productCode: '', productName: '', hsnNo: '', unit: '', qty: '', rate: '', totalAmount: '', batchNo: '', delete: '', text: 'obj'
@@ -377,7 +377,7 @@ export class CreateStockshortsComponent implements OnInit {
 
   //Autocomplete code
   getProductByProductName(value) {
-    //debugger;
+    ;
     if (value != null && value !== '') {
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
@@ -441,7 +441,7 @@ export class CreateStockshortsComponent implements OnInit {
 
   //Code based getting data
   getdata(productCode) {
-    //debugger;
+    ;
     const branchCode = this.branchFormData.get('branchCode')?.value;
 const pCode = productCode?.value;
 
@@ -496,7 +496,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
   //Calaculating code
   calculateAmount(row, index) {
-    //debugger;
+    ;
     let amount = 0;
     for (let a = 0; a < this.dataSource.data.length; a++) {
       if (this.dataSource.data[a].qty) {
@@ -513,7 +513,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
   //Save Code
   save() {
-    //debugger;
+    ;
     var index = this.dataSource.data.indexOf(1);
     this.dataSource.data.splice(index, 1);
     if (this.routeUrl != '') {
@@ -539,7 +539,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
   }
 
   registerStackshorts() {
-    //debugger;
+    ;
     const registerStackreceiptsUrl = [this.apiConfigService.registerStockshorts].join('/');
     const requestObj = { StockshortHdr: this.branchFormData.value, StockshortDtl: this.dataSource.data };
     this.apiService.apiPostRequest(registerStackreceiptsUrl, requestObj).subscribe(

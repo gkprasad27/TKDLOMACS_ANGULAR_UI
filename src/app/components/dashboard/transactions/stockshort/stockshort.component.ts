@@ -61,7 +61,7 @@ export class StockshortComponent  implements OnInit {
   }
 
   getInvoiceDetails() {
-    //debugger;
+    ;
     const getInvoiceDetailstUrl = [this.apiConfigService.getStockshortDeatilListLoad, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceDetailstUrl, this.dateForm.value).subscribe(
       response => {
@@ -77,7 +77,7 @@ export class StockshortComponent  implements OnInit {
   }
 
   openStockissues(row) {
-    // debugger;
+    ;
     localStorage.setItem('selectedStockshort', JSON.stringify(row));
     this.router.navigate(['dashboard/transactions/stockshort/CreateStocshorts', row.stockshortMasterId]);
   }

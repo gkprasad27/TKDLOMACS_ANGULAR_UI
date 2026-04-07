@@ -20,14 +20,14 @@ import { map, startWith } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-@Component({ 
+@Component({
   selector: 'app-create-purchaserequisition',
   templateUrl: './create-purchaserequisition.component.html',
   styleUrls: ['./create-purchaserequisition.component.scss'],
   standalone: true,
   imports: [SharedImportModule, TranslateModule, TextFieldModule, TypeaheadModule]
 })
-export class CreatePurchaseRequisitionComponent  implements OnInit {
+export class CreatePurchaseRequisitionComponent implements OnInit {
 
   branchFormData: FormGroup;
   GetBranchesListArray = [];
@@ -42,7 +42,7 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
   //displayedColumns: string[] = ['productCode', 'productName', 'hsnNo', 'unitName', 'qty', 'availbleQtyinBranch','rate', 'grossAmount', 'availStock','batchNo', 'delete'
   //];
 
-  displayedColumns: string[] = ['productCode', 'productName', 'qty', 'availbleQtyinBranch', 'availbleQtyinGowdown', 'approvedQty',  'delete'
+  displayedColumns: string[] = ['productCode', 'productName', 'qty', 'availbleQtyinBranch', 'availbleQtyinGowdown', 'approvedQty', 'delete'
   ];
 
   dataSource: MatTableDataSource<any>;
@@ -69,7 +69,7 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private alertService: AlertService,
-        private router: Router,
+    private router: Router,
 
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
@@ -85,10 +85,9 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
       });
     const user = JSON.parse(localStorage.getItem('user'));
     if (user != null) {
-      //debugger;
       this.branchFormData.patchValue
         ({
-          userId: user.userId,
+          userId: user.userId,  
           userName: user.userName,
           shiftId: user.shiftId
         })
@@ -99,7 +98,6 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
   }
 
   loadData() {
-    //debugger;
     const user = JSON.parse(localStorage.getItem('user'));
     this.getCompiniesList();
     this.getBranchesList();
@@ -146,7 +144,6 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
 
 
   getprreqDeatilList(id) {
-    debugger;
     const getInvoiceDeatilListUrl = [this.apiConfigService.getprreqDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
@@ -194,7 +191,6 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
 
   //issueno code;
   genaratereceiptNo(branch?) {
-    debugger;
     //setbranch
     let genarateVoucherNoUrl;
     if (branch != null) {
@@ -221,7 +217,7 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
     //this.gettingtobranches();
   }
 
-  
+
 
   private filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -229,7 +225,6 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
   }
 
   addTableRow() {
-    //debugger;
     const tableObj =
     {
       productCode: '', productName: '', qty: '', availbleQtyinBranch: '', availbleQtyinGowdown: '', approvedQty: '', delete: '', text: 'obj'
@@ -259,13 +254,9 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
   }
 
 
-  setToFormModel(text, column, value)
-  {
-   // debugger;
-    //alert("hi");
+  setToFormModel(text, column, value) {
     this.tableFormObj = true;
-    if (text == 'obj')
-    {
+    if (text == 'obj') {
       this.tableFormData.patchValue
         ({
           [column]: value
@@ -318,7 +309,6 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
 
   //Autocomplete code
   getProductByProductName(value) {
-    //debugger;
     if (value != null && value !== '') {
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
@@ -340,13 +330,13 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
 
 
   getdata(productCode) {
-    //debugger;set branch
+    //;set branch
     const branch = this.branchFormData.get('branch')?.value;
 
-if (branch != null && branch !== '' &&
-    productCode?.value != null && productCode.value !== '') {
+    if (branch != null && branch !== '' &&
+      productCode?.value != null && productCode.value !== '') {
       const getBillingDetailsRcdUrl = [this.apiConfigService.GetProductListsforpreq, productCode.value,
-        this.branchFormData.get('branch').value].join('/');
+      this.branchFormData.get('branch').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
           const res = response;
@@ -354,7 +344,7 @@ if (branch != null && branch !== '' &&
             if (res.response != null) {
               if (res?.response?.productsList != null) {
                 this.DetailsSection(res.response['productsList']);
-              
+
                 this.spinner.hide();
               }
             }
@@ -364,8 +354,7 @@ if (branch != null && branch !== '' &&
   }
 
   //assign data
-  DetailsSection(obj)
-  {
+  DetailsSection(obj) {
     console.log(obj);
     this.dataSource.data = this.dataSource.data.map(val => {
       if (val.productCode == obj.productCode) {
@@ -377,7 +366,7 @@ if (branch != null && branch !== '' &&
         val = obj;
       }
       val.text = 'obj';
-      if(val.qty == 0) {
+      if (val.qty == 0) {
         val.qty = '';
       }
       return val;
@@ -386,7 +375,6 @@ if (branch != null && branch !== '' &&
   }
 
   setProductName(name) {
-    //debugger;
     this.tableFormData.patchValue
       ({
         productName: name.value
@@ -397,7 +385,6 @@ if (branch != null && branch !== '' &&
 
   //Calaculating code
   //calculateAmount(row, index) {
-  //  //debugger;
   //  let amount = 0;
   //  for (let a = 0; a < this.dataSource.data.length; a++) {
   //    if (this.dataSource.data[a].qty) {
@@ -414,7 +401,6 @@ if (branch != null && branch !== '' &&
 
   //Save Code
   save() {
-    //debugger;
     var index = this.dataSource.data.indexOf(1);
     this.dataSource.data.splice(index, 1);
     if (this.routeUrl != '') {
@@ -440,7 +426,6 @@ if (branch != null && branch !== '' &&
   }
 
   registerpurreq() {
-    debugger;
     const registerStackreceiptsUrl = [this.apiConfigService.registerPurchaserequisitionDetails].join('/');
     const requestObj = { PurreqHdr: this.branchFormData.value, PurreqDetail: this.dataSource.data };
     this.apiService.apiPostRequest(registerStackreceiptsUrl, requestObj).subscribe(
@@ -463,7 +448,7 @@ if (branch != null && branch !== '' &&
     this.formGroup();
     const user = JSON.parse(localStorage.getItem('user'));
     this.genaratereceiptNo(user.branchCode);
-   // this.gettingtobranches();
+    // this.gettingtobranches();
     this.branchFormData = this.formBuilder.group
       ({
         requisitionDate: [(new Date()).toISOString()],
@@ -472,13 +457,13 @@ if (branch != null && branch !== '' &&
         company: [null],
         requisitionNo: [null]
       });
-   
+
     this.ngOnInit();
   }
 
 
   back() {
-      this.router.navigate(['dashboard/transactions/purchaserequisition']);
+    this.router.navigate(['dashboard/transactions/purchaserequisition']);
   }
 
 }

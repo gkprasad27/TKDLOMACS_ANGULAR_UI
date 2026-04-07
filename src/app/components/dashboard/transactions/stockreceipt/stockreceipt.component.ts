@@ -62,7 +62,6 @@ export class StockreceiptsComponent implements OnInit {
     this.getInvoiceDetails();
   }
   getInvoiceDetails() {
-    //debugger;
     const getInvoiceDetailstUrl = [this.apiConfigService.getStockreceiptsDeatilListLoad, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceDetailstUrl, this.dateForm.value).subscribe(
       response => {
@@ -79,7 +78,6 @@ export class StockreceiptsComponent implements OnInit {
   
 
   openStockreceipt(row) {
-    // debugger;
     localStorage.setItem('selectedstockissues', JSON.stringify(row));
     this.router.navigate(['dashboard/transactions/stockreceipt/CreateStockreceipts', row.operatorStockReceiptId]);
   }
@@ -111,7 +109,6 @@ export class StockreceiptsComponent implements OnInit {
   }
   getStockreceiptList()
   {
-    //debugger;
     const getInvoiceListUrl = [this.apiConfigService.getStockreceiptsList, this.branchCode.branchCode].join('/');
 
     this.apiService.apiPostRequest(getInvoiceListUrl, this.dateForm.value).subscribe(

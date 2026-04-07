@@ -339,7 +339,7 @@ getProductByProductName(value) {
 }
 
   getdata(productCode) {
-    //debugger;
+    ;
     const branchCode = this.branchFormData.get('branchCode')?.value;
 const pCode = productCode?.value;
 
