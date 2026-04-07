@@ -1,7 +1,7 @@
 import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core'; 
 
@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 export class AccountsGroupComponent  implements OnInit {
 
-  modelFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
   isSubmitted  =  false;
   formData: any;
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../../services/common.service';
 import { ApiConfigService } from '../../../../services/api-config.service';
 
@@ -10,7 +10,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { AlertService } from '../../../../services/alert.service';
 import { Static } from '../../../../enums/common/static';
-import { UntypedFormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PrintComponent } from '../../../../reuse-components/print/print.component';
@@ -63,8 +62,8 @@ export class SalesInvoiceComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   isSaveDisabled = false;
   date = new Date((new Date().getTime() - 3888000000));
-  modelFormData: UntypedFormGroup;
-  tableFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
+  tableFormData: FormGroup;
   printBill = false;
   taxPercentage: any;
   setFocus: any;
@@ -889,8 +888,12 @@ export class SalesInvoiceComponent implements OnInit {
     //     });
     //     val = obj;
     //   }
-    //   val.text = 'obj';
-    //   return val;
+    // 
+      // val.text = 'obj';
+      // if(val.qty == 0) {
+      //   val.qty = '';
+      // }
+      // return val;
     // });
     // if (this.disableSlipValData(obj)) {
     this.setToFormModel(null, null, null);

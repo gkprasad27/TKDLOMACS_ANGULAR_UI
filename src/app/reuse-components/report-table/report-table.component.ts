@@ -16,7 +16,7 @@ import { SearchFilterTableComponent } from '../search-filter-table/search-filter
 import { NgxSpinnerService } from 'ngx-spinner';
 // search
 
-import { UntypedFormGroup, UntypedFormControl, AbstractControl, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, AbstractControl, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ReplaySubject, Subject, pipe } from 'rxjs';
 import { take, takeUntil, map } from 'rxjs/operators';
 import { MatSelect } from '@angular/material/select';
@@ -51,13 +51,13 @@ export class ReportTableComponent implements OnInit, OnChanges {
   selectedDate = { start: moment().add(-1, 'day'), end: moment().add(0, 'day') };
   GetBankPAccountLedgerListArray = [];
   GetProductListArray = [];
-  public tableMultiCtrl: UntypedFormControl = new UntypedFormControl();
+  public tableMultiCtrl: FormControl = new FormControl();
   public filteredTableMulti: ReplaySubject<any> = new ReplaySubject<any>(1);
 
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
   protected onDestroy = new Subject<void>();
 
-  dateForm: UntypedFormGroup;
+  dateForm: FormGroup;
   params = new HttpParams();
   @Input() tableData: any;
   @Input() headerData: any = [];
@@ -170,7 +170,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     });
 
   }
-  checkDates(group: UntypedFormGroup) {
+  checkDates(group: FormGroup) {
     if (group.controls.formDate.value < group.controls.toDate.value) {
       return { notValid: true }
     }

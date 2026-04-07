@@ -494,6 +494,21 @@
     "companyCode": "companyCode",
     "companyName": "companyName"
   },
+
+  "openingbalance": {
+    "title": "Opening Balance",
+    "branchCode": "Branch Code",
+    "branchName": "Branch Name",
+    "ledgerCode": "Ledger Code",
+    "ledgerName": "Ledger Name",
+    "voucherNo": "Voucher No",
+    "openingBalanceDate": "Date",
+    "paymentTypeName": "Payment Type",
+    "amount": "Amount",
+    "narration": "Narration",
+    "shiftId": "Shift Id",
+    "userName": "User Name"
+  },
   "leaveopeningbalance": {
     "title": "Leaveopening Balances",
     "empCode": "EmpCode",

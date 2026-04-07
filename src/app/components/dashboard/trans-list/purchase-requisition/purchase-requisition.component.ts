@@ -368,6 +368,9 @@ if (branch != null && branch !== '' &&
         val = obj;
       }
       val.text = 'obj';
+      if(val.qty == 0) {
+        val.qty = '';
+      }
       return val;
     });
     this.setToFormModel(null, null, null);

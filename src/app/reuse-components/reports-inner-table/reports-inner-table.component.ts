@@ -12,7 +12,7 @@ import { CommonService } from '../../services/common.service';
 import { ActivatedRoute } from '@angular/router';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { SearchFilterTableComponent } from '../search-filter-table/search-filter-table.component';
-import { UntypedFormGroup, UntypedFormControl, AbstractControl, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, AbstractControl, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -37,13 +37,13 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class ReportsInnerTableComponent  {
 
-  public tableMultiCtrl: UntypedFormControl = new UntypedFormControl();
+  public tableMultiCtrl: FormControl = new FormControl();
   public filteredTableMulti: ReplaySubject<any> = new ReplaySubject<any>(1);
 
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
   protected onDestroy = new Subject<void>();
 
-  dateForm: UntypedFormGroup;
+  dateForm: FormGroup;
   tableData: any;
 
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
@@ -102,7 +102,7 @@ export class ReportsInnerTableComponent  {
     }
 
   }
-  checkDates(group: UntypedFormGroup) {
+  checkDates(group: FormGroup) {
     if (group.controls.formDate.value < group.controls.toDate.value) {
       return { notValid: true }
     }

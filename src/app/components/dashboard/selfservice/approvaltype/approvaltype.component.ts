@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AlertService } from '../../../../services/alert.service';
 import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { UntypedFormBuilder, UntypedFormGroup, Validators, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CommonService } from '../../../../services/common.service';
 import { StatusCodes } from '../../../../enums/common/common';
 import { DatePipe, formatDate } from '@angular/common';
@@ -37,7 +37,7 @@ export class ApprovalTypeComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  modelFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
   isSubmitted = false;
   formData: any;
  

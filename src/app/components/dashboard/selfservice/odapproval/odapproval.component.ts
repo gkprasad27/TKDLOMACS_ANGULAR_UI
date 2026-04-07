@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../../services/common.service';
 
 import { ApiConfigService } from '../../../../services/api-config.service';
@@ -27,7 +27,7 @@ export class odApprovalComponent implements OnInit {
 
   leaveApprovalList: any;
 
-  leaveRequestForm: UntypedFormGroup;
+  leaveRequestForm: FormGroup;
   displayedColumns: string[] = ['select', 'empCode', 'empName', 'sno', 'applydate', 'fromDate', 'toDate', 'status', 'approvedId', 'reason'];
 
   dataSource: MatTableDataSource<any>;

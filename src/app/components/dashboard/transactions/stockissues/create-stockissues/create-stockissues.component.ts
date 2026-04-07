@@ -3,7 +3,7 @@ import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../../../services/common.service';
 import { ApiConfigService } from '../../../../../services/api-config.service';
 
@@ -14,10 +14,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar, StatusCodes } from '../../../../../enums/common/common';
 import { AlertService } from '../../../../../services/alert.service';
 import { Static } from '../../../../../enums/common/static';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({ 
@@ -29,9 +29,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class CreateStockissuesComponent implements OnInit {
 
-  branchFormData: UntypedFormGroup;
+  branchFormData: FormGroup;
   GetBranchesListArray = [];
-  myControl = new UntypedFormControl();
+  myControl = new FormControl();
   filteredOptions: Observable<any[]>;
   getAccountLedgerListArray = [];
   getAccountLedgerListNameArray = [];
@@ -48,8 +48,8 @@ export class CreateStockissuesComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   date = new Date((new Date().getTime() - 3888000000));
-  modelFormData: UntypedFormGroup;
-  tableFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
+  tableFormData: FormGroup;
  // printBill: any;
   issueno = null;
   totalamount = null;
@@ -69,6 +69,8 @@ export class CreateStockissuesComponent implements OnInit {
     private apiService: ApiService,
     private alertService: AlertService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
+
     private spinner: NgxSpinnerService,
   ) {
     this.branchFormData = this.formBuilder.group({
@@ -129,7 +131,7 @@ export class CreateStockissuesComponent implements OnInit {
           this.genaratebranchcode();
           ////this.setBranchCode();
           ////this.genarateVoucherNo(user.branchCode);
-          ////this.formGroup();
+          this.formGroup();
           ////this.gettingtobranches();
          // this.settoBranchCode();
         }
@@ -182,7 +184,6 @@ export class CreateStockissuesComponent implements OnInit {
                 });
               this.setBranchCode();
               this.genarateVoucherNo(this.fromBranchCode);
-              this.formGroup();
               this.gettingtobranches();
               this.spinner.hide();
              
@@ -487,11 +488,11 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
           const res = response;
+                this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.productsList != null) {
                 this.DetailsSection(res.response['productsList']);
-                this.spinner.hide();
               }
             }
           }
@@ -511,6 +512,9 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
         val = obj;
       }
       val.text = 'obj';
+      if(val.qty == 0) {
+        val.qty = '';
+      }
       return val;
     });
     this.setToFormModel(null, null, null);
@@ -625,6 +629,10 @@ if (fromBranchCode != null && fromBranchCode !== '' &&
 
     });
    this.ngOnInit();
+  }
+
+  back() {
+      this.router.navigate(['dashboard/transactions/stockissues']);
   }
 
 }

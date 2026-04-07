@@ -8,7 +8,7 @@ import { AlertService } from '../../../../services/alert.service';
 
 import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../../services/common.service';
 import { StatusCodes } from '../../../../enums/common/common';
 import { SharedImportModule } from 'src/app/shared/shared-import';
@@ -26,7 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class LeavetypeComponent implements OnInit {
 
-  modelFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
   isSubmitted = false;
   formData: any;
   apiConfigService: any;

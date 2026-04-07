@@ -2,7 +2,7 @@ import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { AlertService } from '../../../../services/alert.service';
 import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../../../services/api.service';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -24,7 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 export class NumberAssignmentComponent implements OnInit {
 
-  modelFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
   isSubmitted = false;
   formData: any;
     companyList: any;

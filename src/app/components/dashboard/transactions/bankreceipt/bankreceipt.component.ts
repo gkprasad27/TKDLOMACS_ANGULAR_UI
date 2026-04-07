@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../../services/common.service';
 
 import { ApiConfigService } from '../../../../services/api-config.service';
@@ -26,7 +26,7 @@ import moment from 'moment';
 export class BankReceiptComponent implements OnInit {
   selectedDate = {start : moment().add(-1, 'day'), end: moment().add(0, 'day')};
   GetBranchesListArray:any;
-  dateForm: UntypedFormGroup;
+  dateForm: FormGroup;
   // table
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

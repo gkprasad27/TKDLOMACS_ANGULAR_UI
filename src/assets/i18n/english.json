@@ -350,7 +350,7 @@
     "unit": "Unit",
     "qty": "Qty",
     "rate": "Rate",
-    "Amount": "Amount",
+    "amount": "Amount",
     "StockAvailable": "Stock Available",
     "batchNo": "Batch No",
     "addDate": "Add Date"
@@ -400,7 +400,7 @@
     "unit": "Unit",
     "qty": "Qty",
     "rate": "Rate",
-    "Amount": "Amount",
+    "amount": "Amount",
     "StockAvailable": "Stock Available",
     "batchNo": "Batch No"
   },
@@ -1164,7 +1164,7 @@
     "accountCode": "To Account Code",
     "accountName": "To Account Name",
     "createnewcashpayment": "Create Cash Payment",
-    "Amount": "Amount",
+    "amount": "Amount",
     "toLedgerCode": "To Account Code",
     "toLedgerName": "To Account Name",
     "narration": "Narration",
@@ -1187,14 +1187,14 @@
     "accountCode": "To Account Code",
     "accountName": "To Account Name",
     "createnewcashreceipt": "Create Cash Receipt",
-    "Amount": "Amount",
+    "amount": "Amount",
     "toLedgerCode": "To Account Code",
     "toLedgerName": "To Account Name",
     "narration": "Narration",
     "SlNo": "SL.No",
     "userName": "Created By",
-    "UserId": "User Id",
-    "ShiftId": "Shift Id"
+    "userId": "User Id",
+    "shiftId": "Shift Id"
   },
   "bankpayment": {
     "title": "Bank Payment",
@@ -1210,7 +1210,7 @@
     "accountCode": "To Account Code",
     "accountName": "To Account Name",
     "createnewbankpayment": "Create Bank Payment",
-    "Amount": "Amount",
+    "amount": "Amount",
     "chequeNo": "Cheque No",
     "postingDate": "Posting Date",
     "realized": "Realized",
@@ -1219,8 +1219,8 @@
     "userName": "Created By",
     "toLedgerCode": "To Account Code",
     "toLedgerName": "To Account Name",
-    "UserId": "User Id",
-    "ShiftId": "Shift Id"
+    "userId": "User Id",
+    "shiftId": "Shift Id"
   },
   "AccountLedger": {
     "title": "Account Ledger"
@@ -1239,7 +1239,7 @@
     "accountCode": "To Account Code",
     "accountName": "To Account Name",
     "createnewbankreceipt": "Create Bank Receipt",
-    "Amount": "Amount",
+    "amount": "Amount",
     "chequeNo": "Cheque No",
     "postingDate": "Posting Date",
     "realized": "Realized",
@@ -1248,8 +1248,8 @@
     "userName": "Created By",
     "toLedgerCode": "To Account Code",
     "toLedgerName": "To Account Name",
-    "UserId": "User Id",
-    "ShiftId": "Shift Id"
+    "userId": "User Id",
+    "shiftId": "Shift Id"
   },
   "journalvoucher": {
     "title": "Journal Voucher",
@@ -1268,15 +1268,15 @@
     "createnewjournalvoucher": "Create New Journal Voucher",
     "accountCode": "To Account Code",
     "accountName": "To Account Name",
-    "Amount": "Amount",
+    "amount": "Amount",
     "SlNo": "SL.No",
     "userName": "Created By",
     "referenceNo": "Reference No",
     "toLedgerCode": "To Account Code",
+    "userId": "User Id",
+    "shiftId": "Shift Id",
     "toLedgerName": "To Account Name",
-    "transactionType": "Debit/Credit",
-    "UserId": "User Id",
-    "ShiftId": "Shift Id"
+    "transactionType": "Debit/Credit"
   },
   "rolePrevilages": {
     "title": "Role Previlages",
@@ -1290,11 +1290,13 @@
   },
    "packageconversion": {
     "title": "Package Conversion",
-    "inputproductCode": "Input ProductCode",
-    "inputproductName": "Input ProductName",
+    "inputProductId": "Input Product Id",
+    "outputProductId": "Output Product Id",
+    "inputproductCode": "Input Product Code",
+    "inputproductName": "Input Product Name",
     "inputQty": "Input Qty",
-    "outputproductCode": "Output ProductCode",
-    "outputproductName": "Output ProductName",
+    "outputproductCode": "Output Product Code",
+    "outputproductName": "Output Product Name",
     "outputQty": "Output Qty",
     "addDate": "AddDate"
   },

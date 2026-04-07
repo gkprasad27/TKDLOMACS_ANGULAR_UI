@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
-import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
+import { FormGroup, UntypedFormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiConfigService } from '../../../../services/api-config.service';
@@ -23,7 +23,7 @@ import { CommonService } from '../../../../services/common.service';
 })
 export class RolesprevilagesComponent implements OnInit {
 
-  formData: UntypedFormGroup;
+  formData: FormGroup;
   roleArray = [];
   parentMenu = [];
   actualData = [];

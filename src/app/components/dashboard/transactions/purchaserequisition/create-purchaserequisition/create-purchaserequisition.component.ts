@@ -3,7 +3,7 @@ import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../../../services/common.service';
 import { ApiConfigService } from '../../../../../services/api-config.service';
 
@@ -14,10 +14,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar, StatusCodes } from '../../../../../enums/common/common';
 import { AlertService } from '../../../../../services/alert.service';
 import { Static } from '../../../../../enums/common/static';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({ 
@@ -29,9 +29,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class CreatePurchaseRequisitionComponent  implements OnInit {
 
-  branchFormData: UntypedFormGroup;
+  branchFormData: FormGroup;
   GetBranchesListArray = [];
-  myControl = new UntypedFormControl();
+  myControl = new FormControl();
   filteredOptions: Observable<any[]>;
   getAccountLedgerListArray = [];
   getAccountLedgerListNameArray = [];
@@ -49,8 +49,8 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   date = new Date((new Date().getTime() - 3888000000));
-  modelFormData: UntypedFormGroup;
-  tableFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
+  tableFormData: FormGroup;
   // printBill: any;
   issueno = null;
   totalamount = null;
@@ -69,6 +69,8 @@ export class CreatePurchaseRequisitionComponent  implements OnInit {
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private alertService: AlertService,
+        private router: Router,
+
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
   ) {
@@ -375,6 +377,9 @@ if (branch != null && branch !== '' &&
         val = obj;
       }
       val.text = 'obj';
+      if(val.qty == 0) {
+        val.qty = '';
+      }
       return val;
     });
     this.setToFormModel(null, null, null);
@@ -469,6 +474,11 @@ if (branch != null && branch !== '' &&
       });
    
     this.ngOnInit();
+  }
+
+
+  back() {
+      this.router.navigate(['dashboard/transactions/purchaserequisition']);
   }
 
 }

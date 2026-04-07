@@ -1,41 +1,37 @@
-<div class="p-1 d-flex">
-  <h4  [routerLink]="['/dashboard/transactions/journalvoucher']"> <u class="cursor--pointer"> {{ 'journalvoucher.title' | translate }}  </u>  </h4>
-  &nbsp; 	&nbsp; <h4>  / </h4> 	&nbsp;
-  <h5 class="p-1">  {{ 'journalvoucher.createnewjournalvoucher' | translate }} </h5>
-</div>
-
 <div class="">
-  <mat-card >
+  <mat-card>
 
     <mat-card-content>
       <form [formGroup]="branchFormData" autocomplete="off">
 
-        <div class="d--flex mat-form-field-height">
+        <div class="row">
 
-          <mat-form-field class="form-element">
+          <mat-form-field class="col-3">
             <mat-label>{{ 'journalvoucher.branchName' | translate }}</mat-label>
-            <mat-select formControlName="branchCode" appFocusOnEnter tabIndex="3"  (selectionChange)="genarateVoucherNo(); setBranchCode();">
+            <mat-select formControlName="branchCode" appFocusOnEnter tabIndex="3"
+              (selectionChange)="genarateVoucherNo(); setBranchCode();">
               @for (branch of GetBranchesListArray; track branch) {
-                <mat-option [value]="branch.id">
-                  {{ branch.id }} - {{branch.text}}
-                </mat-option>
+              <mat-option [value]="branch.id">
+                {{ branch.id }} - {{branch.text}}
+              </mat-option>
               }
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="form-element">
-            <input matInput placeholder="{{ 'journalvoucher.voucherNo' | translate }}" formControlName="voucherNo"
-              appFocusOnEnter tabIndex="1">
-            </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label>{{ 'journalvoucher.voucherNo' | translate }}</mat-label>
+            <input matInput formControlName="voucherNo" appFocusOnEnter tabIndex="1">
+          </mat-form-field>
 
-            <mat-form-field>
-              <input matInput [matDatepicker]="picker" placeholder="{{'journalvoucher.journalVoucherDate' | translate }}"
-                formControlName="journalVoucherDate" appFocusOnEnter  tabIndex="4" (click)="picker.open()" readonly>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label>{{ 'journalvoucher.journalVoucherDate' | translate }}</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="journalVoucherDate" appFocusOnEnter tabIndex="4"
+              (click)="picker.open()" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
 
-              <!-- <mat-form-field class="form-element">
+          <!-- <mat-form-field class="form-element">
               <mat-label>{{ 'journalvoucher.fromLedgerName' | translate }}</mat-label>
               <mat-select formControlName="fromLedgerCode" appFocusOnEnter tabIndex="3" >
                 <mat-option *ngFor="let bank of getJVAccountLedgerListArray" [value]="bank.id">
@@ -44,74 +40,74 @@
               </mat-select>
             </mat-form-field> -->
 
-            <mat-form-field>
-              <mat-label>{{ 'journalvoucher.fromLedgerName' | translate }}</mat-label>
-              <input class="typeahead" matInput
-                placeholder="{{ 'journalvoucher.fromLedgerName' | translate }}" formControlName="fromLedgerCode"
-                (typeaheadOnSelect)="setLedgerName($event)" (input)="getJournalVoucherAccountLedgerList($event.target.value)"
-                [typeahead]="GetJournalVoucherListArray" typeaheadOptionField='id' autocomplete="off"
-                [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
-                [typeaheadWaitMs]="200" id="fromLedgerName" >
-                <ng-template #customItemTemplate let-model="item">
-                  <span><strong>{{model.id}}</strong> - {{model.text}}</span>
-                </ng-template>
-              </mat-form-field>
 
-              <mat-form-field>
-                <input matInput [matDatepicker]="picker1" placeholder="{{'journalvoucher.referenceDate' | translate }}"
-                  formControlName="referenceDate" appFocusOnEnter  tabIndex="4" (click)="picker1.open()" readonly>
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                  <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
+          <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+            [class.filled]="branchFormData.get('fromLedgerName')?.value">
+            <label> {{ 'journalvoucher.fromLedgerName' | translate }} </label>
+            <input placeholder=" " formControlName="fromLedgerName" (typeaheadOnSelect)="setLedgerName($event)"
+              (input)="getJournalVoucherAccountLedgerList($event.target.value)" id="fromLedgerName" [typeahead]="GetJournalVoucherListArray"
+              autocomplete="off" [typeaheadOptionsLimit]="100000" typeaheadOptionField='id' [typeaheadItemTemplate]="customItemTemplate"
+              class="form-control typeahead" [typeaheadWaitMs]="200">
+            <ng-template #customItemTemplate let-model="item">
+              <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+            </ng-template>
+          </div>
 
-                <mat-form-field class="form-element">
-                  <input matInput placeholder="{{ 'journalvoucher.referenceNo' | translate }}"
-                    formControlName="referenceNo" appFocusOnEnter tabIndex="2" >
-                  </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label>{{ 'journalvoucher.referenceDate' | translate }}</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="referenceDate" appFocusOnEnter tabIndex="4" (click)="picker1.open()" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
 
-                  <mat-form-field>
-                    <mat-label>{{'journalvoucher.transactionType' | translate }}</mat-label>
-                    <mat-select formControlName="transactionType" placeholder="transactionType" >
-                      @for (transaction of transaction; track transaction) {
-                        <mat-option [value]="transaction.value">
-                          {{transaction.viewValue}}
-                        </mat-option>
-                      }
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </form>
-            </mat-card-content>
+          <mat-form-field class="col-3">
+              <mat-label>{{ 'journalvoucher.referenceNo' | translate }}</mat-label>
+            <input matInput formControlName="referenceNo" appFocusOnEnter tabIndex="2">
+          </mat-form-field>
 
-          </mat-card>
+          <mat-form-field class="col-3">
+            <mat-label>{{'journalvoucher.transactionType' | translate }}</mat-label>
+            <mat-select formControlName="transactionType" placeholder="transactionType">
+              @for (transaction of transaction; track transaction) {
+              <mat-option [value]="transaction.value">
+                {{transaction.viewValue}}
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card-content>
+
+  </mat-card>
 
 
-          <mat-card class="mt-2">
+  <mat-card class="mt-2">
 
-            <mat-card-content>
-              <div class="table mt-3 mat-form-field-height">
-                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
-                  <ng-container matColumnDef="SlNo">
-                    <th class="p-0" mat-header-cell *matHeaderCellDef> {{ 'journalvoucher.SlNo' | translate }} </th>
-                    <td mat-cell *matCellDef="let element;">
+    <mat-card-content>
+      <div class="table mt-3 mat-form-field-height">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+          <ng-container matColumnDef="SlNo">
+            <th class="p-0" mat-header-cell *matHeaderCellDef> {{ 'journalvoucher.SlNo' | translate }} </th>
+            <td mat-cell *matCellDef="let element;">
 
-                      <input matInput disabled value="{{ dataSource.filteredData.indexOf(element) + 1}}" />
-                    </td>
-                  </ng-container>
-                  <ng-container matColumnDef="toLedgerCode">
-                    <th mat-header-cell *matHeaderCellDef>  {{ 'journalvoucher.toLedgerCode' | translate }} </th>
-                    <td mat-cell *matCellDef="let element;">
-                      <input class="typeAhead" [(ngModel)]="element.toLedgerCode" type="search"
-                        [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setAccountName($event)"
-                        (input)="getAccountByAccountCode($event.target.value)"
-                        [typeahead]="getAccountLedgerListArray" typeaheadOptionField='id' >
-                      </td>
-                    </ng-container>
+              <input matInput disabled value="{{ dataSource.filteredData.indexOf(element) + 1}}" />
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="toLedgerCode">
+            <th mat-header-cell *matHeaderCellDef> {{ 'journalvoucher.toLedgerCode' | translate }} </th>
+            <td mat-cell *matCellDef="let element;">
+              <input class="typeAhead" [(ngModel)]="element.toLedgerCode" type="search"
+                [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setAccountName($event)"
+                (input)="getAccountByAccountCode($event.target.value)" [typeahead]="getAccountLedgerListArray"
+                typeaheadOptionField='id'>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="toLedgerName">
-                      <th mat-header-cell *matHeaderCellDef>{{ 'journalvoucher.toLedgerName' | translate }}</th>
-                      <td mat-cell *matCellDef="let element">
-                        <!-- <span >{{ element.name }} </span> -->
+          <ng-container matColumnDef="toLedgerName">
+            <th mat-header-cell *matHeaderCellDef>{{ 'journalvoucher.toLedgerName' | translate }}</th>
+            <td mat-cell *matCellDef="let element">
+              <!-- <span >{{ element.name }} </span> -->
               <!-- <input matInput [value]="element.toLedgerName" [(ngModel)]="element.toLedgerName" (input)="
                   setToFormModel(
                     element.text,
@@ -119,99 +115,99 @@
                     element.toLedgerName
                   )
                 " /> -->
-                        <input class="typeAhead" id="LedgerName" [(ngModel)]="element.toLedgerName" type="search"
-                          [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setAccountCode($event)"
-                          (input)="getAccountByAccountName($event.target.value)"
-                          [typeahead]="getAccountLedgerListArray" typeaheadOptionField='text' >
-                        </td>
-                      </ng-container>
+              <input class="typeAhead" id="LedgerName" [(ngModel)]="element.toLedgerName" type="search"
+                [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setAccountCode($event)"
+                (input)="getAccountByAccountName($event.target.value)" [typeahead]="getAccountLedgerListArray"
+                typeaheadOptionField='text'>
+            </td>
+          </ng-container>
 
-                      <ng-container matColumnDef="amount">
-                        <th mat-header-cell *matHeaderCellDef> {{ 'journalvoucher.amount' | translate }} </th>
-                        <td mat-cell *matCellDef="let element;">
-                          <input matInput [disabled]="element.text != 'obj'" type="number" matInput disabled [value]="element.amount"
-                            [(ngModel)]="element.amount" (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
-                          (input)="setToFormModel(element.text, 'amount', element.amount)"  /> </td>
-                        </ng-container>
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> {{ 'journalvoucher.amount' | translate }} </th>
+            <td mat-cell *matCellDef="let element;">
+              <input matInput [disabled]="element.text != 'obj'" type="number" matInput disabled
+                [value]="element.amount" [(ngModel)]="element.amount"
+                (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
+                (input)="setToFormModel(element.text, 'amount', element.amount)" />
+            </td>
+          </ng-container>
 
-                        <ng-container matColumnDef="delete">
-                          <th mat-header-cell *matHeaderCellDef>  </th>
-                          <td mat-cell *matCellDef="let element;">
-                            @if ((element.text == 'obj' && dataSource.filteredData.indexOf(element) != 0)) {
-                              <mat-icon  class="cursor--pointer delete-icon"
-                              (click)="deleteRow(dataSource.filteredData.indexOf(element))">delete</mat-icon>
-                            }
-                          </td>
-                        </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element;">
+              @if ((element.text == 'obj' && dataSource.filteredData.indexOf(element) != 0)) {
+              <mat-icon class="cursor--pointer delete-icon"
+                (click)="deleteRow(dataSource.filteredData.indexOf(element))">delete</mat-icon>
+              }
+            </td>
+          </ng-container>
 
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-                        </tr>
-                      </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
 
-                      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
-                    </div>
-
-
-
-                  </mat-card-content>
-                </mat-card>
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+      </div>
 
 
-                <mat-card class="mt-2">
 
-                  <mat-card-content>
+    </mat-card-content>
+  </mat-card>
 
-                    <form [formGroup]="branchFormData" autocomplete="off">
 
-                      <div class="d-flex justify-content-between m-2">
-                        <div class="d-flex justify-content-center">
-                          <div class="w-75">
-                            <mat-form-field class="form-element">
-                              <input matInput placeholder="{{ 'journalvoucher.userName' | translate }}"
-                                formControlName="userName" appFocusOnEnter tabIndex="1">
-                              </mat-form-field>
+  <mat-card class="mt-2">
 
-                            </div>
-                          </div>
-                          <div class="w-50">
-                            <mat-form-field>
-                              <mat-label>{{ 'journalvoucher.narration' | translate }}</mat-label>
-                              <textarea matInput formControlName="narration" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                              cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
-                            </mat-form-field>
-                          </div>
+    <mat-card-content>
 
-                          <div class="w-50 d-flex justify-content-center">
-                            <div class="w-75">
-                              <mat-form-field class="form-element">
-                                <input matInput placeholder="{{ 'journalvoucher.totalAmount' | translate }}"
-                                  formControlName="totalAmount" appFocusOnEnter tabIndex="1">
-                                </mat-form-field>
+      <form [formGroup]="branchFormData" autocomplete="off">
 
-                              </div>
-                            </div>
-                          </div>
+        <div class="d-flex justify-content-between m-2">
+            <div class="w-25 p-3">
+              <mat-form-field class="form-element">
+                <input matInput placeholder="{{ 'journalvoucher.userName' | translate }}" formControlName="userName"
+                  appFocusOnEnter tabIndex="1">
+              </mat-form-field>
 
-                          <div class="d-flex justify-content-end mr-4">
-                            <div class="d-flex flex-column mr-2">
-                              <mat-label>{{ 'COMMON.PRINT' | translate }}</mat-label>
-                              <mat-slide-toggle formControlName="printBill"></mat-slide-toggle>
-                            </div>
-                            <button mat-raised-button type="submit" class="button-color-bule mr-2 text-white" [disabled]="routeUrl != ''"
-                              (click)="save()">
-                              <!-- <mat-icon>save</mat-icon> -->
-                            {{ 'COMMON.SAVE' | translate }}</button>
-                            <button mat-raised-button class="button-color-red text-white mr-2" [disabled]="routeUrl != ''"
-                              (click)="reset();"  >
-                              <!-- <mat-icon>close</mat-icon> -->
-                              {{ 'COMMON.RESET' | translate }}
-                            </button>
-                          </div>
+            </div>
+          <div class="w-25 p-3">
+            <mat-form-field>
+              <mat-label>{{ 'journalvoucher.narration' | translate }}</mat-label>
+              <textarea matInput formControlName="narration" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+            </mat-form-field>
+          </div>
 
-                        </form>
-                      </mat-card-content>
-                    </mat-card>
+            <div class="w-75 p-3">
+              <mat-form-field class="form-element">
+                <input matInput placeholder="{{ 'journalvoucher.totalAmount' | translate }}"
+                  formControlName="totalAmount" appFocusOnEnter tabIndex="1">
+              </mat-form-field>
 
-                  </div>
+            </div>
+        </div>
 
+        <div class="d-flex justify-content-end mr-4">
+          <div class="d-flex flex-column mr-2">
+            <mat-label>{{ 'COMMON.PRINT' | translate }}</mat-label>
+            <mat-slide-toggle formControlName="printBill"></mat-slide-toggle>
+          </div>
+          <button mat-raised-button type="submit" class="button-color-bule mr-2 text-white" [disabled]="routeUrl != ''"
+            (click)="save()">
+            <!-- <mat-icon>save</mat-icon> -->
+            {{ 'COMMON.SAVE' | translate }}</button>
+          <button mat-raised-button class="button-color-red text-white mr-2" [disabled]="routeUrl != ''"
+            (click)="reset();">
+            <!-- <mat-icon>close</mat-icon> -->
+            {{ 'COMMON.RESET' | translate }}
+          </button>
+          <button mat-raised-button class="button-color-red text-white mr-3" (click)="back();">
+            {{ 'COMMON.BACK' | translate }}
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+</div>

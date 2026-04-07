@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, SimpleChanges, Input} from'@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../../services/api-config.service';
 import { ApiService} from '../../../../../services/api.service';
@@ -26,7 +26,7 @@ import { TableComponent } from 'src/app/reuse-components/table/table.component';
     imports: [SharedImportModule, TranslateModule, TableComponent]
 })
 export class GiftMasterComponent implements OnInit, OnChanges {
-    modelFromData: UntypedFormGroup;
+    modelFromData: FormGroup;
     productList:any=[];
     
     isFormEdit:boolean=false;

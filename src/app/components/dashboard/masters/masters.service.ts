@@ -177,7 +177,7 @@ export class MastersService {
         this.dynamicData.registerUrl = this.apiConfigService.registerMemberMaster;
         this.dynamicData.updateUrl = this.apiConfigService.updateMemberMaster;
         this.dynamicData.deleteUrl = this.apiConfigService.deleteTaxStructure;
-        this.dynamicData.listName = 'MembersList';
+        this.dynamicData.listName = 'membersList';
         this.dynamicData.primaryKey = 'MemberId';
         return this.dynamicData;
         break;

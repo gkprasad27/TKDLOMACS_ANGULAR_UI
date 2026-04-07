@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../../../services/common.service';
 import { ApiConfigService } from '../../../../../services/api-config.service';
 
@@ -11,10 +11,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar, StatusCodes } from '../../../../../enums/common/common';
 import { AlertService } from '../../../../../services/alert.service';
 import { Static } from '../../../../../enums/common/static';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../../directives/format-datepicker';
@@ -37,9 +37,9 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 })
 export class CreateBankpaymentComponent implements OnInit {
 
-  branchFormData: UntypedFormGroup;
+  branchFormData: FormGroup;
   GetBranchesListArray = [];
-  myControl = new UntypedFormControl();
+  myControl = new FormControl();
   filteredOptions: Observable<any[]>;
   getAccountLedgerListArray = [];
   getAccountLedgerListNameArray = [];
@@ -55,8 +55,8 @@ export class CreateBankpaymentComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   date = new Date((new Date().getTime() - 3888000000));
-  modelFormData: UntypedFormGroup;
-  tableFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
+  tableFormData: FormGroup;
   printBill: any;
   tableFormObj = false;
   routeUrl = '';
@@ -66,6 +66,8 @@ export class CreateBankpaymentComponent implements OnInit {
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
+        private router: Router,
+
     private alertService: AlertService,
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
@@ -95,6 +97,12 @@ export class CreateBankpaymentComponent implements OnInit {
       bankLedgerName:[null],
       serverDate:[null]
     });
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user?.role != '1') {
+      this.branchFormData.controls['branchCode'].disable();
+    }
 
   }
 
@@ -546,6 +554,11 @@ export class CreateBankpaymentComponent implements OnInit {
           this.spinner.hide();
         }
       });
+  }
+
+
+  back() {
+      this.router.navigate(['dashboard/transactions/bankpayment']);
   }
 
 }

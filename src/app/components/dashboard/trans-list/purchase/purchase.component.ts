@@ -756,8 +756,12 @@ export class PurchaseComponent implements OnInit {
     //     });
     //     val = obj;
     //   }
-    //   val.text = 'obj';
-    //   return val;
+    //   
+      // val.text = 'obj';
+      // if(val.qty == 0) {
+      //   val.qty = '';
+      // }
+      // return val;
     // });
     this.setToFormModel(null, null, null);
   }

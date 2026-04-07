@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../../../services/common.service';
 
 import { ApiConfigService } from '../../../../services/api-config.service';
@@ -19,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [SharedImportModule, TranslateModule]
 })
 export class CTCBreakupComponent implements OnInit {
-  modelFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
   structureList:any;
   filteredOptions:any;
   displayedColumns: string[] = ['componentCode','componentName','amount','duration','specificMonth'];

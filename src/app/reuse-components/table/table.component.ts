@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CommonService } from '../../services/common.service';
 
 import { ActivatedRoute } from '@angular/router';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { MatSelect } from '@angular/material/select';
@@ -30,10 +30,10 @@ import { RuntimeConfigService } from 'src/app/services/runtime-config.service';
 export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   /** control for the selected bank for multi-selection */
-  public tableMultiCtrl: UntypedFormControl = new UntypedFormControl();
+  public tableMultiCtrl: FormControl = new FormControl();
 
   /** control for the MatSelect filter keyword multi-selection */
-  public tableMultiFilterCtrl: UntypedFormControl = new UntypedFormControl();
+  public tableMultiFilterCtrl: FormControl = new FormControl();
 
   /** list of banks filtered by search keyword */
   public filteredTableMulti: ReplaySubject<any> = new ReplaySubject<any>(1);

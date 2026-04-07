@@ -41,10 +41,11 @@
             </mat-form-field> -->
           <mat-form-field class="col-3">
             <mat-label>{{ 'bankpayment.bankLedgerName' | translate }}</mat-label>
-            <input class="typeahead" matInput  formControlName="bankLedgerCode" (typeaheadOnSelect)="setLedgerName($event)"
-              (input)="getBankPAccountLedgerList($event.target.value)" [typeahead]="GetBankPAccountLedgerListArray"
-              typeaheadOptionField='id' autocomplete="off" [typeaheadItemTemplate]="customItemTemplate"
-              [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200" id="bankLedgerName">
+            <input class="typeahead" matInput formControlName="bankLedgerCode"
+              (typeaheadOnSelect)="setLedgerName($event)" (input)="getBankPAccountLedgerList($event.target.value)"
+              [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' autocomplete="off"
+              [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
+              [typeaheadWaitMs]="200" id="bankLedgerName">
             <ng-template #customItemTemplate let-model="item">
               <span><strong>{{model.id}}</strong> - {{model.text}}</span>
             </ng-template>
@@ -196,6 +197,9 @@
             (click)="reset();">
 
             {{ 'COMMON.RESET' | translate }}
+          </button>
+          <button mat-raised-button class="button-color-red text-white mr-3" (click)="back();">
+            {{ 'COMMON.BACK' | translate }}
           </button>
         </div>
 

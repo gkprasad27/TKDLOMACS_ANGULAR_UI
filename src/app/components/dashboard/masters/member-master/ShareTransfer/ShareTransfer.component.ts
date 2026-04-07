@@ -6,7 +6,7 @@ import { AlertService } from '../../../../../services/alert.service';
 
 import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../../services/api-config.service';
 import { StatusCodes } from '../../../../../enums/common/common';
@@ -32,7 +32,7 @@ import { TableComponent } from 'src/app/reuse-components/table/table.component';
 })
 export class ShareTransferComponent implements OnInit, OnChanges {
 
-  modelFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
   isSubmitted = false;
   formData: any;
   companyList: any;

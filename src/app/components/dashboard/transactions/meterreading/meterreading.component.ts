@@ -5,7 +5,7 @@ import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
 import { SaveItemComponent } from '../../../../reuse-components/save-item/save-item.component';
 
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StatusCodes } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../services/api-config.service';
@@ -30,7 +30,7 @@ import { userInfo } from 'os';
 
 export class MeterReadingComponent implements OnInit {
   isSaveDisabled = true;
-  modelFormData: UntypedFormGroup;
+  modelFormData: FormGroup;
   isSubmitted = false;
   formData: any;
   getMeterReadingBranches: any;

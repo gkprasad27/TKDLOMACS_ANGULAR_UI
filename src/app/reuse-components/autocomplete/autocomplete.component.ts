@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map, debounceTime } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -54,7 +54,7 @@ export class AutocompleteComponent implements OnInit {
 
 
   // Autocomplete setup
-  objectControl = new UntypedFormControl();
+  objectControl = new FormControl();
   filteredObjectOptions$: Observable<any>;
 
   constructor(
