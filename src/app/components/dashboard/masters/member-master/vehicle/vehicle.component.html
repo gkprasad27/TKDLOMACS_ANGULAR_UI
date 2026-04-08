@@ -1,70 +1,70 @@
-<div class="position-relative popup-class" >
+<div class="position-relative popup-class">
 
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
     <form [formGroup]="modelFormData" autocomplete="off">
-      <div class="d--flex">
+      <div class="row">
 
-        <!-- <mat-form-field class="form-element">
+        <!-- <mat-form-field class="col-2">
         <input matInput placeholder="{{'vehicle.memberId' | translate }}" formControlName="memberId" appFocusOnEnter
           tabIndex="3">
         </mat-form-field>
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-2">
           <input matInput placeholder="{{'vehicle.memberCode' | translate }}" formControlName="memberCode"
             appFocusOnEnter tabIndex="4">
           </mat-form-field> -->
-          <mat-form-field class="form-element">
-            <input matInput placeholder="{{'vehicle.memberShares' | translate }}" formControlName="memberShares"
-              appFocusOnEnter tabIndex="5">
-            </mat-form-field>
-            <mat-form-field class="form-element">
-              <input matInput placeholder="{{'vehicle.vehicleRegNo' | translate }}" formControlName="vehicleRegNo"
-                appFocusOnEnter tabIndex="6">
-              </mat-form-field>
-              <mat-form-field class="form-element">
-                <input matInput placeholder="{{'vehicle.vehicleModel' | translate }}" formControlName="vehicleModel"
-                  appFocusOnEnter tabIndex="6">
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput [matDatepicker]="picker1" placeholder="{{'vehicle.fromDate' | translate }}"
-                    formControlName="fromDate">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                  </mat-form-field>
-                  <mat-form-field>
-                    <input matInput [matDatepicker]="picker2" placeholder="{{'vehicle.toDate' | translate }}"
-                      formControlName="toDate">
-                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                      <mat-datepicker #picker2></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field>
-                      <mat-label [translate]="'vehicle.vehicleTypeName'"></mat-label>
-                      <select matNativeControl placeholder="{{'vehicle.vehicleTypeName' | translate }}"
-                        formControlName="vehicleTypeName">
-                        @for (vehicleType of vehicleTypes; track vehicleType) {
-                          <option [value]="vehicleType.text">
-                          {{vehicleType.text}}</option>
-                        }
-                      </select>
-                    </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label>{{ 'vehicle.memberShares' | translate }}</mat-label>
+          <input matInput formControlName="memberShares" appFocusOnEnter tabIndex="5">
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label>{{ 'vehicle.vehicleRegNo' | translate }}</mat-label>
+          <input matInput formControlName="vehicleRegNo" appFocusOnEnter tabIndex="6">
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label>{{ 'vehicle.vehicleModel' | translate }}</mat-label>
+          <input matInput formControlName="vehicleModel" appFocusOnEnter tabIndex="6">
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label>{{ 'vehicle.fromDate' | translate }}</mat-label>
+          <input matInput [matDatepicker]="picker1" formControlName="fromDate">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label>{{ 'vehicle.toDate' | translate }}</mat-label>
+          <input matInput [matDatepicker]="picker2" formControlName="toDate">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'vehicle.vehicleTypeName'"></mat-label>
+          <select matNativeControl placeholder="{{'vehicle.vehicleTypeName' | translate }}"
+            formControlName="vehicleTypeName">
+            @for (vehicleType of vehicleTypes; track vehicleType) {
+            <option [value]="vehicleType.text">
+              {{vehicleType.text}}</option>
+            }
+          </select>
+        </mat-form-field>
 
-                  </div>
-                  <mat-divider></mat-divider>
-                </form>
-              </mat-card-content>
+      </div>
+      <mat-divider></mat-divider>
+    </form>
+  </mat-card-content>
 
-              <div class="form-element p-2 d-flex justify-content-end">
-                <button mat-raised-button class="button-color-red text-white mr-1" (click)="reset()">
+  <div class="col-2 p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1" (click)="reset()">
 
-                  {{ 'COMMON.RESET' | translate }}
-                </button>
-                <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
-                  tabIndex="25">
+      {{ 'COMMON.RESET' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
+      tabIndex="25">
 
-                  {{ 'COMMON.SAVE' | translate }}
-                </button>
-              </div>
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
 
-            </div>
+</div>
 
-            <app-table [tableData]="vehicleTableData" (addOrUpdateEvent)="addOrUpdateEvent($event)" [isVehicle]="true">
-            </app-table>
+<app-table [tableData]="vehicleTableData" (addOrUpdateEvent)="addOrUpdateEvent($event)" [isVehicle]="true">
+</app-table>

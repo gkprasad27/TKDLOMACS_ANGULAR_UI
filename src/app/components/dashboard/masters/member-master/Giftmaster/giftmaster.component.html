@@ -1,56 +1,54 @@
 @if (isFormVisible) {
-  <div  class="position-relative popup-class">
-    <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
-      <form [formGroup]="modelFromData">
-        <div class="d--flex">
-          <mat-form-field>
-            <mat-label [translate]="'GiftMaster.giftId'"></mat-label>
-            <select matNativeControl placeholder="{{'select'}}"
-              formControlName="giftId">
-              @for (product of productList; track product) {
-                <option [value]="product.id">
-                {{product.text}}</option>
-              }
-            </select>
-          </mat-form-field>
-          <mat-form-field class="form-element">
-            <input matInput placeholder="{{ 'GiftMaster.giftName'| translate}}" formControlName="giftName" appFocusOnEnter
-              tabindex="1">
-            </mat-form-field>
-            <mat-form-field class="form-element">
-              <input matInput placeholder="{{ 'GiftMaster.description'| translate}}" formControlName="description" appFocusOnEnter
-                tabindex="1">
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput [matDatepicker]="picker2" placeholder="{{'GiftMaster.issuseDate' | translate }}"
-                  formControlName="issueDate">
-                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                  <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field>
-                  <mat-label [translate]="'GiftMaster.year'"></mat-label>
-                  <select matNativeControl placeholder="{{'select'}}"
-                    formControlName="year">
-                    @for (yr of yearArr; track yr) {
-                      <option [value]="yr">
-                      {{yr}}</option>
-                    }
-                  </select>
-                </mat-form-field>
-              </div>
-            </form>
-          </mat-card-content>
-          <div class="form-element p-2 d-flex justify-content-end">
-            <button mat-raised-button class="button-color-red text-white mr-1" (click)="reset()">
-              {{ 'COMMON.RESET' | translate }}
-            </button>
-            <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
-              tabIndex="25">
-              {{ 'COMMON.SAVE' | translate }}
-            </button>
-          </div>
-        </div>
-      }
+<div class="position-relative popup-class">
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
+    <form [formGroup]="modelFromData">
+      <div class="row">
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'GiftMaster.giftId'"></mat-label>
+          <select matNativeControl placeholder="{{'select'}}" formControlName="giftId">
+            @for (product of productList; track product) {
+            <option [value]="product.id">
+              {{product.text}}</option>
+            }
+          </select>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'GiftMaster.giftName'"></mat-label>
+          <input matInput formControlName="giftName" appFocusOnEnter tabindex="1">
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'GiftMaster.description'"></mat-label>
+          <input matInput formControlName="description" appFocusOnEnter tabindex="1">
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'GiftMaster.issuseDate'"></mat-label>
+          <input matInput [matDatepicker]="picker2" formControlName="issueDate">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label [translate]="'GiftMaster.year'"></mat-label>
+          <select matNativeControl placeholder="{{'select'}}" formControlName="year">
+            @for (yr of yearArr; track yr) {
+            <option [value]="yr">
+              {{yr}}</option>
+            }
+          </select>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+  <div class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1" (click)="reset()">
+      {{ 'COMMON.RESET' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
+      tabIndex="25">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>
+}
 
-      <app-table  [tableData]="gifttableDataList" (addOrUpdateEvent)="addOrUpdateEvent($event)" [isGiftmaster]="'true'">
-      </app-table>
+<app-table [tableData]="gifttableDataList" (addOrUpdateEvent)="addOrUpdateEvent($event)" [isGiftmaster]="'true'">
+</app-table>
