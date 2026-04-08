@@ -120,7 +120,7 @@
                           </ng-container>
 
                           <ng-container matColumnDef="availStock">
-                            <th mat-header-cell *matHeaderCellDef>{{ 'stockissues.StockAvailabe' | translate }}</th>
+                            <th mat-header-cell *matHeaderCellDef>{{ 'stockissues.stockAvailable' | translate }}</th>
                             <td mat-cell *matCellDef="let element">
               <input matInput [value]="element.availStock" [(ngModel)]="element.availStock" (input)="
                   setToFormModel(
@@ -145,7 +145,7 @@
                               </ng-container>
 
                               <ng-container matColumnDef="grossAmount">
-                                <th mat-header-cell *matHeaderCellDef> {{ 'stockissues.Amount' | translate }} </th>
+                                <th mat-header-cell *matHeaderCellDef> {{ 'stockissues.amount' | translate }} </th>
                                 <td mat-cell *matCellDef="let element;">
                                   <input matInput [disabled]="element.text != 'obj'" type="number" matInput disabled [value]="element.grossAmount"
                                     [(ngModel)]="element.grossAmount"

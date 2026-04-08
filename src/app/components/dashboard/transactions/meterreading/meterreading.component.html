@@ -51,12 +51,6 @@
         </mat-form-field>
 
         <mat-form-field class="col-3">
-          <mat-label>{{'meterreading.totalSales' | translate }}</mat-label>
-          <input matInput formControlName="totalSales"
-            appFocusOnEnter tabIndex="6">
-        </mat-form-field>
-
-        <mat-form-field class="col-3">
           <mat-label>{{'meterreading.testing' | translate }}</mat-label>
           <input matInput formControlName="testing"
             appFocusOnEnter tabIndex="7" (change)="calculateAmount()" (change)="calculateSales()" type="number">
@@ -66,6 +60,12 @@
           <mat-label>{{'meterreading.density' | translate }}</mat-label>
           <input matInput formControlName="density"
             appFocusOnEnter tabIndex="8" (change)="calculateAmount()" (change)="calculateSales()" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.totalSales' | translate }}</mat-label>
+          <input matInput formControlName="totalSales"
+            appFocusOnEnter tabIndex="6">
         </mat-form-field>
 
         <mat-form-field class="col-3">

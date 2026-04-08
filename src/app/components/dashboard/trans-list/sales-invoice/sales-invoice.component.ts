@@ -57,7 +57,7 @@ export class SalesInvoiceComponent implements OnInit {
   getSalesBranchListArray: any[] = [];
   memberNamesList: any[] = [];
   displayedColumns: string[] = ['SlNo', 'productCode', 'productName', 'hsnNo', 'pumpNo', 'qty', 'fQty',
-    'slipNo', 'unitName', 'discount', 'taxGroupName', 'rate', 'grossAmount', 'availStock', 'delete'
+    'slipNo', 'unitName',  'taxGroupName', 'rate', 'grossAmount', 'availStock', 'delete'
   ];
   dataSource: MatTableDataSource<any>;
   isSaveDisabled = false;
@@ -1072,7 +1072,7 @@ export class SalesInvoiceComponent implements OnInit {
     //   this.alertService.openSnackBar("Your Balance is low Please Add Balance", Static.Close, SnackBar.error);
     //   return;
     // }
-    const allowedLedgerCodes = ['100', '2295', '2696', '2600', '2041', '2403'];
+    const allowedLedgerCodes = ['100', '2295', '2696', '2600', '2041', '2403', '2431'];
 
 if (
   !allowedLedgerCodes.includes(this.branchFormData.get('ledgerCode').value) &&

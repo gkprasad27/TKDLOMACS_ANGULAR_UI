@@ -251,14 +251,14 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="discount">
+          <!-- <ng-container matColumnDef="discount">
             <th mat-header-cell *matHeaderCellDef> {{ 'salesInvoice.discount' | translate }} </th>
             <td mat-cell *matCellDef="let element;">
               <strong> <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.discount"
                   (input)="element.discount = $event.target.value; setToFormModel(element.text, 'discount', element.discount)"
                    /></strong>
             </td>
-          </ng-container>
+          </ng-container> -->
 
           <ng-container matColumnDef="taxGroupName">
             <th mat-header-cell *matHeaderCellDef> {{ 'salesInvoice.taxGroupName' | translate }} </th>
