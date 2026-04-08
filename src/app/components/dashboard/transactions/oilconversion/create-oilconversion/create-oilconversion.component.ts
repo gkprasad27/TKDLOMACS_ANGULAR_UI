@@ -55,6 +55,7 @@ export class CreateOilconversionsComponent implements OnInit {
   routeUrl = '';
   getProductByProductCodeArray = [];
   getProductByProductNameArray: any[];
+  setFocus: any;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -359,7 +360,8 @@ export class CreateOilconversionsComponent implements OnInit {
   //}
 
   //Code based getting data
-  getdata(productCode) {
+  getdata(productCode, index, id) {
+    this.setFocus = id + index;
     const branchCode = this.branchFormData.get('branchCode')?.value;
     const pCode = productCode?.value;
 
@@ -400,6 +402,7 @@ export class CreateOilconversionsComponent implements OnInit {
       return val;
     });
     this.setToFormModel(null, null, null);
+    this.commonService.setFocus(this.setFocus);
   }
 
   setProductName(name) {

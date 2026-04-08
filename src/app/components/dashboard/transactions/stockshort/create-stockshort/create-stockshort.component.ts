@@ -56,6 +56,7 @@ export class CreateStockshortsComponent implements OnInit {
   getProductByProductNameArray: any[];
   GetCostCentersListArray: any;
     stockshortNo: any;
+  setFocus: any;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -438,8 +439,8 @@ export class CreateStockshortsComponent implements OnInit {
 
 
   //Code based getting data
-  getdata(productCode) {
-    ;
+  getdata(productCode, index, id) {
+    this.setFocus = id + index;
     const branchCode = this.branchFormData.get('branchCode')?.value;
 const pCode = productCode?.value;
 
@@ -481,6 +482,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
       return val;
     });
     this.setToFormModel(null, null, null);
+    this.commonService.setFocus(this.setFocus);
   }
 
   setProductName(name) {

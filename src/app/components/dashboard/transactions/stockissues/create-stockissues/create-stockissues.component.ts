@@ -104,8 +104,6 @@ export class CreateStockissuesComponent implements OnInit {
   }
 
   loadData() {
-    ;
-    this.getCashPaymentBranchesList();
     // this.gettingtobranches();
     this.activatedRoute.params.subscribe(params => {
       if (params.id1 != null) {
@@ -188,9 +186,9 @@ export class CreateStockissuesComponent implements OnInit {
   }
 
   ngOnInit() {
-    ;
     this.loadData();
     this.commonService.setFocus('productCode');
+    this.getCashPaymentBranchesList();
   }
 
   getStockissuesDeatilList(id) {
@@ -209,7 +207,6 @@ export class CreateStockissuesComponent implements OnInit {
   }
 
   getCashPaymentBranchesList() {
-    ;
     const getCashPaymentBranchesListUrl = [this.apiConfigService.GetBranchesList].join('/');
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
@@ -525,25 +522,35 @@ export class CreateStockissuesComponent implements OnInit {
 
   //Save Code
   save() {
-    ;
-    var index = this.dataSource.data.indexOf(1);
-    this.dataSource.data.splice(index, 1);
     if (this.routeUrl != '') {
       return;
     }
-    let availStock = this.dataSource.filteredData.filter(stock => {
-      if (stock?.availStock === 0 || (stock?.qty == null && stock?.rate == null)) {
+    let tableData = [];
+    for (let d = 0; d < this.dataSource.data.length; d++) {
+      if (this.dataSource.data[d]['productCode'] != '') {
+        tableData.push(this.dataSource.data[d]);
+      }
+    }
+    let content = '';
+    let availStock = tableData.filter(stock => {
+      if ((stock?.qty == null || stock?.qty <= 0)) {
+        content = 'Please enter valid Quantity';
+        return stock;
+      }
+      if (stock.availStock == 0 || ((stock.qty == null) && (stock.rate == null))) {
+        content = 'Availablilty Stock is 0';
         return stock;
       }
     });
     if (availStock.length) {
-      this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) 0 Availablilty Stock`, Static.Close, SnackBar.error);
+      this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
       return;
     }
     if (!this.tableFormObj) {
       this.dataSource.data.pop();
     }
     if (this.dataSource.data.length == 0) {
+      this.alertService.openSnackBar(`Product is not added`, Static.Close, SnackBar.error);
       return;
     }
 
@@ -551,7 +558,6 @@ export class CreateStockissuesComponent implements OnInit {
   }
 
   registerStackissues() {
-    ;
     const registerInvoiceUrl = [this.apiConfigService.registerStockissues].join('/');
     const requestObj = { StockissueHdr: this.branchFormData.value, StockissueDtl: this.dataSource.data };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
@@ -573,25 +579,11 @@ export class CreateStockissuesComponent implements OnInit {
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.formGroup();
-    this.branchFormData = this.formBuilder.group({
-      issueNo: [null],
+    this.branchFormData.patchValue({
       issueDate: [(new Date()).toISOString()],
-      fromBranchCode: [null],
-      fromBranchName: [null],
-      toBranchCode: [null],
-      toBranchName: [null],
-      serverDateTime: [null],
-      shiftId: [null],
-      userId: '0',
-      userName: [null],
-      employeeId: [null],
-      remarks: [null],
-      operatorStockIssueId: '0',
-      // printBill: [false],
-
     });
-    this.ngOnInit();
+    this.loadData();
+    this.commonService.setFocus('productCode');
   }
 
   back() {

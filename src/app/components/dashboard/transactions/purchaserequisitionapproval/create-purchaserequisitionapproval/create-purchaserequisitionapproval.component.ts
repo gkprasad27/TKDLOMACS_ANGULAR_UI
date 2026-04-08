@@ -61,6 +61,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
   GettoBranchesListArray: any;
   toBranchCode: any;
   compiniesList: any;
+  setFocus: any;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -95,13 +96,12 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
   }
   ngOnInit() {
     this.loadData();
+    this.getCompiniesList();
+    this.getBranchesList();
   }
 
   loadData() {
-    ;
     const user = JSON.parse(localStorage.getItem('user'));
-    this.getCompiniesList();
-    this.getBranchesList();
     this.activatedRoute.params.subscribe(params => {
       if (params.id1 != null) {
         this.routeUrl = params.id1;
@@ -333,7 +333,8 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
   }
 
 
-  getdata(productCode) {
+  getdata(productCode, index, id) {
+    this.setFocus = id + index;
     //set branch
     const branch = this.branchFormData.get('branch')?.value;
 
@@ -376,6 +377,7 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
       return val;
     });
     this.setToFormModel(null, null, null);
+    this.commonService.setFocus(this.setFocus);
   }
 
   setProductName(name) {
@@ -407,26 +409,40 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
 
   //Save Code
   save() {
-    //var index = this.dataSource.data.indexOf(1);
-    //this.dataSource.data.splice(index, 1);
-    //if (this.routeUrl != '') {
-    //  return;
-    //}
-    //let availStock = this.dataSource.filteredData.filter(stock => {
-    //  if (stock.availStock == 0 || ((stock.qty == null))) {
-    //    return stock;
-    //  }
-    //});
-    //if (availStock.length) {
-    //  this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) 0 Availablilty Stock`, Static.Close, SnackBar.error);
-    //  return;
-    //}
-    //if (!this.tableFormObj) {
-    //  this.dataSource.data.pop();
-    //}
-    //if (this.dataSource.data.length == 0) {
-    //  return;
-    //}
+    if (this.routeUrl != '') {
+      return;
+    }
+    let tableData = [];
+    for (let d = 0; d < this.dataSource.data.length; d++) {
+      if (this.dataSource.data[d]['productCode'] != '') {
+        tableData.push(this.dataSource.data[d]);
+      }
+    }
+    let content = '';
+    let availStock = tableData.filter(stock => {
+      if ((stock?.qty == null || stock?.qty <= 0)) {
+        content = 'Please enter valid Quantity';
+        return stock;
+      }
+      if (stock.availStock == 0 || ((stock.qty == null) && (stock.rate == null))) {
+        content = 'Availablilty Stock is 0';
+        return stock;
+      }
+    });
+    if (availStock.length) {
+      this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
+      return;
+    }
+    if (!this.tableFormObj) {
+      this.dataSource.data.pop();
+    }
+    if (this.dataSource.data.length == 0) {
+      this.alertService.openSnackBar(`Product is not added`, Static.Close, SnackBar.error);
+      return;
+    }
+    var index = this.dataSource.data.indexOf(1);
+    this.dataSource.data.splice(index, 1);
+
 
     this.registerpurreq();
   }
@@ -451,20 +467,10 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.formGroup();
-    const user = JSON.parse(localStorage.getItem('user'));
-    this.genaratereceiptNo(user.branchCode);
-    // this.gettingtobranches();
-    this.branchFormData = this.formBuilder.group
-      ({
+    this.branchFormData.patchValue({
         requisitionDate: [(new Date()).toISOString()],
-        //fromBranchCode: (user.branchCode != null) ? user.branchCode : user.branchCode,
-        branch: (user.branchCode != null) ? user.branchCode : user.branchCode,
-        company: [null],
-        requisitionNo: [null]
       });
-
-    this.ngOnInit();
+    this.loadData();
   }
 
 

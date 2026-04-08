@@ -56,6 +56,7 @@ export class CreateStockExcessComponent implements OnInit {
   printBill: any;
   tableFormObj = false;
   routeUrl = '';
+  setFocus: any;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -95,11 +96,11 @@ export class CreateStockExcessComponent implements OnInit {
   ngOnInit() {
     this.loadData();
     this.commonService.setFocus('costCenter');
+    this.getStockExcessBranchesList();
+    this.getStockExcessCostCentersList();
   }
 
   loadData() {
-    this.getStockExcessBranchesList();
-    this.getStockExcessCostCentersList();
     this.activatedRoute.params.subscribe(params => {
       if (params.id1 != null) {
         this.routeUrl = params.id1;
@@ -338,8 +339,8 @@ getProductByProductName(value) {
   }
 }
 
-  getdata(productCode) {
-    ;
+  getdata(productCode, index, id) {
+    this.setFocus = id + index;
     const branchCode = this.branchFormData.get('branchCode')?.value;
 const pCode = productCode?.value;
 
@@ -379,6 +380,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
       return val;
     });
     this.setToFormModel(null, null, null);
+    this.commonService.setFocus(this.setFocus);
   }
 
   setProductName(name) {
@@ -404,6 +406,29 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
       }
     }
     let content = '';
+    let availStock = tableData.filter(stock => {
+      if ((stock?.qty == null || stock?.qty <= 0)) {
+        content = 'Please enter valid Quantity';
+        return stock;
+      }
+      if (stock.availStock == 0 || ((stock.qty == null) && (stock.rate == null))) {
+        content = 'Availablilty Stock is 0';
+        return stock;
+      }
+    });
+    if (availStock.length) {
+      this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
+      return;
+    }
+    if (!this.tableFormObj) {
+      this.dataSource.data.pop();
+    }
+    if (this.dataSource.data.length == 0) {
+      this.alertService.openSnackBar(`Product is not added`, Static.Close, SnackBar.error);
+      return;
+    }
+    var index = this.dataSource.data.indexOf(1);
+    this.dataSource.data.splice(index, 1);
     let totalAmount = null;
     this.dataSource.data.forEach(element => {
       totalAmount = element.amount + totalAmount;

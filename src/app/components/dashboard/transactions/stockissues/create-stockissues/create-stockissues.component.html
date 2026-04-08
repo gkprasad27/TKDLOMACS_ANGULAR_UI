@@ -98,7 +98,7 @@
                       <ng-container matColumnDef="qty">
                         <th mat-header-cell *matHeaderCellDef> {{ 'stockissues.qty' | translate }} </th>
                         <td mat-cell *matCellDef="let element;">
-                          <input matInput type="number" [disabled]="element.text != 'obj'" [value]="element.qty"
+                          <input matInput id="qty{{dataSource.filteredData.indexOf(element)}}" type="number" [disabled]="element.text != 'obj'" [value]="element.qty"
                             (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
                             [(ngModel)]="element.qty"
                             (input)="setToFormModel(element.text, 'qty', element.qty); clearQty(dataSource.filteredData.indexOf(element), element.qty, 'qty',element);" />

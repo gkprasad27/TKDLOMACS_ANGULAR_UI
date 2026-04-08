@@ -443,7 +443,8 @@ export class CreateBankreceiptComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.dataSource.data);
   }
 
-  setAccountName(value) {
+  setAccountName(value, index, id) {
+    this.commonService.setFocus(id + index);
     let flag = true;
     for (let t = 0; t < this.getAccountLedgerListArray.length; t++) {
       if (this.getAccountLedgerListArray[t]['id'] == value.value) {
