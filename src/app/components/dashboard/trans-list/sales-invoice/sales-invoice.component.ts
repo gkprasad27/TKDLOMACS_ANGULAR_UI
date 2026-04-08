@@ -57,7 +57,7 @@ export class SalesInvoiceComponent implements OnInit {
   getSalesBranchListArray: any[] = [];
   memberNamesList: any[] = [];
   displayedColumns: string[] = ['SlNo', 'productCode', 'productName', 'hsnNo', 'pumpNo', 'qty', 'fQty',
-    'slipNo', 'unitName',  'taxGroupName', 'rate', 'grossAmount', 'availStock', 'delete'
+    'slipNo', 'unitName', 'taxGroupName', 'rate', 'grossAmount', 'availStock', 'delete'
   ];
   dataSource: MatTableDataSource<any>;
   isSaveDisabled = false;
@@ -352,7 +352,7 @@ export class SalesInvoiceComponent implements OnInit {
     });
   }
 
-  getCashPartyAccountList() {
+  getCashPartyAccountList(flag = true) {
     if (this.branchFormData.get('ledgerCode').value != null && this.branchFormData.get('ledgerCode').value !== '') {
       const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, this.branchFormData.get('ledgerCode').value].join('/');
       this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
@@ -363,7 +363,9 @@ export class SalesInvoiceComponent implements OnInit {
             if (res.response != null) {
               if (res?.response?.CashPartyAccountList?.length > 0) {
                 this.getCashPartyAccountListArray = res.response['CashPartyAccountList'];
-                this.getCashPartyAccount();
+                if (flag) {
+                  this.getCashPartyAccount();
+                }
               } else {
                 this.getCashPartyAccountListArray = [];
               }
@@ -871,7 +873,7 @@ export class SalesInvoiceComponent implements OnInit {
       this.alertService.openSnackBar(`This Product(${obj.productCode}) available stock is 0`, Static.Close, SnackBar.error);
     }
     obj.text = 'obj';
-    if(obj.qty == 0) {
+    if (obj.qty == 0) {
       obj.qty = '';
     }
     this.dataSource.data[index] = obj;
@@ -889,11 +891,11 @@ export class SalesInvoiceComponent implements OnInit {
     //     val = obj;
     //   }
     // 
-      // val.text = 'obj';
-      // if(val.qty == 0) {
-      //   val.qty = '';
-      // }
-      // return val;
+    // val.text = 'obj';
+    // if(val.qty == 0) {
+    //   val.qty = '';
+    // }
+    // return val;
     // });
     // if (this.disableSlipValData(obj)) {
     this.setToFormModel(null, null, null);
@@ -1046,7 +1048,7 @@ export class SalesInvoiceComponent implements OnInit {
           return stock;
         }
       }
-      if (stock.productCode == 'D' || stock.productCode == 'P' || stock.productCode == 'XP'|| stock.productCode == 'CNG'|| stock.productCode == 'XG'|| stock.productCode == 'X1') {
+      if (stock.productCode == 'D' || stock.productCode == 'P' || stock.productCode == 'XP' || stock.productCode == 'CNG' || stock.productCode == 'XG' || stock.productCode == 'X1') {
         if ((stock.pumpNo == null)) {
           content = 'PumpNo is null';
           return stock;
@@ -1064,7 +1066,7 @@ export class SalesInvoiceComponent implements OnInit {
       this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
       return;
     }
-    if(this.branchFormData.get('invoiceNo').value == null || this.branchFormData.get('invoiceNo').value == '' || this.branchFormData.get('invoiceNo').value == 0) {
+    if (this.branchFormData.get('invoiceNo').value == null || this.branchFormData.get('invoiceNo').value == '' || this.branchFormData.get('invoiceNo').value == 0) {
       this.alertService.openSnackBar("Invoice No can't be empty", Static.Close, SnackBar.error);
       return;
     }
@@ -1072,19 +1074,19 @@ export class SalesInvoiceComponent implements OnInit {
     //   this.alertService.openSnackBar("Your Balance is low Please Add Balance", Static.Close, SnackBar.error);
     //   return;
     // }
-    const allowedLedgerCodes = ['100', '2295', '2696', '2600', '2041', '2403', '2431'];
+    const allowedLedgerCodes = ['100', '2295', '2696', '2600', '2041', '2403', '2431', '311', '312', '313', '314', '315', '318', '319', '320', '321', '322', '324', '9510', '9555', '9561', '965', '9577', '9586', '9588', '9592', '9595', '9600', '9606', '2431'];
 
-if (
-  !allowedLedgerCodes.includes(this.branchFormData.get('ledgerCode').value) &&
-  (+this.branchFormData.get('accountBalance').value < +this.branchFormData.get('grandTotal').value)
-) {
-  this.alertService.openSnackBar(
-    "Your Balance is low Please Add Balance",
-    Static.Close,
-    SnackBar.error
-  );
-  return;
-}
+    if (
+      !allowedLedgerCodes.includes(this.branchFormData.get('ledgerCode').value) &&
+      (+this.branchFormData.get('accountBalance').value < +this.branchFormData.get('grandTotal').value)
+    ) {
+      this.alertService.openSnackBar(
+        "Your Balance is low Please Add Balance",
+        Static.Close,
+        SnackBar.error
+      );
+      return;
+    }
     const dialogRef = this.dialog.open(SaveItemComponent, {
       width: '1024px',
       data: '',

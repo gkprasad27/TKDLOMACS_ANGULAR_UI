@@ -68,7 +68,7 @@ export class CreateOilconversionsComponent implements OnInit {
     private spinner: NgxSpinnerService,
   ) {
     this.branchFormData = this.formBuilder.group({
-      oilConversionVchNo: [null],
+      oilConversionVchNo: [null, Validators.required],
       oilConversionDate: [(new Date()).toISOString()],
       branchCode: [null],
       branchName: [null],
@@ -80,7 +80,7 @@ export class CreateOilconversionsComponent implements OnInit {
       userName: [null],
       employeeId: [null],
       narration: [null],
-      oilConversionMasterId: '0',
+      oilConversionMasterId: 0,
       //printBill: [false],
 
     });
@@ -103,10 +103,10 @@ export class CreateOilconversionsComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    this.getCashPaymentBranchesList();
     this.commonService.setFocus('productCode');
   }
   loadData() {
-    this.getCashPaymentBranchesList();
     this.activatedRoute.params.subscribe(params => {
       if (params.id1 != null) {
         this.routeUrl = params.id1;
@@ -177,10 +177,9 @@ export class CreateOilconversionsComponent implements OnInit {
 
   //issueno code;
   genarateVoucherNo(branch?) {
-    this.branchFormData.patchValue
-      ({
-        oilConversionVchNo: ''
-      });
+    this.branchFormData.patchValue({
+      oilConversionVchNo: ''
+    });
     let genarateVoucherNoUrl;
     if (branch != null) {
       genarateVoucherNoUrl = [this.apiConfigService.getoilconversionvocherNo, branch].join('/');
@@ -194,10 +193,9 @@ export class CreateOilconversionsComponent implements OnInit {
           if (res.response != null) {
             if ((res.response['oilconversionVoucherNo'] != null)) {
               this.issueno = res.response['oilconversionVoucherNo']
-              this.branchFormData.patchValue
-                ({
-                  oilConversionVchNo: res.response['oilconversionVoucherNo']
-                });
+              this.branchFormData.patchValue({
+                oilConversionVchNo: res.response['oilconversionVoucherNo']
+              });
               this.spinner.hide();
             }
           }
@@ -433,8 +431,6 @@ export class CreateOilconversionsComponent implements OnInit {
 
   //Save Code
   save() {
-    var index = this.dataSource.data.indexOf(1);
-    this.dataSource.data.splice(index, 1);
     if (this.routeUrl != '') {
       return;
     }
@@ -444,22 +440,36 @@ export class CreateOilconversionsComponent implements OnInit {
     //  this.alertService.openSnackBar(`This Product("availStock") 0 Availablilty Stock`, Static.Close, SnackBar.error);
     //  return;
     //}
-    let availStock = this.dataSource.filteredData.filter(stock => {
+    let tableData = [];
+    for (let d = 0; d < this.dataSource.data.length; d++) {
+      if (this.dataSource.data[d]['productCode'] != '') {
+        tableData.push(this.dataSource.data[d]);
+      }
+    }
+    let content = '';
+    let availStock = tableData.filter((stock, index) => {
+      if ((stock?.qty == null || stock?.qty <= 0)) {
+        content = 'Please enter valid Quantity';
+        return stock;
+      }
       if (stock.availStock == 0 || ((stock.qty == null) && (stock.rate == null) && (stock.grossAmount == null))) {
+        content = 'Availablilty Stock is 0';
         return stock;
       }
     });
     if (availStock.length) {
-      this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) 0 Availablilty Stock`, Static.Close, SnackBar.error);
+      this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
       return;
     }
     if (!this.tableFormObj) {
       this.dataSource.data.pop();
     }
     if (this.dataSource.data.length == 0) {
+      this.alertService.openSnackBar(`Product is not added`, Static.Close, SnackBar.error);
       return;
     }
-
+    var index = this.dataSource.data.indexOf(1);
+    this.dataSource.data.splice(index, 1);
     this.registerOilcoversions();
   }
 
@@ -483,15 +493,11 @@ export class CreateOilconversionsComponent implements OnInit {
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.formGroup();
-    const user = JSON.parse(localStorage.getItem('user'));
-    this.branchFormData = this.formBuilder.group({
+    this.branchFormData.patchValue({
       oilConversionDate: [(new Date()).toISOString()],
-      branchCode: +user.branchCode,
-      oilConversionVchNo: user.branchCode
     });
-    this.ngOnInit();
     this.loadData();
+    this.commonService.setFocus('productCode');
   }
 
 

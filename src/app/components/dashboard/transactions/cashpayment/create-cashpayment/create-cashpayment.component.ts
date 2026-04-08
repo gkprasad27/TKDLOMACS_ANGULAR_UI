@@ -58,6 +58,7 @@ export class CreateCashpaymentComponent implements OnInit {
   printBill: any;
   tableFormObj = false;
   routeUrl = '';
+  setFocus: any;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -256,7 +257,9 @@ export class CreateCashpaymentComponent implements OnInit {
       });
     }
     if (this.tableFormData.valid) {
-      this.addTableRow();
+      if (this.dataSource.data[this.dataSource.data.length - 1].toLedgerCode != '' || this.dataSource.data[this.dataSource.data.length - 1].toLedgerCode != null) {
+        this.addTableRow();
+      }
       this.formGroup();
       this.tableFormObj = false;
     }
@@ -369,7 +372,8 @@ export class CreateCashpaymentComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.dataSource.data);
   }
 
-  setAccountName(value) {
+  setAccountName(value, index, id) {
+    this.commonService.setFocus(id + index);
     let flag = true;
     for (let t = 0; t < this.getAccountLedgerListArray.length; t++) {
       if (this.getAccountLedgerListArray[t]['id'] == value.value) {

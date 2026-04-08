@@ -133,10 +133,10 @@ export class CreateStockshortsComponent implements OnInit {
   //}
 
   ngOnInit() {
-    ;
+    this.getBranchesList();
+    this.GetCostCentersList();
     this.loadData();
     this.commonService.setFocus('costCenter');
-    ;
     //this.formGroup();
     //this.getBranchesList();
     //this.GetCostCentersList();
@@ -166,8 +166,6 @@ export class CreateStockshortsComponent implements OnInit {
   }
 
   loadData() {
-    this.getBranchesList();
-    this.GetCostCentersList();
     this.activatedRoute.params.subscribe(params => {
       if (params.id1 != null) {
         this.routeUrl = params.id1;
@@ -513,27 +511,39 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
   //Save Code
   save() {
-    ;
-    var index = this.dataSource.data.indexOf(1);
-    this.dataSource.data.splice(index, 1);
     if (this.routeUrl != '') {
       return;
     }
-    let availStock = this.dataSource.filteredData.filter(stock => {
+    let tableData = [];
+    for (let d = 0; d < this.dataSource.data.length; d++) {
+      if (this.dataSource.data[d]['productCode'] != '') {
+        tableData.push(this.dataSource.data[d]);
+      }
+    }
+    let content = '';
+    let availStock = tableData.filter(stock => {
+      if ((stock?.qty == null || stock?.qty <= 0)) {
+        content = 'Please enter valid Quantity';
+        return stock;
+      }
       if (stock.availStock == 0 || ((stock.qty == null) && (stock.rate == null))) {
+        content = 'Availablilty Stock is 0';
         return stock;
       }
     });
     if (availStock.length) {
-      this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) 0 Availablilty Stock`, Static.Close, SnackBar.error);
+      this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
       return;
     }
     if (!this.tableFormObj) {
       this.dataSource.data.pop();
     }
     if (this.dataSource.data.length == 0) {
+      this.alertService.openSnackBar(`Product is not added`, Static.Close, SnackBar.error);
       return;
     }
+    var index = this.dataSource.data.indexOf(1);
+    this.dataSource.data.splice(index, 1);
 
     this.registerStackshorts();
   }
@@ -561,15 +571,11 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.formGroup();
-    const user = JSON.parse(localStorage.getItem('user'));
-    this.branchFormData = this.formBuilder.group({
-      stockshortDate: [(new Date()).toISOString()],
-      branchCode: +user.branchCode,
-      stockshortNo: user.branchCode
+    this.branchFormData.patchValue({
+      stockshortDate: [(new Date()).toISOString()]
     });
-    this.ngOnInit();
-    //this.genaratestockshortvocherNo(1);
+    this.loadData();
+    this.commonService.setFocus('costCenter');
   }
 
   back() { 

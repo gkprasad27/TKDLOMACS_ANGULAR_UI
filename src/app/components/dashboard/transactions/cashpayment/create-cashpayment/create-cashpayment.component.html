@@ -52,7 +52,7 @@
                 <td mat-cell *matCellDef="let element;">
 
                   <input class="typeAhead" [(ngModel)]="element.toLedgerCode" type="search"
-                    [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setAccountName($event)"
+                    [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setAccountName($event, dataSource.filteredData.indexOf(element), 'amount')"
                     (input)="getAccountByAccountCode($event.target.value)" id="toLedgerCode"
                     [typeahead]="getAccountLedgerListArray" typeaheadOptionField='id' >
 
@@ -80,7 +80,7 @@
                   <ng-container matColumnDef="amount">
                     <th mat-header-cell *matHeaderCellDef> {{ 'cashpayment.amount' | translate }} </th>
                     <td mat-cell *matCellDef="let element;">
-                      <input matInput [disabled]="element.text != 'obj'" type="number" matInput disabled [value]="element.amount"
+                      <input matInput id="amount{{ dataSource.filteredData.indexOf(element) }}" [disabled]="element.text != 'obj'" type="number" matInput disabled [value]="element.amount"
                         [(ngModel)]="element.amount" (change)="calculateAmount(element, dataSource.filteredData.indexOf(element))"
                       (input)="setToFormModel(element.text, 'amount', element.amount)"  /> </td>
                     </ng-container>

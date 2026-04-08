@@ -144,6 +144,7 @@ export class MemberMasterComponent implements OnInit {
       .subscribe(
         response => {
           const res = response;
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.tableData = [];
@@ -154,7 +155,6 @@ export class MemberMasterComponent implements OnInit {
               });
             }
           }
-          this.spinner.hide();
         }
       );
 
@@ -172,7 +172,6 @@ export class MemberMasterComponent implements OnInit {
               this.tileNameList = res.response['TileNameList'];
             }
           }
-          this.spinner.hide();
         }
       );
   }
@@ -188,7 +187,6 @@ export class MemberMasterComponent implements OnInit {
               this.stateList = res.response['StateList'];
             }
           }
-          this.spinner.hide();
         }
       );
   }
@@ -204,7 +202,6 @@ export class MemberMasterComponent implements OnInit {
               this.passbookStatuses = res.response['PassbookStatuses'];
             }
           }
-          this.spinner.hide();
         }
       );
   }
@@ -220,7 +217,6 @@ export class MemberMasterComponent implements OnInit {
               this.relations = res.response['PassbookStatuses'];
             }
           }
-          this.spinner.hide();
         }
       );
   }

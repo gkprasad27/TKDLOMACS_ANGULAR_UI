@@ -125,7 +125,7 @@
           </ng-container>
 
           <ng-container matColumnDef="totalAmount">
-            <th mat-header-cell *matHeaderCellDef> {{ 'stockshort.Amount' | translate }} </th>
+            <th mat-header-cell *matHeaderCellDef> {{ 'stockshort.amount' | translate }} </th>
             <td mat-cell *matCellDef="let element;">
               <input matInput [disabled]="element.text != 'obj'" type="number" matInput disabled
                 [value]="element.totalAmount" [(ngModel)]="element.totalAmount"

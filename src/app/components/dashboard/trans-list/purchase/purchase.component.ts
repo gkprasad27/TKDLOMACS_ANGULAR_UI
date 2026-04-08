@@ -89,7 +89,7 @@ export class PurchaseComponent implements OnInit {
       voucherNo: [null],
       voucherTypeId: [null],
       purchaseInvNo: [0],
-      supplierInvNo: [null],
+      supplierInvNo: [null, Validators.required],
       purchaseInvDate: [(new Date()).toISOString()],
       serverDateTime: [null],
       ledgerId: ['100'],
@@ -444,7 +444,7 @@ export class PurchaseComponent implements OnInit {
       });
   }
 
-  getPCashPartyAccountList() {
+  getPCashPartyAccountList(flag = true) {
     if (this.branchFormData.get('ledgerCode').value != null && this.branchFormData.get('ledgerCode').value !== '') {
       const getCashPartyAccountListUrl = [this.apiConfigService.getPCashPartyAccountList, this.branchFormData.get('ledgerCode').value].join('/');
       this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
@@ -455,7 +455,9 @@ export class PurchaseComponent implements OnInit {
             if (res.response != null) {
               if (res?.response?.CashPartyAccountList?.length > 0) {
                 this.getCashPartyAccountListArray = res.response['CashPartyAccountList'];
-                this.getCashPartyAccount();
+                if (flag) {
+                  this.getCashPartyAccount();
+                }
               } else {
                 this.getCashPartyAccountListArray = [];
               }
@@ -537,7 +539,7 @@ export class PurchaseComponent implements OnInit {
       ledgerName: (lname[0] != null) ? lname[0].text : null
     });
     this.getCashPartyAccount();
-    this.commonService.setFocus('productCode0');
+    this.commonService.setFocus('supplierInvNo');
   }
 
 
