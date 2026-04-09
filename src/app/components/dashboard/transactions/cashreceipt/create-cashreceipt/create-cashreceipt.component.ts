@@ -73,10 +73,10 @@ export class CreateCashreceiptComponent implements OnInit {
 
   ) {
     this.branchFormData = this.formBuilder.group({
-      voucherNo: [null],
-      cashReceiptDate: [(new Date()).toISOString()],
+      voucherNo: [null, [Validators.required]],
+      cashReceiptDate: [(new Date()).toISOString(), [Validators.required]],
       branchId: [null],
-      branchCode: [null],
+      branchCode: [null, [Validators.required]],
       branchName: [null],
       shiftId: [null],
       userId: [null],
@@ -113,28 +113,32 @@ export class CreateCashreceiptComponent implements OnInit {
         this.routeUrl = params.id1;
         this.disableForm(params.id1);
         this.getCashReceiptDetailsList(params.id1);
-        let billHeader = JSON.parse(localStorage.getItem('selectedBill'));
-        this.branchFormData.setValue(billHeader);
       } else {
-        this.disableForm();
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user?.branchCode != null) {
-          this.branchFormData.patchValue({
-            branchCode: +user.branchCode,
-            userId: user.seqId,
-            userName: user.userName
-          });
-          this.setBranchCode();
-          this.genarateVoucherNo(user.branchCode);
-          this.formGroup();
-          this.branchFormData.patchValue({
-            cashReceiptDate: (new Date()).toISOString()
-          });
-
-        }
-        this.addTableRow();
+        this.resetData();
       }
     });
+  }
+
+  resetData() {
+    this.disableForm();
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.branchCode != null) {
+      this.branchFormData.patchValue({
+        branchCode: +user.branchCode,
+        branchId: +user.branchCode,
+        userId: user.seqId,
+        userName: user.userName,
+        cashReceiptDate: (new Date()).toISOString()
+      });
+      this.setBranchCode();
+      this.genarateVoucherNo(user.branchCode);
+      this.formGroup();
+      this.branchFormData.patchValue({
+        cashReceiptDate: (new Date()).toISOString()
+      });
+
+    }
+    this.addTableRow();
   }
 
   getCashReceiptDetailsList(id) {
@@ -142,11 +146,14 @@ export class CreateCashreceiptComponent implements OnInit {
     this.apiService.apiGetRequest(getCashReceiptDetailsListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.CashReceiptDetails?.length) {
             this.dataSource = new MatTableDataSource(res.response['CashReceiptDetails']);
             this.dataSource.paginator = this.paginator;
-            this.spinner.hide();
+          }
+          if (res?.response?.cashReceiptData) {
+            this.branchFormData.patchValue(res.response['cashReceiptData']);
           }
         }
       });
@@ -219,7 +226,8 @@ export class CreateCashreceiptComponent implements OnInit {
     });
     if (bname.length) {
       this.branchFormData.patchValue({
-        branchName: bname?.[0] != null ? bname[0].text : null
+        branchName: bname?.[0] != null ? bname[0].text : null,
+        branchId: bname?.[0] != null ? bname[0].id : null
       });
     }
   }
@@ -418,7 +426,7 @@ export class CreateCashreceiptComponent implements OnInit {
 
 
   save() {
-    if (this.routeUrl != '' || this.dataSource.data.length == 0) {
+    if (this.routeUrl != '' || this.branchFormData.invalid) {
       return;
     }
     let tableData = [];
@@ -468,18 +476,18 @@ export class CreateCashreceiptComponent implements OnInit {
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.formGroup();
-    this.loadData();
-
+    this.resetData();
+    this.commonService.setFocus('toLedgerCode');
   }
 
   registerCashReceipt(data) {
-    this.branchFormData.patchValue({
-      cashReceiptMasterId: 0,
-      cashReceiptDate: this.commonService.formatDate(this.branchFormData.get('cashReceiptDate').value)
-    });
+    var index = this.dataSource.data.indexOf(1);
+    this.dataSource.data.splice(index, 1);
+    const obj = this.branchFormData.getRawValue();
+    obj.cashReceiptDate = this.commonService.formatDate(this.branchFormData.get('cashReceiptDate').value);
+    obj.cashReceiptMasterId = 0;
     const registerCashReceiptUrl = [this.apiConfigService.registerCashReceipt].join('/');
-    const requestObj = { CashreceiptHdr: this.branchFormData.value, CashreceiptDetail: data };
+    const requestObj = { CashreceiptHdr: obj, CashreceiptDetail: data };
     this.apiService.apiPostRequest(registerCashReceiptUrl, requestObj).subscribe(
       response => {
         const res = response;

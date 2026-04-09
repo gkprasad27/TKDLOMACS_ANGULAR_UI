@@ -87,12 +87,12 @@ export class CreateJournalvoucherComponent implements OnInit {
 
   ) {
     this.branchFormData = this.formBuilder.group({
-      voucherNo: [null],
-      journalVoucherMasterId: [null],
-      journalVoucherDate: [(new Date()).toISOString()],
-      referenceDate: [(new Date()).toISOString()],
+      voucherNo: [null, [Validators.required]],
+      journalVoucherMasterId: [0],
+      journalVoucherDate: [(new Date()).toISOString(), [Validators.required]],
+      referenceDate: [(new Date()).toISOString(), [Validators.required]],
       branchId: [null],
-      branchCode: [null],
+      branchCode: [null, [Validators.required]],
       branchName: [null],
       shiftId: [null],
       userId: [null],
@@ -100,13 +100,13 @@ export class CreateJournalvoucherComponent implements OnInit {
       employeeId: [null],
       totalAmount: [null],
       narration: [null],
-      fromLedgerCode: [null],
+      fromLedgerCode: [null,  [Validators.required]],
       fromLedgerName: [null],
       fromLedgerId: [null],
-      referenceNo: [null],
+      referenceNo: [null, [Validators.required]],
       journalVchNo: [null],
       serverDate: [null],
-      transactionType: "Debit"
+      transactionType: ["Debit", [Validators.required]]
     });
 
     const user = JSON.parse(localStorage.getItem('user'));
@@ -129,35 +129,44 @@ export class CreateJournalvoucherComponent implements OnInit {
         this.routeUrl = params.id1;
         this.disableForm(params.id1);
         this.getJournalVoucherDetailsList(params.id1);
-        const billHeader = JSON.parse(localStorage.getItem('selectedBill'));
-        this.branchFormData.setValue(billHeader);
       } else {
-        this.disableForm();
-        this.addTableRow();
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user?.branchCode != null) {
-          this.branchFormData.patchValue({
-            branchCode: +user.branchCode,
-            userId: user.seqId,
-            userName: user.userName
-          });
-          this.setBranchCode();
-          this.genarateVoucherNo(user.branchCode);
-          this.formGroup();
-        }
+        this.resetData();
       }
     });
   }
+
+  resetData() {
+    this.disableForm();
+    this.addTableRow();
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.branchCode != null) {
+      this.branchFormData.patchValue({
+        branchCode: +user.branchCode,
+        branchId: +user.branchCode,
+        userId: user.seqId,
+        userName: user.userName,
+        journalVoucherDate: (new Date()).toISOString(),
+        referenceDate: (new Date()).toISOString(),
+      });
+      this.setBranchCode();
+      this.genarateVoucherNo(user.branchCode);
+      this.formGroup();
+    }
+  }
+
   getJournalVoucherDetailsList(id) {
     const getJournalVoucherDetailsListUrl = [this.apiConfigService.getJournalVoucherDetailsList, id].join('/');
     this.apiService.apiGetRequest(getJournalVoucherDetailsListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.JournalVoucherDetails?.length) {
             this.dataSource = new MatTableDataSource(res.response['JournalVoucherDetails']);
             this.dataSource.paginator = this.paginator;
-            this.spinner.hide();
+          }
+          if (res?.response?.JournalVoucherData) {
+            this.branchFormData.patchValue(res.response['JournalVoucherData']);
           }
         }
       });
@@ -497,7 +506,7 @@ export class CreateJournalvoucherComponent implements OnInit {
     //   this.dataSource.data.pop();
     //   console.log(this.dataSource.data);
     // }
-    if (this.routeUrl != '' || this.dataSource.data.length == 0) {
+    if (this.routeUrl != '' || this.branchFormData.invalid) {
       return;
     }
     let tableData = [];
@@ -527,7 +536,6 @@ export class CreateJournalvoucherComponent implements OnInit {
       totalAmount = element.amount + totalAmount;
     });
 
-    console.log(this.branchFormData, this.dataSource.data);
     const dialogRef = this.dialog.open(SaveItemComponent, {
       width: '1024px',
       data: '',
@@ -545,26 +553,27 @@ export class CreateJournalvoucherComponent implements OnInit {
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.formGroup();
-    this.loadData();
+    this.resetData();
+    this.commonService.setFocus('fromLedgerName');
   }
 
   registerJournalVoucher(data) {
-    this.branchFormData.patchValue({
-      journalVoucherMasterId: 0,
-      journalVoucherDate: this.commonService.formatDate(this.branchFormData.get('journalVoucherDate').value)
-    });
+    var index = this.dataSource.data.indexOf(1);
+    this.dataSource.data.splice(index, 1);
+    const obj = this.branchFormData.getRawValue();
+    obj.journalVoucherDate = this.commonService.formatDate(this.branchFormData.get('journalVoucherDate').value);
+    obj.journalVoucherMasterId = 0;
     const registerJournalVoucherUrl = [this.apiConfigService.registerJournalVoucher].join('/');
-    const requestObj = { JournalVoucherHdr: this.branchFormData.value, JournalVoucherDetail: data };
+    const requestObj = { JournalVoucherHdr: obj, JournalVoucherDetail: data };
     this.apiService.apiPostRequest(registerJournalVoucherUrl, requestObj).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Journal Voucher Created Successfully..', Static.Close, SnackBar.success);
           }
           this.reset();
-          this.spinner.hide();
         }
       });
   }

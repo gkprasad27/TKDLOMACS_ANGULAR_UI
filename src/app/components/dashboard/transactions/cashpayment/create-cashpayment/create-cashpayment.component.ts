@@ -74,9 +74,9 @@ export class CreateCashpaymentComponent implements OnInit {
 
   ) {
     this.branchFormData = this.formBuilder.group({
-      voucherNo: [null],
-      cashPaymentDate: [(new Date()).toISOString()],
-      branchCode: [null],
+      voucherNo: [null, [Validators.required]],
+      cashPaymentDate: [(new Date()).toISOString(), [Validators.required]],
+      branchCode: [null, [Validators.required]],
       branchName: [null],
       shiftId: [null],
       userId: [null],
@@ -103,38 +103,42 @@ export class CreateCashpaymentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCashPaymentBranchesList();
     this.loadData();
     this.commonService.setFocus('toLedgerCode');
   }
 
   loadData() {
-    this.getCashPaymentBranchesList();
     this.activatedRoute.params.subscribe(params => {
       if (params.id1 != null) {
         this.routeUrl = params.id1;
         this.disableForm(params.id1);
         this.getCashPaymentDetailsList(params.id1);
-        let billHeader = JSON.parse(localStorage.getItem('selectedBill'));
-        this.branchFormData.setValue(billHeader);
       } else {
-        this.disableForm();
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user?.branchCode != null) {
-          this.branchFormData.patchValue({
-            branchCode: +user.branchCode,
-            userId: user.seqId,
-            userName: user.userName
-          });
-          this.setBranchCode();
-          this.genarateVoucherNo(user.branchCode);
-          this.formGroup();
-          this.branchFormData.patchValue({
-            cashPaymentDate: (new Date()).toISOString()
-          });
-        }
-        this.addTableRow();
+        this.resetData();
       }
     });
+  }
+
+  resetData() {
+    this.disableForm();
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.branchCode != null) {
+      this.branchFormData.patchValue({
+        branchCode: +user.branchCode,
+        branchId: +user.branchCode,
+        userId: user.seqId,
+        userName: user.userName,
+        cashPaymentDate: (new Date()).toISOString()
+      });
+      this.setBranchCode();
+      this.genarateVoucherNo(user.branchCode);
+      this.formGroup();
+      this.branchFormData.patchValue({
+        cashPaymentDate: (new Date()).toISOString()
+      });
+    }
+    this.addTableRow();
   }
 
   getCashPaymentDetailsList(id) {
@@ -142,10 +146,13 @@ export class CreateCashpaymentComponent implements OnInit {
     this.apiService.apiGetRequest(getCashPaymentDetailsListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.CashpaymentDetails?.length) {
             this.dataSource = new MatTableDataSource(res.response['CashpaymentDetails']);
-            this.spinner.hide();
+          }
+          if (res?.response?.cashpaymentData) {
+            this.branchFormData.patchValue(res.response['cashpaymentData']);
           }
         }
       });
@@ -220,7 +227,8 @@ export class CreateCashpaymentComponent implements OnInit {
     });
     if (bname.length) {
       this.branchFormData.patchValue({
-        branchName: bname?.[0] != null ? bname[0].text : null
+        branchName: bname?.[0] != null ? bname[0].text : null,
+        branchId: bname?.[0] != null ? bname[0].id : null
       });
     }
   }
@@ -418,7 +426,7 @@ export class CreateCashpaymentComponent implements OnInit {
 
   }
   save() {
-    if (this.routeUrl != '' || this.dataSource.data.length == 0) {
+    if (this.routeUrl != '' || this.branchFormData.invalid) {
       return;
     }
     let tableData = [];
@@ -465,26 +473,27 @@ export class CreateCashpaymentComponent implements OnInit {
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.formGroup();
-    this.loadData();
+    this.resetData();
+    this.commonService.setFocus('toLedgerCode');
   }
 
   registerCashPayment(data) {
-    this.branchFormData.patchValue({
-      cashPaymentMasterId: 0,
-      cashPaymentDate: this.commonService.formatDate(this.branchFormData.get('cashPaymentDate').value)
-    });
+    var index = this.dataSource.data.indexOf(1);
+    this.dataSource.data.splice(index, 1);
+    const obj = this.branchFormData.getRawValue();
+    obj.cashPaymentDate = this.commonService.formatDate(this.branchFormData.get('cashPaymentDate').value);
+    obj.cashPaymentMasterId = 0;
     const registerCashPaymentUrl = [this.apiConfigService.registerCashPayment].join('/');
-    const requestObj = { CashpaymentHdr: this.branchFormData.value, CashpaymentDetail: data };
+    const requestObj = { CashpaymentHdr: obj, CashpaymentDetail: data };
     this.apiService.apiPostRequest(registerCashPaymentUrl, requestObj).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Cash Payment Created Successfully..', Static.Close, SnackBar.success);
           }
           this.reset();
-          this.spinner.hide();
         }
       });
   }

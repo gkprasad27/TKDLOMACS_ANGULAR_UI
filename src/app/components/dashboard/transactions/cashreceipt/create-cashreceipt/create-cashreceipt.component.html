@@ -17,13 +17,14 @@
         </mat-form-field>
 
         <mat-form-field class="col-3">
-          <input matInput placeholder="{{ 'cashreceipt.voucherNo' | translate }}" formControlName="voucherNo"
+          <mat-label>{{ 'cashreceipt.voucherNo' | translate }}</mat-label>
+          <input matInput formControlName="voucherNo"
             appFocusOnEnter tabIndex="1">
         </mat-form-field>
 
         <mat-form-field class="col-3">
-          <input matInput [matDatepicker]="picker" placeholder="{{'cashreceipt.cashReceiptDate' | translate }}"
-            formControlName="cashReceiptDate" appFocusOnEnter tabIndex="4" (click)="picker.open()" readonly>
+          <mat-label>{{ 'cashreceipt.cashReceiptDate' | translate }}</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="cashReceiptDate" appFocusOnEnter tabIndex="4" (click)="picker.open()" readonly>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -146,7 +147,7 @@
       <div class="d-flex justify-content-end mr-4">
         <div class="d-flex flex-column mr-2">
           <mat-label>{{ 'COMMON.PRINT' | translate }}</mat-label>
-          <mat-slide-toggle formControlName="printBill"></mat-slide-toggle>
+          <mat-slide-toggle  [(ngModel)]="printBill" [ngModelOptions]="{standalone: true}"></mat-slide-toggle>
         </div>
         <button mat-raised-button type="submit" class="button-color-bule mr-2 text-white" [disabled]="routeUrl != ''"
           (click)="save()">

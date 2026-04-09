@@ -39,17 +39,22 @@
                 </mat-option>
               </mat-select>
             </mat-form-field> -->
-          <mat-form-field class="col-3">
-            <mat-label>{{ 'bankpayment.bankLedgerName' | translate }}</mat-label>
-            <input class="typeahead" matInput formControlName="bankLedgerCode"
-              (typeaheadOnSelect)="setLedgerName($event)" (input)="getBankPAccountLedgerList($event.target.value)"
-              [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' autocomplete="off"
-              [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
-              [typeaheadWaitMs]="200" id="bankLedgerName">
+            
+
+          <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+            [class.filled]="branchFormData.get('bankLedgerCode')?.value">
+            <label> {{ 'bankpayment.bankLedgerName' | translate }} </label>
+            <input placeholder=" " id="bankLedgerName" formControlName="bankLedgerCode"
+              (input)="getBankPAccountLedgerList($event.target.value)" id="bankLedgerCode" shortcutkey="f2"
+              autocomplete="off" [typeaheadOptionsLimit]="100000" [typeahead]="GetBankPAccountLedgerListArray"
+              typeaheadOptionField='id' class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
+              (typeaheadOnSelect)="setLedgerName($event)" [typeaheadWaitMs]="200" >
             <ng-template #customItemTemplate let-model="item">
               <span><strong>{{model.id}}</strong> - {{model.text}}</span>
             </ng-template>
-          </mat-form-field>
+          </div>
+
+
 
           <mat-form-field class="col-3">
             <mat-label>{{ 'bankpayment.postingDate' | translate }}</mat-label>
@@ -187,7 +192,7 @@
         <div class="d-flex justify-content-end mr-4">
           <div class="d-flex flex-column mr-2">
             <mat-label>{{ 'COMMON.PRINT' | translate }}</mat-label>
-            <mat-slide-toggle formControlName="printBill"></mat-slide-toggle>
+            <mat-slide-toggle [(ngModel)]="printBill" [ngModelOptions]="{standalone: true}"></mat-slide-toggle>
           </div>
           <button mat-raised-button type="submit" class="button-color-bule mr-2 text-white" [disabled]="routeUrl != ''"
             (click)="save()">

@@ -41,7 +41,7 @@
             </mat-form-field> -->
 
 
-          <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
+          <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
             [class.filled]="branchFormData.get('bankLedgerCode')?.value">
             <label> {{ 'bankreceipt.bankLedgerName' | translate }} </label>
             <input placeholder=" " formControlName="bankLedgerCode" (input)="getBRAccountLedgerList($event.target.value)"
@@ -190,7 +190,7 @@
         <div class="d-flex justify-content-end mr-4">
           <div class="d-flex flex-column mr-2">
             <mat-label>{{ 'COMMON.PRINT' | translate }}</mat-label>
-            <mat-slide-toggle formControlName="printBill"></mat-slide-toggle>
+            <mat-slide-toggle [(ngModel)]="printBill" [ngModelOptions]="{standalone: true}"></mat-slide-toggle>
           </div>
           <button mat-raised-button type="submit" class="button-color-bule mr-2 text-white" [disabled]="routeUrl != ''"
             (click)="save()">
