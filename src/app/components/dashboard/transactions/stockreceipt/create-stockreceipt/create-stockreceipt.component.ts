@@ -237,10 +237,12 @@ export class CreateStockreceiptsComponent implements OnInit {
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response != null) {
             console.log(res.response['branch']);
-            if (res?.response?.branch?.length) {
+            if (res?.response?.branch) {
               this.toBranchCode = res.response['branch']
+              const [code, name] = res.response['branch'] && res.response['branch'].split('-');
               this.branchFormData.patchValue({
-                toBranchName: res.response['branch']
+                toBranchCode: +code,
+                toBranchName: name,
               });
               //this.GettoBranchesListArray = res.response['branch'];
             }
