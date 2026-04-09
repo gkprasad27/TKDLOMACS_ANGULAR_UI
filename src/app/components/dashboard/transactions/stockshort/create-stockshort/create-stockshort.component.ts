@@ -192,6 +192,9 @@ export class CreateStockshortsComponent implements OnInit {
     });
   }
   setBranchCode() {
+    if (!this.GetBranchesListArray.length) {
+      return;
+    }
     const bname = this.GetBranchesListArray.filter(branchCode => {
       if (branchCode.id == this.branchFormData.get('branchCode').value) {
         return branchCode;
@@ -225,11 +228,14 @@ export class CreateStockshortsComponent implements OnInit {
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response;
+              this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.GetBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
+                if (this.branchFormData.get('branchCode').value != null) {
+                this.setBranchCode();
+              }
             }
           }
         }

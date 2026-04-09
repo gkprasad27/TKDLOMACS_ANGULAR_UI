@@ -24,10 +24,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
-@Component({ 
-    selector: 'app-create-cashpayment',
-    templateUrl: './create-cashpayment.component.html',
-    styleUrls: ['./create-cashpayment.component.scss'],
+@Component({
+  selector: 'app-create-cashpayment',
+  templateUrl: './create-cashpayment.component.html',
+  styleUrls: ['./create-cashpayment.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
@@ -67,7 +67,7 @@ export class CreateCashpaymentComponent implements OnInit {
     private apiService: ApiService,
     private alertService: AlertService,
     private activatedRoute: ActivatedRoute,
-        private router: Router,
+    private router: Router,
 
     private spinner: NgxSpinnerService,
     public dialog: MatDialog,
@@ -94,7 +94,7 @@ export class CreateCashpaymentComponent implements OnInit {
       serverDate: [null]
     });
 
-      const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
 
     if (user?.role != '1') {
       this.branchFormData.controls['branchCode'].disable();
@@ -172,11 +172,14 @@ export class CreateCashpaymentComponent implements OnInit {
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.GetBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
+              if (this.branchFormData.get('branchCode').value != null) {
+                this.setBranchCode();
+              }
             }
           }
         }
@@ -207,6 +210,9 @@ export class CreateCashpaymentComponent implements OnInit {
   }
 
   setBranchCode() {
+    if (!this.GetBranchesListArray.length) {
+      return;
+    }
     const bname = this.GetBranchesListArray.filter(branchCode => {
       if (branchCode.id == this.branchFormData.get('branchCode').value) {
         return branchCode;
@@ -485,7 +491,7 @@ export class CreateCashpaymentComponent implements OnInit {
 
 
   back() {
-      this.router.navigate(['dashboard/transactions/cashpayment']);
+    this.router.navigate(['dashboard/transactions/cashpayment']);
   }
 
 }

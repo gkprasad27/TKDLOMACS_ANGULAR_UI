@@ -331,6 +331,9 @@ export class PurchaseReturnComponent implements OnInit {
           }
           if (res?.response?.invoiceMasterData != null) {
             this.branchFormData.patchValue(res.response['invoiceMasterData']);
+            this.branchFormData.patchValue({
+              paymentMode: res.response['invoiceMasterData']['paymentMode'] == 1 ? 'Credit' : res.response['invoiceMasterData']['paymentMode'] == 2 ? 'Debit' : null
+            });
           }
         }
       });

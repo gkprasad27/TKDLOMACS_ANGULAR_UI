@@ -29,10 +29,10 @@ interface Transaction {
   viewValue: string;
 }
 
-@Component({ 
-    selector: 'app-create-journalvoucher',
-    templateUrl: './create-journalvoucher.component.html',
-    styleUrls: ['./create-journalvoucher.component.scss'],
+@Component({
+  selector: 'app-create-journalvoucher',
+  templateUrl: './create-journalvoucher.component.html',
+  styleUrls: ['./create-journalvoucher.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
@@ -50,21 +50,21 @@ export class CreateJournalvoucherComponent implements OnInit {
   getAccountLedgerListNameArray = [];
   getSalesBranchListArray = [];
   branchesList = [];
-  getmemberNamesArray=[];
-  getJVAccountLedgerListArray=[];
-  GetJournalVoucherListArray=[];
+  getmemberNamesArray = [];
+  getJVAccountLedgerListArray = [];
+  GetJournalVoucherListArray = [];
 
-  displayedColumns: string[] = ['SlNo','toLedgerCode', 'toLedgerName', 'amount', 'delete'
+  displayedColumns: string[] = ['SlNo', 'toLedgerCode', 'toLedgerName', 'amount', 'delete'
   ];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  transaction : Transaction[]=
-  [
-    { value: 'Debit', viewValue: 'Debit' },
-    { value: 'Credit', viewValue: 'Credit' }
-   
-  ];
+  transaction: Transaction[] =
+    [
+      { value: 'Debit', viewValue: 'Debit' },
+      { value: 'Credit', viewValue: 'Credit' }
+
+    ];
 
   date = new Date((new Date().getTime() - 3888000000));
   modelFormData: FormGroup;
@@ -78,7 +78,7 @@ export class CreateJournalvoucherComponent implements OnInit {
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
-        private router: Router,
+    private router: Router,
 
     private alertService: AlertService,
     private activatedRoute: ActivatedRoute,
@@ -90,8 +90,8 @@ export class CreateJournalvoucherComponent implements OnInit {
       voucherNo: [null],
       journalVoucherMasterId: [null],
       journalVoucherDate: [(new Date()).toISOString()],
-      referenceDate:[(new Date()).toISOString()],
-      branchId:[null],
+      referenceDate: [(new Date()).toISOString()],
+      branchId: [null],
       branchCode: [null],
       branchName: [null],
       shiftId: [null],
@@ -100,16 +100,16 @@ export class CreateJournalvoucherComponent implements OnInit {
       employeeId: [null],
       totalAmount: [null],
       narration: [null],
-      fromLedgerCode:[null],
-      fromLedgerName:[null],
-      fromLedgerId:[null],
-      referenceNo:[null],
-      journalVchNo:[null],
-      serverDate:[null],
-      transactionType:"Debit"
+      fromLedgerCode: [null],
+      fromLedgerName: [null],
+      fromLedgerId: [null],
+      referenceNo: [null],
+      journalVchNo: [null],
+      serverDate: [null],
+      transactionType: "Debit"
     });
 
-     const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
 
     if (user?.role != '1') {
       this.branchFormData.controls['branchCode'].disable();
@@ -118,8 +118,8 @@ export class CreateJournalvoucherComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.loadData();
-   this.commonService.setFocus('fromLedgerName');
+    this.loadData();
+    this.commonService.setFocus('fromLedgerName');
   }
   loadData() {
     this.getJournalVoucherBranchesList();
@@ -186,11 +186,14 @@ export class CreateJournalvoucherComponent implements OnInit {
     this.apiService.apiGetRequest(getJournalVoucherBranchesListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.GetBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
+              if (this.branchFormData.get('branchCode').value != null) {
+                this.setBranchCode();
+              }
             }
           }
         }
@@ -290,8 +293,8 @@ export class CreateJournalvoucherComponent implements OnInit {
           if (this.dataSource.data[d]['toLedgerName'] == this.getAccountLedgerListArray[t]['text']) {
             this.dataSource.data[d]['toLedgerCode'] = this.getAccountLedgerListArray[t]['id'];
             this.tableFormData.patchValue({
-              toLedgerCode : this.getAccountLedgerListArray[t].id,
-              toLedgerName : this.getAccountLedgerListArray[t].text
+              toLedgerCode: this.getAccountLedgerListArray[t].id,
+              toLedgerName: this.getAccountLedgerListArray[t].text
             });
             flag = false;
             break;
@@ -299,22 +302,22 @@ export class CreateJournalvoucherComponent implements OnInit {
         }
       }
     }
-    if(flag) {
-        this.dataSource.data[this.dataSource.data.length - 1].toLedgerName = value.value;
-        for (let t = 0; t < this.getAccountLedgerListArray.length; t++) {
-          if (this.getAccountLedgerListArray[t]['text'] == value.value) {
-            for (let d = 0; d < this.dataSource.data.length; d++) {
-              if (this.dataSource.data[d]['toLedgerName'] == this.getAccountLedgerListArray[t]['text']) {
-                this.dataSource.data[d]['toLedgerCode'] = this.getAccountLedgerListArray[t]['id'];
-                this.tableFormData.patchValue({
-                  toLedgerCode : this.getAccountLedgerListArray[t].id,
-                  toLedgerName : this.getAccountLedgerListArray[t].text
-                        });
-                break;
-              }
+    if (flag) {
+      this.dataSource.data[this.dataSource.data.length - 1].toLedgerName = value.value;
+      for (let t = 0; t < this.getAccountLedgerListArray.length; t++) {
+        if (this.getAccountLedgerListArray[t]['text'] == value.value) {
+          for (let d = 0; d < this.dataSource.data.length; d++) {
+            if (this.dataSource.data[d]['toLedgerName'] == this.getAccountLedgerListArray[t]['text']) {
+              this.dataSource.data[d]['toLedgerCode'] = this.getAccountLedgerListArray[t]['id'];
+              this.tableFormData.patchValue({
+                toLedgerCode: this.getAccountLedgerListArray[t].id,
+                toLedgerName: this.getAccountLedgerListArray[t].text
+              });
+              break;
             }
           }
         }
+      }
     }
     this.dataSource = new MatTableDataSource(this.dataSource.data);
   }
@@ -342,6 +345,9 @@ export class CreateJournalvoucherComponent implements OnInit {
       });
   }
   setBranchCode() {
+    if (!this.GetBranchesListArray.length) {
+      return;
+    }
     const bname = this.GetBranchesListArray.filter(branchCode => {
       if (branchCode.id == this.branchFormData.get('branchCode').value) {
         return branchCode;
@@ -357,7 +363,7 @@ export class CreateJournalvoucherComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.getmemberNamesArray.filter(option => option.text.toLowerCase().includes(filterValue));
   }
-  
+
   addTableRow() {
     const tableObj = {
       toLedgerCode: '', toLedgerName: '', amount: '', delete: '', text: 'obj'
@@ -412,7 +418,7 @@ export class CreateJournalvoucherComponent implements OnInit {
     });
     this.dataSource = new MatTableDataSource(this.dataSource.data);
     this.dataSource.paginator = this.paginator;
-   this.calculateAmount();
+    this.calculateAmount();
   }
 
   getAccountByAccountCode(value) {
@@ -443,7 +449,7 @@ export class CreateJournalvoucherComponent implements OnInit {
       }
     }
     this.branchFormData.patchValue({
-      totalAmount : amount
+      totalAmount: amount
     });
   }
 
@@ -456,33 +462,33 @@ export class CreateJournalvoucherComponent implements OnInit {
           if (this.dataSource.data[d]['toLedgerCode'] == this.getAccountLedgerListArray[t]['id']) {
             this.dataSource.data[d]['toLedgerName'] = this.getAccountLedgerListArray[t]['text'];
             this.tableFormData.patchValue({
-              toLedgerCode : this.getAccountLedgerListArray[t].id,
-              toLedgerName : this.getAccountLedgerListArray[t].text
+              toLedgerCode: this.getAccountLedgerListArray[t].id,
+              toLedgerName: this.getAccountLedgerListArray[t].text
             });
             flag = false;
           }
         }
       }
     }
-    if(flag) {
-        this.dataSource.data[this.dataSource.data.length - 1].toLedgerCode = value.value;
-        for (let t = 0; t < this.getAccountLedgerListArray.length; t++) {
-          if (this.getAccountLedgerListArray[t]['id'] == value.value) {
-            for (let d = 0; d < this.dataSource.data.length; d++) {
-              if (this.dataSource.data[d]['toLedgerCode'] == this.getAccountLedgerListArray[t]['id']) {
-                this.dataSource.data[d]['toLedgerName'] = this.getAccountLedgerListArray[t]['text'];
-                this.tableFormData.patchValue({
-                  toLedgerCode : this.getAccountLedgerListArray[t].id,
-                  toLedgerName : this.getAccountLedgerListArray[t].text
-                        });
-              }
+    if (flag) {
+      this.dataSource.data[this.dataSource.data.length - 1].toLedgerCode = value.value;
+      for (let t = 0; t < this.getAccountLedgerListArray.length; t++) {
+        if (this.getAccountLedgerListArray[t]['id'] == value.value) {
+          for (let d = 0; d < this.dataSource.data.length; d++) {
+            if (this.dataSource.data[d]['toLedgerCode'] == this.getAccountLedgerListArray[t]['id']) {
+              this.dataSource.data[d]['toLedgerName'] = this.getAccountLedgerListArray[t]['text'];
+              this.tableFormData.patchValue({
+                toLedgerCode: this.getAccountLedgerListArray[t].id,
+                toLedgerName: this.getAccountLedgerListArray[t].text
+              });
             }
           }
         }
+      }
     }
     this.dataSource = new MatTableDataSource(this.dataSource.data);
     this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource.data,this.tableFormData);
+    console.log(this.dataSource.data, this.tableFormData);
     //this.setToFormModel();
 
   }
@@ -546,7 +552,7 @@ export class CreateJournalvoucherComponent implements OnInit {
   registerJournalVoucher(data) {
     this.branchFormData.patchValue({
       journalVoucherMasterId: 0,
-      journalVoucherDate:this.commonService.formatDate(this.branchFormData.get('journalVoucherDate').value)
+      journalVoucherDate: this.commonService.formatDate(this.branchFormData.get('journalVoucherDate').value)
     });
     const registerJournalVoucherUrl = [this.apiConfigService.registerJournalVoucher].join('/');
     const requestObj = { JournalVoucherHdr: this.branchFormData.value, JournalVoucherDetail: data };
@@ -565,7 +571,7 @@ export class CreateJournalvoucherComponent implements OnInit {
 
 
   back() {
-      this.router.navigate(['dashboard/transactions/bankpayment']);
+    this.router.navigate(['dashboard/transactions/bankpayment']);
   }
 
 }

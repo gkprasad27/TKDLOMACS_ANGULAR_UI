@@ -79,11 +79,11 @@ export class StockTransferComponent implements OnInit {
   formDataGroup() {
     this.formData = this.formBuilder.group({
       stockTransferMasterId: [0],
-      stockTransferNo: [null],
-      stockTransferDate: [(new Date()).toISOString()],
-      fromBranchCode: [null],
+      stockTransferNo: [null, [Validators.required]],
+      stockTransferDate: [null, [Validators.required]],
+      fromBranchCode: [null, [Validators.required]],
       fromBranchName: [null],
-      toBranchCode: [null],
+      toBranchCode: [null, [Validators.required]],
       toBranchName: [null],
       shiftId: [null],
       userId: [null],
@@ -126,20 +126,25 @@ export class StockTransferComponent implements OnInit {
         }
         this.disableForm(params.id1);
       } else {
-        this.addTableRow();
-        this.disableForm();
-        this.formGroup();
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user?.branchCode != null) {
-          this.formData.patchValue({
-            fromBranchCode: +user.branchCode,
-            userId: user.seqId,
-            userName: user.userName
-          });
-        }
+        this.resetData();
       }
     });
 
+  }
+
+  resetData() {
+    this.addTableRow();
+    this.disableForm();
+    this.formGroup();
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.branchCode != null) {
+      this.formData.patchValue({
+        fromBranchCode: +user.branchCode,
+        stockTransferDate: (new Date()).toISOString(),
+        userId: user.seqId,
+        userName: user.userName
+      });
+    }
   }
 
   setBranchCode(code, text) {
@@ -172,6 +177,7 @@ export class StockTransferComponent implements OnInit {
         }
       }
     }
+    this.commonService.setFocus('productCode0');
   }
 
   getStockTransferDetilsaRecords(id) {
@@ -523,7 +529,7 @@ export class StockTransferComponent implements OnInit {
   }
 
   save() {
-    if (this.routeUrl != '' || this.dataSource.data.length == 0) {
+    if (this.routeUrl != '' || this.formData.invalid) {
       return;
     }
     let tableData = [];
@@ -534,11 +540,12 @@ export class StockTransferComponent implements OnInit {
     }
     let content = '';
     let availStock = tableData.filter(stock => {
+      console.log(stock);
       if (stock.availStock == 0) {
         content = '0 Availablilty Stock';
         return stock;
       }
-      if (stock?.qty == null && stock?.fQty == null) {
+      if ((stock?.qty == null || stock?.qty == '')) {
         content = 'qty or Fqty is null';
         return stock;
       }
@@ -551,7 +558,13 @@ export class StockTransferComponent implements OnInit {
       this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
       return;
     }
+    if (tableData.length == 0) {
+      this.alertService.openSnackBar(`Product is not added`, Static.Close, SnackBar.error);
+      return;
+    }
 
+    var index = this.dataSource.data.indexOf(1);
+    this.dataSource.data.splice(index, 1);
     const dialogRef = this.dialog.open(SaveItemComponent, {
       width: '1024px',
       data: '',
@@ -559,7 +572,7 @@ export class StockTransferComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
-        this.enableFileds();
+        // this.enableFileds();
         this.registerStockTransfer(tableData);
       }
     });
@@ -585,15 +598,15 @@ export class StockTransferComponent implements OnInit {
 
   registerStockTransfer(data) {
     const registerStockTransferUrl = this.apiConfigService.registerStockTransfer;
-    const requestObj = { stockTransferMaster: this.formData.value, stockTransferDetail: data };
+    const requestObj = { stockTransferMaster: this.formData.getRawValue(), stockTransferDetail: data };
     this.apiService.apiPostRequest(registerStockTransferUrl, requestObj).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             this.alertService.openSnackBar('Stock Trasfer Created Successfully..', Static.Close, SnackBar.success);
           }
-          this.spinner.hide();
           this.reset();
         }
       });
@@ -602,7 +615,9 @@ export class StockTransferComponent implements OnInit {
   reset() {
     this.formData.reset();
     this.dataSource = new MatTableDataSource();
-    this.formDataGroup();
+    this.resetData();
+    this.setFocus = '';
+    this.commonService.setFocus('productCode0');
   }
 
   exportToPdf() {

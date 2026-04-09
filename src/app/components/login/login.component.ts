@@ -195,7 +195,7 @@ export class LoginComponent implements OnInit {
 
 
   otpApi(companyCode: string = null) {
-    const getLoginUrl = `${this.apiConfigService.getAuthentication}?company=${companyCode}`;
+    const getLoginUrl = `${this.apiConfigService.getAuthentication}?company=${this.loginForm.get('username').value}`;
     this.apiService.apiGetRequest(getLoginUrl)
       .subscribe(
         response => {

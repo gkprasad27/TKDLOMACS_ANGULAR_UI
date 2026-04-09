@@ -22,10 +22,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
-@Component({ 
-    selector: 'app-create-stockexcess',
-    templateUrl: './create-stockexcess.component.html',
-    styleUrls: ['./create-stockexcess.component.scss'],
+@Component({
+  selector: 'app-create-stockexcess',
+  templateUrl: './create-stockexcess.component.html',
+  styleUrls: ['./create-stockexcess.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
@@ -43,9 +43,9 @@ export class CreateStockExcessComponent implements OnInit {
   getProductByProductNameArray = [];
   getStockExcessListArray = [];
   branchesList = [];
-  getmemberNamesArray=[];
+  getmemberNamesArray = [];
 
-  displayedColumns: string[] = ['SlNo','productCode', 'productName', 'hsnNo', 'unitName', 'qty', 'rate', 'totalAmount',  'batchNo', 'delete'
+  displayedColumns: string[] = ['SlNo', 'productCode', 'productName', 'hsnNo', 'unitName', 'qty', 'rate', 'totalAmount', 'batchNo', 'delete'
   ];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -64,7 +64,7 @@ export class CreateStockExcessComponent implements OnInit {
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private alertService: AlertService,
-        private router: Router,
+    private router: Router,
 
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
@@ -81,12 +81,12 @@ export class CreateStockExcessComponent implements OnInit {
       employeeId: [null],
       narration: [null],
       //printBill: [false],
-      stockExcessMasterId:[null],
-      costCenter:[null],
-      serverDate:[null]
+      stockExcessMasterId: [null],
+      costCenter: [null],
+      serverDate: [null]
     });
 
-      const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
 
     if (user?.role != '1') {
       this.branchFormData.controls['branchCode'].disable();
@@ -121,7 +121,7 @@ export class CreateStockExcessComponent implements OnInit {
           this.genarateVoucherNo(user.branchCode);
           this.formGroup();
         }
-	this.addTableRow();
+        this.addTableRow();
       }
     });
   }
@@ -160,11 +160,14 @@ export class CreateStockExcessComponent implements OnInit {
     this.apiService.apiGetRequest(getStockExcessBranchesListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.GetBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
+              if (this.branchFormData.get('branchCode').value != null) {
+                this.setBranchCode();
+              }
             }
           }
         }
@@ -211,6 +214,9 @@ export class CreateStockExcessComponent implements OnInit {
   }
 
   setBranchCode() {
+    if (!this.GetBranchesListArray.length) {
+      return;
+    }
     const bname = this.GetBranchesListArray.filter(branchCode => {
       if (branchCode.id == this.branchFormData.get('branchCode').value) {
         return branchCode;
@@ -226,7 +232,7 @@ export class CreateStockExcessComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.getmemberNamesArray.filter(option => option.text.toLowerCase().includes(filterValue));
   }
-  
+
   addTableRow() {
     const tableObj = {
       productCode: '', productName: '', hsnNo: '', unit: '', qty: '', rate: '', totalAmount: '', batchNo: '', delete: '', text: 'obj'
@@ -304,50 +310,50 @@ export class CreateStockExcessComponent implements OnInit {
     }
   }
 
- calculateAmount(row, index) {
-  let amount = 0;
-  for (let a = 0; a < this.dataSource.data.length; a++) {
-    if (this.dataSource.data[a].qty) {
-      amount = (this.dataSource.data[a].qty) * (this.dataSource.data[a].rate);
-      this.dataSource.data[a]['totalAmount'] = amount;
+  calculateAmount(row, index) {
+    let amount = 0;
+    for (let a = 0; a < this.dataSource.data.length; a++) {
+      if (this.dataSource.data[a].qty) {
+        amount = (this.dataSource.data[a].qty) * (this.dataSource.data[a].rate);
+        this.dataSource.data[a]['totalAmount'] = amount;
+      }
     }
+    this.tableFormData.patchValue
+      ({
+        totalAmount: amount
+
+      });
   }
-  this.tableFormData.patchValue
-    ({
-      totalAmount: amount
 
-    });
-}
-
-getProductByProductName(value) {
-  if (value != null && value !== '') {
-    const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
-    this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
-      response => {
-        const res = response;
-        if (res != null && res.status === StatusCodes.pass) {
-          if (res.response != null) {
-            if (res?.response?.products != null) {
-              this.getProductByProductNameArray = res.response['products'];
-              this.spinner.hide();
+  getProductByProductName(value) {
+    if (value != null && value !== '') {
+      const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
+      this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
+        response => {
+          const res = response;
+          if (res != null && res.status === StatusCodes.pass) {
+            if (res.response != null) {
+              if (res?.response?.products != null) {
+                this.getProductByProductNameArray = res.response['products'];
+                this.spinner.hide();
+              }
             }
           }
-        }
-      });
-  } else {
-    this.getProductByProductNameArray = [];
+        });
+    } else {
+      this.getProductByProductNameArray = [];
+    }
   }
-}
 
   getdata(productCode, index, id) {
     this.setFocus = id + index;
     const branchCode = this.branchFormData.get('branchCode')?.value;
-const pCode = productCode?.value;
+    const pCode = productCode?.value;
 
-if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
+    if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
       const getBillingDetailsRcdUrl = [this.apiConfigService.getProductListsforStockexcessList, productCode.value,
-        this.branchFormData.get('branchCode').value].join('/');
+      this.branchFormData.get('branchCode').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
           const res = response;
@@ -374,7 +380,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
         val = obj;
       }
       val.text = 'obj';
-      if(val.qty == 0) {
+      if (val.qty == 0) {
         val.qty = '';
       }
       return val;
@@ -433,7 +439,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
     this.dataSource.data.forEach(element => {
       totalAmount = element.amount + totalAmount;
     });
-  
+
     console.log(this.branchFormData, this.dataSource.data);
 
     this.registerStockexcess(tableData);
@@ -467,7 +473,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
 
   back() {
-      this.router.navigate(['dashboard/transactions/stockexcess']);
+    this.router.navigate(['dashboard/transactions/stockexcess']);
   }
 
 }

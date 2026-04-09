@@ -88,7 +88,7 @@ export class CreatePurchaseRequisitionComponent implements OnInit {
     if (user != null) {
       this.branchFormData.patchValue
         ({
-          userId: user.userId,  
+          userId: user.userId,
           userName: user.userName,
           shiftId: user.shiftId
         })
@@ -102,7 +102,7 @@ export class CreatePurchaseRequisitionComponent implements OnInit {
 
   loadData() {
     const user = JSON.parse(localStorage.getItem('user'));
-  
+
     this.activatedRoute.params.subscribe(params => {
       if (params.id1 != null) {
         this.routeUrl = params.id1;
@@ -130,7 +130,9 @@ export class CreatePurchaseRequisitionComponent implements OnInit {
   }
 
   setBranchCode() {
-    //sebranch
+    if (!this.GetBranchesListArray.length) {
+      return;
+    }
     const bname = this.GetBranchesListArray.filter(fromBranchCode => {
       if (fromBranchCode.id == this.branchFormData.get('branch').value) {
         return fromBranchCode;
@@ -179,11 +181,14 @@ export class CreatePurchaseRequisitionComponent implements OnInit {
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.GetBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
+              if (this.branchFormData.get('branch').value != null) {
+                this.setBranchCode();
+              }
             }
           }
         }
@@ -332,7 +337,7 @@ export class CreatePurchaseRequisitionComponent implements OnInit {
 
 
   getdata(productCode, index, id) {
-      this.setFocus = id + index;
+    this.setFocus = id + index;
     //;set branch
     const branch = this.branchFormData.get('branch')?.value;
 
@@ -375,7 +380,7 @@ export class CreatePurchaseRequisitionComponent implements OnInit {
       return val;
     });
     this.setToFormModel(null, null, null);
-      this.commonService.setFocus(this.setFocus);
+    this.commonService.setFocus(this.setFocus);
   }
 
   setProductName(name) {
@@ -405,7 +410,7 @@ export class CreatePurchaseRequisitionComponent implements OnInit {
 
   //Save Code
   save() {
-   if (this.routeUrl != '') {
+    if (this.routeUrl != '') {
       return;
     }
     let tableData = [];
@@ -462,8 +467,8 @@ export class CreatePurchaseRequisitionComponent implements OnInit {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
     this.branchFormData.patchValue({
-        requisitionDate: [(new Date()).toISOString()],
-      });
+      requisitionDate: [(new Date()).toISOString()],
+    });
     this.loadData();
   }
 

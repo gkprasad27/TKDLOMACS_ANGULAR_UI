@@ -1,15 +1,15 @@
 <mat-card class="boxshadow p-3">
   <mat-card-title class="background--color rounded text-white p-2 d-flex">
     <mat-icon >lock</mat-icon>
-    <small  [translate]="!showOtp ? 'LOGIN.LOGIN' : 'LOGIN.OTP'"> </small>
+    <small  [translate]="!showOtp ? 'login.LOGIN' : 'login.OTP'"> </small>
   </mat-card-title>
   <mat-card-content class="p-0">
 
     @if (!showOtp) {
-      <form [formGroup]="loginForm"  class="row mt-3" autocomplete="off">
+      <form [formGroup]="loginForm"  class="row mt-3" autocomplete="off" >
 
         <mat-form-field class="col-4" [ngClass]="{ 'ng--valid': formControls.username.valid }">
-          <mat-label [translate]="'LOGIN.USERNAME'"></mat-label>
+          <mat-label [translate]="'login.USERNAME'"></mat-label>
           <input matInput formControlName="username">
           @if (isSubmitted && formControls.username.errors) {
             <mat-error class="help-block">
@@ -21,7 +21,7 @@
         </mat-form-field>
 
         <mat-form-field class="col-4" [ngClass]="{ 'ng--valid': formControls.password.valid }">
-          <mat-label [translate]="'LOGIN.PASSWORD'"></mat-label>
+          <mat-label [translate]="'login.PASSWORD'"></mat-label>
           <input matInput type="password" formControlName="password">
           @if (isSubmitted && formControls.password.errors) {
             <mat-error class="help-block">
@@ -46,8 +46,8 @@
       </form>
 
       <div class="d-flex justify-content-end mt-2">
-          <button mat-raised-button class="background--color text-white mat-raised-button" type="button" (click)="onSubmit()">
-            {{ 'LOGIN.LOGIN' | translate}}
+          <button mat-raised-button class="background--color text-white mat-raised-button" (click)="onSubmit()" type="button" >
+            {{ 'login.LOGIN' | translate}}
           </button>
         </div>
     }
@@ -56,7 +56,7 @@
       <form [formGroup]="form"  class="row mt-3" autocomplete="off">
 
         <mat-form-field class="col-12" [ngClass]="{ 'ng--valid': form.get('otp').valid }">
-          <mat-label [translate]="'LOGIN.OTP'"></mat-label>
+          <mat-label [translate]="'login.OTP'"></mat-label>
           <input matInput formControlName="otp" type="number">
           @if (isSubmitted && form.get('otp').errors) {
             <mat-error class="help-block">
@@ -71,7 +71,7 @@
 
       <div class="d-flex justify-content-end mt-2">
           <button mat-raised-button class="background--color text-white mat-raised-button" type="button" (click)="onotp()">
-            {{ 'LOGIN.VERIFY' | translate}}
+            {{ 'login.VERIFY' | translate}}
           </button>
         </div>
     }

@@ -197,10 +197,6 @@ export class PurchaseComponent implements OnInit {
         this.routeUrl = params.id1;
         this.disableForm(params.id1);
         this.getPurchaseInvoiceDeatilList(params.value);
-        if (this.routeUrl == 'return') {
-          const user = JSON.parse(localStorage.getItem('user'));
-          this.getPurchasePurchaseReturnInvNo(user.branchCode);
-        }
       } else {
         this.resetData();
       }
@@ -370,6 +366,16 @@ export class PurchaseComponent implements OnInit {
           }
           if (res?.response?.invoiceMasterData?.totalTcsAmount != 0) {
             this.tcs = true;
+          }
+          this.branchFormData.patchValue({
+              paymentMode: 
+              res.response['invoiceMasterData']['paymentMode'] == 1 ? 'Credit' : 
+              res.response['invoiceMasterData']['paymentMode'] == 2 ? 'Debit' : 
+              res.response['invoiceMasterData']['paymentMode'] == 3 ? 'Cash' : null
+          });
+          if (this.routeUrl == 'return') {
+            const user = JSON.parse(localStorage.getItem('user'));
+            this.getPurchasePurchaseReturnInvNo(user.branchCode);
           }
         }
       });
@@ -819,6 +825,7 @@ export class PurchaseComponent implements OnInit {
 
 
   save() {
+    debugger
     if (this.routeUrl == 'return') {
       this.registerReturnPurchase();
       return;
@@ -859,7 +866,6 @@ export class PurchaseComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
-        this.enableFileds();
         this.registerPurchase(tableData);
       }
     });
@@ -881,7 +887,8 @@ export class PurchaseComponent implements OnInit {
           if (res.response != null) {
             this.alertService.openSnackBar('Purchase Created Successfully..', Static.Close, SnackBar.success);
           }
-          this.reset();
+          this.router.navigate(['/dashboard/transaction/purchaseInvoice']);
+          // this.reset();
         }
       });
   }
@@ -906,15 +913,15 @@ export class PurchaseComponent implements OnInit {
     this.dataSource = new MatTableDataSource();
     this.formDataGroup();
     this.resetData();
+    this.commonService.setFocus('ledgerCode');
   }
 
   registerPurchase(data) {
-    this.branchFormData.patchValue({
-      paymentMode: 0,
-      purchaseInvDate: this.commonService.formatDate(this.branchFormData.get('purchaseInvDate').value)
-    });
+    const obj = this.branchFormData.getRawValue();
+    obj.purchaseInvDate = this.commonService.formatDate(this.branchFormData.get('purchaseInvDate').value);
+    obj.paymentMode = 0;
     const registerPurchaseUrl = this.apiConfigService.registerPurchase;
-    const requestObj = { purchaseHdr: this.branchFormData.value, purchaseDetail: data };
+    const requestObj = { purchaseHdr: obj, purchaseDetail: data };
     this.apiService.apiPostRequest(registerPurchaseUrl, requestObj).subscribe(
       response => {
         const res = response;

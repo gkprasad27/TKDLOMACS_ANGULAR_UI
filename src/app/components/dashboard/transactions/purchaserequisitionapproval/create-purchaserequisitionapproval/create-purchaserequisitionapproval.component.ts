@@ -129,7 +129,9 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
   }
 
   setBranchCode() {
-    //sebranch
+    if (!this.GetBranchesListArray.length) {
+      return;
+    }
     const bname = this.GetBranchesListArray.filter(fromBranchCode => {
       if (fromBranchCode.id == this.branchFormData.get('branch').value) {
         return fromBranchCode;
@@ -178,11 +180,14 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.GetBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
+              if (this.branchFormData.get('branch').value != null) {
+                this.setBranchCode();
+              }
             }
           }
         }
@@ -468,8 +473,8 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
     this.branchFormData.patchValue({
-        requisitionDate: [(new Date()).toISOString()],
-      });
+      requisitionDate: [(new Date()).toISOString()],
+    });
     this.loadData();
   }
 

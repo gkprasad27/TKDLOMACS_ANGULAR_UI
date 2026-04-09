@@ -117,6 +117,7 @@ export class PurchaseRequisitionComponent implements OnInit {
         if (!this.commonService.checkNullOrUndefined(branchesList) && branchesList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(branchesList.response)) {
             this.getBranchesListArray = branchesList.response['BranchesList'];
+            this.setBranchCode();
           }
         }
 

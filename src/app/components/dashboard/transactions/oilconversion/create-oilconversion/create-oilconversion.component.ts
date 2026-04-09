@@ -70,8 +70,8 @@ export class CreateOilconversionsComponent implements OnInit {
   ) {
     this.branchFormData = this.formBuilder.group({
       oilConversionVchNo: [null, Validators.required],
-      oilConversionDate: [(new Date()).toISOString()],
-      branchCode: [null],
+      oilConversionDate: [(new Date()).toISOString(), Validators.required],
+      branchCode: [null, Validators.required],
       branchName: [null],
       branchId: [null],
       voucherTypeId: [null],
@@ -113,14 +113,13 @@ export class CreateOilconversionsComponent implements OnInit {
         this.routeUrl = params.id1;
         //this.disableForm(params.id1);
         this.getOilconversionDeatilList(params.id1);
-        let billHeader = JSON.parse(localStorage.getItem('selectedOilconversion'));
-        this.branchFormData.setValue(billHeader);
       } else {
         //this.disableForm();
         const user = JSON.parse(localStorage.getItem('user'));
         if (user?.branchCode != null) {
           this.branchFormData.patchValue({
             branchCode: +user.branchCode,
+            branchId: +user.branchCode,
             userId: user.seqId,
             userName: user.userName
           });
@@ -133,6 +132,9 @@ export class CreateOilconversionsComponent implements OnInit {
     });
   }
   setBranchCode() {
+    if (!this.GetBranchesListArray.length) {
+      return;
+    }
     const bname = this.GetBranchesListArray.filter(branchCode => {
       if (branchCode.id == this.branchFormData.get('branchCode').value) {
         return branchCode;
@@ -140,7 +142,8 @@ export class CreateOilconversionsComponent implements OnInit {
     });
     if (bname.length) {
       this.branchFormData.patchValue({
-        branchName: bname?.[0] != null ? bname[0].text : null
+        branchName: bname?.[0] != null ? bname[0].text : null,
+        branchId: bname?.[0] != null ? bname[0].id : null,
       });
     }
   }
@@ -164,11 +167,14 @@ export class CreateOilconversionsComponent implements OnInit {
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response;
+              this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.GetBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
+              if (this.branchFormData.get('branchCode').value != null) {
+                this.setBranchCode();
+              }
             }
           }
         }
@@ -434,7 +440,7 @@ export class CreateOilconversionsComponent implements OnInit {
 
   //Save Code
   save() {
-    if (this.routeUrl != '') {
+    if (this.routeUrl != '' || this.branchFormData.invalid) {
       return;
     }
     let a = 0;
@@ -467,7 +473,7 @@ export class CreateOilconversionsComponent implements OnInit {
     if (!this.tableFormObj) {
       this.dataSource.data.pop();
     }
-    if (this.dataSource.data.length == 0) {
+    if (tableData.length == 0) {
       this.alertService.openSnackBar(`Product is not added`, Static.Close, SnackBar.error);
       return;
     }
@@ -478,7 +484,7 @@ export class CreateOilconversionsComponent implements OnInit {
 
   registerOilcoversions() {
     const registerInvoiceUrl = [this.apiConfigService.registerOilconversion].join('/');
-    const requestObj = { OilcnvsHdr: this.branchFormData.value, OilcnvsDtl: this.dataSource.data };
+    const requestObj = { OilcnvsHdr: this.branchFormData.getRawValue(), OilcnvsDtl: this.dataSource.data };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
         const res = response;

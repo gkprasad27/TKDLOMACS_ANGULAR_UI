@@ -20,7 +20,8 @@
     "STARTDATE": "Start Date",
     "ENDDATE": "End Date"
   },
-  "LOGIN": {
+  "login": {
+    "title": "Login",
     "USERNAME": "Username",
     "PASSWORD": "Password",
     "LOGIN": "Login",
@@ -964,6 +965,7 @@
     "createnewStock": "Create New Stock",
     "fromBranchCode": "From Branch Code",
     "fromBranchName": "From Branch Name",
+    "SlNo": "Sl No",
     "toBranchCode": "To Branch Code",
     "toBranchName": "To Branch Name",
     "stockTransferDate": "Stock Transfer Date",

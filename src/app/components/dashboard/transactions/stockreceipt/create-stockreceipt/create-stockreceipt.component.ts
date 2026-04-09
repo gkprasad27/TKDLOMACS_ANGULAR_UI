@@ -135,6 +135,9 @@ export class CreateStockreceiptsComponent implements OnInit {
   }
 
   setBranchCode() {
+    if (!this.GetBranchesListArray.length) {
+      return;
+    }
     const bname = this.GetBranchesListArray.filter(fromBranchCode => {
       if (fromBranchCode.id == this.branchFormData.get('fromBranchCode').value) {
         return fromBranchCode;
@@ -168,11 +171,14 @@ export class CreateStockreceiptsComponent implements OnInit {
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response;
+              this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.GetBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
+                if (this.branchFormData.get('fromBranchCode').value != null) {
+                  this.setBranchCode();
+                }
             }
           }
         }

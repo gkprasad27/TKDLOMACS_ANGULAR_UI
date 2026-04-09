@@ -24,10 +24,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
-@Component({ 
-    selector: 'app-create-bankpayment',
-    templateUrl: './create-bankpayment.component.html',
-    styleUrls: ['./create-bankpayment.component.scss'],
+@Component({
+  selector: 'app-create-bankpayment',
+  templateUrl: './create-bankpayment.component.html',
+  styleUrls: ['./create-bankpayment.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
@@ -45,11 +45,11 @@ export class CreateBankpaymentComponent implements OnInit {
   getAccountLedgerListNameArray = [];
   getSalesBranchListArray = [];
   branchesList = [];
-  getmemberNamesArray=[];
-  GetBPAccountLedgerListArray=[];
-  GetBankPAccountLedgerListArray=[];
+  getmemberNamesArray = [];
+  GetBPAccountLedgerListArray = [];
+  GetBankPAccountLedgerListArray = [];
 
-  displayedColumns: string[] = ['SlNo','toLedgerCode', 'toLedgerName', 'amount', 'delete'
+  displayedColumns: string[] = ['SlNo', 'toLedgerCode', 'toLedgerName', 'amount', 'delete'
   ];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -66,7 +66,7 @@ export class CreateBankpaymentComponent implements OnInit {
     private commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
-        private router: Router,
+    private router: Router,
 
     private alertService: AlertService,
     private activatedRoute: ActivatedRoute,
@@ -77,7 +77,7 @@ export class CreateBankpaymentComponent implements OnInit {
     this.branchFormData = this.formBuilder.group({
       voucherNo: [null],
       bankPaymentDate: [(new Date()).toISOString()],
-      branchId:[null],
+      branchId: [null],
       branchCode: [null],
       branchName: [null],
       shiftId: [null],
@@ -87,15 +87,15 @@ export class CreateBankpaymentComponent implements OnInit {
       totalAmount: [null],
       narration: [null],
       //printBill: [false],
-      realized:[null],
-      postingDate:[null],
-      chequeNo:[null],
-      bankLedgerCode:[null],
-      bankPaymentMasterId:[null],
-      bankPaymentVchNo:[null],
-      bankLedgerId:[null],
-      bankLedgerName:[null],
-      serverDate:[null]
+      realized: [null],
+      postingDate: [null],
+      chequeNo: [null],
+      bankLedgerCode: [null],
+      bankPaymentMasterId: [null],
+      bankPaymentVchNo: [null],
+      bankLedgerId: [null],
+      bankLedgerName: [null],
+      serverDate: [null]
     });
 
     const user = JSON.parse(localStorage.getItem('user'));
@@ -112,7 +112,7 @@ export class CreateBankpaymentComponent implements OnInit {
   }
   loadData() {
     this.getBankPaymentBranchesList();
-   // this.getBankPAccountLedgerList();
+    // this.getBankPAccountLedgerList();
     this.activatedRoute.params.subscribe(params => {
       console.log(params.id1);
       if (params.id1 != null) {
@@ -178,11 +178,14 @@ export class CreateBankpaymentComponent implements OnInit {
     this.apiService.apiGetRequest(getBankPaymentBranchesListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.GetBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
+              if (this.branchFormData.get('branchCode').value != null) {
+                this.setBranchCode();
+              }
             }
           }
         }
@@ -255,7 +258,7 @@ export class CreateBankpaymentComponent implements OnInit {
     });
   }
 
-  
+
   genarateVoucherNo(branch?) {
     let genarateVoucherNoUrl;
     if (branch != null) {
@@ -280,6 +283,9 @@ export class CreateBankpaymentComponent implements OnInit {
   }
 
   setBranchCode() {
+    if (!this.GetBranchesListArray.length) {
+      return;
+    }
     const bname = this.GetBranchesListArray.filter(branchCode => {
       if (branchCode.id == this.branchFormData.get('branchCode').value) {
         return branchCode;
@@ -296,7 +302,7 @@ export class CreateBankpaymentComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.getmemberNamesArray.filter(option => option.text.toLowerCase().includes(filterValue));
   }
-  
+
   addTableRow() {
     const tableObj = {
       toLedgerCode: '', toLedgerName: '', amount: '', delete: '', text: 'obj'
@@ -402,11 +408,11 @@ export class CreateBankpaymentComponent implements OnInit {
       }
     }
     this.branchFormData.patchValue({
-      totalAmount : amount
+      totalAmount: amount
     });
   }
 
-  
+
   setAccountCode(value) {
     let flag = true;
     for (let t = 0; t < this.getAccountLedgerListArray.length; t++) {
@@ -415,8 +421,8 @@ export class CreateBankpaymentComponent implements OnInit {
           if (this.dataSource.data[d]['toLedgerName'] == this.getAccountLedgerListArray[t]['text']) {
             this.dataSource.data[d]['toLedgerCode'] = this.getAccountLedgerListArray[t]['id'];
             this.tableFormData.patchValue({
-              toLedgerCode : this.getAccountLedgerListArray[t].id,
-              toLedgerName : this.getAccountLedgerListArray[t].text
+              toLedgerCode: this.getAccountLedgerListArray[t].id,
+              toLedgerName: this.getAccountLedgerListArray[t].text
             });
             flag = false;
             break;
@@ -424,22 +430,22 @@ export class CreateBankpaymentComponent implements OnInit {
         }
       }
     }
-    if(flag) {
-        this.dataSource.data[this.dataSource.data.length - 1].toLedgerName = value.value;
-        for (let t = 0; t < this.getAccountLedgerListArray.length; t++) {
-          if (this.getAccountLedgerListArray[t]['text'] == value.value) {
-            for (let d = 0; d < this.dataSource.data.length; d++) {
-              if (this.dataSource.data[d]['toLedgerName'] == this.getAccountLedgerListArray[t]['text']) {
-                this.dataSource.data[d]['toLedgerCode'] = this.getAccountLedgerListArray[t]['id'];
-                this.tableFormData.patchValue({
-                  toLedgerCode : this.getAccountLedgerListArray[t].id,
-                  toLedgerName : this.getAccountLedgerListArray[t].text
-                        });
-                break;
-              }
+    if (flag) {
+      this.dataSource.data[this.dataSource.data.length - 1].toLedgerName = value.value;
+      for (let t = 0; t < this.getAccountLedgerListArray.length; t++) {
+        if (this.getAccountLedgerListArray[t]['text'] == value.value) {
+          for (let d = 0; d < this.dataSource.data.length; d++) {
+            if (this.dataSource.data[d]['toLedgerName'] == this.getAccountLedgerListArray[t]['text']) {
+              this.dataSource.data[d]['toLedgerCode'] = this.getAccountLedgerListArray[t]['id'];
+              this.tableFormData.patchValue({
+                toLedgerCode: this.getAccountLedgerListArray[t].id,
+                toLedgerName: this.getAccountLedgerListArray[t].text
+              });
+              break;
             }
           }
         }
+      }
     }
     this.dataSource = new MatTableDataSource(this.dataSource.data);
   }
@@ -453,33 +459,33 @@ export class CreateBankpaymentComponent implements OnInit {
           if (this.dataSource.data[d]['toLedgerCode'] == this.getAccountLedgerListArray[t]['id']) {
             this.dataSource.data[d]['toLedgerName'] = this.getAccountLedgerListArray[t]['text'];
             this.tableFormData.patchValue({
-              toLedgerCode : this.getAccountLedgerListArray[t].id,
-              toLedgerName : this.getAccountLedgerListArray[t].text
+              toLedgerCode: this.getAccountLedgerListArray[t].id,
+              toLedgerName: this.getAccountLedgerListArray[t].text
             });
             flag = false;
           }
         }
       }
     }
-    if(flag) {
-        this.dataSource.data[this.dataSource.data.length - 1].toLedgerCode = value.value;
-        for (let t = 0; t < this.getAccountLedgerListArray.length; t++) {
-          if (this.getAccountLedgerListArray[t]['id'] == value.value) {
-            for (let d = 0; d < this.dataSource.data.length; d++) {
-              if (this.dataSource.data[d]['toLedgerCode'] == this.getAccountLedgerListArray[t]['id']) {
-                this.dataSource.data[d]['toLedgerName'] = this.getAccountLedgerListArray[t]['text'];
-                this.tableFormData.patchValue({
-                  toLedgerCode : this.getAccountLedgerListArray[t].id,
-                  toLedgerName : this.getAccountLedgerListArray[t].text
-                        });
-              }
+    if (flag) {
+      this.dataSource.data[this.dataSource.data.length - 1].toLedgerCode = value.value;
+      for (let t = 0; t < this.getAccountLedgerListArray.length; t++) {
+        if (this.getAccountLedgerListArray[t]['id'] == value.value) {
+          for (let d = 0; d < this.dataSource.data.length; d++) {
+            if (this.dataSource.data[d]['toLedgerCode'] == this.getAccountLedgerListArray[t]['id']) {
+              this.dataSource.data[d]['toLedgerName'] = this.getAccountLedgerListArray[t]['text'];
+              this.tableFormData.patchValue({
+                toLedgerCode: this.getAccountLedgerListArray[t].id,
+                toLedgerName: this.getAccountLedgerListArray[t].text
+              });
             }
           }
         }
+      }
     }
     this.dataSource = new MatTableDataSource(this.dataSource.data);
     this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource.data,this.tableFormData);
+    console.log(this.dataSource.data, this.tableFormData);
     //this.setToFormModel();
 
   }
@@ -559,7 +565,7 @@ export class CreateBankpaymentComponent implements OnInit {
 
 
   back() {
-      this.router.navigate(['dashboard/transactions/bankpayment']);
+    this.router.navigate(['dashboard/transactions/bankpayment']);
   }
 
 }
