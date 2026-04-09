@@ -89,8 +89,8 @@ export class CreateJournalvoucherComponent implements OnInit {
     this.branchFormData = this.formBuilder.group({
       voucherNo: [null, [Validators.required]],
       journalVoucherMasterId: [0],
-      journalVoucherDate: [(new Date()).toISOString(), [Validators.required]],
-      referenceDate: [(new Date()).toISOString(), [Validators.required]],
+      journalVoucherDate: [null, [Validators.required]],
+      referenceDate: [null, [Validators.required]],
       branchId: [null],
       branchCode: [null, [Validators.required]],
       branchName: [null],
@@ -100,7 +100,7 @@ export class CreateJournalvoucherComponent implements OnInit {
       employeeId: [null],
       totalAmount: [null],
       narration: [null],
-      fromLedgerCode: [null,  [Validators.required]],
+      fromLedgerCode: [null, [Validators.required]],
       fromLedgerName: [null],
       fromLedgerId: [null],
       referenceNo: [null, [Validators.required]],
@@ -147,6 +147,7 @@ export class CreateJournalvoucherComponent implements OnInit {
         userName: user.userName,
         journalVoucherDate: (new Date()).toISOString(),
         referenceDate: (new Date()).toISOString(),
+        journalVoucherMasterId: 0
       });
       this.setBranchCode();
       this.genarateVoucherNo(user.branchCode);
@@ -165,8 +166,11 @@ export class CreateJournalvoucherComponent implements OnInit {
             this.dataSource = new MatTableDataSource(res.response['JournalVoucherDetails']);
             this.dataSource.paginator = this.paginator;
           }
-          if (res?.response?.JournalVoucherData) {
-            this.branchFormData.patchValue(res.response['JournalVoucherData']);
+          if (res?.response?.journalVoucherData) {
+            this.branchFormData.patchValue(res.response['journalVoucherData']);
+            this.branchFormData.patchValue({
+              branchCode: +res?.response?.journalVoucherData['branchCode']
+            })
           }
         }
       });
@@ -584,7 +588,7 @@ export class CreateJournalvoucherComponent implements OnInit {
 
 
   back() {
-    this.router.navigate(['dashboard/transactions/bankpayment']);
+    this.router.navigate(['dashboard/transactions/journalvoucher']);
   }
 
 }
