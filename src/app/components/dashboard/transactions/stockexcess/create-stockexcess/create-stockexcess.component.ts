@@ -71,9 +71,9 @@ export class CreateStockExcessComponent implements OnInit {
 
   ) {
     this.branchFormData = this.formBuilder.group({
-      stockExcessNo: [null],
-      stockExcessDate: [(new Date()).toISOString()],
-      branchCode: [null],
+      stockExcessNo: [null, [Validators.required]],
+      stockExcessDate: [null, [Validators.required]],
+      branchCode: [null, [Validators.required]],
       branchName: [null],
       shiftId: [null],
       userId: [null],
@@ -81,8 +81,8 @@ export class CreateStockExcessComponent implements OnInit {
       employeeId: [null],
       narration: [null],
       //printBill: [false],
-      stockExcessMasterId: [null],
-      costCenter: [null],
+      stockExcessMasterId: [0],
+      costCenter: [null, [Validators.required]],
       serverDate: [null]
     });
 
@@ -106,24 +106,28 @@ export class CreateStockExcessComponent implements OnInit {
         this.routeUrl = params.id1;
         this.disableForm(params.id1);
         this.getStockExcessDetailsList(params.id1);
-        let billHeader = JSON.parse(localStorage.getItem('selectedBill'));
-        this.branchFormData.setValue(billHeader);
       } else {
-        this.disableForm();
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user?.branchCode != null) {
-          this.branchFormData.patchValue({
-            branchCode: +user.branchCode,
-            userId: user.seqId,
-            userName: user.userName
-          });
-          this.setBranchCode();
-          this.genarateVoucherNo(user.branchCode);
-          this.formGroup();
-        }
-        this.addTableRow();
+        this.resetData();
       }
     });
+  }
+
+  resetData() {
+    this.disableForm();
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.branchCode != null) {
+      this.branchFormData.patchValue({
+        branchCode: +user.branchCode,
+        userId: user.seqId,
+        userName: user.userName,
+        stockExcessDate: (new Date()).toISOString(),
+        stockExcessMasterId: 0
+      });
+      this.setBranchCode();
+      this.genarateVoucherNo(user.branchCode);
+      this.formGroup();
+    }
+    this.addTableRow();
   }
 
   getStockExcessDetailsList(id) {
@@ -131,10 +135,16 @@ export class CreateStockExcessComponent implements OnInit {
     this.apiService.apiGetRequest(getStockExcessDetailsListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.StockExcessDetails?.length) {
             this.dataSource = new MatTableDataSource(res.response['StockExcessDetails']);
-            this.spinner.hide();
+          }
+          if (res?.response?.stockExcessData) {
+            this.branchFormData.patchValue(res?.response?.stockExcessData);
+            this.branchFormData.patchValue({
+              branchCode: +res?.response?.stockExcessData['branchCode']
+            })
           }
         }
       });
@@ -184,13 +194,13 @@ export class CreateStockExcessComponent implements OnInit {
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if ((res.response['stockexcessNo'] != null)) {
               this.branchFormData.patchValue({
                 stockExcessNo: res.response['stockexcessNo']
               });
-              this.spinner.hide();
             }
           }
         }
@@ -202,11 +212,11 @@ export class CreateStockExcessComponent implements OnInit {
     this.apiService.apiGetRequest(getStockExcessCostCentersListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.CostCentersList?.length) {
               this.getStockExcessListArray = res.response['CostCentersList'];
-              this.spinner.hide();
             }
           }
         }
@@ -331,11 +341,11 @@ export class CreateStockExcessComponent implements OnInit {
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
           const res = response;
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.products != null) {
                 this.getProductByProductNameArray = res.response['products'];
-                this.spinner.hide();
               }
             }
           }
@@ -357,11 +367,11 @@ export class CreateStockExcessComponent implements OnInit {
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
           const res = response;
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.productsList != null) {
                 this.DetailsSection(res.response['productsList']);
-                this.spinner.hide();
               }
             }
           }
@@ -402,7 +412,7 @@ export class CreateStockExcessComponent implements OnInit {
     //   this.dataSource.data.pop();
     //   console.log(this.dataSource.data);
     // }
-    if (this.routeUrl != '' || this.dataSource.data.length == 0) {
+    if (this.routeUrl != '' || this.branchFormData.invalid) {
       return;
     }
     let tableData = [];
@@ -439,25 +449,18 @@ export class CreateStockExcessComponent implements OnInit {
     this.dataSource.data.forEach(element => {
       totalAmount = element.amount + totalAmount;
     });
-
-    console.log(this.branchFormData, this.dataSource.data);
-
     this.registerStockexcess(tableData);
   }
 
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.formGroup();
-    this.loadData();
+    this.resetData();
   }
 
   registerStockexcess(data) {
-    this.branchFormData.patchValue({
-      stockExcessMasterId: 0
-    });
     const registerStockexcessUrl = [this.apiConfigService.registerStockexcess].join('/');
-    const requestObj = { StockexcessHdr: this.branchFormData.value, StockexcessDtl: data };
+    const requestObj = { StockexcessHdr: this.branchFormData.getRawValue(), StockexcessDtl: data };
     this.apiService.apiPostRequest(registerStockexcessUrl, requestObj).subscribe(
       response => {
         const res = response;

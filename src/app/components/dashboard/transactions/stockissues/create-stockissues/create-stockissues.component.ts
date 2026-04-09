@@ -75,14 +75,14 @@ export class CreateStockissuesComponent implements OnInit {
   ) {
     this.branchFormData = this.formBuilder.group({
       issueNo: [null, [Validators.required]],
-      issueDate: [(new Date()).toISOString()],
+      issueDate: [null, [Validators.required]],
       fromBranchCode: [null, [Validators.required]],
       fromBranchName: [null],
       toBranchCode: [null],
-      toBranchName: [null],
+      toBranchName: [null, [Validators.required]],
       serverDateTime: [null],
       shiftId: [null],
-      userId: '0',
+      userId: [0],
       userName: [null],
       employeeId: [null],
       remarks: [null],
@@ -93,13 +93,11 @@ export class CreateStockissuesComponent implements OnInit {
     //String data= null;
     const user = JSON.parse(localStorage.getItem('user'));
     if ((user != null)) {
-      ;
-      this.branchFormData.patchValue
-        ({
-          userId: user.userId,
-          userName: user.userName,
-          shiftId: user.shiftId
-        })
+      this.branchFormData.patchValue({
+        userId: user.userId,
+        userName: user.userName,
+        shiftId: user.shiftId
+      })
     }
   }
 
@@ -125,7 +123,9 @@ export class CreateStockissuesComponent implements OnInit {
         ({
           fromBranchCode: +user.branchCode,
           userId: user.seqId,
-          userName: user.userName
+          userName: user.userName,
+          receiptDate: (new Date()).toISOString(),
+          operatorStockIssueId: 0
         });
       this.genaratebranchcode();
       ////this.setBranchCode();
@@ -156,7 +156,6 @@ export class CreateStockissuesComponent implements OnInit {
 
   //issueno code;
   genaratebranchcode(branch?) {
-    ;
     let genaratebranchNoUrl;
     if ((branch != null)) {
       genaratebranchNoUrl = [this.apiConfigService.getbranchesnosList, branch].join('/');
@@ -167,20 +166,18 @@ export class CreateStockissuesComponent implements OnInit {
     this.apiService.apiGetRequest(genaratebranchNoUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if ((res.response['branchno'] != null)) {
               this.fromBranchCode = res.response['branchno']
               console.log(res.response['branchno']);
-              this.branchFormData.patchValue
-                ({
-                  fromBranchCode: res.response['branchno']
-                });
+              this.branchFormData.patchValue({
+                fromBranchCode: res.response['branchno']
+              });
               this.setBranchCode();
               this.genarateVoucherNo(this.fromBranchCode);
               this.gettingtobranches();
-              this.spinner.hide();
-
             }
           }
         }
@@ -200,13 +197,16 @@ export class CreateStockissuesComponent implements OnInit {
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
         const res = response;
-            this.spinner.hide();
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.StockissuesDeatilList?.length) {
             this.dataSource = new MatTableDataSource(res.response['StockissuesDeatilList']);
           }
-          if (res?.response.StockissuesDeatilData) {
-            this.branchFormData.patchValue(res?.response.StockissuesDeatilData);
+          if (res?.response.StockissuesData) {
+            this.branchFormData.patchValue(res?.response.StockissuesData);
+            this.branchFormData.patchValue({
+              fromBranchCode: +res?.response?.StockissuesData['fromBranchCode']
+            })
           }
         }
       });
@@ -244,6 +244,7 @@ export class CreateStockissuesComponent implements OnInit {
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if ((res.response['StackissueNo'] != null)) {
@@ -251,7 +252,6 @@ export class CreateStockissuesComponent implements OnInit {
               this.branchFormData.patchValue({
                 issueNo: res.response['StackissueNo']
               });
-              this.spinner.hide();
             }
           }
         }
@@ -272,15 +272,15 @@ export class CreateStockissuesComponent implements OnInit {
     this.apiService.apiGetRequest(gettingtobranchesListUrl).subscribe(
       response => {
         const res = response;
+              this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.branch?.length) {
               this.toBranchCode = res.response['branch']
               this.branchFormData.patchValue({
-                toBranchCode: res.response['branch'][0].id
+                toBranchName: res.response['branch']
               });
               //this.GettoBranchesListArray = res.response['branch'];
-              this.spinner.hide();
             }
           }
         }
@@ -294,8 +294,7 @@ export class CreateStockissuesComponent implements OnInit {
   }
 
   addTableRow() {
-    const tableObj =
-    {
+    const tableObj = {
       productCode: '', productName: '', hsnNo: '', unit: '', qty: '', rate: '', grossAmount: '', availStock: '', batchNo: '', delete: '', text: 'obj'
     };
 
@@ -388,17 +387,16 @@ export class CreateStockissuesComponent implements OnInit {
 
   //Autocomplete code
   getProductByProductName(value) {
-    ;
     if (value != null && value !== '') {
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
           const res = response;
+              this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.products != null) {
                 this.getProductByProductNameArray = res.response['products'];
-                this.spinner.hide();
               }
             }
           }
@@ -478,8 +476,7 @@ export class CreateStockissuesComponent implements OnInit {
   DetailsSection(obj) {
     this.dataSource.data = this.dataSource.data.map(val => {
       if (val.productCode == obj.productCode) {
-        this.tableFormData.patchValue
-          ({
+        this.tableFormData.patchValue({
             productCode: obj.productCode,
             productName: obj.productName
           });

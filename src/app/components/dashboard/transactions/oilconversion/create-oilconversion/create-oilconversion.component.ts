@@ -70,7 +70,7 @@ export class CreateOilconversionsComponent implements OnInit {
   ) {
     this.branchFormData = this.formBuilder.group({
       oilConversionVchNo: [null, Validators.required],
-      oilConversionDate: [(new Date()).toISOString(), Validators.required],
+      oilConversionDate: [null, Validators.required],
       branchCode: [null, Validators.required],
       branchName: [null],
       branchId: [null],
@@ -87,15 +87,12 @@ export class CreateOilconversionsComponent implements OnInit {
     });
     const user = JSON.parse(localStorage.getItem('user'));
     if (user != null) {
-      this.branchFormData.patchValue
-        ({
-          userId: user.userId,
-          userName: user.userName,
-          shiftId: user.shiftId
-        })
+      this.branchFormData.patchValue({
+        userId: user.userId,
+        userName: user.userName,
+        shiftId: user.shiftId
+      })
     }
-
-
     if (user?.role != '1') {
       this.branchFormData.controls['branchCode'].disable();
     }
@@ -114,23 +111,30 @@ export class CreateOilconversionsComponent implements OnInit {
         //this.disableForm(params.id1);
         this.getOilconversionDeatilList(params.id1);
       } else {
-        //this.disableForm();
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user?.branchCode != null) {
-          this.branchFormData.patchValue({
-            branchCode: +user.branchCode,
-            branchId: +user.branchCode,
-            userId: user.seqId,
-            userName: user.userName
-          });
-          this.setBranchCode();
-          this.genarateVoucherNo(user.branchCode);
-          this.formGroup();
-        }
-        this.addTableRow();
+        this.resetData();
       }
     });
   }
+
+  resetData() {
+    //this.disableForm();
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.branchCode != null) {
+      this.branchFormData.patchValue({
+        branchCode: +user.branchCode,
+        branchId: +user.branchCode,
+        userId: user.seqId,
+        userName: user.userName,
+        oilConversionDate: (new Date()).toISOString(),
+        oilConversionMasterId: 0
+      });
+      this.setBranchCode();
+      this.genarateVoucherNo(user.branchCode);
+      this.formGroup();
+    }
+    this.addTableRow();
+  }
+
   setBranchCode() {
     if (!this.GetBranchesListArray.length) {
       return;
@@ -156,7 +160,12 @@ export class CreateOilconversionsComponent implements OnInit {
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.OilconversionsDeatilList?.length) {
             this.dataSource = new MatTableDataSource(res.response['OilconversionsDeatilList']);
-            this.spinner.hide();
+          }
+          if (res?.response?.OilconversionsData) {
+            this.branchFormData.patchValue(res?.response?.OilconversionsData);
+            this.branchFormData.patchValue({
+              branchCode: +res?.response?.OilconversionsData['branchCode']
+            })
           }
         }
       });
@@ -167,7 +176,7 @@ export class CreateOilconversionsComponent implements OnInit {
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response;
-              this.spinner.hide();
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
@@ -401,6 +410,7 @@ export class CreateOilconversionsComponent implements OnInit {
           });
         val = obj;
       }
+      val.oilConversionMasterId = 0;
       val.text = 'obj';
       if (val.qty == 0) {
         val.qty = '';
@@ -502,10 +512,7 @@ export class CreateOilconversionsComponent implements OnInit {
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.branchFormData.patchValue({
-      oilConversionDate: [(new Date()).toISOString()],
-    });
-    this.loadData();
+    this.resetData();
     this.commonService.setFocus('productCode');
   }
 

@@ -19,10 +19,10 @@ import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
-@Component({ 
-    selector: 'app-create-stockshort',
-    templateUrl: './create-stockshort.component.html',
-    styleUrls: ['./create-stockshort.component.scss'],
+@Component({
+  selector: 'app-create-stockshort',
+  templateUrl: './create-stockshort.component.html',
+  styleUrls: ['./create-stockshort.component.scss'],
   standalone: true,
   imports: [SharedImportModule, TranslateModule, TypeaheadModule]
 })
@@ -38,7 +38,7 @@ export class CreateStockshortsComponent implements OnInit {
   branchesList = [];
   getmemberNamesArray = [];
 
-  displayedColumns: string[] = ['productCode', 'productName', 'hsnNo', 'unitName', 'qty', 'rate', 'totalAmount',  'batchNo', 'delete'
+  displayedColumns: string[] = ['productCode', 'productName', 'hsnNo', 'unitName', 'qty', 'rate', 'totalAmount', 'batchNo', 'delete'
   ];
 
   dataSource: MatTableDataSource<any>;
@@ -47,7 +47,7 @@ export class CreateStockshortsComponent implements OnInit {
   date = new Date((new Date().getTime() - 3888000000));
   modelFormData: FormGroup;
   tableFormData: FormGroup;
- // printBill: any;
+  // printBill: any;
   issueno = null;
   totalamount = null;
   tableFormObj = false;
@@ -55,7 +55,7 @@ export class CreateStockshortsComponent implements OnInit {
   getProductByProductCodeArray = [];
   getProductByProductNameArray: any[];
   GetCostCentersListArray: any;
-    stockshortNo: any;
+  stockshortNo: any;
   setFocus: any;
 
   constructor(
@@ -69,33 +69,30 @@ export class CreateStockshortsComponent implements OnInit {
     private spinner: NgxSpinnerService,
   ) {
     this.branchFormData = this.formBuilder.group({
-      stockshortNo: [null],
-      stockshortDate: [(new Date()).toISOString()],
-      branchCode: [null],
+      stockshortNo: [null, [Validators.required]],
+      stockshortDate: [null, [Validators.required]],
+      branchCode: [null, [Validators.required]],
       branchName: [null],
-     stockshortMasterId:'0',
+      stockshortMasterId: [0],
       shiftId: [null],
       userId: '0',
       userName: [null],
       employeeId: [null],
       serverDate: [null],
-      costCenter: [null],
+      costCenter: [null, [Validators.required]],
       narration: [null],
-     // printBill: [false],
+      // printBill: [false],
 
     });
     const user = JSON.parse(localStorage.getItem('user'));
     if (user != null) {
       ;
-      this.branchFormData.patchValue
-        ({
-          userId: user.userId,
-          userName: user.userName,
-          shiftId: user.shiftId
-        })
+      this.branchFormData.patchValue({
+        userId: user.userId,
+        userName: user.userName,
+        shiftId: user.shiftId
+      })
     }
-
-
     if (user?.role != '1') {
       this.branchFormData.controls['branchCode'].disable();
     }
@@ -127,7 +124,7 @@ export class CreateStockshortsComponent implements OnInit {
   //        });
   //        this.genaratestockshortvocherNo(user.fromBranchCode);
   //      }
-     
+
   //      this.addTableRow();
   //    }
   //  });
@@ -172,25 +169,30 @@ export class CreateStockshortsComponent implements OnInit {
         this.routeUrl = params.id1;
         //this.disableForm(params.id1);
         this.getStockshortDeatilList(params.id1);
-        let billHeader = JSON.parse(localStorage.getItem('selectedStockshort'));
-        this.branchFormData.setValue(billHeader);
       } else {
-        //this.disableForm();
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user?.branchCode != null) {
-          this.branchFormData.patchValue({
-            branchCode: +user.branchCode,
-            userId: user.seqId,
-            userName: user.userName
-          });
-          this.setBranchCode();
-          this.genaratestockshortvocherNo(user.branchCode);
-          this.formGroup();
-        }
-        this.addTableRow();
+        this.resetData();
       }
     });
   }
+
+  resetData() {
+    //this.disableForm();
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.branchCode != null) {
+      this.branchFormData.patchValue({
+        branchCode: +user.branchCode,
+        userId: user.seqId,
+        userName: user.userName,
+        stockshortDate: (new Date()).toISOString(),
+        stockshortMasterId: 0
+      });
+      this.setBranchCode();
+      this.genaratestockshortvocherNo(user.branchCode);
+      this.formGroup();
+    }
+    this.addTableRow();
+  }
+
   setBranchCode() {
     if (!this.GetBranchesListArray.length) {
       return;
@@ -208,15 +210,20 @@ export class CreateStockshortsComponent implements OnInit {
   }
 
   getStockshortDeatilList(id) {
-    ;
     const getInvoiceDeatilListUrl = [this.apiConfigService.getStockshortsDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.StockshortsDeatilList?.length) {
             this.dataSource = new MatTableDataSource(res.response['StockshortsDeatilList']);
-            this.spinner.hide();
+          }
+          if (res?.response?.StockshortsData) {
+            this.branchFormData.patchValue(res?.response?.StockshortsData);
+            this.branchFormData.patchValue({
+              branchCode: +res?.response?.StockshortsData['branchCode']
+            })
           }
         }
       });
@@ -228,12 +235,12 @@ export class CreateStockshortsComponent implements OnInit {
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response;
-              this.spinner.hide();
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.GetBranchesListArray = res.response['BranchesList'];
-                if (this.branchFormData.get('branchCode').value != null) {
+              if (this.branchFormData.get('branchCode').value != null) {
                 this.setBranchCode();
               }
             }
@@ -247,11 +254,11 @@ export class CreateStockshortsComponent implements OnInit {
     this.apiService.apiGetRequest(getCashPaymentBranchesListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.CostCentersList?.length) {
               this.GetCostCentersListArray = res.response['CostCentersList'];
-              this.spinner.hide();
             }
           }
         }
@@ -261,7 +268,6 @@ export class CreateStockshortsComponent implements OnInit {
 
   //stockshortvocherno code;
   genaratestockshortvocherNo(branch?) {
-    ;
     let genarateVoucherNoUrl;
     if (branch != null) {
       genarateVoucherNoUrl = [this.apiConfigService.getstockshortvochernosList, branch].join('/');
@@ -271,15 +277,14 @@ export class CreateStockshortsComponent implements OnInit {
     this.apiService.apiGetRequest(genarateVoucherNoUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if ((res.response['stockshortVoucherNo'] != null)) {
               this.stockshortNo = res.response['stockshortVoucherNo']
-              this.branchFormData.patchValue
-                ({
-                  stockshortNo: res.response['stockshortVoucherNo']
-                });
-              this.spinner.hide();
+              this.branchFormData.patchValue({
+                stockshortNo: res.response['stockshortVoucherNo']
+              });
             }
           }
         }
@@ -292,12 +297,9 @@ export class CreateStockshortsComponent implements OnInit {
   }
 
   addTableRow() {
-    ;
-    const tableObj =
-    {
+    const tableObj = {
       productCode: '', productName: '', hsnNo: '', unit: '', qty: '', rate: '', totalAmount: '', batchNo: '', delete: '', text: 'obj'
     };
-
     if (this.dataSource != null) {
       this.dataSource.data.push(tableObj);
       this.dataSource = new MatTableDataSource(this.dataSource.data);
@@ -366,11 +368,11 @@ export class CreateStockshortsComponent implements OnInit {
       this.apiService.apiPostRequest(getProductByProductCodeUrl, { productCode: value }).subscribe(
         response => {
           const res = response;
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.products != null) {
                 this.getProductByProductCodeArray = res.response['products'];
-                this.spinner.hide();
               }
             }
           }
@@ -382,17 +384,16 @@ export class CreateStockshortsComponent implements OnInit {
 
   //Autocomplete code
   getProductByProductName(value) {
-    ;
     if (value != null && value !== '') {
       const getProductByProductNameUrl = [this.apiConfigService.getProductByProductName].join('/');
       this.apiService.apiPostRequest(getProductByProductNameUrl, { productName: value }).subscribe(
         response => {
           const res = response;
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.products != null) {
                 this.getProductByProductNameArray = res.response['products'];
-                this.spinner.hide();
               }
             }
           }
@@ -448,20 +449,18 @@ export class CreateStockshortsComponent implements OnInit {
   getdata(productCode, index, id) {
     this.setFocus = id + index;
     const branchCode = this.branchFormData.get('branchCode')?.value;
-const pCode = productCode?.value;
-
-if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
-
+    const pCode = productCode?.value;
+    if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
       const getBillingDetailsRcdUrl = [this.apiConfigService.GetProductListsforStockshortsList, productCode.value,
-        this.branchFormData.get('branchCode').value].join('/');
+      this.branchFormData.get('branchCode').value].join('/');
       this.apiService.apiGetRequest(getBillingDetailsRcdUrl).subscribe(
         response => {
           const res = response;
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.productsList != null) {
                 this.DetailsSection(res.response['productsList']);
-                this.spinner.hide();
               }
             }
           }
@@ -469,7 +468,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
     }
   }
 
- 
+
   //assign data
   DetailsSection(obj) {
     this.dataSource.data = this.dataSource.data.map(val => {
@@ -482,7 +481,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
         val = obj;
       }
       val.text = 'obj';
-      if(val.qty == 0) {
+      if (val.qty == 0) {
         val.qty = '';
       }
       return val;
@@ -492,8 +491,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
   }
 
   setProductName(name) {
-    this.tableFormData.patchValue
-      ({
+    this.tableFormData.patchValue({
         productName: name.value
       });
     this.setToFormModel(null, null, null);
@@ -502,7 +500,6 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
   //Calaculating code
   calculateAmount(row, index) {
-    ;
     let amount = 0;
     for (let a = 0; a < this.dataSource.data.length; a++) {
       if (this.dataSource.data[a].qty) {
@@ -519,7 +516,7 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
 
   //Save Code
   save() {
-    if (this.routeUrl != '') {
+    if (this.routeUrl != '' || this.branchFormData.invalid) {
       return;
     }
     let tableData = [];
@@ -557,20 +554,18 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
   }
 
   registerStackshorts() {
-    ;
     const registerStackreceiptsUrl = [this.apiConfigService.registerStockshorts].join('/');
-    const requestObj = { StockshortHdr: this.branchFormData.value, StockshortDtl: this.dataSource.data };
+    const requestObj = { StockshortHdr: this.branchFormData.getRawValue(), StockshortDtl: this.dataSource.data };
     this.apiService.apiPostRequest(registerStackreceiptsUrl, requestObj).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
-          if (res?.response != null)
-          {
+          if (res?.response != null) {
             this.alertService.openSnackBar('Stock Short Created Successfully..', Static.Close, SnackBar.success);
             this.branchFormData.reset();
           }
           this.reset();
-          this.spinner.hide();
           //location.reload();
         }
       });
@@ -579,14 +574,11 @@ if (branchCode != null && branchCode !== '' && pCode != null && pCode !== '') {
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.branchFormData.patchValue({
-      stockshortDate: [(new Date()).toISOString()]
-    });
-    this.loadData();
+    this.resetData();
     this.commonService.setFocus('costCenter');
   }
 
-  back() { 
+  back() {
     this.router.navigate(['/dashboard/transactions/stockshort']);
   }
 }
