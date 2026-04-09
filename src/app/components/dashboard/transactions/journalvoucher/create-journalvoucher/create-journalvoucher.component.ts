@@ -535,6 +535,10 @@ export class CreateJournalvoucherComponent implements OnInit {
     this.dataSource.data.forEach(element => {
       totalAmount = element.amount + totalAmount;
     });
+    if (tableData.length == 0) {
+      this.alertService.openSnackBar(`Product is not added`, Static.Close, SnackBar.error);
+      return;
+    }
 
     const dialogRef = this.dialog.open(SaveItemComponent, {
       width: '1024px',

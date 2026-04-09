@@ -148,7 +148,7 @@ export class CreateBankpaymentComponent implements OnInit {
     this.apiService.apiGetRequest(getBankPaymentDetailsListUrl).subscribe(
       response => {
         const res = response;
-            this.spinner.hide();
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.BankPaymentDetails?.length) {
             this.dataSource = new MatTableDataSource(res.response['BankPaymentDetails']);
@@ -526,6 +526,10 @@ export class CreateBankpaymentComponent implements OnInit {
     this.dataSource.data.forEach(element => {
       totalAmount = element.amount + totalAmount;
     });
+    if (tableData.length == 0) {
+      this.alertService.openSnackBar(`Product is not added`, Static.Close, SnackBar.error);
+      return;
+    }
 
     const dialogRef = this.dialog.open(SaveItemComponent, {
       width: '1024px',

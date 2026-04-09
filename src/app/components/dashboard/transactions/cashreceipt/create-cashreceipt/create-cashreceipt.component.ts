@@ -457,6 +457,10 @@ export class CreateCashreceiptComponent implements OnInit {
       totalGross = element.grossAmount + totalGross;
       totalInvoiceAmount = element.totalInvoiceAmount + totalInvoiceAmount;
     });
+    if (tableData.length == 0) {
+      this.alertService.openSnackBar(`Product is not added`, Static.Close, SnackBar.error);
+      return;
+    }
 
     console.log(this.branchFormData, this.dataSource.data);
     const dialogRef = this.dialog.open(SaveItemComponent, {

@@ -74,9 +74,9 @@ export class CreateStockissuesComponent implements OnInit {
     private spinner: NgxSpinnerService,
   ) {
     this.branchFormData = this.formBuilder.group({
-      issueNo: [null],
+      issueNo: [null, [Validators.required]],
       issueDate: [(new Date()).toISOString()],
-      fromBranchCode: [null],
+      fromBranchCode: [null, [Validators.required]],
       fromBranchName: [null],
       toBranchCode: [null],
       toBranchName: [null],
@@ -86,7 +86,7 @@ export class CreateStockissuesComponent implements OnInit {
       userName: [null],
       employeeId: [null],
       remarks: [null],
-      operatorStockIssueId: '0',
+      operatorStockIssueId: [0],
       // printBill: [false],
 
     });
@@ -110,29 +110,31 @@ export class CreateStockissuesComponent implements OnInit {
         this.routeUrl = params.id1;
         //this.disableForm(params.id1);
         this.getStockissuesDeatilList(params.id1);
-        let billHeader = JSON.parse(localStorage.getItem('selectedstockissues'));
-        this.branchFormData.setValue(billHeader);
         this.gettingtobranches();
       } else {
-        //this.disableForm();
-        const user = JSON.parse(localStorage.getItem('user'));
-        if ((user.branchCode != null)) {
-          this.branchFormData.patchValue
-            ({
-              fromBranchCode: +user.branchCode,
-              userId: user.seqId,
-              userName: user.userName
-            });
-          this.genaratebranchcode();
-          ////this.setBranchCode();
-          ////this.genarateVoucherNo(user.branchCode);
-          this.formGroup();
-          ////this.gettingtobranches();
-          // this.settoBranchCode();
-        }
-        this.addTableRow();
+        this.resetData();
       }
     });
+  }
+
+  resetData() {
+    //this.disableForm();
+    const user = JSON.parse(localStorage.getItem('user'));
+    if ((user.branchCode != null)) {
+      this.branchFormData.patchValue
+        ({
+          fromBranchCode: +user.branchCode,
+          userId: user.seqId,
+          userName: user.userName
+        });
+      this.genaratebranchcode();
+      ////this.setBranchCode();
+      ////this.genarateVoucherNo(user.branchCode);
+      this.formGroup();
+      ////this.gettingtobranches();
+      // this.settoBranchCode();
+    }
+    this.addTableRow();
   }
 
   setBranchCode() {
@@ -189,20 +191,22 @@ export class CreateStockissuesComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    this.commonService.setFocus('productCode');
+    this.commonService.setFocus('productCode0');
     this.getCashPaymentBranchesList();
   }
 
   getStockissuesDeatilList(id) {
-    ;
     const getInvoiceDeatilListUrl = [this.apiConfigService.getStockissuesDeatilList, id].join('/');
     this.apiService.apiGetRequest(getInvoiceDeatilListUrl).subscribe(
       response => {
         const res = response;
+            this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.StockissuesDeatilList?.length) {
             this.dataSource = new MatTableDataSource(res.response['StockissuesDeatilList']);
-            this.spinner.hide();
+          }
+          if (res?.response.StockissuesDeatilData) {
+            this.branchFormData.patchValue(res?.response.StockissuesDeatilData);
           }
         }
       });
@@ -230,8 +234,6 @@ export class CreateStockissuesComponent implements OnInit {
 
   //issueno code;
   genarateVoucherNo(branch?) {
-    ;
-
     let genarateVoucherNoUrl;
     if (branch != null) {
       genarateVoucherNoUrl = [this.apiConfigService.getStockissuesnosList, branch].join('/');
@@ -246,10 +248,9 @@ export class CreateStockissuesComponent implements OnInit {
           if (res.response != null) {
             if ((res.response['StackissueNo'] != null)) {
               this.issueno = res.response['StackissueNo']
-              this.branchFormData.patchValue
-                ({
-                  issueNo: res.response['StackissueNo']
-                });
+              this.branchFormData.patchValue({
+                issueNo: res.response['StackissueNo']
+              });
               this.spinner.hide();
             }
           }
@@ -261,7 +262,6 @@ export class CreateStockissuesComponent implements OnInit {
 
   //tobranch Name;
   gettingtobranches() {
-    ;
     let gettingtobranchesListUrl;
     if (this.branchFormData.get('fromBranchCode').value == null) {
       gettingtobranchesListUrl = [this.apiConfigService.GetToBranchesList].join('/');
@@ -275,12 +275,10 @@ export class CreateStockissuesComponent implements OnInit {
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.branch?.length) {
-              console.log(res.response['branch']);
               this.toBranchCode = res.response['branch']
-              this.branchFormData.patchValue
-                ({
-                  toBranchCode: res.response['branch']
-                });
+              this.branchFormData.patchValue({
+                toBranchCode: res.response['branch'][0].id
+              });
               //this.GettoBranchesListArray = res.response['branch'];
               this.spinner.hide();
             }
@@ -296,7 +294,6 @@ export class CreateStockissuesComponent implements OnInit {
   }
 
   addTableRow() {
-    ;
     const tableObj =
     {
       productCode: '', productName: '', hsnNo: '', unit: '', qty: '', rate: '', grossAmount: '', availStock: '', batchNo: '', delete: '', text: 'obj'
@@ -321,7 +318,7 @@ export class CreateStockissuesComponent implements OnInit {
       employeeId: [null],
       productCode: [null, [Validators.required]],
       productName: [null, [Validators.required]],
-      hsnNo: '0',
+      hsnNo: [0],
       unit: [null],
       qty: [null],
       rate: [null],
@@ -510,7 +507,6 @@ export class CreateStockissuesComponent implements OnInit {
 
   //Calaculating code
   calculateAmount(row, index) {
-    ;
     let amount = 0;
     for (let a = 0; a < this.dataSource.data.length; a++) {
       if (this.dataSource.data[a].qty) {
@@ -527,7 +523,7 @@ export class CreateStockissuesComponent implements OnInit {
 
   //Save Code
   save() {
-    if (this.routeUrl != '') {
+    if (this.routeUrl != '' || this.branchFormData.invalid) {
       return;
     }
     let tableData = [];
@@ -551,10 +547,7 @@ export class CreateStockissuesComponent implements OnInit {
       this.alertService.openSnackBar(`This Product(${availStock[0].productCode}) ${content}`, Static.Close, SnackBar.error);
       return;
     }
-    if (!this.tableFormObj) {
-      this.dataSource.data.pop();
-    }
-    if (this.dataSource.data.length == 0) {
+    if (tableData.length == 0) {
       this.alertService.openSnackBar(`Product is not added`, Static.Close, SnackBar.error);
       return;
     }
@@ -563,20 +556,21 @@ export class CreateStockissuesComponent implements OnInit {
   }
 
   registerStackissues() {
+    var index = this.dataSource.data.indexOf(1);
+    this.dataSource.data.splice(index, 1);
+    const obj = this.branchFormData.getRawValue();
     const registerInvoiceUrl = [this.apiConfigService.registerStockissues].join('/');
-    const requestObj = { StockissueHdr: this.branchFormData.value, StockissueDtl: this.dataSource.data };
+    const requestObj = { StockissueHdr: obj, StockissueDtl: this.dataSource.data };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res?.status === StatusCodes.pass) {
           if (res?.response != null) {
             this.alertService.openSnackBar('Stock Issues Created Successfully..', Static.Close, SnackBar.success);
             //this.branchFormData.reset();
           }
           this.reset();
-
-          this.spinner.hide();
-
         }
       });
   }
@@ -584,11 +578,8 @@ export class CreateStockissuesComponent implements OnInit {
   reset() {
     this.branchFormData.reset();
     this.dataSource = new MatTableDataSource();
-    this.branchFormData.patchValue({
-      issueDate: [(new Date()).toISOString()],
-    });
-    this.loadData();
-    this.commonService.setFocus('productCode');
+    this.resetData();
+    this.commonService.setFocus('productCode0');
   }
 
   back() {
