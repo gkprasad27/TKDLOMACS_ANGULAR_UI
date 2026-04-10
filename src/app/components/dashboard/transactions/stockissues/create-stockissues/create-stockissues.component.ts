@@ -99,6 +99,11 @@ export class CreateStockissuesComponent implements OnInit {
         shiftId: user.shiftId
       })
     }
+
+
+    if (user?.role != '1') {
+      this.branchFormData.controls['fromBranchCode'].disable();
+    }
   }
 
   loadData() {

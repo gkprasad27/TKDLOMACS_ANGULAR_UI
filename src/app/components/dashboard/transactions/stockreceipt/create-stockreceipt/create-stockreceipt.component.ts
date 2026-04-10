@@ -95,6 +95,10 @@ export class CreateStockreceiptsComponent implements OnInit {
         shiftId: user.shiftId
       })
     }
+
+    if (user?.role != '1') {
+      this.branchFormData.controls['fromBranchCode'].disable();
+    }
   }
   ngOnInit() {
     this.loadData();

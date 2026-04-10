@@ -40,7 +40,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
-@Component({ 
+@Component({
   selector: 'app-report-table',
   templateUrl: './report-table.component.html',
   styleUrls: ['./report-table.component.scss'],
@@ -88,7 +88,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     { id: '7', reportName: 'Shift wise Sale Value' },
     { id: '8', reportName: 'Shift wise ICICI SWIPE RECEIVABLES A/c' },
     { id: '9', reportName: 'Shift wise PINE LAB' },
-    { id: '10',reportName: 'Shift wise PAYTM' }
+    { id: '10', reportName: 'Shift wise PAYTM' }
   ];
   AccountLedgers = [];
   ReportBranches = [];
@@ -147,7 +147,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       selectedReport: [''],
       selectedAccountLedger: [''],
       ledgerName: [''],
-      selectedBranch: [],
+      selectedBranch: [+this.user.branchCode],
       selectedProduct: [],
       selectedCriteria: [''],
       vehicleRegNo: [null],
@@ -166,8 +166,14 @@ export class ReportTableComponent implements OnInit, OnChanges {
     activatedRoute.params.subscribe(params => {
       this.routeParam = params.id;
       this.tableHeaders = [];
-      this.dateForm.reset();
+      // this.dateForm.reset();
     });
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user?.role != '1') {
+      this.dateForm.controls['selectedBranch'].disable();
+    }
 
   }
   checkDates(group: FormGroup) {
@@ -404,28 +410,28 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.params = new HttpParams();
     this.params = this.params.append('UserID', 'admin');//this.user.userName);
     this.params = this.params.append('userName', 'admin');//this.user.userName);
-    this.params = this.params.append('companyId', 0);//this.user.userName);
-    this.params = this.params.append('fromDate', this.dateForm.value.formDate);
-    this.params = this.params.append('toDate', this.dateForm.value.toDate);
-    this.params = this.params.append('reportID', this.dateForm.value.selectedReport);
-    // this.params = this.params.append('shiftId', this.dateForm.value.selectedReport);
-    this.params = this.params.append('ledgerCode', this.dateForm.value.selectedAccountLedger);
-    this.params = this.params.append('ledgerName', this.dateForm.value.ledgerName);
-    this.params = this.params.append('branchCode', +this.dateForm.value.selectedBranch);
-    this.params = this.params.append('branchID', +this.dateForm.value.selectedBranch);
-    this.params = this.params.append('productCode', this.dateForm.value.selectedProduct);
-    this.params = this.params.append('selectedCriteria', this.dateForm.value.selectedCriteria);
-    this.params = this.params.append('search', this.dateForm.value.search);
-    this.params = this.params.append('vehicleRegNo', this.dateForm.value.vehicleRegNo);
-    this.params = this.params.append('reportType', this.dateForm.value.selectedReportType);
-    this.params = this.params.append('TrialreportType', this.dateForm.value.selectedTrialReportType);
-    this.params = this.params.append('ClosingreportType', this.dateForm.value.selectedClosingReportType);
-    this.params = this.params.append('fromLedgerCode', this.dateForm.value.fromAccountLedger);
-    this.params = this.params.append('toLedgerCode', this.dateForm.value.toAccountLedger);
-    this.params = this.params.append('RO', this.dateForm.value.RO);
-    this.params = this.params.append('fourColumnreportType', this.dateForm.value.selectedFourColumnReportType);
-    this.params = this.params.append('GroupName', this.dateForm.value.selectedGroupName);
-    this.params = this.params.append('SupplierGroup', this.dateForm.value.selectedSupplierGroup);
+    this.params = this.params.append('companyId', 0);//this.user.userName);this.params = this.params.append('fromDate', this.dateForm.get('formDate')?.value);
+    this.params = this.params.append('fromDate', this.dateForm.get('formDate').value);
+    this.params = this.params.append('toDate', this.dateForm.get('toDate')?.value);
+    this.params = this.params.append('reportID', this.dateForm.get('selectedReport')?.value);
+    // this.params = this.params.append('shiftId', this.dateForm.get('selectedReport')?.value);
+    this.params = this.params.append('ledgerCode', this.dateForm.get('selectedAccountLedger')?.value);
+    this.params = this.params.append('ledgerName', this.dateForm.get('ledgerName')?.value);
+    this.params = this.params.append('branchCode', +this.dateForm.get('selectedBranch')?.value);
+    this.params = this.params.append('branchID', +this.dateForm.get('selectedBranch')?.value);
+    this.params = this.params.append('productCode', this.dateForm.get('selectedProduct')?.value);
+    this.params = this.params.append('selectedCriteria', this.dateForm.get('selectedCriteria')?.value);
+    this.params = this.params.append('search', this.dateForm.get('search')?.value);
+    this.params = this.params.append('vehicleRegNo', this.dateForm.get('vehicleRegNo')?.value);
+    this.params = this.params.append('reportType', this.dateForm.get('selectedReportType')?.value);
+    this.params = this.params.append('TrialreportType', this.dateForm.get('selectedTrialReportType')?.value);
+    this.params = this.params.append('ClosingreportType', this.dateForm.get('selectedClosingReportType')?.value);
+    this.params = this.params.append('fromLedgerCode', this.dateForm.get('fromAccountLedger')?.value);
+    this.params = this.params.append('toLedgerCode', this.dateForm.get('toAccountLedger')?.value);
+    this.params = this.params.append('RO', this.dateForm.get('RO')?.value);
+    this.params = this.params.append('fourColumnreportType', this.dateForm.get('selectedFourColumnReportType')?.value);
+    this.params = this.params.append('GroupName', this.dateForm.get('selectedGroupName')?.value);
+    this.params = this.params.append('SupplierGroup', this.dateForm.get('selectedSupplierGroup')?.value);
     if (this.dateForm.value.selectedCriteria == "shiftId") {
       this.params = this.params.append('shiftId', this.dateForm.value.search);
     } else {

@@ -120,7 +120,7 @@ export class ShareTransferComponent implements OnInit, OnChanges {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
-              this.shareTableData = res.response['ShareList'];
+              this.shareTableData = res.response['shareList'];
             }
           }
           this.spinner.hide();
@@ -136,7 +136,7 @@ export class ShareTransferComponent implements OnInit, OnChanges {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               this.modelFormData.patchValue({
-              shareTransferCode: res.response['ShareTransferNoList']
+              shareTransferCode: res.response['shareTransferNoList']
               })
             }
           }

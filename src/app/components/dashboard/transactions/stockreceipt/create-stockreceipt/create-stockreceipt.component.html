@@ -20,7 +20,7 @@
 
           <mat-form-field class="col-3">
             <mat-label>{{ 'stockreceipt.toBranchName' | translate }}</mat-label>
-            <input matInput formControlName="toBranchCode" appFocusOnEnter tabIndex="1">
+            <input matInput readonly formControlName="toBranchCode" appFocusOnEnter tabIndex="1">
           </mat-form-field>
 
           <mat-form-field class="col-3">
@@ -74,13 +74,20 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="productName">
+          <!-- <ng-container matColumnDef="productName">
             <th mat-header-cell *matHeaderCellDef> {{ 'stockreceipt.productName' | translate }} </th>
             <td mat-cell *matCellDef="let element;">
               <input class="typeAhead" [(ngModel)]="element.productName" type="search"
                 [disabled]="element.text != 'obj'" (typeaheadOnSelect)="setProductName($event)"
                 (input)="getProductByProductName($event.target.value)" [typeahead]="getProductByProductNameArray"
                 typeaheadOptionField='text'>
+            </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="productName">
+            <th mat-header-cell *matHeaderCellDef>{{ 'stockreceipt.productName' | translate }}</th>
+            <td mat-cell *matCellDef="let element">
+              <input matInput disabled [value]="element.productName" [(ngModel)]="element.productName" />
             </td>
           </ng-container>
 

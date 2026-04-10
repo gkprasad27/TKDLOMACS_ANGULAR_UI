@@ -74,24 +74,26 @@ export class CreatePurchaseRequisitionapprovalComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
   ) {
-    this.branchFormData = this.formBuilder.group
-      ({
-        //receiptNo: [null],
-        company: [null],
-        branch: [null],
-        requisitionNo: [null],
-        requisitionDate: [(new Date()).toISOString()],
-        id: '0',
-      });
+    this.branchFormData = this.formBuilder.group({
+      //receiptNo: [null],
+      company: [null],
+      branch: [null],
+      requisitionNo: [null],
+      requisitionDate: [(new Date()).toISOString()],
+      id: '0',
+    });
     const user = JSON.parse(localStorage.getItem('user'));
     if (user != null) {
-      ;
       this.branchFormData.patchValue
         ({
           userId: user.userId,
           userName: user.userName,
           shiftId: user.shiftId
         })
+    }
+
+    if (user?.role != '1') {
+      this.branchFormData.controls['branch'].disable();
     }
   }
   ngOnInit() {

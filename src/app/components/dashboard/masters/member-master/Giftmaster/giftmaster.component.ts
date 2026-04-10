@@ -33,7 +33,7 @@ export class GiftMasterComponent implements OnInit, OnChanges {
   isGiftmaster = true;
   formData: any;
   isFormVisible: boolean = true;
-  gifttableDataList: any = [];
+  gifttableDataList: any;
   statusList: giftIsActive[] = [{ value: "true", viewValue: "Active" }, { value: "false", viewValue: "InActive" }];
   yearArr: number[] = [new Date().getFullYear(), new Date().getFullYear() - 1, new Date().getFullYear() - 2];
 
@@ -93,7 +93,7 @@ export class GiftMasterComponent implements OnInit, OnChanges {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               //console.log(res);
-              this.productList = res.response['GiftProduct'];
+              this.productList = res.response['giftProduct'];
             }
           }
           this.spinner.hide();
@@ -102,18 +102,17 @@ export class GiftMasterComponent implements OnInit, OnChanges {
   }
 
   getGiftList(memberCode: any) {
+    this.gifttableDataList = null;
     this.apiService.apiGetRequest(this.apiConfigService.getGiftList + '/' + this.membercode)
       .subscribe(
         response => {
-
-          const res = response.body;
+          const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res?.response != null) {
-              this.gifttableDataList = res.response["Gifts"];
+              this.gifttableDataList = res.response["gifts"];
             }
           }
-        }
-        , error => {
+        }, error => {
           this.spinner.hide();
         }
       );

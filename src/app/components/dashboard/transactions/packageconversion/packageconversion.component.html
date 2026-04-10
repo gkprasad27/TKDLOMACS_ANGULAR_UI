@@ -6,46 +6,44 @@
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
     <form [formGroup]="modelFormData" autocomplete="off">
 
-      <div class="d--flex">
-        <mat-form-field>
+      <div class="row">
+
+        <mat-form-field class="col-3">
           <mat-label>{{'packageconversion.inputproductCode' | translate }}</mat-label>
-          <mat-select formControlName="inputproductCode"   (selectionChange)="getproductCodeList()" appFocusOnEnter tabIndex="4">
-            @for (ptlist of inputcodeList; track ptlist) {
-              <mat-option [value]="ptlist.id">
-                {{ptlist.id}}
-              </mat-option>
-            }
-          </mat-select>
+          <input type="text" formControlName="inputproductCode" matInput [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getproductCodeList($event)">
+            <mat-option *ngFor="let ptlist of inputcodeList" [value]="ptlist">
+              {{ptlist.id}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label>{{'packageconversion.inputproductName' | translate }}</mat-label>
           <input matInput formControlName="inputproductName" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="col-3">
           <mat-label>{{'packageconversion.outputproductCode' | translate }}</mat-label>
-          <mat-select formControlName="outputproductCode" (selectionChange)="getoutproductCodeList()" appFocusOnEnter tabIndex="8">
-            @for (ptlist of inputcodeList; track ptlist) {
-              <mat-option [value]="ptlist.id">
-                {{ptlist.id}}
-              </mat-option>
-            }
-          </mat-select>
+          <input type="text" formControlName="outputproductCode" matInput [matAutocomplete]="auto1">
+          <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="getoutproductCodeList($event)">
+            <mat-option *ngFor="let ptlist of inputcodeList" [value]="ptlist">
+              {{ptlist.id}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
 
-
-        <mat-form-field class="form-element">
-            <mat-label>{{'packageconversion.outputproductName' | translate }}</mat-label>
+        <mat-form-field class="col-3">
+          <mat-label>{{'packageconversion.outputproductName' | translate }}</mat-label>
           <input matInput formControlName="outputproductName" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label>{{'packageconversion.inputQty' | translate }}</mat-label>
           <input matInput formControlName="inputQty" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-3">
           <mat-label>{{'packageconversion.outputQty' | translate }}</mat-label>
           <input matInput formControlName="outputQty" appFocusOnEnter tabIndex="2">
         </mat-form-field>
@@ -53,7 +51,8 @@
       </div>
       <mat-divider></mat-divider>
       <div class="form-element p-2 d-flex justify-content-end">
-        <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>
+        <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">{{ 'COMMON.CANCEL' |
+          translate }}</button>
         <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()">Save</button>
       </div>
 

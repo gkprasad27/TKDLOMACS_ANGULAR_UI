@@ -101,7 +101,7 @@ export class VehicleComponent implements OnInit, OnChanges {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
-              this.vehicleTypes = res.response['VehicleTypes'];
+              this.vehicleTypes = res.response['vehicleTypes'];
             }
           }
         }
@@ -117,7 +117,7 @@ export class VehicleComponent implements OnInit, OnChanges {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
-              this.vehicleTableData = res.response['VechicleList'];
+              this.vehicleTableData = res.response['vechicleList'];
             }
           }
           this.spinner.hide();

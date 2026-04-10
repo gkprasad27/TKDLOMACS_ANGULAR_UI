@@ -142,9 +142,11 @@ export class StockTransferComponent implements OnInit {
         fromBranchCode: +user.branchCode,
         stockTransferDate: (new Date()).toISOString(),
         userId: user.seqId,
-        userName: user.userName
+        userName: user.userName,
+        stockTransferMasterId: 0
       });
     }
+    this.setBranchCode('fromBranchCode', 'fromBranchName');
   }
 
   setBranchCode(code, text) {
@@ -163,6 +165,9 @@ export class StockTransferComponent implements OnInit {
         stockTransferNo: null
       });
     } else {
+      if (!this.getBranchesListArray.length) {
+        return;
+      }
       const bname = this.getBranchesListArray.filter(branchCode => {
         if (branchCode.id == this.formData.get(code).value) {
           return branchCode;

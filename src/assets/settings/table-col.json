@@ -838,8 +838,8 @@
     "vehicleRegNo": "vehicleRegNo",
     "vehicleModel": "vehicleModel",
     "isValid": "isValid",
-    "fromDate": "fromDate",
-    "toDate": "toDate",
+    "fromDate": "Date",
+    "toDate": "Date",
     "vehicleTypeId": "vehicleTypeId",
     "vehicleTypeName": "vehicleTypeName",
     "vehicleType": "vehicleType"

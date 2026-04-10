@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { AlertService } from '../../../../services/alert.service';
 
-import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { UntypedFormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CommonService } from '../../../../services/common.service';
@@ -16,6 +16,7 @@ import { ApiConfigService } from '../../../../services/api-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 interface Session {
@@ -23,12 +24,12 @@ interface Session {
   viewValue: string;
 }
 
-@Component({ 
+@Component({
   selector: 'app-packageconversion',
   templateUrl: './packageconversion.component.html',
   styleUrls: ['./packageconversion.component.scss'],
   standalone: true,
-  imports: [SharedImportModule, TranslateModule]
+  imports: [SharedImportModule, TranslateModule, MatAutocompleteModule]
 })
 
 export class PackageconversionComponent implements OnInit {
@@ -46,10 +47,14 @@ export class PackageconversionComponent implements OnInit {
       { value: 'FirstHalf', viewValue: 'FirstHalf' },
       { value: 'SecondHalf', viewValue: 'SecondHalf' }
     ];
-    inputcodeList: any;
-    outcodeList: any;
-    getCashPaymentBranchesListArray: any;
-  
+  inputcodeList: any;
+  outcodeList: any;
+  getCashPaymentBranchesListArray: any;
+
+  displayProduct(product: any): string {
+    return product ? product : '';
+  }
+
   constructor(
     private alertService: AlertService,
     private formBuilder: UntypedFormBuilder,
@@ -85,7 +90,7 @@ export class PackageconversionComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.GetInputcodeproductList();
+    this.GetInputcodeproductList();
     //this.GetouttcodeproductList();
   }
   GetInputcodeproductList() {
@@ -105,18 +110,24 @@ export class PackageconversionComponent implements OnInit {
           this.spinner.hide();
         });
   }
-   //GetInputcodeproductList() {
-   //  const getCostCentersListUrl = [this.apiConfigService.getInputcodeproductList].join('/');
-   //  this.commonService.apiCall(getCostCentersListUrl, (data) => {
-   //    this.inputcodeList = data['InputcodeList'];
-   //    this.outcodeList = data['InputcodeList'];
-   //    console.log(data);
-   //  });
-   //}
- 
-  
-  getproductCodeList() {
-    this.spinner.show();
+  //GetInputcodeproductList() {
+  //  const getCostCentersListUrl = [this.apiConfigService.getInputcodeproductList].join('/');
+  //  this.commonService.apiCall(getCostCentersListUrl, (data) => {
+  //    this.inputcodeList = data['InputcodeList'];
+  //    this.outcodeList = data['InputcodeList'];
+  //    console.log(data);
+  //  });
+  //}
+
+
+  getproductCodeList(event) {
+    const selectedObj = event.option.value;
+
+  this.modelFormData.patchValue({
+    inputproductCode: selectedObj.id,
+    inputproductName: selectedObj.text
+  });
+    return;
     const getbranchcodeList = [this.apiConfigService.GetproductNames, this.modelFormData.get('inputproductCode').value].join('/');
     this.apiService.apiGetRequest(getbranchcodeList)
       .subscribe(
@@ -136,7 +147,15 @@ export class PackageconversionComponent implements OnInit {
 
         });
   }
-  getoutproductCodeList() {
+  getoutproductCodeList(event) {
+
+    const selectedObj = event.option.value;
+
+  this.modelFormData.patchValue({
+    outputproductCode: selectedObj.id,
+    outputproductName: selectedObj.text
+  });
+    return;
     this.spinner.show();
     const getbranchcodeList = [this.apiConfigService.GetproductNames, this.modelFormData.get('outputproductCode').value].join('/');
     this.apiService.apiGetRequest(getbranchcodeList)

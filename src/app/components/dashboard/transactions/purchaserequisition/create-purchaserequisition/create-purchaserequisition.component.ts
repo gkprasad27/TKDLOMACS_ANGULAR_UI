@@ -75,8 +75,7 @@ export class CreatePurchaseRequisitionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
   ) {
-    this.branchFormData = this.formBuilder.group
-      ({
+    this.branchFormData = this.formBuilder.group({
         //receiptNo: [null],
         company: [null],
         branch: [null],
@@ -86,12 +85,15 @@ export class CreatePurchaseRequisitionComponent implements OnInit {
       });
     const user = JSON.parse(localStorage.getItem('user'));
     if (user != null) {
-      this.branchFormData.patchValue
-        ({
-          userId: user.userId,
-          userName: user.userName,
-          shiftId: user.shiftId
-        })
+      this.branchFormData.patchValue({
+        userId: user.userId,
+        userName: user.userName,
+        shiftId: user.shiftId
+      })
+    }
+    
+    if (user?.role != '1') {
+      this.branchFormData.controls['branch'].disable();
     }
   }
   ngOnInit() {

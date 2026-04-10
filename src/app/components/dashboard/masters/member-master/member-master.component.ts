@@ -168,8 +168,7 @@ export class MemberMasterComponent implements OnInit {
           const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
-              // console.log(res);
-              this.tileNameList = res.response['TileNameList'];
+              this.tileNameList = res.response['tileNameList'];
             }
           }
         }
@@ -183,8 +182,7 @@ export class MemberMasterComponent implements OnInit {
           const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
-              // console.log(res);
-              this.stateList = res.response['StateList'];
+              this.stateList = res.response['stateList'];
             }
           }
         }
