@@ -40,7 +40,7 @@
     {{ ( routeParam + '.title') | translate }}
   </mat-card-title> -->
   <div class="background-header-boarder">
-    @if (routeParam != 'membermaster' && !isVehicle && !isSharetransfer && !isAdditionalSharetransfer) {
+    @if (routeParam != 'membermaster' && !isVehicle && !isGiftmaster && !isSharetransfer && !isAdditionalSharetransfer) {
     <div class="d-flex justify-content-between align-items-center border">
       <div class="">
         <button class="ml-2" mat-raised-button (click)="openDialog('Add')" [disabled]="user.canAdd">

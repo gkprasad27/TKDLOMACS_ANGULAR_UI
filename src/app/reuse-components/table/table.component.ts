@@ -180,15 +180,15 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     }
 
     if (this.isGiftmaster) {
-      this.routeParam = 'GiftMaster';
+      this.routeParam = 'giftMaster';
     }
 
     if (this.isSharetransfer) {
-      this.routeParam = 'ShareTransfer';
+      this.routeParam = 'shareTransfer';
     }
 
     if (this.isAdditionalSharetransfer) {
-      this.routeParam = 'AdditionalShareTransfer';
+      this.routeParam = 'additionalShareTransfer';
     }
 
     if (this.tableData != null) {

@@ -231,7 +231,7 @@ export class MemberMasterComponent implements OnInit {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
-              this.vehicleTableData = res.response['VechicleList'];
+              this.vehicleTableData = res.response['vehicleList'];
             }
           }
           this.spinner.hide();

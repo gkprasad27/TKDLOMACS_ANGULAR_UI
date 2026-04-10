@@ -829,5 +829,53 @@
     "shiftId": "Shift Id",
     "testing": "Testing",
     "density": "Density"
+  },
+  "vehicle": {
+    "title": "Vehicle",
+    "vehicleId": "vehicleId",   
+    "memberCode": "memberCode",
+    "memberShares": "memberShares",
+    "vehicleRegNo": "vehicleRegNo",
+    "vehicleModel": "vehicleModel",
+    "isValid": "isValid",
+    "fromDate": "fromDate",
+    "toDate": "toDate",
+    "vehicleTypeId": "vehicleTypeId",
+    "vehicleTypeName": "vehicleTypeName",
+    "vehicleType": "vehicleType"
+  },
+  "giftMaster":{
+    "title":"Gift",
+    "memberCode":"Member Code",
+    "giftId":"Gift Id",
+    "status":"Status",
+    "issuseDate":"Issue Date",
+    "description":"Description",
+    "year":"Year",
+    "giftName":"Gift Name"
+  },
+  "shareTransfer": {
+    "title": "Share Transfer",
+    "shareTransferCode":"Share Transfer Code",
+    "transferDate":"Transfer Date",
+    "fromMemberCode":"From Member Code",
+    "toMemberCode" : "To Member Code",
+    "toMemberName":"To Member Name",
+    "fromMemberSharesBefore":"From Member Shares Before T/F",
+    "fromMemberSharesAfter":"From Member Shares After T/F",
+    "toMemberSharesBefore":"To Member Shares Before T/F",
+    "toMemberSharesAfter":"To Member Shares After T/F"
+  },
+  "additionalShareTransfer": {
+    "title": "Additional Shares",
+    "shareTransferCode":"Share Transfer Code",
+    "transferDate":"Transfer Date",
+    "fromMemberCode":"From Member Code",
+    "toMemberCode" : "To Member Code",
+    "toMemberName":"To Member Name",
+    "fromMemberSharesBefore":"From Member Shares Before T/F",
+    "fromMemberSharesAfter":"From Member Shares After T/F",
+    "toMemberSharesBefore":"To Member Shares Before T/F",
+    "toMemberSharesAfter":"To Member Shares After T/F"
   }
 }

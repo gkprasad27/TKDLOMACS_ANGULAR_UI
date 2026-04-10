@@ -1,10 +1,6 @@
 @if (isMemberForm) {
 <mat-card>
   <mat-card-content class="pt-1 p-2 m-0 overflow-auto ">
-    <button type="button" class="button-color-bule text-white ml-2 float-right" mat-raised-button
-      (click)="formToggle('back')">
-      Back
-    </button>
     <mat-tab-group>
       <mat-tab label="{{ 'membermaster.title' | translate }}">
         <form [formGroup]="modelFormData" autocomplete="off">
@@ -148,8 +144,7 @@
             </mat-form-field>
             <mat-form-field class="col-2">
               <mat-label [translate]="'membermaster.issuedShares'"></mat-label>
-              <input matInput formControlName="issuedShares"
-                appFocusOnEnter>
+              <input matInput formControlName="issuedShares" appFocusOnEnter>
             </mat-form-field>
             <mat-form-field class="col-2">
               <mat-label [translate]="'membermaster.receivedShares'"></mat-label>
@@ -177,13 +172,17 @@
             </mat-form-field>
           </div>
           <mat-divider></mat-divider>
-          <div class="col-2 p-2 d-flex justify-content-end">
+          <div class="col-12 p-2 d-flex justify-content-end">
             <button mat-raised-button class="button-color-red text-white mr-1" type="button" (click)="formToggle()">
               {{ 'COMMON.CANCEL' | translate }}
             </button>
             <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" type="button"
               (click)="save()" appFocusOnEnter tabIndex="5">
               {{ 'COMMON.SAVE' | translate }}
+            </button>
+            <button type="button" class="button-color-bule text-white ml-2 " mat-raised-button
+              (click)="formToggle('back')">
+              Back
             </button>
           </div>
         </form>
@@ -194,17 +193,17 @@
       </mat-tab>
       }
       @if (isFormEdit) {
-      <mat-tab label="{{ 'GiftMaster.title' | translate }}">
+      <mat-tab label="{{ 'giftMaster.title' | translate }}">
         <gift-master [membercode]="formData.memberCode"></gift-master>
       </mat-tab>
       }
       @if (isFormEdit) {
-      <mat-tab label="{{ 'ShareTransfer.title' | translate }}">
+      <mat-tab label="{{ 'shareTransfer.title' | translate }}">
         <app-ShareTransfer [shareTableData]="shareTableData" [memberCode]="formData.memberCode"></app-ShareTransfer>
       </mat-tab>
       }
       @if (isFormEdit) {
-      <mat-tab label="{{ 'AdditionalShareTransfer.title' | translate }}">
+      <mat-tab label="{{ 'additionalShareTransfer.title' | translate }}">
         <app-AdditionalShareTransfer [shareTableData]="shareTableData"
           [memberCode]="formData.memberCode"></app-AdditionalShareTransfer>
       </mat-tab>

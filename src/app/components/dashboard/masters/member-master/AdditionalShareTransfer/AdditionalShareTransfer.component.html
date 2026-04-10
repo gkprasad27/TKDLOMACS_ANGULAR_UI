@@ -4,43 +4,43 @@
     <form [formGroup]="modelFormData" autocomplete="off">
       <div class="row">
         <mat-form-field class="col-2">
-            <mat-label>{{ 'ShareTransfer.shareTransferCode' | translate }}</mat-label>
+            <mat-label>{{ 'additionalShareTransfer.shareTransferCode' | translate }}</mat-label>
           <input matInput formControlName="shareTransferCode"
             appFocusOnEnter tabIndex="1">
         </mat-form-field>
         <mat-form-field class="col-2">
-          <mat-label>{{ 'ShareTransfer.transferDate' | translate }}</mat-label>
+          <mat-label>{{ 'additionalShareTransfer.transferDate' | translate }}</mat-label>
           <input matInput [matDatepicker]="picker1" formControlName="transferDate">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-2">
-          <mat-label>{{ 'ShareTransfer.fromMemberCode' | translate }}</mat-label>
+          <mat-label>{{ 'additionalShareTransfer.fromMemberCode' | translate }}</mat-label>
           <input matInput formControlName="fromMemberCode" appFocusOnEnter tabIndex="1">
       </mat-form-field>
       <mat-form-field class="col-2">
-          <mat-label>{{ 'ShareTransfer.toMemberCode' | translate }}</mat-label>
+          <mat-label>{{ 'additionalShareTransfer.toMemberCode' | translate }}</mat-label>
         <input matInput formControlName="toMemberCode" appFocusOnEnter tabIndex="2">
       </mat-form-field>
       <mat-form-field class="col-2">
-          <mat-label>{{ 'ShareTransfer.toMemberName' | translate }}</mat-label>
+          <mat-label>{{ 'additionalShareTransfer.toMemberName' | translate }}</mat-label>
         <input matInput formControlName="toMemberName" appFocusOnEnter tabIndex="3">
       </mat-form-field>
       <mat-form-field class="col-2">
-          <mat-label>{{ 'ShareTransfer.fromMemberSharesBefore' | translate }}</mat-label>
+          <mat-label>{{ 'additionalShareTransfer.fromMemberSharesBefore' | translate }}</mat-label>
         <input matInput formControlName="fromMemberSharesBefore"
           appFocusOnEnter tabIndex="4">
       </mat-form-field>
       <mat-form-field class="col-2">
-          <mat-label>{{ 'ShareTransfer.fromMemberSharesAfter' | translate }}</mat-label>
+          <mat-label>{{ 'additionalShareTransfer.fromMemberSharesAfter' | translate }}</mat-label>
         <input matInput formControlName="fromMemberSharesAfter" appFocusOnEnter tabIndex="5">
       </mat-form-field>
       <mat-form-field class="col-2">
-          <mat-label>{{ 'ShareTransfer.toMemberSharesBefore' | translate }}</mat-label>
+          <mat-label>{{ 'additionalShareTransfer.toMemberSharesBefore' | translate }}</mat-label>
         <input matInput formControlName="toMemberSharesBefore" appFocusOnEnter tabIndex="4">
       </mat-form-field>
       <mat-form-field class="col-2">
-          <mat-label>{{ 'ShareTransfer.toMemberSharesAfter' | translate }}</mat-label>
+          <mat-label>{{ 'additionalShareTransfer.toMemberSharesAfter' | translate }}</mat-label>
         <input matInput formControlName="toMemberSharesAfter" appFocusOnEnter tabIndex="5">
       </mat-form-field>
         <!-- <mat-form-field class="col-2">
@@ -61,7 +61,7 @@
     </form>
   </mat-card-content>
 
-  <div class="col-2 p-2 d-flex justify-content-end">
+  <div class="col-12 p-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mr-1" (click)="reset()">
 
       {{ 'COMMON.RESET' | translate }}

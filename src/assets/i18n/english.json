@@ -635,7 +635,7 @@
     "vehicleTypeName": "vehicleTypeName",
     "vehicleType": "vehicleType"
   },
-  "GiftMaster":{
+  "giftMaster":{
     "title":"Gift",
     "memberCode":"Member Code",
     "giftId":"Gift Id",
@@ -645,7 +645,7 @@
     "year":"Year",
     "giftName":"Gift Name"
   },
-  "ShareTransfer": {
+  "shareTransfer": {
     "title": "Share Transfer",
     "shareTransferCode":"Share Transfer Code",
     "transferDate":"Transfer Date",
@@ -657,7 +657,7 @@
     "toMemberSharesBefore":"To Member Shares Before T/F",
     "toMemberSharesAfter":"To Member Shares After T/F"
   },
-  "AdditionalShareTransfer": {
+  "additionalShareTransfer": {
     "title": "Additional Shares",
     "shareTransferCode":"Share Transfer Code",
     "transferDate":"Transfer Date",

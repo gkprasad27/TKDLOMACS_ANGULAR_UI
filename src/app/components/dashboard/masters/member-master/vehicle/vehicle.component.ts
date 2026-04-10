@@ -69,6 +69,7 @@ export class VehicleComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    debugger
     this.formData = this.vehicleTableData[0];
     if (this.formData != null) {
       this.seDefaults();
@@ -96,13 +97,13 @@ export class VehicleComponent implements OnInit, OnChanges {
       .subscribe(
         response => {
           const res = response;
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
               this.vehicleTypes = res.response['VehicleTypes'];
             }
           }
-          this.spinner.hide();
         }
       );
   }

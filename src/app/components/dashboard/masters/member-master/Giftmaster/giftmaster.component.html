@@ -4,7 +4,7 @@
     <form [formGroup]="modelFromData">
       <div class="row">
         <mat-form-field class="col-2">
-          <mat-label [translate]="'GiftMaster.giftId'"></mat-label>
+          <mat-label [translate]="'giftMaster.giftId'"></mat-label>
           <select matNativeControl placeholder="{{'select'}}" formControlName="giftId">
             @for (product of productList; track product) {
             <option [value]="product.id">
@@ -13,21 +13,21 @@
           </select>
         </mat-form-field>
         <mat-form-field class="col-2">
-          <mat-label [translate]="'GiftMaster.giftName'"></mat-label>
+          <mat-label [translate]="'giftMaster.giftName'"></mat-label>
           <input matInput formControlName="giftName" appFocusOnEnter tabindex="1">
         </mat-form-field>
         <mat-form-field class="col-2">
-          <mat-label [translate]="'GiftMaster.description'"></mat-label>
+          <mat-label [translate]="'giftMaster.description'"></mat-label>
           <input matInput formControlName="description" appFocusOnEnter tabindex="1">
         </mat-form-field>
         <mat-form-field class="col-2">
-          <mat-label [translate]="'GiftMaster.issuseDate'"></mat-label>
+          <mat-label [translate]="'giftMaster.issuseDate'"></mat-label>
           <input matInput [matDatepicker]="picker2" formControlName="issueDate">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-2">
-          <mat-label [translate]="'GiftMaster.year'"></mat-label>
+          <mat-label [translate]="'giftMaster.year'"></mat-label>
           <select matNativeControl placeholder="{{'select'}}" formControlName="year">
             @for (yr of yearArr; track yr) {
             <option [value]="yr">
