@@ -708,10 +708,10 @@ export class ReportTableComponent implements OnInit, OnChanges {
         body: rows,
         startY: (doc as any).lastAutoTable.finalY + 2,
         styles: { font: 'Helvetica', fontSize: 10 },
-        columnStyles: {
-          0: { cellWidth: 2 },
-          1: { cellWidth: 3 }
-        },
+        // columnStyles: {
+        //   0: { cellWidth: 2 },
+        //   1: { cellWidth: 3 }
+        // },
         theme: 'plain'
       });
 
