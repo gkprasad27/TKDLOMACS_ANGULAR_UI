@@ -765,9 +765,21 @@ export class ReportTableComponent implements OnInit, OnChanges {
         }
       }
 
+
+      let name = ''
+      if (this.routeParam === 'Shift') {
+        const obj = this.Reports.find((rr: any) => rr.id === this.dateForm.value.selectedReport);
+        name = obj.reportName;
+      } else if(this.routeParam === 'Four Column Cash Book') {
+        const obj = this.FourColumnReportType.find((rr: any) => rr.id === this.dateForm.value.selectedFourColumnReportType);
+        name = obj.reportName;
+      } else {
+        name = this.routeParam;
+      }
+
       autoTable(doc, {
         body: [
-          [{ content: this.routeParam + ' Report', colSpan: 3, rowSpan: 1, styles: { halign: 'center', fontStyle: 'bold' } }],
+          [{ content: name , colSpan: 3, rowSpan: 1, styles: { halign: 'center', fontStyle: 'bold' } }],
         ],
         theme: 'plain'
       });
@@ -857,7 +869,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
         theme: 'plain',
         startY: (doc as any).lastAutoTable.finalY + 2
       })
-      doc.save(this.routeParam + 'Report.pdf');
+      doc.save(name + '.pdf');
     }
   }
   openDialog(val, row?) {
