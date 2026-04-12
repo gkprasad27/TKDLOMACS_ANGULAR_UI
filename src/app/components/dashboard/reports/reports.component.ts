@@ -49,7 +49,7 @@ export class ReportsComponent implements OnInit {
       this.tableUrl = reportsService.getRouteUrls(params.id);
       this.route = params.id;
       if (this.tableUrl != null) {
-        this.getTableData();
+        // this.getTableData();
         if ((this.reportTableComponent != null)) {
           this.reportTableComponent.defaultValues();
         }

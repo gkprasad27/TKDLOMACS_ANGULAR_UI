@@ -250,7 +250,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
           const res = response;
           if (res?.status === 'PASS') {
             if ((res.response['reportBranchesList'] != null)) {
-              this.ReportBranches = res.response['reportBranchesList'];
+              this.ReportBranches = [ { branchCode: null, branchName: null }, ...res.response['reportBranchesList']];
             }
           }
         });
