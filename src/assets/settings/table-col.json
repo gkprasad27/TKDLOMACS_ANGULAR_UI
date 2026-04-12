@@ -877,5 +877,24 @@
     "fromMemberSharesAfter":"From Member Shares After T/F",
     "toMemberSharesBefore":"To Member Shares Before T/F",
     "toMemberSharesAfter":"To Member Shares After T/F"
+  },
+  "report": {
+    "selectedAccountLedger": "Account Ledger",
+    "formDate": "Choose date",
+    "fromAccountLedger": "From Account Code",
+    "toAccountLedger": "To Account Code",
+    "selectedBranch": "Branch",
+    "selectedReportType": "Report Type",
+    "selectedTrialReportType": "Report Type",
+    "selectedClosingReportType": "Report Type",
+    "vehicleRegNo": "Vehicle Reg.No",
+    "selectedProduct": "Product",
+    "selectedReport": "Shift Report Type",
+    "selectedCriteria": "Search Criteria",
+    "search": "Search",
+    "selectedFourColumnReportType": "Report Type",
+    "selectedGroupName": "Group Type",
+    "selectedSupplierGroup": "Supplier Group",
+    "SearchCriteria": "Search Criteria"
   }
 }

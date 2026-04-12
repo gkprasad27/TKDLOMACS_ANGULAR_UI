@@ -10,7 +10,7 @@
         ||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement Ltrs'||routeParam=='BranchWise StockStatement Qty'
         ||routeParam=='ProductMonthWise PurchaseLtrs') {
         <mat-form-field class="col-3">
-          <mat-label>Choose date</mat-label>
+          <mat-label> {{ 'report.formDate' | translate }} </mat-label>
           <mat-date-range-input [rangePicker]="picker">
             <input matInput matStartDate placeholder="Start date" formControlName="formDate">
             <input matInput matEndDate placeholder="End date" formControlName="toDate">
@@ -22,8 +22,8 @@
         @if(routeParam=='AccountLedger'||routeParam=='Intimate Sale'||routeParam=='Bank Reconciliation') {
         <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
           [class.filled]="dateForm.get('selectedAccountLedger')?.value">
-          <label> Account Ledger </label>
-          <input placeholder=" " formControlName="selectedAccountLedger" id="selectedAccountLedger"
+          <label> {{ 'report.selectedAccountLedger' | translate }}</label>
+          <input placeholder=" " required formControlName="selectedAccountLedger" id="selectedAccountLedger"
             (typeaheadOnSelect)="setLedgerName($event)" (input)="getBankPAccountLedgerList($event.target.value)"
             [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' shortcutkey="f2" autocomplete="off"
             [typeaheadOptionsLimit]="100000" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1"
@@ -37,8 +37,8 @@
         
         <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
           [class.filled]="dateForm.get('fromAccountLedger')?.value">
-          <label> From Account Code </label>
-          <input placeholder=" " formControlName="fromAccountLedger" id="fromAccountLedger"
+          <label> {{ 'report.fromAccountLedger' | translate }}  </label>
+          <input placeholder=" " required formControlName="fromAccountLedger" id="fromAccountLedger"
             (typeaheadOnSelect)="setLedgerName($event)" (input)="getBankPAccountLedgerList($event.target.value)"
             [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' shortcutkey="f2" autocomplete="off"
             [typeaheadOptionsLimit]="100000" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate2"
@@ -51,8 +51,8 @@
         @if(routeParam=='Closing Balance') {
         <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
           [class.filled]="dateForm.get('toAccountLedger')?.value">
-          <label> To Account Code </label>
-          <input placeholder=" " formControlName="toAccountLedger" id="toAccountLedger"
+          <label> {{ 'report.toAccountLedger' | translate }}  </label>
+          <input placeholder=" " required formControlName="toAccountLedger" id="toAccountLedger"
             (typeaheadOnSelect)="setLedgerName($event)" (input)="getBankPAccountLedgerList($event.target.value)"
             [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' shortcutkey="f2" autocomplete="off"
             [typeaheadOptionsLimit]="100000" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate3"
@@ -66,8 +66,8 @@
         ||routeParam=='Product Price List'||routeParam=='24Hrs Sale Value 6Am To 6Am'||routeParam=='AccountLedger'||routeParam=='24Hrs Meter Reading'||routeParam=='Four Column Cash Book'||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement Ltrs'||routeParam=='BranchWise StockStatement Qty'
         ||routeParam=='ProductMonthWise PurchaseLtrs') {
         <mat-form-field class="col-3">
-          <mat-label>Branch</mat-label>
-          <mat-select  formControlName="selectedBranch">
+          <mat-label> {{ 'report.selectedBranch' | translate }}  </mat-label>
+          <mat-select required formControlName="selectedBranch">
             <mat-option *ngFor="let branch of ReportBranches" [value]="branch.branchCode">
               {{branch.branchName}}
             </mat-option>
@@ -76,8 +76,8 @@
         }
         @if(routeParam=='Product Price List') {
         <mat-form-field class="col-3">
-          <mat-label>Report Type</mat-label>
-          <mat-select formControlName="selectedReportType">
+          <mat-label>{{ 'report.selectedReportType' | translate }}</mat-label>
+          <mat-select required formControlName="selectedReportType">
             <mat-option *ngFor="let reporttype of ReportsType" [value]="reporttype.id">
               {{reporttype.reportName}}
             </mat-option>
@@ -86,8 +86,8 @@
         }
         @if(routeParam=='Trial Balance') {
         <mat-form-field class="col-3">
-          <mat-label>Report Type</mat-label>
-          <mat-select formControlName="selectedTrialReportType">
+          <mat-label>{{ 'report.selectedTrialReportType' | translate }}</mat-label>
+          <mat-select required formControlName="selectedTrialReportType">
             <mat-option *ngFor="let reporttype of TrialBalanceReportType" [value]="reporttype.id">
               {{reporttype.reportName}}
             </mat-option>
@@ -96,8 +96,8 @@
         }
         @if(routeParam=='Closing Balance') {
         <mat-form-field class="col-3">
-          <mat-label>Report Type</mat-label>
-          <mat-select formControlName="selectedClosingReportType">
+          <mat-label>{{ 'report.selectedClosingReportType' | translate }}</mat-label>
+          <mat-select required formControlName="selectedClosingReportType">
             <mat-option *ngFor="let reporttype of ClosingBalanceReportType" [value]="reporttype.id">
               {{reporttype.reportName}}
             </mat-option>
@@ -107,8 +107,8 @@
         @if(routeParam=='Stock Ledger') {
         <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
           [class.filled]="dateForm.get('selectedProduct')?.value">
-          <label> Product </label>
-          <input placeholder=" " formControlName="selectedProduct" id="selectedProduct"
+          <label> {{ 'report.selectedProduct' | translate }} </label>
+          <input required placeholder=" " formControlName="selectedProduct" id="selectedProduct"
             (typeaheadOnSelect)="setProductName($event)" (input)="getProductsList($event.target.value)"
             [typeahead]="GetProductListArray" typeaheadOptionField='id' shortcutkey="f2" autocomplete="off"
             [typeaheadOptionsLimit]="100000" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate4"
@@ -120,22 +120,22 @@
         }
         @if(routeParam=='Vehical Enquiry') {
         <mat-form-field class="col-3">
-          <mat-label>Vehical Req.No</mat-label>
-          <input matInput formControlName="vehicleRegNo" appFocusOnEnter tabIndex="2">
+          <mat-label>{{ 'report.vehicleRegNo' | translate }}</mat-label>
+          <input matInput required formControlName="vehicleRegNo" appFocusOnEnter tabIndex="2">
         </mat-form-field>
         }
         @if(routeParam=='Shift') {
         <mat-form-field class="col-3">
-          <mat-label>Shift Report Type</mat-label>
-          <mat-select formControlName="selectedReport">
+          <mat-label>{{ 'report.selectedReport' | translate }}</mat-label>
+          <mat-select required formControlName="selectedReport">
             <mat-option *ngFor="let report of Reports" [value]="report.id">
               {{report.reportName}}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-3">
-          <mat-label>Search Criteria</mat-label>
-          <mat-select formControlName="selectedCriteria">
+          <mat-label>{{ 'report.SearchCriteria' | translate }}</mat-label>
+          <mat-select required formControlName="selectedCriteria">
             <mat-option *ngFor="let search of SearchCriteria" [value]="search.id">
               {{search.parameter}}
             </mat-option>
@@ -151,8 +151,8 @@
         }
         @if(routeParam=='Four Column Cash Book') {
         <mat-form-field class="col-3">
-          <mat-label>Report Type</mat-label>
-          <mat-select formControlName="selectedFourColumnReportType">
+          <mat-label>{{ 'report.selectedFourColumnReportType' | translate }}</mat-label>
+          <mat-select required formControlName="selectedFourColumnReportType">
             <mat-option *ngFor="let reporttype of FourColumnReportType" [value]="reporttype.id">
               {{reporttype.reportName}}
             </mat-option>
@@ -161,8 +161,8 @@
         }
         @if(routeParam=='Product Wise Monthly Purchase'||routeParam=='ProductMonthWise PurchaseLtrs'||routeParam=='BranchWise Monthly SalesByLiters') {
           <mat-form-field class="col-3">
-            <mat-label>Group Type</mat-label>
-            <mat-select formControlName="selectedGroupName">
+            <mat-label>{{ 'report.selectedGroupName' | translate }}</mat-label>
+            <mat-select required formControlName="selectedGroupName">
               <mat-option *ngFor="let groupType of ReportPGList" [value]="groupType.groupName">
                 {{groupType.groupName}}
               </mat-option>
@@ -178,8 +178,8 @@
       }
       @if(routeParam=='BranchWise Monthly SalesByLiters') {
           <mat-form-field class="col-3">
-            <mat-label>Supplier Group</mat-label>
-            <mat-select  formControlName="selectedSupplierGroup">
+            <mat-label>{{ 'report.selectedSupplierGroup' | translate }}</mat-label>
+            <mat-select required  formControlName="selectedSupplierGroup">
               <mat-option *ngFor="let suppliergroup of ReportSGList" [value]="suppliergroup.supplierGroupName">
                 {{suppliergroup.supplierGroupName}}
               </mat-option>

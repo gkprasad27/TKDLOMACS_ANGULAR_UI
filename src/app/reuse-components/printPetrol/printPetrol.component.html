@@ -145,35 +145,35 @@
         </tbody>
       </table>
     </div>
-    <div class="sub-container7" style="min-height: 20px;position: fixed;top: 29%;">
+    <div class="sub-container7" style="min-height: 20px;position: fixed;top: 32%;">
       <table>
         <tbody>
           <tr>
             <td class="form-style-control3"
-              style="padding-left: 150px;word-break: break-all;width: 18%;font-family: Verdana;font-size: 10px;white-space: nowrap;">
+              style="padding-left: 205px;word-break: break-all;font-family: Verdana;font-size: 10px;white-space: nowrap;">
               {{
             invoiceHdr.totalAmount| number: '1.2-2'}} </td>
-            <td class="form-style-control3"
+            <!-- <td class="form-style-control3"
               style="padding-left: 8px;word-break: break-all;width: 18%;font-family: Verdana;font-size: 10px;white-space: nowrap;">
               {{
-            invoiceHdr.tt| number: '1.2-2'}} </td>
+            invoiceHdr.tt| number: '1.2-2'}} 222 </td> -->
             <td class="form-style-control3"
-              style="padding-left: 8px;word-break: break-all;width: 18%;font-family: Verdana;font-size: 10px;white-space: nowrap;">
+              style="padding-left: 14px;word-break: break-all;font-family: Verdana;font-size: 10px;white-space: nowrap;">
               {{
             invoiceHdr.totalCgst| number: '1.2-2'}} </td>
             <td class="form-style-control3"
-              style="padding-left: 8px;word-break: break-all;width: 18%;font-family: Verdana;font-size: 10px;white-space: nowrap; ">
+              style="padding-left: 30px;word-break: break-all;font-family: Verdana;font-size: 10px;white-space: nowrap; ">
               {{
             invoiceHdr.totalSgst| number: '1.2-2'}} </td>
             <td class="form-style-control3"
-              style="padding-left: 8px;word-break: break-all;width: 18%;font-family: Verdana;font-size: 10px;white-space: nowrap; ">
+              style="padding-left: 28px;word-break: break-all;font-family: Verdana;font-size: 10px;white-space: nowrap; ">
               {{
             invoiceHdr.totalIgst| number: '1.2-2'}} </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="sub-container8" style="min-height: 20px;position:fixed; top:31%;">
+    <div class="sub-container8" style="min-height: 20px;position:fixed; top:34%;">
       <table>
         <tr>
           <td class="form-style-control4-id1"
@@ -181,13 +181,13 @@
             invoiceHdr.totaltaxAmount| number:
           '1.2-2'}} </td>
           <td class="form-style-control4-id2"
-            style="padding-left: 20px;font-family: Verdana;font-size: 10px;white-space: nowrap;"> <b>{{
+            style="padding-left: 30px;font-family: Verdana;font-size: 10px;white-space: nowrap;"> <b>{{
             invoiceHdr.grandTotal| number:
           '1.2-2'}}</b> </td>
         </tr>
       </table>
     </div>
-    <div class="sub-container9" style="min-height: 20px; position:fixed; top:33%;left:13%; ">
+    <div class="sub-container9" style="min-height: 20px; position:fixed; top:36%;left:13%; ">
       <table class="sub-container9-table" style="width:50%; font-size: 11px; font-family: Verdana; white-space:nowrap;">
         <tr>
           <td class="form-style-control5"> <b>{{ invoiceHdr.amountInWords| titlecase}} </b> </td>
@@ -195,14 +195,14 @@
       </table>
     </div>
     <div class="sub-container10"
-      style="font-family: Verdana; position:fixed; top:35.5%; left: 26%; min-height: 20px; font-size:10px;">
+      style="font-family: Verdana; position:fixed; top:38%; left: 23%; min-height: 20px; font-size:10px;">
     {{(BranchPhone.sapCode)}} </div>
     <!-- <div class="sub-container10"
     style="font-family: Verdana; position:fixed; top:35.5%; left: 55%; min-height: 20px; font-size:10px;">
     {{invoiceDetail[0].slipNo||invoiceDetail[1].slipNo||invoiceDetail[2].slipNo||invoiceDetail[3].slipNo||invoiceDetail[4].slipNo
   ||invoiceDetail[5].slipNo}} </div> -->
   <div class="sub-container10"
-    style="font-family: Verdana; position:fixed; top:35.5%; left: 79%; min-height: 20px; font-size:10px;">
+    style="font-family: Verdana; position:fixed; top:39%; left: 79%; min-height: 20px; font-size:10px;">
   {{userName}} </div>
 </div>
 </body>

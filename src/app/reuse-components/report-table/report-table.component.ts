@@ -32,13 +32,16 @@ import { ApiService } from 'src/app/services/api.service';
 import { ApiConfigService } from 'src/app/services/api-config.service';
 import { runInThisContext } from 'vm';
 import { ReportsService } from 'src/app/components/dashboard/reports/reports.service';
-import { StatusCodes } from 'src/app/enums/common/common';
+import { SnackBar, StatusCodes } from 'src/app/enums/common/common';
 import moment from 'moment';
 import { style } from '@angular/animations';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { AlertService } from 'src/app/services/alert.service';
+import { RuntimeConfigService } from 'src/app/services/runtime-config.service';
+import { Static } from 'src/app/enums/common/static';
 
 @Component({
   selector: 'app-report-table',
@@ -137,6 +140,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
     private apiConfigService: ApiConfigService,
     private reportsService: ReportsService,
     private spinner: NgxSpinnerService,
+    private alertService: AlertService,
+    private runtimeConfigService: RuntimeConfigService
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
 
@@ -250,7 +255,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
           const res = response;
           if (res?.status === 'PASS') {
             if ((res.response['reportBranchesList'] != null)) {
-              this.ReportBranches = [ { branchCode: null, branchName: null }, ...res.response['reportBranchesList']];
+              this.ReportBranches = [{ branchCode: null, branchName: null }, ...res.response['reportBranchesList']];
             }
           }
         });
@@ -387,6 +392,30 @@ export class ReportTableComponent implements OnInit, OnChanges {
   }
 
   GenerateReport() {
+
+    if (this.dateForm.invalid) {
+      let flag = false;
+      const controls = this.dateForm.controls;
+      for (const name in controls) {
+        if (controls.hasOwnProperty(name)) {
+          const control = controls[name];
+          if (control.errors && control.errors['required']) {
+            flag = true;
+            console.log('First required error in control:', name);
+            this.alertService.openSnackBar(
+              `${this.runtimeConfigService.tableColumnsData['report'][name]} is required`,
+              Static.Close,
+              SnackBar.error
+            );
+            break; // stop at first required error
+          }
+        }
+      }
+      if(flag) {
+        return;
+      }
+    }
+
     this.dateForm.patchValue({
       formDate: this.commonService.formatReportDate(this.dateForm.value.formDate),
       toDate: this.commonService.formatReportDate(this.dateForm.value.toDate),
@@ -770,7 +799,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       if (this.routeParam === 'Shift') {
         const obj = this.Reports.find((rr: any) => rr.id === this.dateForm.value.selectedReport);
         name = obj.reportName;
-      } else if(this.routeParam === 'Four Column Cash Book') {
+      } else if (this.routeParam === 'Four Column Cash Book') {
         const obj = this.FourColumnReportType.find((rr: any) => rr.id === this.dateForm.value.selectedFourColumnReportType);
         name = obj.reportName;
       } else {
@@ -779,7 +808,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
       autoTable(doc, {
         body: [
-          [{ content: name , colSpan: 3, rowSpan: 1, styles: { halign: 'center', fontStyle: 'bold' } }],
+          [{ content: name, colSpan: 3, rowSpan: 1, styles: { halign: 'center', fontStyle: 'bold' } }],
         ],
         theme: 'plain'
       });

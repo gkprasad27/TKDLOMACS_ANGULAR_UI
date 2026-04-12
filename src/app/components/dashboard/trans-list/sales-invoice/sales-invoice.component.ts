@@ -1074,7 +1074,7 @@ export class SalesInvoiceComponent implements OnInit {
     //   this.alertService.openSnackBar("Your Balance is low Please Add Balance", Static.Close, SnackBar.error);
     //   return;
     // }
-    const allowedLedgerCodes = ['100', '2295', '2696', '2600', '2041', '2403', '2431', '311', '312', '313', '314', '315', '318', '319', '320', '321', '322', '324', '9510', '9555', '9561', '965', '9577', '9586', '9588', '9592', '9595', '9600', '9606', '2431'];
+    const allowedLedgerCodes = ['100', '2295', '2696', '2600', '2041', '2403', '2431', '311', '312', '313', '314', '315', '318', '319', '320', '321', '322', '324', '9510', '9555', '9561', '965', '9577', '9586', '9588', '9592', '9595', '9600', '9606', '2431', '2287'];
 
     if (
       !allowedLedgerCodes.includes(this.branchFormData.get('ledgerCode').value) &&

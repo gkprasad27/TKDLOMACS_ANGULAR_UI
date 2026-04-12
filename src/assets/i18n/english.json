@@ -1508,6 +1508,28 @@
   },
   "Stock Valuation": {
     "title": "Stock Valuation"
+  },
+  "report": {
+    "selectedAccountLedger": "Account Ledger",
+    "formDate": "Choose date",
+    "fromAccountLedger": "From Account Code",
+    "toAccountLedger": "To Account Code",
+    "selectedBranch": "Branch",
+    "selectedReportType": "Report Type",
+    "selectedTrialReportType": "Report Type",
+    "selectedClosingReportType": "Report Type",
+    "vehicleRegNo": "Vehicle Reg.No",
+    "selectedProduct": "Product",
+    "selectedReport": "Shift Report Type",
+    "selectedCriteria": "Search Criteria",
+    "search": "Search",
+    "selectedFourColumnReportType": "Report Type",
+    "selectedGroupName": "Group Type",
+    "selectedSupplierGroup": "Supplier Group",
+    "SearchCriteria": "Search Criteria"
+  },
+  "Four Column Cash Book": {
+    "title": "Four Column Cash Book"
   }
 }
 
