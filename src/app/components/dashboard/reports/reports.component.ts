@@ -16,6 +16,7 @@ import { SnackBar } from '../../../enums/common/common';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core'; 
 import { CommonService } from 'src/app/services/common.service';
+import { Static } from 'src/app/enums/common/static';
 
 @Component({ 
     selector: 'app-reports',
@@ -78,6 +79,9 @@ export class ReportsComponent implements OnInit {
               } else {
                 this.tableData = res.response[this.tableUrl.listName];
               }
+              if(this.tableData === null || this.tableData.length < 0) {
+                this.alertService.openSnackBar('No data found', Static.Close, SnackBar.error);
+              }
               this.headerData = res.response['headerList'];
               this.footerData = res.response['footerList'];
             }
@@ -101,6 +105,9 @@ export class ReportsComponent implements OnInit {
                 this.tableData = this.removeDuplicate(res.response[this.tableUrl.listName])
               } else {
                 this.tableData = res.response[this.tableUrl.listName];
+              }
+              if(this.tableData === null || this.tableData.length < 0) {
+                this.alertService.openSnackBar('No data found', Static.Close, SnackBar.error);
               }
               this.headerData = res.response['headerList'];
               this.footerData = res.response['footerList'];
