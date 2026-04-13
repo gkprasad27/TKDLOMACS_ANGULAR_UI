@@ -234,58 +234,53 @@ export class ReportTableComponent implements OnInit, OnChanges {
       });
   }
 
-  getAccountLedgersList() {
-    const getLoginUrl = this.apiConfigService.getAccountLedgersList;
-    this.apiService.apiGetRequest(getLoginUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (res?.status === 'PASS') {
-            if (res?.response?.AccountLedgerList != null) {
-              this.AccountLedgers = res.response['accountLedgerList'];
-            }
+
+  allApis() {
+    const getReportBranchList = this.apiConfigService.getReportBranchList;
+    const getReportPGList = this.apiConfigService.getReportPGList;
+    const getReportSGList = this.apiConfigService.getReportSGList;
+    const getAccountLedgersList = this.apiConfigService.getAccountLedgersList;
+
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin({
+        reportBranchList: this.apiService.apiGetRequest(getReportBranchList),
+        reportPGList: this.apiService.apiGetRequest(getReportPGList),
+        reportSGList: this.apiService.apiGetRequest(getReportSGList),
+        accountLedgersList: this.apiService.apiGetRequest(getAccountLedgersList),
+      }).subscribe(res => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(res.accountLedgersList) && res.accountLedgersList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.accountLedgersList.response)) {
+            this.AccountLedgers = res.accountLedgersList.response['accountLedgerList'];
           }
-        });
-  }
-  getReportBranchesList() {
-    const getLoginUrl = this.apiConfigService.getReportBranchList;
-    this.apiService.apiGetRequest(getLoginUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (res?.status === 'PASS') {
-            if ((res.response['reportBranchesList'] != null)) {
-              this.ReportBranches = [{ branchCode: null, branchName: null }, ...res.response['reportBranchesList']];
-            }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(res.reportBranchList) && res.reportBranchList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.reportBranchList.response)) {
+            this.ReportBranches = [{ branchCode: null, branchName: null }, ...res.reportBranchList.response['reportBranchesList']];
           }
-        });
-  }
-  getReportPGList() {
-    const getLoginUrl = this.apiConfigService.getReportPGList;
-    this.apiService.apiGetRequest(getLoginUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (res?.status === 'PASS') {
-            if ((res.response['reportPGList'] != null)) {
-              this.ReportPGList = res.response['reportPGList'];
-            }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(res.reportPGList) && res.reportPGList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.reportPGList.response)) {
+            this.ReportPGList = res.reportPGList.response['reportPGList'];
           }
-        });
-  }
-  getReportSGList() {
-    const getLoginUrl = this.apiConfigService.getReportSGList;
-    this.apiService.apiGetRequest(getLoginUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (res?.status === 'PASS') {
-            if ((res.response['reportSGList'] != null)) {
-              this.ReportSGList = res.response['reportSGList'];
-            }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(res.reportSGList) && res.reportSGList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.reportSGList.response)) {
+            this.ReportSGList = res.reportSGList.response['reportSGList'];
           }
-        });
+        }
+
+
+      });
+    });
+
   }
+
   // getProductsList() {
   //   const getLoginUrl = [this.apiConfigService.getStockProducts].join('/');
   //   this.apiService.apiGetRequest(getLoginUrl)
@@ -411,7 +406,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
           }
         }
       }
-      if(flag) {
+      if (flag) {
         return;
       }
     }
@@ -1026,11 +1021,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.cdr.detectChanges();
   }
   ngOnInit() {
-    this.getAccountLedgersList();
-    this.getReportBranchesList();
-    this.getReportPGList();
-    this.getReportSGList();
-    // this.getProductsList();
+    this.allApis();
   }
 
   generateTableHeaders() {
