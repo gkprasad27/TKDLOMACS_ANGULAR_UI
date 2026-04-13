@@ -38,7 +38,7 @@
     "ngx-bootstrap": "^21.0.1",
     "ngx-daterangepicker-material": "^6.0.4",
     "ngx-mat-select-search": "^8.0.4",
-    "ngx-spinner": "^16.0.2",
+    "ngx-spinner": "^21.1.0",
     "pdfmake": "^0.1.65",
     "rxjs": "^7.8.2",
     "tslib": "^2.8.0",

@@ -67,7 +67,7 @@
         ||routeParam=='ProductMonthWise PurchaseLtrs') {
         <mat-form-field class="col-3">
           <mat-label> {{ 'report.selectedBranch' | translate }}  </mat-label>
-          <mat-select required formControlName="selectedBranch">
+          <mat-select  formControlName="selectedBranch">
             <mat-option *ngFor="let branch of ReportBranches" [value]="branch.branchCode">
               {{branch.branchName}}
             </mat-option>
