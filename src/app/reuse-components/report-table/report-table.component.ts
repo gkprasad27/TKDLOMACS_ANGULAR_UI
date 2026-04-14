@@ -101,7 +101,6 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
   tableHeaders: any = [];
   SearchCriteria = [
-    { id: 'username', parameter: 'User Name' },
     { id: 'branchCode', parameter: 'Branch Code' },
     { id: 'shiftId', parameter: 'Shift Id' },
     { id: 'userId', parameter: 'User Id' }
