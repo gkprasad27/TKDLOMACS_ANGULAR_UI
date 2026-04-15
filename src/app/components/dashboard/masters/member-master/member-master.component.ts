@@ -197,7 +197,7 @@ export class MemberMasterComponent implements OnInit {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
-              this.passbookStatuses = res.response['PassbookStatuses'];
+              this.passbookStatuses = res.response['passbookStatuses'];
             }
           }
         }
@@ -212,7 +212,7 @@ export class MemberMasterComponent implements OnInit {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
-              this.relations = res.response['PassbookStatuses'];
+              this.relations = res.response['passbookStatuses'];
             }
           }
         }
@@ -246,7 +246,7 @@ export class MemberMasterComponent implements OnInit {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
-              this.shareTableData = res.response['ShareList'];
+              this.shareTableData = res.response['shareList'];
             }
           }
           this.spinner.hide();
