@@ -98,6 +98,12 @@ export class MeterReadingComponent implements OnInit {
         this.modelFormData.controls['inMeterReading'].disable();
       }
     }
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.role != '1') {
+      this.modelFormData.controls['branchCode'].disable();
+    }
+
   }
   calculateAmount() {
     let amount = 0;

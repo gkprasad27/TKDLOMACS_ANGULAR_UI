@@ -687,6 +687,8 @@ export class SalesInvoiceComponent implements OnInit {
               if (res?.response?.CustomerGstNum != null) {
                 this.branchFormData.patchValue({
                   customerGstin: res.response['CustomerGstNum']['customerGstin'],
+                  customerName: res.response['CustomerGstNum']['customerName']
+                  // suppliedTo: res.response['CustomerGstNum']['suppliedTo']
                 });
 
               }
@@ -995,7 +997,7 @@ export class SalesInvoiceComponent implements OnInit {
     //  });
     //}
     if (this.printBill) {
-      if (this.branchFormData.get('branchCode').value == 2 || (this.branchFormData.get('branchCode').value == 3) || (this.branchFormData.get('branchCode').value == 4) || (this.branchFormData.get('branchCode').value == 7)) {
+      if (this.branchFormData.get('branchCode').value == 2 || (this.branchFormData.get('branchCode').value == 1) || (this.branchFormData.get('branchCode').value == 4) || (this.branchFormData.get('branchCode').value == 7)) {
         this.dialog.open(PrintPetrolComponent, {
           width: '1024px',
           data: requestObj,
