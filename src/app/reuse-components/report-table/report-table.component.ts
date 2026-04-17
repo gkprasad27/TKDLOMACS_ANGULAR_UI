@@ -561,340 +561,189 @@ export class ReportTableComponent implements OnInit, OnChanges {
   }
 
   exportToPdf() {
-    if (this.routeParam == 'Product Wise Monthly Purchase' || this.routeParam == 'BranchWise Monthly SalesByLiters' || this.routeParam == 'ProductMonthWise PurchaseLtrs') {
-      let doc = new jsPDF('l', 'cm', 'a3');
 
-      let columns = []; //["ID", "Name", "Country"];
+  const buildColumns = () => {
+    let cols: any[] = [];
+    for (const key in this.tableData[0]) {
+      cols.push(key);
+    }
+    return cols;
+  };
+
+  const buildRows = () => {
+    let rows: any[] = [];
+    for (let i = 0; i < this.dataSource.filteredData.length; i++) {
+      let temp: any[] = [];
       for (const key in this.tableData[0]) {
-        columns.push(key);
+        temp.push(this.dataSource.filteredData[i][key]);
       }
-      let rows = [];
-      for (var i: number = 0; i < this.dataSource.filteredData.length; i++) {
-        rows[i] = [];
-        let j = 0;
-        for (const key in this.tableData[0]) {
-          rows[i][j] = this.dataSource.filteredData[i][key];
-          j++;
-        }
+      rows.push(temp);
+    }
+    return rows;
+  };
+
+  const buildHeaderRows = () => {
+    let headerRows: any[] = [];
+
+    for (let i = 0; i < this.tableHeaders.length; i++) {
+      let temp: any[] = [];
+      for (const key in this.tableHeaders[0]) {
+        temp.push(this.tableHeaders[i][key]);
       }
-
-      autoTable(doc, {
-        body: [
-          [{ content: this.routeParam + ' Report', colSpan: 3, rowSpan: 1, styles: { halign: 'center', fontStyle: 'bold' } }],
-        ],
-        theme: 'plain'
-      });
-      let pipe = new DatePipe('en-US');
-      let currentDate = new Date();
-
-      let headerRows = [];
-      for (var i: number = 0; i < this.tableHeaders.length; i++) {
-        headerRows[i] = [];
-        let j = 0;
-        for (const key in this.tableHeaders[0]) {
-          headerRows[i][j] = this.tableHeaders[i][key];
-          j++;
-        }
-      }
-
-      headerRows = [
-        headerRows[0] ? headerRows[0].concat(headerRows[1]) : "",
-        headerRows[2] ? headerRows[2].concat(headerRows[3]) : "",
-        headerRows[4] ? headerRows[4].concat(headerRows[5]) : "",
-        headerRows[6] ? headerRows[6].concat(headerRows[7]) : "",
-        headerRows[8] ? headerRows[8].concat(headerRows[9]) : "",
-        headerRows[10] ? headerRows[10].concat(headerRows[11]) : "",
-        headerRows[12] ? headerRows[12].concat(headerRows[13]) : "",
-        headerRows[14] ? headerRows[14].concat(headerRows[15]) : ""
-      ];
-
-      headerRows = headerRows.filter(arr => arr != "");
-
-
-
-      autoTable(doc, {
-        margin: { top: 3 },
-        columnStyles: {
-          1: { halign: 'right' }
-        },
-        body: headerRows,
-        theme: 'plain',
-      })
-
-      autoTable(doc, {
-        head: [columns],
-        body: rows,
-        startY: (doc as any).lastAutoTable.finalY + 2,
-        styles: {
-          font: 'Helvetica',
-          fontSize: 10
-        },
-        theme: 'plain'
-      });
-
-      let footerRows = [];
-
-      for (var i: number = 0; i < this.footerData.length; i++) {
-        footerRows[i] = [];
-        let j = 0;
-        for (const key in this.footerData[0]) {
-          footerRows[i][j] = this.footerData[i][key];
-          j++;
-        }
-      }
-
-      let updatedFooterRows = [];
-
-      if (footerRows && footerRows.length) {
-        footerRows.forEach((ft) => {
-          let temp = [];
-          ft.forEach(data => {
-            if (data != "") {
-              temp.push(data);
-            }
-          });
-          updatedFooterRows.push(temp);
-        })
-      }
-
-      autoTable(doc, {
-        body: updatedFooterRows,
-        theme: 'plain',
-        startY: (doc as any).lastAutoTable.finalY + 2
-      })
-      doc.save(this.routeParam + 'Report.pdf');
+      headerRows.push(temp);
     }
 
-    if (this.routeParam == 'Four Column Cash Book') {
-      // Create PDF with landscape orientation for wider content
-      let doc = new jsPDF('l', 'mm', 'a4');
+    // Safe merge (pair rows)
+    return headerRows
+      .map((row, i) =>
+        (i % 2 === 0 && headerRows[i + 1])
+          ? row.concat(headerRows[i + 1])
+          : null
+      )
+      .filter(r => r);
+  };
 
-      let columns = []; //["ID", "Name", "Country"];
-      for (const key in this.tableData[0]) {
-        columns.push(key);
-      }
-      let rows = [];
-      for (var i: number = 0; i < this.dataSource.filteredData.length; i++) {
-        rows[i] = [];
-        let j = 0;
-        for (const key in this.tableData[0]) {
-          rows[i][j] = this.dataSource.filteredData[i][key];
-          j++;
+  const buildFooterRows = () => {
+    let footerRows: any[] = [];
+
+    for (let i = 0; i < this.footerData.length; i++) {
+      let temp: any[] = [];
+      for (const key in this.footerData[0]) {
+        if (this.footerData[i][key] !== "") {
+          temp.push(this.footerData[i][key]);
         }
       }
-
-      autoTable(doc, {
-        body: [
-          [{ content: this.routeParam + ' Report', colSpan: 3, rowSpan: 1, styles: { halign: 'center', fontStyle: 'bold' } }],
-        ],
-        theme: 'plain'
-      });
-      let pipe = new DatePipe('en-US');
-      let currentDate = new Date();
-
-      let headerRows = [];
-      for (var i: number = 0; i < this.tableHeaders.length; i++) {
-        headerRows[i] = [];
-        let j = 0;
-        for (const key in this.tableHeaders[0]) {
-          headerRows[i][j] = this.tableHeaders[i][key];
-          j++;
-        }
-      }
-
-      headerRows = [
-        headerRows[0] ? headerRows[0].concat(headerRows[1]) : "",
-        headerRows[2] ? headerRows[2].concat(headerRows[3]) : "",
-        headerRows[4] ? headerRows[4].concat(headerRows[5]) : "",
-        headerRows[6] ? headerRows[6].concat(headerRows[7]) : "",
-        headerRows[8] ? headerRows[8].concat(headerRows[9]) : "",
-        headerRows[10] ? headerRows[10].concat(headerRows[11]) : "",
-        headerRows[12] ? headerRows[12].concat(headerRows[13]) : "",
-        headerRows[14] ? headerRows[14].concat(headerRows[15]) : ""
-      ];
-
-      headerRows = headerRows.filter(arr => arr != "");
-
-
-
-      autoTable(doc, {
-        margin: { top: 3 },
-        columnStyles: {
-          1: { halign: 'right' }
-        },
-        body: headerRows,
-        theme: 'plain',
-      })
-
-      autoTable(doc, {
-        head: [columns],
-        body: rows,
-        startY: (doc as any).lastAutoTable.finalY + 2,
-        styles: { font: 'Helvetica', fontSize: 10 },
-        // columnStyles: {
-        //   0: { cellWidth: 2 },
-        //   1: { cellWidth: 3 }
-        // },
-        theme: 'plain'
-      });
-
-      let footerRows = [];
-      for (var i: number = 0; i < this.footerData.length; i++) {
-        footerRows[i] = [];
-        let j = 0;
-        for (const key in this.footerData[0]) {
-          footerRows[i][j] = this.footerData[i][key];
-          j++;
-        }
-      }
-
-      let updatedFooterRows = [];
-
-      if (footerRows && footerRows.length) {
-        footerRows.forEach((ft) => {
-          let temp = [];
-          ft.forEach(data => {
-            if (data != "") {
-              temp.push(data);
-            }
-          });
-          updatedFooterRows.push(temp);
-        })
-      }
-
-      autoTable(doc, {
-        body: updatedFooterRows,
-        theme: 'plain',
-        startY: (doc as any).lastAutoTable.finalY + 2
-      })
-      doc.save(this.routeParam + 'Report.pdf');
+      if (temp.length) footerRows.push(temp);
     }
 
-    else {
-      // Create PDF with landscape orientation for wider content
-      let doc = new jsPDF('l', 'mm', 'a4');
-      let columns = []; //["ID", "Name", "Country"];
+    return footerRows;
+  };
 
-      for (const key in this.tableData[0]) {
-        columns.push(key);
-      }
-      let rows = [];
-      for (var i: number = 0; i < this.dataSource.filteredData.length; i++) {
-        rows[i] = [];
-        let j = 0;
-        for (const key in this.tableData[0]) {
-          rows[i][j] = this.dataSource.filteredData[i][key];
-          j++;
-        }
-      }
+  const addCommonHeader = (doc: any, title: string) => {
+    autoTable(doc, {
+      body: [
+        [{
+          content: title,
+          colSpan: 10,
+          styles: { halign: 'center', fontStyle: 'bold', fontSize: 14 }
+        }]
+      ],
+      theme: 'plain'
+    });
 
+    let pipe = new DatePipe('en-US');
+    let currentDate = new Date();
 
-      let name = ''
-      if (this.routeParam === 'Shift') {
-        const obj = this.Reports.find((rr: any) => rr.id === this.dateForm.value.selectedReport);
-        name = obj.reportName;
-      } else if (this.routeParam === 'Four Column Cash Book') {
-        const obj = this.FourColumnReportType.find((rr: any) => rr.id === this.dateForm.value.selectedFourColumnReportType);
-        name = obj.reportName;
-      } else {
-        name = this.routeParam;
-      }
+    doc.setFontSize(10);
+    doc.text(
+      'Generated on: ' + pipe.transform(currentDate, 'dd-MM-yyyy HH:mm'),
+      2,
+      (doc as any).lastAutoTable.finalY + 0.5
+    );
 
-      autoTable(doc, {
-        body: [
-          [{ content: name, colSpan: 3, rowSpan: 1, styles: { halign: 'center', fontStyle: 'bold' } }],
-        ],
-        theme: 'plain'
-      });
+    // Line
+    doc.setLineWidth(0.02);
+    doc.line(
+      1,
+      (doc as any).lastAutoTable.finalY + 1,
+      doc.internal.pageSize.width - 1,
+      (doc as any).lastAutoTable.finalY + 1
+    );
+  };
 
-      let pipe = new DatePipe('en-US');
-      let currentDate = new Date();
+  const addPageNumbers = (doc: any) => {
+    const pageCount = doc.getNumberOfPages();
 
-      let headerRows = [];
-      for (var i: number = 0; i < this.tableHeaders.length; i++) {
-        headerRows[i] = [];
-        let j = 0;
-        for (const key in this.tableHeaders[0]) {
-          headerRows[i][j] = this.tableHeaders[i][key];
-          j++;
-        }
-      }
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.setFontSize(9);
 
-      headerRows = [
-        headerRows[0] ? headerRows[0].concat(headerRows[1]) : "",
-        headerRows[2] ? headerRows[2].concat(headerRows[3]) : "",
-        headerRows[4] ? headerRows[4].concat(headerRows[5]) : "",
-        headerRows[6] ? headerRows[6].concat(headerRows[7]) : "",
-        headerRows[8] ? headerRows[8].concat(headerRows[9]) : "",
-        headerRows[10] ? headerRows[10].concat(headerRows[11]) : "",
-        headerRows[12] ? headerRows[12].concat(headerRows[13]) : "",
-        headerRows[14] ? headerRows[14].concat(headerRows[15]) : ""
-      ];
-
-      headerRows = headerRows.filter(arr => arr != "");
-
-
-
-      autoTable(doc, {
-        margin: { top: 3 },
-        columnStyles: {
-          1: { halign: 'right' }
-        },
-        body: headerRows,
-        theme: 'plain',
-      })
-
-
-      autoTable(doc, {
-        head: [columns],
-        body: rows,
-        startY: (doc as any).lastAutoTable.finalY + 1,
-        styles: { font: 'Helvetica', fontSize: 10 },
-        theme: 'plain'
-      });
-
-      doc.addPage();
-      var pageCount = doc.getNumberOfPages(); //Total Page Number
-      for (i = 0; i < pageCount; i++) {
-        doc.setPage(i);
-        let pageCurrent = doc.getCurrentPageInfo().pageNumber; //Current Page
-        doc.setFontSize(10);
-        doc.text('page: ' + pageCurrent + '/' + pageCount, 10, 10);
-      }
-
-      let footerRows = [];
-      for (var i: number = 0; i < this.footerData.length; i++) {
-        footerRows[i] = [];
-        let j = 0;
-        for (const key in this.footerData[0]) {
-          footerRows[i][j] = this.footerData[i][key];
-          j++;
-        }
-      }
-
-
-      let updatedFooterRows = [];
-
-      if (footerRows && footerRows.length) {
-        footerRows.forEach((ft) => {
-          let temp = [];
-          ft.forEach(data => {
-            if (data != "") {
-              temp.push(data);
-            }
-          });
-          updatedFooterRows.push(temp);
-        })
-      }
-
-      autoTable(doc, {
-        body: updatedFooterRows,
-        theme: 'plain',
-        startY: (doc as any).lastAutoTable.finalY + 2
-      })
-      doc.save(name + '.pdf');
+      doc.text(
+        `Page ${i} of ${pageCount}`,
+        doc.internal.pageSize.width - 10,
+        doc.internal.pageSize.height - 5,
+        { align: 'right' }
+      );
     }
+  };
+
+  // ---------------- MAIN LOGIC ----------------
+
+  let doc: any;
+
+  if (
+    this.routeParam === 'Product Wise Monthly Purchase' ||
+    this.routeParam === 'BranchWise Monthly SalesByLiters' ||
+    this.routeParam === 'ProductMonthWise PurchaseLtrs'
+  ) {
+    doc = new jsPDF('l', 'cm', 'a3');
+  } else {
+    doc = new jsPDF('l', 'mm', 'a4');
   }
+
+  let columns = buildColumns();
+  let rows = buildRows();
+  let headerRows = buildHeaderRows();
+  let footerRows = buildFooterRows();
+
+  // Title
+  let name = '';
+  if (this.routeParam === 'Shift') {
+    const obj = this.Reports.find((rr: any) => rr.id === this.dateForm.value.selectedReport);
+    name = obj?.reportName || this.routeParam;
+  } else if (this.routeParam === 'Four Column Cash Book') {
+    const obj = this.FourColumnReportType.find((rr: any) => rr.id === this.dateForm.value.selectedFourColumnReportType);
+    name = obj?.reportName || this.routeParam;
+  } else {
+    name = this.routeParam;
+  }
+
+  addCommonHeader(doc, name);
+
+  // Header rows
+  autoTable(doc, {
+    margin: { top: 3 },
+    body: headerRows,
+    theme: 'plain'
+  });
+
+  // Main table
+  autoTable(doc, {
+    head: [columns],
+    body: rows,
+    startY: (doc as any).lastAutoTable.finalY + 2,
+    theme: 'grid',
+    styles: { fontSize: 9 },
+    headStyles: {
+      fillColor: [220, 220, 220],
+      textColor: 0,
+      halign: 'center'
+    }
+  });
+
+  // Footer line
+  doc.setLineWidth(0.02);
+  doc.line(
+    1,
+    (doc as any).lastAutoTable.finalY + 1,
+    doc.internal.pageSize.width - 1,
+    (doc as any).lastAutoTable.finalY + 1
+  );
+
+  // Footer table
+  if (footerRows.length) {
+    autoTable(doc, {
+      body: footerRows,
+      theme: 'plain',
+      startY: (doc as any).lastAutoTable.finalY + 2
+    });
+  }
+
+  // Page numbers
+  addPageNumbers(doc);
+
+  doc.save(name + '.pdf');
+}
   openDialog(val, row?) {
     if (this.routeParam == 'Shift') {
       this.dateForm.patchValue({
