@@ -562,188 +562,191 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
   exportToPdf() {
 
-  const buildColumns = () => {
-    let cols: any[] = [];
-    for (const key in this.tableData[0]) {
-      cols.push(key);
-    }
-    return cols;
-  };
-
-  const buildRows = () => {
-    let rows: any[] = [];
-    for (let i = 0; i < this.dataSource.filteredData.length; i++) {
-      let temp: any[] = [];
+    const buildColumns = () => {
+      let cols: any[] = [];
       for (const key in this.tableData[0]) {
-        temp.push(this.dataSource.filteredData[i][key]);
+        cols.push(key);
       }
-      rows.push(temp);
-    }
-    return rows;
-  };
+      return cols;
+    };
 
-  const buildHeaderRows = () => {
-    let headerRows: any[] = [];
-
-    for (let i = 0; i < this.tableHeaders.length; i++) {
-      let temp: any[] = [];
-      for (const key in this.tableHeaders[0]) {
-        temp.push(this.tableHeaders[i][key]);
-      }
-      headerRows.push(temp);
-    }
-
-    // Safe merge (pair rows)
-    return headerRows
-      .map((row, i) =>
-        (i % 2 === 0 && headerRows[i + 1])
-          ? row.concat(headerRows[i + 1])
-          : null
-      )
-      .filter(r => r);
-  };
-
-  const buildFooterRows = () => {
-    let footerRows: any[] = [];
-
-    for (let i = 0; i < this.footerData.length; i++) {
-      let temp: any[] = [];
-      for (const key in this.footerData[0]) {
-        if (this.footerData[i][key] !== "") {
-          temp.push(this.footerData[i][key]);
+    const buildRows = () => {
+      let rows: any[] = [];
+      for (let i = 0; i < this.dataSource.filteredData.length; i++) {
+        let temp: any[] = [];
+        for (const key in this.tableData[0]) {
+          temp.push(this.dataSource.filteredData[i][key]);
         }
+        rows.push(temp);
       }
-      if (temp.length) footerRows.push(temp);
-    }
+      return rows;
+    };
 
-    return footerRows;
-  };
+    const buildHeaderRows = () => {
+      let headerRows: any[] = [];
 
-  const addCommonHeader = (doc: any, title: string) => {
-    autoTable(doc, {
-      body: [
-        [{
+      for (let i = 0; i < this.tableHeaders.length; i++) {
+        let temp: any[] = [];
+        for (const key in this.tableHeaders[0]) {
+          temp.push(this.tableHeaders[i][key]);
+        }
+        headerRows.push(temp);
+      }
+
+      return headerRows
+        .map((row, i) =>
+          (i % 2 === 0 && headerRows[i + 1])
+            ? row.concat(headerRows[i + 1])
+            : null
+        )
+        .filter(r => r);
+    };
+
+    const buildFooterRows = () => {
+      let footerRows: any[] = [];
+
+      for (let i = 0; i < this.footerData.length; i++) {
+        let temp: any[] = [];
+        for (const key in this.footerData[0]) {
+          if (this.footerData[i][key] !== "") {
+            temp.push(this.footerData[i][key]);
+          }
+        }
+        if (temp.length) footerRows.push(temp);
+      }
+
+      return footerRows;
+    };
+
+    const addCommonHeader = (doc: any, title: string) => {
+      autoTable(doc, {
+        body: [[{
           content: title,
           colSpan: 10,
           styles: { halign: 'center', fontStyle: 'bold', fontSize: 14 }
-        }]
-      ],
+        }]],
+        theme: 'plain'
+      });
+
+      let pipe = new DatePipe('en-US');
+      let currentDate = new Date();
+
+      doc.setFontSize(10);
+      doc.text(
+        'Generated on: ' + pipe.transform(currentDate, 'dd-MM-yyyy HH:mm'),
+        10,
+        (doc as any).lastAutoTable.finalY + 5
+      );
+
+      doc.setLineWidth(0.2);
+      doc.line(
+        10,
+        (doc as any).lastAutoTable.finalY + 8,
+        doc.internal.pageSize.width - 10,
+        (doc as any).lastAutoTable.finalY + 8
+      );
+    };
+
+    // ✅ UPDATED FOOTER FUNCTION
+    const addPageNumbers = (doc: any, title: string) => {
+      const pageCount = doc.getNumberOfPages();
+
+      for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFontSize(9);
+
+        // LEFT SIDE (title / reset text)
+        doc.text(
+          title,
+          10,
+          doc.internal.pageSize.height - 10,
+          { align: 'left' }
+        );
+
+        // RIGHT SIDE (page number)
+        doc.text(
+          `Page ${i} of ${pageCount}`,
+          doc.internal.pageSize.width - 10,
+          doc.internal.pageSize.height - 10,
+          { align: 'right' }
+        );
+      }
+    };
+
+    // ---------------- MAIN ----------------
+
+    let doc: any;
+
+    if (
+      this.routeParam === 'Product Wise Monthly Purchase' ||
+      this.routeParam === 'BranchWise Monthly SalesByLiters' ||
+      this.routeParam === 'ProductMonthWise PurchaseLtrs'
+    ) {
+      doc = new jsPDF('l', 'mm', 'a3');
+    } else {
+      doc = new jsPDF('l', 'mm', 'a4');
+    }
+
+    let columns = buildColumns();
+    let rows = buildRows();
+    let headerRows = buildHeaderRows();
+    let footerRows = buildFooterRows();
+
+    // Title logic
+    let name = '';
+    if (this.routeParam === 'Shift') {
+      const obj = this.Reports.find((rr: any) => rr.id === this.dateForm.value.selectedReport);
+      name = obj?.reportName || this.routeParam;
+    } else if (this.routeParam === 'Four Column Cash Book') {
+      const obj = this.FourColumnReportType.find((rr: any) => rr.id === this.dateForm.value.selectedFourColumnReportType);
+      name = obj?.reportName || this.routeParam;
+    } else {
+      name = this.routeParam;
+    }
+
+    addCommonHeader(doc, name);
+
+    autoTable(doc, {
+      margin: { top: 20 },
+      body: headerRows,
       theme: 'plain'
     });
 
-    let pipe = new DatePipe('en-US');
-    let currentDate = new Date();
-
-    doc.setFontSize(10);
-    doc.text(
-      'Generated on: ' + pipe.transform(currentDate, 'dd-MM-yyyy HH:mm'),
-      2,
-      (doc as any).lastAutoTable.finalY + 0.5
-    );
-
-    // Line
-    doc.setLineWidth(0.02);
-    doc.line(
-      1,
-      (doc as any).lastAutoTable.finalY + 1,
-      doc.internal.pageSize.width - 1,
-      (doc as any).lastAutoTable.finalY + 1
-    );
-  };
-
-  const addPageNumbers = (doc: any) => {
-    const pageCount = doc.getNumberOfPages();
-
-    for (let i = 1; i <= pageCount; i++) {
-      doc.setPage(i);
-      doc.setFontSize(9);
-
-      doc.text(
-        `Page ${i} of ${pageCount}`,
-        doc.internal.pageSize.width - 10,
-        doc.internal.pageSize.height - 5,
-        { align: 'right' }
-      );
-    }
-  };
-
-  // ---------------- MAIN LOGIC ----------------
-
-  let doc: any;
-
-  if (
-    this.routeParam === 'Product Wise Monthly Purchase' ||
-    this.routeParam === 'BranchWise Monthly SalesByLiters' ||
-    this.routeParam === 'ProductMonthWise PurchaseLtrs'
-  ) {
-    doc = new jsPDF('l', 'cm', 'a3');
-  } else {
-    doc = new jsPDF('l', 'mm', 'a4');
-  }
-
-  let columns = buildColumns();
-  let rows = buildRows();
-  let headerRows = buildHeaderRows();
-  let footerRows = buildFooterRows();
-
-  // Title
-  let name = '';
-  if (this.routeParam === 'Shift') {
-    const obj = this.Reports.find((rr: any) => rr.id === this.dateForm.value.selectedReport);
-    name = obj?.reportName || this.routeParam;
-  } else if (this.routeParam === 'Four Column Cash Book') {
-    const obj = this.FourColumnReportType.find((rr: any) => rr.id === this.dateForm.value.selectedFourColumnReportType);
-    name = obj?.reportName || this.routeParam;
-  } else {
-    name = this.routeParam;
-  }
-
-  addCommonHeader(doc, name);
-
-  // Header rows
-  autoTable(doc, {
-    margin: { top: 3 },
-    body: headerRows,
-    theme: 'plain'
-  });
-
-  // Main table
-  autoTable(doc, {
-    head: [columns],
-    body: rows,
-    startY: (doc as any).lastAutoTable.finalY + 2,
-    theme: 'grid',
-    styles: { fontSize: 9 },
-    headStyles: {
-      fillColor: [220, 220, 220],
-      textColor: 0,
-      halign: 'center'
-    }
-  });
-
-  // Footer line
-  doc.setLineWidth(0.02);
-  doc.line(
-    1,
-    (doc as any).lastAutoTable.finalY + 1,
-    doc.internal.pageSize.width - 1,
-    (doc as any).lastAutoTable.finalY + 1
-  );
-
-  // Footer table
-  if (footerRows.length) {
     autoTable(doc, {
-      body: footerRows,
-      theme: 'plain',
-      startY: (doc as any).lastAutoTable.finalY + 2
+      head: [columns],
+      body: rows,
+      startY: (doc as any).lastAutoTable.finalY + 10,
+      theme: 'grid',
+      styles: { fontSize: 9 },
+      headStyles: {
+        fillColor: [220, 220, 220],
+        textColor: 0,
+        halign: 'center'
+      }
     });
+
+    doc.setLineWidth(0.2);
+    doc.line(
+      10,
+      (doc as any).lastAutoTable.finalY + 5,
+      doc.internal.pageSize.width - 10,
+      (doc as any).lastAutoTable.finalY + 5
+    );
+
+    if (footerRows.length) {
+      autoTable(doc, {
+        body: footerRows,
+        theme: 'plain',
+        startY: (doc as any).lastAutoTable.finalY + 10
+      });
+    }
+
+    // ✅ Apply footer (left + right)
+    addPageNumbers(doc, name);
+
+    doc.save(name + '.pdf');
   }
 
-  // Page numbers
-  addPageNumbers(doc);
-
-  doc.save(name + '.pdf');
-}
   openDialog(val, row?) {
     if (this.routeParam == 'Shift') {
       this.dateForm.patchValue({

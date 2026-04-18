@@ -26,7 +26,7 @@ import { SnackBar } from '../../../enums/common/common';
 import { TransactionsService } from './transactions.service';
 import { TableComponent } from '../../../reuse-components/table/table.component';
 
-@Component({ 
+@Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss'],
@@ -71,9 +71,9 @@ export class TransactionsComponent implements OnInit {
     this.transactionsService.branchCode = user.branchCode;
     this.transactionsService.role = user.role;
     activatedRoute.params.subscribe(params => {
-    if (this.tableComponent != null) {
-      this.tableComponent.defaultValues();
-    }
+      if (this.tableComponent != null) {
+        this.tableComponent.defaultValues();
+      }
       this.routeParams = params.id;
       this.tableUrl = transactionsService.getRouteUrls(params.id);
       if (this.tableUrl != null && this.tableUrl.coustom) {

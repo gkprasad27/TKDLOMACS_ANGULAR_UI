@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SaveItemComponent } from '../../../../reuse-components/save-item/save-item.component';
 
 import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
-import { StatusCodes } from '../../../../enums/common/common';
+import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../services/api-config.service';
 
@@ -29,7 +29,7 @@ import { userInfo } from 'os';
 })
 
 export class MeterReadingComponent implements OnInit {
-  isSaveDisabled = true;
+
   modelFormData: FormGroup;
   isSubmitted = false;
   formData: any;
@@ -79,8 +79,6 @@ export class MeterReadingComponent implements OnInit {
       this.modelFormData.controls['variation'].disable();
       this.modelFormData.controls['shiftId'].disable();
       this.modelFormData.controls['inMeterReading'].disable();
-      this.isSaveDisabled = true;
-      this.getPump();
     }
     else {
       const user = JSON.parse(localStorage.getItem('user'));
@@ -98,6 +96,7 @@ export class MeterReadingComponent implements OnInit {
         this.modelFormData.controls['inMeterReading'].disable();
       }
     }
+    this.getPump();
 
     const user = JSON.parse(localStorage.getItem('user'));
     if (user?.role != '1') {
@@ -218,22 +217,22 @@ export class MeterReadingComponent implements OnInit {
   }
 
   getPump(branch?) {
-    let getPumpUrl;
-    //const getPump = [this.apiConfigService.getPump,branch].join('/');
-    if (branch != null) {
-      getPumpUrl = [this.apiConfigService.getPump, branch].join('/');
-      this.getmemberNames(this.modelFormData.get('pumpNo').value);
-    }
-    else {
-      getPumpUrl = [this.apiConfigService.getPump, this.modelFormData.get('branchCode').value].join('/');
-      //this.getmemberNames(this.modelFormData.get('pumpNo').value);
-    }
+    this.getPumpNames();
+    // let getPumpUrl;
+    // //const getPump = [this.apiConfigService.getPump,branch].join('/');
+    // if (branch != null) {
+    //   // getPumpUrl = [this.apiConfigService.getPump, branch].join('/');
+    // }
+    // else {
+    //   getPumpUrl = [this.apiConfigService.getPump, this.modelFormData.get('branchCode').value].join('/');
+    //   //this.getmemberNames(this.modelFormData.get('pumpNo').value);
+    // }
 
-    this.pumpNoConfig = {
-      url: getPumpUrl,
-      list: 'PumpList',
+    // this.pumpNoConfig = {
+    //   url: getPumpUrl,
+    //   list: 'PumpList',
 
-    };
+    // };
     // this.apiService.apiGetRequest(getPumpUrl)
     //   .subscribe(
     //     response => {
@@ -284,10 +283,10 @@ export class MeterReadingComponent implements OnInit {
     });
   }
 
-  getmemberNames(value) {
-    if (value != null && value !== '') {
-      this.getmemberNamesArray = [];
-      const getmemberNamesUrl = [this.apiConfigService.getPump, value, this.modelFormData.get('branchCode').value].join('/');
+  getPumpNames() {
+    this.getmemberNamesArray = [];
+    if (this.modelFormData.get('branchCode').value) {
+      const getmemberNamesUrl = [this.apiConfigService.getMPump, this.modelFormData.get('branchCode').value].join('/');
       this.apiService.apiGetRequest(getmemberNamesUrl).subscribe(
         response => {
           this.spinner.hide();
@@ -296,8 +295,7 @@ export class MeterReadingComponent implements OnInit {
             if (res.response != null) {
               if (res?.response?.PumpList?.length) {
                 this.getmemberNamesArray = res.response['PumpList'];
-              }
-              else {
+              } else {
                 this.getmemberNamesArray = [];
               }
             }
@@ -306,9 +304,6 @@ export class MeterReadingComponent implements OnInit {
     }
   }
 
-
-
-
   get formControls() { return this.modelFormData.controls; }
 
 
@@ -316,7 +311,6 @@ export class MeterReadingComponent implements OnInit {
     if (this.modelFormData.invalid) {
       return;
     }
-
     this.modelFormData.controls['meterReadingId'].enable();
     this.modelFormData.controls['totalSales'].enable();
     this.modelFormData.controls['invoiceSales'].enable();
@@ -330,13 +324,54 @@ export class MeterReadingComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
-        this.formData.item = this.modelFormData.value;
-        this.dialogRef.close(this.formData);
+        if (this.modelFormData.value.meterReadingId) {
+          this.dialogRef.close(this.formData);
+        } else {
+          const addCompanyUrl = this.apiConfigService.registerMeterReading;
+          this.apiService.apiPostRequest(addCompanyUrl, this.modelFormData.getRawValue())
+            .subscribe(
+              response => {
+                const res = response;
+                this.spinner.hide();
+                if (res != null && res.status === StatusCodes.pass) {
+                  if (res.response != null) {
+                    this.alertService.openSnackBar('Record Added...', 'close', SnackBar.success);
+                    this.getmemberNamesArray.forEach((m: any) => {
+                      if (m.id === this.modelFormData.value.pumpNo) {
+                        m.selected = true
+                      }
+                    })
+                    this.resetData();
+                  }
+                }
+              });
+        }
       }
     });
-    // this.formData.item = this.modelFormData.value;
-    // this.dialogRef.close(this.formData);
+  }
 
+  resetData() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.modelFormData.patchValue({
+      meterReadingId: 0,
+      testing: 0.00,
+      density: 0.00,
+      inMeterReading: 0.00,
+      outMeterReading: 0.00,
+      consumption: 0.00,
+      totalSales: 0.00,
+      variation: 0.00,
+      invoiceSales: 0.00,
+      userId: user.seqId,
+      userName: user.userName,
+      pumpNo: ''
+    })
+    if (+this.modelFormData.get('branchCode').value !== +user.branchCode) {
+      this.getPump();
+      this.modelFormData.patchValue({
+        branchCode: +user.branchCode
+      })
+    }
   }
 
   cancel() {

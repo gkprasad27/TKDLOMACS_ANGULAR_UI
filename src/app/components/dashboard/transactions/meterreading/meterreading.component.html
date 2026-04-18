@@ -26,7 +26,19 @@
           <input matInput formControlName="shiftId" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
-        <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.pumpNo' | translate }}</mat-label>
+          <mat-select formControlName="pumpNo" appFocusOnEnter tabIndex="1">
+            @for (branch of getmemberNamesArray; track branch) {
+            <mat-option [value]="branch.id" [disabled]="branch.selected" [ngStyle]="{ background: branch.selected ? 'green': '' }">
+              {{branch.id}}
+            </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <!-- <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
           [class.filled]="modelFormData.get('pumpNo')?.value">
           <label> {{ 'salesInvoice.pumpNo' | translate }} </label>
           <input placeholder=" " formControlName="pumpNo" (typeaheadOnSelect)="setMemberName($event); getOBFromPump(); getSaledUnits()"
@@ -36,7 +48,7 @@
           <ng-template #customMemberName let-model="item">
             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
           </ng-template>
-        </div>
+        </div> -->
 
         <mat-form-field class="col-3">
           <mat-label>{{'meterreading.inMeterReading' | translate }}</mat-label>

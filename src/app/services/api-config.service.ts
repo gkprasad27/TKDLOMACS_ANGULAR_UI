@@ -215,6 +215,7 @@ export class ApiConfigService {
   deleteMeterReading = `${environment.baseUrl}transactions/MeterReading/deleteMeterReading`;
   getOBFromPump = `${environment.baseUrl}transactions/MeterReading/GetOBFromPump`;
   getSaledUnits = `${environment.baseUrl}transactions/MeterReading/GetSaledUnits`;
+  getMPump = `${environment.baseUrl}masters/Pump/GetPump`;
 
    // *******************************  End Transaction *****************************************
 
