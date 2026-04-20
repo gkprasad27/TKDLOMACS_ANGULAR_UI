@@ -71,6 +71,7 @@
             <input placeholder=" " formControlName="vehicleRegNo"
               (typeaheadOnSelect)="getmemberNamesByCode($event)"  (input)="getVechiels($event.target.value)" 
               id="vehicleRegNo" [typeahead]="getVechielsArray"
+              (focusout)="toUppercase()"
               autocomplete="off" [typeaheadOptionsLimit]="100000"
               typeaheadOptionField='text' class="form-control typeahead"[typeaheadWaitMs]="200" >
           </div>

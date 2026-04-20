@@ -211,12 +211,22 @@ export class SalesInvoiceComponent implements OnInit {
         if (params.value != null) {
           this.getInvoiceDeatilList(params.value);
         }
-        this.disableForm(params.id1);
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user?.role != '1') {
+          this.disableForm(params.id1);
+        }
       } else {
         this.resetData();
       }
     });
 
+  }
+
+  toUppercase() {
+    const control = this.branchFormData.get('vehicleRegNo');
+    if (control && control.value) {
+      control.setValue(control.value.toUpperCase(), { emitEvent: false });
+    }
   }
 
   resetData() {
@@ -662,7 +672,6 @@ export class SalesInvoiceComponent implements OnInit {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.Members?.length) {
-
                 this.getVechielsArray = res.response['Members'];
               } else {
                 this.getVechielsArray = [];
@@ -985,6 +994,11 @@ export class SalesInvoiceComponent implements OnInit {
 
   print() {
     this.enableFileds();
+    this.toUppercase();
+    const control = this.branchFormData.get('amountInWords');
+    if (control && control.value) {
+      control.setValue(control.value.toUpperCase(), { emitEvent: false });
+    }
     const requestObj = { InvoiceHdr: this.branchFormData.value, InvoiceDetail: this.dataSource.data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };
     if (requestObj.InvoiceDetail || requestObj.InvoiceHdr)
       this.printBill = true;

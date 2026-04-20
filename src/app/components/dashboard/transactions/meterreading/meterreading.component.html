@@ -26,17 +26,16 @@
           <input matInput formControlName="shiftId" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
-
         <mat-form-field class="col-3">
           <mat-label>{{'meterreading.pumpNo' | translate }}</mat-label>
-          <mat-select formControlName="pumpNo" appFocusOnEnter tabIndex="1">
-            @for (branch of getmemberNamesArray; track branch) {
-            <mat-option [value]="branch.id" [disabled]="branch.selected" [ngStyle]="{ background: branch.selected ? 'green': '' }">
-              {{branch.id}}
-            </mat-option>
+          <input type="text" aria-label="Number" matInput formControlName="pumpNo" [matAutocomplete]="auto" >
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="getOBFromPump(); getSaledUnits()">
+            @for (branch of filteredOptions | async; track branch.id) {
+            <mat-option [value]="branch.id" [disabled]="branch.selected"  [ngStyle]="{ background: branch.selected ? 'green': '' }">{{branch.id}}</mat-option>
             }
-          </mat-select>
+          </mat-autocomplete>
         </mat-form-field>
+        
 
         <!-- <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
           [class.filled]="modelFormData.get('pumpNo')?.value">
@@ -52,8 +51,8 @@
 
         <mat-form-field class="col-3">
           <mat-label>{{'meterreading.inMeterReading' | translate }}</mat-label>
-          <input matInput formControlName="inMeterReading"
-            appFocusOnEnter tabIndex="4" (change)="calculateAmount()" type="number">
+          <input matInput formControlName="inMeterReading" appFocusOnEnter tabIndex="4" (change)="calculateAmount()"
+            type="number">
         </mat-form-field>
 
         <mat-form-field class="col-3">
@@ -64,38 +63,35 @@
 
         <mat-form-field class="col-3">
           <mat-label>{{'meterreading.testing' | translate }}</mat-label>
-          <input matInput formControlName="testing"
-            appFocusOnEnter tabIndex="7" (change)="calculateAmount()" (change)="calculateSales()" type="number">
+          <input matInput formControlName="testing" appFocusOnEnter tabIndex="7" (change)="calculateAmount()"
+            (change)="calculateSales()" type="number">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'meterreading.density' | translate }}</mat-label>
-          <input matInput formControlName="density"
-            appFocusOnEnter tabIndex="8" (change)="calculateAmount()" (change)="calculateSales()" type="number">
+          <input matInput formControlName="density" appFocusOnEnter tabIndex="8" (change)="calculateAmount()"
+            (change)="calculateSales()" type="number">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'meterreading.totalSales' | translate }}</mat-label>
-          <input matInput formControlName="totalSales"
-            appFocusOnEnter tabIndex="6">
+          <input matInput formControlName="totalSales" appFocusOnEnter tabIndex="6">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'meterreading.consumption' | translate }}</mat-label>
-          <input matInput formControlName="consumption"
-            appFocusOnEnter tabIndex="9" (change)="calculateAmount()" (change)="calculateSales()" type="number">
+          <input matInput formControlName="consumption" appFocusOnEnter tabIndex="9" (change)="calculateAmount()"
+            (change)="calculateSales()" type="number">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'meterreading.invoiceSales' | translate }}</mat-label>
-          <input matInput formControlName="invoiceSales"
-            appFocusOnEnter tabIndex="10">
+          <input matInput formControlName="invoiceSales" appFocusOnEnter tabIndex="10">
         </mat-form-field>
 
         <mat-form-field class="col-3">
           <mat-label>{{'meterreading.variation' | translate }}</mat-label>
-          <input matInput formControlName="variation"
-            appFocusOnEnter tabIndex="11" type="number">
+          <input matInput formControlName="variation" appFocusOnEnter tabIndex="11" type="number">
         </mat-form-field>
 
 

@@ -195,7 +195,10 @@ export class PurchaseComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if (params.id1 != 'New') {
         this.routeUrl = params.id1;
-        this.disableForm(params.id1);
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user?.role != '1') {
+          this.disableForm(params.id1);
+        }
         this.getPurchaseInvoiceDeatilList(params.value);
       } else {
         this.resetData();

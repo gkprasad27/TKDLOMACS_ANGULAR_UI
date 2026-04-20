@@ -632,19 +632,19 @@ export class ReportTableComponent implements OnInit, OnChanges {
       let currentDate = new Date();
 
       doc.setFontSize(10);
-      doc.text(
-        'Generated on: ' + pipe.transform(currentDate, 'dd-MM-yyyy HH:mm'),
-        10,
-        (doc as any).lastAutoTable.finalY + 5
-      );
+      // doc.text(
+      //   'Generated on: ' + pipe.transform(currentDate, 'dd-MM-yyyy HH:mm'),
+      //   10,
+      //   (doc as any).lastAutoTable.finalY + 5
+      // );
 
-      doc.setLineWidth(0.2);
-      doc.line(
-        10,
-        (doc as any).lastAutoTable.finalY + 8,
-        doc.internal.pageSize.width - 10,
-        (doc as any).lastAutoTable.finalY + 8
-      );
+      // doc.setLineWidth(0.2);
+      // doc.line(
+      //   10,
+      //   (doc as any).lastAutoTable.finalY + 8,
+      //   doc.internal.pageSize.width - 10,
+      //   (doc as any).lastAutoTable.finalY + 8
+      // );
     };
 
     // ✅ UPDATED FOOTER FUNCTION

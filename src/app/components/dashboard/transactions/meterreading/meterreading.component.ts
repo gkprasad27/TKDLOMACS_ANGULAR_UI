@@ -13,6 +13,7 @@ import { ApiConfigService } from '../../../../services/api-config.service';
 import { ApiService } from '../../../../services/api.service';
 import { CommonService } from '../../../../services/common.service';
 import { userInfo } from 'os';
+import { map, Observable, startWith } from 'rxjs';
 
 
 @Component({
@@ -41,6 +42,9 @@ export class MeterReadingComponent implements OnInit {
   getSUFromIM: any;
   pumpNoConfig: any;
   getmemberNamesArray = [];
+
+  filteredOptions: Observable<any[]>;
+
   constructor(
     private alertService: AlertService,
     private formBuilder: UntypedFormBuilder,
@@ -103,7 +107,17 @@ export class MeterReadingComponent implements OnInit {
       this.modelFormData.controls['branchCode'].disable();
     }
 
+    this.filteredOptions = this.modelFormData.get('pumpNo').valueChanges.pipe(
+      startWith(''),
+      map(value => (this.getmemberNamesArray.length) ? this._filter(value || '') : []),
+    );
+
   }
+
+  private _filter(value: string): string[] {
+    return this.getmemberNamesArray.filter(option => (option.id).toString().includes(value));
+  }
+
   calculateAmount() {
     let amount = 0;
     this.modelFormData.patchValue({
@@ -121,11 +135,15 @@ export class MeterReadingComponent implements OnInit {
   }
 
   getSaledUnits() {
+    this.modelFormData.patchValue({
+      invoiceSales: 0.0
+    });
     const getSaledUnitsUrl = [this.apiConfigService.getSaledUnits, this.modelFormData.get('branchCode').value, this.modelFormData.get('pumpNo').value, this.modelFormData.get('shiftId').value].join('/');
     this.apiService.apiPostRequest(getSaledUnitsUrl)
       .subscribe(
         response => {
           const res = response;
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.saledList != null) {
@@ -133,7 +151,6 @@ export class MeterReadingComponent implements OnInit {
                 this.modelFormData.patchValue({
                   invoiceSales: this.getSUFromIM
                 });
-                this.spinner.hide();
               }
             }
           }
@@ -196,11 +213,15 @@ export class MeterReadingComponent implements OnInit {
   }
 
   getOBFromPump() {
+    this.modelFormData.patchValue({
+      inMeterReading: 0.0
+    });
     const getOBFromPumpUrl = [this.apiConfigService.getOBFromPump, this.modelFormData.get('branchCode').value, this.modelFormData.get('pumpNo').value].join('/');
     this.apiService.apiPostRequest(getOBFromPumpUrl)
       .subscribe(
         response => {
           const res = response;
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if ((res.response['OBList'] != null)) {
@@ -208,13 +229,13 @@ export class MeterReadingComponent implements OnInit {
                 this.modelFormData.patchValue({
                   inMeterReading: this.getOBFromPumpList.outMeterReading
                 });
-                this.spinner.hide();
               }
             }
           }
         });
     this.commonService.setFocus('outMeterReading');
   }
+
 
   getPump(branch?) {
     this.getPumpNames();
