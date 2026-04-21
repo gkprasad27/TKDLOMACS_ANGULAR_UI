@@ -828,7 +828,6 @@ export class PurchaseComponent implements OnInit {
 
 
   save() {
-    debugger
     if (this.routeUrl == 'return') {
       this.registerReturnPurchase();
       return;

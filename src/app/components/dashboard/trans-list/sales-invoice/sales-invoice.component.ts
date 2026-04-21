@@ -94,7 +94,7 @@ export class SalesInvoiceComponent implements OnInit {
       branchName: [null],
       invoiceDate: [(new Date()).toISOString()],
       invoiceNo: [0, Validators.required],
-      ledgerCode: ['100'],
+      ledgerCode: ['100 - CASH A/C'],
       vehicleRegNo: [null],
       stateCode: [null],
       memberName: [null],
@@ -364,7 +364,8 @@ export class SalesInvoiceComponent implements OnInit {
 
   getCashPartyAccountList(flag = true) {
     if (this.branchFormData.get('ledgerCode').value != null && this.branchFormData.get('ledgerCode').value !== '') {
-      const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, this.branchFormData.get('ledgerCode').value].join('/');
+      const lname = this.getCashPartyAccountListArray?.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
+      const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, lname ? lname.id: '100'].join('/');
       this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
         response => {
           const res = response;
@@ -372,6 +373,7 @@ export class SalesInvoiceComponent implements OnInit {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.CashPartyAccountList?.length > 0) {
+                res.response['CashPartyAccountList'].forEach((a: any) => a.display = a.id + ' - ' + a.text);
                 this.getCashPartyAccountListArray = res.response['CashPartyAccountList'];
                 if (flag) {
                   this.getCashPartyAccount();
@@ -389,7 +391,8 @@ export class SalesInvoiceComponent implements OnInit {
 
 
   getCashPartyAccount() {
-    const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount, this.branchFormData.get('ledgerCode').value].join('/');
+    const lname = this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
+    const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount, lname.id].join('/');
     this.apiService.apiGetRequest(getCashPartyAccountUrl).subscribe(
       response => {
         const res = response;
@@ -407,19 +410,19 @@ export class SalesInvoiceComponent implements OnInit {
               this.getAccountBalance(res.response['CashPartyAccount']['accountGroupId']);
               this.spinner.hide();
             }
-            if (this.branchFormData.get('ledgerCode').value != '100') {
+            if (lname.id != '100') {
               this.branchFormData.patchValue({
                 mobile: res.response['CashPartyAccount']['mobile'],
                 customerGstin: res.response['CashPartyAccount']['tin']
               });
             }
-            if (this.branchFormData.get('ledgerCode').value != '2295') {
+            if (lname.id != '2295') {
               this.branchFormData.patchValue({
                 mobile: res.response['CashPartyAccount']['mobile'],
                 customerGstin: res.response['CashPartyAccount']['tin']
               });
             }
-            if (this.branchFormData.get('ledgerCode').value != '2403') {
+            if (lname.id != '2403') {
               this.branchFormData.patchValue({
                 mobile: res.response['CashPartyAccount']['mobile'],
                 customerGstin: res.response['CashPartyAccount']['tin']
@@ -432,9 +435,9 @@ export class SalesInvoiceComponent implements OnInit {
 
   getAccountBalance(accountGroupId) {
     const ledgerCode = this.branchFormData.get('ledgerCode')?.value;
-
     if (ledgerCode != null && ledgerCode !== '') {
-      const getAccountBalanceUrl = [this.apiConfigService.getAccountBalance, this.branchFormData.get('ledgerCode').value].join('/');
+      const lname = this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
+      const getAccountBalanceUrl = [this.apiConfigService.getAccountBalance, lname.id].join('/');
       this.apiService.apiGetRequest(getAccountBalanceUrl).subscribe(
         response => {
           const res = response;
@@ -470,6 +473,9 @@ export class SalesInvoiceComponent implements OnInit {
           }
           if (res?.response?.invoiceMasterData != null) {
             this.branchFormData.patchValue(res.response['invoiceMasterData']);
+            this.branchFormData.patchValue({
+              ledgerCode: res.response['invoiceMasterData'].ledgerCode + ' - ' + res.response['invoiceMasterData'].ledgerName
+            })
           }
           if (this.routeUrl == 'return') {
             this.generateSalesReturnInvNo();
@@ -613,13 +619,9 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   setLedgerName() {
-    const lname = this.getCashPartyAccountListArray.filter(lCode => {
-      if (lCode.id == this.branchFormData.get('ledgerCode').value) {
-        return lCode;
-      }
-    });
+    const lname = this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
     this.branchFormData.patchValue({
-      ledgerName: lname?.[0] != null ? lname[0].text : null
+      ledgerName: lname ? lname.text : null
     });
     this.getCashPartyAccount();
     this.commonService.setFocus('vehicleRegNo');
@@ -1091,9 +1093,9 @@ export class SalesInvoiceComponent implements OnInit {
     //   return;
     // }
     const allowedLedgerCodes = ['100', '2295', '2696', '2600', '2041', '2403', '2431', '311', '312', '313', '314', '315', '318', '319', '320', '321', '322', '324', '9510', '9555', '9561', '965', '9577', '9586', '9588', '9592', '9595', '9600', '9606', '2431', '2287'];
-
+    const lname = this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
     if (
-      !allowedLedgerCodes.includes(this.branchFormData.get('ledgerCode').value) &&
+      !allowedLedgerCodes.includes(lname.id) &&
       (+this.branchFormData.get('accountBalance').value < +this.branchFormData.get('grandTotal').value)
     ) {
       this.alertService.openSnackBar(
@@ -1159,9 +1161,11 @@ export class SalesInvoiceComponent implements OnInit {
     this.branchFormData.patchValue({
       paymentMode: 0
     });
+    const lname = this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
     let obj = { ...this.branchFormData.getRawValue() };
     obj.invoiceDate = this.commonService.formatDate(this.branchFormData.get('invoiceDate').value);
     obj.paymentMode = 0;
+    obj.ledgerCode = lname.id;
     data.map(val => val.qty = val.qty != null && val.qty != '' ? +val.qty : 0);
     const registerInvoiceUrl = this.apiConfigService.registerInvoice;
     const requestObj = { InvoiceHdr: obj, InvoiceDetail: data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };

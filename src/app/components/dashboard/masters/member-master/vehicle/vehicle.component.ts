@@ -69,7 +69,6 @@ export class VehicleComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    debugger
     this.formData = this.vehicleTableData[0];
     if (this.formData != null) {
       this.seDefaults();
