@@ -25,7 +25,7 @@
           <label> {{ 'report.selectedAccountLedger' | translate }}</label>
           <input placeholder=" " required formControlName="selectedAccountLedger" id="selectedAccountLedger"
             (typeaheadOnSelect)="setLedgerName($event)" (input)="getBankPAccountLedgerList($event.target.value)"
-            [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' shortcutkey="f2" autocomplete="off"
+            [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='display' shortcutkey="f2" autocomplete="off"
             [typeaheadOptionsLimit]="100000" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1"
             [typeaheadWaitMs]="200">
           <ng-template #customItemTemplate1 let-model="item">
