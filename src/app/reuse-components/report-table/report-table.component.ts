@@ -574,7 +574,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
   const addCommonHeader = (doc: any, title: string) => {
     autoTable(doc, {
       body: [[{
-        content: `THE KRISNA DISTRICT LORRY OWNERS MUTUALLY AIDED CO-OPERATIVE STORES\n\n${title}`,
+        content: `THE KRISHNA DISTRICT LORRY OWNERS MUTUALLY AIDED CO-OPERATIVE STORES LIMITED\n\n${title}`,
         colSpan: 20,
         styles: { halign: 'center', fontStyle: 'bold', fontSize: 14 }
       }]],
