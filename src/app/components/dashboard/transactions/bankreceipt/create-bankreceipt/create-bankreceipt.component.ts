@@ -135,6 +135,7 @@ export class CreateBankreceiptComponent implements OnInit {
         userId: user.seqId,
         userName: user.userName,
         bankReceiptDate: (new Date()).toISOString(),
+        bankReceiptMasterId: 0
       });
       this.setBranchCode();
       this.genarateVoucherNo(user.branchCode);

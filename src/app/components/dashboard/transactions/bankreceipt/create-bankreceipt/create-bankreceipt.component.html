@@ -43,7 +43,7 @@
 
           <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
             [class.filled]="branchFormData.get('bankLedgerCode')?.value">
-            <label> {{ 'bankreceipt.bankLedgerName' | translate }} </label>
+            <label> {{ 'bankreceipt.bankLedgerName' | translate }} <span class="text_danger"> * </span> </label>
             <input placeholder=" " formControlName="bankLedgerCode" (input)="getBRAccountLedgerList($event.target.value)"
              id="bankLedgerCode" shortcutkey="f2" autocomplete="off" [typeaheadOptionsLimit]="100000"
               [typeahead]="GetBPAccountLedgerListArray" typeaheadOptionField='id' class="form-control typeahead"

@@ -415,8 +415,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.params = this.params.append('reportID', this.dateForm.get('selectedReport')?.value);
     // this.params = this.params.append('shiftId', this.dateForm.get('selectedReport')?.value);
 
-    const lname = this.GetBankPAccountLedgerListArray.find(lCode => lCode.display == this.dateForm.get('selectedAccountLedger').value);
-    this.params = this.params.append('ledgerCode', lname.id);
+    const lname = this.GetBankPAccountLedgerListArray.length && this.GetBankPAccountLedgerListArray.find(lCode => lCode.display == this.dateForm.get('selectedAccountLedger').value);
+    this.params = this.params.append('ledgerCode', lname?.id);
     this.params = this.params.append('ledgerName', this.dateForm.get('ledgerName')?.value);
     this.params = this.params.append('branchCode', +this.dateForm.get('selectedBranch')?.value);
     this.params = this.params.append('branchID', +this.dateForm.get('selectedBranch')?.value);
@@ -574,7 +574,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
   const addCommonHeader = (doc: any, title: string) => {
     autoTable(doc, {
       body: [[{
-        content: title,
+        content: `THE KRISNA DISTRICT LORRY OWNERS MUTUALLY AIDED CO-OPERATIVE STORES\n\n${title}`,
         colSpan: 20,
         styles: { halign: 'center', fontStyle: 'bold', fontSize: 14 }
       }]],

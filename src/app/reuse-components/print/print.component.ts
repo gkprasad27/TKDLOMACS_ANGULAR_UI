@@ -82,7 +82,7 @@ export class PrintComponent implements OnInit, AfterViewInit {
         <body style="font-size: 10px; margin-top:2%;" onload="window.print();window.close()">${printContents}</body>
       </html>`
     );
-    popupWin.document.close();
+    // popupWin.document.close();
     this.dialogRef.close();
   }
 }
