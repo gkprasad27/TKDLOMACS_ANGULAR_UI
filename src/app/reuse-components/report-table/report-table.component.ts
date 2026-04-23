@@ -538,13 +538,72 @@ export class ReportTableComponent implements OnInit, OnChanges {
     });
   }
 
+  
   exportToPdf() {
 
   const buildColumns = () => Object.keys(this.tableData[0] || {});
 
+  // ✅ FORMAT ROWS (adds .00 + commas)
   const buildRows = () =>
     this.dataSource.filteredData.map((row: any) =>
-      Object.keys(this.tableData[0] || {}).map(key => row[key])
+      Object.keys(this.tableData[0] || {}).map(key => {
+
+        const value = row[key];
+        const colName = key.toLowerCase();
+
+        console.log(colName, this.routeParam, 'colName')
+
+        const isAmountField = 
+        (this.routeParam == 'AccountLedger' && (colName.includes('debit') || colName.includes('credit'))) ||
+        (this.routeParam == '24HrsSaleValue' && (colName.includes('cashqty') || colName.includes('creditqty') || colName.includes('totalqty') || colName.includes('cashamt') || colName.includes('creditamt') || colName.includes('totalamt'))) ||
+        (this.routeParam == '24HrsSalesStock' && (colName.includes('openingqty') || colName.includes('inwardqty') || colName.includes('outwardqty') || colName.includes('closingqty'))) ||
+        (this.routeParam == 'Shift' && (colName.includes('pump') || colName.includes('opening') || colName.includes('closing') || colName.includes('testing') || colName.includes('density') || colName.includes('mtr.diff') || colName.includes('invoicesales') || colName.includes('totalsales') || colName.includes('variation'))) ||
+        (this.routeParam == 'Vehical Enquiry' && (colName.includes('pumpno') || colName.includes('qty') || colName.includes('grossamount'))) ||
+        (this.routeParam == 'Intimate Sale' && (colName.includes('pqty') || colName.includes('pamount') || colName.includes('npamount') || colName.includes('qty') || colName.includes('amount'))) ||
+        (this.routeParam == 'Stock Verification' && (colName.includes('bookstock') || colName.includes('phystock') || colName.includes('excess') || colName.includes('short') || colName.includes('sales') || colName.includes('stocktransfer'))) ||
+        (this.routeParam == 'Stock Ledger' && (colName.includes('opening') || colName.includes('received') || colName.includes('issued') || colName.includes('closing'))) ||
+        (this.routeParam == 'Sales analysis by branch' && (colName.includes('qty') || colName.includes('liters') || colName.includes('amount'))) ||
+        (this.routeParam == 'Product Wise Monthly Purchase' && (colName.includes('apr') || colName.includes('may') || colName.includes('june') || colName.includes('july') || colName.includes('aug') || colName.includes('sep') || colName.includes('oct') || colName.includes('nov') || colName.includes('dec') || colName.includes('jan') || colName.includes('feb') || colName.includes('mar'))) ||
+        (this.routeParam == 'Daily Sales' && (colName.includes('pumpno') || colName.includes('qty') || colName.includes('grossamount') || colName.includes('slipno') || colName.includes('totalamount'))) ||
+        (this.routeParam == 'Product Price List' && (colName.includes('availableqty') || colName.includes('price'))) ||
+        (this.routeParam == 'Receipts And Payments Detailed' && (colName.includes('credit') || colName.includes('debit'))) ||
+        (this.routeParam == 'Receipts And Payments Summary' && (colName.includes('receipts') || colName.includes('payments'))) ||
+        (this.routeParam == 'SMS Summary' && (colName.includes('qty') || colName.includes('price') || colName.includes('amount'))) ||
+        (this.routeParam == 'Sales GST' && (colName.includes('invoicemasterid') || colName.includes('totalinvoicevalue') || colName.includes('taxablevalue') || colName.includes('cgst') || colName.includes('sgst') || colName.includes('totalgst') || colName.includes('grossamount') || colName.includes('0taxamt') || colName.includes('0igst') || colName.includes('0cgst') || colName.includes('0sgst') || colName.includes('5taxamt') || colName.includes('5igst') || colName.includes('5cgst') || colName.includes('5sgst') || colName.includes('12taxamt') || colName.includes('12igst') || colName.includes('12cgst') || colName.includes('12sgst') || colName.includes('18taxamt') || colName.includes('18igst') || colName.includes('18cgst') || colName.includes('18sgst') || colName.includes('28taxamt') || colName.includes('28igst') || colName.includes('28cgst') || colName.includes('28sgst'))) ||
+        (this.routeParam == '24Hrs Sale Value 6Am To 6Am' && (colName.includes('cashqty') || colName.includes('creditqty') || colName.includes('totalqty') || colName.includes('cashamt') || colName.includes('creditamt') || colName.includes('totalamt'))) ||
+        (this.routeParam == 'Trial Balance' && (colName.includes('ledgercode') || colName.includes('debits') || colName.includes('credits'))) ||
+        (this.routeParam == '24Hrs Meter Reading' && (colName.includes('pump') || colName.includes('opening') || colName.includes('closing') || colName.includes('testing') || colName.includes('density') || colName.includes('mtr.diff') || colName.includes('invoicesales') || colName.includes('totalsales') || colName.includes('variation'))) ||
+        (this.routeParam == 'Closing Balance' && (colName.includes('credits'))) ||
+        (this.routeParam == 'Bank Reconciliation' && (colName.includes('debit') || colName.includes('credit'))) ||
+        (this.routeParam == 'Stock Valuation' && (colName.includes('balance') || colName.includes('liters'))) ||
+        (this.routeParam == 'Four Column Cash Book' && (colName.includes('debit') || colName.includes('credit') || colName.includes('receipts') || colName.includes('payments'))) ||
+        (this.routeParam == 'ProductMonthWise PurchaseLtrs' && (colName.includes('apr') || colName.includes('may') || colName.includes('june') || colName.includes('july') || colName.includes('aug') || colName.includes('sep') || colName.includes('oct') || colName.includes('nov') || colName.includes('dec') || colName.includes('jan') || colName.includes('feb') || colName.includes('mar') || colName.includes('total'))) ||
+        (this.routeParam == 'BranchWise Monthly SalesByLiters' && (colName.includes('gp') || colName.includes('ndmr') || colName.includes('chkn') || colName.includes('an1') || colName.includes('gng') || colName.includes('an2') || colName.includes('sw') || colName.includes('knch') || colName.includes('gdv') || colName.includes('vuy') || colName.includes('tir'))) ||
+        (this.routeParam == 'BranchWise StockStatement Ltrs' && (colName.includes('gollapudi') || colName.includes('nidamanuru') || colName.includes('chinakakani') || colName.includes('autonagargodown') || colName.includes('autonagares') || colName.includes('ganguru') || colName.includes('autonagar2') || colName.includes('saleswing') || colName.includes('kanchikacherla') || colName.includes('gudivada') || colName.includes('vuyyuru') || colName.includes('tiruvuru'))) ||
+        (this.routeParam == 'BranchWise StockStatement Qty' && (colName.includes('gollapudi') || colName.includes('nidamanuru') || colName.includes('chinakakani') || colName.includes('autonagargodown') || colName.includes('autonagares') || colName.includes('ganguru') || colName.includes('autonagar2') || colName.includes('saleswing') || colName.includes('kanchikacherla') || colName.includes('gudivada') || colName.includes('vuyyuru') || colName.includes('tiruvuru')))
+        // const isAmountField =
+        //   colName.includes('amount') ||
+        //   colName.includes('total') ||
+        //   colName.includes('balance') ||
+        //   colName.includes('qty') ||
+        //   colName.includes('price') ||
+        //   colName.includes('value') ||
+        //   colName.includes('debit') ||
+        //   colName.includes('credit');
+
+        if (isAmountField && value !== null && value !== undefined && value !== '') {
+          const num = Number(value);
+          if (!isNaN(num)) {
+            return num.toLocaleString('en-IN', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            });
+          }
+        }
+
+        return value;
+
+      })
     );
 
   const buildHeaderRows = () => {
@@ -573,6 +632,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
   const addCommonHeader = (doc: any, title: string) => {
     autoTable(doc, {
+      margin: { top: 5, left: 5, right: 5 },
       body: [[{
         content: `THE KRISHNA DISTRICT LORRY OWNERS MUTUALLY AIDED CO-OPERATIVE STORES LIMITED\n\n${title}`,
         colSpan: 20,
@@ -589,12 +649,12 @@ export class ReportTableComponent implements OnInit, OnChanges {
       doc.setPage(i);
       doc.setFontSize(9);
 
-      doc.text(title, 10, doc.internal.pageSize.height - 10);
+      doc.text(title, 5, doc.internal.pageSize.height - 5);
 
       doc.text(
         `Page ${i} of ${pageCount}`,
-        doc.internal.pageSize.width - 10,
-        doc.internal.pageSize.height - 10,
+        doc.internal.pageSize.width - 5,
+        doc.internal.pageSize.height - 5,
         { align: 'right' }
       );
     }
@@ -607,22 +667,17 @@ export class ReportTableComponent implements OnInit, OnChanges {
   let headerRows = buildHeaderRows();
   let footerRows = buildFooterRows();
 
-  // 🔥 SMART ORIENTATION
-  const isLandscape = columns.length > 5;
-
-  const isLargeFormat =
-    this.routeParam === 'Product Wise Monthly Purchase' ||
-    this.routeParam === 'BranchWise Monthly SalesByLiters' ||
-    this.routeParam === 'ProductMonthWise PurchaseLtrs';
-
+  // ✅ Portrait A4
   let doc: any = new jsPDF({
-    orientation: isLandscape ? 'landscape' : 'portrait',
+    orientation: 'portrait',
     unit: 'mm',
-    format: isLargeFormat ? 'a3' : 'a4'
+    format: 'a4'
   });
 
+  doc.setDisplayMode('fullwidth', 'continuous', 'UseNone');
+
   // Title
-  let name = '';
+  let name = this.routeParam;
 
   if (this.routeParam === 'Shift') {
     const obj = this.Reports.find((rr: any) => rr.id === this.dateForm.value.selectedReport);
@@ -632,43 +687,84 @@ export class ReportTableComponent implements OnInit, OnChanges {
     const obj = this.FourColumnReportType.find((rr: any) => rr.id === this.dateForm.value.selectedFourColumnReportType);
     name = obj?.reportName || this.routeParam;
   }
-  else {
-    name = this.routeParam;
-  }
 
   addCommonHeader(doc, name);
 
-  // Header section
+  // Header
   autoTable(doc, {
-    margin: { top: 20 },
+    margin: { left: 5, right: 5 },
     body: headerRows,
-    theme: 'plain'
+    theme: 'plain',
+    startY: (doc as any).lastAutoTable.finalY + 5
   });
 
-  // 🔥 CALCULATE WIDTH FIT
-  const pageWidth = doc.internal.pageSize.width;
-  const margin = 20; // 10 left + 10 right
-  const usableWidth = pageWidth - margin;
-  const colWidth = usableWidth / columns.length;
-
-  // 🔥 DYNAMIC COLUMN STYLES
+  // ✅ Column alignment
   const columnStyles: any = {};
-  columns.forEach((_: any, i: number) => {
-    columnStyles[i] = { cellWidth: colWidth };
+
+  columns.forEach((col: string, index: number) => {
+
+    const name = col.toLowerCase();
+
+
+    if (
+      (this.routeParam == 'AccountLedger' && (name.includes('debit') || name.includes('credit'))) ||
+      (this.routeParam == '24HrsSaleValue' && (name.includes('cashqty') || name.includes('creditqty') || name.includes('totalqty') || name.includes('cashamt') || name.includes('creditamt') || name.includes('totalamt'))) ||
+      (this.routeParam == '24HrsSalesStock' && (name.includes('openingqty') || name.includes('inwardqty') || name.includes('outwardqty') || name.includes('closingqty'))) ||
+      (this.routeParam == 'Shift' && (name.includes('pump') || name.includes('opening') || name.includes('closing') || name.includes('testing') || name.includes('density') || name.includes('mtr.diff') || name.includes('invoicesales') || name.includes('totalsales') || name.includes('variation'))) ||
+      (this.routeParam == 'Vehical Enquiry' && (name.includes('pumpno') || name.includes('qty') || name.includes('grossamount'))) ||
+      (this.routeParam == 'Intimate Sale' && (name.includes('pqty') || name.includes('pamount') || name.includes('npamount') || name.includes('qty') || name.includes('amount'))) ||
+      (this.routeParam == 'Stock Verification' && (name.includes('bookstock') || name.includes('phystock') || name.includes('excess') || name.includes('short') || name.includes('sales') || name.includes('stocktransfer'))) ||
+      (this.routeParam == 'Stock Ledger' && (name.includes('opening') || name.includes('received') || name.includes('issued') || name.includes('closing'))) ||
+      (this.routeParam == 'Sales analysis by branch' && (name.includes('qty') || name.includes('liters') || name.includes('amount'))) ||
+      (this.routeParam == 'Product Wise Monthly Purchase' && (name.includes('apr') || name.includes('may') || name.includes('june') || name.includes('july') || name.includes('aug') || name.includes('sep') || name.includes('oct') || name.includes('nov') || name.includes('dec') || name.includes('jan') || name.includes('feb') || name.includes('mar'))) ||
+      (this.routeParam == 'Daily Sales' && (name.includes('pumpno') || name.includes('qty') || name.includes('grossamount') || name.includes('slipno') || name.includes('totalamount'))) ||
+      (this.routeParam == 'Product Price List' && (name.includes('availableqty') || name.includes('price'))) ||
+      (this.routeParam == 'Receipts And Payments Detailed' && (name.includes('credit') || name.includes('debit'))) ||
+      (this.routeParam == 'Receipts And Payments Summary' && (name.includes('receipts') || name.includes('payments'))) ||
+      (this.routeParam == 'SMS Summary' && (name.includes('qty') || name.includes('price') || name.includes('amount') || name.includes('mobile'))) ||
+      (this.routeParam == 'Sales GST' && (name.includes('invoicemasterid') || name.includes('totalinvoicevalue') || name.includes('taxablevalue') || name.includes('cgst') || name.includes('sgst') || name.includes('totalgst') || name.includes('grossamount') || name.includes('0taxamt') || name.includes('0igst') || name.includes('0cgst') || name.includes('0sgst') || name.includes('5taxamt') || name.includes('5igst') || name.includes('5cgst') || name.includes('5sgst') || name.includes('12taxamt') || name.includes('12igst') || name.includes('12cgst') || name.includes('12sgst') || name.includes('18taxamt') || name.includes('18igst') || name.includes('18cgst') || name.includes('18sgst') || name.includes('28taxamt') || name.includes('28igst') || name.includes('28cgst') || name.includes('28sgst'))) ||
+      (this.routeParam == '24Hrs Sale Value 6Am To 6Am' && (name.includes('cashqty') || name.includes('creditqty') || name.includes('totalqty') || name.includes('cashamt') || name.includes('creditamt') || name.includes('totalamt'))) ||
+      (this.routeParam == 'Trial Balance' && (name.includes('ledgercode') || name.includes('debits') || name.includes('credits'))) ||
+      (this.routeParam == '24Hrs Meter Reading' && (name.includes('pump') || name.includes('opening') || name.includes('closing') || name.includes('testing') || name.includes('density') || name.includes('mtr.diff') || name.includes('invoicesales') || name.includes('totalsales') || name.includes('variation'))) ||
+      (this.routeParam == 'Closing Balance' && (name.includes('credits') || name.includes('ledgercode'))) ||
+      (this.routeParam == 'Bank Reconciliation' && (name.includes('debit') || name.includes('credit'))) ||
+      (this.routeParam == 'Stock Valuation' && (name.includes('balance') || name.includes('liters') || name.includes('stockvalue'))) ||
+      (this.routeParam == 'Four Column Cash Book' && (name.includes('debit') || name.includes('credit') || name.includes('receipts') || name.includes('payments'))) ||
+      (this.routeParam == 'ProductMonthWise PurchaseLtrs' && (name.includes('apr') || name.includes('may') || name.includes('june') || name.includes('july') || name.includes('aug') || name.includes('sep') || name.includes('oct') || name.includes('nov') || name.includes('dec') || name.includes('jan') || name.includes('feb') || name.includes('mar') || name.includes('total'))) ||
+      (this.routeParam == 'BranchWise Monthly SalesByLiters' && (name.includes('gp') || name.includes('ndmr') || name.includes('chkn') || name.includes('an1') || name.includes('gng') || name.includes('an2') || name.includes('sw') || name.includes('knch') || name.includes('gdv') || name.includes('vuy') || name.includes('tir'))) ||
+      (this.routeParam == 'BranchWise StockStatement Ltrs' && (name.includes('gollapudi') || name.includes('nidamanuru') || name.includes('chinakakani') || name.includes('autonagargodown') || name.includes('autonagares') || name.includes('ganguru') || name.includes('autonagar2') || name.includes('saleswing') || name.includes('kanchikacherla') || name.includes('gudivada') || name.includes('vuyyuru') || name.includes('tiruvuru'))) ||
+      (this.routeParam == 'BranchWise StockStatement Qty' && (name.includes('gollapudi') || name.includes('nidamanuru') || name.includes('chinakakani') || name.includes('autonagargodown') || name.includes('autonagares') || name.includes('ganguru') || name.includes('autonagar2') || name.includes('saleswing') || name.includes('kanchikacherla') || name.includes('gudivada') || name.includes('vuyyuru') || name.includes('tiruvuru')))
+    ) {
+      columnStyles[index] = { halign: 'right' };
+    }
+    else if (
+      (this.routeParam == 'AccountLedger' && (name.includes('date'))) ||
+      (this.routeParam == 'Vehical Enquiry' && (name.includes('invoicedate'))) ||
+      (this.routeParam == 'Intimate Sale' && (name.includes('invoicedate'))) ||
+      (this.routeParam == 'Stock Ledger' && (name.includes('date'))) ||
+      (this.routeParam == 'SMS Summary' && (name.includes('invoicedate'))) ||
+      (this.routeParam == 'Bank Reconciliation' && (name.includes('date'))) 
+    ) {
+      columnStyles[index] = { halign: 'center' };
+    }
+    else {
+      columnStyles[index] = { halign: 'left' };
+    }
+
   });
 
-  // 🔥 MAIN TABLE (FULL FIX)
+  // ✅ Main table
   autoTable(doc, {
+    margin: { left: 5, right: 5 },
     head: [columns],
     body: rows,
-    startY: (doc as any).lastAutoTable.finalY + 10,
+    startY: (doc as any).lastAutoTable.finalY + 5,
     theme: 'grid',
 
     styles: {
-      fontSize: columns.length > 8 ? 6 : 8,   // adaptive font
-      cellPadding: 2,
-      overflow: 'linebreak',
-      halign: 'center'
+      fontSize: columns.length > 6 ? 6 : 8,
+      cellPadding: 0.3,
+      overflow: 'linebreak'
     },
 
     headStyles: {
@@ -677,34 +773,33 @@ export class ReportTableComponent implements OnInit, OnChanges {
       halign: 'center'
     },
 
-    tableWidth: usableWidth,
-    columnStyles: columnStyles
+    columnStyles: columnStyles,
+    tableWidth: 'auto'
   });
 
   // Separator line
   doc.setLineWidth(0.2);
   doc.line(
-    10,
-    (doc as any).lastAutoTable.finalY + 5,
-    doc.internal.pageSize.width - 10,
-    (doc as any).lastAutoTable.finalY + 5
+    5,
+    (doc as any).lastAutoTable.finalY + 3,
+    doc.internal.pageSize.width - 5,
+    (doc as any).lastAutoTable.finalY + 3
   );
 
-  // Footer table
+  // Footer
   if (footerRows.length) {
     autoTable(doc, {
+      margin: { left: 5, right: 5 },
       body: footerRows,
       theme: 'plain',
-      startY: (doc as any).lastAutoTable.finalY + 10
+      startY: (doc as any).lastAutoTable.finalY + 5
     });
   }
 
-  // Page footer
   addPageNumbers(doc, name);
 
   doc.save(name + '.pdf');
 }
-
   openDialog(val, row?) {
     if (this.routeParam == 'Shift') {
       this.dateForm.patchValue({

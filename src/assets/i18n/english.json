@@ -1509,6 +1509,21 @@
   "Stock Valuation": {
     "title": "Stock Valuation"
   },
+  "AccountLedgerDieselReport": {
+    "title": "Account Ledger Diesel Report"
+  },
+  "BranchWise StockStatement Qty": {
+    "title": "Branch Wise Stock Statement Qty"
+  },
+  "BranchWise StockStatement Ltrs": {
+    "title": "Branch Wise Stock Statement Ltrs"
+  },
+  "BranchWise Monthly SalesByLiters": {
+    "title": "Branch Wise Monthly Sales By Liters"
+  },
+  "ProductMonthWise PurchaseLtrs": {
+    "title": "Product Month Wise Purchase Ltrs"
+  },
   "report": {
     "selectedAccountLedger": "Account Ledger",
     "formDate": "Choose date",
@@ -1530,6 +1545,16 @@
   },
   "Four Column Cash Book": {
     "title": "Four Column Cash Book"
+  },
+  "erpuser": {
+    "title": "Erp User",
+    "userName": "User Name",
+    "password": "Password",
+    "role": "Role",
+    "branchCode": "Branch Code",
+    "companyCode": "Company Code",
+    "addDate": "Add Date",
+    "active": "Active"
   }
 }
 

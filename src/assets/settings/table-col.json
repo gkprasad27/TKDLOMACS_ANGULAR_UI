@@ -896,5 +896,15 @@
     "selectedGroupName": "Group Type",
     "selectedSupplierGroup": "Supplier Group",
     "SearchCriteria": "Search Criteria"
+  },
+  "erpuser": {
+    "title": "ErpUser",
+    "userName": "User Name",
+    "password": "Password",
+    "role": "Role",
+    "branchCode": "Branch Code",
+    "companyCode": "Company Code",
+    "addDate": "Add Date",
+    "active": "Active"
   }
 }
