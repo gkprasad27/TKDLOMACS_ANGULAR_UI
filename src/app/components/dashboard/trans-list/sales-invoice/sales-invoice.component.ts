@@ -391,7 +391,10 @@ export class SalesInvoiceComponent implements OnInit {
 
 
   getCashPartyAccount() {
-    const lname = this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
+    const lname = this.getCashPartyAccountListArray.length && this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
+    if(!lname) {
+      return;
+    }
     const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount, lname.id].join('/');
     this.apiService.apiGetRequest(getCashPartyAccountUrl).subscribe(
       response => {
@@ -475,7 +478,8 @@ export class SalesInvoiceComponent implements OnInit {
             this.branchFormData.patchValue(res.response['invoiceMasterData']);
             this.branchFormData.patchValue({
               ledgerCode: res.response['invoiceMasterData'].ledgerCode + ' - ' + res.response['invoiceMasterData'].ledgerName
-            })
+            }, { emitEvent: false });
+            this.getCashPartyAccountList(false);
           }
           if (this.routeUrl == 'return') {
             this.generateSalesReturnInvNo();
