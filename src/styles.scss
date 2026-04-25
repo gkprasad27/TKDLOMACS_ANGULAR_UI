@@ -353,7 +353,6 @@ mat-tab-header {
 
   input:focus {
     box-shadow: none !important;
-    background-color: none !important;
   }
 }
 
@@ -543,4 +542,13 @@ typeahead-container {
     border: 1px solid rgb(118, 118, 118) !important;
     border-radius: 3px !important;
     padding: 3px !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  background-color: #f6ff0091 !important; /* light blue */
+  outline: none !important; /* optional: removes default border glow */
+}
+
+input, textarea, select {
+  transition: background-color 0.3s ease;
 }
