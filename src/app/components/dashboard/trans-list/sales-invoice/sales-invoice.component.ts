@@ -94,7 +94,8 @@ export class SalesInvoiceComponent implements OnInit {
       branchName: [null],
       invoiceDate: [(new Date()).toISOString()],
       invoiceNo: [0, Validators.required],
-      ledgerCode: ['100 - CASH A/C'],
+      ledgerCode: ['100'],
+      ledgerValue: ['100 - CASH A/C'],
       vehicleRegNo: [null],
       stateCode: [null],
       memberName: [null],
@@ -145,7 +146,7 @@ export class SalesInvoiceComponent implements OnInit {
 
   ngOnInit() {
     this.allApis();
-    this.commonService.setFocus('ledgerCode');
+    this.commonService.setFocus('ledgerValue');
   }
   allApis() {
     const getBranchesListUrl = this.apiConfigService.getBillingBranchesList;
@@ -247,7 +248,7 @@ export class SalesInvoiceComponent implements OnInit {
       this.setBranchCode();
       this.genarateBillNo(user.branchCode);
       this.formGroup();
-      this.getCashPartyAccountList();
+      this.getCashPartyAccountList('');
     }
     this.disableForm();
   }
@@ -362,40 +363,32 @@ export class SalesInvoiceComponent implements OnInit {
     });
   }
 
-  getCashPartyAccountList(flag = true) {
-    if (this.branchFormData.get('ledgerCode').value != null && this.branchFormData.get('ledgerCode').value !== '') {
-      const lname = this.getCashPartyAccountListArray?.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
-      const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, lname ? lname.id: (flag ? '100' : this.branchFormData.get('ledgerCode').value)].join('/');
-      this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
-        response => {
-          const res = response;
-          this.spinner.hide();
-          if (res != null && res.status === StatusCodes.pass) {
-            if (res.response != null) {
-              if (res?.response?.CashPartyAccountList?.length > 0) {
-                res.response['CashPartyAccountList'].forEach((a: any) => a.display = a.id + ' - ' + a.text);
-                this.getCashPartyAccountListArray = res.response['CashPartyAccountList'];
-                if (flag) {
-                  this.getCashPartyAccount();
-                }
-              } else {
-                this.getCashPartyAccountListArray = [];
+  getCashPartyAccountList(event, flag = true) {
+    const value = event?.target?.value;
+    const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, value ? value : this.branchFormData.get('ledgerCode').value].join('/');
+    this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
+      response => {
+        const res = response;
+        this.spinner.hide();
+        if (res != null && res.status === StatusCodes.pass) {
+          if (res.response != null) {
+            if (res?.response?.CashPartyAccountList?.length > 0) {
+              res.response['CashPartyAccountList'].forEach((a: any) => a.display = a.id + ' - ' + a.text);
+              this.getCashPartyAccountListArray = res.response['CashPartyAccountList'];
+              if (flag) {
+                this.getCashPartyAccount();
               }
+            } else {
+              this.getCashPartyAccountListArray = [];
             }
           }
-        });
-    } else {
-      this.getCashPartyAccountListArray = [];
-    }
+        }
+      });
   }
 
 
   getCashPartyAccount() {
-    const lname = this.getCashPartyAccountListArray.length && this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
-    if(!lname) {
-      return;
-    }
-    const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount, lname.id].join('/');
+    const getCashPartyAccountUrl = [this.apiConfigService.getCashPartyAccount, this.branchFormData.get('ledgerCode').value].join('/');
     this.apiService.apiGetRequest(getCashPartyAccountUrl).subscribe(
       response => {
         const res = response;
@@ -413,19 +406,19 @@ export class SalesInvoiceComponent implements OnInit {
               this.getAccountBalance(res.response['CashPartyAccount']['accountGroupId']);
               this.spinner.hide();
             }
-            if (lname.id != '100') {
+            if (this.branchFormData.get('ledgerCode').value != '100') {
               this.branchFormData.patchValue({
                 mobile: res.response['CashPartyAccount']['mobile'],
                 customerGstin: res.response['CashPartyAccount']['tin']
               });
             }
-            if (lname.id != '2295') {
+            if (this.branchFormData.get('ledgerCode').value != '2295') {
               this.branchFormData.patchValue({
                 mobile: res.response['CashPartyAccount']['mobile'],
                 customerGstin: res.response['CashPartyAccount']['tin']
               });
             }
-            if (lname.id != '2403') {
+            if (this.branchFormData.get('ledgerCode').value != '2403') {
               this.branchFormData.patchValue({
                 mobile: res.response['CashPartyAccount']['mobile'],
                 customerGstin: res.response['CashPartyAccount']['tin']
@@ -437,31 +430,27 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getAccountBalance(accountGroupId) {
-    const ledgerCode = this.branchFormData.get('ledgerCode')?.value;
-    if (ledgerCode != null && ledgerCode !== '') {
-      const lname = this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
-      const getAccountBalanceUrl = [this.apiConfigService.getAccountBalance, lname.id].join('/');
-      this.apiService.apiGetRequest(getAccountBalanceUrl).subscribe(
-        response => {
-          const res = response;
-          this.spinner.hide();
-          if (res != null && res.status === StatusCodes.pass) {
-            if (res.response != null) {
-              if (res?.response?.AccountBalance != null) {
-                this.branchFormData.patchValue({
-                  accountBalance: res.response['AccountBalance']
-                });
-                if (accountGroupId === 7576 && res.response['AccountBalance'] <= 0) {
-                  this.isSaveDisabled = true;
-                  this.alertService.openSnackBar(`Advance Party Account Balance Should not Be Less Than or Equal To Zero(${accountGroupId}) code`, Static.Close, SnackBar.error);
-                } else {
-                  this.isSaveDisabled = false;
-                }
+    const getAccountBalanceUrl = [this.apiConfigService.getAccountBalance, this.branchFormData.get('ledgerCode')?.value].join('/');
+    this.apiService.apiGetRequest(getAccountBalanceUrl).subscribe(
+      response => {
+        const res = response;
+        this.spinner.hide();
+        if (res != null && res.status === StatusCodes.pass) {
+          if (res.response != null) {
+            if (res?.response?.AccountBalance != null) {
+              this.branchFormData.patchValue({
+                accountBalance: res.response['AccountBalance']
+              });
+              if (accountGroupId === 7576 && res.response['AccountBalance'] <= 0) {
+                this.isSaveDisabled = true;
+                this.alertService.openSnackBar(`Advance Party Account Balance Should not Be Less Than or Equal To Zero(${accountGroupId}) code`, Static.Close, SnackBar.error);
+              } else {
+                this.isSaveDisabled = false;
               }
             }
           }
-        });
-    }
+        }
+      });
   }
 
   getInvoiceDeatilList(id) {
@@ -477,7 +466,7 @@ export class SalesInvoiceComponent implements OnInit {
           if (res?.response?.invoiceMasterData != null) {
             this.branchFormData.patchValue(res.response['invoiceMasterData']);
             this.branchFormData.patchValue({
-              ledgerCode: res.response['invoiceMasterData'].ledgerCode + ' - ' + res.response['invoiceMasterData'].ledgerName
+              ledgerValue: res.response['invoiceMasterData'].ledgerCode + ' - ' + res.response['invoiceMasterData'].ledgerName
             }, { emitEvent: false });
             this.getCashPartyAccountList(false);
           }
@@ -508,7 +497,7 @@ export class SalesInvoiceComponent implements OnInit {
 
   disableForm(route?) {
     if (route != null) {
-      this.branchFormData.controls['ledgerCode'].disable();
+      this.branchFormData.controls['ledgerValue'].disable();
       this.branchFormData.controls['branchCode'].disable();
       this.branchFormData.controls['invoiceDate'].disable();
       this.branchFormData.controls['vehicleRegNo'].disable();
@@ -622,11 +611,28 @@ export class SalesInvoiceComponent implements OnInit {
     return true;
   }
 
-  setLedgerName() {
-    const lname = this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
+  setLedgerName(event) {
+    const value = event?.target?.value?.split(' -')[0];
+    const lname = this.getCashPartyAccountListArray.find(lCode => lCode.id == value);
     this.branchFormData.patchValue({
-      ledgerName: lname ? lname.text : null
+      ledgerName: lname ? lname.text : null,
+      ledgerCode: lname ? lname.id : null,
     });
+    if (!lname) {
+      this.branchFormData.patchValue({
+        ledgerValue: '',
+        accountBalance: '',
+        paymentMode: '',
+        customerGstin: '',
+        mobile: ''
+      });
+      this.alertService.openSnackBar(`Please select Ledger Code`, Static.Close, SnackBar.error);
+      return;
+    } else {
+      this.branchFormData.patchValue({
+        ledgerValue: this.branchFormData.get('ledgerCode').value + ' - ' + this.branchFormData.get('ledgerName').value
+      });
+    }
     this.getCashPartyAccount();
     this.commonService.setFocus('vehicleRegNo');
   }
@@ -1017,10 +1023,10 @@ export class SalesInvoiceComponent implements OnInit {
     //  });
     //}
     if (this.printBill) {
-      if (this.branchFormData.get('branchCode').value == 2 || 
-      (this.branchFormData.get('branchCode').value == 3) || 
-      (this.branchFormData.get('branchCode').value == 4) || 
-      (this.branchFormData.get('branchCode').value == 7)) {
+      if (this.branchFormData.get('branchCode').value == 2 ||
+        (this.branchFormData.get('branchCode').value == 3) ||
+        (this.branchFormData.get('branchCode').value == 4) ||
+        (this.branchFormData.get('branchCode').value == 7)) {
         this.dialog.open(PrintPetrolComponent, {
           width: '1024px',
           data: requestObj,
@@ -1100,9 +1106,8 @@ export class SalesInvoiceComponent implements OnInit {
     //   return;
     // }
     const allowedLedgerCodes = ['100', '2295', '2696', '2600', '2041', '2403', '2431', '311', '312', '313', '314', '315', '318', '319', '320', '321', '322', '324', '9510', '9555', '9561', '965', '9577', '9586', '9588', '9592', '9595', '9600', '9606', '2431', '2287'];
-    const lname = this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
     if (
-      !allowedLedgerCodes.includes(lname.id) &&
+      !allowedLedgerCodes.includes(this.branchFormData.get('ledgerCode').value) &&
       (+this.branchFormData.get('accountBalance').value < +this.branchFormData.get('grandTotal').value)
     ) {
       this.alertService.openSnackBar(
@@ -1142,7 +1147,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   enableEditFields() {
-    this.branchFormData.controls['ledgerCode'].enable();
+    this.branchFormData.controls['ledgerValue'].enable();
     this.branchFormData.controls['branchCode'].enable();
     this.branchFormData.controls['invoiceDate'].enable();
     this.branchFormData.controls['vehicleRegNo'].enable();
@@ -1168,11 +1173,9 @@ export class SalesInvoiceComponent implements OnInit {
     this.branchFormData.patchValue({
       paymentMode: 0
     });
-    const lname = this.getCashPartyAccountListArray.find(lCode => lCode.display == this.branchFormData.get('ledgerCode').value);
     let obj = { ...this.branchFormData.getRawValue() };
     obj.invoiceDate = this.commonService.formatDate(this.branchFormData.get('invoiceDate').value);
     obj.paymentMode = 0;
-    obj.ledgerCode = lname.id;
     data.map(val => val.qty = val.qty != null && val.qty != '' ? +val.qty : 0);
     const registerInvoiceUrl = this.apiConfigService.registerInvoice;
     const requestObj = { InvoiceHdr: obj, InvoiceDetail: data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };

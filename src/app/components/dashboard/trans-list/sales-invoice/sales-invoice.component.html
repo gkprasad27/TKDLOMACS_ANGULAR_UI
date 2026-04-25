@@ -43,13 +43,13 @@
           </mat-form-field>
 
           <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
-            [class.filled]="branchFormData.get('ledgerCode')?.value">
+            [class.filled]="branchFormData.get('ledgerValue')?.value">
             <label> {{ 'salesInvoice.ledgerCode' | translate }} </label>
-            <input placeholder=" " formControlName="ledgerCode"
-              (input)="getCashPartyAccountList(false)" id="ledgerCode" shortcutkey="f2"
+            <input placeholder=" " formControlName="ledgerValue"
+              (input)="getCashPartyAccountList($event, false)" id="ledgerValue" shortcutkey="f2"
               autocomplete="off" [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray"
               typeaheadOptionField='display' class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
-              (typeaheadOnSelect)="setLedgerName()" (blur)="setLedgerName()" [typeaheadWaitMs]="200" >
+              (typeaheadOnSelect)="setLedgerName($event)" (focusout)="setLedgerName($event)" [typeaheadWaitMs]="200" >
             <ng-template #customItemTemplate let-model="item">
               <span><strong>{{model.id}}</strong> - {{model.text}}</span>
             </ng-template>
@@ -195,8 +195,6 @@
                   (input)="getPupms($event.target.value, element.productCode)" [typeahead]="getPumpsArray"
                   typeaheadOptionField='text' autocomplete="off" [typeaheadMinLength]="0" [minLength]="1"
                   [typeaheadWaitMs]="200" ></strong>
-
-
             </td>
           </ng-container>
 
