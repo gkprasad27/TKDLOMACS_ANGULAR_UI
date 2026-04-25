@@ -8,7 +8,7 @@
         ||routeParam=='Product Price List'||routeParam=='Receipts And Payments Detailed'||routeParam=='Receipts And Payments Summary'||routeParam=='SMS Summary'||routeParam=='Sales GST'||routeParam=='24Hrs Sale Value 6Am To 6Am'
         ||routeParam=='Trial Balance'||routeParam=='24Hrs Meter Reading'||routeParam=='Closing Balance'||routeParam=='Bank Reconciliation'||routeParam=='Stock Valuation'||routeParam=='Four Column Cash Book'
         ||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement Ltrs'||routeParam=='BranchWise StockStatement Qty'
-        ||routeParam=='ProductMonthWise PurchaseLtrs') {
+        ||routeParam=='ProductMonthWise PurchaseLtrs'||routeParam=='einvoice') {
         <mat-form-field class="col-3">
           <mat-label> {{ 'report.formDate' | translate }} </mat-label>
           <mat-date-range-input [rangePicker]="picker">
@@ -190,7 +190,7 @@
         ||routeParam=='Sales analysis by branch'||routeParam=='Product Wise Monthly Purchase'||routeParam=='Daily Sales'||routeParam=='Shift'||routeParam=='Product Price List'
         ||routeParam=='Receipts And Payments Detailed'||routeParam=='Receipts And Payments Summary'||routeParam=='SMS Summary'||routeParam=='Sales GST'||routeParam=='24Hrs Sale Value 6Am To 6Am'
         ||routeParam=='Trial Balance'||routeParam=='24Hrs Meter Reading'||routeParam=='Closing Balance'||routeParam=='Bank Reconciliation'||routeParam=='Stock Valuation'||routeParam=='Four Column Cash Book'||routeParam=='ProductMonthWise PurchaseLtrs'
-        ||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement Ltrs'||routeParam=='BranchWise StockStatement Qty') {
+        ||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement Ltrs'||routeParam=='BranchWise StockStatement Qty'||routeParam=='einvoice') {
           <div class="d-flex align-items-center">
           <button mat-raised-button class="button-color-bule text-white ml-2"
             (click)="GenerateReport()">Generate</button>

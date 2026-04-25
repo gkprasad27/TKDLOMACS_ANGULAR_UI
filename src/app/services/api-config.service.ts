@@ -748,6 +748,7 @@ export class ApiConfigService {
 
    getBranchWiseStockStatementQtyReportData=`${environment.baseUrl}Reports/BranchWiseStockStatementQty/GetBranchWiseStockStatementQtyReportData`;
 
+  getEInvoiceReportData=`${environment.baseUrl}Reports/EInvoiceReport/GetEInvoiceReportData`;
    
 
    

@@ -142,6 +142,10 @@ export class ReportsService {
                     this.dynamicData.url = this.apiConfigService.getBranchWiseStockStatementQtyReportData;
                     this.dynamicData.listName = 'branchWiseStockQty';
                     return this.dynamicData;
+                  case 'einvoice':
+                    this.dynamicData.url = this.apiConfigService.getEInvoiceReportData;
+                    this.dynamicData.listName = 'eInvoice';
+                    return this.dynamicData;
       default:
     }
   }
