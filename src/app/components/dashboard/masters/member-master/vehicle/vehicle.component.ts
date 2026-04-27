@@ -51,7 +51,7 @@ export class VehicleComponent implements OnInit, OnChanges {
   ) {
     
     this.modelFormData = this.formBuilder.group({
-      vehicleId: [null],
+      vehicleId: [0],
       memberId: [null],
       memberCode: [null],
       memberShares: [null],
@@ -60,10 +60,7 @@ export class VehicleComponent implements OnInit, OnChanges {
       isValid: [null],
       fromDate: [null],
       toDate: [null],
-      vehicleTypeId: [null],
-      vehicleTypeName: [null],
       vehicleType: [null],
-
     });
 
   }
@@ -148,12 +145,13 @@ export class VehicleComponent implements OnInit, OnChanges {
     this.modelFormData.controls['memberCode'].enable();
 
     let memberCode =this.memberCode;// this.modelFormData.controls['memberCode'].value;
-    this.modelFormData.patchValue({
-      fromDate:this.commonService.formatDate(this.modelFormData.get('fromDate').value),
-      toDate:this.commonService.formatDate(this.modelFormData.get('toDate').value)
-    });
+
+    let formData = this.modelFormData.getRawValue();
+    formData.fromDate = this.commonService.formatDate(this.modelFormData.get('fromDate').value);
+    formData.toDate = this.commonService.formatDate(this.modelFormData.get('toDate').value);
+
     if (!this.isFormEdit) {
-      this.apiService.apiPostRequest(this.apiConfigService.registerMemberMaster + '/' + memberCode, this.modelFormData.value)
+      this.apiService.apiPostRequest(this.apiConfigService.registerMemberMaster + '/' + memberCode, formData)
         .subscribe(
           response => {
             const res = response;

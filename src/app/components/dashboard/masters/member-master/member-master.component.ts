@@ -4,7 +4,7 @@ import { ApiService } from '../../../../services/api.service';
 
 import { AlertService } from '../../../../services/alert.service';
 
-import { MatDialogRef,  MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -22,17 +22,17 @@ interface giftIssued {
 }
 
 import { SharedImportModule } from 'src/app/shared/shared-import';
-import { TranslateModule } from '@ngx-translate/core'; 
+import { TranslateModule } from '@ngx-translate/core';
 import { AdditionalShareTransferComponent } from './AdditionalShareTransfer/AdditionalShareTransfer.component';
 import { ShareTransferComponent } from './ShareTransfer/ShareTransfer.component';
 import { GiftMasterComponent } from './Giftmaster/giftmaster.component';
 
-@Component({ 
-    selector: 'app-member-master',
-    templateUrl: './member-master.component.html',
-    styleUrls: ['./member-master.component.scss'],
-    standalone: true,
-    imports: [SharedImportModule, TranslateModule, TableComponent, AdditionalShareTransferComponent, ShareTransferComponent, GiftMasterComponent, VehicleComponent, DeleteItemComponent]
+@Component({
+  selector: 'app-member-master',
+  templateUrl: './member-master.component.html',
+  styleUrls: ['./member-master.component.scss'],
+  standalone: true,
+  imports: [SharedImportModule, TranslateModule, TableComponent, AdditionalShareTransferComponent, ShareTransferComponent, GiftMasterComponent, VehicleComponent, DeleteItemComponent]
 })
 export class MemberMasterComponent implements OnInit {
 
@@ -51,7 +51,7 @@ export class MemberMasterComponent implements OnInit {
   vehicleTableData: any = [];
   shareTableData: any = [];
   AdditionalshareTableData: any = [];
- 
+
 
   isMemberForm: boolean = false;
 
@@ -60,11 +60,11 @@ export class MemberMasterComponent implements OnInit {
 
   @ViewChild(TableComponent) tableComponent: TableComponent;
 
-  giftIssued : giftIssued[]=
-  [
-    { value: 'Yes', viewValue: 'Yes' },
-    { value: 'No', viewValue: 'No' }
-  ];
+  giftIssued: giftIssued[] =
+    [
+      { value: 'Yes', viewValue: 'Yes' },
+      { value: 'No', viewValue: 'No' }
+    ];
 
   constructor(
     private apiService: ApiService,
@@ -82,12 +82,12 @@ export class MemberMasterComponent implements OnInit {
 
     this.modelFormData = this.formBuilder.group({
 
-      memberId: [null],
+      memberId: [0],
       memberCode: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(7)]],
       title: [null],
       memberName: [null],
       fatherOrHusbandName: [null],
-      memberAge: [null],
+      memberAge: [0],
       address: [null],
       city: [null],
       state: "ANDHRA PRADESH",
@@ -111,10 +111,10 @@ export class MemberMasterComponent implements OnInit {
       totalShares: [null],
       createdDate: [null],
       isActive: [0],
-      aadharNumber:[null],
-      dob:[null],
-      giftIssued:[null],
-      giftIssuedDate:[null]
+      aadharNumber: [null],
+      dob: [null],
+      giftIssued: [null],
+      giftIssuedDate: [null]
 
     });
 
@@ -135,7 +135,7 @@ export class MemberMasterComponent implements OnInit {
 
 
   searchEvent(event) {
-    if(event == null) {
+    if (event == null) {
       event = {}
     }
     localStorage.setItem('memberObj', JSON.stringify(event));
@@ -150,8 +150,8 @@ export class MemberMasterComponent implements OnInit {
               this.tableData = [];
               this.tableData = res.response[this.tableUrl.listName];
               this.tableData.forEach(element => {
-                if(element.giftIssued =='Yes')
-                element.backgroundColor ='green';
+                if (element.giftIssued == 'Yes')
+                  element.backgroundColor = 'green';
               });
             }
           }
@@ -224,7 +224,7 @@ export class MemberMasterComponent implements OnInit {
     this.apiService.apiGetRequest(this.apiConfigService.getVehicles + '/' + memberCode)
       .subscribe(
         response => {
-          
+
           const res = response;
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
@@ -271,23 +271,23 @@ export class MemberMasterComponent implements OnInit {
       );
   }
 
-//   getGiftList(memberCode){
-//     this.apiService.apiGetRequest(this.apiConfigService.getGiftList+'/'+memberCode)
-//         .subscribe(
-//            response=>{
-//               const res=response.body;
-//               if (res != null && res.status === StatusCodes.pass) {
-//                   if (res?.response != null) {
-//                     this.gifttableDataList =res.response["Gifts"];
-//                   }
-//               }
-//            }
-//          ,error=>{
-//              this.spinner.hide();
-//          }
-//         );
+  //   getGiftList(memberCode){
+  //     this.apiService.apiGetRequest(this.apiConfigService.getGiftList+'/'+memberCode)
+  //         .subscribe(
+  //            response=>{
+  //               const res=response.body;
+  //               if (res != null && res.status === StatusCodes.pass) {
+  //                   if (res?.response != null) {
+  //                     this.gifttableDataList =res.response["Gifts"];
+  //                   }
+  //               }
+  //            }
+  //          ,error=>{
+  //              this.spinner.hide();
+  //          }
+  //         );
 
-//  }
+  //  }
 
   addOrUpdateEvent(value) {
     if (value.action == 'Edit') {
@@ -315,12 +315,14 @@ export class MemberMasterComponent implements OnInit {
     }
 
     if (!this.isFormEdit) {
-      this.modelFormData.patchValue({
-        giftIssuedDate:this.commonService.formatDate(this.modelFormData.get('giftIssuedDate').value),
-        dob:this.commonService.formatDate(this.modelFormData.get('dob').value),
-        joinDate:this.commonService.formatDate(this.modelFormData.get('joinDate').value)
-      });
-      this.apiService.apiPostRequest(this.tableUrl.registerUrl, this.modelFormData.value)
+      let formValue = this.modelFormData.getRawValue();
+      formValue = {
+        ...formValue,
+        giftIssuedDate: this.commonService.formatDate(this.modelFormData.get('giftIssuedDate').value),
+        dob: this.commonService.formatDate(this.modelFormData.get('dob').value),
+        joinDate: this.commonService.formatDate(this.modelFormData.get('joinDate').value)
+      };
+      this.apiService.apiPostRequest(this.tableUrl.registerUrl, formValue)
         .subscribe(
           response => {
             const res = response;
@@ -339,9 +341,9 @@ export class MemberMasterComponent implements OnInit {
 
     else if (this.isFormEdit) {
       this.modelFormData.patchValue({
-        giftIssuedDate:this.commonService.formatDate(this.modelFormData.get('giftIssuedDate').value),
-        dob:this.commonService.formatDate(this.modelFormData.get('dob').value),
-        joinDate:this.commonService.formatDate(this.modelFormData.get('joinDate').value)
+        giftIssuedDate: this.commonService.formatDate(this.modelFormData.get('giftIssuedDate').value),
+        dob: this.commonService.formatDate(this.modelFormData.get('dob').value),
+        joinDate: this.commonService.formatDate(this.modelFormData.get('joinDate').value)
       });
       this.modelFormData.controls['memberCode'].enable();
 
