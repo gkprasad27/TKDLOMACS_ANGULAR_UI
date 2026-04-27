@@ -32,7 +32,7 @@
 
           <mat-form-field class="col-2">
             <mat-label>{{ 'salesInvoice.invoiceDate' | translate }}</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="invoiceDate" (click)="picker.open()" readonly>
+            <input matInput [matDatepicker]="picker" [min]="minDate"  [max]="commonService.date()" formControlName="invoiceDate" (click)="picker.open()" readonly>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>

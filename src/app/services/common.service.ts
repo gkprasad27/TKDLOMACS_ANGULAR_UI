@@ -152,6 +152,11 @@ export class CommonService {
     return `${[mnth, day, date.getFullYear()].join('-')} ${[hours, minutes, seconds].join(':')}`;
   }
 
+  date() {
+    const date = new Date();
+    return date;
+  }
+
   formatDateValue(event, day1?) {
     if (!event) {
       return '';

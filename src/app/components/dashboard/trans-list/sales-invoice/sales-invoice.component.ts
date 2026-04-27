@@ -47,6 +47,8 @@ export class SalesInvoiceComponent implements OnInit {
 
   routeUrl = '';
 
+  
+  minDate = null;
 
   myControl = new FormControl();
   getmemberNamesArray: any[] = [];
@@ -74,7 +76,7 @@ export class SalesInvoiceComponent implements OnInit {
   getCustomerGstNumListArray: any[];
   constructor(
     private formBuilder: FormBuilder,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private alertService: AlertService,
@@ -141,6 +143,7 @@ export class SalesInvoiceComponent implements OnInit {
     if (user?.role != '1') {
       this.branchFormData.controls['invoiceDate'].disable();
       this.branchFormData.controls['branchCode'].disable();
+      this.minDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
     }
   }
 
