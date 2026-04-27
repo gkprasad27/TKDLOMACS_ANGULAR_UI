@@ -468,7 +468,7 @@ export class SalesInvoiceComponent implements OnInit {
             this.branchFormData.patchValue({
               ledgerValue: res.response['invoiceMasterData'].ledgerCode + ' - ' + res.response['invoiceMasterData'].ledgerName
             }, { emitEvent: false });
-            this.getCashPartyAccountList(false);
+            this.getCashPartyAccountList('', false);
           }
           if (this.routeUrl == 'return') {
             this.generateSalesReturnInvNo();
@@ -612,7 +612,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   setLedgerName(event) {
-    const value = event?.target?.value?.split(' -')[0];
+    const value = (event?.value || event?.target?.value)?.split(' -')[0];
     const lname = this.getCashPartyAccountListArray.find(lCode => lCode.id == value);
     this.branchFormData.patchValue({
       ledgerName: lname ? lname.text : null,
@@ -740,7 +740,6 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   setBackGroundColor(value, disabled, prop) {
-    console.log(value, disabled, prop);
     if (disabled) {
       return '';
     } else if (value == 0) {
@@ -825,7 +824,6 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   getmemberNamesByCode(event) {
-    console.log(event);
     const getmemberNamesByCodeUrl = [this.apiConfigService.getmemberNamesByCode, event.item.memberCode].join('/');
     this.apiService.apiGetRequest(getmemberNamesByCodeUrl).subscribe(
       response => {
