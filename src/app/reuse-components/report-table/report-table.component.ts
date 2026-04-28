@@ -762,7 +762,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     theme: 'grid',
 
     styles: {
-      fontSize: columns.length > 6 ? 6 : 8,
+      fontSize: columns.length > 6 ? 8 : 10,
       cellPadding: 0.3,
       overflow: 'linebreak'
     },
