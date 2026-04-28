@@ -37,14 +37,14 @@
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-2">
-          <mat-label [translate]="'vehicle.vehicleType'"></mat-label>
-          <select matNativeControl placeholder="{{'vehicle.vehicleType' | translate }}"
-            formControlName="vehicleType">
+          <mat-label [translate]="'vehicle.vehicleTypeName'"></mat-label>
+          <mat-select (selectionChange)="onSelectionChange($event)" formControlName="vehicleTypeName">
             @for (vehicleType of vehicleTypes; track vehicleType) {
-            <option [value]="vehicleType.text">
-              {{vehicleType.text}}</option>
+            <mat-option [value]="vehicleType.text">
+              {{ vehicleType.text }}
+            </mat-option>
             }
-          </select>
+          </mat-select>
         </mat-form-field>
 
       </div>

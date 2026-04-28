@@ -53,7 +53,7 @@ export class GiftMasterComponent implements OnInit, OnChanges {
 
     this.modelFromData = this.fromBuilder.group({
       memberCode: [null],
-      giftId: [null],
+      giftId: [0],
       status: [Boolean],
       issueDate: [null],
       description: [null],
@@ -99,6 +99,11 @@ export class GiftMasterComponent implements OnInit, OnChanges {
           this.spinner.hide();
         }
       );
+  }
+
+  onSelectionChange(event) {
+    let selectedProduct = this.productList.find((x) => x.text == event.value);
+    this.modelFromData.controls['giftId'].patchValue(selectedProduct.id);
   }
 
   getGiftList(memberCode: any) {

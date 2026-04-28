@@ -162,6 +162,8 @@ export class ShareTransferComponent implements OnInit, OnChanges {
   }
 
   getNoOfShares(){
+    let selected = this.getShareMembersListArray.find((x) => x.text == this.modelFormData.get('fromMemberCode').value);
+    this.modelFormData.controls['fromMemberName'].patchValue(selected.text);
     this.apiService.apiGetRequest(this.apiConfigService.getNoOfShares + '/' + this.modelFormData.get('fromMemberCode').value)
       .subscribe(
         response => {

@@ -60,7 +60,10 @@ export class VehicleComponent implements OnInit, OnChanges {
       isValid: [null],
       fromDate: [null],
       toDate: [null],
+      vehicleTypeId: [null],
+      vehicleTypeName: [null],
       vehicleType: [null],
+
     });
 
   }
@@ -104,6 +107,11 @@ export class VehicleComponent implements OnInit, OnChanges {
       );
   }
 
+  onSelectionChange(event) {
+    let selectedVehicleType = this.vehicleTypes.find((x) => x.text == event.value);
+    this.modelFormData.controls['vehicleTypeId'].patchValue(selectedVehicleType.id);
+  }
+
   getVehicleTableData(memberCode) {
 
     this.apiService.apiGetRequest(this.apiConfigService.getVehicles + '/' + memberCode)
@@ -113,7 +121,7 @@ export class VehicleComponent implements OnInit, OnChanges {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               // console.log(res);
-              this.vehicleTableData = res.response['vechicleList'];
+              this.vehicleTableData = res.response['vehicleList'];
             }
           }
           this.spinner.hide();

@@ -4,17 +4,14 @@
     <form [formGroup]="modelFromData">
       <div class="row">
         <mat-form-field class="col-2">
-          <mat-label [translate]="'giftMaster.giftId'"></mat-label>
-          <select matNativeControl placeholder="{{'select'}}" formControlName="giftId">
-            @for (product of productList; track product) {
-            <option [value]="product.id">
-              {{product.text}}</option>
-            }
-          </select>
-        </mat-form-field>
-        <mat-form-field class="col-2">
           <mat-label [translate]="'giftMaster.giftName'"></mat-label>
-          <input matInput formControlName="giftName" appFocusOnEnter tabindex="1">
+          <mat-select (selectionChange)="onSelectionChange($event)" formControlName="giftName">
+            @for (product of productList; track product) {
+            <mat-option [value]="product.text">
+              {{ product.text }}
+            </mat-option>
+            }
+          </mat-select>
         </mat-form-field>
         <mat-form-field class="col-2">
           <mat-label [translate]="'giftMaster.description'"></mat-label>

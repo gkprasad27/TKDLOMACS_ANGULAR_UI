@@ -623,17 +623,17 @@
   },
   "vehicle": {
     "title": "Vehicle",
-    "vehicleId": "vehicleId",   
-    "memberCode": "memberCode",
-    "memberShares": "memberShares",
-    "vehicleRegNo": "vehicleRegNo",
-    "vehicleModel": "vehicleModel",
-    "isValid": "isValid",
-    "fromDate": "fromDate",
-    "toDate": "toDate",
-    "vehicleTypeId": "vehicleTypeId",
-    "vehicleTypeName": "vehicleTypeName",
-    "vehicleType": "vehicleType"
+    "vehicleId": "Vehicle Id",   
+    "memberCode": "Member Code",
+    "memberShares": "Member Shares",
+    "vehicleRegNo": "Vehicle Reg No",
+    "vehicleModel": "Vehicle Model",
+    "isValid": "Is Valid",
+    "fromDate": "From Date",
+    "toDate": "To Date",
+    "vehicleTypeId": "Vehicle Type Id",
+    "vehicleTypeName": "Vehicle Type Name",
+    "vehicleType": "Vehicle Type"
   },
   "giftMaster":{
     "title":"Gift",
