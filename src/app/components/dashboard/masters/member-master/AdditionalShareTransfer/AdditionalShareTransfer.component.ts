@@ -59,7 +59,7 @@ export class AdditionalShareTransferComponent implements OnInit, OnChanges {
   ) {
     
     this.modelFormData = this.formBuilder.group({
-      shareId: 0,
+      additionalShareId: 0,
       shareTransferCode: [null],
       shareCode: 0,
       transferDate: [(new Date()).toISOString()],
@@ -235,7 +235,7 @@ export class AdditionalShareTransferComponent implements OnInit, OnChanges {
       this.formData = value.item;
       if (this.formData != null) {
         this.modelFormData.patchValue(this.formData);
-        this.modelFormData.controls['shareId'].disable();
+        this.modelFormData.controls['additionalShareId'].disable();
         // this.modelFormData.controls['memberCode'].disable();
         this.isFormEdit = true;
       }
@@ -248,7 +248,7 @@ export class AdditionalShareTransferComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.modelFormData.controls['shareId'].enable();
+    this.modelFormData.controls['additionalShareId'].enable();
     // this.modelFormData.controls['memberCode'].enable();
 
     let memberCode =this.memberCode;// this.modelFormData.controls['memberCode'].value;
