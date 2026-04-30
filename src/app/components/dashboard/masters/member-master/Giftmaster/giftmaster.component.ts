@@ -69,6 +69,10 @@ export class GiftMasterComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
 
   }
+
+  isYearSelectable(year: number): boolean {
+    return this.gifttableDataList?.map(item => item.year).includes(year);
+  }
   ngOnInit(): void {
     this.getGiftProductList();
     this.setDefualts();
@@ -144,10 +148,9 @@ export class GiftMasterComponent implements OnInit, OnChanges {
     }
     this.modelFromData.controls["memberCode"].setValue(this.membercode);
     if (!this.isFormEdit) {
-      this.modelFromData.patchValue({
-        issueDate: this.commonService.formatDate(this.modelFromData.get('issueDate').value)
-      });
-      this.apiService.apiPostRequest(this.apiConfigService.addGift, this.modelFromData.value)
+      const data = this.modelFromData.getRawValue();
+      data.issueDate = this.commonService.formatDate(data.issueDate);
+      this.apiService.apiPostRequest(this.apiConfigService.addGift, data)
         .subscribe(
           response => {
             const res = response;
@@ -161,14 +164,11 @@ export class GiftMasterComponent implements OnInit, OnChanges {
             this.spinner.hide();
           }
         );
-
-      this.isFormEdit = false;
     }
-    else {
-      this.modelFromData.patchValue({
-        issueDate: this.commonService.formatDate(this.modelFromData.get('issueDate').value)
-      });
-      this.apiService.apiPostRequest(this.apiConfigService.updateGift, this.modelFromData.value)
+    else if (this.isFormEdit) {
+      const data = this.modelFromData.getRawValue();
+      data.issueDate = this.commonService.formatDate(data.issueDate);
+      this.apiService.apiPostRequest(this.apiConfigService.updateGift, data)
         .subscribe(
           response => {
             const res = response;

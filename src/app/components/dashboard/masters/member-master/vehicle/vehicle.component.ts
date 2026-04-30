@@ -144,11 +144,9 @@ export class VehicleComponent implements OnInit, OnChanges {
   }
 
   save() {
-  
     if (this.modelFormData.invalid) {
       return;
     }
-
     this.modelFormData.controls['memberId'].enable();
     this.modelFormData.controls['memberCode'].enable();
 

@@ -1,4 +1,3 @@
-@if (isFormVisible) {
 <div class="position-relative popup-class">
   <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
     <form [formGroup]="modelFromData">
@@ -24,13 +23,12 @@
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-2">
-          <mat-label [translate]="'giftMaster.year'"></mat-label>
-          <select matNativeControl placeholder="{{'select'}}" formControlName="year">
+          <mat-label [translate]="'giftMaster.year'"></mat-label> 
+          <mat-select [disabled]="modelFromData.value.giftId" formControlName="year">
             @for (yr of yearArr; track yr) {
-            <option [value]="yr">
-              {{yr}}</option>
+            <mat-option [value]="yr" [disabled]="isYearSelectable(yr)"> {{yr}}</mat-option>
             }
-          </select>
+          </mat-select>
         </mat-form-field>
       </div>
     </form>
@@ -41,11 +39,11 @@
     </button>
     <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
       tabIndex="25">
-      {{ 'COMMON.SAVE' | translate }}
+      {{ modelFromData.value.giftId ? ('COMMON.UPDATE' | translate) : ('COMMON.SAVE' | translate) }}
     </button>
   </div>
 </div>
-}
+
 
 <app-table [tableData]="gifttableDataList" (addOrUpdateEvent)="addOrUpdateEvent($event)" [isGiftmaster]="'true'">
 </app-table>

@@ -14,7 +14,7 @@
           </mat-form-field> -->
         <mat-form-field class="col-2">
           <mat-label>{{ 'vehicle.memberShares' | translate }}</mat-label>
-          <input matInput formControlName="memberShares" appFocusOnEnter tabIndex="5">
+          <input matInput type="number" formControlName="memberShares" appFocusOnEnter tabIndex="5">
         </mat-form-field>
         <mat-form-field class="col-2">
           <mat-label>{{ 'vehicle.vehicleRegNo' | translate }}</mat-label>
@@ -54,13 +54,11 @@
 
   <div class="col-12 p-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mr-1" (click)="reset()">
-
       {{ 'COMMON.RESET' | translate }}
     </button>
     <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
       tabIndex="25">
-
-      {{ 'COMMON.SAVE' | translate }}
+      {{ modelFormData.value.vehicleId ? ('COMMON.UPDATE' | translate) : ('COMMON.SAVE' | translate) }}
     </button>
   </div>
 
