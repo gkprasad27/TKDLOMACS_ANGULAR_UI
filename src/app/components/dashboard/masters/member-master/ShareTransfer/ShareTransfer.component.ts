@@ -262,7 +262,7 @@ export class ShareTransferComponent implements OnInit, OnChanges {
     //   fromDate:this.commonService.formatDate(this.modelFormData.get('fromDate').value),
     //   toDate:this.commonService.formatDate(this.modelFormData.get('toDate').value)
     // });
-    if (!this.isFormEdit) {
+    // if (!this.isFormEdit) {
       this.apiService.apiPostRequest(this.apiConfigService.registerShareTransfer + '/' + memberCode, this.modelFormData.value)
         .subscribe(
           response => {
@@ -277,25 +277,25 @@ export class ShareTransferComponent implements OnInit, OnChanges {
             this.spinner.hide();
           }
         );
-    }
+    // }
 
-    else if (this.isFormEdit) {
+    // else if (this.isFormEdit) {
 
-      this.apiService.apiUpdateRequest(this.tableUrl.updateUrl, this.modelFormData.value)
-        .subscribe(
-          response => {
-            const res = response;
-            if (res != null && res.status === StatusCodes.pass) {
-              if (res.response != null) {
-                this.alertService.openSnackBar('Record Updated...', 'close', SnackBar.success);
-                this.reset();
-                this.getShareTableData(memberCode);
-              }
-            }
-            this.spinner.hide();
-          }
-        );
-    }
+    //   this.apiService.apiUpdateRequest(this.tableUrl.updateUrl, this.modelFormData.value)
+    //     .subscribe(
+    //       response => {
+    //         const res = response;
+    //         if (res != null && res.status === StatusCodes.pass) {
+    //           if (res.response != null) {
+    //             this.alertService.openSnackBar('Record Updated...', 'close', SnackBar.success);
+    //             this.reset();
+    //             this.getShareTableData(memberCode);
+    //           }
+    //         }
+    //         this.spinner.hide();
+    //       }
+    //     );
+    // }
 
   }
 

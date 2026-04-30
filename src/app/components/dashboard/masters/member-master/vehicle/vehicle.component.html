@@ -14,7 +14,7 @@
           </mat-form-field> -->
         <mat-form-field class="col-2">
           <mat-label>{{ 'vehicle.memberShares' | translate }}</mat-label>
-          <input matInput type="number" formControlName="memberShares" appFocusOnEnter tabIndex="5">
+          <input matInput type="number" [disabled]="modelFormData.value.vehicleId"  formControlName="memberShares" appFocusOnEnter tabIndex="5">
         </mat-form-field>
         <mat-form-field class="col-2">
           <mat-label>{{ 'vehicle.vehicleRegNo' | translate }}</mat-label>
