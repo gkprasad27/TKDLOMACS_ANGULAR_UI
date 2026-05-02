@@ -52,6 +52,8 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   @Input() isSharetransfer: boolean;
   @Input() isAdditionalSharetransfer: boolean;
   @Input() setBackgroun: boolean;
+  @Input() showButtons = true;
+
   @Output() searchEvent = new EventEmitter();
   @Output() addEvent = new EventEmitter();
 

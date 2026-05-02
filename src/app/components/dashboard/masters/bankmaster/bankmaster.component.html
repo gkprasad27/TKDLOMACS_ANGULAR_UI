@@ -1,0 +1,175 @@
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'bankmaster.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
+    <form [formGroup]="modelFormData" autocomplete="off">
+      <div class="row">
+
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.bankCode.valid&&formControls.bankCode.status != 'DISABLED',
+           'ng--invalid': !formControls.bankCode.valid &&formControls.bankCode.status != 'DISABLED' }">
+          <mat-label [translate]="'bankmaster.bankCode'"></mat-label>
+          <input matInput formControlName="bankCode" maxlength="5"
+            appFocusOnEnter tabIndex="1">
+          @if (!formControls.bankCode.valid&&formControls.bankCode.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.bankCode.valid  }">
+            Code is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3"
+          [ngClass]="{ 'ng--valid': formControls.bankName.valid, 'ng--invalid': !formControls.bankName.valid  }">
+          <mat-label [translate]="'bankmaster.bankName'"></mat-label>
+          <input matInput formControlName="bankName" maxlength="50"
+            appFocusOnEnter tabIndex="2">
+          @if (!formControls.bankName.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.bankName.valid  }">
+            Name is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.accountType'"></mat-label>
+          <mat-select formControlName="accountType" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            @for (agl of AccountType; track agl) {
+              <mat-option [value]="agl.value">
+                {{agl.viewValue}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.branchNumber'"></mat-label>
+          <input matInput formControlName="branchNumber"
+            maxlength="6" appFocusOnEnter tabIndex="4">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.accountNumber'"></mat-label>
+          <input matInput formControlName="accountNumber"
+            maxlength="20" appFocusOnEnter tabIndex="5">
+        </mat-form-field>
+
+        <!-- <mat-form-field class="col-3">
+          <mat-label>{{'bankmaster.currency' | translate }}</mat-label>
+          <mat-select formControlName="currency" appFocusOnEnter tabIndex="6">
+            <mat-option>None</mat-option>
+            @for (cncy of currencyList; track cncy) {
+              <mat-option [value]="cncy.id">
+                {{cncy.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field> -->
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.ifsccode'"></mat-label>
+          <input matInput formControlName="ifsccode" maxlength="12"
+            appFocusOnEnter tabIndex="7">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.swiftkey'"></mat-label>
+          <input matInput formControlName="swiftkey" maxlength="50"
+            appFocusOnEnter tabIndex="8">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.address'"></mat-label>
+          <input matInput formControlName="address" maxlength="50"
+            appFocusOnEnter tabIndex="9">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.address1'"></mat-label>
+          <input matInput formControlName="address1" maxlength="50"
+            appFocusOnEnter tabIndex="10">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.place'"></mat-label>
+          <input matInput formControlName="place" maxlength="50"
+            appFocusOnEnter tabIndex="11">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.city'"></mat-label>
+          <input matInput formControlName="city" maxlength="50"
+            appFocusOnEnter tabIndex="12">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'bankmaster.state' | translate }}</mat-label>
+          <mat-select formControlName="state" appFocusOnEnter tabIndex="13">
+            <mat-option>None</mat-option>
+            @for (state of stateList; track state) {
+              <mat-option [value]="state.id">
+                {{state.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="col-3">
+          <mat-label>{{'bankmaster.region' | translate }}</mat-label>
+          <mat-select formControlName="region" appFocusOnEnter tabIndex="14">
+            <mat-option>None</mat-option>
+            @for (rgn of regionsList; track rgn) {
+              <mat-option [value]="rgn.id">
+                {{rgn.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field> -->
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'bankmaster.country' | translate }}</mat-label>
+          <mat-select formControlName="country" appFocusOnEnter tabIndex="15">
+            <mat-option>None</mat-option>
+            @for (cntry of countrysList; track cntry) {
+              <mat-option [value]="cntry.id">
+                {{cntry.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.phone'"></mat-label>
+          <input matInput formControlName="phone" maxlength="10"
+            appFocusOnEnter tabIndex="16">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.contactPersion'"></mat-label>
+          <input matInput formControlName="contactPersion"
+            maxlength="50" appFocusOnEnter tabIndex="17">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'bankmaster.bankLimits'"></mat-label>
+          <input matInput formControlName="bankLimits"
+            maxlength="10" appFocusOnEnter tabIndex="18">
+        </mat-form-field>
+
+      </div>
+      <mat-divider></mat-divider>
+    </form>
+  </mat-card-content>
+
+  <div class="form-element mt-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
+      tabIndex="25">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+
+</div>

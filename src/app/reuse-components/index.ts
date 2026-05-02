@@ -8,3 +8,4 @@ export { PrintComponent } from './print/print.component';
 export { PrintPetrolComponent } from './printPetrol/printPetrol.component';
 export { SaveItemComponent } from './save-item/save-item.component';
 export { AutocompleteComponent } from './autocomplete/autocomplete.component';
+export { FileUploadComponent } from './file-upload/file-upload.component';

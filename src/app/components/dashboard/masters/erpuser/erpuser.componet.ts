@@ -1,0 +1,173 @@
+import { Component, Inject, Optional, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CommonService } from '../../../../services/common.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { StatusCodes } from '../../../../enums/common/common';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiConfigService } from '../../../../services/api-config.service';
+import { ApiService } from '../../../../services/api.service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
+@Component({
+  selector: 'app-erpuser',
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule],
+  templateUrl: './erpuser.component.html',
+  standalone: true,
+  styleUrls: ['./erpuser.component.scss']
+})
+
+export class ErpUsersComponent implements OnInit {
+  modelFormData: FormGroup;
+  isSubmitted = false;
+  formData: any;
+  companyList: any;
+  employeesList: any[] = [];
+  RolesList: any;
+
+  constructor(private commonService: CommonService,
+    private apiService: ApiService,
+    private apiConfigService: ApiConfigService,
+    private spinner: NgxSpinnerService,
+    private formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<ErpUsersComponent>,
+    // @Optional() is used to prevent error if no data is passed
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.modelFormData = this.formBuilder.group({
+      userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(2)]],
+      role: [null],
+      seqId: ['0'],
+      active: [null],
+      branchCode: [null],
+      companyCode: [null],
+      addDate: [null]
+    });
+
+    this.formData = { ...data };
+    if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
+      this.modelFormData.patchValue(this.formData.item);
+      this.modelFormData.patchValue({
+        role: this.formData.item.role ? +this.formData.item.role : null
+      })
+      this.modelFormData.controls['userName'].disable();
+    }
+  }
+
+  ngOnInit() {
+    // this.getRolesList();
+    //this.getTableData();
+    this.allApis();
+  }
+
+  allApis() {
+    const getrolelistUrl = this.apiConfigService.getrolelist;
+    const getCompanyUrl = this.apiConfigService.getCompanysList;
+
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getrolelistUrl),
+        this.apiService.apiGetRequest(getCompanyUrl),
+      ]).subscribe(([getrole, companies]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(getrole) && getrole.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(getrole.response)) {
+            this.RolesList = getrole.response['roleList']
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(companies) && companies.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(companies.response)) {
+            this.companyList = companies.response['companiesList']
+          }
+        }
+
+      });
+    });
+  }
+
+  // getEmployeesList() {
+  //   let obj = JSON.parse(localStorage.getItem("user"));
+  //   const getEmployeeList = String.Join('/', this.apiConfigService.getEmployeeList, obj.companyCode);
+  //   this.apiService.apiGetRequest(getEmployeeList)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.employeesList = res.response['emplist'];
+  //           }
+  //         }
+  //         this.spinner.hide();
+  //       });
+  // }
+
+  // getRolesList() {
+  //   const getRolesListsUrl = String.Join('/', this.apiConfigService.getrolelist);
+  //   this.apiService.apiGetRequest(getRolesListsUrl).subscribe(
+  //     response => {
+  //       const res = response;
+  //       if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //         if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response['roleList']) && res.response['roleList'].length) {
+  //             this.RolesList = res.response['roleList'];
+  //             //this.spinner.hide();
+  //           }
+  //         }
+  //       }
+  //       this.getTableData();
+  //     });
+  // }
+
+  // getTableData() {
+  //   const getCompanyUrl = String.Join('/', this.apiConfigService.getCompanysList);
+  //   this.apiService.apiGetRequest(getCompanyUrl)
+  //     .subscribe(
+  //       response => {
+  //         const res = response;
+  //         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+  //           if (!this.commonService.checkNullOrUndefined(res.response)) {
+  //             this.companyList = res.response['companiesList'];
+  //           }
+  //         }
+  //         this.spinner.hide();
+  //       });
+  // }
+
+
+  approveOrReject(event) {
+    this.modelFormData.patchValue({
+      active: event ? 1 : 0,
+    });
+  }
+
+
+
+  get formControls() { return this.modelFormData.controls; }
+
+  save() {
+    if (this.modelFormData.invalid) {
+      return;
+    }
+    this.modelFormData.controls['userName'].enable();
+    this.formData.item = this.modelFormData.value;
+    this.dialogRef.close(this.formData);
+  }
+
+
+
+  cancel() {
+    this.dialogRef.close();
+  }
+}

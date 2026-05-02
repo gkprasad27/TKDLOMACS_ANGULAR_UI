@@ -615,6 +615,7 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   setLedgerName(event) {
+    const ledgerCode = this.branchFormData.get('ledgerCode').value;
     const value = (event?.value || event?.target?.value)?.split(' -')[0];
     const lname = this.getCashPartyAccountListArray.find(lCode => lCode.id == value);
     this.branchFormData.patchValue({
@@ -636,7 +637,9 @@ export class SalesInvoiceComponent implements OnInit {
         ledgerValue: this.branchFormData.get('ledgerCode').value + ' - ' + this.branchFormData.get('ledgerName').value
       });
     }
-    this.getCashPartyAccount();
+    if(ledgerCode != this.branchFormData.get('ledgerCode').value) {
+      this.getCashPartyAccount();
+    }
     this.commonService.setFocus('vehicleRegNo');
   }
 

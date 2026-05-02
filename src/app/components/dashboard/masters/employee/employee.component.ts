@@ -1,197 +1,724 @@
-import { Component, Inject, Optional, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../../../services/api.service';
 
 import { AlertService } from '../../../../services/alert.service';
-
-import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../services/api-config.service';
-import { StatusCodes } from '../../../../enums/common/common';
+import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { CommonService } from '../../../../services/common.service';
+import { Static } from '../../../../enums/common/static';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { TableComponent } from '../../../../reuse-components/table/table.component';
+import { MastersService } from '../masters.service';
+import { FileUploadComponent } from 'src/app/reuse-components/file-upload/file-upload.component';
+import { NonEditableDatepicker } from 'src/app/directives/format-datepicker';
 
-interface GENDER {
-  value: string;
-  viewValue: string;
-}
-interface BloodGroup
-{
-  value: string;
-  viewValue: string;
-}
-import { SharedImportModule } from 'src/app/shared/shared-import';
-import { TranslateModule } from '@ngx-translate/core'; 
-
-@Component({ 
-    selector: 'app-employee',
-    templateUrl: './employee.component.html',
-    styleUrls: ['./employee.component.scss'],
-    standalone: true,
-    imports: [SharedImportModule, TranslateModule]
+@Component({
+  selector: 'app-employee',
+  imports: [CommonModule, ReactiveFormsModule, NonEditableDatepicker, TranslateModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule, MatSlideToggleModule, TableComponent, FileUploadComponent],
+  templateUrl: './employee.component.html',
+  styleUrls: ['./employee.component.scss'],
+  providers: [DatePipe]
 })
 export class EmployeeComponent implements OnInit {
 
 
   modelFormData: FormGroup;
-  isSubmitted  =  false;
+  modelFormData1: FormGroup;
+  modelFormData2: FormGroup;
+  modelFormData3: FormGroup;
+
   formData: any;
-  companyList: any;
-  branchesList: any;
-  gender: GENDER[] =
-    [
-      { value: 'Male', viewValue: 'Male' },
-      { value: 'Female', viewValue: 'Female' }
-    ];
-  
-  blood: BloodGroup[] =
-    [
-    { value: 'A +', viewValue: 'A +' },
-    { value: 'A-', viewValue: 'A-' },
-    { value: 'B+', viewValue: 'B+' },
-    { value: 'B-', viewValue: 'B-' },
-    { value: 'AB +', viewValue: ' AB +' },
-    { value: 'AB-', viewValue: 'AB-' },
-    { value: 'O+', viewValue: 'O+' },
-    { value: 'O-', viewValue: 'O-' }
-    ];
-    getEmployeeCodeList = [];
+
+  companyList: any[] = [];
+  companiesList: any[] = [];
+  // branchesList: any[] = [];
+  bankList: any[] = [];
+  employeesList: any[] = [];
+  designationsList: any[] = [];
+  countryList: any[] = [];
+  stateList: any[] = [];
+  stateList1: any[] = [];
+  educationList: any[] = ['Graduate', 'Under Graduate', 'Post Graduate'];
+  educationTypeList: any[] = ['Full Time', 'Part Time'];
+  educationGapList: any[] = ['Yes', 'No'];
+  carrierGapList: any[] = ['Yes', 'No'];
+
+  genderList
+  fileList: any;
+  fileList1: any;
+
+  @ViewChild(TableComponent, { static: false }) tableComponent: TableComponent;
+  tableData: any[] = [];
+  tableData1: any[] = [];
 
   constructor(
     private apiService: ApiService,
     private apiConfigService: ApiConfigService,
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
-    private formBuilder: UntypedFormBuilder,
-    public dialogRef: MatDialogRef<EmployeeComponent>,
-    private commonService: CommonService,
-    // @Optional() is used to prevent error if no data is passed
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any ) {
+    private formBuilder: FormBuilder,
+    public commonService: CommonService,
+    private router: Router,
+    private datepipe: DatePipe,
+    private mastersService: MastersService) {
+    this.formProperties();
+  }
 
+  formProperties() {
     this.modelFormData = this.formBuilder.group({
-      employeeId: 0,
-      branchId: [null],
-      branchCode: [null],
-      branchName: [null],
-      designationId: [null],
-      employeeName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      employeeCode: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(4)]],
-      dob: [null],
-      maritalStatus: [null],
-      gender: [null],
-      qualification: [null],
-      address: [null],
-      phoneNumber: [null],
-      mobileNumber: [null],
-      email: [null],
-      joiningDate: [null],
-      terminationDate: [null],
-      isActive: [null],
-      narration: [null],
-      bloodGroup: [null],
-      passportNo: [null],
-      passportExpiryDate: [null],
-      labourCardNumber: [null],
-      labourCardExpiryDate: [null],
-      salaryType: [null],
-      bankName: [null],
-      bankbranchName: [null],
-      bankAccountNumber: [null],
-      bankbranchCode: [null],
-      panNumber: [null],
-      pfNumber: [null],
-      esiNumber: [null],
-      extraDate: [null],
-      extra1: [null],
-      extra2: [null],
-      defaultPackageId: [null],
-      aadharNumber: [null],
-      recomendedBy: [null],
-      approvedBy: [null]
-        
-      });
+      branchId: [''],
+      // employeeId: [0],
+      employeeCode: ['', Validators.required],
+      companyCode: ['', Validators.required],
+      // branchCode: [''],
+      designationId: ['', Validators.required],
+      employeeName: ['', Validators.required],
+      dob: [''],
+      maritalStatus: [''],
+      gender: ['', Validators.required],
+      qualification: ['', Validators.required],
+      address: [''],
+      phoneNumber: [''],
+      mobileNumber: ['', Validators.required],
+      email: [''],
+      joiningDate: ['', Validators.required],
+      releavingDate: [''], //
+      isActive: ['true'],
+      narration: [''],
+      bloodGroup: [''],
+      passportNo: [''],
+      accessCardNumber: [''], //
+      bankName: [''],
+      bankAccountNumber: [''],
+      employeeType: [''], //
+      ifscCode: [''], //
+      panNumber: [''],
+      aadharNumber: ['', Validators.required],
+      recomendedBy: [''],
+      reportedBy: [''],
+      approvedBy: [''],
 
-      this.formData = {...data};
-      if (this.formData.item != null) {
-        this.modelFormData.patchValue(this.formData.item);
-       this.modelFormData.controls['employeeCode'].disable();
-      }
+      pfNumber: [''],
+      esiNumber: [''],
+
+    });
+
+    this.modelFormData1 = this.formBuilder.group({
+
+      id: 0,
+      empCode: [''],
+      pAddress1: [''],
+      pAddress: [''],
+      pCity: [''],
+      pState: [''],
+      pZip: [''],
+      pLocation: [''],
+      pCountry: [''],
+      address: [''],
+      address1: [''],
+      city: [''],
+      state: [''],
+      zip: [''],
+      location: [''],
+      country: [''],
+
+    });
+
+    this.modelFormData2 = this.formBuilder.group({
+
+      empCode: [''],
+      qualification: [''],
+      education: [''],
+      percentage: [''],
+      yearofPassing: [''],
+      inistituateName: [''],
+      university: [''],
+      educationType: [''],
+      specialization: [''],
+      attachment: [''],
+      educationGap: [''],
+      educationGapFrom: [''],
+      educationGapTo: [''],
+      remarks: [''],
+      educationGapReasion: [''],
+
+      highlight: false,
+      changed: false,
+      action: [[
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]],
+      index: 0,
+      id: 0
+
+    });
+
+    this.modelFormData3 = this.formBuilder.group({
+
+      empCode: [''],
+      companyName: [''],
+      fromDate: [''],
+      toDate: [''],
+      totalExp: [''],
+      reasionforleft: [''],
+      attachment: [''],
+      carrierGap: [''],
+      carrierGapReasion: [''],
+      carrierGapFrom: [''],
+      carrierGapTo: [''],
+      carrierGapDays: [''],
+      designation: [''],
+
+      highlight: false,
+      changed: false,
+      action: [[
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]],
+      index: 0,
+      id: 0
+
+    });
+
+    this.formData = { ...this.mastersService.editData };
+    if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
+      this.modelFormData.patchValue(this.formData.item);
+      this.modelFormData.patchValue({
+        designationId: this.formData.item.designationId ? +this.formData.item.designationId : 0
+      });
+      this.modelFormData.controls['employeeCode'].disable();
+      // this.modelFormData.controls['employeeId'].disable();
+    }
 
   }
 
   ngOnInit() {
-   // this.getTableData();
-    this.getTableData1();
+    this.allApis();
+    if (this.modelFormData.get('employeeCode').value) {
+      this.allApis1();
+    }
   }
 
-  // getTableData() {
-  //   const getCompanyUrl = [this.apiConfigService.getCompanysList].join('/');
-  //   this.apiService.apiGetRequest(getCompanyUrl)
-  //     .subscribe(
-  //       response => {
-  //       const res = response;
-  //       if (res != null && res.status === StatusCodes.pass) {
-  //         if (res.response != null) {
-  //           console.log(res);
-  //           this.companyList = res.response['companiesList'];
-  //         }
-  //       }
-  //         this.spinner.hide();
-  //     });
-  // }
-  getTableData1() {
-    const getCompanyUrl = [this.apiConfigService.getBranchesList].join('/');
-    this.apiService.apiGetRequest(getCompanyUrl)
-      .subscribe(
-        response => {
-          const res = response;
-          if (res != null && res.status === StatusCodes.pass) {
-            if (res.response != null) {
-              console.log(res);
-              this.branchesList = res.response['branchesList'];
+
+  allApis() {
+    let obj = JSON.parse(localStorage.getItem("user"));
+    const getCompanyList = this.apiConfigService.getCompanyList;
+    // const getBranchesList = this.apiConfigService.getBranchesList);
+    const getEmployeeList = [this.apiConfigService.getEmployeeList, '6'].join('/');;
+    const getBankMastersList = this.apiConfigService.getBankMastersList;
+    const getDesignationsList = this.apiConfigService.getDesignationsList;
+    const getCountryList = this.apiConfigService.getCountryList;
+
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getCompanyList),
+        // this.apiService.apiGetRequest(getBranchesList),
+        this.apiService.apiGetRequest(getEmployeeList),
+        this.apiService.apiGetRequest(getBankMastersList),
+        this.apiService.apiGetRequest(getDesignationsList),
+        this.apiService.apiGetRequest(getCountryList),
+      ]).subscribe(([companyList, employeeList, bankMastersList, designationsList, countrysList]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(companyList) && companyList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(companyList.response)) {
+            this.companiesList = companyList.response['companiesList'];
+          }
+        }
+
+        // if (!this.commonService.checkNullOrUndefined(branchesList) && branchesList.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(branchesList.response)) {
+        //     this.branchesList = branchesList.response['branchesList'];
+        //   }
+        // }
+
+        if (!this.commonService.checkNullOrUndefined(employeeList) && employeeList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(employeeList.response)) {
+            this.employeesList = employeeList.response['emplist'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(bankMastersList) && bankMastersList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(bankMastersList.response)) {
+            this.bankList = bankMastersList.response['bankList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(designationsList) && designationsList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(designationsList.response)) {
+            this.designationsList = designationsList.response['designationsList'];
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(countrysList) && countrysList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(countrysList.response)) {
+            this.countryList = countrysList.response['countryList'];
+          }
+        }
+
+      });
+    });
+  }
+
+  allApis1() {
+
+    const getAddressList = [this.apiConfigService.getAddressList, this.modelFormData.get('employeeCode').value].join('/');
+    const getEducationList = [this.apiConfigService.getEducationList, this.modelFormData.get('employeeCode').value].join('/');
+    const getExperianceList = [this.apiConfigService.getExperianceList, this.modelFormData.get('employeeCode').value].join('/');
+
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getAddressList),
+        this.apiService.apiGetRequest(getEducationList),
+        this.apiService.apiGetRequest(getExperianceList),
+      ]).subscribe(([addressList, educationList, experianceList]) => {
+
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(addressList) && addressList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(addressList.response)) {
+            this.modelFormData1.patchValue(addressList.response['AddressList']);
+            if (this.modelFormData1.value.country) {
+              this.onCountryChange();
+            }
+            if (this.modelFormData1.value.pCountry) {
+              this.onPCountryChange();
             }
           }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(educationList) && educationList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(educationList.response)) {
+            if (educationList.response['EducationList'] && educationList.response['EducationList'].length) {
+              educationList.response['EducationList'].forEach((s: any, index: number) => {
+                s.dubQty = s.qty;
+                s.index = index + 1;
+                s.action = [
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' }
+                ];
+              })
+              this.tableData = educationList.response['EducationList'];
+            }
+          }
+        }
+
+        if (!this.commonService.checkNullOrUndefined(experianceList) && experianceList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(experianceList.response)) {
+            if (experianceList.response['experienceList'] && experianceList.response['experienceList'].length) {
+              experianceList.response['experienceList'].forEach((s: any, index: number) => {
+                s.dubQty = s.qty;
+                s.index = index + 1;
+                s.action = [
+                  { id: 'Edit', type: 'edit' },
+                  { id: 'Delete', type: 'delete' }
+                ];
+              })
+              this.tableData1 = experianceList.response['experienceList'];
+            }
+          }
+        }
+
+      });
+    });
+  }
+
+
+  onPCountryChange() {
+    const getSaleOrderUrl = [this.apiConfigService.getStatesList, this.modelFormData1.value.pCountry].join('/');
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
           this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.stateList1 = res.response['StatesList'];
+            }
+          }
         });
+  }
+
+  onCountryChange() {
+    const getSaleOrderUrl = [this.apiConfigService.getStatesList, this.modelFormData1.value.country].join('/');
+    this.apiService.apiGetRequest(getSaleOrderUrl)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.stateList = res.response['StatesList'];
+            }
+          }
+        });
+  }
+
+
+  downLoadFile(event: any, flag = false) {
+    const url = [this.apiConfigService.getFile, flag ? event.item[event.action] : event.name].join('/');
+    this.apiService.apiGetRequest(url)
+      .subscribe(
+        response => {
+          this.spinner.hide();
+          window.open(response.response, '_blank');
+        });
+  }
+
+  emitFilesList(event: any) {
+    this.fileList = event[0];
+  }
+
+  emitFilesList1(event: any) {
+    this.fileList1 = event[0];
   }
 
   get formControls() { return this.modelFormData.controls; }
 
 
+  resetForm() {
+    this.modelFormData2.reset();
+    this.modelFormData2.patchValue({
+      index: 0,
+      action: [
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]
+    });
+  }
+
+  saveForm() {
+    if (this.modelFormData2.invalid) {
+      return;
+    }
+    this.modelFormData2.patchValue({
+      highlight: true,
+      changed: true,
+    });
+    let fObj = this.modelFormData2.value;
+    fObj.attachment = this.fileList ? this.fileList.name.split('.')[0] : '';
+
+    let data: any = this.tableData;
+    this.tableData = null;
+    this.tableComponent.defaultValues();
+    if (this.modelFormData2.value.index == 0) {
+      fObj.index = data ? (data.length + 1) : 1;
+      data = [fObj, ...data];
+    } else {
+      data = data.map((res: any) => res = res.index == fObj.index ? fObj : res);
+    }
+    setTimeout(() => {
+      this.tableData = data;
+      this.resetForm();
+    });
+  }
+
+  editOrDeleteEvent(value) {
+    if (value.action === 'Delete') {
+      if (value.item.id) {
+        this.deleteItem(value.item);
+      } else {
+        this.tableComponent.defaultValues();
+        this.tableData = this.tableData.filter((res: any) => res.index != value.item.index);
+      }
+    } else {
+      this.modelFormData2.patchValue(value.item);
+      this.fileList = { name: value.item.attachment };
+      this.modelFormData2.enable();
+    }
+  }
+
+  deleteItem(item: any) {
+    const obj = {
+      description: 'Are you sure you want to delete?'
+    }
+    this.commonService.deletePopup(obj, (flag: any) => {
+      if (flag) {
+        const deleteEducation = [this.apiConfigService.deleteEducation, item.id].join('/');
+        this.apiService.apiDeleteRequest(deleteEducation).subscribe(response => {
+          this.spinner.hide();
+          if (response.status === StatusCodes.pass) {
+            this.tableComponent.defaultValues();
+            this.tableData = this.tableData.filter((res: any) => res.index != item.index);
+          }
+        });
+      }
+    })
+  }
+
+
+  resetForm1() {
+    this.modelFormData3.reset();
+    this.modelFormData3.patchValue({
+      index: 0,
+      action: [
+        { id: 'Edit', type: 'edit' },
+        { id: 'Delete', type: 'delete' }
+      ]
+    });
+  }
+
+  saveForm1() {
+    if (this.modelFormData3.invalid) {
+      return;
+    }
+    this.modelFormData3.patchValue({
+      highlight: true,
+      changed: true,
+    });
+
+    let fObj = this.modelFormData3.value;
+    fObj.attachment = this.fileList1 ? this.fileList1.name.split('.')[0] : '';
+
+    let data: any = this.tableData1;
+    this.tableData1 = null;
+    this.tableComponent.defaultValues();
+    if (this.modelFormData3.value.index == 0) {
+      fObj.index = data ? (data.length + 1) : 1;
+      data = [fObj, ...data];
+    } else {
+      data = data.map((res: any) => res = res.index == fObj.index ? fObj : res);
+    }
+    setTimeout(() => {
+      this.tableData1 = data;
+      this.resetForm();
+    });
+  }
+
+  editOrDeleteEvent1(value) {
+    if (value.action === 'Delete') {
+      if (value.item.id) {
+        this.deleteItem(value.item);
+      } else {
+        this.tableComponent.defaultValues();
+        this.tableData1 = this.tableData1.filter((res: any) => res.index != value.item.index);
+      }
+    } else {
+      this.modelFormData3.patchValue(value.item);
+      this.fileList1 = { name: value.item.attachment };
+      this.modelFormData3.enable();
+    }
+  }
+
+  deleteItem1(item: any) {
+    const obj = {
+      description: 'Are you sure you want to delete?'
+    }
+    this.commonService.deletePopup(obj, (flag: any) => {
+      if (flag) {
+        const deleteExperiance = [this.apiConfigService.deleteExperiance, item.id].join('/');
+        this.apiService.apiDeleteRequest(deleteExperiance).subscribe(response => {
+          this.spinner.hide();
+          if (response.status === StatusCodes.pass) {
+            this.tableComponent.defaultValues();
+            this.tableData1 = this.tableData1.filter((res: any) => res.index != item.index);
+          }
+        });
+      }
+    })
+  }
+
   save() {
     if (this.modelFormData.invalid) {
       return;
     }
-    this.formData.item = this.modelFormData.value;
-    this.dialogRef.close(this.formData);
-    this.modelFormData.controls['employeeCode'].enable();
-  }
 
-  cancel() {
-    this.dialogRef.close();
-  }
+    // this.modelFormData.controls['employeeId'].enable();
+    if (this.formData.action == "Edit") {
+      this.update();
+      return;
+    }
 
-//Get the Employee list data
-getEmployeeCode(value) {
-  if (value != null && value !== '') {
-    const getProductByProductCodeUrl = [this.apiConfigService.getEmpCode].join('/');
-    this.apiService.apiPostRequest(getProductByProductCodeUrl, { Code: value }).subscribe(
+    let formData: any = {};
+
+    formData = this.modelFormData.getRawValue();
+    formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'MM-dd-yyyy') : '';
+    formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'MM-dd-yyyy') : '';
+    formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'MM-dd-yyyy') : '';
+
+    const addCashBank = this.apiConfigService.registerEmployee;
+    this.apiService.apiPostRequest(addCashBank, formData).subscribe(
       response => {
         const res = response;
-        if (res != null && res.status === StatusCodes.pass) {
-          if (res.response != null) {
-            if (res?.response?.['Empcodes'] != null) {
-              this.getEmployeeCodeList = res.response['Empcodes'];
-              this.spinner.hide();
-            }
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.alertService.openSnackBar('Employee Created Successfully..', Static.Close, SnackBar.success);
+            this.router.navigate(['/dashboard/master/employee']);
           }
+          this.spinner.hide();
         }
       });
-  } else {
-    this.getEmployeeCodeList = [];
   }
-}
+
+  update() {
+    const addCashBank = this.apiConfigService.updateEmployee;
+
+    let formData: any = {};
+
+    formData = this.modelFormData.getRawValue();
+    formData.dob = this.modelFormData.get('dob').value ? this.datepipe.transform(this.modelFormData.get('dob').value, 'yyyy-MM-dd') : '';
+    formData.joiningDate = this.modelFormData.get('joiningDate').value ? this.datepipe.transform(this.modelFormData.get('joiningDate').value, 'yyyy-MM-dd') : '';
+    formData.releavingDate = this.modelFormData.get('releavingDate').value ? this.datepipe.transform(this.modelFormData.get('releavingDate').value, 'yyyy-MM-dd') : '';
+
+    this.apiService.apiUpdateRequest(addCashBank, formData).subscribe(
+      response => {
+        const res = response;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.alertService.openSnackBar('Employee Details Updated Successfully..', Static.Close, SnackBar.success);
+            // this.router.navigate(['/dashboard/master/employee']);
+          }
+          this.spinner.hide();
+        }
+      });
+  }
+
+  save1() {
+    if (this.modelFormData1.invalid) {
+      return;
+    }
+
+    if (this.modelFormData.invalid) {
+      this.alertService.openSnackBar('Please Fill Employee Details', Static.Close, SnackBar.error);
+      return;
+    }
+
+    if (this.formData.action == "Edit" && this.modelFormData1.value.id) {
+      this.update1();
+      return
+    }
+
+    let formData: any = {};
+    formData = this.modelFormData1.getRawValue();
+    formData.empCode = this.modelFormData.get('employeeCode').value;
+
+    const addCashBank = this.apiConfigService.registerEmployeeAddress;
+    this.apiService.apiPostRequest(addCashBank, formData).subscribe(
+      response => {
+        const res = response;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.alertService.openSnackBar('Employee Details Updated Successfully..', Static.Close, SnackBar.success);
+            this.router.navigate(['/dashboard/master/employee']);
+          }
+          this.spinner.hide();
+        }
+      });
+  }
+
+  update1() {
+
+    const addCashBank = this.apiConfigService.updateAddress;
+
+    let formData: any = {};
+    formData = this.modelFormData1.getRawValue();
+    formData.empCode = this.modelFormData.get('employeeCode').value;
+
+    this.apiService.apiUpdateRequest(addCashBank, formData).subscribe(
+      response => {
+        const res = response;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.alertService.openSnackBar('Employee Details Updated Successfully..', Static.Close, SnackBar.success);
+            // this.router.navigate(['/dashboard/master/employee']);
+          }
+          this.spinner.hide();
+        }
+      });
+  }
+
+
+  save2() {
+
+
+    if (this.modelFormData.invalid) {
+      this.alertService.openSnackBar('Please Fill Employee Details', Static.Close, SnackBar.error);
+      return;
+    }
+
+    let arr = this.tableData.filter((t: any) => t.changed)
+    if (this.tableData.length == 0 || arr.length == 0) {
+      this.alertService.openSnackBar('Add Or Update One Education Details', Static.Close, SnackBar.error);
+      return;
+    }
+
+    arr.forEach((a: any) => {
+      a.empCode = this.modelFormData.get('employeeCode').value;
+      a.yearofPassing = a.yearofPassing ? this.datepipe.transform(a.yearofPassing, 'MM-dd-yyyy') : '';
+      a.educationGapFrom = a.educationGapFrom ? this.datepipe.transform(a.educationGapFrom, 'MM-dd-yyyy') : '';
+      a.educationGapTo = a.educationGapTo ? this.datepipe.transform(a.educationGapTo, 'MM-dd-yyyy') : '';
+    })
+
+    const registerEducation = this.apiConfigService.registerEducation;
+    this.apiService.apiPostRequest(registerEducation, arr).subscribe(
+      response => {
+        const res = response;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.alertService.openSnackBar('Education Details Updated Successfully..', Static.Close, SnackBar.success);
+            // this.router.navigate(['/dashboard/master/employee']);
+          }
+          this.spinner.hide();
+        }
+      });
+  }
+
+  save3() {
+
+    if (this.modelFormData.invalid) {
+      this.alertService.openSnackBar('Please Fill Employee Details', Static.Close, SnackBar.error);
+      return;
+    }
+
+    let arr = this.tableData1.filter((t: any) => t.changed)
+    if (this.tableData1.length == 0 || arr.length == 0) {
+      this.alertService.openSnackBar('Add Or Update One Experience Details', Static.Close, SnackBar.error);
+      return;
+    }
+
+    arr.forEach((a: any) => {
+      a.empCode = this.modelFormData.get('employeeCode').value;
+      a.fromDate = a.fromDate ? this.datepipe.transform(a.fromDate, 'MM-dd-yyyy') : '';
+      a.toDate = a.toDate ? this.datepipe.transform(a.toDate, 'MM-dd-yyyy') : '';
+      a.carrierGapFrom = a.carrierGapFrom ? this.datepipe.transform(a.carrierGapFrom, 'MM-dd-yyyy') : '';
+      a.carrierGapTo = a.carrierGapTo ? this.datepipe.transform(a.carrierGapTo, 'MM-dd-yyyy') : '';
+    })
+
+    const registerExperiance = this.apiConfigService.registerExperiance;
+    this.apiService.apiPostRequest(registerExperiance, arr).subscribe(
+      response => {
+        const res = response;
+        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(res.response)) {
+            this.alertService.openSnackBar('Experience Details Updated Successfully..', Static.Close, SnackBar.success);
+            // this.router.navigate(['/dashboard/master/employee']);
+          }
+          this.spinner.hide();
+        }
+      });
+  }
+
+
+  cancel() {
+    this.router.navigate(['dashboard/master/employee'])
+  }
 
 }
 
