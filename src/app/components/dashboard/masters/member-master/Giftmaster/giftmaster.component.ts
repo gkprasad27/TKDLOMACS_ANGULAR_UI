@@ -191,5 +191,8 @@ export class GiftMasterComponent implements OnInit, OnChanges {
     this.modelFromData.reset();
     this.setDefualts();
     this.isFormVisible = false;
+    this.modelFromData.patchValue({
+      giftId: 0
+    });
   }
 }

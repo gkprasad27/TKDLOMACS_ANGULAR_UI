@@ -197,7 +197,11 @@ export class VehicleComponent implements OnInit, OnChanges {
 
   reset() {
     this.modelFormData.reset();
+    this.modelFormData.patchValue({
+      vehicleId: 0
+    });
     this.seDefaults();
+    this.isFormEdit = false;
   }
 
 }
