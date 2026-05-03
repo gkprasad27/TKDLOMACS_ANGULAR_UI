@@ -147,8 +147,8 @@ export class BankMasterComponent implements OnInit {
         });
   }
 
-  onStateChange(event: any) {
-    const selectedState = this.stateList.find((state: any) => state.id === event.value);
+  onStateChange() {
+    const selectedState = this.stateList.find((state: any) => state.id === this.modelFormData.value.state);
     if (selectedState) {
       this.modelFormData.patchValue({ stateName: selectedState.text });
     }
