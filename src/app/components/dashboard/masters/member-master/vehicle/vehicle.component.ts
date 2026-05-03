@@ -135,6 +135,7 @@ export class VehicleComponent implements OnInit, OnChanges {
     if (value.action == 'Edit') {
       this.formData = value.item;
       if (this.formData != null) {
+        this.formData.isValid = this.formData.isValid == 1 ? true : false;
         this.modelFormData.patchValue(this.formData);
         this.modelFormData.controls['memberId'].disable();
         this.modelFormData.controls['memberCode'].disable();
@@ -155,6 +156,7 @@ export class VehicleComponent implements OnInit, OnChanges {
     let formData = this.modelFormData.getRawValue();
     formData.fromDate = this.commonService.formatDate(this.modelFormData.get('fromDate').value);
     formData.toDate = this.commonService.formatDate(this.modelFormData.get('toDate').value);
+    formData.isValid = this.modelFormData.get('isValid').value ? 1 : 0;
 
     if (!this.isFormEdit) {
       this.apiService.apiPostRequest(this.apiConfigService.registerMemberMaster + '/' + memberCode, formData)
@@ -175,7 +177,7 @@ export class VehicleComponent implements OnInit, OnChanges {
 
     else if (this.isFormEdit) {
 
-      this.apiService.apiUpdateRequest(this.apiConfigService.updateVehicle, this.modelFormData.value)
+      this.apiService.apiUpdateRequest(this.apiConfigService.updateVehicle, formData)
         .subscribe(
           response => {
             const res = response;
