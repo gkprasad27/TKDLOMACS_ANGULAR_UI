@@ -24,7 +24,7 @@
         </mat-form-field>
         <mat-form-field class="col-2">
           <mat-label [translate]="'giftMaster.year'"></mat-label> 
-          <mat-select [disabled]="modelFromData.value.giftId" formControlName="year">
+          <mat-select [disabled]="isFormEdit" formControlName="year">
             @for (yr of yearArr; track yr) {
             <mat-option [value]="yr" [disabled]="isYearSelectable(yr)"> {{yr}}</mat-option>
             }

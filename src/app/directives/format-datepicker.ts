@@ -1,5 +1,5 @@
 import { NativeDateAdapter, MatDateFormats } from '@angular/material/core';
-import { Injectable } from "@angular/core";
+import { Directive, ElementRef, HostListener, Injectable, Input } from "@angular/core";
 @Injectable()
 export class AppDateAdapter extends NativeDateAdapter {
   format(date: Date, displayFormat: Object): string {
@@ -26,3 +26,20 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     monthYearA11yLabel: { year: 'numeric', month: 'long' },
   }
 };
+
+
+@Directive({
+  selector: '[nonEditable]'
+})
+export class NonEditableDatepicker {
+
+  @Input('nonEditable') datePickerRef: any;
+
+  constructor(private el: ElementRef) { }
+
+  @HostListener('click') onInput() {
+    this.el.nativeElement.setAttribute('readonly', true);
+    this.datePickerRef.open()
+  }
+
+}

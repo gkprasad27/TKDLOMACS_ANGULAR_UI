@@ -54,14 +54,14 @@ export class GiftMasterComponent implements OnInit, OnChanges {
     this.modelFromData = this.fromBuilder.group({
       memberCode: [null],
       giftId: [0],
-      status: [Boolean],
+      status: [],
       issueDate: [null],
       description: [null],
       editWho: [null],
       addWho: [null],
       editDate: [null],
       addDate: [null],
-      year: [Number],
+      year: [],
       giftName: [null]
     });
 
@@ -82,10 +82,8 @@ export class GiftMasterComponent implements OnInit, OnChanges {
   setDefualts() {
     let d = new Date();
     this.modelFromData.controls["issueDate"].setValue(d);
-    this.modelFromData.controls["year"].setValue(d.getFullYear());
     this.modelFromData.controls["memberCode"].setValue(this.membercode);
     this.modelFromData.controls["status"].setValue(true);
-
   }
 
   getGiftProductList() {
@@ -191,6 +189,7 @@ export class GiftMasterComponent implements OnInit, OnChanges {
     this.modelFromData.reset();
     this.setDefualts();
     this.isFormVisible = false;
+    this.isFormEdit = false;
     this.modelFromData.patchValue({
       giftId: 0
     });

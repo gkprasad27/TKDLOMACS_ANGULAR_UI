@@ -355,6 +355,9 @@ export class ApiConfigService {
    updateCompany = `${environment.baseUrl}masters/Company/UpdateCompany`;
    deleteCompany = `${environment.baseUrl}masters/Company/DeleteCompany`;
 
+  getrolelist = `${environment.baseUrl}UserCreation/GetRoleList`;
+
+
   // department
   getdepartmentlist = `${environment.baseUrl}masters/Department/getdepartmentlist`;
   registerdepartment = `${environment.baseUrl}masters/Department/registerdepartment`;
@@ -388,18 +391,41 @@ export class ApiConfigService {
    deleteTaxMaster = `${environment.baseUrl}masters/TaxMaster/DeleteTaxMaster`;
 
    // --- Employee
-   getEmployeeList = `${environment.baseUrl}masters/Employee/GetEmployeeList`;
-   registerEmployee = `${environment.baseUrl}masters/Employee/RegisterEmployee`;
-   updateEmployee = `${environment.baseUrl}masters/Employee/UpdateEmployee`;
-   deleteEmployee = `${environment.baseUrl}masters/Employee/DeleteEmployee`;
+   getEmployeeList = `${environment.baseUrl}Employee/GetEmployeeList`;
+   registerEmployee = `${environment.baseUrl}Employee/RegisterEmployee`;
+   updateEmployee = `${environment.baseUrl}Employee/UpdateEmployee`;
+   deleteEmployee = `${environment.baseUrl}Employee/DeleteEmployee`;
+
+  getBankMastersList = `${environment.baseUrl}Common/GetBankMastersList`;
+   getCountryList = `${environment.baseUrl}Country/GetCountryList`;
+   getAddressList = `${environment.baseUrl}Employee/GetAddressList`;
+   getEducationList = `${environment.baseUrl}Employee/GetEducationList`;
+   getExperianceList = `${environment.baseUrl}Employee/GetExperianceList`;
+   getStatesList = `${environment.baseUrl}masters/StateWiseGst/GetStatesList`;
+   getFile = `${environment.baseUrl}Transactions/GetFile`;
+   deleteEducation = `${environment.baseUrl}Employee/deleteEducation`;
+   deleteExperiance = `${environment.baseUrl}Employee/deleteExperiance`;
+   registerEmployeeAddress = `${environment.baseUrl}Employee/RegisterEmployeeAddress`;
+   updateAddress = `${environment.baseUrl}Employee/UpdateAddress`;
+   registerEducation = `${environment.baseUrl}Employee/RegisterEducation`;
+   registerExperiance = `${environment.baseUrl}Employee/registerExperiance`;
+
+
+   getBankMastersLists = `${environment.baseUrl}BankMaster/GetBankMastersList`;
+   getBankMasterLists = `${environment.baseUrl}BankMaster/GetBankMasterList`;
+   registerBankMaster = `${environment.baseUrl}BankMaster/RegisterBankMaster`;
+   updateBankMaster = `${environment.baseUrl}BankMaster/UpdateBankMaster`;
+   deleteBankMaster = `${environment.baseUrl}BankMaster/DeleteBankMaster`;
+
+
 
    // --- EmployeeInBranch
-  getAllEmployeesInBranch = `${environment.baseUrl}masters/EmployeeInBranch/GetAllEmployeesInBranch`;
-  getEmployeeInBranchList = `${environment.baseUrl}masters/EmployeeInBranch/GetEmployeeList`;
-  getBranchesBranchList = `${environment.baseUrl}masters/EmployeeInBranch/GetBranchesList`;
-  registerEmployeeInBranch = `${environment.baseUrl}masters/EmployeeInBranch/RegisterEmployeeInBranch`;
-  updateEmployeeInBranch = `${environment.baseUrl}masters/EmployeeInBranch/UpdateEmployeeInBranch`;
-  deleteEmployeeInBranch = `${environment.baseUrl}masters/EmployeeInBranch/DeleteEmployeeInBranch`;
+  getAllEmployeesInBranch = `${environment.baseUrl}EmployeeInBranch/GetAllEmployeesInBranch`;
+  getEmployeeInBranchList = `${environment.baseUrl}EmployeeInBranch/GetEmployeeList`;
+  getBranchesBranchList = `${environment.baseUrl}EmployeeInBranch/GetBranchesList`;
+  registerEmployeeInBranch = `${environment.baseUrl}EmployeeInBranch/RegisterEmployeeInBranch`;
+  updateEmployeeInBranch = `${environment.baseUrl}EmployeeInBranch/UpdateEmployeeInBranch`;
+  deleteEmployeeInBranch = `${environment.baseUrl}EmployeeInBranch/DeleteEmployeeInBranch`;
    
 
    // --- PartnerType
@@ -749,7 +775,7 @@ export class ApiConfigService {
    getBranchWiseStockStatementQtyReportData=`${environment.baseUrl}Reports/BranchWiseStockStatementQty/GetBranchWiseStockStatementQtyReportData`;
 
   getEInvoiceReportData=`${environment.baseUrl}Reports/EInvoiceReport/GetEInvoiceReportData`;
-   
+
 
    
  /****************************** Settings *********************************************************** */

@@ -1,6 +1,7 @@
 import {
   Component, OnInit, ViewChild, Input, OnChanges,
-  ChangeDetectorRef, Output, EventEmitter, AfterViewInit, OnDestroy
+  ChangeDetectorRef, Output, EventEmitter, AfterViewInit, OnDestroy,
+  HostListener
 } from '@angular/core';
 
 import { MatPaginator } from '@angular/material/paginator';
@@ -52,15 +53,23 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   @Input() isSharetransfer: boolean;
   @Input() isAdditionalSharetransfer: boolean;
   @Input() setBackgroun: boolean;
+  @Input() showButtons = true;
+
   @Output() searchEvent = new EventEmitter();
   @Output() addEvent = new EventEmitter();
+  @Output() editOrDeleteEvent = new EventEmitter();
+  @Output() onLinkEmitEvent = new EventEmitter();
+  @Output() tableCheckboxEvent = new EventEmitter();
+  @Output() tableButtonEvent = new EventEmitter();
+  checkedAll = false;
+  tableIndex: any;
 
 
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
   highlightedRows = [];
   columnDefinitions = [];
   filterColData = [];
@@ -79,6 +88,18 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     Vehicle: null
   }
 
+  
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (this.highlightedRows.length) {
+      if (event.keyCode == 40) {
+        this.tableIndex = this.tableIndex + 1;
+      } else if (event.keyCode == 38) {
+        this.tableIndex = this.tableIndex - 1;
+      }
+      this.setIndex(this.dataSource.data[this.tableIndex], this.tableIndex);
+    }
+  }
 
   constructor(
     public dialog: MatDialog,
@@ -138,7 +159,8 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     }
   }
 
-  setIndex(row) {
+  setIndex(row, i) {
+    this.tableIndex = i;
     this.highlightedRows = [];
     this.highlightedRows.push(row);
   }
@@ -195,6 +217,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
       if (this.tableData.length > 0) {
         this.showDataNotFound = false;
         this.dataSource = new MatTableDataSource(this.tableData);
+        this.checkedAll = this.dataSource.data.every((f: any) => f.checkbox);
       } else {
         this.showDataNotFound = true;
       }
@@ -339,6 +362,24 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   addMember() {
     this.addEvent.emit();
+  }
+
+  
+  editOrDelete(action: string, item: any) {
+    this.editOrDeleteEvent.emit({ action: action, item: item });
+  }
+  
+  onLink(action: any, element: any) {
+    this.onLinkEmitEvent.emit({ action: action, item: element });
+  }
+
+  tableCheckboxCheck(flag: any, element: any) {
+    this.tableCheckboxEvent.emit({ flag: flag, item: element });
+    this.checkedAll = this.dataSource.data.every((f: any) => f.checkbox);
+  }
+
+  tableButtonCheck(flag: any, element: any) {
+    this.tableButtonEvent.emit({ flag: flag, item: element });
   }
 
   ngOnDestroy() {

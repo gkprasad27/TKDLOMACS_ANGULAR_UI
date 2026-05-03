@@ -4,7 +4,7 @@ import { AuthGuard } from './auth.guard';
 import { LoginComponent, DashboardComponent, NotFoundComponent } from './components/index';
 import { GeneralledgerComponent } from './components/dashboard/generalledger/index';
 import { InventoryComponent } from './components/dashboard/Inventory/index';
-import { MastersComponent } from './components/dashboard/masters/index';
+import { EmployeeComponent, MastersComponent } from './components/dashboard/masters/index';
 import { PayrollComponent } from './components/dashboard/payroll/index';
 import { SelfserviceComponent } from './components/dashboard/selfservice/index';
 // import { TransactionsComponent } from './components/dashboard/transactions';
@@ -22,6 +22,7 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' },
     children: [
       { path: 'master/:id', component: MastersComponent, data: { title: 'Master' } },
+      { path: 'master/:id/:id1', component: EmployeeComponent, data: { title: 'Master' } },
 
       // transation screens
       { path: 'transaction/:id/:id1', loadComponent: () => import('./components/dashboard/trans-list/trans-list.component').then(m => m.TransListComponent) },

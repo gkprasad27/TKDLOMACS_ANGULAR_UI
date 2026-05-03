@@ -18,15 +18,18 @@ import { DepartmentComponent } from './department/department.component';
 import { OpeningBalanceComponent } from './openingBalance/openingBalance.component';
 import { MeterReadingComponent } from '../transactions/meterreading/meterreading.component';
 import { PackageconversionComponent } from '../transactions/packageconversion/packageconversion.component';
+import { ErpUsersComponent } from './erpuser/erpuser.componet';
+import { BankMasterComponent } from './bankmaster/bankmaster.component';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class MastersService {
-  dynamicData = { url: '', component: null, registerUrl: '', listName: '', updateUrl: '', primaryKey: '', deleteUrl: '' };
+  dynamicData = { url: '', component: null, registerUrl: '', listName: '', updateUrl: '', primaryKey: '', deleteUrl: '', tabScreen: '' };
   branchCode: any;
   role: any;
+  editData: any;
 
   constructor(
     private apiConfigService: ApiConfigService
@@ -136,7 +139,8 @@ export class MastersService {
         this.dynamicData.updateUrl = this.apiConfigService.updateEmployee;
         this.dynamicData.deleteUrl = this.apiConfigService.deleteEmployee;
         this.dynamicData.listName = 'employeesList';
-        this.dynamicData.primaryKey = 'employeeId';
+        this.dynamicData.primaryKey = 'employeeCode';
+        this.dynamicData.tabScreen = 'True';
         return this.dynamicData;
         break;
       case 'tank':
@@ -221,6 +225,26 @@ export class MastersService {
         this.dynamicData.deleteUrl = this.apiConfigService.deletePackageconversions;
         this.dynamicData.listName = 'packageconversionsList';
         this.dynamicData.primaryKey = 'packingConversionId';
+        // this.dynamicData.coustom = true;
+        return this.dynamicData;
+      case 'erpuser':
+        this.dynamicData.url = this.apiConfigService.getPackageconversionList;
+        this.dynamicData.component = ErpUsersComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerPackageconversion;
+        this.dynamicData.updateUrl = this.apiConfigService.updatePackageconversions;
+        this.dynamicData.deleteUrl = this.apiConfigService.deletePackageconversions;
+        this.dynamicData.listName = 'packageconversionsList';
+        this.dynamicData.primaryKey = 'packingConversionId';
+        // this.dynamicData.coustom = true;
+        return this.dynamicData;
+      case 'bankmaster':
+        this.dynamicData.url = this.apiConfigService.getBankMastersLists;
+        this.dynamicData.component = BankMasterComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerBankMaster;
+        this.dynamicData.updateUrl = this.apiConfigService.updateBankMaster;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteBankMaster;
+        this.dynamicData.listName = 'bankList';
+        this.dynamicData.primaryKey = 'bankCode';
         // this.dynamicData.coustom = true;
         return this.dynamicData;
       default:
