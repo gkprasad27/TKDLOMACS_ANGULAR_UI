@@ -154,8 +154,8 @@
             <mat-select formControlName="bankName" appFocusOnEnter tabIndex="21">
               <mat-option>None</mat-option>
               @for (bank of bankList; track bank) {
-                <mat-option [value]="bank.id">
-                  {{bank.text}}
+                <mat-option [value]="bank.bankName">
+                  {{bank.bankName}}
                 </mat-option>
               }
             </mat-select>
@@ -239,7 +239,7 @@
         <div class="form-element mt-2 d-flex justify-content-end">
           <button mat-raised-button class="button-color-red text-white mx-1" [translate]="'COMMON.CANCEL'"
           (click)="cancel()">Cancel</button>
-          <button mat-raised-button type="submit" class="button-color-bule text-white mx-1"
+          <button mat-raised-button class="button-color-bule text-white mx-1"
           [translate]="'COMMON.SAVE'" (click)="save()"> Save</button>
         </div>
 
@@ -388,7 +388,7 @@
         <div class="form-element mt-2 d-flex justify-content-end">
           <button mat-raised-button class="button-color-red text-white mx-1" [translate]="'COMMON.CANCEL'"
           (click)="cancel()">Cancel</button>
-          <button mat-raised-button type="submit" class="button-color-bule text-white mx-1"
+          <button mat-raised-button class="button-color-bule text-white mx-1"
           [translate]="'COMMON.SAVE'" (click)="save1()"> Save</button>
         </div>
 
@@ -508,7 +508,7 @@
 
       <div id="for" class="d-flex justify-content-end mb-3">
 
-        <button mat-raised-button type="submit" id="submit" class="button-color-bule mx-1 text-white"
+        <button mat-raised-button id="submit" class="button-color-bule mx-1 text-white"
           (click)="saveForm()"><i class="fa-solid fa-arrows-rotate"></i>
           {{ 'COMMON.UPDATE' | translate }}
         </button>
@@ -531,7 +531,7 @@
   <div class="form-element mt-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" [translate]="'COMMON.CANCEL'"
     (click)="cancel()">Cancel</button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" [translate]="'COMMON.SAVE'"
+    <button mat-raised-button class="button-color-bule text-white mx-1" [translate]="'COMMON.SAVE'"
     (click)="save2()"> Save</button>
   </div>
 
@@ -631,7 +631,7 @@
 
     <div id="for" class="d-flex justify-content-end mb-3">
 
-      <button mat-raised-button type="submit" id="submit" class="button-color-bule mx-1 text-white"
+      <button mat-raised-button id="submit" class="button-color-bule mx-1 text-white"
         (click)="saveForm1()"><i class="fa-solid fa-arrows-rotate"></i>
         {{ 'COMMON.UPDATE' | translate }}
       </button>
@@ -654,7 +654,7 @@
 <div class="form-element mt-2 d-flex justify-content-end">
   <button mat-raised-button class="button-color-red text-white mx-1" [translate]="'COMMON.CANCEL'"
   (click)="cancel()">Cancel</button>
-  <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" [translate]="'COMMON.SAVE'"
+  <button mat-raised-button class="button-color-bule text-white mx-1" [translate]="'COMMON.SAVE'"
   (click)="save3()"> Save</button>
 </div>
 

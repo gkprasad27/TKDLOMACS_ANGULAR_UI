@@ -91,6 +91,7 @@ export class BankMasterComponent implements OnInit {
     this.formData = { ...data };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
+      this.modelFormData.patchValue({ state: +this.formData.item.state });
       this.modelFormData.controls['bankCode'].disable();
     }
   }

@@ -238,7 +238,7 @@ export class MastersService {
         // this.dynamicData.coustom = true;
         return this.dynamicData;
       case 'bankmaster':
-        this.dynamicData.url = this.apiConfigService.getBankMastersLists;
+        this.dynamicData.url = this.apiConfigService.getBankMasterLists;
         this.dynamicData.component = BankMasterComponent;
         this.dynamicData.registerUrl = this.apiConfigService.registerBankMaster;
         this.dynamicData.updateUrl = this.apiConfigService.updateBankMaster;
