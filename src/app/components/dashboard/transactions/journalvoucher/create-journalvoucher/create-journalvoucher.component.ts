@@ -103,7 +103,7 @@ export class CreateJournalvoucherComponent implements OnInit {
       fromLedgerCode: [null, [Validators.required]],
       fromLedgerName: [null],
       fromLedgerId: [null],
-      referenceNo: [null, [Validators.required]],
+      referenceNo: [null],
       journalVchNo: [null],
       serverDate: [null],
       transactionType: ["Debit", [Validators.required]]
