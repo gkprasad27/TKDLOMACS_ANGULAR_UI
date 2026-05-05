@@ -709,7 +709,7 @@
     "branchName": "Branch Name",
     "ledgerCode": "Ledger Code",
     "ledgerName": "Ledger Name",
-    "totalAmount": "Total Amount",
+    "grandTotal": "Grand Total",
     "purchaseReturn": "link",
     "userId": "User Id",
     "shiftId": "Shift Id"

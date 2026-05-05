@@ -141,6 +141,9 @@ export class CommonService {
 
 
   formatDate(event) {
+    if(event == null || event == undefined){
+      return '';
+    }
     const time = new Date();
     // tslint:disable-next-line: one-variable-per-declaration
     const date = new Date(event),
@@ -177,6 +180,9 @@ export class CommonService {
 
 
   formatReportDate(event) {
+    if(event == null || event == undefined){
+      return '';
+    }
     var time = new Date();
     var date = new Date(event),
       mnth = ("0" + (date.getMonth() + 1)).slice(-2),
@@ -188,6 +194,9 @@ export class CommonService {
   }
 
   formatDate1(event) {
+    if(event == null || event == undefined){
+      return '';
+    }
     var date = new Date(event),
       mnth = ("0" + (date.getMonth() + 1)).slice(-2),
       day = ("0" + date.getDate()).slice(-2);

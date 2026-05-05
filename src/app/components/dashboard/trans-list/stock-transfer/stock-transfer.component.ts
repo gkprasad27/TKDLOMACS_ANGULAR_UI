@@ -632,9 +632,11 @@ export class StockTransferComponent implements OnInit {
     this.params = this.params.append('userName', user.userName);
     this.params = this.params.append('fromBranchCode', this.formData.value.fromBranchCode);
     this.params = this.params.append('stockTransferNo', this.formData.value.stockTransferNo);
-    this.apiService.apiGetRequest(tableUrl, this.params).subscribe(
+    this.apiService.apiReportGetRequest(tableUrl, this.params).subscribe(
       response => {
-        const res = response;
+        const res = response['body'];
+        this.spinner.hide();
+        console.log(res);
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.StockList != null) {
