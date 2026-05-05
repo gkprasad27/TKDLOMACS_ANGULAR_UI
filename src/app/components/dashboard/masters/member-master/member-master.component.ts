@@ -293,6 +293,7 @@ export class MemberMasterComponent implements OnInit {
     if (value.action == 'Edit') {
       this.formData = value.item;
       if (this.formData != null) {
+        this.formData.isActive = this.formData.isActive == 1 ? true : false;
         this.modelFormData.patchValue(this.formData);
         this.modelFormData.controls['memberCode'].disable();
         this.formToggle();
@@ -320,7 +321,8 @@ export class MemberMasterComponent implements OnInit {
         ...formValue,
         giftIssuedDate: this.commonService.formatDate(this.modelFormData.get('giftIssuedDate').value),
         dob: this.commonService.formatDate(this.modelFormData.get('dob').value),
-        joinDate: this.commonService.formatDate(this.modelFormData.get('joinDate').value)
+        joinDate: this.commonService.formatDate(this.modelFormData.get('joinDate').value),
+        isActive: this.modelFormData.get('isActive').value ? 1 : 0
       };
       this.apiService.apiPostRequest(this.tableUrl.registerUrl, formValue)
         .subscribe(
@@ -340,14 +342,17 @@ export class MemberMasterComponent implements OnInit {
     }
 
     else if (this.isFormEdit) {
-      this.modelFormData.patchValue({
+      this.modelFormData.controls['memberCode'].enable();
+      let formValue = this.modelFormData.getRawValue();
+      formValue = {
+        ...formValue,
         giftIssuedDate: this.commonService.formatDate(this.modelFormData.get('giftIssuedDate').value),
         dob: this.commonService.formatDate(this.modelFormData.get('dob').value),
-        joinDate: this.commonService.formatDate(this.modelFormData.get('joinDate').value)
-      });
-      this.modelFormData.controls['memberCode'].enable();
+        joinDate: this.commonService.formatDate(this.modelFormData.get('joinDate').value),
+        isActive: this.modelFormData.get('isActive').value ? 1 : 0
+      };
 
-      this.apiService.apiUpdateRequest(this.tableUrl.updateUrl, this.modelFormData.value)
+      this.apiService.apiUpdateRequest(this.tableUrl.updateUrl, formValue)
         .subscribe(
           response => {
             const res = response;
