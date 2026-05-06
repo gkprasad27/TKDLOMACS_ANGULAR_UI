@@ -10,7 +10,7 @@
         <mat-form-field class="col-3">
           <mat-label>{{ 'openingbalance.branchName' | translate }}</mat-label>
           <mat-select formControlName="branchCode" appFocusOnEnter tabIndex="3"
-            (selectionChange)="genarateVoucherNo();">
+            (selectionChange)="genarateVoucherNo(); setBranchCode();">
             @for (branch of getBranchesListArray; track branch) {
             <mat-option [value]="branch.id">
               {{ branch.id }} - {{branch.text}}
@@ -68,7 +68,7 @@
 
         <mat-form-field class="col-3">
           <mat-label>{{ 'openingbalance.amount' | translate }}</mat-label>
-          <input matInput formControlName="amount" appFocusOnEnter tabIndex="2">
+          <input matInput type="number" formControlName="amount" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
         <mat-form-field class="col-3">

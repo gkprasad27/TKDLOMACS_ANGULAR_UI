@@ -1,6 +1,6 @@
 import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { AlertService } from '../../../../services/alert.service';
-import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StatusCodes } from '../../../../enums/common/common';
@@ -12,10 +12,10 @@ import { CommonService } from '../../../../services/common.service';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
 
-@Component({ 
-    selector: 'openingBalance',
-    templateUrl: './openingBalance.component.html',
-    styleUrls: ['./openingBalance.component.scss'],
+@Component({
+  selector: 'openingBalance',
+  templateUrl: './openingBalance.component.html',
+  styleUrls: ['./openingBalance.component.scss'],
   standalone: true,
   imports: [SharedImportModule, TranslateModule]
 })
@@ -45,16 +45,17 @@ export class OpeningBalanceComponent implements OnInit {
     this.modelFormData = this.formBuilder.group({
       // departmentId: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(4)]],
       // departmentName: ['', [Validators.required, Validators.minLength(2)]],
-      openingBalanceId:  ['0'],
+      openingBalanceId: ['0'],
       branchCode: [null],
-      branchName:[null],
-      voucherNo:[null],
+      branchName: [null],
+      voucherNo: [null],
       paymentTypeId: [null],
       openingBalanceDate: [null],
       narration: [null],
       ledgerCode: [null],
       ledgerName: [null],
-      amount:[null]
+      amount: [null],
+      userName: [null]
     });
 
 
@@ -77,19 +78,21 @@ export class OpeningBalanceComponent implements OnInit {
         userName: user.userName
       });
       this.genarateVoucherNo(user.branchCode);
+      this.setBranchCode();
     }
   }
- 
+
   getOpeningBalBranchesList() {
     const getOpeningBalBranchesListUrl = [this.apiConfigService.getObBranchesList].join('/');
-   this.apiService.apiGetRequest(getOpeningBalBranchesListUrl).subscribe(
+    this.apiService.apiGetRequest(getOpeningBalBranchesListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.getBranchesListArray = res.response['BranchesList'];
-              this.spinner.hide();
+              this.setBranchCode();
             }
           }
         }
@@ -98,18 +101,29 @@ export class OpeningBalanceComponent implements OnInit {
 
   getPaymentType() {
     const getPaymentTypeListUrl = [this.apiConfigService.getPaymentType].join('/');
-   this.apiService.apiGetRequest(getPaymentTypeListUrl).subscribe(
+    this.apiService.apiGetRequest(getPaymentTypeListUrl).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
             if (res?.response?.BranchesList?.length > 0) {
               this.GetPaymentListArray = res.response['BranchesList'];
-              this.spinner.hide();
             }
           }
         }
       });
+  }
+
+  setBranchCode() {
+    if (this.getBranchesListArray.length) {
+      const bname = this.getBranchesListArray.find(branchCode => branchCode.id == this.modelFormData.get('branchCode').value);
+      if (bname) {
+        this.modelFormData.patchValue({
+          branchName: (bname != null) ? bname.text : null
+        });
+      }
+    }
   }
 
   genarateVoucherNo(branch?) {
