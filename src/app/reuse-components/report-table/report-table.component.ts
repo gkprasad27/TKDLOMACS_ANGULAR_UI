@@ -762,7 +762,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     theme: 'grid',
 
     styles: {
-      fontSize: columns.length > 6 ? 8 : 10,
+      fontSize: columns.length > 6 ? 10 : 12,
       cellPadding: 0.3,
       overflow: 'linebreak'
     },
@@ -890,6 +890,9 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     if (this.tableData != null) {
       if (this.tableData.length > 0) {
+        this.tableData = this.tableData.map((row, index) => {
+          return { sno: index + 1, ...row };
+        });
         this.dataSource = new MatTableDataSource(this.tableData);
       }
     }

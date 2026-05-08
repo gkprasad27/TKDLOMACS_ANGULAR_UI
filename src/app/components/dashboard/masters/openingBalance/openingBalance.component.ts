@@ -3,7 +3,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
-import { StatusCodes } from '../../../../enums/common/common';
+import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { ApiService } from '../../../../services/api.service';
@@ -11,6 +11,7 @@ import { ApiService } from '../../../../services/api.service';
 import { CommonService } from '../../../../services/common.service';
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
+import { Static } from 'src/app/enums/common/static';
 
 @Component({
   selector: 'openingBalance',
@@ -54,6 +55,7 @@ export class OpeningBalanceComponent implements OnInit {
       narration: [null],
       ledgerCode: [null],
       ledgerName: [null],
+      ledgerValue: [null],
       amount: [null],
       userName: [null]
     });
@@ -69,7 +71,6 @@ export class OpeningBalanceComponent implements OnInit {
   ngOnInit() {
     this.getOpeningBalBranchesList();
     this.getPaymentType();
-    this.commonService.setFocus('ledgerName');
     const user = JSON.parse(localStorage.getItem('user'));
     if (user?.branchCode != null) {
       this.modelFormData.patchValue({
@@ -79,6 +80,26 @@ export class OpeningBalanceComponent implements OnInit {
       });
       this.genarateVoucherNo(user.branchCode);
       this.setBranchCode();
+    }
+  }
+
+  setLedgerName(event) {
+    const value = (event?.value || event?.target?.value)?.split(' -')[0];
+    const lname = this.GetBankPAccountLedgerListArray.find(lCode => lCode.id == value);
+    this.modelFormData.patchValue({
+      ledgerName: lname ? lname.text : null,
+      ledgerCode: lname ? lname.id : null,
+    });
+    if (!lname) {
+      this.modelFormData.patchValue({
+        ledgerValue: ''
+      });
+      this.alertService.openSnackBar(`Please select Ledger Code`, Static.Close, SnackBar.error);
+      return;
+    } else {
+      this.modelFormData.patchValue({
+        ledgerValue: this.modelFormData.get('ledgerCode').value + ' - ' + this.modelFormData.get('ledgerName').value
+      });
     }
   }
 
@@ -93,6 +114,13 @@ export class OpeningBalanceComponent implements OnInit {
             if (res?.response?.BranchesList?.length > 0) {
               this.getBranchesListArray = res.response['BranchesList'];
               this.setBranchCode();
+              setTimeout(() => {
+                if (this.formData.item != null) {
+                  this.modelFormData.patchValue({
+                    ledgerValue: this.formData.item.ledgerCode + ' - ' + this.formData.item.ledgerName
+                  }, { emitEvent: false });
+                }
+              });
             }
           }
         }

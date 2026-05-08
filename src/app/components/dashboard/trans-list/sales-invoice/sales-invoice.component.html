@@ -166,7 +166,7 @@
           </ng-container>
 
           <ng-container matColumnDef="productName">
-            <th mat-header-cell *matHeaderCellDef> {{ 'salesInvoice.productName' | translate }} </th>
+            <th mat-header-cell class="product_width" *matHeaderCellDef> {{ 'salesInvoice.productName' | translate }} </th>
             <td mat-cell *matCellDef="let element;">
               <strong><input class="typeAhead" [(ngModel)]="element.productName" [matTooltip]="element.productName"
                   disabled (typeaheadOnSelect)="setProductName($event, element)"
@@ -402,10 +402,10 @@
           {{ 'COMMON.PRINT' | translate }}
         </button>
         }
-        @if ((routeUrl == 'return' || routeUrl == '')) {
+        @if ((routeUrl == 'return' || routeUrl == '' || this.user?.role == '1')) {
         <button [disabled]="isSaveDisabled" mat-raised-button type="submit" class="button-color-bule mr-3 text-white"
           (click)="save()">
-          {{ 'COMMON.SAVE' | translate }}
+          {{ (routeUrl != '' ? 'COMMON.UPDATE' : 'COMMON.SAVE') | translate }}
         </button>
         }
         <button mat-raised-button class="button-color-red text-white mr-3" [disabled]="routeUrl != ''"

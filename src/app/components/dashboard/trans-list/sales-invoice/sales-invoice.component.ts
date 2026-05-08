@@ -74,6 +74,7 @@ export class SalesInvoiceComponent implements OnInit {
   GetPumpsListArray: any;
   pumpList = [];
   getCustomerGstNumListArray: any[];
+  user: any;
   constructor(
     private formBuilder: FormBuilder,
     public commonService: CommonService,
@@ -139,8 +140,9 @@ export class SalesInvoiceComponent implements OnInit {
     });
 
     const user = JSON.parse(localStorage.getItem('user'));
+    this.user = user;
 
-    if (user?.role != '1') {
+    if (this.user?.role != '1') {
       this.branchFormData.controls['invoiceDate'].disable();
       this.branchFormData.controls['branchCode'].disable();
       this.minDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
@@ -215,8 +217,7 @@ export class SalesInvoiceComponent implements OnInit {
         if (params.value != null) {
           this.getInvoiceDeatilList(params.value);
         }
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user?.role != '1') {
+        if (this.user?.role != '1') {
           this.disableForm(params.id1);
         }
       } else {
@@ -236,12 +237,11 @@ export class SalesInvoiceComponent implements OnInit {
   resetData() {
     this.addTableRow();
     // this.getCashPartyAccountList("100");
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user?.branchCode != null) {
+    if (this.user?.branchCode != null) {
       this.branchFormData.patchValue({
-        branchCode: +user.branchCode,
-        userId: user.seqId,
-        userName: user.userName
+        branchCode: +this.user.branchCode,
+        userId: this.user.seqId,
+        userName: this.user.userName
       });
       this.branchFormData.patchValue({
         stateCode: 37,
@@ -249,7 +249,7 @@ export class SalesInvoiceComponent implements OnInit {
       });
       // this.getCashPartyAccount();
       this.setBranchCode();
-      this.genarateBillNo(user.branchCode);
+      this.genarateBillNo(this.user.branchCode);
       this.formGroup();
       this.getCashPartyAccountList('');
     }
@@ -1053,7 +1053,7 @@ export class SalesInvoiceComponent implements OnInit {
       this.registerInvoiceReturn();
       return;
     }
-    if (this.routeUrl != '' || this.dataSource.data.length == 0) {
+    if ((this.routeUrl != '' && this.user?.role != '1') || this.dataSource.data.length == 0) {
       return;
     }
     let tableData = [];
@@ -1065,6 +1065,8 @@ export class SalesInvoiceComponent implements OnInit {
     }
     let content = '';
     let availStock = tableData.filter(stock => {
+    console.log(stock.availStock);
+
       if (stock.availStock == 0) {
         content = '0 Availablilty Stock';
         return stock;
@@ -1090,7 +1092,7 @@ export class SalesInvoiceComponent implements OnInit {
         }
       }
       if ((stock.pumpNo != null)) {
-        if (this.getPumpsArray.length == 0) {
+        if (this.getPumpsArray.length == 0 && (this.routeUrl == '')) {
           content = 'PumpNo is not valid';
           return stock;
         }
@@ -1181,7 +1183,7 @@ export class SalesInvoiceComponent implements OnInit {
     obj.invoiceDate = this.commonService.formatDate(this.branchFormData.get('invoiceDate').value);
     obj.paymentMode = 0;
     data.map(val => val.qty = val.qty != null && val.qty != '' ? +val.qty : 0);
-    const registerInvoiceUrl = this.apiConfigService.registerInvoice;
+    const registerInvoiceUrl = (this.user.role === '1' && this.routeUrl !== '') ? this.apiConfigService.updateInvoice : this.apiConfigService.registerInvoice;
     const requestObj = { InvoiceHdr: obj, InvoiceDetail: data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(
       response => {

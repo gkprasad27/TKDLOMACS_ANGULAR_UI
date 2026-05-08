@@ -370,7 +370,8 @@ mat-tab-header {
   background-color: white;
   transition: all 0.2s ease;
   pointer-events: none;
-  font-size: 16px;
+  font-weight: 500 !important;
+  font-size: larger !important;
 }
 
 .floating-dropdown.filled label,
@@ -551,4 +552,9 @@ input:focus, textarea:focus, select:focus {
 
 input, textarea, select {
   transition: background-color 0.3s ease;
+}
+
+mat-label {
+    font-weight: 500 !important;
+    font-size: larger !important;
 }
