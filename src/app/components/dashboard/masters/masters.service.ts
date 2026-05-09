@@ -228,13 +228,13 @@ export class MastersService {
         // this.dynamicData.coustom = true;
         return this.dynamicData;
       case 'erpuser':
-        this.dynamicData.url = this.apiConfigService.getPackageconversionList;
+        this.dynamicData.url = this.apiConfigService.getUsersList;
         this.dynamicData.component = ErpUsersComponent;
-        this.dynamicData.registerUrl = this.apiConfigService.registerPackageconversion;
-        this.dynamicData.updateUrl = this.apiConfigService.updatePackageconversions;
-        this.dynamicData.deleteUrl = this.apiConfigService.deletePackageconversions;
-        this.dynamicData.listName = 'packageconversionsList';
-        this.dynamicData.primaryKey = 'packingConversionId';
+        this.dynamicData.registerUrl = this.apiConfigService.registerErpUser;
+        this.dynamicData.updateUrl = this.apiConfigService.updateErpUser;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteErpUser;
+        this.dynamicData.listName = 'ScreenNames';
+        this.dynamicData.primaryKey = 'userName';
         // this.dynamicData.coustom = true;
         return this.dynamicData;
       case 'bankmaster':

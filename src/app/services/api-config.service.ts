@@ -218,6 +218,13 @@ export class ApiConfigService {
   getSaledUnits = `${environment.baseUrl}transactions/MeterReading/GetSaledUnits`;
   getMPump = `${environment.baseUrl}masters/Pump/GetPump`;
 
+  // erp user
+  getUsersList = `${environment.baseUrl}Settings/GetUsersList`;
+  registerErpUser = `${environment.baseUrl}UserCreation/RegisterUserCreation`;
+  updateErpUser = `${environment.baseUrl}UserCreation/UpdateUserCreation`;
+  deleteErpUser = `${environment.baseUrl}UserCreation/DeleteUserCreation`;
+  getEmployeesList = `${environment.baseUrl}Selfservice/Advance/GetEmployeesList`;
+
    // *******************************  End Transaction *****************************************
 
 

@@ -46,11 +46,11 @@ export class ErpUsersComponent implements OnInit {
     this.modelFormData = this.formBuilder.group({
       userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(4)]],
       password: ['', [Validators.required, Validators.minLength(2)]],
-      role: [null],
+      role: [null, Validators.required],
       seqId: ['0'],
       active: [null],
       branchCode: [null],
-      companyCode: [null],
+      employeeCode: [null, Validators.required],
       addDate: [null]
     });
 
@@ -71,25 +71,33 @@ export class ErpUsersComponent implements OnInit {
   }
 
   allApis() {
-    const getrolelistUrl = this.apiConfigService.getrolelist;
-    const getCompanyUrl = this.apiConfigService.getCompanysList;
+    const getrolelistUrl = this.apiConfigService.getRoles;
+    // const getCompanyUrl = this.apiConfigService.getCompanysList;
+    const getEmployeeList = this.apiConfigService.getEmployeesList;
 
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
         this.apiService.apiGetRequest(getrolelistUrl),
-        this.apiService.apiGetRequest(getCompanyUrl),
-      ]).subscribe(([getrole, companies]) => {
+        // this.apiService.apiGetRequest(getCompanyUrl),
+        this.apiService.apiGetRequest(getEmployeeList)
+      ]).subscribe(([getrole, employeeList]) => {
         this.spinner.hide();
 
         if (!this.commonService.checkNullOrUndefined(getrole) && getrole.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(getrole.response)) {
-            this.RolesList = getrole.response['roleList']
+            this.RolesList = getrole.response['roles']
           }
         }
 
-        if (!this.commonService.checkNullOrUndefined(companies) && companies.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(companies.response)) {
-            this.companyList = companies.response['companiesList']
+        // if (!this.commonService.checkNullOrUndefined(companies) && companies.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(companies.response)) {
+        //     this.companyList = companies.response['companiesList']
+        //   }
+        // }
+
+        if (!this.commonService.checkNullOrUndefined(employeeList) && employeeList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(employeeList.response)) {
+            this.employeesList = employeeList.response['EmployeeList'];
           }
         }
 

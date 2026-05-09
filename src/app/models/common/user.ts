@@ -1,6 +1,6 @@
 export interface User {
   seqId: number;
-  username: string;
+  userName: string;
   password: string;
   role: string;
   canEdit: string;

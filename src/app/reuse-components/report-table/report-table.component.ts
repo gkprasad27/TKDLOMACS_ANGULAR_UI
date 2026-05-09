@@ -407,8 +407,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
       selectedSupplierGroup: this.dateForm.get('selectedSupplierGroup').value,
     })
     this.params = new HttpParams();
-    this.params = this.params.append('UserID', 'admin');//this.user.userName);
-    this.params = this.params.append('userName', 'admin');//this.user.userName);
+    this.params = this.params.append('UserID', this.user.userName);//this.user.userName);
+    this.params = this.params.append('userName', this.user.userName);//this.user.userName);
     this.params = this.params.append('companyId', 0);//this.user.userName);this.params = this.params.append('fromDate', this.dateForm.get('formDate')?.value);
     this.params = this.params.append('fromDate', this.dateForm.get('formDate').value);
     this.params = this.params.append('toDate', this.dateForm.get('toDate')?.value);

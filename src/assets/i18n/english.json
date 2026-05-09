@@ -1599,6 +1599,7 @@
     "role": "Role",
     "branchCode": "Branch Code",
     "companyCode": "Company Code",
+    "employeeCode":"Employee Code",
     "addDate": "Add Date",
     "active": "Active"
   },
