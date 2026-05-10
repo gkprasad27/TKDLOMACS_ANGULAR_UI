@@ -48,7 +48,7 @@ export class ErpUsersComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(2)]],
       role: [null, Validators.required],
       seqId: ['0'],
-      active: [null],
+      active: [true],
       branchCode: [null],
       employeeCode: [null, Validators.required],
       addDate: [null]

@@ -19,6 +19,16 @@
         </mat-form-field>
 
         <mat-form-field class="col-3"
+          [ngClass]="{ 'ng--valid': formControls.password.valid, 'ng--invalid': !formControls.password.valid  }">
+          <mat-label [translate]="'erpuser.password'"></mat-label>
+          <input matInput formControlName="password" maxlength="50" appFocusOnEnter tabIndex="2">
+          @if (!formControls.password.valid) {
+          <mat-error [ngClass]="{ 'ng--invalid': !formControls.password.valid  }">
+            Password is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.employeeCode.valid, 'ng--invalid': !formControls.employeeCode.valid  }">
           <mat-label [translate]="'erpuser.employeeCode'"></mat-label>
           <mat-select formControlName="employeeCode">
@@ -28,18 +38,6 @@
           </mat-select>
           <mat-error *ngIf="!formControls.employeeCode.valid" [ngClass]="{ 'ng--invalid': !formControls.employeeCode.valid  }">
             User Name is required</mat-error>
-        </mat-form-field>
-
-
-
-        <mat-form-field class="col-3"
-          [ngClass]="{ 'ng--valid': formControls.password.valid, 'ng--invalid': !formControls.password.valid  }">
-          <mat-label [translate]="'erpuser.password'"></mat-label>
-          <input matInput formControlName="password" maxlength="50" appFocusOnEnter tabIndex="2">
-          @if (!formControls.password.valid) {
-          <mat-error [ngClass]="{ 'ng--invalid': !formControls.password.valid  }">
-            Password is required</mat-error>
-          }
         </mat-form-field>
 
         <mat-form-field class="col-3">
