@@ -53,30 +53,30 @@
     "accountGroupName": "Account Group Name",
     "nature": "Nature",
     "groupUnder": "Under Account",
-    "affectGrossProfit": "Affect Gross Profit",    
+    "affectGrossProfit": "Affect Gross Profit",
     "narration": "Narration",
-    "Undersubaccount":"Under SubAccount"
+    "Undersubaccount": "Under SubAccount"
   },
   "glaccounts": {
     "title": "Account Ledger",
     "ledgerCode": "Ledger Code",
-    "ledgerName": "Ledger Name",    
+    "ledgerName": "Ledger Name",
     "accountTypeName": "Account Type",
     "openingBalance": "Opening Balance",
-    "accountGroupId":"Account Group",
-    "crOrDr":"Payment Type",
-    "mailingName":"Mailing Name",
-    "bankAccountNumber":"Bank Account Number",
-    "phone":"Phone",
-    "email":"E-mail",
-    "mobile":"Mobile",
-    "pan":"Pan",
-    "tin":"GSTIN",
-    "pricinglevelId":"Pricing Level",
-    "creditPeriod":"Credit Period",
-    "creditLimit":"Credit Limit",
-    "address":"Address",
-    "narration":"Narration"
+    "accountGroupId": "Account Group",
+    "crOrDr": "Payment Type",
+    "mailingName": "Mailing Name",
+    "bankAccountNumber": "Bank Account Number",
+    "phone": "Phone",
+    "email": "E-mail",
+    "mobile": "Mobile",
+    "pan": "Pan",
+    "tin": "GSTIN",
+    "pricinglevelId": "Pricing Level",
+    "creditPeriod": "Credit Period",
+    "creditLimit": "Credit Limit",
+    "address": "Address",
+    "narration": "Narration"
   },
   "glsubcode": {
     "title": "GL Subcode",
@@ -209,40 +209,39 @@
     "title": "Material Groups",
     "groupCode": "Code",
     "groupName": "GroupName",
-    "narration":"Narration",
-    "extraDate":"Product Group Date"
+    "narration": "Narration",
+    "extraDate": "Product Group Date"
   },
   "company": {
     "title": "Company",
     "companyId": "Code",
     "companyName": "Name",
-    "mailingName":"Mailing Name",
-    "address":"Address",
-    "country":"Country",
-    "state":"State",
-    "city":"City",
-    "pin":"Pin",
-    "phone":"Phone",
-    "emailId":"Email",
-    "web":"Web",    
-    "currencyId":"Currency",
-    "financialYearFrom":"Financial Year From",
-    "booksBeginingFrom":"Books Beginning From",
-    "gstin":"GST"
-    
+    "mailingName": "Mailing Name",
+    "address": "Address",
+    "country": "Country",
+    "state": "State",
+    "city": "City",
+    "pin": "Pin",
+    "phone": "Phone",
+    "emailId": "Email",
+    "web": "Web",
+    "currencyId": "Currency",
+    "financialYearFrom": "Financial Year From",
+    "booksBeginingFrom": "Books Beginning From",
+    "gstin": "GST"
   },
   "branches": {
     "title": "Branch",
     "branchCode": "Code",
     "branchName": "Name",
-    "address":"Address",
-    "city":"City",
-    "state":"State",
-    "country":"Country",
-    "pinCode":"Pin Code",
-    "phone":"Phone",
-    "email":"Email",
-    "gstin":"GST"
+    "address": "Address",
+    "city": "City",
+    "state": "State",
+    "country": "Country",
+    "pinCode": "Pin Code",
+    "phone": "Phone",
+    "email": "Email",
+    "gstin": "GST"
   },
   "department": {
     "title": "Department",
@@ -255,7 +254,7 @@
     "companyCode": "Company Code",
     "companyDesc": "Company Desc",
     "companyGroupCode": "Company Group Code"
-  }, 
+  },
   "advance": {
     "title": "Advance",
     "id": "id",
@@ -308,7 +307,6 @@
     "noOfDays": "No Of Days",
     "department": "Department"
   },
-
   "costcenter": {
     "title": "Cost Center",
     "code": "Code",
@@ -381,7 +379,6 @@
     "stockAvailable": "Stock Available",
     "batchNo": "Batch No"
   },
-
   "stockshort": {
     "title": "Stock Short List",
     "newstockshort": "New Stock Short",
@@ -394,7 +391,7 @@
     "shiftId": "Shift Id",
     "costCenter": "Cost Center",
     "remarks": "Remarks",
-    "stockshortNo":"Stock Short No",
+    "stockshortNo": "Stock Short No",
     "productCode": "Product Code",
     "productName": "Product Name",
     "hsnNo": "HsnNo",
@@ -405,7 +402,6 @@
     "StockAvailable": "Stock Available",
     "batchNo": "Batch No"
   },
-
   "oilconversion": {
     "title": "Oil Conversion List",
     "newoilconversion": "New Oil Conversion",
@@ -429,7 +425,6 @@
     "newQty": "New Qty",
     "batchNo": "Batch No"
   },
-
   "division": {
     "title": "Division",
     "code": "Code",
@@ -631,13 +626,13 @@
     "meterReading": "Meter Reading",
     "isWorking": "Is Working"
   },
-  "membermaster": { 
-    "title": "Member",   
-    "memberCode": "Member Code",    
+  "membermaster": {
+    "title": "Member",
+    "memberCode": "Member Code",
     "nameTitle": "Name Title",
-    "memberName": "Member Name",   
-    "giftIssued":"Gift Issued",
-    "giftIssuedDate":"Gift Issued Date", 
+    "memberName": "Member Name",
+    "giftIssued": "Gift Issued",
+    "giftIssuedDate": "Gift Issued Date",
     "noofShares": "No of Shares",
     "issuedShares": "Issued Shares",
     "receivedShares": "Received Shares",
@@ -660,16 +655,15 @@
     "nominee": "Nominee",
     "relation": "Relation",
     "passBook": "Pass Book",
-    "passBookStatus": "Pass Book Status",    
-    "aadharNumber":"Aadhar Number",
-    "dob":"Date Of Birth",
-    "photo":"Photo",
-    "membervehicle":"Member Vehicle"
-    
+    "passBookStatus": "Pass Book Status",
+    "aadharNumber": "Aadhar Number",
+    "dob": "Date Of Birth",
+    "photo": "Photo",
+    "membervehicle": "Member Vehicle"
   },
   "vehicle": {
     "title": "Vehicle",
-    "vehicleId": "Vehicle Id",   
+    "vehicleId": "Vehicle Id",
     "memberCode": "Member Code",
     "memberShares": "Member Shares",
     "vehicleRegNo": "Vehicle Reg No",
@@ -681,39 +675,39 @@
     "vehicleTypeName": "Vehicle Type Name",
     "vehicleType": "Vehicle Type"
   },
-  "giftMaster":{
-    "title":"Gift",
-    "memberCode":"Member Code",
-    "giftId":"Gift Id",
-    "status":"Status",
-    "issuseDate":"Issue Date",
-    "description":"Description",
-    "year":"Year",
-    "giftName":"Gift Name"
+  "giftMaster": {
+    "title": "Gift",
+    "memberCode": "Member Code",
+    "giftId": "Gift Id",
+    "status": "Status",
+    "issuseDate": "Issue Date",
+    "description": "Description",
+    "year": "Year",
+    "giftName": "Gift Name"
   },
   "shareTransfer": {
     "title": "Share Transfer",
-    "shareTransferCode":"Share Transfer Code",
-    "transferDate":"Transfer Date",
-    "fromMemberCode":"From Member Code",
-    "toMemberCode" : "To Member Code",
-    "toMemberName":"To Member Name",
-    "fromMemberSharesBefore":"From Member Shares Before T/F",
-    "fromMemberSharesAfter":"From Member Shares After T/F",
-    "toMemberSharesBefore":"To Member Shares Before T/F",
-    "toMemberSharesAfter":"To Member Shares After T/F"
+    "shareTransferCode": "Share Transfer Code",
+    "transferDate": "Transfer Date",
+    "fromMemberCode": "From Member Code",
+    "toMemberCode": "To Member Code",
+    "toMemberName": "To Member Name",
+    "fromMemberSharesBefore": "From Member Shares Before T/F",
+    "fromMemberSharesAfter": "From Member Shares After T/F",
+    "toMemberSharesBefore": "To Member Shares Before T/F",
+    "toMemberSharesAfter": "To Member Shares After T/F"
   },
   "additionalShareTransfer": {
     "title": "Additional Shares",
-    "shareTransferCode":"Share Transfer Code",
-    "transferDate":"Transfer Date",
-    "fromMemberCode":"From Member Code",
-    "toMemberCode" : "To Member Code",
-    "toMemberName":"To Member Name",
-    "fromMemberSharesBefore":"From Member Shares Before T/F",
-    "fromMemberSharesAfter":"From Member Shares After T/F",
-    "toMemberSharesBefore":"To Member Shares Before T/F",
-    "toMemberSharesAfter":"To Member Shares After T/F"
+    "shareTransferCode": "Share Transfer Code",
+    "transferDate": "Transfer Date",
+    "fromMemberCode": "From Member Code",
+    "toMemberCode": "To Member Code",
+    "toMemberName": "To Member Name",
+    "fromMemberSharesBefore": "From Member Shares Before T/F",
+    "fromMemberSharesAfter": "From Member Shares After T/F",
+    "toMemberSharesBefore": "To Member Shares Before T/F",
+    "toMemberSharesAfter": "To Member Shares After T/F"
   },
   "segment": {
     "title": "Segment",
@@ -759,14 +753,14 @@
     "description": "Tax Structure Name",
     "taxGroupName": "Tax Group Name",
     "totalGst": "Total IGST",
-    "totalPercentageGst": "Total GST",    
+    "totalPercentageGst": "Total GST",
     "cgst": "CGST",
     "sgst": "SGST",
     "igst": "IGST",
     "purchaseAccount": "Purchase Account",
     "salesAccount": "Sales Account",
     "fromDate": "From Date",
-    "toDate": "To Date",    
+    "toDate": "To Date",
     "narration": "Narration"
   },
   "unit": {
@@ -1020,12 +1014,9 @@
     "shiftId": "Shift Id",
     "newStock": "New Stock",
     "viewStock": "Stock Invoice List View",
-
     "userName": "User Name",
     "totalQty": "Total Qty",
     "totalLtrs": "Total Ltrs",
-
-
     "productCode": "Product Code",
     "productName": "Product Name",
     "hsnNo": "HsnNo",
@@ -1075,19 +1066,14 @@
     "totalLiters": "Total Liters",
     "tankNo": "Tank No",
     "narration": "Narration",
-
     "SlNo": "Sl No",
-
     "RETURNTITLE": "Sales Return",
     "VIEWSALESRETURN": "Sales Return View",
     "DATE": "Date",
     "INVOICENO": "Invoive No",
-
     "invoiceMasterId": "invoiceMasterId",
     "invoiceDate": "Invoice Date",
-
     "isManualEntry": "IsManual Entry",
-
     "CreatenewSales": " Create New Sales",
     "cashOrParty": "Cash / Party",
     "vehicleRegNo": "Vehicle Reg No",
@@ -1117,7 +1103,7 @@
     "totalGross": "Total Gross",
     "grandTotal": "Grand Total",
     "totalInvoiceAmount": "Total Invoice Amount",
-    "purchaseReturnInvNo":"Purchase Return Invoice No",
+    "purchaseReturnInvNo": "Purchase Return Invoice No",
     "tcs": "TCS",
     "userName": "User Name",
     "AMOUNTINWORDS": "Amount In Words",
@@ -1127,7 +1113,6 @@
     "totalTcs": "Total TCS",
     "roundOffPlus": "Round Off Plus",
     "roundOffMinus": "Round Off Minus"
-
   },
   "purchaseReturn": {
     "title": "Purchase Return",
@@ -1336,7 +1321,7 @@
     "edit": "Edit",
     "delete": "Delete"
   },
-   "packageconversion": {
+  "packageconversion": {
     "title": "Package Conversion",
     "inputProductId": "Input Product Id",
     "outputProductId": "Output Product Id",
@@ -1393,7 +1378,7 @@
     "invoiceSales": "Saled Units",
     "entryDate": "Date"
   },
- "product": {
+  "product": {
     "title": "Product",
     "productCode": "Product Code",
     "productName": "Product Name",
@@ -1441,7 +1426,7 @@
     "skip": "Skip",
     "reason": "Reason",
     "department": "Department",
-    "recommendedby": "Recommended By",   
+    "recommendedby": "Recommended By",
     "approveName": "Approve Name",
     "reportName": "Report Name",
     "accptedId": "Accpted Id",
@@ -1452,8 +1437,7 @@
     "companyGroupCode": "Company Group Code",
     "companyGroupName": "Company Group Name"
   },
-
- "permissionrequest": {
+  "permissionrequest": {
     "title": "Permission Request",
     "id": "Id",
     "empCode": "Emp Code",
@@ -1477,7 +1461,6 @@
     "fromDate": "From Date",
     "todate": "To Date"
   },
-
   "openingbalance": {
     "title": "Opening Balance",
     "branchCode": "Branch Code",
@@ -1539,7 +1522,7 @@
   },
   "24Hrs Sale%20Value%206Am%20To%206Am": {
     "title": "24 Hrs Sale Value 6Am To 6Am"
-  }, 
+  },
   "Trial Balance": {
     "title": "Trial Balance"
   },
@@ -1599,7 +1582,7 @@
     "role": "Role",
     "branchCode": "Branch Code",
     "companyCode": "Company Code",
-    "employeeCode":"Employee Code",
+    "employeeCode": "Employee Code",
     "addDate": "Add Date",
     "active": "Active"
   },
@@ -1630,6 +1613,13 @@
     "regionName": "Region",
     "countryName": "Country",
     "currencyName": "Currency"
+  },
+  "userassignmentinbranch": {
+    "title": "User Assignment In Branch",
+    "user": "User",
+    "branch": "Branch",
+    "username": "User Name",
+    "userId": "User Id",
+    "branchName": "Branch Name"
   }
 }
-

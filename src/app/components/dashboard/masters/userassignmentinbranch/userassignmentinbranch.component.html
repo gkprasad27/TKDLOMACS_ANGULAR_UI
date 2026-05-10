@@ -1,0 +1,63 @@
+<div class="position-relative" *ngIf="modelFormData">
+    <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+        <span> {{'userassignmentinbranch.title' | translate }} </span>
+        <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+    </mat-card-title>
+
+    <mat-card-content class="pt-5 p-2 m-0 overflow-auto " >
+        <form [formGroup]="modelFormData" autocomplete="off">
+            <div class="row">
+
+                <mat-form-field class="col-6">
+                    <mat-label [translate]="'userassignmentinbranch.user'"></mat-label>
+                    <mat-select formControlName="userId">
+                        <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
+                            {{emp.text}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-6 multiple-select">
+                    <mat-label>{{ 'userassignmentinbranch.branch' | translate }}</mat-label>
+                    <mat-select formControlName="branches" multiple (selectionChange)="updateBranchs()">
+                        <mat-select-trigger>
+                            {{modelFormData.value.branches?.[0] || ''}} {{ modelFormData.value.branches.length > 1 ? ',' : '' }} {{modelFormData.value.branches?.[1] || ''}}
+                            @if ((modelFormData.value.branches?.length || 0) > 2) {
+                            <span class="example-additional-selection">
+                                (+{{(modelFormData.value.branches?.length || 0) - 2}}
+                                {{modelFormData.value.branches?.length === 3 ? 'other' :
+                                'others'}})
+                            </span>
+                            }
+                        </mat-select-trigger>
+                        @for (branch of branchesList; track branch) {
+                        <mat-option [value]="branch.text">{{branch.text}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+
+
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <div class="w-50 border-2  p-3">
+                    {{ modelFormData.value.branchName }}
+                </div>
+            </div>
+
+            <mat-divider></mat-divider>
+        </form>
+    </mat-card-content>
+
+    <div class="form-element mt-2 d-flex justify-content-end">
+        <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+            {{ 'COMMON.CANCEL' | translate }}
+        </button>
+        <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()"
+            appFocusOnEnter tabIndex="25">
+            {{ 'COMMON.SAVE' | translate }}
+        </button>
+    </div>
+
+</div>

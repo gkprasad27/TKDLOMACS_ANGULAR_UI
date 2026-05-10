@@ -20,6 +20,7 @@ import { MeterReadingComponent } from '../transactions/meterreading/meterreading
 import { PackageconversionComponent } from '../transactions/packageconversion/packageconversion.component';
 import { ErpUsersComponent } from './erpuser/erpuser.componet';
 import { BankMasterComponent } from './bankmaster/bankmaster.component';
+import { UserassignmentinbranchComponent } from './userassignmentinbranch/userassignmentinbranch.component';
 
 
 @Injectable({
@@ -245,6 +246,16 @@ export class MastersService {
         this.dynamicData.deleteUrl = this.apiConfigService.deleteBankMaster;
         this.dynamicData.listName = 'bankList';
         this.dynamicData.primaryKey = 'bankCode';
+        // this.dynamicData.coustom = true;
+        return this.dynamicData;
+      case 'userassignmentinbranch':
+        this.dynamicData.url = this.apiConfigService.getUserInBranch;
+        this.dynamicData.component = UserassignmentinbranchComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerUserBranchCreation;
+        this.dynamicData.updateUrl = this.apiConfigService.updateUserBranch;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteUserBranch;
+        this.dynamicData.listName = 'userList';
+        this.dynamicData.primaryKey = 'userId';
         // this.dynamicData.coustom = true;
         return this.dynamicData;
       default:

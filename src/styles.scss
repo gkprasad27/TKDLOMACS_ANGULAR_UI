@@ -228,6 +228,14 @@ mat-option {
   }
 }
 
+.multiple-select {
+  mat-option {
+    &>mat-pseudo-checkbox {
+      display: block !important;
+    }
+  }
+}
+
 .cdk-overlay-pane-select-search.cdk-overlay-pane-select-search-with-offset {
   margin: 50px 0px 0px 30px !important;
 }
