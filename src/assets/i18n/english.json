@@ -1620,6 +1620,9 @@
     "branch": "Branch",
     "username": "User Name",
     "userId": "User Id",
-    "branchName": "Branch Name"
+    "branchName": "Branch Name",
+    "userName":"User Name",
+    "role":"Role",
+    "active":"Active"
   }
 }

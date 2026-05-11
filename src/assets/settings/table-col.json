@@ -967,6 +967,9 @@
   },
   "userassignmentinbranch": {
     "userId": "User Id",
-    "branchName": "Branch Name"
+    "userName":"User Name",
+    "branchName": "Branch Code",
+    "role": "Role",
+    "active":"Active"
   }
 }
