@@ -585,6 +585,9 @@ export class ApiConfigService {
   getObVoucherNo = `${environment.baseUrl}masters/OpeningBalance/GetVoucherNo`;
   getPaymentType = `${environment.baseUrl}masters/OpeningBalance/GetPaymentType`;
   registerOpeningBalance = `${environment.baseUrl}masters/OpeningBalance/RegisterOpeningBalance`;
+  updateOpeningBalance = `${environment.baseUrl}masters/OpeningBalance/UpdateOpeningBalance`;
+  deleteOpeningBalance = `${environment.baseUrl}masters/OpeningBalance/DeleteOpeningBalance`;
+
   // updatedepartment = `${environment.baseUrl}masters/Department/updatedepartment`;
   // deletedepartment = `${environment.baseUrl}masters/Department/deletedepartment`;
   // ******************************* End  master *****************************************

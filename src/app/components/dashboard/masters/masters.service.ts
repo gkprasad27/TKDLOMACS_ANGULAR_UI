@@ -200,8 +200,8 @@ export class MastersService {
         this.dynamicData.url = this.apiConfigService.getOpeningBalanceList;
         this.dynamicData.component = OpeningBalanceComponent;
         this.dynamicData.registerUrl = this.apiConfigService.registerOpeningBalance;
-        this.dynamicData.updateUrl = this.apiConfigService.updatedepartment
-        this.dynamicData.deleteUrl = this.apiConfigService.deletedepartment;
+        this.dynamicData.updateUrl = this.apiConfigService.updateOpeningBalance
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteOpeningBalance;
         this.dynamicData.listName = 'openingBList';
         this.dynamicData.primaryKey = 'openingBalanceId';
         return this.dynamicData;

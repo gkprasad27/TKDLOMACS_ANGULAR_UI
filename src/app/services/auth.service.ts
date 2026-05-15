@@ -9,6 +9,7 @@ export class AuthService {
   constructor() { }
 
   public login(userInfo: User) {
+    userInfo.role = userInfo?.role?.trim();
     localStorage.setItem('user', JSON.stringify(userInfo));
   }
 
