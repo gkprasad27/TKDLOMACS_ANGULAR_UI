@@ -1112,7 +1112,9 @@
     "totalIgst": "Total IGST",
     "totalTcs": "Total TCS",
     "roundOffPlus": "Round Off Plus",
-    "roundOffMinus": "Round Off Minus"
+    "roundOffMinus": "Round Off Minus",
+    "goodsReceivedDate": "Goods Received Date",
+    "indentRefNo": "Indent Ref No"
   },
   "purchaseReturn": {
     "title": "Purchase Return",

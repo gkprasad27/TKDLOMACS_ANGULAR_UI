@@ -91,6 +91,7 @@ export class PurchaseComponent implements OnInit {
       purchaseInvNo: [0],
       supplierInvNo: [null, Validators.required],
       purchaseInvDate: [(new Date()).toISOString()],
+      goodsReceivedDate: [(new Date()).toISOString()],
       serverDateTime: [null],
       ledgerId: ['100'],
       ledgerName: [null],
@@ -117,6 +118,7 @@ export class PurchaseComponent implements OnInit {
       amountInWords: [null],
       narration: [null],
       isPurchaseReturned: [null],
+      indentRefNo: [null],
       totalTcsAmount: [null]
     });
 
@@ -411,10 +413,11 @@ export class PurchaseComponent implements OnInit {
       this.branchFormData.controls['branchCode'].disable();
       this.branchFormData.controls['purchaseInvDate'].disable();
       this.branchFormData.controls['ledgerCode'].disable();
-      this.branchFormData.controls['purchaseInvDate'].disable();
+      this.branchFormData.controls['goodsReceivedDate'].disable();
       this.branchFormData.controls['stateCode'].disable();
       this.branchFormData.controls['supplierInvNo'].disable();
       this.branchFormData.controls['gstin'].disable();
+      this.branchFormData.controls['indentRefNo'].disable();
       this.branchFormData.controls['narration'].disable();
       this.branchFormData.controls['roundOffPlus'].disable();
       this.branchFormData.controls['roundOffMinus'].disable();
@@ -876,10 +879,10 @@ export class PurchaseComponent implements OnInit {
   }
 
   registerReturnPurchase() {
-    this.branchFormData.patchValue({
-      paymentMode: 0,
-      purchaseInvDate: this.commonService.formatDate(this.branchFormData.get('purchaseInvDate').value)
-    });
+    const obj = this.branchFormData.getRawValue();
+    obj.purchaseInvDate = this.commonService.formatDate(obj.purchaseInvDate);
+    obj.goodsReceivedDate = this.commonService.formatDate(obj.goodsReceivedDate);
+    obj.paymentMode = 0;;
     const registerPurchaseUrl = [this.apiConfigService.getPurchaseRegisterPurchaseReturn, this.isPurchaseReturnInvoice, this.branchFormData.get('purchaseInvId').value].join('/');
     this.apiService.apiGetRequest(registerPurchaseUrl).subscribe(
       response => {
@@ -920,7 +923,8 @@ export class PurchaseComponent implements OnInit {
 
   registerPurchase(data) {
     const obj = this.branchFormData.getRawValue();
-    obj.purchaseInvDate = this.commonService.formatDate(this.branchFormData.get('purchaseInvDate').value);
+    obj.purchaseInvDate = this.commonService.formatDate(obj.purchaseInvDate);
+    obj.goodsReceivedDate = this.commonService.formatDate(obj.goodsReceivedDate);
     obj.paymentMode = 0;
     const registerPurchaseUrl = this.apiConfigService.registerPurchase;
     const requestObj = { purchaseHdr: obj, purchaseDetail: data };

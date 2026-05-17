@@ -19,8 +19,15 @@
           </mat-form-field>
 
           <mat-form-field class="col-2">
+            <mat-label>{{ 'purchaseInvoice.goodsReceivedDate' | translate }}</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="goodsReceivedDate" (click)="picker1.open()" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-2">
             <mat-label>{{ 'purchaseInvoice.purchaseInvDate' | translate }}</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="purchaseInvDate" (click)="picker.open()" readonly>
+            <input matInput [matDatepicker]="picker" formControlName="purchaseInvDate" readonly>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -72,6 +79,11 @@
           <mat-form-field class="col-2">
             <mat-label>{{ 'purchaseInvoice.gstin' | translate }}</mat-label>
             <input matInput formControlName="gstin" >
+          </mat-form-field>
+
+          <mat-form-field class="col-2">
+            <mat-label>{{ 'purchaseInvoice.indentRefNo' | translate }}</mat-label>
+            <input matInput formControlName="indentRefNo" >
           </mat-form-field>
 
           <!-- <mat-form-field class="form-element">
