@@ -48,6 +48,11 @@ mat-card {
   color: $color-white;
 }
 
+/* Hide print section on normal view - this just hides the template from display */
+#printableReport {
+  display: none;
+}
+
 .dropdown--width {
   width: 20rem;
 }

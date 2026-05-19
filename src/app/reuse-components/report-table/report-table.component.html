@@ -1,13 +1,102 @@
+<!-- ===== PRINTABLE TEMPLATE (Hidden until PDF export) ===== -->
+<div id="printableReport" style="display: none;">
+  <div style="padding: 20px; font-family: Arial, sans-serif;">
+    <!-- Header -->
+    <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #000; padding-bottom: 15px;">
+      <h2 style="margin: 5px 0;"> {{ ( routeParam + '.title') | translate }} </h2>
+      <p style="margin: 5px 0; font-size: 12px;">Generated on: {{ currentDate | date:'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+
+    <!-- Report Summary -->
+    @if(headerData && headerData.length) {
+    <div style="margin-bottom: 15px; font-size: 12px;">
+
+      @for(header of headerData; track $index) {
+      <div style="display: flex; flex-wrap: wrap; margin: 5px 0;">
+
+        @for(key of getSortedHeaderKeys(header); track key) {
+        <span style="margin-right: 30px; margin-bottom: 5px;">
+          <strong>{{ runtimeConfigService.tableColumnsData[this.routeParam][key] || key }}:</strong>
+          {{ header[key] }}
+        </span>
+        }
+
+      </div>
+      }
+
+    </div>
+    }
+
+    <!-- Table -->
+    @if(dataSource?.data && dataSource.data.length) {
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 11px;">
+      <thead>
+        <tr style="background-color: #dcdcdc; border: 1px solid #000;">
+          @for(column of getDisplayedColumns(); track column) {
+          <th style="border: 1px solid #000; padding: 8px; text-align: center; font-weight: bold;">
+            {{ column }}
+          </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for(row of dataSource.filteredData; track $index; let i = $index) {
+        <tr style="border: 1px solid #000;">
+          @for(column of getDisplayedColumns(); track column) {
+          <td style="border: 1px solid #000; padding: 6px; text-align: {{ getColumnAlignment(column) }};">
+            {{ formatCellValue(row[column], column) }}
+          </td>
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+    }
+
+    <!-- Footer -->
+    @if(footerData && footerData.length) {
+    <div style="margin-top: 20px; border-top: 2px solid #000; padding-top: 15px; font-size: 12px;">
+      @for(footer of footerData; track $index) {
+      <div style="display: flex; margin: 5px 0;">
+        @for(key of getFooterKeys(footer); track key) {
+        <span style="margin-right: 30px;"><strong>{{ key }}:</strong> {{ footer[key] }}</span>
+        }
+      </div>
+      }
+    </div>
+    }
+
+    <!-- Signatures -->
+    <div style="margin-top: 80px; display: flex; justify-content: space-between; font-size: 12px;">
+      <div style="text-align: center; width: 30%;">
+        <p style="border-top: 1px solid #000; margin: 10px 0; padding-top: 10px;">Prepared By</p>
+      </div>
+      <div style="text-align: center; width: 30%;">
+        <p style="border-top: 1px solid #000; margin: 10px 0; padding-top: 10px;">Checked By</p>
+      </div>
+      <div style="text-align: center; width: 30%;">
+        <p style="border-top: 1px solid #000; margin: 10px 0; padding-top: 10px;">Authorized By</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN UI ===== -->
 <mat-card>
   <div class="table-boarder">
     <div class="m-2 table-boarder">
       <form [formGroup]="dateForm" autocomplete="off" class="ml-2 row">
 
-        @if(routeParam=='Shift'||routeParam=='AccountLedger'||routeParam=='24HrsSaleValue'||routeParam=='24HrsSalesStock'||routeParam=='Vehical Enquiry'
-        ||routeParam=='Intimate Sale'||routeParam=='Stock Verification'||routeParam=='Stock Ledger'||routeParam=='Sales analysis by branch'||routeParam=='Product Wise Monthly Purchase'||routeParam=='Daily Sales'
-        ||routeParam=='Product Price List'||routeParam=='Receipts And Payments Detailed'||routeParam=='Receipts And Payments Summary'||routeParam=='SMS Summary'||routeParam=='Sales GST'||routeParam=='24Hrs Sale Value 6Am To 6Am'
-        ||routeParam=='Trial Balance'||routeParam=='24Hrs Meter Reading'||routeParam=='Closing Balance'||routeParam=='Bank Reconciliation'||routeParam=='Stock Valuation'||routeParam=='Four Column Cash Book'
-        ||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement Ltrs'||routeParam=='BranchWise StockStatement Qty'
+        @if(routeParam=='Shift'||routeParam=='AccountLedger'||routeParam=='24HrsSaleValue'||routeParam=='24HrsSalesStock'||routeParam=='Vehical
+        Enquiry'
+        ||routeParam=='Intimate Sale'||routeParam=='Stock Verification'||routeParam=='Stock Ledger'||routeParam=='Sales
+        analysis by branch'||routeParam=='Product Wise Monthly Purchase'||routeParam=='Daily Sales'
+        ||routeParam=='Product Price List'||routeParam=='Receipts And Payments Detailed'||routeParam=='Receipts And
+        Payments Summary'||routeParam=='SMS Summary'||routeParam=='Sales GST'||routeParam=='24Hrs Sale Value 6Am To 6Am'
+        ||routeParam=='Trial Balance'||routeParam=='24Hrs Meter Reading'||routeParam=='Closing
+        Balance'||routeParam=='Bank Reconciliation'||routeParam=='Stock Valuation'||routeParam=='Four Column Cash Book'
+        ||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement
+        Ltrs'||routeParam=='BranchWise StockStatement Qty'
         ||routeParam=='ProductMonthWise PurchaseLtrs'||routeParam=='einvoice') {
         <mat-form-field class="col-3">
           <mat-label> {{ 'report.formDate' | translate }} </mat-label>
@@ -25,24 +114,24 @@
           <label> {{ 'report.selectedAccountLedger' | translate }}</label>
           <input placeholder=" " required formControlName="selectedAccountLedger" id="selectedAccountLedger"
             (typeaheadOnSelect)="setLedgerName($event)" (input)="getBankPAccountLedgerList($event.target.value)"
-            [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='display' shortcutkey="f2" autocomplete="off"
-            [typeaheadOptionsLimit]="100000" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate1"
-            [typeaheadWaitMs]="200">
+            [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='display' shortcutkey="f2"
+            autocomplete="off" [typeaheadOptionsLimit]="100000" class="form-control typeahead"
+            [typeaheadItemTemplate]="customItemTemplate1" [typeaheadWaitMs]="200">
           <ng-template #customItemTemplate1 let-model="item">
             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
           </ng-template>
         </div>
         }
         @if(routeParam=='Closing Balance') {
-        
+
         <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
           [class.filled]="dateForm.get('fromAccountLedger')?.value">
-          <label> {{ 'report.fromAccountLedger' | translate }}  </label>
+          <label> {{ 'report.fromAccountLedger' | translate }} </label>
           <input placeholder=" " required formControlName="fromAccountLedger" id="fromAccountLedger"
             (typeaheadOnSelect)="setLedgerName($event)" (input)="getBankPAccountLedgerList($event.target.value)"
             [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' shortcutkey="f2" autocomplete="off"
-            [typeaheadOptionsLimit]="100000" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate2"
-            [typeaheadWaitMs]="200">
+            [typeaheadOptionsLimit]="100000" class="form-control typeahead"
+            [typeaheadItemTemplate]="customItemTemplate2" [typeaheadWaitMs]="200">
           <ng-template #customItemTemplate2 let-model="item">
             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
           </ng-template>
@@ -51,23 +140,27 @@
         @if(routeParam=='Closing Balance') {
         <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
           [class.filled]="dateForm.get('toAccountLedger')?.value">
-          <label> {{ 'report.toAccountLedger' | translate }}  </label>
+          <label> {{ 'report.toAccountLedger' | translate }} </label>
           <input placeholder=" " required formControlName="toAccountLedger" id="toAccountLedger"
             (typeaheadOnSelect)="setLedgerName($event)" (input)="getBankPAccountLedgerList($event.target.value)"
             [typeahead]="GetBankPAccountLedgerListArray" typeaheadOptionField='id' shortcutkey="f2" autocomplete="off"
-            [typeaheadOptionsLimit]="100000" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate3"
-            [typeaheadWaitMs]="200">
+            [typeaheadOptionsLimit]="100000" class="form-control typeahead"
+            [typeaheadItemTemplate]="customItemTemplate3" [typeaheadWaitMs]="200">
           <ng-template #customItemTemplate3 let-model="item">
             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
           </ng-template>
         </div>
         }
-        @if(routeParam=='24HrsSaleValue'||routeParam=='24HrsSalesStock'||routeParam=='Stock Verification'||routeParam=='Stock Ledger'||routeParam=='Sales analysis by branch'||routeParam=='Daily Sales'
-        ||routeParam=='Product Price List'||routeParam=='24Hrs Sale Value 6Am To 6Am'||routeParam=='AccountLedger'||routeParam=='24Hrs Meter Reading'||routeParam=='Four Column Cash Book'||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement Ltrs'||routeParam=='BranchWise StockStatement Qty'
+        @if(routeParam=='24HrsSaleValue'||routeParam=='24HrsSalesStock'||routeParam=='Stock
+        Verification'||routeParam=='Stock Ledger'||routeParam=='Sales analysis by branch'||routeParam=='Daily Sales'
+        ||routeParam=='Product Price List'||routeParam=='24Hrs Sale Value 6Am To
+        6Am'||routeParam=='AccountLedger'||routeParam=='24Hrs Meter Reading'||routeParam=='Four Column Cash
+        Book'||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement
+        Ltrs'||routeParam=='BranchWise StockStatement Qty'
         ||routeParam=='ProductMonthWise PurchaseLtrs') {
         <mat-form-field class="col-3">
-          <mat-label> {{ 'report.selectedBranch' | translate }}  </mat-label>
-          <mat-select  formControlName="selectedBranch">
+          <mat-label> {{ 'report.selectedBranch' | translate }} </mat-label>
+          <mat-select formControlName="selectedBranch">
             <mat-option *ngFor="let branch of ReportBranches" [value]="branch.branchCode">
               {{branch.branchName}}
             </mat-option>
@@ -111,8 +204,8 @@
           <input required placeholder=" " formControlName="selectedProduct" id="selectedProduct"
             (typeaheadOnSelect)="setProductName($event)" (input)="getProductsList($event.target.value)"
             [typeahead]="GetProductListArray" typeaheadOptionField='id' shortcutkey="f2" autocomplete="off"
-            [typeaheadOptionsLimit]="100000" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate4"
-            [typeaheadWaitMs]="200">
+            [typeaheadOptionsLimit]="100000" class="form-control typeahead"
+            [typeaheadItemTemplate]="customItemTemplate4" [typeaheadWaitMs]="200">
           <ng-template #customItemTemplate4 let-model="item">
             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
           </ng-template>
@@ -159,39 +252,46 @@
           </mat-select>
         </mat-form-field>
         }
-        @if(routeParam=='Product Wise Monthly Purchase'||routeParam=='ProductMonthWise PurchaseLtrs'||routeParam=='BranchWise Monthly SalesByLiters') {
-          <mat-form-field class="col-3">
-            <mat-label>{{ 'report.selectedGroupName' | translate }}</mat-label>
-            <mat-select required formControlName="selectedGroupName">
-              <mat-option *ngFor="let groupType of ReportPGList" [value]="groupType.groupName">
-                {{groupType.groupName}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <!-- <mat-form-field>
+        @if(routeParam=='Product Wise Monthly Purchase'||routeParam=='ProductMonthWise
+        PurchaseLtrs'||routeParam=='BranchWise Monthly SalesByLiters') {
+        <mat-form-field class="col-3">
+          <mat-label>{{ 'report.selectedGroupName' | translate }}</mat-label>
+          <mat-select required formControlName="selectedGroupName">
+            <mat-option *ngFor="let groupType of ReportPGList" [value]="groupType.groupName">
+              {{groupType.groupName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field>
          <mat-select placeholder="Group Type" formControlName="selectedGroupName">
            <mat-option *ngFor="let groupType of GroupName" [value]="groupType.id">
              {{groupType.parameter}}
            </mat-option>
          </mat-select>
        </mat-form-field> -->
-      }
-      @if(routeParam=='BranchWise Monthly SalesByLiters') {
-          <mat-form-field class="col-3">
-            <mat-label>{{ 'report.selectedSupplierGroup' | translate }}</mat-label>
-            <mat-select required  formControlName="selectedSupplierGroup">
-              <mat-option *ngFor="let suppliergroup of ReportSGList" [value]="suppliergroup.supplierGroupName">
-                {{suppliergroup.supplierGroupName}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
         }
-        @if(routeParam=='AccountLedger'||routeParam=='24HrsSaleValue'||routeParam=='24HrsSalesStock'||routeParam=='Vehical Enquiry'||routeParam=='Intimate Sale'||routeParam=='Stock Verification'||routeParam=='Stock Ledger'
-        ||routeParam=='Sales analysis by branch'||routeParam=='Product Wise Monthly Purchase'||routeParam=='Daily Sales'||routeParam=='Shift'||routeParam=='Product Price List'
-        ||routeParam=='Receipts And Payments Detailed'||routeParam=='Receipts And Payments Summary'||routeParam=='SMS Summary'||routeParam=='Sales GST'||routeParam=='24Hrs Sale Value 6Am To 6Am'
-        ||routeParam=='Trial Balance'||routeParam=='24Hrs Meter Reading'||routeParam=='Closing Balance'||routeParam=='Bank Reconciliation'||routeParam=='Stock Valuation'||routeParam=='Four Column Cash Book'||routeParam=='ProductMonthWise PurchaseLtrs'
-        ||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement Ltrs'||routeParam=='BranchWise StockStatement Qty'||routeParam=='einvoice') {
-          <div class="d-flex align-items-center">
+        @if(routeParam=='BranchWise Monthly SalesByLiters') {
+        <mat-form-field class="col-3">
+          <mat-label>{{ 'report.selectedSupplierGroup' | translate }}</mat-label>
+          <mat-select required formControlName="selectedSupplierGroup">
+            <mat-option *ngFor="let suppliergroup of ReportSGList" [value]="suppliergroup.supplierGroupName">
+              {{suppliergroup.supplierGroupName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        }
+        @if(routeParam=='AccountLedger'||routeParam=='24HrsSaleValue'||routeParam=='24HrsSalesStock'||routeParam=='Vehical
+        Enquiry'||routeParam=='Intimate Sale'||routeParam=='Stock Verification'||routeParam=='Stock Ledger'
+        ||routeParam=='Sales analysis by branch'||routeParam=='Product Wise Monthly Purchase'||routeParam=='Daily
+        Sales'||routeParam=='Shift'||routeParam=='Product Price List'
+        ||routeParam=='Receipts And Payments Detailed'||routeParam=='Receipts And Payments Summary'||routeParam=='SMS
+        Summary'||routeParam=='Sales GST'||routeParam=='24Hrs Sale Value 6Am To 6Am'
+        ||routeParam=='Trial Balance'||routeParam=='24Hrs Meter Reading'||routeParam=='Closing
+        Balance'||routeParam=='Bank Reconciliation'||routeParam=='Stock Valuation'||routeParam=='Four Column Cash
+        Book'||routeParam=='ProductMonthWise PurchaseLtrs'
+        ||routeParam=='BranchWise Monthly SalesByLiters'||routeParam=='BranchWise StockStatement
+        Ltrs'||routeParam=='BranchWise StockStatement Qty'||routeParam=='einvoice') {
+        <div class="d-flex align-items-center">
           <button mat-raised-button class="button-color-bule text-white ml-2"
             (click)="GenerateReport()">Generate</button>
         </div>
@@ -210,12 +310,12 @@
     <div class="m-2 table-boarder">
       <div class="d-flex align-items-center justify-content-between">
         <div>
-        <button class="ml-2" mat-raised-button (click)="exportToExcel()">
-          <mat-icon>file_copy</mat-icon> Excel
-        </button>
-        <button class="ml-2" mat-raised-button (click)="exportToPdf()">
-          <mat-icon>picture_as_pdf</mat-icon> Pdf
-        </button>
+          <button class="ml-2" mat-raised-button (click)="exportToExcel()">
+            <mat-icon>file_copy</mat-icon> Excel
+          </button>
+          <button class="ml-2" mat-raised-button (click)="exportToPdf()">
+            <mat-icon>picture_as_pdf</mat-icon> Pdf
+          </button>
         </div>
         <div class="w-25 row">
           <mat-form-field class="pl-2 col-12">

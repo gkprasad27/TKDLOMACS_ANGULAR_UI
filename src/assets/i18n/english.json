@@ -1258,7 +1258,17 @@
     "shiftId": "Shift Id"
   },
   "AccountLedger": {
-    "title": "Account Ledger"
+    "title": "Account Ledger",
+    "LedgeCode": "Ledger Code",
+    "fromDate": "From Date",
+    "LedgerName": "Ledger Name",
+    "ToDate": "To Date",
+    "GSTIN": "Gstin",
+    "location": "Location",
+    "ReportDate": "Report Date",
+    "OpeningBalance": "Opening Balance",
+    "ReportCreatedBy": "Report Created By",
+    "ClosingBalance": "Closing Balance"
   },
   "bankreceipt": {
     "title": "Bank Receipt",
@@ -1623,8 +1633,8 @@
     "username": "User Name",
     "userId": "User Id",
     "branchName": "Branch Name",
-    "userName":"User Name",
-    "role":"Role",
-    "active":"Active"
+    "userName": "User Name",
+    "role": "Role",
+    "active": "Active"
   }
 }

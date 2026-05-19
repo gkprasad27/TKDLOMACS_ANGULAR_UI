@@ -971,5 +971,24 @@
     "branchName": "Branch Code",
     "role": "Role",
     "active":"Active"
+  },
+  "AccountLedger": {
+    "VoucherNo": "Voucher No",
+    "description": "Description",
+    "Date": "Date",
+    "Credit": "Credit",
+    "Debit": "Debit",
+    "headers": {
+      "LedgeCode": "Ledger Code",
+      "fromDate": "From Date",
+      "LedgerName": "Ledger Name",
+      "ToDate": "To Date",
+      "GSTIN": "Gstin",
+      "location": "Location",
+      "ReportDate" : "Report Date",
+      "OpeningBalance": "Opening Balance",
+      "ReportCreatedBy": "Report Created By",
+      "ClosingBalance": "Closing Balance"
+    }
   }
 }
