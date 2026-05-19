@@ -37,7 +37,6 @@ export class MastersService {
   ) { }
 
   getRouteUrls(data) {
-
     const user = JSON.parse(localStorage.getItem('user'));
     switch (data) {
       case 'company':
