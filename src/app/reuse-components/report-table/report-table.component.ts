@@ -136,7 +136,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
   // Column config for formatting
   private amountColumnPatterns = [
     'debit', 'credit', 'qty', 'amount', 'total', 'price', 'value',
-    'opening', 'closing', 'received', 'issued', 'balance', 'liters'
+    'opening', 'closing', 'received', 'issued', 'balance', 'liters', 'CreditTotal', 'DebitToal'
   ];
 
   private dateColumnPatterns = ['date', 'invoicedate', 'plandate', 'targetdate'];
