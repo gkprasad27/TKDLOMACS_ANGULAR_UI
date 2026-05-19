@@ -141,6 +141,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
   private dateColumnPatterns = ['date', 'invoicedate', 'plandate', 'targetdate'];
 
+  showPrintableReport = false;
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private commonService: CommonService,
@@ -384,7 +386,6 @@ export class ReportTableComponent implements OnInit, OnChanges {
           const control = controls[name];
           if (control.errors && control.errors['required']) {
             flag = true;
-            console.log('First required error in control:', name);
             this.alertService.openSnackBar(
               `${this.runtimeConfigService.tableColumnsData['report'][name]} is required`,
               Static.Close,
@@ -602,7 +603,16 @@ export class ReportTableComponent implements OnInit, OnChanges {
     }
 
     if (this.isDateColumn(columnName)) {
-      return new DatePipe('en-US').transform(value, 'dd/MM/yyyy');
+      try {
+        // Check if value is a valid date
+        const date = new Date(value);
+        if (!isNaN(date.getTime())) {
+          return new DatePipe('en-US').transform(value, 'dd/MM/yyyy');
+        }
+      } catch (e) {
+        console.error('Error formatting date:', e);
+      }
+      return value;
     }
 
     return value;
@@ -614,7 +624,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
   getSortedHeaderKeys(header: any): string[] {
 
     // Order from common config
-    const orderedKeys = Object.keys(this.runtimeConfigService.tableColumnsData[this.routeParam]);
+    const orderedKeys = Object.keys(this.runtimeConfigService.tableColumnsData[this.routeParam].headers);
 
     // Return only available keys in same order
     return orderedKeys.filter(
@@ -636,35 +646,42 @@ export class ReportTableComponent implements OnInit, OnChanges {
    * Converts the static HTML template to PDF
    */
   exportToPdf() {
-    const element = document.getElementById('printableReport');
+    this.showPrintableReport = true;
 
-    if (!element) {
-      this.alertService.openSnackBar(
-        'No report data to export',
-        Static.Close,
-        SnackBar.error
-      );
-      return;
-    }
+    setTimeout(() => {
+    
+      const element = document.getElementById('printableReport');
 
-    const options = {
-      margin: 10,
-      filename: `${this.routeParam}_Report_${new Date().getTime()}.pdf`,
-      image: {
-        type: 'jpeg' as const,
-        quality: 0.98
-      },
-      html2canvas: {
-        scale: 2
-      },
-      jsPDF: {
-        orientation: 'portrait' as const,
-        unit: 'mm' as const,
-        format: 'a4' as const
+      if (!element) {
+        this.alertService.openSnackBar(
+          'No report data to export',
+          Static.Close,
+          SnackBar.error
+        );
+        return;
       }
-    };
 
-    html2pdf().set(options).from(element).save();
+      const options = {
+        margin: 10,
+        filename: `${this.routeParam}_Report_${new Date().getTime()}.pdf`,
+        image: {
+          type: 'jpeg' as const,
+          quality: 0.98
+        },
+        html2canvas: {
+          scale: 2
+        },
+        jsPDF: {
+          orientation: 'portrait' as const,
+          unit: 'mm' as const,
+          format: 'a4' as const
+        }
+      };
+
+      html2pdf().set(options).from(element).save();
+      this.showPrintableReport = false;
+    }, 1000);
+
   }
 
   // ===== END OF HELPER METHODS =====
@@ -785,9 +802,6 @@ export class ReportTableComponent implements OnInit, OnChanges {
         this.columnDefinitions.push(obj);
       });
     }
-
-    console.log(this.columnDefinitions);
-
 
     this.generateTableHeaders();
 

@@ -1268,7 +1268,13 @@
     "ReportDate": "Report Date",
     "OpeningBalance": "Opening Balance",
     "ReportCreatedBy": "Report Created By",
-    "ClosingBalance": "Closing Balance"
+    "ClosingBalance": "Closing Balance",
+    "sno": "Sno",
+    "Date": "Date",
+    "VoucherNo": "Voucher No",
+    "description": "Description",
+    "Debit": "Debit",
+    "Credit": "Credit"
   },
   "bankreceipt": {
     "title": "Bank Receipt",
