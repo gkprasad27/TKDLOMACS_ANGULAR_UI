@@ -13,7 +13,7 @@ import { ApiConfigService } from '../../../../services/api-config.service';
 import { ApiService } from '../../../../services/api.service';
 import { CommonService } from '../../../../services/common.service';
 import { userInfo } from 'os';
-import { map, Observable, startWith } from 'rxjs';
+// import { map, Observable, startWith } from 'rxjs';
 
 
 @Component({
@@ -43,7 +43,7 @@ export class MeterReadingComponent implements OnInit {
   pumpNoConfig: any;
   getmemberNamesArray = [];
 
-  filteredOptions: Observable<any[]>;
+  // filteredOptions: Observable<any[]>;
 
   constructor(
     private alertService: AlertService,
@@ -107,16 +107,16 @@ export class MeterReadingComponent implements OnInit {
       this.modelFormData.controls['branchCode'].disable();
     }
 
-    this.filteredOptions = this.modelFormData.get('pumpNo').valueChanges.pipe(
-      startWith(''),
-      map(value => (this.getmemberNamesArray.length) ? this._filter(value || '') : []),
-    );
+    // this.filteredOptions = this.modelFormData.get('pumpNo').valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => (this.getmemberNamesArray.length) ? this._filter(value || '') : []),
+    // );
 
   }
 
-  private _filter(value: string): string[] {
-    return this.getmemberNamesArray.filter(option => (option.id).toString().includes(value));
-  }
+  // private _filter(value: string): string[] {
+  //   return this.getmemberNamesArray.filter(option => (option.id).toString().includes(value));
+  // }
 
   calculateAmount() {
     let amount = 0;
@@ -397,6 +397,19 @@ export class MeterReadingComponent implements OnInit {
 
   cancel() {
     this.dialogRef.close();
+  }
+
+  reset() {
+    this.modelFormData.patchValue({
+      meterReadingId: 0,
+      testing: 0.00,
+      density: 0.00,
+      outMeterReading: 0.00,
+      consumption: 0.00,
+      totalSales: 0.00,
+      variation: 0.00,
+      invoiceSales: 0.00
+    })
   }
 
 }

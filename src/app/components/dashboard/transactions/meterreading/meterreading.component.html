@@ -26,7 +26,7 @@
           <input matInput formControlName="shiftId" appFocusOnEnter tabIndex="2">
         </mat-form-field>
 
-        <mat-form-field class="col-3">
+        <!-- <mat-form-field class="col-3">
           <mat-label>{{'meterreading.pumpNo' | translate }}</mat-label>
           <input type="text" aria-label="Number" matInput formControlName="pumpNo" [matAutocomplete]="auto" >
           <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="getOBFromPump(); getSaledUnits()">
@@ -34,8 +34,20 @@
             <mat-option [value]="branch.id" [disabled]="branch.selected"  [ngStyle]="{ background: branch.selected ? 'green': '' }">{{branch.id}}</mat-option>
             }
           </mat-autocomplete>
-        </mat-form-field>
+        </mat-form-field> -->
         
+
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'meterreading.pumpNo' | translate }}</mat-label>
+          <mat-select formControlName="pumpNo" appFocusOnEnter tabIndex="1">
+            @for (branch of getmemberNamesArray; track branch) {
+            <mat-option [value]="branch.id" [disabled]="branch.selected" [ngStyle]="{ background: branch.selected ? 'green': '' }">
+              {{branch.id}}
+            </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
         <!-- <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
           [class.filled]="modelFormData.get('pumpNo')?.value">
@@ -104,6 +116,10 @@
 
   </mat-card-content>
   <div class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1" (click)="reset()">
+
+      {{ 'COMMON.RESET' | translate }}
+    </button>
     <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
 
       {{ 'COMMON.CANCEL' | translate }}
