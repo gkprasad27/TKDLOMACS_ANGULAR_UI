@@ -1048,7 +1048,7 @@
   "purchaseInvoice": {
     "title": "Purchase Invoice",
     "SUBTITLE": "Purchase Return",
-    "purchaseInvNo": "Purchase Invoice No",
+    "purchaseInvNo": "Goods Received No",
     "purchaseInvDate": "Purchase Invoice Date",
     "branchCode": "Branch Code",
     "branchName": "Branch Name",
@@ -1061,7 +1061,7 @@
     "userId": "User Id",
     "shiftId": "Shift Id",
     "NEWPURCHASE": "Create New Purchase",
-    "supplierInvNo": "Supplier Invoice No",
+    "supplierInvNo": "Purchase Invoice No",
     "gstin": "Gst in",
     "totalLiters": "Total Liters",
     "tankNo": "Tank No",
@@ -1113,8 +1113,9 @@
     "totalTcs": "Total TCS",
     "roundOffPlus": "Round Off Plus",
     "roundOffMinus": "Round Off Minus",
-    "goodsReceivedDate": "Goods Received Date",
-    "indentRefNo": "Indent Ref No"
+    "goodsReceivedDate": "Purchase Received Date",
+    "indentRefNo": "Indent Ref No",
+    "vehicleNo": "Vehicle No"
   },
   "purchaseReturn": {
     "title": "Purchase Return",
@@ -1642,5 +1643,12 @@
     "userName": "User Name",
     "role": "Role",
     "active": "Active"
+  },
+  "ledger": {
+    "title": " Ledger",
+    "code": "Code",
+    "description": "Ledger Name",
+    "ledgerType": "Ledger Type",
+    "ext": "Currency"
   }
 }

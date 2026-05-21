@@ -119,11 +119,13 @@ export class PurchaseComponent implements OnInit {
       narration: [null],
       isPurchaseReturned: [null],
       indentRefNo: [null],
-      totalTcsAmount: [null]
+      totalTcsAmount: [null],
+      vehicleNo: [null],
     });
 
 
     const user = JSON.parse(localStorage.getItem('user'));
+      this.branchFormData.controls['purchaseInvDate'].disable();
 
     if (user?.role != '1') {
       this.branchFormData.controls['branchCode'].disable();
