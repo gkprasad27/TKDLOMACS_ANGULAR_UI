@@ -990,5 +990,25 @@
       "ReportCreatedBy": "Report Created By",
       "ClosingBalance": "Closing Balance"
     }
+  },
+  "ledger": {
+    "title": " Ledger",
+    "code": "Code",
+    "description": "Ledger Name",
+    "ledgerType": "Ledger Type",
+    "ext": "Currency"
+  },
+  "openledger": {
+    "title": "Open Ledger",
+    "ledgerName": "Ledger Name",
+    "financialYearStartFrom": "FY Start",
+    "financialYearEndTo": "FY End",
+    "accountingYear": "Accounting Year",
+    "compCode": "Company Code"
+  },
+  "rolePrevilages/role": {
+    "title": "Role Previlages",
+    "id": "id",
+    "text": "text"
   }
 }

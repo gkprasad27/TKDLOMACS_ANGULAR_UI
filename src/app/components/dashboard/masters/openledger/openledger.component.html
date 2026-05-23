@@ -1,0 +1,91 @@
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'openledger.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="row">
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'COMMON.COMPANYCODE'"></mat-label>
+          <mat-select formControlName="compCode" appFocusOnEnter tabIndex="0">
+            <mat-option>None</mat-option>
+            @for (comp of companyList; track comp) {
+              <mat-option [value]="comp.id">
+                {{comp.text}}
+              </mat-option>
+            }
+          </mat-select>
+          @if (!formControls.compCode.valid && formControls.compCode.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.compCode.valid  }"> Company Code is
+              required
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.ledgerKey.valid && formControls.ledgerKey.status != 'DISABLED', 
+           'ng--invalid': !formControls.ledgerKey.valid && formControls.ledgerKey.status != 'DISABLED' }">
+          <mat-label>{{'openledger.ledgerKey' | translate }}</mat-label>
+          <mat-select formControlName="ledgerKey" appFocusOnEnter tabIndex="1">
+            @for (ledger of ledgerList; track ledger) {
+              <mat-option [value]="ledger.code">
+                {{ledger.description}}
+              </mat-option>
+            }
+          </mat-select>
+          @if (!formControls.ledgerKey.valid && formControls.ledgerKey.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.ledgerKey.valid  }">
+            Code is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'openledger.financialYearStartFrom'"></mat-label>
+          <mat-select formControlName="financialYearStartFrom" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            @for (ltype of financialYearEndTo; track ltype) {
+              <mat-option [value]="ltype.value">
+                {{ltype.value}} - {{ltype.viewValue}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'openledger.financialYearEndTo'"></mat-label>
+          <mat-select formControlName="financialYearEndTo" appFocusOnEnter tabIndex="4">
+            <mat-option>None</mat-option>
+            @for (ltype of financialYearEndTo; track ltype) {
+              <mat-option [value]="ltype.value">
+                {{ltype.value}} - {{ltype.viewValue}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'openledger.accountingYear'"></mat-label>
+          <input matInput formControlName="accountingYear"
+            maxlength="4" appFocusOnEnter tabIndex="4">
+        </mat-form-field>
+
+      </div>
+      <mat-divider></mat-divider>
+    </form>
+
+  </mat-card-content>
+  <div class="form-element m-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="5">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
+      tabIndex="6">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

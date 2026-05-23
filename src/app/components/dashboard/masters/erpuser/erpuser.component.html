@@ -4,14 +4,14 @@
     <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
   </mat-card-title>
 
-  <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto " style="height: 200px;">
     <form [formGroup]="modelFormData" autocomplete="off">
       <div class="row">
 
         <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.userName.valid, 'ng--invalid': !formControls.userName.valid  }">
           <mat-label [translate]="'erpuser.userName'"></mat-label>
-          <input matInput formControlName="userName" maxlength="50" appFocusOnEnter tabIndex="2">
+          <input matInput formControlName="userName" maxlength="50" appFocusOnEnter tabIndex="1">
           @if (!formControls.userName.valid) {
           <mat-error [ngClass]="{ 'ng--invalid': !formControls.userName.valid  }">
             User Name is required</mat-error>
@@ -31,7 +31,7 @@
         <mat-form-field class="col-3"
           [ngClass]="{ 'ng--valid': formControls.employeeCode.valid, 'ng--invalid': !formControls.employeeCode.valid  }">
           <mat-label [translate]="'erpuser.employeeCode'"></mat-label>
-          <mat-select formControlName="employeeCode">
+          <mat-select formControlName="employeeCode"  appFocusOnEnter tabIndex="3">
             <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
               {{emp.text}}
             </mat-option>
@@ -42,7 +42,7 @@
 
         <mat-form-field class="col-3">
           <mat-label [translate]="'erpuser.role'"></mat-label>
-          <mat-select formControlName="role" appFocusOnEnter tabIndex="3">
+          <mat-select formControlName="role" appFocusOnEnter tabIndex="4">
             @for (role of RolesList; track role) {
             <mat-option [value]="role.id">
               {{role.text}}
@@ -73,7 +73,7 @@
     </form>
   </mat-card-content>
 
-  <div class="form-element mt-2 d-flex justify-content-end">
+  <div class="form-element m-2 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
       {{ 'COMMON.CANCEL' | translate }}
     </button>

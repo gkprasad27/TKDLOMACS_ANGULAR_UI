@@ -426,6 +426,19 @@ export class ApiConfigService {
   deleteBankMaster = `${environment.baseUrl}BankMaster/DeleteBankMaster`;
 
 
+  // ledger
+  getLedgerList = `${environment.baseUrl}Ledger/GetLedgerList`;
+  registerLedger = `${environment.baseUrl}Ledger/RegisterLedger`;
+  updateLedger = `${environment.baseUrl}Ledger/UpdateLedger`;
+  deleteLedger = `${environment.baseUrl}Ledger/DeletLedger`;
+  getcurrencyList = `${environment.baseUrl}Common/GetCurrencyList`;
+
+  // openLedger
+  getOpenLedgerList = `${environment.baseUrl}OpenLedger/GetOpenLedgerList`;
+  registerOpenLedger = `${environment.baseUrl}OpenLedger/RegisterOpenLedger`;
+  updateOpenLedger = `${environment.baseUrl}OpenLedger/UpdateOpenLedgerList`;
+  deleteOpenLedger = `${environment.baseUrl}OpenLedger/DeleteOpenLedgerList`;
+
   // userassignmentinbranch
   getUserInBranch = `${environment.baseUrl}UserAssignmentBranch/GetUserinBranch`;
   registerUserBranchCreation = `${environment.baseUrl}UserAssignmentBranch/RegisterUserBranchCreation`;

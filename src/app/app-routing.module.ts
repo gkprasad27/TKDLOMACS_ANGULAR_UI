@@ -24,6 +24,8 @@ const routes: Routes = [
       { path: 'master/:id', component: MastersComponent, data: { title: 'Master' } },
       { path: 'master/:id/:id1', component: EmployeeComponent, data: { title: 'Master' } },
 
+      { path: 'rolePrevilages/role', loadComponent: () => import('./components/dashboard/rolesprevilages/rolesprevilages.component').then(m => m.RolesprevilagesComponent)},
+
       // transation screens
       { path: 'transaction/:id/:id1', loadComponent: () => import('./components/dashboard/trans-list/trans-list.component').then(m => m.TransListComponent) },
       { path: 'transaction/:id', loadComponent: () => import('./components/dashboard/trans-list/trans-list.component').then(m => m.TransListComponent) },

@@ -1650,5 +1650,24 @@
     "description": "Ledger Name",
     "ledgerType": "Ledger Type",
     "ext": "Currency"
+  },
+  "openledger": {
+    "title": "Open Ledger",
+    "ledgerKey": "Ledger Name",
+    "ledgerName": "Ledger Name",
+    "financialYearStartFrom": "FY Start",
+    "financialYearEndTo": "FY End",
+    "accountingYear": "Accounting Year",
+    "compCode": "Company Code"
+  },
+  "rolePrevilages/role": {
+    "title": "Role Previlages",
+    "role": "Role",
+    "menuName": "Menu Name",
+    "headerMenu": "Header Menu",
+    "active": "Active",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete"
   }
 }

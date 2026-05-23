@@ -21,6 +21,8 @@ import { PackageconversionComponent } from '../transactions/packageconversion/pa
 import { ErpUsersComponent } from './erpuser/erpuser.componet';
 import { BankMasterComponent } from './bankmaster/bankmaster.component';
 import { UserassignmentinbranchComponent } from './userassignmentinbranch/userassignmentinbranch.component';
+import { LedgerComponent } from './ledger/ledger.component';
+import { OpenLedgerComponent } from './openledger/openledger.component';
 
 
 @Injectable({
@@ -257,6 +259,25 @@ export class MastersService {
         this.dynamicData.primaryKey = 'userId';
         // this.dynamicData.coustom = true;
         return this.dynamicData;
+      case 'ledger':
+        this.dynamicData.url = this.apiConfigService.getLedgerList;
+        this.dynamicData.component = LedgerComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerLedger;
+        this.dynamicData.updateUrl = this.apiConfigService.updateLedger;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteLedger;
+        this.dynamicData.listName = 'ledgerList';
+        this.dynamicData.primaryKey = 'code';
+        return this.dynamicData;
+      case 'openledger':
+        this.dynamicData.url = this.apiConfigService.getOpenLedgerList;
+        this.dynamicData.component = OpenLedgerComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerOpenLedger;
+        this.dynamicData.updateUrl = this.apiConfigService.updateOpenLedger;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteOpenLedger;
+        this.dynamicData.listName = 'OpenLedgerList';
+        this.dynamicData.primaryKey = 'ledgerKey';
+        return this.dynamicData;
+        break;
       default:
     }
   }
