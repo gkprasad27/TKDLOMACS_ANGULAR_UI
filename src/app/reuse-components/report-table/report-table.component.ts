@@ -646,43 +646,61 @@ export class ReportTableComponent implements OnInit, OnChanges {
    * Converts the static HTML template to PDF
    */
   exportToPdf() {
-    this.showPrintableReport = true;
+  this.showPrintableReport = true;
 
-    setTimeout(() => {
-    
-      const element = document.getElementById('printableReport');
+  setTimeout(() => {
 
-      if (!element) {
-        this.alertService.openSnackBar(
-          'No report data to export',
-          Static.Close,
-          SnackBar.error
-        );
-        return;
+    const element = document.getElementById('printableReport');
+
+    if (!element) {
+      this.alertService.openSnackBar(
+        'No report data to export',
+        Static.Close,
+        SnackBar.error
+      );
+      return;
+    }
+
+    const options = {
+
+      margin: [10, 10, 10, 10] as [number, number, number, number],
+
+      filename: `${this.routeParam}_Report_${new Date().getTime()}.pdf`,
+      image: {
+        type: 'jpeg' as const,
+        quality: 1
+      },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        scrollY: 0
+      },
+
+      jsPDF: {
+        orientation: 'portrait' as const,
+        unit: 'mm' as const,
+        format: 'a4' as const
+      },
+
+      pagebreak: {
+        mode: ['css', 'legacy']
       }
 
-      const options = {
-        margin: 10,
-        filename: `${this.routeParam}_Report_${new Date().getTime()}.pdf`,
-        image: {
-          type: 'jpeg' as const,
-          quality: 0.98
-        },
-        html2canvas: {
-          scale: 2
-        },
-        jsPDF: {
-          orientation: 'portrait' as const,
-          unit: 'mm' as const,
-          format: 'a4' as const
-        }
-      };
+    };
 
-      html2pdf().set(options).from(element).save();
-      this.showPrintableReport = false;
-    }, 1000);
+    html2pdf()
+      .set(options)
+      .from(element)
+      .save()
+      .then(() => {
 
-  }
+        this.showPrintableReport = false;
+
+      });
+
+  }, 500);
+
+}
 
   // ===== END OF HELPER METHODS =====
 
