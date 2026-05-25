@@ -72,6 +72,7 @@ export class ReportsComponent implements OnInit {
       .subscribe(
         response => {
           const res = response['body'];
+          this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (this.route == 'Intimate Sale') {
@@ -86,9 +87,8 @@ export class ReportsComponent implements OnInit {
               this.footerData = res.response['footerList'];
             }
           }
-          this.spinner.hide();
         }, error => {
-
+          this.spinner.hide();
       });
   }
   getTableData() {

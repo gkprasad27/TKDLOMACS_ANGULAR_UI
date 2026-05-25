@@ -1495,10 +1495,40 @@
     "userName": "User Name"
   },
   "24HrsSaleValue": {
-    "title": "24 Hrs Sale Value"
+    "title": "24 Hrs Sale Value",
+    "productCode": "Product Code",
+    "CashQty": "Cash Qty",
+    "CreditQty": "Credit Qty",
+    "TotalQty": "Total Qty",
+    "CashAmt": "Cash Amount",
+    "CreditAmt": "Credit Amount",
+    "TotalAmt": "Total Amount",
+    "GSTIN": "Gstin",
+    "sno": "Sno",
+    "BranchName": "Branch Name",
+    "Address": "Address",
+    "Phone": "Phone",
+    "ReportDate": "Report Date",
+    "ReportCreatedBy": "Report Created By",
+    "FromDate": "From Date",
+    "ToDate": "To Date"
   },
   "24HrsSalesStock": {
-    "title": "24 Hrs Sales Stock"
+    "title": "24 Hrs Sales Stock",
+    "sno": "Sno",
+    "ProductName": "Product Name",
+    "Product": "Product",
+    "OutwardQty": "Outward Qty",
+    "OpeningQty": "Opening Qty",
+    "InwardQty": "Inward Qty",
+    "ClosingQty": "Closing Qty",
+    "BranchName": "Branch Name",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "GSTIN": "GSTIN",
+    "Phone": "Phone",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date"
   },
   "Shift": {
     "title": "Shift"
@@ -1507,7 +1537,23 @@
     "title": "Vehical Enquiry"
   },
   "Intimate Sale": {
-    "title": "Intimate Sale"
+    "title": "Intimate Sale",
+    "invoiceNo": "Invoice No",
+    "Vehicle": "Vehicle",
+    "invoiceDate": "Invoice Date",
+    "nPAmount": "NP Amount",
+    "pAmount": "P Amount",
+    "Qty": "Qty",
+        "sno": "Sno",
+    "PQty": "P Qty",
+    "Amount": "Amount",
+    "LedgerCode": "Ledger Code",
+    "LedgerName": "Ledger Name",
+    "ReportCreatedBy": "Report Created By",
+    "ReportDate": "Report Date",
+    "FromDate": "From Date",
+    "ToDate": "To Date",
+    "Address": "Address"
   },
   "Stock Verification": {
     "title": "Stock Verification"
@@ -1546,7 +1592,50 @@
     "title": "Trial Balance"
   },
   "24Hrs Meter Reading": {
-    "title": "24 Hrs Meter Reading"
+    "title": "24 Hrs Meter Reading",
+    "Code": "Code",
+    "Pump": "Pump",
+    "Closing": "Closing",
+    "Consumption": "Consumption",
+    "Density": "Density",
+    "InvoiceSales": "Invoice Sales",
+    "Mtr.Diff": "Meter Difference",
+    "Opening": "Opening",
+    "sno": "Sno",
+    "Testing": "Testing",
+    "TotalSales": "Total Sales",
+    "Variation": "Variation",
+    "BranchName": "Branch Name",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "GSTIN": "GSTIN",
+    "Phone": "Phone",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "Address": "Address"
+  },
+  "24Hrs Sale Value 6Am To 6Am": {
+    "title": "24Hrs Sale Value 6Am To 6Am",
+    "Code": "Code",
+    "Pump": "Pump",
+    "Closing": "Closing",
+    "Consumption": "Consumption",
+    "Density": "Density",
+    "InvoiceSales": "Invoice Sales",
+    "Mtr.Diff": "Meter Difference",
+    "Opening": "Opening",
+    "Testing": "Testing",
+    "TotalSales": "Total Sales",
+    "sno": "Sno",
+    "Variation": "Variation",
+    "BranchName": "Branch Name",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "GSTIN": "GSTIN",
+    "Phone": "Phone",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "Address": "Address"
   },
   "Closing Balance": {
     "title": "Closing Balance"

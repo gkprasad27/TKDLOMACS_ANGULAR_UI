@@ -967,10 +967,10 @@
   },
   "userassignmentinbranch": {
     "userId": "User Id",
-    "userName":"User Name",
+    "userName": "User Name",
     "branchName": "Branch Code",
     "role": "Role",
-    "active":"Active"
+    "active": "Active"
   },
   "AccountLedger": {
     "VoucherNo": "Voucher No",
@@ -985,10 +985,153 @@
       "ToDate": "To Date",
       "GSTIN": "Gstin",
       "location": "Location",
-      "ReportDate" : "Report Date",
+      "ReportDate": "Report Date",
       "OpeningBalance": "Opening Balance",
       "ReportCreatedBy": "Report Created By",
       "ClosingBalance": "Closing Balance"
+    },
+    "footer": {
+      "colspan": 3,
+      "DebitTotal": "Debit Total",
+      "CreditTotal": "Credit Total"
+    }
+  },
+  "24HrsSaleValue": {
+    "productCode": "Product Code",
+    "CashQty": "Cash Qty",
+    "CreditQty": "Credit Qty",
+    "TotalQty": "Total Qty",
+    "CashAmt": "Cash Amount",
+    "CreditAmt": "Credit Amount",
+    "TotalAmt": "Total Amount",
+    "headers": {
+      "GSTIN": "Gstin",
+      "BranchName": "Branch Name",
+      "Address": "Address",
+      "Phone": "Phone",
+      "ReportDate": "Report Date",
+      "ReportCreatedBy": "Report Created By",
+      "FromDate": "From Date",
+      "ToDate": "To Date"
+    },
+    "footer": {
+      "colspan": 4,
+      "GrandCashAmount": "GrandCashAmount",
+      "GrandCreditAmount": "GrandCreditAmount",
+      "GrandTotalAmount": "GrandTotalAmount"
+    }
+  },
+  "24HrsSalesStock": {
+    "ProductName": "Product Name",
+    "Product": "Product",
+    "OutwardQty": "Outward Qty",
+    "OpeningQty": "Opening Qty",
+    "InwardQty": "Inward Qty",
+    "ClosingQty": "Closing Qty",
+    "headers": {
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTIN": "GSTIN",
+      "Phone": "Phone",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    }
+  },
+  "24Hrs Meter Reading": {
+    "Code": "Code",
+    "Pump": "Pump",
+    "Closing": "Closing",
+    "Consumption": "Consumption",
+    "Density": "Density",
+    "InvoiceSales": "Invoice Sales",
+    "Mtr.Diff": "Meter Difference",
+    "Opening": "Opening",
+    "Testing": "Testing",
+    "TotalSales": "Total Sales",
+    "Variation": "Variation",
+    "headers": {
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTIN": "GSTIN",
+      "Phone": "Phone",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date",
+      "Address": "Address"
+    }
+  },
+  "24Hrs Sale Value 6Am To 6Am": {
+    "Code": "Code",
+    "Pump": "Pump",
+    "Closing": "Closing",
+    "Consumption": "Consumption",
+    "Density": "Density",
+    "InvoiceSales": "Invoice Sales",
+    "Mtr.Diff": "Meter Difference",
+    "Opening": "Opening",
+    "Testing": "Testing",
+    "TotalSales": "Total Sales",
+    "Variation": "Variation",
+    "headers": {
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTIN": "GSTIN",
+      "Phone": "Phone",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date",
+      "Address": "Address"
+    }
+  },
+  "Stock Verification": {
+    "Code": "Code",
+    "Pump": "Pump",
+    "Closing": "Closing",
+    "Consumption": "Consumption",
+    "Density": "Density",
+    "InvoiceSales": "Invoice Sales",
+    "Mtr.Diff": "Meter Difference",
+    "Opening": "Opening",
+    "Testing": "Testing",
+    "TotalSales": "Total Sales",
+    "Variation": "Variation",
+    "headers": {
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTIN": "GSTIN",
+      "Phone": "Phone",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date",
+      "Address": "Address"
+    }
+  },
+  "Intimate Sale": {
+    "invoiceNo": "Invoice No",
+    "Vehicle": "Vehicle",
+    "invoiceDate": "Invoice Date",
+    "nPAmount": "NP Amount",
+    "pAmount": "P Amount",
+    "Qty": "Qty",
+    "PQty": "P Qty",
+    "Amount": "Amount",
+    "headers": {
+      "LedgerCode": "Ledger Code",
+      "LedgerName": "Ledger Name",
+      "ReportCreatedBy": "Report Created By",
+      "ReportDate": "Report Date",
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "Address": "Address"
+    },
+    "footer": {
+      "colspan": 2,
+      "BalanceDue": "BalanceDue",
+      "Credit": "Credit",
+      "NPTotalQty": "NPTotalQty",
+      "TotalPurchase": "TotalPurchase",
+      "TotalQty":"TotalQty"
     }
   },
   "ledger": {

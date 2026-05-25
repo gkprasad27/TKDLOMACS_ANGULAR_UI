@@ -136,7 +136,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
   // Column config for formatting
   private amountColumnPatterns = [
     'debit', 'credit', 'qty', 'amount', 'total', 'price', 'value',
-    'opening', 'closing', 'received', 'issued', 'balance', 'liters', 'CreditTotal', 'DebitToal'
+    'opening', 'closing', 'received', 'issued', 'balance', 'liters', 'Credittotal', 'debittoal', 
+    'cashqty', 'creditqty', 'totalqty', 'cashamt', 'creditamt', 'totalamt'
   ];
 
   private dateColumnPatterns = ['date', 'invoicedate', 'plandate', 'targetdate'];
@@ -625,14 +626,16 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     // Order from common config
     const orderedKeys = Object.keys(this.runtimeConfigService.tableColumnsData[this.routeParam].headers);
-
+    return orderedKeys;
     // Return only available keys in same order
-    return orderedKeys.filter(
-      key => header[key] !== undefined &&
-        header[key] !== null &&
-        header[key] !== ''
-    );
+    // return orderedKeys.filter(
+    //   key => header[key] !== undefined &&
+    //     header[key] !== null &&
+    //     header[key] !== ''
+    // );
   }
+
+  keepOrder = () => 0;
 
   /**
    * Get keys from footer object
@@ -645,7 +648,47 @@ export class ReportTableComponent implements OnInit, OnChanges {
    * Simplified PDF export using html2pdf
    * Converts the static HTML template to PDF
    */
-  exportToPdf() {
+columnConfig: any = {
+
+  sno: {
+    width: '50px',
+    whiteSpace: 'nowrap'
+  },
+
+  description: {
+    width: '400px',
+    whiteSpace: 'normal'
+  },
+};
+
+
+getColumnStyle(column: string): any {
+
+  const config = this.columnConfig[column] || {};
+
+  console.log('Column:', column, 'Config:', config);
+
+  return {
+
+    width: config.width || 'auto',
+
+    maxWidth: config.width || 'auto',
+
+    whiteSpace: config.whiteSpace || 'nowrap',
+
+    wordBreak:
+      config.whiteSpace === 'normal'
+        ? 'break-word'
+        : 'normal'
+
+  };
+
+}
+
+
+
+exportToPdf() {
+
   this.showPrintableReport = true;
 
   setTimeout(() => {
@@ -653,33 +696,52 @@ export class ReportTableComponent implements OnInit, OnChanges {
     const element = document.getElementById('printableReport');
 
     if (!element) {
+
       this.alertService.openSnackBar(
         'No report data to export',
         Static.Close,
         SnackBar.error
       );
+
       return;
+
     }
 
     const options = {
 
-      margin: [10, 10, 10, 10] as [number, number, number, number],
+      margin: [4, 4, 4, 4] as [number, number, number, number],
 
       filename: `${this.routeParam}_Report_${new Date().getTime()}.pdf`,
+
       image: {
-        type: 'jpeg' as const,
+        type: 'png' as const,
         quality: 1
       },
+
       html2canvas: {
+
         scale: 2,
+
         useCORS: true,
-        scrollY: 0
+
+        scrollY: 0,
+
+        backgroundColor: '#ffffff',
+
+        logging: false
+
       },
 
       jsPDF: {
+
         orientation: 'portrait' as const,
+
         unit: 'mm' as const,
-        format: 'a4' as const
+
+        format: 'a4' as const,
+
+        compress: true
+
       },
 
       pagebreak: {
@@ -696,12 +758,16 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
         this.showPrintableReport = false;
 
+      })
+      .catch(() => {
+
+        this.showPrintableReport = false;
+
       });
 
-  }, 500);
+  }, 100);
 
 }
-
   // ===== END OF HELPER METHODS =====
 
   openDialog(val, row?) {
