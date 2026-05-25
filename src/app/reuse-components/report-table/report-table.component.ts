@@ -490,12 +490,14 @@ export class ReportTableComponent implements OnInit, OnChanges {
     worksheet.addRow([]);
 
     let headerRows = [];
-    for (var i: number = 0; i < this.headerData.length; i++) {
-      headerRows[i] = [];
-      let j = 0;
-      for (const key in this.headerData[0]) {
-        headerRows[i][j] = this.headerData[i][key];
-        j++;
+    if (this.headerData != null && this.headerData.length) {
+      for (var i: number = 0; i < this.headerData.length; i++) {
+        headerRows[i] = [];
+        let j = 0;
+        for (const key in this.headerData[0]) {
+          headerRows[i][j] = this.headerData[i][key];
+          j++;
+        }
       }
     }
 
@@ -534,12 +536,14 @@ export class ReportTableComponent implements OnInit, OnChanges {
     worksheet.addRow([]);
     //Adding fooer Rows
     let footerRows = [];
-    for (var i: number = 0; i < this.footerData.length; i++) {
-      footerRows[i] = [];
-      let j = 0;
-      for (const key in this.footerData[0]) {
-        footerRows[i][j] = this.footerData[i][key];
-        j++;
+    if (this.footerData != null && this.footerData.length) {
+      for (var i: number = 0; i < this.footerData.length; i++) {
+        footerRows[i] = [];
+        let j = 0;
+        for (const key in this.footerData[0]) {
+          footerRows[i][j] = this.footerData[i][key];
+          j++;
+        }
       }
     }
 

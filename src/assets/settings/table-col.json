@@ -1038,6 +1038,204 @@
       "ToDate": "To Date"
     }
   },
+  "BranchWise StockStatement Qty": {
+    "productCode": "Product Code",
+    "productName": "Product Name",
+    "supplierId": "Supplier Id",
+    "SupplierName": "Supplier Name",
+    "AUTONAGAR2": "Autonagar 2",
+    "AUTONAGARES": "Autonagars",
+    "AUTONAGARGODOWN": "Autonagar Godown",
+    "CHINAKAKANI": "Chinakakani",
+    "GANGURU": "Ganguru",
+    "GOLLAPUDI": "Gollapudi",
+    "GUDIVADA": "Gudivada",
+    "KANCHIKACHERLA": "Kanchikacherla",
+    "NIDAMANURU": "Nidamanuru",
+    "SALESWING": "Saleswing",
+    "TIRUVURU": "Tiruvuru",
+    "VUYYURU": "Vuyyuru",
+    "headers": {
+      "CreatedBy": "Created By",
+      "ReportDate": "Report Date",
+      "FromDate": "From Date",
+      "ToDate": "To Date"
+    },
+    "footer": {
+      "colspan": 4,
+      "TOTAUTONAGAR2": "Total Autonagar 2",
+      "TOTAUTONAGARES": "Total Autonagars",
+      "TOTAUTONAGARGODOWN": "Total Autonagar Godown",
+      "TOTCHINAKAKANI": "Total Chinakakani",
+      "TOTGANGURU": "Total Ganguru",
+      "TOTGOLLAPUDI": "Total Gollapudi",
+      "TOTGUDIVADA": "Total Gudivada",
+      "TOTKANCHIKACHERLA": "Total Kanchikacherla",
+      "TOTNIDAMANURU": "Total Nidamanuru",
+      "TOTSALESWING": "Total Saleswing",
+      "TOTTIRUVURU": "Total Tiruvuru",
+      "TOTVUYYURU": "Total Vuyyuru"
+    }
+  },
+  "BranchWise StockStatement Ltrs": {
+    "productCode": "Product Code",
+    "productName": "Product Name",
+    "supplierId": "Supplier Id",
+    "SupplierName": "Supplier Name",
+    "AUTONAGAR2": "Autonagar 2",
+    "AUTONAGARES": "Autonagars",
+    "AUTONAGARGODOWN": "Autonagar Godown",
+    "CHINAKAKANI": "Chinakakani",
+    "GANGURU": "Ganguru",
+    "GOLLAPUDI": "Gollapudi",
+    "GUDIVADA": "Gudivada",
+    "KANCHIKACHERLA": "Kanchikacherla",
+    "NIDAMANURU": "Nidamanuru",
+    "SALESWING": "Saleswing",
+    "TIRUVURU": "Tiruvuru",
+    "VUYYURU": "Vuyyuru",
+    "header": {
+      "CreatedBy": "Created By",
+      "ReportDate": "Report Date",
+      "FromDate": "From Date",
+      "ToDate": "To Date"
+    },
+    "footer": {
+      "colspan": 4,
+      "TOTAUTONAGAR2": "Total Autonagar 2",
+      "TOTAUTONAGARES": "Total Autonagars",
+      "TOTAUTONAGARGODOWN": "Total Autonagar Godown",
+      "TOTCHINAKAKANI": "Total Chinakakani",
+      "TOTGANGURU": "Total Ganguru",
+      "TOTGOLLAPUDI": "Total Gollapudi",
+      "TOTGUDIVADA": "Total Gudivada",
+      "TOTKANCHIKACHERLA": "Total Kanchikacherla",
+      "TOTNIDAMANURU": "Total Nidamanuru",
+      "TOTSALESWING": "Total Saleswing",
+      "TOTTIRUVURU": "Total Tiruvuru",
+      "TOTVUYYURU": "Total Vuyyuru"
+    }
+  },
+  "BranchWise Monthly SalesByLiters": {
+    "productCode": "Product Code",
+    "productName": "Product Name",
+    "SupplierName": "Supplier Name",
+    "AN1": "AN 1",
+    "AN2": "AN 2",
+    "CHKN": "CHKN",
+    "GDV": "GDV",
+    "GNG": "GNG",
+    "GP": "GP",
+    "KNCH": "KNCH",
+    "NDMR": "NDMR",
+    "SW": "SW",
+    "TIR": "TIR",
+    "VUY": "VUY",
+    "headers": {
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTIN": "GSTIN",
+      "Phone": "Phone",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date",
+      "Address": "Address"
+    },
+    "footer": {
+      "colspan": 2,
+      "TotAutonagar1": "Total Autonagar 1",
+      "TotAutonagar2": "Total Autonagar 2",
+      "TotChinakakani": "Total Chinakakani",
+      "TotGanguru": "Total Ganguru",
+      "TotGollapudi": "Total Gollapudi",
+      "TotGudivada": "Total Gudivada",
+      "TotKanchikacherla": "Total Kanchikacherla",
+      "TotNidamanuru": "Total Nidamanuru",
+      "TotSalesWing": "Total SalesWing",
+      "TotTiruvuru": "Total Tiruvuru",
+      "TotVuyyuru": "Total Vuyyuru",
+      "TotalLabel": "Grand Total"
+    }
+  },
+  "ProductMonthWise PurchaseLtrs": {
+    "Name": "Name",
+    "supplierName": "Supplier Name",
+    "unitName": "Unit Name",
+    "Code": "Code",
+    "JAN": "January",
+    "FEB": "February",
+    "MAR": "March",
+    "APR": "April",
+    "MAY": "May",
+    "JUNE": "June",
+    "JULY": "July",
+    "AUG": "August",
+    "SEP": "September",
+    "OCT": "October",
+    "NOV": "November",
+    "DEC": "December",
+    "Total": "Total",
+    "headers": {
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    },
+    "footer": {
+      "colspan": 4,
+      "TOTJANUARY": "Total January",
+      "TOTFEBRUARY": "Total February",
+      "TOTMARCH": "Total March",
+      "TOTAPRIL": "Total April",
+      "TOTMAY": "Total May",
+      "TOTJUNE": "Total June",
+      "TOTJULY": "Total July",
+      "TOTAUGUST": "Total August",
+      "TOTSEPTEMBER": "Total September",
+      "TOTOCTOBER": "Total October",
+      "TOTNOVEMBER": "Total November",
+      "TOTDECEMBER": "Total December",
+      "GrandTotal": "Grand Total"
+    }
+  },
+  "Four Column Cash Book": {
+    "InvoiceNo": "Invoice No",
+    "LedgerName": "Ledger Name",
+    "Payments": "Payments",
+    "Receipts": "Receipts",
+    "Debit": "Debit",
+    "Credit": "Credit",
+    "headers": {
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "GSTNo": "GST No",
+      "OpeningBalance": "Opening Balance",
+      "ReportDate": "Report Date",
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "Address": "Address"
+    },
+    "footer": {
+      "colspan": 0,
+      "BalanceBD": "Balance B/D",
+      "TotalType": "Total",
+      "TotalPayments": "Total Payments",
+      "TotalReceipts": "Total Receipts",
+      "TotalDebits": "Total Debits",
+      "TotalCredits": "Total Credits"
+    }
+  },
+  "Stock Valuation": {
+    "Balance": "Balance",
+    "Code": "Code",
+    "Liters": "Liters",
+    "ProductName": "ProductName",
+    "StockValue": "StockValue",
+    "UOM": "UOM",
+    "footer": {
+      "TotalVal": "Total"
+    }
+  },
   "24Hrs Meter Reading": {
     "Code": "Code",
     "Pump": "Pump",
@@ -1131,7 +1329,7 @@
       "Credit": "Credit",
       "NPTotalQty": "NPTotalQty",
       "TotalPurchase": "TotalPurchase",
-      "TotalQty":"TotalQty"
+      "TotalQty": "TotalQty"
     }
   },
   "ledger": {
