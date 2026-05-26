@@ -45,6 +45,7 @@ export class UserassignmentinbranchComponent {
       userId: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(4)]],
       branches: ['', [Validators.required]],
       branchName: [''],
+      userName: ['']
     });
 
     this.formData = { ...data };
@@ -54,6 +55,7 @@ export class UserassignmentinbranchComponent {
         userId: this.formData.item?.userId?.toString()
       })
       this.modelFormData.controls['userId'].disable();
+      this.modelFormData.controls['userName'].disable();
     }
   }
 
@@ -111,7 +113,12 @@ export class UserassignmentinbranchComponent {
     if (this.modelFormData.invalid) {
       return;
     }
+    const selectedUser = this.employeesList.find((employee: any) => employee.id === this.modelFormData.value.userId);
+    if (selectedUser) {
+      this.modelFormData.patchValue({ userName: selectedUser.text });
+    }
     this.modelFormData.controls['userId'].enable();
+    this.modelFormData.controls['userName'].enable();
     this.formData.item = this.modelFormData.value;
     this.dialogRef.close(this.formData);
   }

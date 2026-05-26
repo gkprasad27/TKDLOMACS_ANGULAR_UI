@@ -8,13 +8,18 @@
         <form [formGroup]="modelFormData" autocomplete="off">
             <div class="row">
 
-                <mat-form-field class="col-6">
+                <mat-form-field class="col-6" *ngIf="!formData.item">
                     <mat-label [translate]="'userassignmentinbranch.user'"></mat-label>
                     <mat-select formControlName="userId">
                         <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
                             {{emp.text}}
                         </mat-option>
                     </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="col-6" *ngIf="formData.item">
+                    <mat-label [translate]="'userassignmentinbranch.user'"></mat-label>
+                    <input matInput formControlName="userName">
                 </mat-form-field>
 
                 <mat-form-field class="col-6 multiple-select">
