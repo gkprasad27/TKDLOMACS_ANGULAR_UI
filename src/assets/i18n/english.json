@@ -1275,7 +1275,9 @@
     "VoucherNo": "Voucher No",
     "description": "Description",
     "Debit": "Debit",
-    "Credit": "Credit"
+    "Credit": "Credit",
+    "CreditTotal":"Credit Total",
+    "DebitToal": "Debit Total"
   },
   "bankreceipt": {
     "title": "Bank Receipt",

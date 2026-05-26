@@ -1009,6 +1009,7 @@
     "active": "Active"
   },
   "AccountLedger": {
+    "sno": "S No",
     "VoucherNo": "Voucher No",
     "description": "Description",
     "Date": "Date",
@@ -1028,11 +1029,12 @@
     },
     "footer": {
       "colspan": 3,
-      "DebitTotal": "Debit Total",
-      "CreditTotal": "Credit Total"
+      "CreditTotal": "Credit Total",
+      "DebitToal": "Debit Total"
     }
   },
   "24HrsSaleValue": {
+    "sno": "S No",
     "productCode": "Product Code",
     "CashQty": "Cash Qty",
     "CreditQty": "Credit Qty",
@@ -1058,11 +1060,12 @@
     }
   },
   "24HrsSalesStock": {
-    "ProductName": "Product Name",
+    "sno": "S No",
     "Product": "Product",
-    "OutwardQty": "Outward Qty",
+    "ProductName": "Product Name",
     "OpeningQty": "Opening Qty",
     "InwardQty": "Inward Qty",
+    "OutwardQty": "Outward Qty",
     "ClosingQty": "Closing Qty",
     "headers": {
       "BranchName": "Branch Name",
@@ -1072,6 +1075,59 @@
       "Phone": "Phone",
       "ReportDate": "Report Date",
       "ToDate": "To Date"
+    }
+  },
+  "24HrsSaleValue6AmTo6Am": {
+    "sno": "S No",
+    "productCode": "Product Code",
+    "CashQty": "Cash Quantity",
+    "CreditQty": "Credit Quantity",
+    "CreditAmt": "Credit Amount",
+    "CashAmt": "Cash Amount",
+    "TotalQty": "Total Quantity",
+    "TotalAmt": "Total Amount",
+    "headers": {
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTIN": "GSTIN",
+      "Phone": "Phone",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date",
+      "Address": "Address"
+    },
+    "footer": {
+      "colspan": 3,
+      "CashSales": "Cash Sales",
+      "CreditSales": "Credit Sales",
+      "GrandTotal": "Grand Total"
+    }
+  },
+  "IntimateSale": {
+    "Vehicle": "Vehicle",
+    "invoiceNo": "Invoice No",
+    "invoiceDate": "Invoice Date",
+    "Qty": "Qty",
+    "PQty": "P Qty",
+    "nPAmount": "NP Amount",
+    "pAmount": "P Amount",
+    "Amount": "Amount",
+    "headers": {
+      "LedgerCode": "Ledger Code",
+      "LedgerName": "Ledger Name",
+      "ReportCreatedBy": "Report Created By",
+      "ReportDate": "Report Date",
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "Address": "Address"
+    },
+    "footer": {
+      "colspan": 2,
+      "TotalQty": "TotalQty",
+      "BalanceDue": "BalanceDue",
+      "Credit": "Credit",
+      "NPTotalQty": "NPTotalQty",
+      "TotalPurchase": "TotalPurchase"
     }
   },
   "BranchWiseStockStatementQty": {
@@ -1455,31 +1511,6 @@
       "Address": "Address"
     }
   },
-  "24HrsSaleValue6AmTo6Am": {
-    "CashAmt": "Cash Amount",
-    "CashQty": "Cash Quantity",
-    "CreditAmt": "Credit Amount",
-    "CreditQty": "Credit Quantity",
-    "TotalAmt": "Total Amount",
-    "TotalQty": "Total Quantity",
-    "productCode": "Product Code",
-    "headers": {
-      "BranchName": "Branch Name",
-      "CreatedBy": "Created By",
-      "FromDate": "From Date",
-      "GSTIN": "GSTIN",
-      "Phone": "Phone",
-      "ReportDate": "Report Date",
-      "ToDate": "To Date",
-      "Address": "Address"
-    },
-    "footer": {
-      "colspan": 4,
-      "CashSales": "Cash Sales",
-      "CreditSales": "Credit Sales",
-      "GrandTotal": "Grand Total"
-    }
-  },
   "StockVerification": {
     "BookStock": "Book Stock",
     "Excess": "Excess",
@@ -1596,33 +1627,6 @@
       "TOTOCTOBER": "Total October",
       "TOTNOVEMBER": "Total November",
       "TOTDECEMBER": "Total December"
-    }
-  },
-  "IntimateSale": {
-    "invoiceNo": "Invoice No",
-    "Vehicle": "Vehicle",
-    "invoiceDate": "Invoice Date",
-    "nPAmount": "NP Amount",
-    "pAmount": "P Amount",
-    "Qty": "Qty",
-    "PQty": "P Qty",
-    "Amount": "Amount",
-    "headers": {
-      "LedgerCode": "Ledger Code",
-      "LedgerName": "Ledger Name",
-      "ReportCreatedBy": "Report Created By",
-      "ReportDate": "Report Date",
-      "FromDate": "From Date",
-      "ToDate": "To Date",
-      "Address": "Address"
-    },
-    "footer": {
-      "colspan": 2,
-      "BalanceDue": "BalanceDue",
-      "Credit": "Credit",
-      "NPTotalQty": "NPTotalQty",
-      "TotalPurchase": "TotalPurchase",
-      "TotalQty": "TotalQty"
     }
   },
   "DailySales": {

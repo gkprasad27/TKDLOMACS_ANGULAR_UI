@@ -46,9 +46,10 @@
         font-size: 8px;
       ">
 
-      @for(header of runtimeConfigService.tableColumnsData[routeParam].headers | keyvalue: keepOrder; track header.key) {
 
       <div class="row" style="margin-bottom: 2px;">
+
+      @for(header of runtimeConfigService.tableColumnsData[routeParam].headers | keyvalue: keepOrder; track header.key) {
 
 
         <div class="col-6">
@@ -63,7 +64,7 @@
                 display: inline-block;
               ">
 
-              {{ (routeParam + '.' + header.key) | translate }}
+              {{ getTranslationKey(header.key) | translate }}
 
             </strong>
 
@@ -73,10 +74,10 @@
 
         </div>
 
+      }
 
       </div>
 
-      }
 
     </div>
 
@@ -108,9 +109,9 @@
                 font-weight: bold;
                 font-size: 7px;
                 color: #000;
-              " [ngStyle]="getColumnStyle(body.key)">
+              " [ngStyle]="getColumnStyle(getTranslationKey(body.key))">
 
-              {{ (routeParam + '.' + body.key) | translate }}sdsdsfsdfsdf
+              {{ getTranslationKey(body.key) | translate }}
 
             </th>
           }
@@ -414,8 +415,8 @@
         @for(header of runtimeConfigService.tableColumnsData[routeParam].headers | keyvalue: keepOrder; track header) {
         <div class="col-6">
           <span style="margin-right: 30px; margin-bottom: 5px;">
-            <strong style="min-width: 150px; display: inline-block;">{{ (routeParam + '.' + header.key) | translate
-              }}</strong>
+            <strong style="min-width: 150px; display: inline-block;">{{ getTranslationKey(header.key)
+              | translate }}</strong>
             : {{ headerData[0][header.key] }}
           </span>
         </div>

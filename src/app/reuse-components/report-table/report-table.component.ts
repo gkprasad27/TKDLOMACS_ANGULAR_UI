@@ -136,8 +136,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
   // Column config for formatting
   private amountColumnPatterns = [
     'debit', 'credit', 'qty', 'amount', 'total', 'price', 'value',
-    'opening', 'closing', 'received', 'issued', 'balance', 'liters', 'Credittotal', 'debittoal',
-    'cashqty', 'creditqty', 'totalqty', 'cashamt', 'creditamt', 'totalamt'
+    'opening', 'closing', 'received', 'issued', 'balance', 'liters', 'CreditTotal', 'DebitToal',
+    'cashqty', 'creditqty', 'totalqty', 'cashamt', 'creditamt', 'totalamt', 'CashSales', 'CreditSales', 'GrandTotal'
   ];
 
   private dateColumnPatterns = ['date', 'invoicedate', 'plandate', 'targetdate'];
@@ -247,7 +247,20 @@ export class ReportTableComponent implements OnInit, OnChanges {
   }
   getDisplayedColumns(): string[] {
     if (this.tableData != null) {
-      return this.columnDefinitions.filter(cd => cd.hide).map(cd => cd.def);
+
+        // Get ordered keys from config
+      const columnOrder = Object.keys(
+        this.runtimeConfigService.tableColumnsData[this.routeParam]
+      ).filter(key => key !== 'headers' && key !== 'footer');
+      
+      return this.columnDefinitions
+      .filter(cd => cd.hide)
+      .sort((a, b) => {
+        return columnOrder.indexOf(a.def) - columnOrder.indexOf(b.def);
+      })
+      .map(cd => cd.def);
+
+      // return this.columnDefinitions.filter(cd => cd.hide).map(cd => cd.def);
     }
   }
   toggleSelectAll(selectAllValue: boolean) {
@@ -697,6 +710,14 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     };
 
+  }
+
+  /**
+   * Safe concatenation of routeParam and key for translation
+   * Converts symbol/number types to strings to avoid TS2469 operator error
+   */
+  getTranslationKey(key: string | number | symbol): string {
+    return `${this.routeParam}.${String(key)}`;
   }
 
 
