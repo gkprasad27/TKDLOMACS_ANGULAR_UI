@@ -11,8 +11,8 @@
                 <mat-form-field class="col-6" *ngIf="!formData.item">
                     <mat-label [translate]="'userassignmentinbranch.user'"></mat-label>
                     <mat-select formControlName="userId">
-                        <mat-option *ngFor="let emp of employeesList" [value]="emp.id">
-                            {{emp.text}}
+                        <mat-option *ngFor="let emp of employeesList" [value]="emp.seqId">
+                            {{emp.userName}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

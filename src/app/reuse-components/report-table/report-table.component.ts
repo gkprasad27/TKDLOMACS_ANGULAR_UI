@@ -186,6 +186,12 @@ export class ReportTableComponent implements OnInit, OnChanges {
     activatedRoute.params.subscribe(params => {
       this.routeParam = params.id;
       this.tableHeaders = [];
+      this.footerData = [];
+      this.defaultValues();
+      this.dateForm.reset();
+      this.dateForm.patchValue({
+        selectedBranch: +this.user.branchCode
+      });
       // this.dateForm.reset();
     });
 
@@ -692,7 +698,7 @@ getColumnStyle(column: string): any {
 
 
 exportToPdf() {
-
+  this.spinner.show();
   this.showPrintableReport = true;
 
   setTimeout(() => {
@@ -759,17 +765,18 @@ exportToPdf() {
       .from(element)
       .save()
       .then(() => {
-
         this.showPrintableReport = false;
+        this.spinner.hide();
 
       })
       .catch(() => {
 
         this.showPrintableReport = false;
+        this.spinner.hide();
 
       });
 
-  }, 100);
+  });
 
 }
   // ===== END OF HELPER METHODS =====

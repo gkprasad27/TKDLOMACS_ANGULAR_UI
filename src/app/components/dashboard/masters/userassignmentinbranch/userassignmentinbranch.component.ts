@@ -45,7 +45,8 @@ export class UserassignmentinbranchComponent {
       userId: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(4)]],
       branches: ['', [Validators.required]],
       branchName: [''],
-      userName: ['']
+      userName: [''],
+      id: [0]
     });
 
     this.formData = { ...data };
@@ -64,19 +65,19 @@ export class UserassignmentinbranchComponent {
   }
 
   allApis() {
-    const getEmployeeList = this.apiConfigService.getEmployeesList;
+    const getUsersList = this.apiConfigService.getUsersList;
     const getBranchesListUrl = this.apiConfigService.getBillingBranchesList;
 
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
-        this.apiService.apiGetRequest(getEmployeeList),
+        this.apiService.apiGetRequest(getUsersList),
         this.apiService.apiGetRequest(getBranchesListUrl)
-      ]).subscribe(([employeeList, branchesList]) => {
+      ]).subscribe(([userList, branchesList]) => {
         this.spinner.hide();
 
-        if (!this.commonService.checkNullOrUndefined(employeeList) && employeeList.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(employeeList.response)) {
-            this.employeesList = employeeList.response['EmployeeList'];
+        if (!this.commonService.checkNullOrUndefined(userList) && userList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(userList.response)) {
+            this.employeesList = userList.response['ScreenNames'];
           }
         }
 
@@ -113,9 +114,9 @@ export class UserassignmentinbranchComponent {
     if (this.modelFormData.invalid) {
       return;
     }
-    const selectedUser = this.employeesList.find((employee: any) => employee.id === this.modelFormData.value.userId);
+    const selectedUser = this.employeesList.find((user: any) => user.seqId === this.modelFormData.value.userId);
     if (selectedUser) {
-      this.modelFormData.patchValue({ userName: selectedUser.text });
+      this.modelFormData.patchValue({ userName: selectedUser.userName });
     }
     this.modelFormData.controls['userId'].enable();
     this.modelFormData.controls['userName'].enable();
