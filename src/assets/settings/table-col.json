@@ -683,6 +683,44 @@
     "shiftId": "Shift Id",
     "customerGstin": "Customer GSTIN"
   },
+  "Shift": {
+    "Closing": "Closing",
+    "Code": "Code",
+    "Density": "Density",
+    "InvoiceSales": "InvoiceSales",
+    "Mtr.Diff": "Mtr.Diff",
+    "Opening": "Opening",
+    "Pump": "Pump",
+    "Testing": "Testing",
+    "TotalSales": "TotalSales",
+    "Variation": "Variation",
+    "headers": {
+      "Address": "Address",
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTIN": "GSTIN",
+      "Phone": "Phone",
+      "ReportDate": "Report Date",
+      "ShiftId": "Shift Id",
+      "ToDate": "To Date",
+      "UserName": "User Name"
+    }
+  },
+  "BankReconciliation": {
+    "Credit": "Credit",
+    "Date": "Date",
+    "Debit": "Debit",
+    "InvoiceNo": "Invoice No",
+    "Partyname": "Partyname",
+    "headers": {
+      "AccountName": "Account Name",
+      "LedgerCode": "Ledger Code",
+      "ReportCreatedBy": "Report Created By",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    }
+  },
   "salesReturn": {
     "invoiceNo": "Invoice No",
     "invoiceReturnNo": "Invoice Return No",
@@ -1036,7 +1074,7 @@
       "ToDate": "To Date"
     }
   },
-  "BranchWise StockStatement Qty": {
+  "BranchWiseStockStatementQty": {
     "productCode": "Product Code",
     "productName": "Product Name",
     "supplierId": "Supplier Id",
@@ -1075,7 +1113,7 @@
       "TOTVUYYURU": "Total Vuyyuru"
     }
   },
-  "BranchWise StockStatement Ltrs": {
+  "BranchWiseStockStatementLtrs": {
     "productCode": "Product Code",
     "productName": "Product Name",
     "supplierId": "Supplier Id",
@@ -1092,7 +1130,7 @@
     "SALESWING": "Saleswing",
     "TIRUVURU": "Tiruvuru",
     "VUYYURU": "Vuyyuru",
-    "header": {
+    "headers": {
       "CreatedBy": "Created By",
       "ReportDate": "Report Date",
       "FromDate": "From Date",
@@ -1114,7 +1152,7 @@
       "TOTVUYYURU": "Total Vuyyuru"
     }
   },
-  "BranchWise Monthly SalesByLiters": {
+  "BranchWiseMonthlySalesByLiters": {
     "productCode": "Product Code",
     "productName": "Product Name",
     "SupplierName": "Supplier Name",
@@ -1155,7 +1193,7 @@
       "TotalLabel": "Grand Total"
     }
   },
-  "ProductMonthWise PurchaseLtrs": {
+  "ProductMonthWisePurchaseLtrs": {
     "Name": "Name",
     "supplierName": "Supplier Name",
     "unitName": "Unit Name",
@@ -1196,7 +1234,156 @@
       "GrandTotal": "Grand Total"
     }
   },
-  "Four Column Cash Book": {
+  "ProductPriceList": {
+    "AvailableQty": "Available Qty",
+    "Price": "Price",
+    "productCode": "Product Code",
+    "productName": "Product Name",
+    "headers": {
+      "Address": "Address",
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTIN": "GSTIN",
+      "Phone": "Phone",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    }
+  },
+  "ReceiptsAndPaymentsDetailed": {
+    "AccountDescription": "Account Description",
+    "Credit": "Credit",
+    "Debit": "Debit",
+    "headers": {
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    },
+    "footer": {
+      "colspan": 1,
+      "CreditAmount": "Credit Amount",
+      "DebitAmount": "Debit Amount",
+      "TotalType": "Total"
+    }
+  },
+  "ReceiptsAndPaymentsSummary": {
+    "Payments": "Payments",
+    "Receipts": "Receipts",
+    "ledgerName": "Ledger Name",
+    "headers": {
+      "Address": "Address",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "OpeningBalance": "Opening Balance",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    },
+    "footer": {
+      "colspan": 1,
+      "CashClosingBalance": "Cash Closing Balance",
+      "TotalPayments": "Total Payments",
+      "TotalReceipts": "Total Receipts",
+      "TotalType": "Total"
+    }
+  },
+  "ClosingBalance": {
+    "credits": "Credits",
+    "ledgerCode": "Ledger Code",
+    "ledgerName": "Ledger Name",
+    "headers": {
+      "FromDate":"From Date",
+      "FromLedgerCode":"From Ledger Code",
+      "FromLedgerName":"From Ledger Name",
+      "GSTIN":"GSTIN",
+      "ReportCreatedBy":"Report Created By",
+      "ReportDate":"Report Date",
+      "ToDate":"To Date",
+      "ToLedgerCode":"To Ledger Code",
+      "ToLedgerName":"To Ledger Name"
+    },
+    "footer": {
+      "colspan": 1,
+      "CreditTotal": "Credit Total"
+    }
+  },
+  "SMSSummary": {
+    "title": "SMS Summary",
+    "amount": "Amount",
+    "branch": "Branch",
+    "invoiceDate": "Invoice Date",
+    "invoiceNo": "Invoice No",
+    "mobile": "Mobile",
+    "price": "Price",
+    "qty": "Qty",
+    "smsReturnID": "SMS Return ID",
+    "vehicleRegNo": "Vehicle Reg No",
+    "headers": {
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    }
+  },
+  "SalesGST": {
+    "title": "Sales GST",
+    "0CGST": "0 CGST",
+    "0IGST": "0 IGST",
+    "0SGST": "0 SGST",
+    "0TaxAmt": "0 Tax Amount",
+    "5CGST": "5 CGST",
+    "5IGST": "5 IGST",
+    "5SGST": "5 SGST",
+    "5TaxAmt": "5 Tax Amount",
+    "12CGST": "12 CGST",
+    "12IGST": "12 IGST",
+    "12SGST": "12 SGST",
+    "12TaxAmt": "12 Tax Amount",
+    "18CGST": "18 CGST",
+    "18IGST": "18 IGST",
+    "18SGST": "18 SGST",
+    "18TaxAmt": "18 Tax Amount",
+    "28CGST": "28 CGST",
+    "28IGST": "28 IGST",
+    "28SGST": "28 SGST",
+    "28TaxAmt": "28 Tax Amount",
+    "POS": "POS",
+    "TaxableValue": "Taxable Value",
+    "TotalInvoiceValue": "Total Invoice Value",
+    "cgst": "CGST",
+    "customerGSTIN": "Customer GSTIN",
+    "customerName": "Customer Name",
+    "grossAmount": "Gross Amount",
+    "invoiceDate": "Invoice Date",
+    "invoiceMasterId": "Invoice Master ID",
+    "invoiceNo": "Invoice No",
+    "sgst": "SGST",
+    "totalGST": "Total GST",
+    "headers": {
+      "CreatedBy":"Created By",
+      "FromDate":"From Date",
+      "ReportDate":"Report Date",
+      "ToDate":"To Date"
+    }
+  },
+  "VehicalEnquiry": {
+    "InvoiceDate": "Invoice Date",
+    "branchName": "Branch Name",
+    "grossAmount": "Gross Amount",
+    "invoiceNo": "Invoice No",
+    "productCode": "Product Code",
+    "productName": "Product Name",
+    "pumpNo": "Pump No",
+    "qty": "Quantity",
+    "vehicleRegNo": "Vehicle Reg No",
+    "headers": {
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    }
+  },
+  "FourColumnCashBook": {
     "InvoiceNo": "Invoice No",
     "LedgerName": "Ledger Name",
     "Payments": "Payments",
@@ -1223,18 +1410,29 @@
       "TotalCredits": "Total Credits"
     }
   },
-  "Stock Valuation": {
+  "StockValuation": {
     "Balance": "Balance",
     "Code": "Code",
     "Liters": "Liters",
     "ProductName": "ProductName",
     "StockValue": "StockValue",
     "UOM": "UOM",
+    "headers": {
+      "Address": "Address",
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTNo": "GST No",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    },
     "footer": {
-      "TotalVal": "Total"
+      "colspan": 3,
+      "TotalVal": "Total Value",
+      "branchName": "Branch Name"
     }
   },
-  "24Hrs Meter Reading": {
+  "24HrsMeterReading": {
     "Code": "Code",
     "Pump": "Pump",
     "Closing": "Closing",
@@ -1257,18 +1455,14 @@
       "Address": "Address"
     }
   },
-  "24Hrs Sale Value 6Am To 6Am": {
-    "Code": "Code",
-    "Pump": "Pump",
-    "Closing": "Closing",
-    "Consumption": "Consumption",
-    "Density": "Density",
-    "InvoiceSales": "Invoice Sales",
-    "Mtr.Diff": "Meter Difference",
-    "Opening": "Opening",
-    "Testing": "Testing",
-    "TotalSales": "Total Sales",
-    "Variation": "Variation",
+  "24HrsSaleValue6AmTo6Am": {
+    "CashAmt": "Cash Amount",
+    "CashQty": "Cash Quantity",
+    "CreditAmt": "Credit Amount",
+    "CreditQty": "Credit Quantity",
+    "TotalAmt": "Total Amount",
+    "TotalQty": "Total Quantity",
+    "productCode": "Product Code",
     "headers": {
       "BranchName": "Branch Name",
       "CreatedBy": "Created By",
@@ -1278,20 +1472,23 @@
       "ReportDate": "Report Date",
       "ToDate": "To Date",
       "Address": "Address"
+    },
+    "footer": {
+      "colspan": 4,
+      "CashSales": "Cash Sales",
+      "CreditSales": "Credit Sales",
+      "GrandTotal": "Grand Total"
     }
   },
-  "Stock Verification": {
-    "Code": "Code",
-    "Pump": "Pump",
-    "Closing": "Closing",
-    "Consumption": "Consumption",
-    "Density": "Density",
-    "InvoiceSales": "Invoice Sales",
-    "Mtr.Diff": "Meter Difference",
-    "Opening": "Opening",
-    "Testing": "Testing",
-    "TotalSales": "Total Sales",
-    "Variation": "Variation",
+  "StockVerification": {
+    "BookStock": "Book Stock",
+    "Excess": "Excess",
+    "Name": "Name",
+    "PhyStock": "Physical Stock",
+    "ProductCode": "Product Code",
+    "Sales": "Sales",
+    "Short": "Short",
+    "StockTransfer": "Stock Transfer",
     "headers": {
       "BranchName": "Branch Name",
       "CreatedBy": "Created By",
@@ -1301,9 +1498,107 @@
       "ReportDate": "Report Date",
       "ToDate": "To Date",
       "Address": "Address"
+    },
+    "footer": {
+      "colspan": 2,
+      "GrandSTRQtyTotal": "Grand STR Qty Total",
+      "GrandSaleTotal": "Grand Sale Total",
+      "GrandTotal": "Grand Total",
+      "TotalType": "Total"
     }
   },
-  "Intimate Sale": {
+  "StockLedger": {
+    "Closing Quantity": "Closing Quantity",
+    "Date": "Date",
+    "Issued": "Issued",
+    "Opening Quantity": "Opening Quantity",
+    "Received": "Received",
+    "branchName": "Branch Name",
+    "invoiceNo": "Invoice No",
+    "productCode": "Product Code",
+    "headers": {
+      "FromDate": "From Date",
+      "ReportCreatedBy": "Report Created By",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    },
+    "footer": {
+      "colspan": 3,
+      "TotalIssued": "Total Issued",
+      "TotalReceived": "Total Received",
+      "TotalType": "Total"
+    }
+  },
+  "Salesanalysisbybranch": {
+    "Amount": "Amount",
+    "Liters": "Liters",
+    "ProductCode": "Product Code",
+    "ProductGroupName": "Product Group Name",
+    "ProductName": "Product Name",
+    "Qty": "Qty",
+    "UnitName": "Unit Name",
+    "headers": {
+      "Address": "Address",
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTIN": "GSTIN",
+      "Phone": "Phone",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    },
+    "footer": {
+      "colspan": 1,
+      "CashSales": "Cash Sales",
+      "CreditSales": "Credit Sales",
+      "GrandTotal": "Grand Total",
+      "GrossAmount": "Gross Amount",
+      "LubesTotals": "Lubes Totals",
+      "TotalQty": "Total Qty",
+      "TotalType": "Total"
+    }
+  },
+  "ProductWiseMonthlyPurchase": {
+    "Code": "Code",
+    "GroupName": "Group Name",
+    "Name": "Name",
+    "SupplierName": "Supplier Name",
+    "UnitName": "Unit Name",
+    "JAN": "January",
+    "FEB": "February",
+    "MAR": "March",
+    "APR": "April",
+    "MAY": "May",
+    "JUNE": "June",
+    "JULY": "July",
+    "AUG": "August",
+    "SEP": "September",
+    "OCT": "October",
+    "NOV": "November",
+    "DEC": "December",
+    "headers": {
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    },
+    "footer": {
+      "colspan": 4,
+      "TOTJANUARY": "Total January",
+      "TOTFEB": "Total February",
+      "TOTMARCH": "Total March",
+      "TOTAPRIL": "Total April",
+      "TOTMAY": "Total May",
+      "TOTJUNE": "Total June",
+      "TOTJULY": "Total July",
+      "TOTAUGUST": "Total August",
+      "TOTSEPTEMBER": "Total September",
+      "TOTOCTOBER": "Total October",
+      "TOTNOVEMBER": "Total November",
+      "TOTDECEMBER": "Total December"
+    }
+  },
+  "IntimateSale": {
     "invoiceNo": "Invoice No",
     "Vehicle": "Vehicle",
     "invoiceDate": "Invoice Date",
@@ -1328,6 +1623,52 @@
       "NPTotalQty": "NPTotalQty",
       "TotalPurchase": "TotalPurchase",
       "TotalQty": "TotalQty"
+    }
+  },
+  "DailySales": {
+    "GrossAmount": "Gross Amount",
+    "InvoiceNo": "Invoice No",
+    "LedgerName": "Ledger Name",
+    "ProductCode": "Product Code",
+    "PumpNo": "Pump No",
+    "Qty": "Qty",
+    "SlipNo": "Slip No",
+    "TotalAmount": "Total Amount",
+    "VehicleRegNo": "Vehicle Reg No",
+    "headers": {
+      "Address": "Address",
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTNo": "GST No",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
+    },
+    "footer": {
+      "colspan": 0,
+      "AmountTotal": "Amount Total",
+      "CashAmount": "Cash Amount",
+      "CreditAmount": "Credit Amount",
+      "FooterType": "Footer Type",
+      "LubesCash": "Lubes Cash",
+      "LubesCredit": "Lubes Credit",
+      "NetAmount": "Net Amount",
+      "QtyTotal": "Qty Total",
+      "SparesCash": "Spares Cash",
+      "SparesCredit": "Spares Credit"
+    }
+  },
+  "TrialBalance": {
+    "ledgerCode": "Ledger Code",
+    "ledgername": "Ledger Name",
+    "OrderKey": "Order Key",
+    "debits": "Debits",
+    "credits": "Credits",
+    "headers": {
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
     }
   },
   "ledger": {

@@ -1531,12 +1531,47 @@
     "ToDate": "To Date"
   },
   "Shift": {
-    "title": "Shift"
+    "title": "Shift",
+    "Closing": "Closing",
+    "Code": "Code",
+    "Density": "Density",
+    "InvoiceSales": "InvoiceSales",
+    "Mtr.Diff": "Mtr.Diff",
+    "Opening": "Opening",
+    "Pump": "Pump",
+    "Testing": "Testing",
+    "TotalSales": "TotalSales",
+    "Variation": "Variation",
+    "sno": "S No",
+    "Address": "Address",
+    "BranchName": "Branch Name",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "GSTIN": "GSTIN",
+    "Phone": "Phone",
+    "ReportDate": "Report Date",
+    "ShiftId": "Shift Id",
+    "ToDate": "To Date",
+    "UserName": "User Name"
   },
-  "Vehical Enquiry": {
-    "title": "Vehical Enquiry"
+  "VehicalEnquiry": {
+    "title": "Vehical Enquiry",
+    "InvoiceDate": "Invoice Date",
+    "branchName": "Branch Name",
+    "grossAmount": "Gross Amount",
+    "invoiceNo": "Invoice No",
+    "productCode": "Product Code",
+    "productName": "Product Name",
+    "pumpNo": "Pump No",
+    "qty": "Quantity",
+    "vehicleRegNo": "Vehicle Reg No",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "sno": "S No"
   },
-  "Intimate Sale": {
+  "IntimateSale": {
     "title": "Intimate Sale",
     "invoiceNo": "Invoice No",
     "Vehicle": "Vehicle",
@@ -1555,40 +1590,260 @@
     "ToDate": "To Date",
     "Address": "Address"
   },
-  "Stock Verification": {
-    "title": "Stock Verification"
+  "StockVerification": {
+    "title": "Stock Verification",
+    "BookStock": "Book Stock",
+    "Excess": "Excess",
+    "Name": "Name",
+    "PhyStock": "Physical Stock",
+    "ProductCode": "Product Code",
+    "Sales": "Sales",
+    "Short": "Short",
+    "StockTransfer": "Stock Transfer",
+    "BranchName": "Branch Name",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "GSTIN": "GSTIN",
+    "Phone": "Phone",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "Address": "Address",
+    "sno": "S No",
+    "GrandSTRQtyTotal": "Grand STR Qty Total",
+    "GrandSaleTotal": "Grand Sale Total",
+    "GrandTotal": "Grand Total",
+    "TotalType": "Total"
   },
-  "Stock Ledger": {
-    "title": "Stock Ledger"
+  "StockLedger": {
+    "title": "Stock Ledger",
+    "Closing Quantity": "Closing Quantity",
+    "Date": "Date",
+    "Issued": "Issued",
+    "Opening Quantity": "Opening Quantity",
+    "Received": "Received",
+    "branchName": "Branch Name",
+    "invoiceNo": "Invoice No",
+    "productCode": "Product Code",
+    "FromDate": "From Date",
+    "ReportCreatedBy": "Report Created By",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "sno": "S No",
+    "TotalIssued": "Total Issued",
+    "TotalReceived": "Total Received",
+    "TotalType": "Total"
   },
-  "Sales analysis by branch": {
-    "title": "Sales analysis by branch"
+  "Salesanalysisbybranch": {
+    "title": "Sales analysis by branch",
+    "Amount": "Amount",
+    "Liters": "Liters",
+    "ProductCode": "Product Code",
+    "ProductGroupName": "Product Group Name",
+    "ProductName": "Product Name",
+    "Qty": "Qty",
+    "UnitName": "Unit Name",
+    "Address": "Address",
+    "BranchName": "Branch Name",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "GSTIN": "GSTIN",
+    "Phone": "Phone",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "sno": "S No",
+    "CashSales": "Cash Sales",
+    "CreditSales": "Credit Sales",
+    "GrandTotal": "Grand Total",
+    "GrossAmount": "Gross Amount",
+    "LubesTotals": "Lubes Totals",
+    "TotalQty": "Total Qty",
+    "TotalType": "Total"
   },
-  "Product Wise Monthly Purchase": {
-    "title": "Product Wise Monthly Purchase"
+  "ProductWiseMonthlyPurchase": {
+    "title": "Product Wise Monthly Purchase",
+    "Code": "Code",
+    "GroupName": "Group Name",
+    "Name": "Name",
+    "supplierName": "Supplier Name",
+    "unitName": "Unit Name",
+    "JAN": "January",
+    "FEB": "February",
+    "MAR": "March",
+    "APR": "April",
+    "MAY": "May",
+    "JUNE": "June",
+    "JULY": "July",
+    "AUG": "August",
+    "SEP": "September",
+    "OCT": "October",
+    "NOV": "November",
+    "DEC": "December",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "sno": "S No",
+    "TOTJANUARY": "Total January",
+    "TOTFEB": "Total February",
+    "TOTMARCH": "Total March",
+    "TOTAPRIL": "Total April",
+    "TOTMAY": "Total May",
+    "TOTJUNE": "Total June",
+    "TOTJULY": "Total July",
+    "TOTAUGUST": "Total August",
+    "TOTSEPTEMBER": "Total September",
+    "TOTOCTOBER": "Total October",
+    "TOTNOVEMBER": "Total November",
+    "TOTDECEMBER": "Total December"
   },
-  "Daily Sales": {
-    "title": "Daily Sales"
+  "DailySales": {
+    "title": "Daily Sales",
+    "GrossAmount": "Gross Amount",
+    "InvoiceNo": "Invoice No",
+    "LedgerName": "Ledger Name",
+    "ProductCode": "Product Code",
+    "PumpNo": "Pump No",
+    "Qty": "Qty",
+    "SlipNo": "Slip No",
+    "TotalAmount": "Total Amount",
+    "VehicleRegNo": "Vehicle Reg No",
+    "Address": "Address",
+    "BranchName": "Branch Name",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "GSTNo": "GST No",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "sno": "S No",
+    "AmountTotal": "Amount Total",
+    "CashAmount": "Cash Amount",
+    "CreditAmount": "Credit Amount",
+    "FooterType": "Footer Type",
+    "LubesCash": "Lubes Cash",
+    "LubesCredit": "Lubes Credit",
+    "NetAmount": "Net Amount",
+    "QtyTotal": "Qty Total",
+    "SparesCash": "Spares Cash",
+    "SparesCredit": "Spares Credit"
   },
-  "Product Price List": {
-    "title": "Product Price List"
+  "ProductPriceList": {
+    "title": "Product Price List",
+    "AvailableQty": "Available Qty",
+    "Price": "Price",
+    "productCode": "Product Code",
+    "productName": "Product Name",
+    "Address": "Address",
+    "BranchName": "Branch Name",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "GSTIN": "GSTIN",
+    "Phone": "Phone",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "sno": "S No"
   },
-  "Receipts And Payments Detailed": {
-    "title": "Receipts And Payments Detailed"
+  "ReceiptsAndPaymentsDetailed": {
+    "title": "Receipts And Payments Detailed",
+    "Account Description": "Account Description",
+    "Credit": "Credit",
+    "Debit": "Debit",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "sno": "S No",
+    "CreditAmount": "Credit Amount",
+    "DebitAmount": "Debit Amount",
+    "TotalType": "Total"
   },
-  "Receipts And Payments Summary": {
-    "title": "Receipts And Payments Summary"
+  "ReceiptsAndPaymentsSummary": {
+    "title": "Receipts And Payments Summary",
+    "Payments": "Payments",
+    "Receipts": "Receipts",
+    "ledgerName": "Ledger Name",
+    "Address": "Address",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "OpeningBalance": "Opening Balance",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "sno": "S No",
+    "CashClosingBalance": "Cash Closing Balance",
+    "TotalPayments": "Total Payments",
+    "TotalReceipts": "Total Receipts",
+    "TotalType": "Total"
   },
-  "SMS Summary": {
-    "title": "SMS Summary"
+  "SMSSummary": {
+    "title": "SMS Summary",
+    "amount": "Amount",
+    "branch": "Branch",
+    "invoiceDate": "Invoice Date",
+    "invoiceNo": "Invoice No",
+    "mobile": "Mobile",
+    "price": "Price",
+    "qty": "Qty",
+    "smsReturnID": "SMS Return ID",
+    "vehicleRegNo": "Vehicle Reg No",
+    "sno": "S No",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date"
   },
-  "Sales GST": {
-    "title": "Sales GST"
+  "SalesGST": {
+    "title": "Sales GST",
+    "0CGST": "0 CGST",
+    "0IGST": "0 IGST",
+    "0SGST": "0 SGST",
+    "0TaxAmt": "0 Tax Amount",
+    "5CGST": "5 CGST",
+    "5IGST": "5 IGST",
+    "5SGST": "5 SGST",
+    "5TaxAmt": "5 Tax Amount",
+    "12CGST": "12 CGST",
+    "12IGST": "12 IGST",
+    "12SGST": "12 SGST",
+    "12TaxAmt": "12 Tax Amount",
+    "18CGST": "18 CGST",
+    "18IGST": "18 IGST",
+    "18SGST": "18 SGST",
+    "18TaxAmt": "18 Tax Amount",
+    "28CGST": "28 CGST",
+    "28IGST": "28 IGST",
+    "28SGST": "28 SGST",
+    "28TaxAmt": "28 Tax Amount",
+    "POS": "POS",
+    "TaxableValue": "Taxable Value",
+    "TotalInvoiceValue": "Total Invoice Value",
+    "cgst": "CGST",
+    "customerGSTIN": "Customer GSTIN",
+    "customerName": "Customer Name",
+    "grossAmount": "Gross Amount",
+    "invoiceDate": "Invoice Date",
+    "invoiceMasterId": "Invoice Master ID",
+    "invoiceNo": "Invoice No",
+    "sgst": "SGST",
+    "totalGST": "Total GST",
+    "sno": "S No",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date"
   },
-  "Trial Balance": {
-    "title": "Trial Balance"
+  "TrialBalance": {
+    "title": "Trial Balance",
+    "ledgerCode": "Ledger Code",
+    "ledgername": "Ledger Name",
+    "sno": "S no",
+    "OrderKey": "Order Key",
+    "debits": "Debits",
+    "credits": "Credits",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date"
   },
-  "24Hrs Meter Reading": {
+  "24HrsMeterReading": {
     "title": "24 Hrs Meter Reading",
     "Code": "Code",
     "Pump": "Pump",
@@ -1611,20 +1866,15 @@
     "ToDate": "To Date",
     "Address": "Address"
   },
-  "24Hrs Sale Value 6Am To 6Am": {
+  "24HrsSaleValue6AmTo6Am": {
     "title": "24Hrs Sale Value 6Am To 6Am",
-    "Code": "Code",
-    "Pump": "Pump",
-    "Closing": "Closing",
-    "Consumption": "Consumption",
-    "Density": "Density",
-    "InvoiceSales": "Invoice Sales",
-    "Mtr.Diff": "Meter Difference",
-    "Opening": "Opening",
-    "Testing": "Testing",
-    "TotalSales": "Total Sales",
-    "sno": "Sno",
-    "Variation": "Variation",
+    "CashAmt": "Cash Amount",
+    "CashQty": "Cash Quantity",
+    "CreditAmt": "Credit Amount",
+    "CreditQty": "Credit Quantity",
+    "TotalAmt": "Total Amount",
+    "TotalQty": "Total Quantity",
+    "productCode": "Product Code",
     "BranchName": "Branch Name",
     "CreatedBy": "Created By",
     "FromDate": "From Date",
@@ -1632,21 +1882,66 @@
     "Phone": "Phone",
     "ReportDate": "Report Date",
     "ToDate": "To Date",
-    "Address": "Address"
+    "Address": "Address",
+    "sno": "S No",
+    "CashSales": "Cash Sales",
+    "CreditSales": "Credit Sales",
+    "GrandTotal": "Grand Total"
   },
-  "Closing Balance": {
-    "title": "Closing Balance"
+  "ClosingBalance": {
+    "title": "Closing Balance",
+    "credits": "Credits",
+    "ledgerCode": "Ledger Code",
+    "ledgerName": "Ledger Name",
+    "FromDate": "From Date",
+    "FromLedgerCode": "From Ledger Code",
+    "FromLedgerName": "From Ledger Name",
+    "GSTIN": "GSTIN",
+    "ReportCreatedBy": "Report Created By",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "ToLedgerCode": "To Ledger Code",
+    "ToLedgerName": "To Ledger Name",
+    "sno": "S No",
+    "CreditTotal": "Credit Total"
   },
-  "Bank Reconciliation": {
-    "title": "Bank Reconciliation"
+  "BankReconciliation": {
+    "title": "Bank Reconciliation",
+    "Credit": "Credit",
+    "Date": "Date",
+    "Debit": "Debit",
+    "InvoiceNo": "Invoice No",
+    "sno": "S No",
+    "Partyname": "Partyname",
+    "AccountName": "Account Name",
+    "LedgerCode": "Ledger Code",
+    "ReportCreatedBy": "Report Created By",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date"
   },
-  "Stock Valuation": {
-    "title": "Stock Valuation"
+  "StockValuation": {
+    "title": "Stock Valuation",
+    "Balance": "Balance",
+    "Code": "Code",
+    "Liters": "Liters",
+    "ProductName": "ProductName",
+    "StockValue": "StockValue",
+    "UOM": "UOM",
+    "Address": "Address",
+    "BranchName": "Branch Name",
+    "CreatedBy": "Created By",
+    "FromDate": "From Date",
+    "GSTNo": "GST No",
+    "ReportDate": "Report Date",
+    "ToDate": "To Date",
+    "sno": "S No",
+    "TotalVal": "Total Value",
+    "branchName": "Branch Name"
   },
   "AccountLedgerDieselReport": {
     "title": "Account Ledger Diesel Report"
   },
-  "BranchWise StockStatement Qty": {
+  "BranchWiseStockStatementQty": {
     "title": "Branch Wise Stock Statement Qty",
     "sno": "S no",
     "productCode": "Product Code",
@@ -1682,7 +1977,7 @@
     "TOTTIRUVURU": "Total Tiruvuru",
     "TOTVUYYURU": "Total Vuyyuru"
   },
-  "BranchWise StockStatement Ltrs": {
+  "BranchWiseStockStatementLtrs": {
     "title": "Branch Wise Stock Statement Ltrs",
     "sno": "S no",
     "productCode": "Product Code",
@@ -1718,7 +2013,7 @@
     "TOTTIRUVURU": "Total Tiruvuru",
     "TOTVUYYURU": "Total Vuyyuru"
   },
-  "BranchWise Monthly SalesByLiters": {
+  "BranchWiseMonthlySalesByLiters": {
     "title": "Branch Wise Monthly Sales By Liters",
     "sno": "S No",
     "productCode": "Product Code",
@@ -1756,7 +2051,7 @@
     "TotVuyyuru": "Total Vuyyuru",
     "TotalLabel": "Grand Total"
   },
-  "ProductMonthWise PurchaseLtrs": {
+  "ProductMonthWisePurchaseLtrs": {
     "title": "Product Month Wise Purchase Ltrs",
     "sno": "S No",
     "Name": "Name",
@@ -1813,7 +2108,7 @@
     "selectedSupplierGroup": "Supplier Group",
     "SearchCriteria": "Search Criteria"
   },
-  "Four Column Cash Book": {
+  "FourColumnCashBook": {
     "title": "Four Column Cash Book",
     "sno": "S No",
     "InvoiceNo": "Invoice No",
@@ -1822,20 +2117,20 @@
     "Receipts": "Receipts",
     "Debit": "Debit",
     "Credit": "Credit",
-      "BranchName":"Branch Name",
-      "CreatedBy":"Created By",
-      "GSTNo":"GST No",
-      "OpeningBalance":"Opening Balance",
-      "ReportDate":"Report Date",
-      "FromDate":"From Date",
-      "ToDate":"To Date",
-      "Address":"Address",
-      "BalanceBD":"Balance B/D",
-      "TotalType":"Total",
-      "TotalPayments":"Total Payments",
-      "TotalReceipts":"Total Receipts",
-      "TotalDebits":"Total Debits",
-      "TotalCredits":"Total Credits"
+    "BranchName": "Branch Name",
+    "CreatedBy": "Created By",
+    "GSTNo": "GST No",
+    "OpeningBalance": "Opening Balance",
+    "ReportDate": "Report Date",
+    "FromDate": "From Date",
+    "ToDate": "To Date",
+    "Address": "Address",
+    "BalanceBD": "Balance B/D",
+    "TotalType": "Total",
+    "TotalPayments": "Total Payments",
+    "TotalReceipts": "Total Receipts",
+    "TotalDebits": "Total Debits",
+    "TotalCredits": "Total Credits"
   },
   "erpuser": {
     "title": "Erp User",

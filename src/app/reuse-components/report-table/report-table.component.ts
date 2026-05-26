@@ -136,7 +136,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
   // Column config for formatting
   private amountColumnPatterns = [
     'debit', 'credit', 'qty', 'amount', 'total', 'price', 'value',
-    'opening', 'closing', 'received', 'issued', 'balance', 'liters', 'Credittotal', 'debittoal', 
+    'opening', 'closing', 'received', 'issued', 'balance', 'liters', 'Credittotal', 'debittoal',
     'cashqty', 'creditqty', 'totalqty', 'cashamt', 'creditamt', 'totalamt'
   ];
 
@@ -158,8 +158,27 @@ export class ReportTableComponent implements OnInit, OnChanges {
     private alertService: AlertService,
     public runtimeConfigService: RuntimeConfigService
   ) {
-    this.user = JSON.parse(localStorage.getItem('user'));
 
+    this.model();
+
+    activatedRoute.params.subscribe(params => {
+      this.routeParam = params.id;
+      this.tableHeaders = [];
+      this.headerData = [];
+      this.footerData = [];
+      this.defaultValues();
+      this.dateForm.reset();
+      setTimeout(() => {
+        this.model();
+      });
+      // this.dateForm.reset();
+    });
+
+
+  }
+
+  model() {
+    this.user = JSON.parse(localStorage.getItem('user'));
     this.dateForm = this.formBuilder.group({
       selected: [null],
       formDate: ['', Validators.required],
@@ -183,25 +202,12 @@ export class ReportTableComponent implements OnInit, OnChanges {
       selectedSupplierGroup: ['']
     }, { validator: this.checkDates });
 
-    activatedRoute.params.subscribe(params => {
-      this.routeParam = params.id;
-      this.tableHeaders = [];
-      this.footerData = [];
-      this.defaultValues();
-      this.dateForm.reset();
-      this.dateForm.patchValue({
-        selectedBranch: +this.user.branchCode
-      });
-      // this.dateForm.reset();
-    });
 
-    const user = JSON.parse(localStorage.getItem('user'));
-
-    if (user?.role != '1') {
+    if (this.user?.role != '1') {
       this.dateForm.controls['selectedBranch'].disable();
     }
-
   }
+
   checkDates(group: FormGroup) {
     if (group.controls.formDate.value < group.controls.toDate.value) {
       return { notValid: true }
@@ -632,7 +638,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
   /**
    * Get keys from header object
    */
-  getSortedHeaderKeys(header: any): string[] {
+  getSortedHeaderKeys(): string[] {
 
     // Order from common config
     const orderedKeys = Object.keys(this.runtimeConfigService.tableColumnsData[this.routeParam].headers);
@@ -658,127 +664,128 @@ export class ReportTableComponent implements OnInit, OnChanges {
    * Simplified PDF export using html2pdf
    * Converts the static HTML template to PDF
    */
-columnConfig: any = {
+  columnConfig: any = {
 
-  sno: {
-    width: '50px',
-    whiteSpace: 'nowrap'
-  },
+    sno: {
+      width: '50px',
+      whiteSpace: 'nowrap'
+    },
 
-  description: {
-    width: '400px',
-    whiteSpace: 'normal'
-  },
-};
-
-
-getColumnStyle(column: string): any {
-
-  const config = this.columnConfig[column] || {};
-
-  console.log('Column:', column, 'Config:', config);
-
-  return {
-
-    width: config.width || 'auto',
-
-    maxWidth: config.width || 'auto',
-
-    whiteSpace: config.whiteSpace || 'nowrap',
-
-    wordBreak:
-      config.whiteSpace === 'normal'
-        ? 'break-word'
-        : 'normal'
-
+    description: {
+      width: '400px',
+      whiteSpace: 'normal'
+    },
   };
 
-}
 
+  getColumnStyle(column: string): any {
 
+    const config = this.columnConfig[column] || {};
 
-exportToPdf() {
-  this.spinner.show();
-  this.showPrintableReport = true;
+    return {
 
-  setTimeout(() => {
+      width: config.width || 'auto',
 
-    const element = document.getElementById('printableReport');
+      maxWidth: config.width || 'auto',
 
-    if (!element) {
+      whiteSpace: config.whiteSpace || 'nowrap',
 
-      this.alertService.openSnackBar(
-        'No report data to export',
-        Static.Close,
-        SnackBar.error
-      );
-
-      return;
-
-    }
-
-    const options = {
-
-      margin: [4, 4, 4, 4] as [number, number, number, number],
-
-      filename: `${this.routeParam}_Report_${new Date().getTime()}.pdf`,
-
-      image: {
-        type: 'png' as const,
-        quality: 1
-      },
-
-      html2canvas: {
-
-        scale: 2,
-
-        useCORS: true,
-
-        scrollY: 0,
-
-        backgroundColor: '#ffffff',
-
-        logging: false
-
-      },
-
-      jsPDF: {
-
-        orientation: 'portrait' as const,
-
-        unit: 'mm' as const,
-
-        format: 'a4' as const,
-
-        compress: true
-
-      },
-
-      pagebreak: {
-        mode: ['css', 'legacy']
-      }
+      wordBreak:
+        config.whiteSpace === 'normal'
+          ? 'break-word'
+          : 'normal'
 
     };
 
-    html2pdf()
-      .set(options)
-      .from(element)
-      .save()
-      .then(() => {
-        this.showPrintableReport = false;
+  }
+
+
+
+  exportToPdf() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.showPrintableReport = true;
+
+      setTimeout(() => {
+
+        const element = document.getElementById('printableReport');
+
+        if (!element) {
+
+          this.alertService.openSnackBar(
+            'No report data to export',
+            Static.Close,
+            SnackBar.error
+          );
+
+          return;
+
+        }
+
+        const options = {
+
+          margin: [4, 4, 4, 4] as [number, number, number, number],
+
+          filename: `${this.routeParam}_Report_${new Date().getTime()}.pdf`,
+
+          image: {
+            type: 'png' as const,
+            quality: 1
+          },
+
+          html2canvas: {
+
+            scale: 2,
+
+            useCORS: true,
+
+            scrollY: 0,
+
+            backgroundColor: '#ffffff',
+
+            logging: false
+
+          },
+
+          jsPDF: {
+
+            orientation: 'portrait' as const,
+
+            unit: 'mm' as const,
+
+            format: 'a4' as const,
+
+            compress: true
+
+          },
+
+          pagebreak: {
+            mode: ['css', 'legacy']
+          }
+
+        };
+
+        // html2pdf()
+        //   .set(options)
+        //   .from(element)
+        //   .save()
+        //   .then(() => {
+        //     this.showPrintableReport = false;
+        //     this.spinner.hide();
+
+        //   })
+        //   .catch(() => {
+
+        //     this.showPrintableReport = false;
         this.spinner.hide();
 
-      })
-      .catch(() => {
-
-        this.showPrintableReport = false;
-        this.spinner.hide();
+        //   });
 
       });
+    });
 
-  });
 
-}
+  }
   // ===== END OF HELPER METHODS =====
 
   openDialog(val, row?) {
