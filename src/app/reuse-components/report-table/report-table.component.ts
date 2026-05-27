@@ -590,7 +590,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
    */
   isAmountColumn(columnName: string): boolean {
     const colName = columnName.toLowerCase();
-    return this.amountColumnPatterns.some(pattern => colName.includes(pattern));
+    return this.amountColumnPatterns.some(pattern => colName.includes(pattern.toLowerCase()));
   }
 
   /**
@@ -688,6 +688,11 @@ export class ReportTableComponent implements OnInit, OnChanges {
       width: '400px',
       whiteSpace: 'normal'
     },
+
+    ProductName: {
+      width: '300px',
+      whiteSpace: 'normal'
+    }
   };
 
 
@@ -786,21 +791,21 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
         };
 
-        // html2pdf()
-        //   .set(options)
-        //   .from(element)
-        //   .save()
-        //   .then(() => {
-        //     this.showPrintableReport = false;
-        //     this.spinner.hide();
+        html2pdf()
+          .set(options)
+          .from(element)
+          .save()
+          .then(() => {
+            this.showPrintableReport = false;
+            this.spinner.hide();
 
-        //   })
-        //   .catch(() => {
+          })
+          .catch(() => {
 
-        //     this.showPrintableReport = false;
+            this.showPrintableReport = false;
         this.spinner.hide();
 
-        //   });
+          });
 
       });
     });

@@ -1097,13 +1097,14 @@
       "Address": "Address"
     },
     "footer": {
-      "colspan": 3,
+      "colspan": 4,
       "CashSales": "Cash Sales",
       "CreditSales": "Credit Sales",
       "GrandTotal": "Grand Total"
     }
   },
   "IntimateSale": {
+    "sno":"S No",
     "Vehicle": "Vehicle",
     "invoiceNo": "Invoice No",
     "invoiceDate": "Invoice Date",

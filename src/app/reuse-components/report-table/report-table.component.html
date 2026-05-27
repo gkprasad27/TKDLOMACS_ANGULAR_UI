@@ -109,7 +109,7 @@
                 font-weight: bold;
                 font-size: 7px;
                 color: #000;
-              " [ngStyle]="getColumnStyle(getTranslationKey(body.key))">
+              " [ngStyle]="getColumnStyle(body.key.toString())">
 
               {{ getTranslationKey(body.key) | translate }}
 
