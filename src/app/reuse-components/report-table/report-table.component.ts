@@ -498,89 +498,224 @@ export class ReportTableComponent implements OnInit, OnChanges {
   }
 
   exportToExcel(): void {
-    let columns = [];
-    for (const key in this.tableData[0]) {
-      columns.push(key);
-    }
-    //Create workbook and worksheet
-    let workbook = new Workbook();
-    let worksheet = workbook.addWorksheet('Report', {
-      pageSetup: { fitToPage: true, paperSize: 11, orientation: 'landscape' }
-    });
-    //Add Row and formatting
-    let titleRow = worksheet.addRow([this.routeParam + ' Report']);
-    titleRow.font = { name: 'Calibri', family: 4, size: 16, underline: 'single', bold: true }
-    titleRow.alignment = { horizontal: 'center' }
-    worksheet.mergeCells(1, 1, 2, columns.length);
-    worksheet.addRow([]);
-
-    let headerRows = [];
-    if (this.headerData != null && this.headerData.length) {
-      for (var i: number = 0; i < this.headerData.length; i++) {
-        headerRows[i] = [];
-        let j = 0;
-        for (const key in this.headerData[0]) {
-          headerRows[i][j] = this.headerData[i][key];
-          j++;
-        }
-      }
-    }
-
-    headerRows.forEach(d => {
-      let row = worksheet.addRow(d);
-    });
-
-    //Blank Row 
-    worksheet.addRow([]);
-    //Add Header Row
-
-    let headerRow = worksheet.addRow(columns);
-
-    // Cell Style : Fill and Border
-    headerRow.eachCell((cell, number) => {
-      cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } },
-        cell.font = { bold: true }
-    })
-    worksheet.columns.forEach(col => {
-      col.width = 20;
-    }
-
-    )
-    let rows = [];
-    for (var i: number = 0; i < this.dataSource.filteredData.length; i++) {
-      rows[i] = [];
-      let j = 0;
-      for (const key in this.tableData[0]) {
-        rows[i][j] = this.dataSource.filteredData[i][key];
-        j++;
-      }
-    }
-    rows.forEach(d => {
-      let row = worksheet.addRow(d);
-    });
-    worksheet.addRow([]);
-    //Adding fooer Rows
-    let footerRows = [];
-    if (this.footerData != null && this.footerData.length) {
-      for (var i: number = 0; i < this.footerData.length; i++) {
-        footerRows[i] = [];
-        let j = 0;
-        for (const key in this.footerData[0]) {
-          footerRows[i][j] = this.footerData[i][key];
-          j++;
-        }
-      }
-    }
-
-    footerRows.forEach(d => {
-      let row = worksheet.addRow(d);
-    });
-    //Generate Excel File with given name
-    workbook.xlsx.writeBuffer().then((data) => {
-      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, this.routeParam + 'Report.xlsx');
-    });
+  let columns = [];
+  for (const key in this.tableData[0]) {
+    columns.push(key);
   }
+    //Create workbook and worksheet
+  let workbook = new Workbook();
+  let worksheet = workbook.addWorksheet('Report', {
+    pageSetup: {
+      fitToPage: true,
+      paperSize: 11,
+      orientation: 'landscape'
+    }
+  });
+
+  // Title Row
+  let titleRow = worksheet.addRow([this.routeParam + ' Report']);
+
+  titleRow.font = {
+    name: 'Calibri',
+    family: 4,
+    size: 16,
+    underline: 'single',
+    bold: true
+  };
+
+  titleRow.alignment = {
+    horizontal: 'center'
+  };
+
+  worksheet.mergeCells(1, 1, 2, columns.length);
+
+  worksheet.addRow([]);
+
+  // ================= HEADER DATA =================
+
+  let headerRows: any[] = [];
+
+  // Get headers from runtime config
+  const configHeaders = this.runtimeConfigService.tableColumnsData[this.routeParam]?.headers;
+
+  if (configHeaders && this.headerData != null && this.headerData.length) {
+
+    // Add translated header keys row based on config order
+    const translatedHeaderKeys: string[] = [];
+    for (const key in configHeaders) {
+      const translationKey = this.getTranslationKey(key);
+      // Get the translated value synchronously
+      const translatedValue = this.translate.instant(translationKey);
+      translatedHeaderKeys.push(translatedValue);
+    }
+    headerRows[0] = translatedHeaderKeys;
+
+    // Add header values rows
+    for (let i = 0; i < this.headerData.length; i++) {
+      const headerRow = [];
+      for (const key in configHeaders) {
+        headerRow.push(this.headerData[i][key]);
+      }
+      headerRows[i + 1] = headerRow;
+    }
+  }
+
+  console.log('headerRows', headerRows);
+
+  headerRows.forEach((d, index) => {
+
+    let row = worksheet.addRow(d);
+
+    // Make all header section rows bold
+    row.eachCell((cell) => {
+
+      cell.font = {
+        bold: true
+      };
+
+      cell.border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' }
+      };
+
+      // Optional background color
+      if (index === 0) {
+        cell.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: 'D9EAD3' }
+        };
+      }
+    });
+  });
+
+  // Blank Row
+  worksheet.addRow([]);
+
+  // ================= TABLE HEADER =================
+
+  let headerRow = worksheet.addRow(
+    columns.map(col => this.translate.instant(this.getTranslationKey(col)))
+  );
+
+  headerRow.eachCell((cell) => {
+
+    cell.border = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' }
+    };
+
+    cell.font = {
+      bold: true
+    };
+
+    cell.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'BDD7EE' }
+    };
+  });
+
+  // Column Width
+  worksheet.columns.forEach(col => {
+    col.width = 20;
+  });
+
+  // ================= TABLE DATA =================
+
+  let rows = [];
+
+  for (let i: number = 0; i < this.dataSource.filteredData.length; i++) {
+
+    rows[i] = [];
+
+    let j = 0;
+
+    for (const key in this.tableData[0]) {
+      rows[i][j] = this.dataSource.filteredData[i][key];
+      j++;
+    }
+  }
+
+  rows.forEach(d => {
+    worksheet.addRow(d);
+  });
+
+  worksheet.addRow([]);
+
+  // ================= FOOTER DATA =================
+
+  let footerRows = [];
+
+  // Get footer from runtime config
+  const configFooter = this.runtimeConfigService.tableColumnsData[this.routeParam]?.footer;
+
+  if (configFooter && this.footerData != null && this.footerData.length) {
+
+    for (let i: number = 0; i < this.footerData.length; i++) {
+
+      footerRows[i] = [];
+
+      // Get colspan value if it exists
+      const colspanValue = configFooter['colspan'] || 0;
+
+      // Add empty cells for colspan
+      for (let j = 0; j < colspanValue; j++) {
+        footerRows[i].push('');
+      }
+
+      // Add "Totals" label after colspan
+      if (colspanValue > 0) {
+        footerRows[i].push('Totals');
+      }
+
+      // Build footer row based on config order (excluding colspan)
+      for (const key in configFooter) {
+        if (key !== 'colspan') {
+          footerRows[i].push(this.footerData[i][key]);
+        }
+      }
+    }
+  }
+
+  footerRows.forEach(d => {
+
+    let row = worksheet.addRow(d);
+
+    row.eachCell((cell) => {
+
+      cell.font = {
+        bold: true
+      };
+
+      cell.border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' }
+      };
+    });
+  });
+
+  // ================= EXPORT EXCEL =================
+
+  workbook.xlsx.writeBuffer().then((data) => {
+
+    let blob = new Blob(
+      [data],
+      {
+        type:
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      }
+    );
+
+    fs.saveAs(blob, this.routeParam + 'Report.xlsx');
+  });
+}
 
 
   // ===== HELPER METHODS FOR PDF EXPORT =====
@@ -662,6 +797,15 @@ export class ReportTableComponent implements OnInit, OnChanges {
     //     header[key] !== null &&
     //     header[key] !== ''
     // );
+  }
+
+  /**
+   * Get keys from footer object using runtime config
+   */
+  getSortedFooterKeys(): string[] {
+    // Order from common config
+    const orderedKeys = Object.keys(this.runtimeConfigService.tableColumnsData[this.routeParam].footer);
+    return orderedKeys;
   }
 
   keepOrder = () => 0;
