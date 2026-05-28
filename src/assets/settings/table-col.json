@@ -708,17 +708,18 @@
     }
   },
   "BankReconciliation": {
-    "Credit": "Credit",
+    "sno": "S No",
+    "InvoiceNo": "Tr.Number",
+    "Partyname": "Partyname",
     "Date": "Date",
     "Debit": "Debit",
-    "InvoiceNo": "Invoice No",
-    "Partyname": "Partyname",
+    "Credit": "Credit",
     "headers": {
       "AccountName": "Account Name",
       "LedgerCode": "Ledger Code",
-      "ReportCreatedBy": "Report Created By",
       "ReportDate": "Report Date",
-      "ToDate": "To Date"
+      "ToDate": "To Date",
+      "ReportCreatedBy": "Report Created By"
     }
   },
   "salesReturn": {
@@ -1010,22 +1011,21 @@
   },
   "AccountLedger": {
     "sno": "S No",
+    "Date": "Date",
     "VoucherNo": "Voucher No",
     "description": "Description",
-    "Date": "Date",
-    "Credit": "Credit",
     "Debit": "Debit",
+    "Credit": "Credit",
     "headers": {
+      "GSTIN": "GSTIN",
       "LedgeCode": "Ledger Code",
-      "fromDate": "From Date",
-      "LedgerName": "Ledger Name",
-      "ToDate": "To Date",
-      "GSTIN": "Gstin",
-      "location": "Location",
       "ReportDate": "Report Date",
+      "LedgerName": "Ledger Name",
+      "fromDate": "From Date",
+      "ToDate": "To Date",
       "OpeningBalance": "Opening Balance",
-      "ReportCreatedBy": "Report Created By",
-      "ClosingBalance": "Closing Balance"
+      "ClosingBalance": "Closing Balance",
+      "ReportCreatedBy": "Report Created By"
     },
     "footer": {
       "colspan": 3,
@@ -1170,86 +1170,6 @@
       "TOTVUYYURU": "Total Vuyyuru"
     }
   },
-  "BranchWiseStockStatementLtrs": {
-    "productCode": "Product Code",
-    "productName": "Product Name",
-    "supplierId": "Supplier Id",
-    "SupplierName": "Supplier Name",
-    "AUTONAGAR2": "Autonagar 2",
-    "AUTONAGARES": "Autonagars",
-    "AUTONAGARGODOWN": "Autonagar Godown",
-    "CHINAKAKANI": "Chinakakani",
-    "GANGURU": "Ganguru",
-    "GOLLAPUDI": "Gollapudi",
-    "GUDIVADA": "Gudivada",
-    "KANCHIKACHERLA": "Kanchikacherla",
-    "NIDAMANURU": "Nidamanuru",
-    "SALESWING": "Saleswing",
-    "TIRUVURU": "Tiruvuru",
-    "VUYYURU": "Vuyyuru",
-    "headers": {
-      "CreatedBy": "Created By",
-      "ReportDate": "Report Date",
-      "FromDate": "From Date",
-      "ToDate": "To Date"
-    },
-    "footer": {
-      "colspan": 4,
-      "TOTAUTONAGAR2": "Total Autonagar 2",
-      "TOTAUTONAGARES": "Total Autonagars",
-      "TOTAUTONAGARGODOWN": "Total Autonagar Godown",
-      "TOTCHINAKAKANI": "Total Chinakakani",
-      "TOTGANGURU": "Total Ganguru",
-      "TOTGOLLAPUDI": "Total Gollapudi",
-      "TOTGUDIVADA": "Total Gudivada",
-      "TOTKANCHIKACHERLA": "Total Kanchikacherla",
-      "TOTNIDAMANURU": "Total Nidamanuru",
-      "TOTSALESWING": "Total Saleswing",
-      "TOTTIRUVURU": "Total Tiruvuru",
-      "TOTVUYYURU": "Total Vuyyuru"
-    }
-  },
-  "BranchWiseMonthlySalesByLiters": {
-    "productCode": "Product Code",
-    "productName": "Product Name",
-    "SupplierName": "Supplier Name",
-    "AN1": "AN 1",
-    "AN2": "AN 2",
-    "CHKN": "CHKN",
-    "GDV": "GDV",
-    "GNG": "GNG",
-    "GP": "GP",
-    "KNCH": "KNCH",
-    "NDMR": "NDMR",
-    "SW": "SW",
-    "TIR": "TIR",
-    "VUY": "VUY",
-    "headers": {
-      "BranchName": "Branch Name",
-      "CreatedBy": "Created By",
-      "FromDate": "From Date",
-      "GSTIN": "GSTIN",
-      "Phone": "Phone",
-      "ReportDate": "Report Date",
-      "ToDate": "To Date",
-      "Address": "Address"
-    },
-    "footer": {
-      "colspan": 2,
-      "TotAutonagar1": "Total Autonagar 1",
-      "TotAutonagar2": "Total Autonagar 2",
-      "TotChinakakani": "Total Chinakakani",
-      "TotGanguru": "Total Ganguru",
-      "TotGollapudi": "Total Gollapudi",
-      "TotGudivada": "Total Gudivada",
-      "TotKanchikacherla": "Total Kanchikacherla",
-      "TotNidamanuru": "Total Nidamanuru",
-      "TotSalesWing": "Total SalesWing",
-      "TotTiruvuru": "Total Tiruvuru",
-      "TotVuyyuru": "Total Vuyyuru",
-      "TotalLabel": "Grand Total"
-    }
-  },
   "ProductMonthWisePurchaseLtrs": {
     "Name": "Name",
     "supplierName": "Supplier Name",
@@ -1345,6 +1265,7 @@
     }
   },
   "ClosingBalance": {
+    "sno": "S No",
     "credits": "Credits",
     "ledgerCode": "Ledger Code",
     "ledgerName": "Ledger Name",
@@ -1438,33 +1359,6 @@
       "FromDate": "From Date",
       "ReportDate": "Report Date",
       "ToDate": "To Date"
-    }
-  },
-  "FourColumnCashBook": {
-    "InvoiceNo": "Invoice No",
-    "LedgerName": "Ledger Name",
-    "Payments": "Payments",
-    "Receipts": "Receipts",
-    "Debit": "Debit",
-    "Credit": "Credit",
-    "headers": {
-      "BranchName": "Branch Name",
-      "CreatedBy": "Created By",
-      "GSTNo": "GST No",
-      "OpeningBalance": "Opening Balance",
-      "ReportDate": "Report Date",
-      "FromDate": "From Date",
-      "ToDate": "To Date",
-      "Address": "Address"
-    },
-    "footer": {
-      "colspan": 0,
-      "BalanceBD": "Balance B/D",
-      "TotalType": "Total",
-      "TotalPayments": "Total Payments",
-      "TotalReceipts": "Total Receipts",
-      "TotalDebits": "Total Debits",
-      "TotalCredits": "Total Credits"
     }
   },
   "StockValuation": {
@@ -1676,6 +1570,170 @@
       "ToDate": "To Date"
     }
   },
+
+
+
+
+  "BranchWiseMonthlySalesByLiters": {
+    "productCode": "Product Code",
+    "productName": "Product Name",
+    "SupplierName": "Supplier Name",
+    "GP": "GP",
+    "NDMR": "NDMR",
+    "CHKN": "CHKN",
+    "AN1": "AN 1",
+    "GNG": "GNG",
+    "AN2": "AN 2",
+    "GDV": "GDV",
+    "KNCH": "KNCH",
+    "SW": "SW",
+    "TIR": "TIR",
+    "VUY": "VUY",
+    "headers": {
+      "BranchName": "Branch Name",
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "GSTIN": "GSTIN",
+      "Phone": "Phone",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date",
+      "Address": "Address"
+    },
+    "footer": {
+      "colspan": 2,
+      "TotAutonagar1": "Total Autonagar 1",
+      "TotAutonagar2": "Total Autonagar 2",
+      "TotChinakakani": "Total Chinakakani",
+      "TotGanguru": "Total Ganguru",
+      "TotGollapudi": "Total Gollapudi",
+      "TotGudivada": "Total Gudivada",
+      "TotKanchikacherla": "Total Kanchikacherla",
+      "TotNidamanuru": "Total Nidamanuru",
+      "TotSalesWing": "Total SalesWing",
+      "TotTiruvuru": "Total Tiruvuru",
+      "TotVuyyuru": "Total Vuyyuru",
+      "TotalLabel": "Grand Total"
+    }
+  },
+
+
+  "FourColumnCashBook": {
+    "sno": "S No",
+    "InvoiceNo": "Tr.Number",
+    "LedgerName": "Ledger Name",
+    "Debit": "Debit",
+    "Credit": "Credit",
+    "Receipts": "Receipts",
+    "Payments": "Payments",
+    "headers": {
+      "OpeningBalance": "Opening Balance",
+      "BranchName": "Branch Name",
+      "GSTNo": "GST No",
+      "Address": "Address",
+      "ReportDate": "Report Date",
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "CreatedBy": "Created By"
+    },
+    "footer": {
+      "colspan": 2,
+      "TotalDebits": "Total Debits",
+      "TotalCredits": "Total Credits",
+      "TotalReceipts": "Total Receipts",
+      "TotalPayments": "Total Payments"
+    }
+  },
+  "BranchWiseStockStatementLtrs": {
+    "sno": "S No",
+    "productCode": "Product Code",
+    "productName": "Product Name",
+    "supplierId": "Supplier Id",
+    "SupplierName": "Supplier Name",
+    "AUTONAGAR2": "Autonagar 2",
+    "AUTONAGARES": "Autonagars",
+    "AUTONAGARGODOWN": "Autonagar Godown",
+    "CHINAKAKANI": "Chinakakani",
+    "GANGURU": "Ganguru",
+    "GOLLAPUDI": "Gollapudi",
+    "GUDIVADA": "Gudivada",
+    "KANCHIKACHERLA": "Kanchikacherla",
+    "NIDAMANURU": "Nidamanuru",
+    "SALESWING": "Saleswing",
+    "TIRUVURU": "Tiruvuru",
+    "VUYYURU": "Vuyyuru",
+    "headers": {
+      "CreatedBy": "Created By",
+      "ReportDate": "Report Date",
+      "FromDate": "From Date",
+      "ToDate": "To Date"
+    },
+    "footer": {
+      "colspan": 4,
+      "TOTAUTONAGAR2": "Total Autonagar 2",
+      "TOTAUTONAGARES": "Total Autonagars",
+      "TOTAUTONAGARGODOWN": "Total Autonagar Godown",
+      "TOTCHINAKAKANI": "Total Chinakakani",
+      "TOTGANGURU": "Total Ganguru",
+      "TOTGOLLAPUDI": "Total Gollapudi",
+      "TOTGUDIVADA": "Total Gudivada",
+      "TOTKANCHIKACHERLA": "Total Kanchikacherla",
+      "TOTNIDAMANURU": "Total Nidamanuru",
+      "TOTSALESWING": "Total Saleswing",
+      "TOTTIRUVURU": "Total Tiruvuru",
+      "TOTVUYYURU": "Total Vuyyuru"
+    }
+  },
+  "AccountLedgerDieselReport": {
+    "title": "Account Ledger Diesel Report"
+  },
+  "einvoice": {
+    "sno": "Sno",
+    "SupplyTypeCode": "Supply Type Code",
+    "BranchCode": "Branch Code",
+    "IgstOnIntra": "IGST On Intra",
+    "DocumentType": "Document Type",
+    "DocumentNumber": "Document Number",
+    "DocumentDate": "Document Date",
+    "BuyerGSTIN": "Buyer GSTIN",
+    "BuyerLegalName": "Buyer Legal Name",
+    "BuyerTradeName": "Buyer Trade Name",
+    "BuyerPOS": "Buyer POS",
+    "BuyerAddr1": "Buyer Addr1",
+    "BuyerAddr2": "Buyer Addr2",
+    "BuyerLocation": "Buyer Location",
+    "BuyerPinCode": "Buyer Pin Code",
+    "BuyerState": "Buyer State",
+    "BuyerPhoneNumber": "Buyer Phone Number",
+    "BuyerEmailId": "Buyer Email Id",
+    "ProductDescription": "Product Description",
+    "HSNcode": "HSN code",
+    "Quantity": "Quantity",
+    "FreeQuantity": "Free Quantity",
+    "Unit": "Unit",
+    "UnitPrice": "Unit Price",
+    "GrossAmount": "Gross Amount",
+    "Discount": "Discount",
+    "PreTaxValue": "Pre Tax Value",
+    "Taxablevalue": "Taxable value",
+    "GSTRate": "GST Rate",
+    "SgstAmt": "SGST Amount",
+    "cgstAmt": "CGST Amount",
+    "IgstAmt": "IGST Amount",
+    "ItemTotal": "Item Total",
+    "TotalTaxablevalue": "Total Taxable value",
+    "TSgstAmt": "Total SGST Amount",
+    "TCgstAmt": "Total CGST Amount",
+    "TIgstAmt": "Total IGST Amount",
+    "TotalInvoicevalue": "Total Invoice value"
+  },
+
+
+
+
+
+
+
+
   "ledger": {
     "title": " Ledger",
     "code": "Code",

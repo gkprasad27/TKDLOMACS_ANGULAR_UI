@@ -1912,7 +1912,7 @@
     "Credit": "Credit",
     "Date": "Date",
     "Debit": "Debit",
-    "InvoiceNo": "Invoice No",
+    "InvoiceNo": "Tr.Number",
     "sno": "S No",
     "Partyname": "Partyname",
     "AccountName": "Account Name",

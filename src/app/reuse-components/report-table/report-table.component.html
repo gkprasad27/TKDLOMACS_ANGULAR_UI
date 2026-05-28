@@ -1,209 +1,4 @@
-<!-- ===== PRINTABLE TEMPLATE (Hidden until PDF export) ===== -->
-<div id="printableReport" *ngIf="showPrintableReport">
 
-  <div style="
-      padding: 6px;
-      font-family: Arial, sans-serif;
-      background: #ffffff;
-      color: #000;
-      width: 100%;
-    ">
-
-    <!-- HEADER -->
-    <div style="
-        text-align: center;
-        margin-bottom: 10px;
-        padding-bottom: 6px;
-        border-bottom: 1px solid #d9d9d9;
-      ">
-
-      <div style="
-          font-size: 10px;
-          font-weight: bold;
-          margin-bottom: 3px;
-        ">
-
-        THE KRISHNA DISTRICT LORRY OWNERS MUTUALLY AIDED CO-OPERATIVE STORES LIMITED
-
-      </div>
-
-      <div style="
-          font-size: 9px;
-          font-weight: 600;
-        ">
-
-        {{ ( routeParam + '.title') | translate }} Report
-
-      </div>
-
-    </div>
-
-    <!-- REPORT SUMMARY -->
-    @if(headerData && headerData.length) {
-
-    <div style="
-        margin-bottom: 10px;
-        font-size: 8px;
-      ">
-
-
-      <div class="row" style="margin-bottom: 2px;">
-
-      @for(header of runtimeConfigService.tableColumnsData[routeParam].headers | keyvalue: keepOrder; track header.key) {
-
-
-        <div class="col-6">
-
-          <span style="
-              display: inline-block;
-              margin-bottom: 2px;
-            ">
-
-            <strong style="
-                min-width: 95px;
-                display: inline-block;
-              ">
-
-              {{ getTranslationKey(header.key) | translate }}
-
-            </strong>
-
-            : {{ headerData[0][header.key] }}
-
-          </span>
-
-        </div>
-
-      }
-
-      </div>
-
-
-    </div>
-
-    }
-
-    <!-- TABLE -->
-    @if(dataSource?.data && dataSource.data.length) {
-
-    <table style="
-        width: 100%;
-        border-collapse: collapse;
-        table-layout: fixed;
-        font-family: Arial, sans-serif;
-        font-size: 7px;
-      ">
-
-      <!-- TABLE HEADER -->
-      <thead style="display: table-header-group;">
-
-        <tr style="background: #fafafa;">
-
-          @for(body of runtimeConfigService.tableColumnsData[routeParam] | keyvalue: keepOrder; track body) {
-
-          @if(body.key != 'headers' && body.key != 'footer') {
-            <th style="
-                border: 0.4px solid #d9d9d9;
-                padding: 3px 2px;
-                text-align: center;
-                font-weight: bold;
-                font-size: 7px;
-                color: #000;
-              " [ngStyle]="getColumnStyle(body.key.toString())">
-
-              {{ getTranslationKey(body.key) | translate }}
-
-            </th>
-          }
-
-          }
-
-        </tr>
-
-      </thead>
-
-      <!-- TABLE BODY -->
-      <tbody>
-
-        @for(row of dataSource.filteredData; track $index; let i = $index) {
-
-        <tr>
-
-          @for(column of getDisplayedColumns(); track column) {
-
-          <td style="
-              border: 0.4px solid #d9d9d9;
-              padding: 3px 2px;
-              font-size: 7px;
-              color: #000;
-            " [ngStyle]="getColumnStyle(column)" [style.textAlign]="getColumnAlignment(column)">
-
-            {{ formatCellValue(row[column], column) }}
-
-          </td>
-
-          }
-
-        </tr>
-
-        }
-
-        <!-- FOOTER -->
-        @if(runtimeConfigService.tableColumnsData[routeParam]?.footer) {
-
-        <tr>
-
-          <td [attr.colspan]="runtimeConfigService.tableColumnsData[routeParam].footer.colspan" style="
-              border: 0.4px solid #d9d9d9;
-              padding: 3px 2px;
-              font-size: 7px;
-            ">
-          </td>
-
-          <td style="
-              border: 0.4px solid #d9d9d9;
-              padding: 3px 2px;
-              font-size: 7px;
-              font-weight: bold;
-              text-align: center;
-            ">
-
-            Totals
-
-          </td>
-
-          @for(foot of runtimeConfigService.tableColumnsData[routeParam].footer | keyvalue: keepOrder; track foot) {
-
-          @if (foot.key != 'colspan') {
-
-          <td style="
-              border: 0.4px solid #d9d9d9;
-              padding: 3px 2px;
-              font-size: 7px;
-              font-weight: bold;
-            " [style.textAlign]="getColumnAlignment(foot['key'].toString())">
-
-            {{ footerData[0][foot['key']] || '0.00' }}
-
-          </td>
-
-          }
-
-          }
-
-        </tr>
-
-        }
-
-      </tbody>
-
-    </table>
-
-    }
-
-  </div>
-
-</div>
 <!-- ===== MAIN UI ===== -->
 <mat-card>
   <div class="table-boarder">
@@ -489,3 +284,209 @@
     </div>
   </div>
 </mat-card>
+<!-- ===== PRINTABLE TEMPLATE (Hidden until PDF export) ===== -->
+<div id="printableReport" *ngIf="showPrintableReport">
+
+  <div style="
+      padding: 6px;
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #000;
+      width: 100%;
+    ">
+
+    <!-- HEADER -->
+    <div style="
+        text-align: center;
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid #d9d9d9;
+      ">
+
+      <div style="
+          font-size: 10px;
+          font-weight: bold;
+          margin-bottom: 3px;
+        ">
+
+        THE KRISHNA DISTRICT LORRY OWNERS MUTUALLY AIDED CO-OPERATIVE STORES LIMITED
+
+      </div>
+
+      <div style="
+          font-size: 9px;
+          font-weight: 600;
+        ">
+
+        {{ ( routeParam + '.title') | translate }} Report
+
+      </div>
+
+    </div>
+
+    <!-- REPORT SUMMARY -->
+    @if(headerData && headerData.length) {
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 8px;
+      ">
+
+
+      <div class="row" style="margin-bottom: 2px;">
+
+      @for(header of runtimeConfigService.tableColumnsData[routeParam].headers | keyvalue: keepOrder; track header.key) {
+
+
+        <div class="col-6">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              {{ getTranslationKey(header.key) | translate }}
+
+            </strong>
+
+            : {{ headerData[0][header.key] }}
+
+          </span>
+
+        </div>
+
+      }
+
+      </div>
+
+
+    </div>
+
+    }
+
+    <!-- TABLE -->
+    @if(dataSource?.data && dataSource.data.length) {
+
+    <table style="
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-family: Arial, sans-serif;
+        font-size: 7px;
+      ">
+
+      <!-- TABLE HEADER -->
+      <thead style="display: table-header-group;">
+
+        <tr style="background: #fafafa;">
+
+          @for(body of runtimeConfigService.tableColumnsData[routeParam] | keyvalue: keepOrder; track body) {
+
+          @if(body.key != 'headers' && body.key != 'footer') {
+            <th style="
+                border: 0.4px solid #d9d9d9;
+                padding: 3px 2px;
+                text-align: center;
+                font-weight: bold;
+                font-size: 7px;
+                color: #000;
+              " [ngStyle]="getColumnStyle(body.key.toString())">
+
+              {{ getTranslationKey(body.key) | translate }}
+
+            </th>
+          }
+
+          }
+
+        </tr>
+
+      </thead>
+
+      <!-- TABLE BODY -->
+      <tbody>
+
+        @for(row of dataSource.filteredData; track $index; let i = $index) {
+
+        <tr>
+
+          @for(column of getDisplayedColumns(); track column) {
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              color: #000;
+            " [ngStyle]="getColumnStyle(column)" [style.textAlign]="getColumnAlignment(column)">
+
+            {{ formatCellValue(row[column], column) }}
+
+          </td>
+
+          }
+
+        </tr>
+
+        }
+
+        <!-- FOOTER -->
+        @if(runtimeConfigService.tableColumnsData[routeParam]?.footer) {
+
+        <tr>
+
+          <td [attr.colspan]="runtimeConfigService.tableColumnsData[routeParam].footer.colspan" style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+            ">
+          </td>
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+              text-align: center;
+            ">
+
+            Totals
+
+          </td>
+
+          @for(foot of runtimeConfigService.tableColumnsData[routeParam].footer | keyvalue: keepOrder; track foot) {
+
+          @if (foot.key != 'colspan') {
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="getColumnAlignment(foot['key'].toString())">
+
+            {{ footerData[0][foot['key']] || '0.00' }}
+
+          </td>
+
+          }
+
+          }
+
+        </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+    }
+
+  </div>
+
+</div>

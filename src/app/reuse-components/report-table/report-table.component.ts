@@ -137,7 +137,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
   private amountColumnPatterns = [
     'debit', 'credit', 'qty', 'amount', 'total', 'price', 'value',
     'opening', 'closing', 'received', 'issued', 'balance', 'liters', 'CreditTotal', 'DebitToal',
-    'cashqty', 'creditqty', 'totalqty', 'cashamt', 'creditamt', 'totalamt', 'CashSales', 'CreditSales', 'GrandTotal'
+    'cashqty', 'creditqty', 'totalqty', 'cashamt', 'creditamt', 'totalamt', 'CashSales', 'CreditSales', 'GrandTotal', 'TotalDebits',
+     'TotalCredits', 'TotalReceipts', 'TotalPayments', 'Receipts', 'Payments'
   ];
 
   private dateColumnPatterns = ['date', 'invoicedate', 'plandate', 'targetdate'];
