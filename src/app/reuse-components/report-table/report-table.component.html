@@ -1,4 +1,3 @@
-
 <!-- ===== MAIN UI ===== -->
 <mat-card>
   <div class="table-boarder">
@@ -335,7 +334,8 @@
 
       <div class="row" style="margin-bottom: 2px;">
 
-      @for(header of runtimeConfigService.tableColumnsData[routeParam].headers | keyvalue: keepOrder; track header.key) {
+        @for(header of runtimeConfigService.tableColumnsData[routeParam].headers | keyvalue: keepOrder; track
+        header.key) {
 
 
         <div class="col-6">
@@ -360,7 +360,7 @@
 
         </div>
 
-      }
+        }
 
       </div>
 
@@ -388,7 +388,7 @@
           @for(body of runtimeConfigService.tableColumnsData[routeParam] | keyvalue: keepOrder; track body) {
 
           @if(body.key != 'headers' && body.key != 'footer') {
-            <th style="
+          <th style="
                 border: 0.4px solid #d9d9d9;
                 padding: 3px 2px;
                 text-align: center;
@@ -397,9 +397,9 @@
                 color: #000;
               " [ngStyle]="getColumnStyle(body.key.toString())">
 
-              {{ getTranslationKey(body.key) | translate }}
+            {{ getTranslationKey(body.key) | translate }}
 
-            </th>
+          </th>
           }
 
           }
@@ -481,9 +481,549 @@
 
         }
 
+        @if(routeParam == '24HrsSaleValue') {
+        <tr>
+
+          <td colspan="5" style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+              text-align: end;
+            ">
+
+            Lubes Total:
+
+          </td>
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['LubesTotal'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['LubesTotal1'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['LubesTotal2'] || '0.00' }}
+
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td colspan="5" style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+              text-align: end;
+            ">
+
+            Cash Rec:
+
+          </td>
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['CashReceipt'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['CreditAmountTotal'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['GrandTotalAmount1'] || '0.00' }}
+
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td colspan="5" style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+              text-align: end;
+            ">
+
+            CNG:
+
+          </td>
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['TotalAmount'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['TotalAmount1'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['TotalAmount2'] || '0.00' }}
+
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td colspan="5" style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+              text-align: end;
+            ">
+
+            Grand Total:
+
+          </td>
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['GrandCashAmount'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['GrandCreditAmount'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['GrandTotalAmount'] || '0.00' }}
+
+          </td>
+
+        </tr>
+        }
+
+
+        @if(routeParam == 'IntimateSale') {
+        <tr>
+
+          <td colspan="7" style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+              text-align: end;
+            ">
+
+            Total :
+
+          </td>
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['TotalQty'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['NPTotalQty'] || '0.00' }}
+
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td colspan="7" style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+              text-align: end;
+            ">
+
+            Total Purchases :
+
+          </td>
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['TotalPurchase1'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['TotalPurchase'] || '0.00' }}
+
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td colspan="7" style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+              text-align: end;
+            ">
+
+            Credit:
+
+          </td>
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['Credit1'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['Credit'] || '0.00' }}
+
+          </td>
+
+
+        </tr>
+
+        <tr>
+
+          <td colspan="7" style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+              text-align: end;
+            ">
+
+            Balance/Due :
+
+          </td>
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['BalanceDue1'] || '0.00' }}
+
+          </td>
+
+
+          <td style="
+              border: 0.4px solid #d9d9d9;
+              padding: 3px 2px;
+              font-size: 7px;
+              font-weight: bold;
+            " [style.textAlign]="'right'">
+
+            {{ footerData[0]['BalanceDue'] || '0.00' }}
+
+          </td>
+
+
+        </tr>
+        }
+
+
       </tbody>
 
     </table>
+
+    }
+
+
+    @if(routeParam == 'DailySales') {
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 8px;
+      ">
+
+
+      <div class="row" style="margin-bottom: 2px;">
+
+
+        <div class="col-6">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Cash Amount:
+
+            </strong>
+
+           <span style="padding-left: 10px;"> {{ footerData[0]['CashAmount'] }}</span>
+
+          </span>
+
+        </div>
+
+
+        <div class="col-3">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Lubes-Cash:
+
+            </strong>
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['Lubes-Cash'] }}</span>
+
+          </span>
+
+        </div>
+
+
+
+        <div class="col-3">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Credit:
+
+            </strong>
+
+           <span style="padding-left: 10px;"> {{ footerData[0]['Credit Amount'] }}</span>
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+     <div style="
+        margin-bottom: 10px;
+        font-size: 8px;
+      ">
+
+
+      <div class="row" style="margin-bottom: 2px;">
+
+
+        <div class="col-6">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Credit Amount:
+
+            </strong>
+
+           <span style="padding-left: 10px;"> {{ footerData[0]['Lubes-Credit'] }}</span>
+
+          </span>
+
+        </div>
+
+
+        <div class="col-3">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Lubes-Cash:
+
+            </strong>
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['Spares-Cash'] }}</span>
+
+          </span>
+
+        </div>
+
+
+
+        <div class="col-3">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Credit:
+
+            </strong>
+
+           <span style="padding-left: 10px;"> {{ footerData[0]['Spares-Credit'] }}</span>
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
 
     }
 

@@ -138,7 +138,9 @@ export class ReportTableComponent implements OnInit, OnChanges {
     'debit', 'credit', 'qty', 'amount', 'total', 'price', 'value',
     'opening', 'closing', 'received', 'issued', 'balance', 'liters', 'CreditTotal', 'DebitToal',
     'cashqty', 'creditqty', 'totalqty', 'cashamt', 'creditamt', 'totalamt', 'CashSales', 'CreditSales', 'GrandTotal', 'TotalDebits',
-     'TotalCredits', 'TotalReceipts', 'TotalPayments', 'Receipts', 'Payments'
+    'TotalCredits', 'TotalReceipts', 'TotalPayments', 'Receipts', 'Payments', 'Closing', 'Density', 'InvoiceSales', 'Mtr.Diff', 'Opening', 'TotalSales', 'Variation', 'Consumption', 'Pump', 'Testing',
+    'OpeningQty', 'InwardQty', 'OutwardQty', 'ClosingQty', 'PQty', 'nPAmount', 'pAmount', 'TotalPurchase', 'NPTotalQty', 'Credit', 'BalanceDue', 'TotalQty',
+    "PumpNo", 'GrossAmount', 'SlipNo', 'TotalAmount', 'GrossAmount'
   ];
 
   private dateColumnPatterns = ['date', 'invoicedate', 'plandate', 'targetdate'];
@@ -249,17 +251,17 @@ export class ReportTableComponent implements OnInit, OnChanges {
   getDisplayedColumns(): string[] {
     if (this.tableData != null) {
 
-        // Get ordered keys from config
+      // Get ordered keys from config
       const columnOrder = Object.keys(
         this.runtimeConfigService.tableColumnsData[this.routeParam]
       ).filter(key => key !== 'headers' && key !== 'footer');
-      
+
       return this.columnDefinitions
-      .filter(cd => cd.hide)
-      .sort((a, b) => {
-        return columnOrder.indexOf(a.def) - columnOrder.indexOf(b.def);
-      })
-      .map(cd => cd.def);
+        .filter(cd => cd.hide)
+        .sort((a, b) => {
+          return columnOrder.indexOf(a.def) - columnOrder.indexOf(b.def);
+        })
+        .map(cd => cd.def);
 
       // return this.columnDefinitions.filter(cd => cd.hide).map(cd => cd.def);
     }
@@ -499,199 +501,155 @@ export class ReportTableComponent implements OnInit, OnChanges {
   }
 
   exportToExcel(): void {
-  let columns = [];
-  for (const key in this.tableData[0]) {
-    columns.push(key);
-  }
-    //Create workbook and worksheet
-  let workbook = new Workbook();
-  let worksheet = workbook.addWorksheet('Report', {
-    pageSetup: {
-      fitToPage: true,
-      paperSize: 11,
-      orientation: 'landscape'
+
+    let columns: string[] = [];
+
+    for (const key in this.tableData[0]) {
+      columns.push(key);
     }
-  });
 
-  // Title Row
-  let titleRow = worksheet.addRow([this.routeParam + ' Report']);
+    // ================= WORKBOOK =================
 
-  titleRow.font = {
-    name: 'Calibri',
-    family: 4,
-    size: 16,
-    underline: 'single',
-    bold: true
-  };
+    let workbook = new Workbook();
 
-  titleRow.alignment = {
-    horizontal: 'center'
-  };
-
-  worksheet.mergeCells(1, 1, 2, columns.length);
-
-  worksheet.addRow([]);
-
-  // ================= HEADER DATA =================
-
-  let headerRows: any[] = [];
-
-  // Get headers from runtime config
-  const configHeaders = this.runtimeConfigService.tableColumnsData[this.routeParam]?.headers;
-
-  if (configHeaders && this.headerData != null && this.headerData.length) {
-
-    // Add translated header keys row based on config order
-    const translatedHeaderKeys: string[] = [];
-    for (const key in configHeaders) {
-      const translationKey = this.getTranslationKey(key);
-      // Get the translated value synchronously
-      const translatedValue = this.translate.instant(translationKey);
-      translatedHeaderKeys.push(translatedValue);
-    }
-    headerRows[0] = translatedHeaderKeys;
-
-    // Add header values rows
-    for (let i = 0; i < this.headerData.length; i++) {
-      const headerRow = [];
-      for (const key in configHeaders) {
-        headerRow.push(this.headerData[i][key]);
-      }
-      headerRows[i + 1] = headerRow;
-    }
-  }
-
-  console.log('headerRows', headerRows);
-
-  headerRows.forEach((d, index) => {
-
-    let row = worksheet.addRow(d);
-
-    // Make all header section rows bold
-    row.eachCell((cell) => {
-
-      cell.font = {
-        bold: true
-      };
-
-      cell.border = {
-        top: { style: 'thin' },
-        left: { style: 'thin' },
-        bottom: { style: 'thin' },
-        right: { style: 'thin' }
-      };
-
-      // Optional background color
-      if (index === 0) {
-        cell.fill = {
-          type: 'pattern',
-          pattern: 'solid',
-          fgColor: { argb: 'D9EAD3' }
-        };
+    let worksheet = workbook.addWorksheet('Report', {
+      pageSetup: {
+        fitToPage: true,
+        paperSize: 11,
+        orientation: 'landscape'
       }
     });
-  });
 
-  // Blank Row
-  worksheet.addRow([]);
+    // ================= TITLE =================
 
-  // ================= TABLE HEADER =================
+    let titleRow = worksheet.addRow([
+      this.routeParam + ' Report'
+    ]);
 
-  let headerRow = worksheet.addRow(
-    columns.map(col => this.translate.instant(this.getTranslationKey(col)))
-  );
-
-  headerRow.eachCell((cell) => {
-
-    cell.border = {
-      top: { style: 'thin' },
-      left: { style: 'thin' },
-      bottom: { style: 'thin' },
-      right: { style: 'thin' }
-    };
-
-    cell.font = {
+    titleRow.font = {
+      name: 'Calibri',
+      family: 4,
+      size: 16,
+      underline: 'single',
       bold: true
     };
 
-    cell.fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'BDD7EE' }
+    titleRow.alignment = {
+      horizontal: 'center'
     };
-  });
 
-  // Column Width
-  worksheet.columns.forEach(col => {
-    col.width = 20;
-  });
+    worksheet.mergeCells(1, 1, 2, columns.length);
 
-  // ================= TABLE DATA =================
+    worksheet.addRow([]);
 
-  let rows = [];
+    // ================= HEADER DATA =================
 
-  for (let i: number = 0; i < this.dataSource.filteredData.length; i++) {
+    const configHeaders =
+      this.runtimeConfigService.tableColumnsData[this.routeParam]?.headers;
 
-    rows[i] = [];
+    if (
+      configHeaders &&
+      this.headerData != null &&
+      this.headerData.length
+    ) {
 
-    let j = 0;
+      const headerKeys = Object.keys(configHeaders);
 
-    for (const key in this.tableData[0]) {
-      rows[i][j] = this.dataSource.filteredData[i][key];
-      j++;
-    }
-  }
+      // First object
+      const headerObj = this.headerData[0];
 
-  rows.forEach(d => {
-    worksheet.addRow(d);
-  });
+      // 2 fields per row
+      for (let i = 0; i < headerKeys.length; i += 2) {
 
-  worksheet.addRow([]);
+        const leftKey = headerKeys[i];
+        const rightKey = headerKeys[i + 1];
 
-  // ================= FOOTER DATA =================
+        // ================= DATA ROW =================
 
-  let footerRows = [];
+        let valueRowData =
+          new Array(columns.length).fill('');
 
-  // Get footer from runtime config
-  const configFooter = this.runtimeConfigService.tableColumnsData[this.routeParam]?.footer;
+        // Left side
+        if (leftKey) {
 
-  if (configFooter && this.footerData != null && this.footerData.length) {
+          const leftLabel = this.translate.instant(
+            this.getTranslationKey(leftKey)
+          );
 
-    for (let i: number = 0; i < this.footerData.length; i++) {
-
-      footerRows[i] = [];
-
-      // Get colspan value if it exists
-      const colspanValue = configFooter['colspan'] || 0;
-
-      // Add empty cells for colspan
-      for (let j = 0; j < colspanValue; j++) {
-        footerRows[i].push('');
-      }
-
-      // Add "Totals" label after colspan
-      if (colspanValue > 0) {
-        footerRows[i].push('Totals');
-      }
-
-      // Build footer row based on config order (excluding colspan)
-      for (const key in configFooter) {
-        if (key !== 'colspan') {
-          footerRows[i].push(this.footerData[i][key]);
+          valueRowData[0] =
+            `${leftLabel}: ${headerObj[leftKey] ?? ''}`;
         }
+
+        // Right side -> LAST COLUMN
+        if (rightKey) {
+
+          const rightLabel = this.translate.instant(
+            this.getTranslationKey(rightKey)
+          );
+
+          valueRowData[columns.length - 1] =
+            `${rightLabel}: ${headerObj[rightKey] ?? ''}`;
+        }
+
+        let valueRow =
+          worksheet.addRow(valueRowData);
+
+        // ================= SPACE ROW =================
+
+        worksheet.addRow([]);
+
+        // ================= STYLING =================
+
+        valueRow.eachCell((cell) => {
+
+          cell.font = {
+            bold: true
+          };
+
+          cell.border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+          };
+
+          cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'D9EAD3' }
+          };
+
+          cell.alignment = {
+            vertical: 'middle',
+            horizontal: 'left'
+          };
+        });
+
+        // Left alignment
+        valueRow.getCell(1).alignment = {
+          horizontal: 'left',
+          vertical: 'middle'
+        };
+
+        // Right alignment
+        valueRow.getCell(columns.length).alignment = {
+          horizontal: 'right',
+          vertical: 'middle'
+        };
       }
     }
-  }
 
-  footerRows.forEach(d => {
+    // ================= TABLE HEADER =================
 
-    let row = worksheet.addRow(d);
+    let headerRow = worksheet.addRow(
+      columns.map(col =>
+        this.translate.instant(
+          this.getTranslationKey(col)
+        )
+      )
+    );
 
-    row.eachCell((cell) => {
-
-      cell.font = {
-        bold: true
-      };
+    headerRow.eachCell((cell) => {
 
       cell.border = {
         top: { style: 'thin' },
@@ -699,24 +657,287 @@ export class ReportTableComponent implements OnInit, OnChanges {
         bottom: { style: 'thin' },
         right: { style: 'thin' }
       };
+
+      cell.font = {
+        bold: true
+      };
+
+      cell.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'BDD7EE' }
+      };
+
+      cell.alignment = {
+        horizontal: 'center',
+        vertical: 'middle'
+      };
     });
-  });
 
-  // ================= EXPORT EXCEL =================
+    // ================= COLUMN WIDTH =================
 
-  workbook.xlsx.writeBuffer().then((data) => {
+    worksheet.columns.forEach(col => {
+      col.width = 20;
+    });
 
-    let blob = new Blob(
-      [data],
-      {
-        type:
-          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    // ================= TABLE DATA =================
+
+    let rows: any[] = [];
+
+    for (
+      let i = 0;
+      i < this.dataSource.filteredData.length;
+      i++
+    ) {
+
+      rows[i] = [];
+
+      let j = 0;
+
+      for (const key in this.tableData[0]) {
+
+        rows[i][j] =
+          this.dataSource.filteredData[i][key];
+
+        j++;
       }
-    );
+    }
 
-    fs.saveAs(blob, this.routeParam + 'Report.xlsx');
-  });
-}
+    rows.forEach(d => {
+      worksheet.addRow(d);
+    });
+
+    worksheet.addRow([]);
+
+    // ================= FOOTER DATA =================
+
+    let footerRows: any[] = [];
+
+    const configFooter =
+      this.runtimeConfigService.tableColumnsData[this.routeParam]?.footer;
+
+    if (
+      configFooter &&
+      this.footerData != null &&
+      this.footerData.length
+    ) {
+
+      for (let i = 0; i < this.footerData.length; i++) {
+
+        footerRows[i] = [];
+
+        const colspanValue =
+          configFooter['colspan'] || 0;
+
+        // Empty cells
+        for (let j = 0; j < colspanValue; j++) {
+          footerRows[i].push('');
+        }
+
+        // Totals label
+        if (colspanValue > 0) {
+          footerRows[i].push('Totals');
+        }
+
+        // Footer values
+        for (const key in configFooter) {
+
+          if (key !== 'colspan') {
+
+            footerRows[i].push(
+              this.footerData[i][key]
+            );
+          }
+        }
+      }
+    }
+
+    // ================= FOOTER STYLE =================
+
+    footerRows.forEach(d => {
+
+      let row = worksheet.addRow(d);
+
+      row.eachCell((cell) => {
+
+        cell.font = {
+          bold: true
+        };
+
+        cell.border = {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' },
+          right: { style: 'thin' }
+        };
+      });
+    });
+
+    if (this.routeParam === '24HrsSaleValue') {
+      let newFooterRows: any[] = [];
+      newFooterRows[0] = [];
+      newFooterRows[1] = [];
+      newFooterRows[2] = [];
+      newFooterRows[3] = [];
+
+      const colspanValue = 4;
+      // Empty cells
+      for (let j = 0; j < colspanValue; j++) {
+        newFooterRows[0].push('');
+      }
+      // Totals label
+      if (colspanValue > 0) {
+        newFooterRows[0].push('Lubes Total:');
+      }
+      newFooterRows[0].push(this.footerData[0]['LubesTotal']);
+      newFooterRows[0].push(this.footerData[0]['LubesTotal1']);
+      newFooterRows[0].push(this.footerData[0]['LubesTotal2']); 
+
+         // Empty cells
+      for (let j = 0; j < colspanValue; j++) {
+        newFooterRows[1].push('');
+      }
+      // Totals label
+      if (colspanValue > 0) {
+        newFooterRows[1].push('Cash Rec:');
+      }
+      newFooterRows[1].push(this.footerData[0]['CashReceipt']);
+      newFooterRows[1].push(this.footerData[0]['CreditAmountTotal']);
+      newFooterRows[1].push(this.footerData[0]['GrandTotalAmount1']);
+
+            // Empty cells
+      for (let j = 0; j < colspanValue; j++) {
+        newFooterRows[2].push('');
+      }
+      // Totals label
+      if (colspanValue > 0) {
+        newFooterRows[2].push('CNG:');
+      }
+      newFooterRows[2].push(this.footerData[0]['TotalAmount']);
+      newFooterRows[2].push(this.footerData[0]['TotalAmount1']);
+      newFooterRows[2].push(this.footerData[0]['TotalAmount2']);
+
+              // Empty cells
+      for (let j = 0; j < colspanValue; j++) {
+        newFooterRows[3].push('');
+      }
+      // Totals label
+      if (colspanValue > 0) {
+        newFooterRows[3].push('Grand Total:');
+      }
+      newFooterRows[3].push(this.footerData[0]['GrandCashAmount']);
+      newFooterRows[3].push(this.footerData[0]['GrandCreditAmount']);
+      newFooterRows[3].push(this.footerData[0]['GrandTotalAmount']);
+      newFooterRows.forEach(d => {
+
+        let row = worksheet.addRow(d);
+
+        row.eachCell((cell) => {
+
+          cell.font = {
+            bold: true
+          };
+
+          cell.border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+          };
+        });
+      });
+    }
+
+    if (this.routeParam === 'IntimateSale') {
+      let newFooterRows: any[] = [];
+      newFooterRows[0] = [];
+      newFooterRows[1] = [];
+      newFooterRows[2] = [];
+      newFooterRows[3] = [];
+
+      const colspanValue = 7;
+      // Empty cells
+      for (let j = 0; j < colspanValue; j++) {
+        newFooterRows[0].push('');
+      }
+      // Totals label
+      if (colspanValue > 0) {
+        newFooterRows[0].push('Total:');
+      }
+      newFooterRows[0].push(this.footerData[0]['TotalQty']);
+      newFooterRows[0].push(this.footerData[0]['NPTotalQty']);
+
+         // Empty cells
+      for (let j = 0; j < colspanValue; j++) {
+        newFooterRows[1].push('');
+      }
+      // Totals label
+      if (colspanValue > 0) {
+        newFooterRows[1].push('Total Purchases:');
+      }
+      newFooterRows[1].push(this.footerData[0]['TotalPurchase1']);
+      newFooterRows[1].push(this.footerData[0]['TotalPurchase']);
+
+            // Empty cells
+      for (let j = 0; j < colspanValue; j++) {
+        newFooterRows[2].push('');
+      }
+      // Totals label
+      if (colspanValue > 0) {
+        newFooterRows[2].push('Credit:');
+      }
+      newFooterRows[2].push(this.footerData[0]['Credit1']);
+      newFooterRows[2].push(this.footerData[0]['Credit']);
+
+              // Empty cells
+      for (let j = 0; j < colspanValue; j++) {
+        newFooterRows[3].push('');
+      }
+      // Totals label
+      if (colspanValue > 0) {
+        newFooterRows[3].push('Balance/Due:');
+      }
+      newFooterRows[3].push(this.footerData[0]['BalanceDue1']);
+      newFooterRows[3].push(this.footerData[0]['BalanceDue']);
+      newFooterRows.forEach(d => {
+
+        let row = worksheet.addRow(d);
+
+        row.eachCell((cell) => {
+
+          cell.font = {
+            bold: true
+          };
+
+          cell.border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+          };
+        });
+      });
+    }
+
+
+    // ================= EXPORT =================
+
+    workbook.xlsx.writeBuffer().then((data) => {
+
+      let blob = new Blob(
+        [data],
+        {
+          type:
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        }
+      );
+
+      fs.saveAs(
+        blob,
+        this.routeParam + 'Report.xlsx'
+      );
+    });
+  }
 
 
   // ===== HELPER METHODS FOR PDF EXPORT =====
@@ -837,6 +1058,11 @@ export class ReportTableComponent implements OnInit, OnChanges {
     ProductName: {
       width: '300px',
       whiteSpace: 'normal'
+    },
+
+    LedgerName: {
+      width: '300px',
+      whiteSpace: 'normal'
     }
   };
 
@@ -948,7 +1174,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
           .catch(() => {
 
             this.showPrintableReport = false;
-        this.spinner.hide();
+            this.spinner.hide();
 
           });
 
