@@ -1272,30 +1272,29 @@
     }
   },
   "StockVerification": {
-    "BookStock": "Book Stock",
-    "Excess": "Excess",
-    "Name": "Name",
-    "PhyStock": "Physical Stock",
+    "sno":"S No",
     "ProductCode": "Product Code",
-    "Sales": "Sales",
+    "Name": "Product Name",
+    "PhyStock": "Phy Stock",
+    "Excess": "Excess",
     "Short": "Short",
+    "BookStock": "Book Stock",
+    "Sales": "Sales",
     "StockTransfer": "Stock Transfer",
     "headers": {
       "BranchName": "Branch Name",
-      "CreatedBy": "Created By",
-      "FromDate": "From Date",
       "GSTIN": "GSTIN",
-      "Phone": "Phone",
+      "Address": "Address",
       "ReportDate": "Report Date",
+      "FromDate": "From Date",
       "ToDate": "To Date",
-      "Address": "Address"
+      "CreatedBy": "Created By"
     },
     "footer": {
-      "colspan": 2,
-      "GrandSTRQtyTotal": "Grand STR Qty Total",
-      "GrandSaleTotal": "Grand Sale Total",
+      "colspan": 5,
       "GrandTotal": "Grand Total",
-      "TotalType": "Total"
+      "GrandSaleTotal": "Grand Sale Total",
+      "GrandSTRQtyTotal": "Grand STR Qty Total"
     }
   },
   "StockLedger": {
@@ -1317,35 +1316,6 @@
       "colspan": 3,
       "TotalIssued": "Total Issued",
       "TotalReceived": "Total Received",
-      "TotalType": "Total"
-    }
-  },
-  "Salesanalysisbybranch": {
-    "Amount": "Amount",
-    "Liters": "Liters",
-    "ProductCode": "Product Code",
-    "ProductGroupName": "Product Group Name",
-    "ProductName": "Product Name",
-    "Qty": "Qty",
-    "UnitName": "Unit Name",
-    "headers": {
-      "Address": "Address",
-      "BranchName": "Branch Name",
-      "CreatedBy": "Created By",
-      "FromDate": "From Date",
-      "GSTIN": "GSTIN",
-      "Phone": "Phone",
-      "ReportDate": "Report Date",
-      "ToDate": "To Date"
-    },
-    "footer": {
-      "colspan": 1,
-      "CashSales": "Cash Sales",
-      "CreditSales": "Credit Sales",
-      "GrandTotal": "Grand Total",
-      "GrossAmount": "Gross Amount",
-      "LubesTotals": "Lubes Totals",
-      "TotalQty": "Total Qty",
       "TotalType": "Total"
     }
   },
@@ -1697,8 +1667,8 @@
     "invoiceNo": "Invoice No",
     "invoiceDate": "Invoice Date",
     "PQty": "P Qty",
-    "nPAmount": "NP Amount",
     "pAmount": "P Amount",
+    "nPAmount": "NP Amount",
     "Qty": "Qty",
     "Amount": "Amount",
     "headers": {
@@ -1743,9 +1713,9 @@
     "vehicleRegNo": "Vehicle No",
     "InvoiceDate": "Invoice Date",
     "invoiceNo": "Invoice No",
-    "branchName": "Branch Name",
-    "productName": "Product Name",
+    "BranchName": "Branch Name",
     "productCode": "Product Code",
+    "productName": "Product Name",
     "pumpNo": "Pump No",
     "qty": "Quantity",
     "grossAmount": "Gross Amount",
@@ -1755,6 +1725,33 @@
       "FromDate": "From Date",
       "ToDate": "To Date",
       "CreatedBy": "Created By"
+    }
+  },
+
+  "Salesanalysisbybranch": {
+    "sno": "S No",
+    "BillDate": "Bill Date",
+    "BillNo": "Bill No",
+    "Code": "Code",
+    "ItemName": "Item Name",
+    "UOM":"UOM",
+    "Qty": "Qty",
+    "Liters": "Liters",
+    "Sales": "Sales",
+    "headers": {
+      "GSTIN": "GSTIN",
+      "BranchName": "Branch Name",
+      "Address": "Address",
+      "ReportDate": "Report Date",
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "CreatedBy": "Created By"
+    },
+    "footer": {
+      "colspan": 5,
+      "Qty": "Qty",
+      "Liters": "Liters",
+      "Amount": "Amount"
     }
   }
 }

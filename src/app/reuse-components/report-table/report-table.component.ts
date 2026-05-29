@@ -140,7 +140,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     'cashqty', 'creditqty', 'totalqty', 'cashamt', 'creditamt', 'totalamt', 'CashSales', 'CreditSales', 'GrandTotal', 'TotalDebits',
     'TotalCredits', 'TotalReceipts', 'TotalPayments', 'Receipts', 'Payments', 'Closing', 'Density', 'InvoiceSales', 'Mtr.Diff', 'Opening', 'TotalSales', 'Variation', 'Consumption', 'Pump', 'Testing',
     'OpeningQty', 'InwardQty', 'OutwardQty', 'ClosingQty', 'PQty', 'nPAmount', 'pAmount', 'TotalPurchase', 'NPTotalQty', 'Credit', 'BalanceDue', 'TotalQty',
-    "PumpNo", 'GrossAmount', 'SlipNo', 'TotalAmount', 'GrossAmount'
+    "PumpNo", 'GrossAmount', 'SlipNo', 'CNG', 'GrossAmount', 'Sales', 'BookStock', 'PhyStock', 'Excess', 'Short', 'StockTransfer'
   ];
 
   private dateColumnPatterns = ['date', 'invoicedate', 'plandate', 'targetdate'];
@@ -790,10 +790,10 @@ export class ReportTableComponent implements OnInit, OnChanges {
         newFooterRows[0].push('Lubes Total:');
       }
       newFooterRows[0].push(this.footerData[0]['LubesTotal']);
-      newFooterRows[0].push(this.footerData[0]['LubesTotal1']);
-      newFooterRows[0].push(this.footerData[0]['LubesTotal2']); 
+      newFooterRows[0].push(this.footerData[0]['CreditAmountTotal']);
+      newFooterRows[0].push(this.footerData[0]['LubesTotal2']);
 
-         // Empty cells
+      // Empty cells
       for (let j = 0; j < colspanValue; j++) {
         newFooterRows[1].push('');
       }
@@ -802,10 +802,10 @@ export class ReportTableComponent implements OnInit, OnChanges {
         newFooterRows[1].push('Cash Rec:');
       }
       newFooterRows[1].push(this.footerData[0]['CashReceipt']);
-      newFooterRows[1].push(this.footerData[0]['CreditAmountTotal']);
-      newFooterRows[1].push(this.footerData[0]['GrandTotalAmount1']);
+      newFooterRows[1].push(this.footerData[0]['CashReceipt1']);
+      newFooterRows[1].push(this.footerData[0]['CashReceipt2']);
 
-            // Empty cells
+      // Empty cells
       for (let j = 0; j < colspanValue; j++) {
         newFooterRows[2].push('');
       }
@@ -813,11 +813,11 @@ export class ReportTableComponent implements OnInit, OnChanges {
       if (colspanValue > 0) {
         newFooterRows[2].push('CNG:');
       }
-      newFooterRows[2].push(this.footerData[0]['TotalAmount']);
-      newFooterRows[2].push(this.footerData[0]['TotalAmount1']);
-      newFooterRows[2].push(this.footerData[0]['TotalAmount2']);
+      newFooterRows[2].push(this.footerData[0]['CNG']);
+      newFooterRows[2].push(this.footerData[0]['CNG1']);
+      newFooterRows[2].push(this.footerData[0]['CNG2']);
 
-              // Empty cells
+      // Empty cells
       for (let j = 0; j < colspanValue; j++) {
         newFooterRows[3].push('');
       }
@@ -855,7 +855,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       newFooterRows[2] = [];
       newFooterRows[3] = [];
 
-      const colspanValue = 7;
+      const colspanValue = 6;
       // Empty cells
       for (let j = 0; j < colspanValue; j++) {
         newFooterRows[0].push('');
@@ -867,7 +867,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       newFooterRows[0].push(this.footerData[0]['TotalQty']);
       newFooterRows[0].push(this.footerData[0]['NPTotalQty']);
 
-         // Empty cells
+      // Empty cells
       for (let j = 0; j < colspanValue; j++) {
         newFooterRows[1].push('');
       }
@@ -878,7 +878,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       newFooterRows[1].push(this.footerData[0]['TotalPurchase1']);
       newFooterRows[1].push(this.footerData[0]['TotalPurchase']);
 
-            // Empty cells
+      // Empty cells
       for (let j = 0; j < colspanValue; j++) {
         newFooterRows[2].push('');
       }
@@ -889,7 +889,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       newFooterRows[2].push(this.footerData[0]['Credit1']);
       newFooterRows[2].push(this.footerData[0]['Credit']);
 
-              // Empty cells
+      // Empty cells
       for (let j = 0; j < colspanValue; j++) {
         newFooterRows[3].push('');
       }
@@ -917,6 +917,56 @@ export class ReportTableComponent implements OnInit, OnChanges {
           };
         });
       });
+    }
+
+    if (this.routeParam === 'DailySales') {
+
+      let newFooterRows: any[] = [];
+      newFooterRows[0] = [];
+      newFooterRows[1] = [];
+
+      // Totals label
+      newFooterRows[0].push('');
+      newFooterRows[0].push('Cash Amount:');
+      newFooterRows[0].push(this.footerData[0]['CashAmount']);
+      newFooterRows[0].push('');
+      newFooterRows[0].push('Lubes-Cash:');
+      newFooterRows[0].push(this.footerData[0]['Lubes-Cash']);
+      newFooterRows[0].push('');
+      newFooterRows[0].push('Credit:');
+      newFooterRows[0].push(this.footerData[0]['Lubes-Credit']);
+
+      // Totals label
+      newFooterRows[1].push('');
+      newFooterRows[1].push('Credit Amount:');
+      newFooterRows[1].push(this.footerData[0]['Credit Amount']);
+      newFooterRows[1].push('');
+      newFooterRows[1].push('Spares-Cash:');
+      newFooterRows[1].push(this.footerData[0]['Spares-Cash']);
+      newFooterRows[1].push('');
+      newFooterRows[1].push('Credit:');
+      newFooterRows[1].push(this.footerData[0]['Spares-Credit']);
+      
+      newFooterRows.forEach(d => {
+
+        let row = worksheet.addRow(d);
+
+        row.eachCell((cell) => {
+
+          cell.font = {
+            bold: true
+          };
+
+          cell.border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+          };
+        });
+      });
+
+
     }
 
 
@@ -1061,7 +1111,17 @@ export class ReportTableComponent implements OnInit, OnChanges {
     },
 
     LedgerName: {
-      width: '300px',
+      width: '200px',
+      whiteSpace: 'normal'
+    },
+
+    ItemName: {
+      width: '250px',
+      whiteSpace: 'normal'
+    },
+
+    Name: {
+      width: '250px',
       whiteSpace: 'normal'
     }
   };
