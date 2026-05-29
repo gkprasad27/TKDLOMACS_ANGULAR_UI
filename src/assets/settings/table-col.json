@@ -1009,30 +1009,6 @@
     "role": "Role",
     "active": "Active"
   },
-  "AccountLedger": {
-    "sno": "S No",
-    "Date": "Date",
-    "VoucherNo": "Voucher No",
-    "description": "Description",
-    "Debit": "Debit",
-    "Credit": "Credit",
-    "headers": {
-      "GSTIN": "GSTIN",
-      "LedgeCode": "Ledger Code",
-      "ReportDate": "Report Date",
-      "LedgerName": "Ledger Name",
-      "fromDate": "From Date",
-      "ToDate": "To Date",
-      "OpeningBalance": "Opening Balance",
-      "ClosingBalance": "Closing Balance",
-      "ReportCreatedBy": "Report Created By"
-    },
-    "footer": {
-      "colspan": 3,
-      "CreditTotal": "Credit Total",
-      "DebitToal": "Debit Total"
-    }
-  },
 
   "24HrsSaleValue6AmTo6Am": {
     "sno": "S No",
@@ -1630,6 +1606,30 @@
 
 
 
+  "AccountLedger": {
+    "sno": "S No",
+    "Date": "Date",
+    "VoucherNo": "Voucher No",
+    "description": "Description",
+    "Debit": "Debit",
+    "Credit": "Credit",
+    "headers": {
+      "GSTIN": "GSTIN",
+      "LedgeCode": "Ledger Code",
+      "ReportDate": "Report Date",
+      "LedgerName": "Ledger Name",
+      "fromDate": "From Date",
+      "ToDate": "To Date",
+      "OpeningBalance": "Opening Balance",
+      "ClosingBalance": "Closing Balance",
+      "ReportCreatedBy": "Report Created By"
+    },
+    "footer": {
+      "colspan": 3,
+      "DebitToal": "Debit Total",
+      "CreditTotal": "Credit Total"
+    }
+  },
   "24HrsSaleValue": {
     "sno": "S No",
     "productCode": "Product Code",

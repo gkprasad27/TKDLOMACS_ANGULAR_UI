@@ -1179,7 +1179,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
           });
 
       });
-    });
+    }, 1000);
 
 
   }

@@ -1258,27 +1258,6 @@
     "userId": "User Id",
     "shiftId": "Shift Id"
   },
-  "AccountLedger": {
-    "title": "Account Ledger",
-    "LedgeCode": "Ledger Code",
-    "fromDate": "From Date",
-    "LedgerName": "Ledger Name",
-    "ToDate": "To Date",
-    "GSTIN": "Gstin",
-    "location": "Location",
-    "ReportDate": "Report Date",
-    "OpeningBalance": "Opening Balance",
-    "ReportCreatedBy": "Report Created By",
-    "ClosingBalance": "Closing Balance",
-    "sno": "Sno",
-    "Date": "Date",
-    "VoucherNo": "Voucher No",
-    "description": "Description",
-    "Debit": "Debit",
-    "Credit": "Credit",
-    "CreditTotal":"Credit Total",
-    "DebitToal": "Debit Total"
-  },
   "bankreceipt": {
     "title": "Bank Receipt",
     "voucherNo": "Voucher No",
@@ -2131,6 +2110,27 @@
 
 
 
+  "AccountLedger": {
+    "title": "Account Ledger",
+    "LedgeCode": "Ledger Code",
+    "fromDate": "From Date",
+    "LedgerName": "Ledger Name",
+    "ToDate": "To Date",
+    "GSTIN": "GSTIN",
+    "location": "Location",
+    "ReportDate": "Report Date",
+    "OpeningBalance": "Opening Balance",
+    "ReportCreatedBy": "Report Created By",
+    "ClosingBalance": "Closing Balance",
+    "sno": "Sno",
+    "Date": "Date",
+    "VoucherNo": "Voucher No",
+    "description": "Description",
+    "Debit": "Debit",
+    "Credit": "Credit",
+    "CreditTotal":"Credit Total",
+    "DebitToal": "Debit Total"
+  },
   "24HrsSaleValue": {
     "title": "24 Hrs Sale Value",
     "productCode": "Product Code",
