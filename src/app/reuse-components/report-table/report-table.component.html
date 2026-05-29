@@ -303,7 +303,7 @@
       ">
 
       <div style="
-          font-size: 10px;
+          font-size: 15px;
           font-weight: bold;
           margin-bottom: 3px;
         ">
@@ -313,7 +313,7 @@
       </div>
 
       <div style="
-          font-size: 9px;
+          font-size: 14px;
           font-weight: 600;
         ">
 
@@ -328,17 +328,17 @@
 
     <div style="
         margin-bottom: 10px;
-        font-size: 8px;
+        font-size: 13px;
       ">
 
 
-      <div class="row" style="margin-bottom: 2px;">
+      <div style="margin-bottom: 2px;display: flex; flex-wrap: wrap;">
 
         @for(header of runtimeConfigService.tableColumnsData[routeParam].headers | keyvalue: keepOrder; track
         header.key) {
 
 
-        <div class="col-6">
+        <div style="flex: 0 0 50%;">
 
           <span style="
               display: inline-block;
@@ -377,7 +377,7 @@
         border-collapse: collapse;
         table-layout: fixed;
         font-family: Arial, sans-serif;
-        font-size: 7px;
+        font-size: 12px;
       ">
 
       <!-- TABLE HEADER -->
@@ -393,7 +393,7 @@
                 padding: 3px 2px;
                 text-align: center;
                 font-weight: bold;
-                font-size: 7px;
+                font-size: 12px;
                 color: #000;
               " [ngStyle]="getColumnStyle(body.key.toString())">
 
@@ -420,7 +420,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               color: #000;
             " [ngStyle]="getColumnStyle(column)" [style.textAlign]="getColumnAlignment(column)">
 
@@ -442,14 +442,14 @@
           <td [attr.colspan]="runtimeConfigService.tableColumnsData[routeParam].footer.colspan" style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
             ">
           </td>
 
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
               text-align: center;
             ">
@@ -465,7 +465,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="getColumnAlignment(foot['key'].toString())">
 
@@ -487,7 +487,7 @@
           <td colspan="5" style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
               text-align: end;
             ">
@@ -499,7 +499,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -511,7 +511,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -523,7 +523,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -538,7 +538,7 @@
           <td colspan="5" style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
               text-align: end;
             ">
@@ -550,7 +550,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -562,7 +562,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -574,7 +574,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -589,7 +589,7 @@
           <td colspan="5" style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
               text-align: end;
             ">
@@ -601,7 +601,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -613,7 +613,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -625,7 +625,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -640,7 +640,7 @@
           <td colspan="5" style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
               text-align: end;
             ">
@@ -652,7 +652,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -664,7 +664,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -676,7 +676,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -694,7 +694,7 @@
           <td colspan="7" style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
               text-align: end;
             ">
@@ -706,7 +706,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -718,7 +718,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -733,7 +733,7 @@
           <td colspan="7" style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
               text-align: end;
             ">
@@ -745,7 +745,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -757,7 +757,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -772,7 +772,7 @@
           <td colspan="7" style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
               text-align: end;
             ">
@@ -784,7 +784,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -796,7 +796,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -812,7 +812,7 @@
           <td colspan="7" style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
               text-align: end;
             ">
@@ -824,7 +824,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -836,7 +836,7 @@
           <td style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
-              font-size: 7px;
+              font-size: 12px;
               font-weight: bold;
             " [style.textAlign]="'right'">
 
@@ -860,14 +860,14 @@
 
     <div style="
         margin-bottom: 10px;
-        font-size: 8px;
+        font-size: 13px;
       ">
 
 
-      <div class="row" style="margin-bottom: 2px;">
+      <div style="margin-bottom: 2px;display: flex;">
 
 
-        <div class="col-6">
+        <div style="flex: 0 0 50%;">
 
           <span style="
               display: inline-block;
@@ -890,7 +890,7 @@
         </div>
 
 
-        <div class="col-3">
+        <div style="flex: 0 0 50%;">
 
           <span style="
               display: inline-block;
@@ -914,7 +914,7 @@
 
 
 
-        <div class="col-3">
+        <div style="flex: 0 0 25%;">
 
           <span style="
               display: inline-block;
@@ -943,14 +943,14 @@
 
      <div style="
         margin-bottom: 10px;
-        font-size: 8px;
+        font-size: 13px;
       ">
 
 
-      <div class="row" style="margin-bottom: 2px;">
+      <div style="margin-bottom: 2px;display: flex;">
 
 
-        <div class="col-6">
+        <div style="flex: 0 0 50%;">
 
           <span style="
               display: inline-block;
@@ -973,7 +973,7 @@
         </div>
 
 
-        <div class="col-3">
+        <div style="flex: 0 0 25%;">
 
           <span style="
               display: inline-block;
@@ -997,7 +997,7 @@
 
 
 
-        <div class="col-3">
+        <div  style="flex: 0 0 25%;">
 
           <span style="
               display: inline-block;

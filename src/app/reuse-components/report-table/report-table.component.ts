@@ -140,8 +140,57 @@ export class ReportTableComponent implements OnInit, OnChanges {
     'cashqty', 'creditqty', 'totalqty', 'cashamt', 'creditamt', 'totalamt', 'CashSales', 'CreditSales', 'GrandTotal', 'TotalDebits',
     'TotalCredits', 'TotalReceipts', 'TotalPayments', 'Receipts', 'Payments', 'Closing', 'Density', 'InvoiceSales', 'Mtr.Diff', 'Opening', 'TotalSales', 'Variation', 'Consumption', 'Pump', 'Testing',
     'OpeningQty', 'InwardQty', 'OutwardQty', 'ClosingQty', 'PQty', 'nPAmount', 'pAmount', 'TotalPurchase', 'NPTotalQty', 'Credit', 'BalanceDue', 'TotalQty',
-    "PumpNo", 'GrossAmount', 'SlipNo', 'CNG', 'GrossAmount', 'Sales', 'BookStock', 'PhyStock', 'Excess', 'Short', 'StockTransfer'
+    "PumpNo", 'GrossAmount', 'SlipNo', 'CNG', 'GrossAmount', 'Sales', 'BookStock', 'PhyStock', 'Excess', 'Short', 'StockTransfer',
+    "TotalInvoiceSales", 'TotalTesting', 'TotalTotalSales', 'TotalVariation'
   ];
+
+
+  /**
+   * Simplified PDF export using html2pdf
+   * Converts the static HTML template to PDF
+   */
+  columnConfig: any = {
+
+    sno: {
+      width: '50px',
+      whiteSpace: 'nowrap'
+    },
+
+    description: {
+      width: '400px',
+      whiteSpace: 'normal'
+    },
+
+    ProductName: {
+      width: '300px',
+      whiteSpace: 'normal'
+    },
+
+    LedgerName: {
+      width: '200px',
+      whiteSpace: 'normal'
+    },
+
+    ItemName: {
+      width: '250px',
+      whiteSpace: 'normal'
+    },
+
+    Name: {
+      width: '250px',
+      whiteSpace: 'normal'
+    },
+
+    Pump: {
+      width: '50px',
+      whiteSpace: 'normal'
+    },
+
+    PumpNo: {
+      width: '50px',
+      whiteSpace: 'normal'
+    }
+  };
 
   private dateColumnPatterns = ['date', 'invoicedate', 'plandate', 'targetdate'];
 
@@ -1089,42 +1138,6 @@ export class ReportTableComponent implements OnInit, OnChanges {
     return Object.keys(footer).filter(key => footer[key] !== '');
   }
 
-  /**
-   * Simplified PDF export using html2pdf
-   * Converts the static HTML template to PDF
-   */
-  columnConfig: any = {
-
-    sno: {
-      width: '50px',
-      whiteSpace: 'nowrap'
-    },
-
-    description: {
-      width: '400px',
-      whiteSpace: 'normal'
-    },
-
-    ProductName: {
-      width: '300px',
-      whiteSpace: 'normal'
-    },
-
-    LedgerName: {
-      width: '200px',
-      whiteSpace: 'normal'
-    },
-
-    ItemName: {
-      width: '250px',
-      whiteSpace: 'normal'
-    },
-
-    Name: {
-      width: '250px',
-      whiteSpace: 'normal'
-    }
-  };
 
 
   getColumnStyle(column: string): any {
@@ -1165,7 +1178,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
       setTimeout(() => {
 
-        const element = document.getElementById('printableReport');
+        const element = document.getElementById('printableReport').innerHTML;
 
         if (!element) {
 
@@ -1222,24 +1235,33 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
         };
 
-        html2pdf()
-          .set(options)
-          .from(element)
-          .save()
-          .then(() => {
-            this.showPrintableReport = false;
-            this.spinner.hide();
+        // html2pdf()
+        //   .set(options)
+        //   .from(element)
+        //   .save()
+        //   .then(() => {
+        //     this.showPrintableReport = false;
+        //     this.spinner.hide();
 
-          })
-          .catch(() => {
+        //   })
+        //   .catch(() => {
 
-            this.showPrintableReport = false;
-            this.spinner.hide();
+        //     this.showPrintableReport = false;
+        //     this.spinner.hide();
 
-          });
+        //   });
+
+          
+      var w = window.open();
+      // var html = document.getElementById('invoicePrintData').innerHTML;
+      w.document.body.innerHTML = element;
+      this.showPrintableReport = false;
+      this.spinner.hide();
+
+      w.print();
 
       });
-    }, 1000);
+    }, 500);
 
 
   }

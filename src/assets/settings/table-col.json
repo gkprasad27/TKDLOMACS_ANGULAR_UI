@@ -1626,9 +1626,9 @@
     "Closing": "Closing",
     "Consumption": "Consumption",
     "Density": "Density",
-    "InvoiceSales": "Invoice Sales",
     "Mtr.Diff": "Meter Difference",
     "Opening": "Opening",
+    "InvoiceSales": "Invoice Sales",
     "Testing": "Testing",
     "TotalSales": "Total Sales",
     "Variation": "Variation",
@@ -1641,12 +1641,18 @@
       "ReportDate": "Report Date",
       "ToDate": "To Date",
       "Address": "Address"
+    },
+    "footer": {
+      "colspan": 7,
+      "TotalInvoiceSales": "TotalInvoiceSales",
+      "TotalTesting": "TotalTesting",
+      "TotalTotalSales": "TotalTotalSales",
+      "TotalVariation": "TotalVariation"
     }
   },
   "24HrsSalesStock": {
     "sno": "S No",
     "Product": "Product",
-    "ProductName": "Product Name",
     "OpeningQty": "Opening Qty",
     "InwardQty": "Inward Qty",
     "OutwardQty": "Outward Qty",
@@ -1713,7 +1719,7 @@
     "vehicleRegNo": "Vehicle No",
     "InvoiceDate": "Invoice Date",
     "invoiceNo": "Invoice No",
-    "BranchName": "Branch Name",
+    "branchName": "Branch Name",
     "productCode": "Product Code",
     "productName": "Product Name",
     "pumpNo": "Pump No",
@@ -1725,6 +1731,11 @@
       "FromDate": "From Date",
       "ToDate": "To Date",
       "CreatedBy": "Created By"
+    },
+    "footer": {
+      "colspan": 7,
+      "TotalQty": "TotalQty",
+      "TotalGrossAmount": "TotalGrossAmount"
     }
   },
 

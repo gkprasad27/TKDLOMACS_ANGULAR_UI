@@ -2238,6 +2238,7 @@
   "VehicalEnquiry": {
     "title": "Vehical Enquiry",
     "InvoiceDate": "Date",
+    "branchName": "Branch",
     "BranchName": "Branch",
     "grossAmount": "Gross Amount",
     "invoiceNo": "Invoice No",
