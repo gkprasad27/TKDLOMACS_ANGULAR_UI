@@ -129,7 +129,7 @@
         @if(routeParam=='Shift') {
         <mat-form-field class="col-3">
           <mat-label>{{ 'report.selectedReport' | translate }}</mat-label>
-          <mat-select required formControlName="selectedReport">
+          <mat-select required formControlName="selectedReport" (selectionChange)="selectionChange()">
             <mat-option *ngFor="let report of Reports" [value]="report.id">
               {{report.reportName}}
             </mat-option>
@@ -206,7 +206,7 @@
     <div class="m-2 table-boarder" *ngIf="headerData && headerData.length">
       <div class="row">
 
-        @for(header of runtimeConfigService.tableColumnsData[routeParam].headers | keyvalue: keepOrder; track header) {
+        @for(header of getHeaders | keyvalue: keepOrder; track header) {
         <div class="col-6">
           <span style="margin-right: 30px; margin-bottom: 5px;">
             <strong style="min-width: 150px; display: inline-block;">{{ getTranslationKey(header.key)
@@ -317,7 +317,7 @@
           font-weight: 600;
         ">
 
-        {{ ( routeParam + '.title') | translate }} Report
+        {{ routeParam === 'Shift' ? getShiftName : (routeParam + '.title') | translate : '' }}  Report
 
       </div>
 
@@ -335,7 +335,7 @@
       <div style="margin-bottom: 2px; display: flex; flex-wrap: wrap;">
 
   @for (
-    header of runtimeConfigService.tableColumnsData[routeParam].headers | keyvalue: keepOrder;
+    header of getHeaders | keyvalue: keepOrder;
     track header.key;
     let last = $last;
     let count = $count
@@ -391,7 +391,7 @@
 
         <tr style="background: #fafafa;">
 
-          @for(body of runtimeConfigService.tableColumnsData[routeParam] | keyvalue: keepOrder; track body) {
+          @for(body of getBody | keyvalue: keepOrder; track body) {
 
           @if(body.key != 'headers' && body.key != 'footer') {
           <th style="
@@ -439,11 +439,11 @@
         }
 
         <!-- FOOTER -->
-        @if(runtimeConfigService.tableColumnsData[routeParam]?.footer) {
+        @if(getFooter) {
 
         <tr>
 
-          <td [attr.colspan]="runtimeConfigService.tableColumnsData[routeParam].footer.colspan" style="
+          <td [attr.colspan]="getFooter.colspan" style="
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
               font-size: 12px;
@@ -462,7 +462,7 @@
 
           </td>
 
-          @for(foot of runtimeConfigService.tableColumnsData[routeParam].footer | keyvalue: keepOrder; track foot) {
+          @for(foot of getFooter | keyvalue: keepOrder; track foot) {
 
           @if (foot.key != 'colspan') {
 
@@ -1028,8 +1028,325 @@
 
     </div>
 
+    }
+
+
+
+    @if(routeParam == 'Shift' && dateForm.get('selectedReport')?.value == '6') {
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Total:
+
+            </strong>
+
+           <span style="padding-left: 10px;"> {{ footerData[0]['TotalQty'] }}</span>
+
+          </span>
+
+        </div>
+
+
+        <div style="flex: 0 0 50%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+<!-- 
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Lubes-Cash:
+
+            </strong> -->
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['TotalAmount'] }}</span>
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+     <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 50%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Cash Amount:
+
+            </strong>
+
+           <span style="padding-left: 10px;"> {{ footerData[0]['CashAmount'] }}</span>
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 50%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Credit Amount:
+
+            </strong>
+
+           <span style="padding-left: 10px;"> {{ footerData[0]['CreditAmount'] }}</span>
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
 
     }
+
+
+
+    @if(routeParam == 'Shift' && dateForm.get('selectedReport')?.value == '7') {
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Lubes Totals:
+
+            </strong>
+
+           <span style="padding-left: 10px;"> {{ footerData[0]['LubesCashAmt'] }}</span>
+
+          </span>
+
+        </div>
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['LubesCreditAmt'] }}</span>
+
+          </span>
+
+        </div>
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['LubesTotal'] }}</span>
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Cash Receipt:
+
+            </strong>
+
+           <span style="padding-left: 10px;"> {{ footerData[0]['CashReceipt'] }}</span>
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Grand Totals:
+
+            </strong>
+
+           <span style="padding-left: 10px;"> {{ footerData[0]['GrandCashAmt'] }}</span>
+
+          </span>
+
+        </div>
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['GrandCreditAmt'] }}</span>
+
+          </span>
+
+        </div>
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['GrandTotalAmt'] }}</span>
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    }
+
 
   </div>
 

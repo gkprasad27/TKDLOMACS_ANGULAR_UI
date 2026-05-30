@@ -87,7 +87,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     { id: '2', reportName: 'Shift wise Meter Reading' },
     { id: '3', reportName: 'Shift wise sales stock' },
     { id: '4', reportName: 'Shift wise hdfc bank account' },
-    { id: '5', reportName: 'Shift wise  fleet card account' },
+    { id: '5', reportName: 'Shift wise fleet card account' },
     { id: '6', reportName: 'Shift wise daily sales report' },
     { id: '7', reportName: 'Shift wise Sale Value' },
     { id: '8', reportName: 'Shift wise ICICI SWIPE RECEIVABLES A/c' },
@@ -298,6 +298,18 @@ export class ReportTableComponent implements OnInit, OnChanges {
         width: '80px',
         whiteSpace: 'normal'
       }
+    },
+
+    Shift: {
+      LedgerName: {
+        width: '250px',
+        whiteSpace: 'normal'
+      },
+
+      Description: {
+        width: '400px',
+        whiteSpace: 'normal'
+      }
     }
 
     // description: {
@@ -435,6 +447,14 @@ export class ReportTableComponent implements OnInit, OnChanges {
     }
   }
 
+  selectionChange() {
+
+    if (this.routeParam == 'Shift') {
+      this.defaultValues();
+    }
+
+  }
+
   checkDates(group: FormGroup) {
     if (group.controls.formDate.value < group.controls.toDate.value) {
       return { notValid: true }
@@ -477,7 +497,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
       // Get ordered keys from config
       const columnOrder = Object.keys(
-        this.runtimeConfigService.tableColumnsData[this.routeParam]
+        this.getBody
       ).filter(key => key !== 'headers' && key !== 'footer');
 
       return this.columnDefinitions
@@ -628,6 +648,33 @@ export class ReportTableComponent implements OnInit, OnChanges {
     });
   }
 
+  get getHeaders() {
+    if(this.routeParam == 'Shift') {
+      return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value]?.headers;
+    }
+    return this.runtimeConfigService.tableColumnsData[this.routeParam].headers;
+  }
+
+  get getFooter() {
+    if(this.routeParam == 'Shift') {
+      return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value]?.footer;
+    }
+    return this.runtimeConfigService.tableColumnsData[this.routeParam].footer;
+  }
+
+  get getBody() {
+    if(this.routeParam == 'Shift') {
+      return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value];
+    }
+    return this.runtimeConfigService.tableColumnsData[this.routeParam];
+  }
+
+  get getShiftName() {
+    if(this.routeParam == 'Shift') {
+      return this.Reports.find(r => r.id == this.dateForm.get('selectedReport')?.value)?.reportName;
+    }
+    return null;
+  }
 
   GenerateReport() {
 
@@ -768,8 +815,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     // ================= HEADER DATA =================
 
-    const configHeaders =
-      this.runtimeConfigService.tableColumnsData[this.routeParam]?.headers;
+    const configHeaders = this.getHeaders;
 
     if (
       configHeaders &&
@@ -937,8 +983,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     let footerRows: any[] = [];
 
-    const configFooter =
-      this.runtimeConfigService.tableColumnsData[this.routeParam]?.footer;
+    const configFooter = this.getFooter;
 
     if (
       configFooter &&
@@ -1285,7 +1330,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
   getSortedHeaderKeys(): string[] {
 
     // Order from common config
-    const orderedKeys = Object.keys(this.runtimeConfigService.tableColumnsData[this.routeParam].headers);
+    const orderedKeys = Object.keys(this.getHeaders);
     return orderedKeys;
     // Return only available keys in same order
     // return orderedKeys.filter(
@@ -1300,7 +1345,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
    */
   getSortedFooterKeys(): string[] {
     // Order from common config
-    const orderedKeys = Object.keys(this.runtimeConfigService.tableColumnsData[this.routeParam].footer);
+    const orderedKeys = Object.keys(this.getFooter);
     return orderedKeys;
   }
 
@@ -1316,6 +1361,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
 
   getColumnStyle(column: string): any {
+
+    console.log('Getting style for column:', column);
 
     let config = { width: '', whiteSpace: '' };
     if (column === 'sno') {

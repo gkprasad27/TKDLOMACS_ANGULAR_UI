@@ -684,27 +684,134 @@
     "customerGstin": "Customer GSTIN"
   },
   "Shift": {
-    "Closing": "Closing",
-    "Code": "Code",
-    "Density": "Density",
-    "InvoiceSales": "InvoiceSales",
-    "Mtr.Diff": "Mtr.Diff",
-    "Opening": "Opening",
-    "Pump": "Pump",
-    "Testing": "Testing",
-    "TotalSales": "TotalSales",
-    "Variation": "Variation",
-    "headers": {
-      "Address": "Address",
-      "BranchName": "Branch Name",
-      "CreatedBy": "Created By",
-      "FromDate": "From Date",
-      "GSTIN": "GSTIN",
-      "Phone": "Phone",
-      "ReportDate": "Report Date",
-      "ShiftId": "Shift Id",
-      "ToDate": "To Date",
-      "UserName": "User Name"
+    "2": {
+      "sno": "S No",
+      "Pump": "Pump",
+      "Code": "Code",
+      "Opening": "Opening",
+      "Closing": "Closing",
+      "Testing": "Testing",
+      "Density": "Density",
+      "Mtr.Diff": "Mtr.Diff",
+      "InvoiceSales": "InvoiceSales",
+      "TotalSales": "TotalSales",
+      "Variation": "Variation",
+      "headers": {
+        "BranchName": "Branch Name",
+        "GSTIN": "GSTIN",
+        "UserName": "User Name",
+        "ShiftId": "Shift Id",
+        "Address": "Address",
+        "ReportDate": "Report Date",
+        "FromDate": "From Date",
+        "ToDate": "To Date",
+        "CreatedBy": "Created By"
+      }
+    },
+    "3": {
+      "sno": "S No",
+      "Product": "Product",
+      "OpeningQty": "OpeningQty",
+      "InwardQty": "InwardQty",
+      "OutwardQty": "OutwardQty",
+      "ClosingQty": "ClosingQty",
+      "headers": {
+        "BranchName": "Branch Name",
+        "GSTIN": "GSTIN",
+        "UserName": "User Name",
+        "ShiftId": "Shift Id"
+      }
+    },
+    "5": {
+      "sno": "S No",
+      "DATE": "DATE",
+      "Voucher No": "Voucher No",
+      "Description": "Description",
+      "Debit": "Debit",
+      "Credit": "Credit",
+      "headers": {
+        "LedgerCode": "Ledger Code",
+        "ReportDate": "Report Date",
+        "UserName": "User Name",
+        "ShiftId": "Shift Id",
+        "LedgerName": "Ledger Name",
+        "ReportCreatedBy":"Created By",
+        "FromDate": "From Date",
+        "ToDate": "To Date",
+        "OpeningBalance": "Opening Balance",
+        "ClosingBalance": "Closing Balance"
+      },
+      "footer": {
+        "colspan": 3,
+        "TotalDebit": "TotalDebit",
+        "TotalCredits": "TotalCredits"
+      }
+    },
+    "10": {
+      "sno": "S No",
+      "DATE": "DATE",
+      "Voucher No": "Voucher No",
+      "Description": "Description",
+      "Debit": "Debit",
+      "Credit": "Credit",
+      "headers": {
+        "LedgerCode": "Ledger Code",
+        "ReportDate": "Report Date",
+        "UserName": "User Name",
+        "ShiftId": "Shift Id",
+        "LedgerName": "Ledger Name",
+        "ReportCreatedBy":"Created By",
+        "FromDate": "From Date",
+        "ToDate": "To Date",
+        "OpeningBalance": "Opening Balance",
+        "ClosingBalance": "Closing Balance"
+      },
+      "footer": {
+        "colspan": 3,
+        "TotalDebit": "TotalDebit",
+        "TotalCredits": "TotalCredits"
+      }
+    },
+    "6": {
+      "sno": "S No",
+      "LedgerName": "LedgerName",
+      "InvoiceNo": "InvoiceNo",
+      "VehicleRegNo": "VehicleRegNo",
+      "ProductCode": "ProductCode",
+      "PumpNo": "PumpNo",
+      "Qty": "Qty",
+      "GrossAmount": "GrossAmount",
+      "SlipNo": "SlipNo",
+      "TotalAmount": "TotalAmount",
+      "headers": {
+        "BranchName": "Branch Name",
+        "GSTIN": "GSTIN",
+        "UserName": "User Name",
+        "ShiftId": "Shift Id",
+        "Address": "Address",
+        "ReportDate": "Report Date",
+        "FromDate": "From Date",
+        "ToDate": "To Date",
+        "CreatedBy":"Created By"
+      }
+    },
+    "7": {
+      "sno": "S No",
+      "productCode": "productCode",
+      "CashQty": "CashQty",
+      "CreditQty": "CreditQty",
+      "TotalQty": "TotalQty",
+      "CashAmt": "CashAmt",
+      "CreditAmt": "CreditAmt",
+      "TotalAmt": "TotalAmt",
+      "headers": {
+        "UserName": "User Name",
+        "ShiftId": "Shift Id",
+        "FromDate": "From Date",
+        "ReportDate": "Report Date",
+        "ToDate": "To Date",
+        "CreatedBy":"Created By"
+      }
     }
   },
   "BankReconciliation": {
@@ -1009,7 +1116,6 @@
     "role": "Role",
     "active": "Active"
   },
-
   "24HrsSaleValue6AmTo6Am": {
     "sno": "S No",
     "productCode": "Product Code",
@@ -1133,7 +1239,7 @@
     }
   },
   "ReceiptsAndPaymentsDetailed": {
-    "sno":"S No",
+    "sno": "S No",
     "Account Description": "Account Description",
     "Credit": "Credit",
     "Debit": "Debit",
@@ -1170,15 +1276,15 @@
     "ledgerCode": "Ledger Code",
     "ledgerName": "Ledger Name",
     "headers": {
-      "FromDate":"From Date",
-      "FromLedgerCode":"From Ledger Code",
-      "FromLedgerName":"From Ledger Name",
-      "GSTIN":"GSTIN",
-      "ReportCreatedBy":"Report Created By",
-      "ReportDate":"Report Date",
-      "ToDate":"To Date",
-      "ToLedgerCode":"To Ledger Code",
-      "ToLedgerName":"To Ledger Name"
+      "FromDate": "From Date",
+      "FromLedgerCode": "From Ledger Code",
+      "FromLedgerName": "From Ledger Name",
+      "GSTIN": "GSTIN",
+      "ReportCreatedBy": "Report Created By",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date",
+      "ToLedgerCode": "To Ledger Code",
+      "ToLedgerName": "To Ledger Name"
     },
     "footer": {
       "colspan": 1,
@@ -1240,10 +1346,10 @@
     "sgst": "SGST",
     "totalGST": "Total GST",
     "headers": {
-      "CreatedBy":"Created By",
-      "FromDate":"From Date",
-      "ReportDate":"Report Date",
-      "ToDate":"To Date"
+      "CreatedBy": "Created By",
+      "FromDate": "From Date",
+      "ReportDate": "Report Date",
+      "ToDate": "To Date"
     }
   },
   "StockValuation": {
@@ -1269,7 +1375,7 @@
     }
   },
   "StockVerification": {
-    "sno":"S No",
+    "sno": "S No",
     "ProductCode": "Product Code",
     "Name": "Product Name",
     "PhyStock": "Phy Stock",
@@ -1371,10 +1477,6 @@
       "ToDate": "To Date"
     }
   },
-
-
-
-
   "BranchWiseMonthlySalesByLiters": {
     "productCode": "Product Code",
     "productName": "Product Name",
@@ -1416,8 +1518,6 @@
       "TotalLabel": "Grand Total"
     }
   },
-
-
   "FourColumnCashBook": {
     "sno": "S No",
     "InvoiceNo": "Tr.Number",
@@ -1527,14 +1627,6 @@
     "TIgstAmt": "Total IGST Amount",
     "TotalInvoicevalue": "Total Invoice value"
   },
-
-
-
-
-
-
-
-
   "ledger": {
     "title": " Ledger",
     "code": "Code",
@@ -1555,26 +1647,6 @@
     "id": "id",
     "text": "text"
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   "AccountLedger": {
     "sno": "S No",
     "Date": "Date",
@@ -1667,7 +1739,7 @@
     }
   },
   "IntimateSale": {
-    "sno":"S No",
+    "sno": "S No",
     "Vehicle": "Vehicle",
     "invoiceNo": "Invoice No",
     "invoiceDate": "Invoice Date",
@@ -1737,14 +1809,13 @@
       "TotalGrossAmount": "TotalGrossAmount"
     }
   },
-
   "Salesanalysisbybranch": {
     "sno": "S No",
     "BillDate": "Bill Date",
     "BillNo": "Bill No",
     "Code": "Code",
     "ItemName": "Item Name",
-    "UOM":"UOM",
+    "UOM": "UOM",
     "Qty": "Qty",
     "Liters": "Liters",
     "Sales": "Sales",
