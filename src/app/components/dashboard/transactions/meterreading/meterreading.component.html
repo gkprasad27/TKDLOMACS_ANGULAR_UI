@@ -40,7 +40,7 @@
 
         <mat-form-field class="col-3">
           <mat-label>{{'meterreading.pumpNo' | translate }}</mat-label>
-          <mat-select formControlName="pumpNo" appFocusOnEnter tabIndex="1">
+          <mat-select formControlName="pumpNo" (selectionChange)="getOBFromPump(); getSaledUnits()" appFocusOnEnter tabIndex="1">
             @for (branch of getmemberNamesArray; track branch) {
             <mat-option [value]="branch.id" [disabled]="branch.selected" [ngStyle]="{ background: branch.selected ? 'green': '' }">
               {{branch.id}}
