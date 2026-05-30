@@ -1117,19 +1117,19 @@
     }
   },
   "ProductPriceList": {
-    "AvailableQty": "Available Qty",
-    "Price": "Price",
+    "sno": "S No",
     "productCode": "Product Code",
     "productName": "Product Name",
+    "AvailableQty": "Available Qty",
+    "Price": "Price",
     "headers": {
-      "Address": "Address",
       "BranchName": "Branch Name",
-      "CreatedBy": "Created By",
-      "FromDate": "From Date",
       "GSTIN": "GSTIN",
-      "Phone": "Phone",
       "ReportDate": "Report Date",
-      "ToDate": "To Date"
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "CreatedBy": "Created By",
+      "Address": "Address"
     }
   },
   "ReceiptsAndPaymentsDetailed": {
@@ -1298,25 +1298,27 @@
     }
   },
   "StockLedger": {
-    "Closing Quantity": "Closing Quantity",
-    "Date": "Date",
-    "Issued": "Issued",
-    "Opening Quantity": "Opening Quantity",
-    "Received": "Received",
+    "sno": "S No",
     "branchName": "Branch Name",
+    "Date": "Date",
     "invoiceNo": "Invoice No",
     "productCode": "Product Code",
+    "Opening Quantity": "Opening Quantity",
+    "Closing Quantity": "Closing Quantity",
+    "Received": "Received",
+    "Issued": "Issued",
     "headers": {
-      "FromDate": "From Date",
-      "ReportCreatedBy": "Report Created By",
+      "GSTIN": "GSTIN",
+      "BranchName": "Branch Name",
       "ReportDate": "Report Date",
-      "ToDate": "To Date"
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "ReportCreatedBy": "Report Created By"
     },
     "footer": {
-      "colspan": 3,
-      "TotalIssued": "Total Issued",
+      "colspan": 6,
       "TotalReceived": "Total Received",
-      "TotalType": "Total"
+      "TotalIssued": "Total Issued"
     }
   },
   "ProductWiseMonthlyPurchase": {
@@ -1587,12 +1589,12 @@
       "GSTIN": "GSTIN",
       "LedgeCode": "Ledger Code",
       "ReportDate": "Report Date",
-      "LedgerName": "Ledger Name",
       "fromDate": "From Date",
       "ToDate": "To Date",
       "OpeningBalance": "Opening Balance",
       "ClosingBalance": "Closing Balance",
-      "ReportCreatedBy": "Report Created By"
+      "ReportCreatedBy": "Report Created By",
+      "LedgerName": "Ledger Name"
     },
     "footer": {
       "colspan": 3,
@@ -1678,14 +1680,14 @@
     "Qty": "Qty",
     "Amount": "Amount",
     "headers": {
-      "BranchName": "Branch Name",
       "LedgerCode": "Ledger Code",
       "GSTIN": "GSTIN",
       "LedgerName": "Ledger Name",
       "ReportDate": "Report Date",
       "FromDate": "From Date",
       "ToDate": "To Date",
-      "ReportCreatedBy": "Report Created By"
+      "ReportCreatedBy": "Report Created By",
+      "BranchName": "Branch Name"
     }
   },
   "DailySales": {

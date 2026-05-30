@@ -138,7 +138,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     'debit', 'credit', 'qty', 'amount', 'total', 'price', 'value',
     'opening', 'closing', 'received', 'issued', 'balance', 'liters', 'CreditTotal', 'DebitToal',
     'cashqty', 'creditqty', 'totalqty', 'cashamt', 'creditamt', 'totalamt', 'CashSales', 'CreditSales', 'GrandTotal', 'TotalDebits',
-    'TotalCredits', 'TotalReceipts', 'TotalPayments', 'Receipts', 'Payments', 'Closing', 'Density', 'InvoiceSales', 'Mtr.Diff', 'Opening', 'TotalSales', 'Variation', 'Consumption', 'Pump', 'Testing',
+    'TotalCredits', 'TotalReceipts', 'TotalPayments', 'Receipts', 'Payments', 'Closing', 'Density', 'InvoiceSales', 'Mtr.Diff', 'Opening', 'TotalSales', 'Variation', 'Consumption', 'Testing',
     'OpeningQty', 'InwardQty', 'OutwardQty', 'ClosingQty', 'PQty', 'nPAmount', 'pAmount', 'TotalPurchase', 'NPTotalQty', 'Credit', 'BalanceDue', 'TotalQty',
     "PumpNo", 'GrossAmount', 'SlipNo', 'CNG', 'GrossAmount', 'Sales', 'BookStock', 'PhyStock', 'Excess', 'Short', 'StockTransfer',
     "TotalInvoiceSales", 'TotalTesting', 'TotalTotalSales', 'TotalVariation'
@@ -151,45 +151,165 @@ export class ReportTableComponent implements OnInit, OnChanges {
    */
   columnConfig: any = {
 
-    sno: {
-      width: '50px',
-      whiteSpace: 'nowrap'
+    AccountLedger: {
+      description: {
+        width: '300px',
+        whiteSpace: 'normal'
+      },
     },
 
-    description: {
-      width: '400px',
-      whiteSpace: 'normal'
+    ProductPriceList: {
+
+      productCode: {
+        width: '100px',
+        whiteSpace: 'normal'
+      },
+
+      AvailableQty: {
+        width: '100px',
+        whiteSpace: 'normal'
+      },
+
+      Price: {
+        width: '100px',
+        whiteSpace: 'normal'
+      }
     },
 
-    ProductName: {
-      width: '300px',
-      whiteSpace: 'normal'
+    '24HrsMeterReading': {
+
+      Variation: {
+        width: '55px',
+        whiteSpace: 'normal'
+      },
+
+      Density: {
+        width: '40px',
+        whiteSpace: 'normal'
+      },
+
+      Pump: {
+        width: '35px',
+        whiteSpace: 'normal'
+      },
+
+      Testing: {
+        width: '40px',
+        whiteSpace: 'normal'
+      }
+
     },
 
-    LedgerName: {
+    StockVerification: {
+
+    Name: {
       width: '200px',
       whiteSpace: 'normal'
     },
 
-    ItemName: {
-      width: '250px',
+    ProductCode: {
+      width: '90px',
       whiteSpace: 'normal'
     },
 
-    Name: {
-      width: '250px',
-      whiteSpace: 'normal'
     },
 
-    Pump: {
-      width: '50px',
-      whiteSpace: 'normal'
+    StockLedger: {
+      branchName: {
+        width: '120px',
+        whiteSpace: 'normal'
+      }
     },
 
-    PumpNo: {
-      width: '50px',
-      whiteSpace: 'normal'
+    Salesanalysisbybranch: {
+      ItemName: {
+        width: '200px',
+        whiteSpace: 'normal'
+      }
+    },
+
+    DailySales: {
+      LedgerName: {
+        width: '170px',
+        whiteSpace: 'normal'
+      },
+      PumpNo: {
+        width: '35px',
+        whiteSpace: 'normal'
+      },
+
+      Qty: {
+        width: '35px',
+        whiteSpace: 'normal'
+      }
+
     }
+
+    // description: {
+    //   width: '300px',
+    //   whiteSpace: 'normal'
+    // },
+
+    // ProductName: {
+    //   width: '300px',
+    //   whiteSpace: 'normal'
+    // },
+
+    // LedgerName: {
+    //   width: '200px',
+    //   whiteSpace: 'normal'
+    // },
+
+    // ItemName: {
+    //   width: '250px',
+    //   whiteSpace: 'normal'
+    // },
+
+    // Name: {
+    //   width: '250px',
+    //   whiteSpace: 'normal'
+    // },
+
+
+    // PumpNo: {
+    //   width: '50px',
+    //   whiteSpace: 'normal'
+    // },
+
+
+
+
+    // "Mtr.Diff": {
+    //   width: '50px',
+    //   whiteSpace: 'normal'
+    // },
+
+    // Issued: {
+    //   width: '40px',
+    //   whiteSpace: 'normal'
+    // },
+
+
+    // Received: {
+    //   width: '55px',
+    //   whiteSpace: 'normal'
+    // },
+
+    // "Opening Quantity": {
+    //   width: '60px',
+    //   whiteSpace: 'normal'
+    // },
+
+    // "Closing Quantity": {
+    //   width: '60px',
+    //   whiteSpace: 'normal'
+    // },
+
+    // Date: {
+    //   width: '80px',
+    //   whiteSpace: 'normal'
+    // },
+
   };
 
   private dateColumnPatterns = ['date', 'invoicedate', 'plandate', 'targetdate'];
@@ -995,7 +1115,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       newFooterRows[1].push('');
       newFooterRows[1].push('Credit:');
       newFooterRows[1].push(this.footerData[0]['Spares-Credit']);
-      
+
       newFooterRows.forEach(d => {
 
         let row = worksheet.addRow(d);
@@ -1142,7 +1262,15 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
   getColumnStyle(column: string): any {
 
-    const config = this.columnConfig[column] || {};
+    let config = { width: '', whiteSpace: '' };
+    if (column === 'sno') {
+      config = {
+        width: '30px',
+        whiteSpace: 'nowrap',
+      };
+    } else {
+      config = this.columnConfig[this.routeParam] ? this.columnConfig[this.routeParam][column] || {} : {};
+    }
 
     return {
 
@@ -1251,14 +1379,14 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
         //   });
 
-          
-      var w = window.open();
-      // var html = document.getElementById('invoicePrintData').innerHTML;
-      w.document.body.innerHTML = element;
-      this.showPrintableReport = false;
-      this.spinner.hide();
 
-      w.print();
+        var w = window.open('', '_blank');
+        // var html = document.getElementById('invoicePrintData').innerHTML;
+        w.document.body.innerHTML = element;
+        this.showPrintableReport = false;
+        this.spinner.hide();
+
+        w.print();
 
       });
     }, 500);
