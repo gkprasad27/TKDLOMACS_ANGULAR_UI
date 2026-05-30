@@ -1133,40 +1133,35 @@
     }
   },
   "ReceiptsAndPaymentsDetailed": {
-    "AccountDescription": "Account Description",
+    "sno":"S No",
+    "Account Description": "Account Description",
     "Credit": "Credit",
     "Debit": "Debit",
     "headers": {
-      "CreatedBy": "Created By",
-      "FromDate": "From Date",
+      "Address": "Address",
       "ReportDate": "Report Date",
-      "ToDate": "To Date"
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "CreatedBy": "Created By"
     },
     "footer": {
       "colspan": 1,
       "CreditAmount": "Credit Amount",
-      "DebitAmount": "Debit Amount",
-      "TotalType": "Total"
+      "DebitAmount": "Debit Amount"
     }
   },
   "ReceiptsAndPaymentsSummary": {
-    "Payments": "Payments",
-    "Receipts": "Receipts",
+    "sno": "S No",
     "ledgerName": "Ledger Name",
+    "Receipts": "Receipts",
+    "Payments": "Payments",
     "headers": {
-      "Address": "Address",
-      "CreatedBy": "Created By",
-      "FromDate": "From Date",
       "OpeningBalance": "Opening Balance",
+      "Address": "Address",
       "ReportDate": "Report Date",
-      "ToDate": "To Date"
-    },
-    "footer": {
-      "colspan": 1,
-      "CashClosingBalance": "Cash Closing Balance",
-      "TotalPayments": "Total Payments",
-      "TotalReceipts": "Total Receipts",
-      "TotalType": "Total"
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "CreatedBy": "Created By"
     }
   },
   "ClosingBalance": {
@@ -1191,21 +1186,23 @@
     }
   },
   "SMSSummary": {
-    "title": "SMS Summary",
-    "amount": "Amount",
-    "branch": "Branch",
-    "invoiceDate": "Invoice Date",
+    "sno": "S No",
     "invoiceNo": "Invoice No",
+    "invoiceDate": "Date",
+    "branch": "Branch",
     "mobile": "Mobile",
-    "price": "Price",
+    "vehicleRegNo": "Vehicle No",
     "qty": "Qty",
+    "amount": "Amount",
+    "price": "Price",
     "smsReturnID": "SMS Return ID",
-    "vehicleRegNo": "Vehicle Reg No",
     "headers": {
-      "CreatedBy": "Created By",
-      "FromDate": "From Date",
+      "GST": "GSTIN",
+      "Branch": "Branch Name",
       "ReportDate": "Report Date",
-      "ToDate": "To Date"
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "CreatedBy": "Created By"
     }
   },
   "SalesGST": {

@@ -400,7 +400,7 @@
                 text-align: center;
                 font-weight: bold;
                 color: #000;
-              " [ngStyle]="getColumnStyle(body.key.toString())" [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch') ? 10 : 12">
+              " [ngStyle]="getColumnStyle(body.key.toString())" [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch' || routeParam === 'SMSSummary'  || routeParam === 'VehicalEnquiry' ) ? 10 : 12">
 
             {{ getTranslationKey(body.key) | translate }}
 
@@ -426,7 +426,7 @@
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
               color: #000;
-            " [ngStyle]="getColumnStyle(column)" [style.textAlign]="getColumnAlignment(column)" [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch') ? 10 : 12">
+            " [ngStyle]="getColumnStyle(column)" [style.textAlign]="getColumnAlignment(column)" [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch' || routeParam === 'SMSSummary'  || routeParam === 'VehicalEnquiry' ) ? 10 : 12">
 
             {{ formatCellValue(row[column], column) }}
 

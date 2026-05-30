@@ -243,6 +243,61 @@ export class ReportTableComponent implements OnInit, OnChanges {
         whiteSpace: 'normal'
       }
 
+    },
+
+    ReceiptsAndPaymentsDetailed: {
+      'Account Description': {
+        width: '350px',
+        whiteSpace: 'normal'
+      }
+    },
+
+    ReceiptsAndPaymentsSummary: {
+      'ledgerName': {
+        width: '350px',
+        whiteSpace: 'normal'
+      }
+    },
+
+    SMSSummary: {
+        qty: {
+        width: '50px',
+        whiteSpace: 'normal'
+      },
+        price: {
+        width: '50px',
+        whiteSpace: 'normal'
+      },
+      invoiceNo: {
+        width: '100px',
+        whiteSpace: 'normal'
+      }
+    },
+
+    VehicalEnquiry: {
+      qty: {
+        width: '35px',
+        whiteSpace: 'normal'
+      },
+      pumpNo: {
+        width: '35px',
+        whiteSpace: 'normal'
+      },
+
+      productName: {
+        width: '200px',
+        whiteSpace: 'normal'
+      },
+
+      branchName: {
+        width: '120px',
+        whiteSpace: 'normal'
+      },
+
+      invoiceNo: {
+        width: '80px',
+        whiteSpace: 'normal'
+      }
     }
 
     // description: {
