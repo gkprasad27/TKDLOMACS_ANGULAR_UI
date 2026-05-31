@@ -1710,10 +1710,10 @@
     "headers": {
       "BranchName": "Branch Name",
       "CreatedBy": "Created By",
-      "FromDate": "From Date",
       "GSTIN": "GSTIN",
       "Phone": "Phone",
       "ReportDate": "Report Date",
+      "FromDate": "From Date",
       "ToDate": "To Date",
       "Address": "Address"
     },
@@ -1856,12 +1856,6 @@
         "ToDate": "To Date",
         "ReportDate": "Report Date",
         "CreatedBy": "Created By"
-      },
-      "footer": {
-        "colspan": 4,
-        "Qty": "Qty",
-        "Liters": "Liters",
-        "Amount": "Amount"
       }
     },
     "Sales Analysis Sub Category Wise Report": {
