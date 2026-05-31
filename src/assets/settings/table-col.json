@@ -1143,6 +1143,7 @@
     }
   },
   "BranchWiseStockStatementQty": {
+    "sno": "S No",
     "productCode": "Product Code",
     "productName": "Product Name",
     "supplierId": "Supplier Id",
@@ -1353,6 +1354,7 @@
     }
   },
   "StockValuation": {
+    "sno": "S No",
     "Balance": "Balance",
     "Code": "Code",
     "Liters": "Liters",
@@ -1465,6 +1467,7 @@
     }
   },
   "TrialBalance": {
+    "sno": "S No",
     "ledgerCode": "Ledger Code",
     "ledgername": "Ledger Name",
     "OrderKey": "Order Key",
@@ -1478,6 +1481,7 @@
     }
   },
   "BranchWiseMonthlySalesByLiters": {
+    "sno": "S No",
     "productCode": "Product Code",
     "productName": "Product Name",
     "SupplierName": "Supplier Name",

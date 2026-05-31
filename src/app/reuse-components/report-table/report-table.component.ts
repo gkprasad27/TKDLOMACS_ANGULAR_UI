@@ -329,6 +329,37 @@ export class ReportTableComponent implements OnInit, OnChanges {
       }
     },
 
+    BranchWiseStockStatementLtrs: {
+      productName: {
+        width: '150px',
+        whiteSpace: 'normal'
+      },
+
+      SupplierName: {
+        width: '100px',
+        whiteSpace: 'normal'
+      }
+    },
+
+    BranchWiseStockStatementQty: {
+      productName: {
+        width: '150px',
+        whiteSpace: 'normal'
+      },
+
+      SupplierName: {
+        width: '100px',
+        whiteSpace: 'normal'
+      }
+    },
+
+    BankReconciliation: {
+      Partyname: {
+        width: '400px',
+        whiteSpace: 'normal'
+      }
+    }
+
     // description: {
     //   width: '300px',
     //   whiteSpace: 'normal'

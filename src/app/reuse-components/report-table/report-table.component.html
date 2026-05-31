@@ -407,8 +407,9 @@
                 text-align: center;
                 font-weight: bold;
                 color: #000;
+                word-wrap: break-word;
               " [ngStyle]="getColumnStyle(body.key.toString())"
-            [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch' || routeParam === 'SMSSummary'  || routeParam === 'VehicalEnquiry' ) ? 10 : 12">
+            [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch' || routeParam === 'SMSSummary'  || routeParam === 'VehicalEnquiry' || routeParam === 'BranchWiseStockStatementLtrs' || routeParam === 'BranchWiseStockStatementQty') ? 10 : 12">
 
             {{ getTranslationKey(body.key) | translate }}
 
@@ -435,7 +436,7 @@
               padding: 3px 2px;
               color: #000;
             " [ngStyle]="getColumnStyle(column)" [style.textAlign]="getColumnAlignment(column)"
-            [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch' || routeParam === 'SMSSummary'  || routeParam === 'VehicalEnquiry' ) ? 10 : 12">
+            [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch' || routeParam === 'SMSSummary'  || routeParam === 'VehicalEnquiry' || routeParam === 'BranchWiseStockStatementLtrs' || routeParam === 'BranchWiseStockStatementQty') ? 10 : 12">
 
             {{ formatCellValue(row[column], column) }}
 
