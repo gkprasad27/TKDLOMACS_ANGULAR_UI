@@ -148,6 +148,16 @@
           <input matInput formControlName="search" appFocusOnEnter tabIndex="1">
         </mat-form-field>
         }
+        @if(routeParam=='Salesanalysisbybranch') {
+        <mat-form-field class="col-3">
+          <mat-label>{{ 'report.ReportName' | translate }}</mat-label>
+          <mat-select required formControlName="ReportName" (selectionChange)="selectionChange()">
+            <mat-option *ngFor="let report of ReportNames" [value]="report.reportName">
+              {{report.reportName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        }
         @if(routeParam=='StockVerification') {
         <mat-checkbox class="col-1" (change)="checkCheckBoxvalue($event)" formControlName="RO">RO'S</mat-checkbox>
         }
@@ -317,7 +327,7 @@
           font-weight: 600;
         ">
 
-        {{ routeParam === 'Shift' ? getShiftName : (routeParam + '.title') | translate : '' }}  Report
+        {{ routeParam === 'Shift' || routeParam === 'Salesanalysisbybranch' ? getName : (routeParam + '.title') | translate : '' }} Report
 
       </div>
 
@@ -334,41 +344,38 @@
 
       <div style="margin-bottom: 2px; display: flex; flex-wrap: wrap;">
 
-  @for (
-    header of getHeaders | keyvalue: keepOrder;
-    track header.key;
-    let last = $last;
-    let count = $count
-  ) {
+        @for (
+        header of getHeaders | keyvalue: keepOrder;
+        track header.key;
+        let last = $last;
+        let count = $count
+        ) {
 
-    <div
-      [style.flex]="last && count % 2 !== 0 ? '0 0 100%' : '0 0 50%'">
+        <div [style.flex]="last && count % 2 !== 0 ? '0 0 100%' : '0 0 50%'">
 
-      <span
-        style="
+          <span style="
           display: inline-block;
           margin-bottom: 2px;
         ">
 
-        <strong
-          style="
+            <strong style="
             min-width: 150px;
             display: inline-block;
           ">
 
-          {{ getTranslationKey(header.key) | translate }}
+              {{ getTranslationKey(header.key) | translate }}
 
-        </strong>
+            </strong>
 
-        : {{ headerData[0][header.key] }}
+            : {{ headerData[0][header.key] }}
 
-      </span>
+          </span>
 
-    </div>
+        </div>
 
-  }
+        }
 
-</div>
+      </div>
 
 
     </div>
@@ -400,7 +407,8 @@
                 text-align: center;
                 font-weight: bold;
                 color: #000;
-              " [ngStyle]="getColumnStyle(body.key.toString())" [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch' || routeParam === 'SMSSummary'  || routeParam === 'VehicalEnquiry' ) ? 10 : 12">
+              " [ngStyle]="getColumnStyle(body.key.toString())"
+            [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch' || routeParam === 'SMSSummary'  || routeParam === 'VehicalEnquiry' ) ? 10 : 12">
 
             {{ getTranslationKey(body.key) | translate }}
 
@@ -426,7 +434,8 @@
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
               color: #000;
-            " [ngStyle]="getColumnStyle(column)" [style.textAlign]="getColumnAlignment(column)" [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch' || routeParam === 'SMSSummary'  || routeParam === 'VehicalEnquiry' ) ? 10 : 12">
+            " [ngStyle]="getColumnStyle(column)" [style.textAlign]="getColumnAlignment(column)"
+            [style.font-size.px]="(routeParam === '24HrsMeterReading' || routeParam === 'StockVerification' || routeParam === 'Salesanalysisbybranch' || routeParam === 'SMSSummary'  || routeParam === 'VehicalEnquiry' ) ? 10 : 12">
 
             {{ formatCellValue(row[column], column) }}
 
@@ -887,7 +896,7 @@
 
             </strong>
 
-           <span style="padding-left: 10px;"> {{ footerData[0]['CashAmount'] }}</span>
+            <span style="padding-left: 10px;"> {{ footerData[0]['CashAmount'] }}</span>
 
           </span>
 
@@ -934,7 +943,7 @@
 
             </strong>
 
-           <span style="padding-left: 10px;"> {{ footerData[0]['Lubes-Credit'] }}</span>
+            <span style="padding-left: 10px;"> {{ footerData[0]['Lubes-Credit'] }}</span>
 
           </span>
 
@@ -945,7 +954,7 @@
 
     </div>
 
-     <div style="
+    <div style="
         margin-bottom: 10px;
         font-size: 13px;
       ">
@@ -970,7 +979,7 @@
 
             </strong>
 
-           <span style="padding-left: 10px;"> {{ footerData[0]['Credit Amount'] }}</span>
+            <span style="padding-left: 10px;"> {{ footerData[0]['Credit Amount'] }}</span>
 
           </span>
 
@@ -1001,7 +1010,7 @@
 
 
 
-        <div  style="flex: 0 0 25%;">
+        <div style="flex: 0 0 25%;">
 
           <span style="
               display: inline-block;
@@ -1017,7 +1026,7 @@
 
             </strong>
 
-           <span style="padding-left: 10px;"> {{ footerData[0]['Spares-Credit'] }}</span>
+            <span style="padding-left: 10px;"> {{ footerData[0]['Spares-Credit'] }}</span>
 
           </span>
 
@@ -1060,7 +1069,7 @@
 
             </strong>
 
-           <span style="padding-left: 10px;"> {{ footerData[0]['TotalQty'] }}</span>
+            <span style="padding-left: 10px;"> {{ footerData[0]['TotalQty'] }}</span>
 
           </span>
 
@@ -1073,7 +1082,7 @@
               display: inline-block;
               margin-bottom: 2px;
             ">
-<!-- 
+            <!-- 
             <strong style="
                 min-width: 95px;
                 display: inline-block;
@@ -1094,7 +1103,7 @@
 
     </div>
 
-     <div style="
+    <div style="
         margin-bottom: 10px;
         font-size: 13px;
       ">
@@ -1119,7 +1128,7 @@
 
             </strong>
 
-           <span style="padding-left: 10px;"> {{ footerData[0]['CashAmount'] }}</span>
+            <span style="padding-left: 10px;"> {{ footerData[0]['CashAmount'] }}</span>
 
           </span>
 
@@ -1157,7 +1166,7 @@
 
             </strong>
 
-           <span style="padding-left: 10px;"> {{ footerData[0]['CreditAmount'] }}</span>
+            <span style="padding-left: 10px;"> {{ footerData[0]['CreditAmount'] }}</span>
 
           </span>
 
@@ -1201,7 +1210,7 @@
 
             </strong>
 
-           <span style="padding-left: 10px;"> {{ footerData[0]['LubesCashAmt'] }}</span>
+            <span style="padding-left: 10px;"> {{ footerData[0]['LubesCashAmt'] }}</span>
 
           </span>
 
@@ -1266,7 +1275,7 @@
 
             </strong>
 
-           <span style="padding-left: 10px;"> {{ footerData[0]['CashReceipt'] }}</span>
+            <span style="padding-left: 10px;"> {{ footerData[0]['CashReceipt'] }}</span>
 
           </span>
 
@@ -1306,7 +1315,7 @@
 
             </strong>
 
-           <span style="padding-left: 10px;"> {{ footerData[0]['GrandCashAmt'] }}</span>
+            <span style="padding-left: 10px;"> {{ footerData[0]['GrandCashAmt'] }}</span>
 
           </span>
 
@@ -1338,6 +1347,155 @@
           </span>
 
         </div>
+
+      </div>
+
+
+    </div>
+
+
+    }
+
+
+    @if(routeParam == 'Salesanalysisbybranch' && dateForm.get('ReportName')?.value == 'Sales Analysis Sub Category Branch Wise Report') {
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Grand Total:
+
+            </strong>
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['GrandTotalQty'] }}</span>
+
+          </span>
+
+        </div>
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['GrandTotalLiters'] }}</span>
+
+          </span>
+
+        </div>
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['GrandGrossAmount'] }}</span>
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Cash:
+
+            </strong>
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['CashSales'] }}</span>
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Credit:
+
+            </strong>
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['CreditSales'] }}</span>
+
+          </span>
+
+        </div>
+
 
       </div>
 

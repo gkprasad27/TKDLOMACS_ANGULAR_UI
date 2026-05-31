@@ -94,6 +94,14 @@ export class ReportTableComponent implements OnInit, OnChanges {
     { id: '9', reportName: 'Shift wise PINE LAB' },
     { id: '10', reportName: 'Shift wise PAYTM' }
   ];
+  ReportNames = [
+    // { id: '1', reportName: 'Shift Report' },
+    { id: '2', reportName: 'Detailed Sales Analysis Report' },
+    { id: '3', reportName: 'Sales Analysis Sub Category Branch Wise Report' },
+    { id: '4', reportName: 'Sales Analysis Sub Category Wise Report' },
+  ];
+
+
   AccountLedgers = [];
   ReportBranches = [];
   ReportPGList = [];
@@ -225,7 +233,11 @@ export class ReportTableComponent implements OnInit, OnChanges {
       ItemName: {
         width: '200px',
         whiteSpace: 'normal'
-      }
+      },
+       ProductName: {
+          width: '200px',
+          whiteSpace: 'normal'
+        }
     },
 
     DailySales: {
@@ -309,8 +321,13 @@ export class ReportTableComponent implements OnInit, OnChanges {
       Description: {
         width: '400px',
         whiteSpace: 'normal'
+      },
+
+      Pump: {
+        width: '35px',
+        whiteSpace: 'normal'
       }
-    }
+    },
 
     // description: {
     //   width: '300px',
@@ -431,6 +448,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       vehicleRegNo: [null],
       search: [null],
       selectedReportType: [''],
+      ReportName: [''],
       selectedTrialReportType: [''],
       selectedClosingReportType: [''],
       fromAccountLedger: [''],
@@ -450,6 +468,9 @@ export class ReportTableComponent implements OnInit, OnChanges {
   selectionChange() {
 
     if (this.routeParam == 'Shift') {
+      this.defaultValues();
+    }
+    if (this.routeParam == 'Salesanalysisbybranch') {
       this.defaultValues();
     }
 
@@ -652,12 +673,18 @@ export class ReportTableComponent implements OnInit, OnChanges {
     if(this.routeParam == 'Shift') {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value]?.headers;
     }
+    if(this.routeParam == 'Salesanalysisbybranch') {
+      return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value]?.headers;
+    }
     return this.runtimeConfigService.tableColumnsData[this.routeParam].headers;
   }
 
   get getFooter() {
     if(this.routeParam == 'Shift') {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value]?.footer;
+    }
+    if(this.routeParam == 'Salesanalysisbybranch') {
+      return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value]?.footer;
     }
     return this.runtimeConfigService.tableColumnsData[this.routeParam].footer;
   }
@@ -666,12 +693,18 @@ export class ReportTableComponent implements OnInit, OnChanges {
     if(this.routeParam == 'Shift') {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value];
     }
+    if(this.routeParam == 'Salesanalysisbybranch') {
+      return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value];
+    }
     return this.runtimeConfigService.tableColumnsData[this.routeParam];
   }
 
-  get getShiftName() {
+  get getName() {
     if(this.routeParam == 'Shift') {
       return this.Reports.find(r => r.id == this.dateForm.get('selectedReport')?.value)?.reportName;
+    }
+    if(this.routeParam == 'Salesanalysisbybranch') {
+      return this.dateForm.get('ReportName')?.value;
     }
     return null;
   }
@@ -711,6 +744,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       selectedCriteria: this.dateForm.get('selectedCriteria').value,
       search: this.dateForm.get('search').value,
       selectedReportType: this.dateForm.get('selectedReportType').value,
+      ReportName: this.dateForm.get('ReportName').value,
       selectedTrialReportType: this.dateForm.get('selectedTrialReportType').value,
       selectedClosingReportType: this.dateForm.get('selectedClosingReportType').value,
       fromAccountLedger: this.dateForm.get('fromAccountLedger').value,
@@ -739,6 +773,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.params = this.params.append('search', this.dateForm.get('search')?.value);
     this.params = this.params.append('vehicleRegNo', this.dateForm.get('vehicleRegNo')?.value);
     this.params = this.params.append('reportType', this.dateForm.get('selectedReportType')?.value);
+    this.params = this.params.append('ReportName', this.dateForm.get('ReportName')?.value);
     this.params = this.params.append('TrialreportType', this.dateForm.get('selectedTrialReportType')?.value);
     this.params = this.params.append('ClosingreportType', this.dateForm.get('selectedClosingReportType')?.value);
     this.params = this.params.append('fromLedgerCode', this.dateForm.get('fromAccountLedger')?.value);
@@ -1380,7 +1415,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
       maxWidth: config.width || 'auto',
 
-      whiteSpace: config.whiteSpace || 'nowrap',
+      // whiteSpace: config.whiteSpace || 'nowrap',
 
       wordBreak:
         config.whiteSpace === 'normal'

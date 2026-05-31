@@ -1592,7 +1592,11 @@
     "CreatedBy": "Report Created By",
     "Qty": "Qty",
     "Liters": "Liters",
-    "Amount": "Amount"
+    "Amount": "Amount",
+    "ProductGroupName": "Product Group Name",
+    "ProductCode": "Product Code",
+    "ProductName": "Product Name",
+    "UnitName": "Unit Name"
   },
   "ProductWiseMonthlyPurchase": {
     "title": "Product Wise Monthly Purchase",
@@ -1987,6 +1991,7 @@
     "selectedProduct": "Product",
     "selectedReport": "Shift Report Type",
     "selectedCriteria": "Search Criteria",
+    "ReportName": "Report Name",
     "search": "Search",
     "selectedFourColumnReportType": "Report Type",
     "selectedGroupName": "Group Type",

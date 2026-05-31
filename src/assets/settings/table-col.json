@@ -735,7 +735,7 @@
         "UserName": "User Name",
         "ShiftId": "Shift Id",
         "LedgerName": "Ledger Name",
-        "ReportCreatedBy":"Created By",
+        "ReportCreatedBy": "Created By",
         "FromDate": "From Date",
         "ToDate": "To Date",
         "OpeningBalance": "Opening Balance",
@@ -760,7 +760,7 @@
         "UserName": "User Name",
         "ShiftId": "Shift Id",
         "LedgerName": "Ledger Name",
-        "ReportCreatedBy":"Created By",
+        "ReportCreatedBy": "Created By",
         "FromDate": "From Date",
         "ToDate": "To Date",
         "OpeningBalance": "Opening Balance",
@@ -792,7 +792,7 @@
         "ReportDate": "Report Date",
         "FromDate": "From Date",
         "ToDate": "To Date",
-        "CreatedBy":"Created By"
+        "CreatedBy": "Created By"
       }
     },
     "7": {
@@ -810,7 +810,7 @@
         "FromDate": "From Date",
         "ReportDate": "Report Date",
         "ToDate": "To Date",
-        "CreatedBy":"Created By"
+        "CreatedBy": "Created By"
       }
     }
   },
@@ -1810,29 +1810,81 @@
     }
   },
   "Salesanalysisbybranch": {
-    "sno": "S No",
-    "BillDate": "Bill Date",
-    "BillNo": "Bill No",
-    "Code": "Code",
-    "ItemName": "Item Name",
-    "UOM": "UOM",
-    "Qty": "Qty",
-    "Liters": "Liters",
-    "Sales": "Sales",
-    "headers": {
-      "GSTIN": "GSTIN",
-      "BranchName": "Branch Name",
-      "Address": "Address",
-      "ReportDate": "Report Date",
-      "FromDate": "From Date",
-      "ToDate": "To Date",
-      "CreatedBy": "Created By"
-    },
-    "footer": {
-      "colspan": 5,
+    "Detailed Sales Analysis Report": {
+      "sno": "S No",
+      "BillDate": "Bill Date",
+      "BillNo": "Bill No",
+      "Code": "Code",
+      "ItemName": "Item Name",
+      "UOM": "UOM",
       "Qty": "Qty",
       "Liters": "Liters",
-      "Amount": "Amount"
+      "Sales": "Sales",
+      "headers": {
+        "BranchName": "Branch Name",
+        "GSTIN": "GSTIN",
+        "Address": "Address",
+        "ReportDate": "Report Date",
+        "FromDate": "From Date",
+        "ToDate": "To Date",
+        "CreatedBy": "Created By"
+      },
+      "footer": {
+        "colspan": 5,
+        "Qty": "Qty",
+        "Liters": "Liters",
+        "Amount": "Amount"
+      }
+    },
+    "Sales Analysis Sub Category Branch Wise Report": {
+      "sno": "S No",
+      "ProductGroupName": "Product Group Name",
+      "ProductCode": "Product Code",
+      "ProductName": "Product Name",
+      "UnitName": "Unit Name",
+      "Qty": "Qty",
+      "Liters": "Liters",
+      "Amount": "Amount",
+      "headers": {
+        "BranchName": "Branch Name",
+        "Address": "Address",
+        "FromDate": "From Date",
+        "ToDate": "To Date",
+        "ReportDate": "Report Date",
+        "CreatedBy": "Created By"
+      },
+      "footer": {
+        "colspan": 4,
+        "Qty": "Qty",
+        "Liters": "Liters",
+        "Amount": "Amount"
+      }
+    },
+    "Sales Analysis Sub Category Wise Report": {
+      "sno": "S No",
+      "BillDate": "Bill Date",
+      "BillNo": "Bill No",
+      "Code": "Code",
+      "ItemName": "Item Name",
+      "UOM": "UOM",
+      "Qty": "Qty",
+      "Liters": "Liters",
+      "Sales": "Sales",
+      "headers": {
+        "GSTIN": "GSTIN",
+        "BranchName": "Branch Name",
+        "Address": "Address",
+        "ReportDate": "Report Date",
+        "FromDate": "From Date",
+        "ToDate": "To Date",
+        "CreatedBy": "Created By"
+      },
+      "footer": {
+        "colspan": 5,
+        "Qty": "Qty",
+        "Liters": "Liters",
+        "Amount": "Amount"
+      }
     }
   }
 }
