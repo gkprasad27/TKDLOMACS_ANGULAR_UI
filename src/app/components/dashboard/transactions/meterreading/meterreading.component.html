@@ -116,7 +116,7 @@
 
   </mat-card-content>
   <div class="form-element p-2 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mr-1" (click)="reset()">
+    <button mat-raised-button  *ngIf="!formData.item" class="button-color-red text-white mr-1" (click)="reset()">
 
       {{ 'COMMON.RESET' | translate }}
     </button>

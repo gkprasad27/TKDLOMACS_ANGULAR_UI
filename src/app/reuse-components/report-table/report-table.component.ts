@@ -1475,7 +1475,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
       setTimeout(() => {
 
-        const element = document.getElementById('printableReport').innerHTML;
+        const element = document.getElementById('printableReport');
+        // const element = document.getElementById('printableReport').innerHTML;
 
         if (!element) {
 
@@ -1532,30 +1533,29 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
         };
 
-        // html2pdf()
-        //   .set(options)
-        //   .from(element)
-        //   .save()
-        //   .then(() => {
-        //     this.showPrintableReport = false;
-        //     this.spinner.hide();
+        html2pdf()
+          .set(options)
+          .from(element)
+          .save()
+          .then(() => {
+            this.showPrintableReport = false;
+            this.spinner.hide();
 
-        //   })
-        //   .catch(() => {
+          })
+          .catch(() => {
 
-        //     this.showPrintableReport = false;
-        //     this.spinner.hide();
+            this.showPrintableReport = false;
+            this.spinner.hide();
 
-        //   });
+          });
 
 
-        var w = window.open('', '_blank');
-        // var html = document.getElementById('invoicePrintData').innerHTML;
-        w.document.body.innerHTML = element;
-        this.showPrintableReport = false;
-        this.spinner.hide();
+        // var w = window.open('', '_blank');
+        // w.document.body.innerHTML = element;
+        // this.showPrintableReport = false;
+        // this.spinner.hide();
 
-        w.print();
+        // w.print();
 
       });
     }, 500);

@@ -408,7 +408,9 @@ export class MeterReadingComponent implements OnInit {
       consumption: 0.00,
       totalSales: 0.00,
       variation: 0.00,
-      invoiceSales: 0.00
+      invoiceSales: 0.00,
+      pumpNo: '',
+      inMeterReading: 0.00
     })
   }
 

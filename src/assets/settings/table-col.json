@@ -1313,6 +1313,8 @@
     }
   },
   "SalesGST": {
+    "sno":"S No",
+    "customerGSTIN": "Receiver GSTIN/UINSTIN GSTIN",
     "title": "Sales GST",
     "0CGST": "0 CGST",
     "0IGST": "0 IGST",
@@ -1338,7 +1340,6 @@
     "TaxableValue": "Taxable Value",
     "TotalInvoiceValue": "Total Invoice Value",
     "cgst": "CGST",
-    "customerGSTIN": "Customer GSTIN",
     "customerName": "Customer Name",
     "grossAmount": "Gross Amount",
     "invoiceDate": "Invoice Date",
@@ -1347,10 +1348,11 @@
     "sgst": "SGST",
     "totalGST": "Total GST",
     "headers": {
-      "CreatedBy": "Created By",
-      "FromDate": "From Date",
+      "BranchName": "Branch Name",
       "ReportDate": "Report Date",
-      "ToDate": "To Date"
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "CreatedBy": "Created By"
     }
   },
   "StockValuation": {
@@ -1380,11 +1382,11 @@
     "sno": "S No",
     "ProductCode": "Product Code",
     "Name": "Product Name",
+    "BookStock": "Book Stock",
     "PhyStock": "Phy Stock",
+    "Sales": "Sales",
     "Excess": "Excess",
     "Short": "Short",
-    "BookStock": "Book Stock",
-    "Sales": "Sales",
     "StockTransfer": "Stock Transfer",
     "headers": {
       "BranchName": "Branch Name",
@@ -1396,9 +1398,12 @@
       "CreatedBy": "Created By"
     },
     "footer": {
-      "colspan": 5,
+      "colspan": 2,
       "GrandTotal": "Grand Total",
+      "empty": "",
       "GrandSaleTotal": "Grand Sale Total",
+      "empty1": "",
+      "empty2": "",
       "GrandSTRQtyTotal": "Grand STR Qty Total"
     }
   },
@@ -1698,13 +1703,13 @@
     "sno": "S No",
     "Code": "Code",
     "Pump": "Pump",
-    "Closing": "Closing",
-    "Consumption": "Consumption",
-    "Density": "Density",
-    "Mtr.Diff": "Meter Difference",
     "Opening": "Opening",
-    "InvoiceSales": "Invoice Sales",
+    "Closing": "Closing",
+    "Mtr.Diff": "Meter Difference",
     "Testing": "Testing",
+    "Density": "Density",
+    "Consumption": "Consumption",
+    "InvoiceSales": "Invoice Sales",
     "TotalSales": "Total Sales",
     "Variation": "Variation",
     "headers": {
@@ -1718,9 +1723,8 @@
       "Address": "Address"
     },
     "footer": {
-      "colspan": 7,
+      "colspan": 8,
       "TotalInvoiceSales": "TotalInvoiceSales",
-      "TotalTesting": "TotalTesting",
       "TotalTotalSales": "TotalTotalSales",
       "TotalVariation": "TotalVariation"
     }
