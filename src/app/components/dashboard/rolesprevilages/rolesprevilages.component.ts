@@ -62,10 +62,11 @@ export class RolesprevilagesComponent implements OnInit, OnDestroy {
     const getRolesUrl = this.apiConfigService.getRoles;
     this.apiService.apiGetRequest(getRolesUrl).subscribe(
       response => {
+        console.log(response);
         const res = response;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.roleArray = res.response['Roles'];
+        if (res != null && res.status === StatusCodes.pass) {
+          if (res.response != null) {
+            this.roleArray = res.response['roles'];
           }
         }
         this.spinner.hide();
@@ -85,9 +86,9 @@ export class RolesprevilagesComponent implements OnInit, OnDestroy {
     this.apiService.apiGetRequest(getRolesUrl).subscribe(
       response => {
         const res = response;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
-            this.parentMenu = res.response['ParentMenus'];
+        if (res != null && res.status === StatusCodes.pass) {
+          if (res.response != null) {
+            this.parentMenu = res.response['parentMenus'];
           }
         }
         this.spinner.hide();
@@ -95,12 +96,12 @@ export class RolesprevilagesComponent implements OnInit, OnDestroy {
   }
 
   selectedParentMenu() {
-    const getRolesUrl = ['/', this.apiConfigService.getMenuList, this.formData.get('role').value, this.formData.get('parentMenu').value].join('/');
+    const getRolesUrl = [this.apiConfigService.getMenuList, this.formData.get('role').value, this.formData.get('parentMenu').value].join('/');
     this.apiService.apiGetRequest(getRolesUrl).subscribe(
       response => {
         const res = response;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
+        if (res != null && res.status === StatusCodes.pass) {
+          if (res.response != null) {
             this.actualData = res.response.map(x => ({ ...x }));
             this.dataSource = new MatTableDataSource(res.response.map(x => ({ ...x })));
             this.dataSource.paginator = this.paginator;
@@ -131,12 +132,12 @@ export class RolesprevilagesComponent implements OnInit, OnDestroy {
       }
     }
 
-    const getAccessUrl = ['/', this.apiConfigService.giveAccess, this.formData.get('role').value].join('/');
+    const getAccessUrl = [this.apiConfigService.giveAccess, this.formData.get('role').value].join('/');
     this.apiService.apiPostRequest(getAccessUrl, filterData).subscribe(
       response => {
         const res = response;
-        if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(res.response)) {
+        if (res != null && res.status === StatusCodes.pass) {
+          if (res.response != null) {
             this.alertService.openSnackBar(Static.LoginSussfull, Static.Close, SnackBar.success);
             this.reset();
           }
