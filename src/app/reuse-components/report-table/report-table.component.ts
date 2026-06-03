@@ -546,23 +546,18 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.filterColData = [];
   }
   getDisplayedColumns(): string[] {
-    if (this.tableData != null) {
+  if (this.tableData != null) {
 
-      // Get ordered keys from config
-      const columnOrder = Object.keys(
-        this.getBody
-      ).filter(key => key !== 'headers' && key !== 'footer');
+    const columnOrder = Object.keys(this.getBody)
+      .filter(key => key !== 'headers' && key !== 'footer');
 
-      return this.columnDefinitions
-        .filter(cd => cd.hide)
-        .sort((a, b) => {
-          return columnOrder.indexOf(a.def) - columnOrder.indexOf(b.def);
-        })
-        .map(cd => cd.def);
-
-      // return this.columnDefinitions.filter(cd => cd.hide).map(cd => cd.def);
-    }
+    return columnOrder.filter(col =>
+      this.columnDefinitions.some(cd => cd.def === col && cd.hide)
+    );
   }
+
+  return [];
+}
   toggleSelectAll(selectAllValue: boolean) {
     this.filteredTableMulti.pipe(take(1), takeUntil(this.onDestroy))
       .subscribe(val => {
