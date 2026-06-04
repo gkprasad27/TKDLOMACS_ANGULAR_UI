@@ -158,7 +158,7 @@ export class SalesInvoiceComponent implements OnInit {
     const getMasterBranchesListUrl = this.apiConfigService.getBranchesList;
     const getStateListUrl = this.apiConfigService.getStateList;
     const getSlipListUrl = '../../../../../../assets/settings/bill.json';
-    const getPerchaseListUrl = '../../../../../../assets/settings/perchase.json';
+    const getPerchaseListUrl = '../../../../../../assets/settings/salesInvoice.json';
     const getPerchaseBranchListUrl = '../../../../../../assets/settings/perchase-branch.json';
 
     // Use forkJoin to run both APIs in parallel

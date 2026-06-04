@@ -211,15 +211,15 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     StockVerification: {
 
-    Name: {
-      width: '200px',
-      whiteSpace: 'normal'
-    },
+      Name: {
+        width: '200px',
+        whiteSpace: 'normal'
+      },
 
-    ProductCode: {
-      width: '90px',
-      whiteSpace: 'normal'
-    },
+      ProductCode: {
+        width: '90px',
+        whiteSpace: 'normal'
+      },
 
     },
 
@@ -235,10 +235,10 @@ export class ReportTableComponent implements OnInit, OnChanges {
         width: '200px',
         whiteSpace: 'normal'
       },
-       ProductName: {
-          width: '200px',
-          whiteSpace: 'normal'
-        }
+      ProductName: {
+        width: '200px',
+        whiteSpace: 'normal'
+      }
     },
 
     DailySales: {
@@ -273,11 +273,11 @@ export class ReportTableComponent implements OnInit, OnChanges {
     },
 
     SMSSummary: {
-        qty: {
+      qty: {
         width: '50px',
         whiteSpace: 'normal'
       },
-        price: {
+      price: {
         width: '50px',
         whiteSpace: 'normal'
       },
@@ -546,18 +546,18 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.filterColData = [];
   }
   getDisplayedColumns(): string[] {
-  if (this.tableData != null) {
+    if (this.tableData != null) {
 
-    const columnOrder = Object.keys(this.getBody)
-      .filter(key => key !== 'headers' && key !== 'footer');
+      const columnOrder = Object.keys(this.getBody)
+        .filter(key => key !== 'headers' && key !== 'footer');
 
-    return columnOrder.filter(col =>
-      this.columnDefinitions.some(cd => cd.def === col && cd.hide)
-    );
+      return columnOrder.filter(col =>
+        this.columnDefinitions.some(cd => cd.def === col && cd.hide)
+      );
+    }
+
+    return [];
   }
-
-  return [];
-}
   toggleSelectAll(selectAllValue: boolean) {
     this.filteredTableMulti.pipe(take(1), takeUntil(this.onDestroy))
       .subscribe(val => {
@@ -697,40 +697,40 @@ export class ReportTableComponent implements OnInit, OnChanges {
   }
 
   get getHeaders() {
-    if(this.routeParam == 'Shift') {
+    if (this.routeParam == 'Shift') {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value]?.headers;
     }
-    if(this.routeParam == 'Salesanalysisbybranch') {
+    if (this.routeParam == 'Salesanalysisbybranch') {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value]?.headers;
     }
     return this.runtimeConfigService.tableColumnsData[this.routeParam].headers;
   }
 
   get getFooter() {
-    if(this.routeParam == 'Shift') {
+    if (this.routeParam == 'Shift') {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value]?.footer;
     }
-    if(this.routeParam == 'Salesanalysisbybranch') {
+    if (this.routeParam == 'Salesanalysisbybranch') {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value]?.footer;
     }
     return this.runtimeConfigService.tableColumnsData[this.routeParam].footer;
   }
 
   get getBody() {
-    if(this.routeParam == 'Shift') {
+    if (this.routeParam == 'Shift') {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value];
     }
-    if(this.routeParam == 'Salesanalysisbybranch') {
+    if (this.routeParam == 'Salesanalysisbybranch') {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value];
     }
     return this.runtimeConfigService.tableColumnsData[this.routeParam];
   }
 
   get getName() {
-    if(this.routeParam == 'Shift') {
+    if (this.routeParam == 'Shift') {
       return this.Reports.find(r => r.id == this.dateForm.get('selectedReport')?.value)?.reportName;
     }
-    if(this.routeParam == 'Salesanalysisbybranch') {
+    if (this.routeParam == 'Salesanalysisbybranch') {
       return this.dateForm.get('ReportName')?.value;
     }
     return null;
@@ -1471,7 +1471,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       setTimeout(() => {
 
         const element = document.getElementById('printableReport');
-        // const element = document.getElementById('printableReport').innerHTML;
+        const elementHtml = document.getElementById('printableReport').innerHTML;
 
         if (!element) {
 
@@ -1483,6 +1483,15 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
           return;
 
+        }
+
+        if (this.routeParam === 'AccountLedger') {
+          var w = window.open('', '_blank');
+          w.document.body.innerHTML = elementHtml;
+          this.showPrintableReport = false;
+          this.spinner.hide();
+          w.print();
+          return;
         }
 
         const options = {
@@ -1545,12 +1554,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
           });
 
 
-        // var w = window.open('', '_blank');
-        // w.document.body.innerHTML = element;
-        // this.showPrintableReport = false;
-        // this.spinner.hide();
 
-        // w.print();
 
       });
     }, 500);
