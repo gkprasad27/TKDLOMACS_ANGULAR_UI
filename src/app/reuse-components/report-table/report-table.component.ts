@@ -150,7 +150,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
     'TotalCredits', 'TotalReceipts', 'TotalPayments', 'Receipts', 'Payments', 'Closing', 'Density', 'InvoiceSales', 'Mtr.Diff', 'Opening', 'TotalSales', 'Variation', 'Consumption', 'Testing',
     'OpeningQty', 'InwardQty', 'OutwardQty', 'ClosingQty', 'PQty', 'nPAmount', 'pAmount', 'TotalPurchase', 'NPTotalQty', 'Credit', 'BalanceDue', 'TotalQty',
     "PumpNo", 'GrossAmount', 'SlipNo', 'CNG', 'GrossAmount', 'Sales', 'BookStock', 'PhyStock', 'Excess', 'Short', 'StockTransfer',
-    "TotalInvoiceSales", 'TotalTesting', 'TotalTotalSales', 'TotalVariation'
+    "TotalInvoiceSales", 'TotalTesting', 'TotalTotalSales', 'TotalVariation', 
+    "TotalInvoiceValue", "TaxableValue", "0TaxAmt", "0IGST", "0CGST", "0SGST", "5TaxAmt", "5IGST", "5CGST", "5SGST", "12TaxAmt", "12IGST", "12CGST", "12SGST", "18TaxAmt", "18IGST", "18CGST", "18SGST", "28TaxAmt", "28IGST", "28CGST", "28SGST"
   ];
 
 
@@ -1485,7 +1486,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
         }
 
-        if (this.routeParam === 'AccountLedger') {
+        if (this.routeParam === 'AccountLedger' || this.routeParam === 'SalesGST') {
           var w = window.open('', '_blank');
           w.document.body.innerHTML = elementHtml;
           this.showPrintableReport = false;
@@ -1521,7 +1522,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
           jsPDF: {
 
-            orientation: 'portrait' as const,
+            orientation: (this.routeParam === 'SalesGST' ? 'landscape' : 'portrait') as 'landscape' | 'portrait',
 
             unit: 'mm' as const,
 

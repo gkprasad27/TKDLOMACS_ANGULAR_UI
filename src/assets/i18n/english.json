@@ -1728,8 +1728,8 @@
     "TaxableValue": "Taxable Value",
     "TotalInvoiceValue": "Total Invoice Value",
     "cgst": "CGST",
-    "customerGSTIN": "Customer GSTIN",
-    "customerName": "Customer Name",
+    "customerGSTIN": "Receiver GSTIN/UINSTIN GSTIN",
+    "customerName":"Receiver Name",
     "grossAmount": "Gross Amount",
     "invoiceDate": "Invoice Date",
     "invoiceMasterId": "Invoice Master ID",
@@ -1740,6 +1740,7 @@
     "CreatedBy": "Created By",
     "FromDate": "From Date",
     "ReportDate": "Report Date",
+    "Branch":"Branch Name",
     "ToDate": "To Date"
   },
   "TrialBalance": {
