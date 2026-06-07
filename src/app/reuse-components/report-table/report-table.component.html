@@ -670,7 +670,7 @@
               font-weight: bold;
             " [style.textAlign]="getColumnAlignment(foot['key'].toString())">
 
-            {{ footerData[0][foot['key']] || '' }}
+            {{ formatCellValue(footerData[0][foot['key']], foot['key']) }}
 
           </td>
 

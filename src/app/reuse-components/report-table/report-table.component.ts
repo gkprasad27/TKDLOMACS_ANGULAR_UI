@@ -1356,7 +1356,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
   /**
    * Format cell value based on column type
    */
-  formatCellValue(value: any, columnName: string): any {
+  formatCellValue(value: any, columnName: any): any {
     if (value === null || value === undefined || value === '') {
       return '';
     }
