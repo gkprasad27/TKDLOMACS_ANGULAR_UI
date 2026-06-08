@@ -1376,11 +1376,12 @@ export class ReportTableComponent implements OnInit, OnChanges {
         // Check if value is a valid date
         const date = new Date(value);
         if (!isNaN(date.getTime())) {
-          return new DatePipe('en-US').transform(value, 'dd/MM/yyyy');
+          return new DatePipe('en-US').transform(value, 'dd-MM-yyyy');
         }
       } catch (e) {
         console.error('Error formatting date:', e);
       }
+      console.warn(value, 'is not a valid date');
       return value;
     }
 
@@ -1424,8 +1425,6 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
 
   getColumnStyle(column: string): any {
-
-    console.log('Getting style for column:', column);
 
     let config = { width: '', whiteSpace: '' };
     if (column === 'sno') {
