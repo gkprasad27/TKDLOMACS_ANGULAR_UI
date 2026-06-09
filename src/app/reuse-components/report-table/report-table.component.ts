@@ -151,7 +151,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
     'OpeningQty', 'InwardQty', 'OutwardQty', 'ClosingQty', 'PQty', 'nPAmount', 'pAmount', 'TotalPurchase', 'NPTotalQty', 'Credit', 'BalanceDue', 'TotalQty',
     "PumpNo", 'GrossAmount', 'SlipNo', 'CNG', 'GrossAmount', 'Sales', 'BookStock', 'PhyStock', 'Excess', 'Short', 'StockTransfer',
     "TotalInvoiceSales", 'TotalTesting', 'TotalTotalSales', 'TotalVariation', 
-    "TotalInvoiceValue", "TaxableValue", "0TaxAmt", "0IGST", "0CGST", "0SGST", "5TaxAmt", "5IGST", "5CGST", "5SGST", "12TaxAmt", "12IGST", "12CGST", "12SGST", "18TaxAmt", "18IGST", "18CGST", "18SGST", "28TaxAmt", "28IGST", "28CGST", "28SGST"
+    "TotalInvoiceValue", "TaxableValue", "0TaxAmt", "0IGST", "0CGST", "0SGST", "5TaxAmt", "5IGST", "5CGST", "5SGST", "12TaxAmt", "12IGST", "12CGST", "12SGST", "18TaxAmt", "18IGST", "18CGST", "18SGST", "28TaxAmt", "28IGST", "28CGST", "28SGST",
+    "OpeningBalance", "ClosingBalance"
   ];
 
 
@@ -1374,10 +1375,10 @@ export class ReportTableComponent implements OnInit, OnChanges {
     if (this.isDateColumn(columnName)) {
       try {
         // Check if value is a valid date
-        const date = new Date(value);
-        if (!isNaN(date.getTime())) {
-          return new DatePipe('en-US').transform(value, 'dd-MM-yyyy');
-        }
+        // const date = new Date(value);
+        // if (!isNaN(date.getTime())) {
+          return value;
+        // }
       } catch (e) {
         console.error('Error formatting date:', e);
       }
