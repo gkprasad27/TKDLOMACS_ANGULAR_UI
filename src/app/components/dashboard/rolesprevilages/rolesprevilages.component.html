@@ -5,7 +5,7 @@
       <div class="row">
 
         <mat-form-field class="col-3">
-          <mat-label>{{ 'rolePrevilages/role.role' | translate }}</mat-label>
+          <mat-label>{{ 'rolePrevilages.role' | translate }}</mat-label>
           <mat-select formControlName="role" (selectionChange)="onRuleChange($event)" appFocusOnEnter tabIndex="1">
             @for (role of roleArray; track role) {
               <mat-option [value]="role.id">
@@ -15,7 +15,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-3">
-          <mat-label>{{ 'rolePrevilages/role.headerMenu' | translate }}</mat-label>
+          <mat-label>{{ 'rolePrevilages.headerMenu' | translate }}</mat-label>
           <mat-select formControlName="parentMenu" (selectionChange)="selectedParentMenu();" appFocusOnEnter
             tabIndex="2">
             @for (pm of parentMenu; track pm) {
@@ -35,15 +35,15 @@
     <div class="table">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
         <ng-container matColumnDef="ext4">
-          <th mat-header-cell *matHeaderCellDef>{{ "rolePrevilages/role.menuName" | translate }}</th>
+          <th mat-header-cell *matHeaderCellDef>{{ "rolePrevilages.menuName" | translate }}</th>
           <td mat-cell *matCellDef="let element">{{ element.ext4 }}</td>
         </ng-container>
 
         <ng-container matColumnDef="active">
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox [hidden]="!dataSource" (change)="checkboxCheck($event, 'active')">
+            <mat-checkbox [(ngModel)]="activeChecked" [hidden]="!dataSource" (change)="checkboxCheck($event, 'active')">
             </mat-checkbox>
-            <span class="m-1"> {{ "rolePrevilages/role.active" | translate }} </span>
+            <span class="m-1"> {{ "rolePrevilages.active" | translate }} </span>
           </th>
           <td mat-cell *matCellDef="let element">
             <mat-checkbox [(ngModel)]="element.active" [checked]="element.active">
@@ -53,9 +53,9 @@
 
         <ng-container matColumnDef="canAdd">
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox [hidden]="!dataSource" (change)="checkboxCheck($event, 'canAdd')">
+            <mat-checkbox [(ngModel)]="canAddChecked" [hidden]="!dataSource" (change)="checkboxCheck($event, 'canAdd')">
             </mat-checkbox>
-            <span class="m-1"> {{ "rolePrevilages/role.add" | translate }} </span>
+            <span class="m-1"> {{ "rolePrevilages.add" | translate }} </span>
           </th>
           <td mat-cell *matCellDef="let element">
             <mat-checkbox [(ngModel)]="element.canAdd" [checked]="element.canAdd">
@@ -65,9 +65,9 @@
 
         <ng-container matColumnDef="canEdit">
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox [hidden]="!dataSource" (change)="checkboxCheck($event, 'canEdit')">
+            <mat-checkbox [(ngModel)]="canEditChecked" [hidden]="!dataSource" (change)="checkboxCheck($event, 'canEdit')">
             </mat-checkbox>
-            <span class="m-1"> {{ "rolePrevilages/role.edit" | translate }} </span>
+            <span class="m-1"> {{ "rolePrevilages.edit" | translate }} </span>
           </th>
           <td mat-cell *matCellDef="let element">
             <mat-checkbox [(ngModel)]="element.canEdit" [checked]="element.canEdit">
@@ -77,9 +77,9 @@
 
         <ng-container matColumnDef="canDelete">
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox [hidden]="!dataSource" (change)="checkboxCheck($event, 'canDelete')">
+            <mat-checkbox [(ngModel)]="canDeleteChecked" [hidden]="!dataSource" (change)="checkboxCheck($event, 'canDelete')">
             </mat-checkbox>
-            <span class="m-1"> {{ "rolePrevilages/role.delete" | translate }} </span>
+            <span class="m-1"> {{ "rolePrevilages.delete" | translate }} </span>
           </th>
           <td mat-cell *matCellDef="let element">
             <mat-checkbox [(ngModel)]="element.canDelete" [checked]="element.canDelete">
