@@ -950,6 +950,14 @@ export class SalesInvoiceComponent implements OnInit {
     }
   }
 
+  clearPumpNo(index, value) {
+    const flag = this.getPumpsArray.some(pump => pump.pumpNo == value);
+    if (!flag) {
+      this.dataSource.data[index].pumpNo = null;
+      this.dataSource = new MatTableDataSource(this.dataSource.data);
+    }
+  }
+
   getPupms(pump, productCode) {
     const pNumber = +pump;
     if (!isNaN(pNumber)) {
