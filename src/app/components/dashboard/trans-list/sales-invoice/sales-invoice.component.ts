@@ -951,10 +951,21 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   clearPumpNo(index, value) {
-    const flag = this.getPumpsArray.some(pump => pump.pumpNo == value);
+    const flag = this.getPumpsArray.some(pump => pump.text == value);
     if (!flag) {
       this.dataSource.data[index].pumpNo = null;
       this.dataSource = new MatTableDataSource(this.dataSource.data);
+    }
+  }
+
+  onTabPress(event, index, value) {
+    if (event.key === 'Tab') {
+      const flag = this.getPumpsArray.some(pump => pump.text == value);
+      if (flag) {
+        console.log(value);
+        this.dataSource.data[index].pumpNo = value;
+        this.dataSource = new MatTableDataSource(this.dataSource.data);
+      }
     }
   }
 
