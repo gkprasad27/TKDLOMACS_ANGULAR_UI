@@ -1695,6 +1695,135 @@
 
     }
 
+    
+    @if(routeParam == 'ReceiptsAndPaymentsDetailed') {
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 15px;
+                width: 15px;
+                display: inline-block;
+              ">
+
+              Cash Closing Balance:
+
+            </strong>
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['ClosingTotalReceipts'] }}</span>
+
+          </span>
+
+        </div>
+
+
+        <div style="flex: 0 0 50%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+            <!-- 
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Lubes-Cash:
+
+            </strong> -->
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['ClosingTotalPayments'] }}</span>
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 150px;
+                width: 150px;
+                display: inline-block;
+              ">
+
+              Closing Total:
+
+            </strong>
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['TotalReceipts'] }}</span>
+
+          </span>
+
+        </div>
+
+        
+        <div style="flex: 0 0 50%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <!-- <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Credit Amount:
+
+            </strong> -->
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['TotalPayments'] }}</span>
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    }
+
+
 
   </div>
 
