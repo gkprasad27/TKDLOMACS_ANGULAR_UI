@@ -1486,7 +1486,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
         }
 
-        if (this.routeParam === 'AccountLedger' || this.routeParam === 'SalesGST') {
+        if (this.routeParam === 'AccountLedger' || this.routeParam === 'SalesGST' || this.routeParam === 'IntimateSale' || this.routeParam === 'DailySales') {
           var w = window.open('', '_blank');
           w.document.body.innerHTML = elementHtml;
           this.showPrintableReport = false;
