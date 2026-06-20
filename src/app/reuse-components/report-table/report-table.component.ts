@@ -1486,73 +1486,73 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
         }
 
-        if (this.routeParam === 'AccountLedger' || this.routeParam === 'SalesGST' || this.routeParam === 'IntimateSale' || this.routeParam === 'DailySales') {
+        // if (this.routeParam === 'AccountLedger' || this.routeParam === 'SalesGST' || this.routeParam === 'IntimateSale' || this.routeParam === 'DailySales') {
           var w = window.open('', '_blank');
           w.document.body.innerHTML = elementHtml;
           this.showPrintableReport = false;
           this.spinner.hide();
           w.print();
-          return;
-        }
+          // return;
+        // }
 
-        const options = {
+        // const options = {
 
-          margin: [4, 4, 4, 4] as [number, number, number, number],
+        //   margin: [4, 4, 4, 4] as [number, number, number, number],
 
-          filename: `${this.routeParam}_Report_${new Date().getTime()}.pdf`,
+        //   filename: `${this.routeParam}_Report_${new Date().getTime()}.pdf`,
 
-          image: {
-            type: 'png' as const,
-            quality: 1
-          },
+        //   image: {
+        //     type: 'png' as const,
+        //     quality: 1
+        //   },
 
-          html2canvas: {
+        //   html2canvas: {
 
-            scale: 2,
+        //     scale: 2,
 
-            useCORS: true,
+        //     useCORS: true,
 
-            scrollY: 0,
+        //     scrollY: 0,
 
-            backgroundColor: '#ffffff',
+        //     backgroundColor: '#ffffff',
 
-            logging: false
+        //     logging: false
 
-          },
+        //   },
 
-          jsPDF: {
+        //   jsPDF: {
 
-            orientation: (this.routeParam === 'SalesGST' ? 'landscape' : 'portrait') as 'landscape' | 'portrait',
+        //     orientation: (this.routeParam === 'SalesGST' ? 'landscape' : 'portrait') as 'landscape' | 'portrait',
 
-            unit: 'mm' as const,
+        //     unit: 'mm' as const,
 
-            format: 'a4' as const,
+        //     format: 'a4' as const,
 
-            compress: true
+        //     compress: true
 
-          },
+        //   },
 
-          pagebreak: {
-            mode: ['css', 'legacy']
-          }
+        //   pagebreak: {
+        //     mode: ['css', 'legacy']
+        //   }
 
-        };
+        // };
 
-        html2pdf()
-          .set(options)
-          .from(element)
-          .save()
-          .then(() => {
-            this.showPrintableReport = false;
-            this.spinner.hide();
+        // html2pdf()
+        //   .set(options)
+        //   .from(element)
+        //   .save()
+        //   .then(() => {
+        //     this.showPrintableReport = false;
+        //     this.spinner.hide();
 
-          })
-          .catch(() => {
+        //   })
+        //   .catch(() => {
 
-            this.showPrintableReport = false;
-            this.spinner.hide();
+        //     this.showPrintableReport = false;
+        //     this.spinner.hide();
 
-          });
+        //   });
 
 
 
