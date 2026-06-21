@@ -23,6 +23,12 @@ import { BankMasterComponent } from './bankmaster/bankmaster.component';
 import { UserassignmentinbranchComponent } from './userassignmentinbranch/userassignmentinbranch.component';
 import { LedgerComponent } from './ledger/ledger.component';
 import { OpenLedgerComponent } from './openledger/openledger.component';
+import { ComponentMasterComponent } from '../payroll/componentmaster/componentmaster.component';
+import { PTMasterComponent } from '../payroll/ptmaster/ptmaster.component';
+import { CTCBreakupComponent } from '../payroll/ctcbreakup/ctcbreakup.component';
+import { StructureCreationComponent } from '../payroll/structure-creation/structure-creation.component';
+import { PFMasterComponent } from '../payroll/pfmaster/pfmaster.component';
+import { SalaryProcessComponent } from '../payroll/salaryproces/salaryprocess.component';
 
 
 @Injectable({
@@ -277,7 +283,60 @@ export class MastersService {
         this.dynamicData.listName = 'OpenLedgerList';
         this.dynamicData.primaryKey = 'ledgerKey';
         return this.dynamicData;
-        break;
+      case 'componentmaster':
+        this.dynamicData.url = this.apiConfigService.getComponentsList;
+        this.dynamicData.component = ComponentMasterComponent;
+        this.dynamicData.registerUrl = [this.apiConfigService.registerComponent, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.updateUrl = [this.apiConfigService.updateComponent, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteComponent;
+        this.dynamicData.listName = 'componentsList';
+        this.dynamicData.primaryKey = 'componentCode';
+        return this.dynamicData;
+
+      case 'ptmaster':
+        this.dynamicData.url = this.apiConfigService.getPTList;
+        this.dynamicData.component = PTMasterComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerPT;
+        this.dynamicData.updateUrl = this.apiConfigService.updatePT;
+        this.dynamicData.deleteUrl = this.apiConfigService.deletePT;
+        this.dynamicData.listName = 'ptList';
+        this.dynamicData.primaryKey = 'id';
+        return this.dynamicData;
+
+
+      case 'CTCBreakup':
+        this.dynamicData.url = this.apiConfigService.getCTCList;
+        this.dynamicData.component = CTCBreakupComponent;
+        this.dynamicData.listName = 'structuresList';
+        this.dynamicData.primaryKey = 'structureCode';
+        return this.dynamicData;
+
+      case 'structureCreation':
+        this.dynamicData.url = this.apiConfigService.getStructuresList;
+        this.dynamicData.component = StructureCreationComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerStructure;
+        this.dynamicData.updateUrl = this.apiConfigService.updateStructure;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteStructure;
+        this.dynamicData.listName = 'structuresList';
+        this.dynamicData.primaryKey = 'structureCode';
+        return this.dynamicData;
+
+      case 'pfmaster':
+        this.dynamicData.url = this.apiConfigService.getPfList;
+        this.dynamicData.component = PFMasterComponent;
+        this.dynamicData.registerUrl = [this.apiConfigService.registerPF, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.updateUrl = [this.apiConfigService.updatePF, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.deleteUrl = this.apiConfigService.deletePF;
+        this.dynamicData.listName = 'pfList';
+        this.dynamicData.primaryKey = 'id';
+        return this.dynamicData;
+
+      case 'salaryprocess':
+        this.dynamicData.url = this.apiConfigService.getCTCList;
+        this.dynamicData.component = SalaryProcessComponent;
+        this.dynamicData.listName = 'structuresList';
+        this.dynamicData.primaryKey = 'structureCode';
+        return this.dynamicData;
       default:
     }
   }

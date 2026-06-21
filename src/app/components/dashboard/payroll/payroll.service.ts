@@ -14,8 +14,8 @@ import { SalaryProcessComponent} from './salaryproces/salaryprocess.component';
   providedIn: 'root'
 })
 export class PayrollService {
-  dynamicData = { url: '', component: null, registerUrl: '', listName: '', updateUrl: '', primaryKey: '', deleteUrl: '', coustom: true };
 
+  dynamicData = { url: '', component: null, registerUrl: '', listName: '', updateUrl: '', primaryKey: '', deleteUrl: '', coustom: true };
 
   constructor(
     private apiConfigService: ApiConfigService
