@@ -89,7 +89,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     { id: '3', reportName: 'Shift wise sales stock' },
     { id: '4', reportName: 'Shift wise hdfc bank account' },
     { id: '5', reportName: 'Shift wise fleet card account' },
-    { id: '6', reportName: 'Shift wise daily sales report' },
+    { id: '6', reportName: 'Shift wise daily sales' },
     { id: '7', reportName: 'Shift wise Sale Value' },
     { id: '8', reportName: 'Shift wise ICICI SWIPE RECEIVABLES A/c' },
     { id: '9', reportName: 'Shift wise PINE LAB' },
@@ -97,9 +97,9 @@ export class ReportTableComponent implements OnInit, OnChanges {
   ];
   ReportNames = [
     // { id: '1', reportName: 'Shift Report' },
-    { id: '2', reportName: 'Detailed Sales Analysis Report' },
-    { id: '3', reportName: 'Sales Analysis Sub Category Branch Wise Report' },
-    { id: '4', reportName: 'Sales Analysis Sub Category Wise Report' },
+    { id: '2', reportName: 'Detailed Sales Analysis' },
+    { id: '3', reportName: 'Sales Analysis Sub Category Branch Wise' },
+    { id: '4', reportName: 'Sales Analysis Sub Category Wise' },
   ];
 
 
@@ -117,12 +117,12 @@ export class ReportTableComponent implements OnInit, OnChanges {
   ];
   search = [];
   ReportsType = [
-    { id: '1', reportName: 'Product Price List All Branch Report' },
-    { id: '2', reportName: 'Product Price List By Branch Report' }
+    { id: '1', reportName: 'Product Price List All Branch' },
+    { id: '2', reportName: 'Product Price List By Branch' }
   ];
   TrialBalanceReportType = [
-    { id: '1', reportName: 'Trial Balance Report' },
-    { id: '2', reportName: 'Trial Balance Group Report' }
+    { id: '1', reportName: 'Trial Balance' },
+    { id: '2', reportName: 'Trial Balance Group' }
   ];
   ClosingBalanceReportType = [
     { id: '1', reportName: 'Credit' },
@@ -149,7 +149,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     'cashqty', 'creditqty', 'totalqty', 'cashamt', 'creditamt', 'totalamt', 'CashSales', 'CreditSales', 'GrandTotal', 'TotalDebits',
     'TotalCredits', 'TotalReceipts', 'TotalPayments', 'Receipts', 'Payments', 'Closing', 'Density', 'InvoiceSales', 'Mtr.Diff', 'Opening', 'TotalSales', 'Variation', 'Consumption', 'Testing',
     'OpeningQty', 'InwardQty', 'OutwardQty', 'ClosingQty', 'PQty', 'nPAmount', 'pAmount', 'TotalPurchase', 'NPTotalQty', 'Credit', 'BalanceDue', 'TotalQty',
-    "PumpNo", 'GrossAmount', 'SlipNo', 'CNG', 'GrossAmount', 'Sales', 'BookStock', 'PhyStock', 'Excess', 'Short', 'StockTransfer',
+    'GrossAmount', 'CNG', 'GrossAmount', 'Sales', 'BookStock', 'PhyStock', 'Excess', 'Short', 'StockTransfer',
     "TotalInvoiceSales", 'TotalTesting', 'TotalTotalSales', 'TotalVariation', 
     "TotalInvoiceValue", "TaxableValue", "0TaxAmt", "0IGST", "0CGST", "0SGST", "5TaxAmt", "5IGST", "5CGST", "5SGST", "12TaxAmt", "12IGST", "12CGST", "12SGST", "18TaxAmt", "18IGST", "18CGST", "18SGST", "28TaxAmt", "28IGST", "28CGST", "28SGST",
     "OpeningBalance", "ClosingBalance"
@@ -234,11 +234,23 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     Salesanalysisbybranch: {
       ItemName: {
-        width: '200px',
+        width: '150px',
         whiteSpace: 'normal'
       },
       ProductName: {
         width: '200px',
+        whiteSpace: 'normal'
+      },
+      Code: {
+        width: '40px',
+        whiteSpace: 'normal'
+      },
+      UOM: {
+        width: '50px',
+        whiteSpace: 'normal'
+      },
+      Qty: {
+        width: '60px',
         whiteSpace: 'normal'
       }
     },
@@ -252,9 +264,12 @@ export class ReportTableComponent implements OnInit, OnChanges {
         width: '35px',
         whiteSpace: 'normal'
       },
-
       Qty: {
-        width: '35px',
+        width: '65px',
+        whiteSpace: 'normal'
+      },
+      SlipNo: {
+        width: '40px',
         whiteSpace: 'normal'
       }
 
@@ -290,8 +305,12 @@ export class ReportTableComponent implements OnInit, OnChanges {
     },
 
     VehicalEnquiry: {
+      vehicleRegNo: {
+        width: '80px',
+        whiteSpace: 'normal'
+      },
       qty: {
-        width: '35px',
+        width: '55px',
         whiteSpace: 'normal'
       },
       pumpNo: {
@@ -300,7 +319,17 @@ export class ReportTableComponent implements OnInit, OnChanges {
       },
 
       productName: {
-        width: '200px',
+        width: '150px',
+        whiteSpace: 'normal'
+      },
+
+      InvoiceDate: {
+        width: '80px',
+        whiteSpace: 'normal'
+      },
+
+      productCode: {
+        width: '80px',
         whiteSpace: 'normal'
       },
 
@@ -317,7 +346,26 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     Shift: {
       LedgerName: {
-        width: '250px',
+        width: '150px',
+        whiteSpace: 'normal'
+      },
+
+      InvoiceNo: {
+        width: '80px',
+        whiteSpace: 'normal'
+      },
+
+      PumpNo: {
+        width: '35px',
+        whiteSpace: 'normal'
+      },
+      VehicleRegNo: {
+        width: '80px',
+        whiteSpace: 'normal'
+      },
+
+      SlipNo: {
+        width: '40px',
         whiteSpace: 'normal'
       },
 
@@ -329,12 +377,32 @@ export class ReportTableComponent implements OnInit, OnChanges {
       Pump: {
         width: '35px',
         whiteSpace: 'normal'
+      },
+
+      Opening: {
+        width: '100px',
+        whiteSpace: 'normal'
+      },
+
+      Closing: {
+        width: '100px',
+        whiteSpace: 'normal'
+      },
+
+      DATE: {
+        width: '80px',
+        whiteSpace: 'normal'
       }
     },
 
     BranchWiseStockStatementLtrs: {
       productName: {
-        width: '150px',
+        width: '100px',
+        whiteSpace: 'normal'
+      },
+
+      productCode: {
+        width: '80px',
         whiteSpace: 'normal'
       },
 
@@ -358,7 +426,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     BankReconciliation: {
       Partyname: {
-        width: '400px',
+        width: '200px',
         whiteSpace: 'normal'
       }
     }

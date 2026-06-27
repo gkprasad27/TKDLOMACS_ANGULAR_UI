@@ -651,9 +651,8 @@
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
               font-size: 12px;
-              font-weight: bold;
-              text-align: center;
-            ">
+              text-align: end;
+            "  [style.font-weight]="routeParam !== 'BranchWiseStockStatementLtrs' && routeParam !== 'BranchWiseStockStatementQty' ? 'bold' : 'normal'">
 
             Totals
 
@@ -667,8 +666,7 @@
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
               font-size: 12px;
-              font-weight: bold;
-            " [style.textAlign]="getColumnAlignment(foot['key'].toString())">
+            " [style.textAlign]="getColumnAlignment(foot['key'].toString())" [style.font-weight]="routeParam !== 'BranchWiseStockStatementLtrs' && routeParam !== 'BranchWiseStockStatementQty' ? 'bold' : 'normal'">
 
             {{ formatCellValue(footerData[0][foot['key']], foot['key']) }}
 
@@ -1240,10 +1238,10 @@
       ">
 
 
-      <div style="margin-bottom: 2px;display: flex;">
+      <div style="margin-bottom: 2px;">
 
 
-        <div style="flex: 0 0 20%;">
+        <div style="flex: 0 0 100%;">
 
           <span style="
               display: inline-block;
@@ -1255,7 +1253,7 @@
                 display: inline-block;
               ">
 
-              Total:
+              Total Qty:
 
             </strong>
 
@@ -1266,21 +1264,21 @@
         </div>
 
 
-        <div style="flex: 0 0 50%;">
+        <div style="flex: 0 0 100%;">
 
           <span style="
               display: inline-block;
               margin-bottom: 2px;
             ">
-            <!-- 
+            
             <strong style="
                 min-width: 95px;
                 display: inline-block;
               ">
 
-              Lubes-Cash:
+              Gross Amount:
 
-            </strong> -->
+            </strong>
 
             <span style="padding-left: 10px;"> {{ footerData[0]['TotalAmount'] }}</span>
 
@@ -1299,7 +1297,7 @@
       ">
 
 
-      <div style="margin-bottom: 2px;display: flex;">
+      <div style="margin-bottom: 10px;display: flex;">
 
 
         <div style="flex: 0 0 50%;">
@@ -1384,7 +1382,7 @@
       <div style="margin-bottom: 2px;display: flex;">
 
 
-        <div style="flex: 0 0 20%;">
+        <div style="flex: 0 0 40%;">
 
           <span style="
               display: inline-block;
@@ -1489,7 +1487,7 @@
       <div style="margin-bottom: 2px;display: flex;">
 
 
-        <div style="flex: 0 0 20%;">
+        <div style="flex: 0 0 40%;">
 
           <span style="
               display: inline-block;

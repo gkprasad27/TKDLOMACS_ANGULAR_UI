@@ -1253,8 +1253,8 @@
     },
     "footer": {
       "colspan": 1,
-      "CreditAmount": "Credit Amount",
-      "DebitAmount": "Debit Amount"
+      "TotalCredit": "Credit Amount",
+      "TotalDebit": "Debit Amount"
     }
   },
   "ReceiptsAndPaymentsSummary": {
@@ -1273,9 +1273,9 @@
   },
   "ClosingBalance": {
     "sno": "S No",
-    "credits": "Credits",
     "ledgerCode": "Ledger Code",
     "ledgerName": "Ledger Name",
+    "credits": "Credits",
     "headers": {
       "FromDate": "From Date",
       "FromLedgerCode": "From Ledger Code",
@@ -1288,7 +1288,7 @@
       "ToLedgerName": "To Ledger Name"
     },
     "footer": {
-      "colspan": 1,
+      "colspan": 2,
       "CreditTotal": "Credit Total"
     }
   },
@@ -1360,8 +1360,8 @@
     "Code": "Code",
     "Liters": "Liters",
     "ProductName": "ProductName",
-    "StockValue": "StockValue",
     "UOM": "UOM",
+    "StockValue": "StockValue",
     "headers": {
       "Address": "Address",
       "BranchName": "Branch Name",
@@ -1372,9 +1372,8 @@
       "ToDate": "To Date"
     },
     "footer": {
-      "colspan": 3,
-      "TotalVal": "Total Value",
-      "branchName": "Branch Name"
+      "colspan": 5,
+      "TotalVal": "Total Value"
     }
   },
   "StockVerification": {

@@ -1603,8 +1603,8 @@
     "Code": "Code",
     "GroupName": "Group Name",
     "Name": "Name",
-    "supplierName": "Supplier Name",
-    "unitName": "Unit Name",
+    "SupplierName": "Supplier Name",
+    "UnitName": "Unit Name",
     "JAN": "January",
     "FEB": "February",
     "MAR": "March",
@@ -1662,8 +1662,8 @@
     "ReportDate": "Report Date",
     "ToDate": "To Date",
     "sno": "S No",
-    "CreditAmount": "Credit Amount",
-    "DebitAmount": "Debit Amount",
+    "TotalCredit": "Credit Amount",
+    "TotalDebit": "Debit Amount",
     "TotalType": "Total"
   },
   "ReceiptsAndPaymentsSummary": {
