@@ -1356,11 +1356,11 @@
   },
   "StockValuation": {
     "sno": "S No",
-    "Balance": "Balance",
-    "Code": "Code",
-    "Liters": "Liters",
     "ProductName": "ProductName",
+    "Code": "Code",
     "UOM": "UOM",
+    "Balance": "Balance",
+    "Liters": "Liters",
     "StockValue": "StockValue",
     "headers": {
       "Address": "Address",

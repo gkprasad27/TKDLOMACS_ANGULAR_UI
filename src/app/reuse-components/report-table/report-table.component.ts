@@ -275,6 +275,13 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     },
 
+    StockValuation: {
+      ProductName: {
+        width: '200px',
+        whiteSpace: 'normal'
+      }
+    },
+
     ReceiptsAndPaymentsDetailed: {
       'Account Description': {
         width: '350px',
