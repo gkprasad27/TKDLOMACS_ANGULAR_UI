@@ -1815,7 +1815,7 @@
     }
   },
   "Salesanalysisbybranch": {
-    "Detailed Sales Analysis Report": {
+    "Detailed Sales Analysis": {
       "sno": "S No",
       "BillDate": "Bill Date",
       "BillNo": "Bill No",
@@ -1841,7 +1841,7 @@
         "Amount": "Amount"
       }
     },
-    "Sales Analysis Sub Category Branch Wise Report": {
+    "Sales Analysis Sub Category Branch Wise": {
       "sno": "S No",
       "ProductGroupName": "Product Group Name",
       "ProductCode": "Product Code",
@@ -1859,7 +1859,7 @@
         "CreatedBy": "Created By"
       }
     },
-    "Sales Analysis Sub Category Wise Report": {
+    "Sales Analysis Sub Category Wise": {
       "sno": "S No",
       "BillDate": "Bill Date",
       "BillNo": "Bill No",
