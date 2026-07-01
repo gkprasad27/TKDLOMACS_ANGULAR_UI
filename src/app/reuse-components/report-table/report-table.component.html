@@ -1812,6 +1812,62 @@
     }
 
 
+    @if(routeParam == 'StockValuation') {
+    
+    @for(row of footerData; track $index; let i = $index) {
+    
+    <div style="
+                  margin-bottom: 10px;
+                  font-size: 13px;
+                  margin-top: 20px;
+                  display: flex;
+                ">
+
+                <div style="width: 40%;"></div>
+    
+    
+      <div style="margin-bottom: 2px;display: flex; width: 60%;">
+    
+        <span style="
+                        display: inline-block;
+                        margin-bottom: 2px;
+                      ">
+    
+          <strong style="
+                          min-width: 250px;
+                          width: 250px;
+                          display: inline-block;
+                        ">
+    
+            {{ row.branchName }}
+    
+          </strong>
+    
+    
+        </span> 
+    
+        <span style="
+                        display: inline-block;
+                        margin-bottom: 2px;
+                      ">
+    
+          <span style="padding-left: 10px;"> {{ row.TotalVal }}</span>
+    
+        </span>
+    
+    
+      </div>
+    
+    
+    </div>
+    
+    
+    }
+    
+    
+    }
+
+
 
   </div>
 

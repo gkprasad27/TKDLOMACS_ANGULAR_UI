@@ -1370,10 +1370,6 @@
       "GSTNo": "GST No",
       "ReportDate": "Report Date",
       "ToDate": "To Date"
-    },
-    "footer": {
-      "colspan": 5,
-      "TotalVal": "Total Value"
     }
   },
   "StockVerification": {
