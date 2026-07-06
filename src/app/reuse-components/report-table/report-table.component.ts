@@ -1378,6 +1378,44 @@ export class ReportTableComponent implements OnInit, OnChanges {
     }
 
 
+    if (this.routeParam === 'StockValuation') {
+
+      let newFooterRows: any[] = [];
+
+      this.footerData.forEach((footerItem, index) => {
+        newFooterRows[index] = [];
+        newFooterRows[index].push('');
+        newFooterRows[index].push('');
+        newFooterRows[index].push('');
+        newFooterRows[index].push('');
+        newFooterRows[index].push(footerItem['branchName']);
+        newFooterRows[index].push('');
+        newFooterRows[index].push(footerItem['TotalVal']);
+      });
+      
+      newFooterRows.forEach(d => {
+
+        let row = worksheet.addRow(d);
+
+        row.eachCell((cell) => {
+
+          cell.font = {
+            bold: true
+          };
+
+          cell.border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+          };
+        });
+      });
+
+
+    }
+
+
     // ================= EXPORT =================
 
     workbook.xlsx.writeBuffer().then((data) => {
