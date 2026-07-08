@@ -1,0 +1,78 @@
+<div class="position-relative popup-class">
+
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'vouchertype.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.voucherTypeId.valid &&formControls.voucherTypeId.status != 'DISABLED',
+           'ng--invalid': !formControls.voucherTypeId.valid &&formControls.voucherTypeId.status != 'DISABLED'  }">
+          <mat-label [translate]="'vouchertype.voucherTypeId'"></mat-label>
+          <input matInput  formControlName="voucherTypeId"
+            maxlength="4" appFocusOnEnter tabIndex="1">
+          @if (!formControls.voucherTypeId.valid &&formControls.voucherTypeId.status != 'DISABLED') {
+            <mat-error
+            [ngClass]="{ 'ng--invalid': !formControls.voucherTypeId.valid  }">Voucher Type Key is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3"
+          [ngClass]="{ 'ng--valid': formControls.voucherTypeName.valid, 'ng--invalid': !formControls.voucherTypeName.valid  }">
+          <mat-label [translate]="'vouchertype.voucherTypeName'"></mat-label>
+          <input matInput formControlName="voucherTypeName"
+            maxlength="40" appFocusOnEnter tabIndex="2">
+          @if (!formControls.voucherTypeName.valid) {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.voucherTypeName.valid  }">voucher Type Name is required
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'vouchertype.voucherClass' | translate }}</mat-label>
+          <mat-select formControlName="voucherClass" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            @for (vcList of voucherClass; track vcList) {
+              <mat-option [value]="vcList.voucherKey">
+                {{vcList.description}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'vouchertype.accountType'"></mat-label>
+          <mat-select formControlName="accountType" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            @for (ltype of voucherNatures; track ltype) {
+              <mat-option [value]="ltype.viewValue">
+                {{ltype.viewValue}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'vouchertype.printText'"></mat-label>
+          <input matInput formControlName="printText"
+            maxlength="40" appFocusOnEnter tabIndex="4">
+        </mat-form-field>
+
+      </div>
+      <mat-divider></mat-divider>
+    </form>
+  </mat-card-content>
+  <div class="form-element mt-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="5">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-green text-white mx-1" (click)="save()" appFocusOnEnter
+      tabIndex="6">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

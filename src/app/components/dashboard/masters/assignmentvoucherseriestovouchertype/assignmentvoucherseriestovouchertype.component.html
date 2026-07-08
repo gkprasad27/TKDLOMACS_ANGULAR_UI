@@ -1,0 +1,59 @@
+<div class="position-relative popup-class">
+
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'AssignVoucherseriestoVouchertype.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+      <div class="row">
+        <mat-form-field class="col-3">
+          <mat-label>{{'AssignVoucherseriestoVouchertype.voucherType' | translate }}</mat-label>
+          <mat-select formControlName="voucherType" appFocusOnEnter tabIndex="2">
+            <mat-option>None</mat-option>
+            @for (vttype of vtypeList; track vttype) {
+              <mat-option [value]="vttype.voucherTypeId">
+                {{vttype.voucherTypeName}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'AssignVoucherseriestoVouchertype.voucherSeries' | translate }}</mat-label>
+          <mat-select formControlName="voucherSeries" appFocusOnEnter tabIndex="3">
+            <mat-option>None</mat-option>
+            @for (vcList of vcList; track vcList) {
+              <mat-option [value]="vcList.id">
+                {{vcList.id}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'AssignVoucherseriestoVouchertype.suffix'"></mat-label>
+          <input matInput
+            formControlName="suffix" appFocusOnEnter tabIndex="4">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'AssignVoucherseriestoVouchertype.lastNumber'"></mat-label>
+          <input matInput
+            formControlName="lastNumber" appFocusOnEnter tabIndex="5">
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+    </form>
+  </mat-card-content>
+  <div class="form-element mt-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="4">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-green text-white mx-1" (click)="save()" appFocusOnEnter
+      tabIndex="5">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

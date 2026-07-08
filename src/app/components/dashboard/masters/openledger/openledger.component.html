@@ -14,8 +14,8 @@
           <mat-select formControlName="compCode" appFocusOnEnter tabIndex="0">
             <mat-option>None</mat-option>
             @for (comp of companyList; track comp) {
-              <mat-option [value]="comp.id">
-                {{comp.text}}
+              <mat-option [value]="comp.companyId">
+                {{comp.companyName}}
               </mat-option>
             }
           </mat-select>

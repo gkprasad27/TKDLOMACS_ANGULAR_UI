@@ -1,0 +1,58 @@
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'taxtransactions.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.code.valid &&formControls.code.status != 'DISABLED',
+           'ng--invalid': !formControls.code.valid  &&formControls.code.status != 'DISABLED'}">
+          <mat-label [translate]="'taxtransactions.code'"></mat-label>
+          <input matInput formControlName="code" maxlength="4"
+            appFocusOnEnter tabIndex="1">
+          @if (!formControls.code.valid  &&formControls.code.status != 'DISABLED') {
+            <mat-error
+              [ngClass]="{ 'ng--invalid': !formControls.code.valid  }">Code is
+            required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3"
+          [ngClass]="{ 'ng--valid': formControls.description.valid, 'ng--invalid': !formControls.description.valid  }">
+          <mat-label [translate]="'taxtransactions.description'"></mat-label>
+          <input matInput formControlName="description"
+            maxlength="30" appFocusOnEnter tabIndex="2">
+          @if (!formControls.description.valid) {
+            <mat-error
+            [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Name is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'taxtransactions.taxType' | translate }}</mat-label>
+          <mat-select formControlName="taxType" appFocusOnEnter
+            tabIndex="4">
+            <mat-option>None</mat-option>
+            @for (taxtrnsn of taxTypelist; track taxtrnsn) {
+              <mat-option [value]="taxtrnsn.taxKey">
+                {{taxtrnsn.taxKey}} - {{taxtrnsn.description}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+    </form>
+  </mat-card-content>
+  <div class="form-element mt-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="3">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-green text-white mx-1" (click)="save()" appFocusOnEnter
+      tabIndex="4">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

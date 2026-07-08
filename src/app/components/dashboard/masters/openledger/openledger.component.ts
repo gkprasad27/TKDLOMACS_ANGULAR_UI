@@ -121,7 +121,7 @@ export class OpenLedgerComponent implements OnInit {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.companyList = res.response['companiesList'];
+              this.companyList = res.response['CompanysList'];
             }
           }
           this.spinner.hide();

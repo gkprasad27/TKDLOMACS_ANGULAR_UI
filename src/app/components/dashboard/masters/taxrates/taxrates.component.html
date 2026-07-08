@@ -1,0 +1,120 @@
+<div class="position-relative popup-class">
+
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span>{{'taxrates.title' | translate }}</span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+      <div class="row">
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.taxRateCode.valid &&formControls.taxRateCode.status != 'DISABLED',
+           'ng--invalid': !formControls.taxRateCode.valid &&formControls.taxRateCode.status != 'DISABLED'}">
+          <mat-label [translate]="'taxrates.taxRateCode'"></mat-label>
+          <input matInput  formControlName="taxRateCode"
+            maxlength="5" appFocusOnEnter tabIndex="1">
+          @if (!formControls.taxRateCode.valid  &&formControls.taxRateCode.status != 'DISABLED') {
+            <mat-error
+            [ngClass]="{ 'ng--invalid': !formControls.taxRateCode.valid  }">Code is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3"
+          [ngClass]="{ 'ng--valid': formControls.description.valid, 'ng--invalid': !formControls.description.valid  }">
+          <mat-label [translate]="'taxrates.description'"></mat-label>
+          <input matInput  formControlName="description"
+            maxlength="50" appFocusOnEnter tabIndex="2">
+          @if (!formControls.description.valid) {
+            <mat-error
+            [ngClass]="{ 'ng--invalid': !formControls.description.valid  }">Name is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'taxrates.taxType'"></mat-label>
+          <mat-select formControlName="taxType" appFocusOnEnter tabIndex="5">
+            <mat-option>None</mat-option>
+            @for (taxtype of TaxTypess; track taxtype) {
+              <mat-option [value]="taxtype.viewValue">
+                {{taxtype.viewValue}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>Tax Transaction</mat-label>
+          <mat-select   formControlName="taxTransaction"
+            appFocusOnEnter tabIndex="4">
+            <mat-option>None</mat-option>
+            @for (taxtrnsn of Taxtransaction; track taxtrnsn) {
+              <mat-option [value]="taxtrnsn.id">
+                {{taxtrnsn.text}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'taxrates.taxCondition'"></mat-label>
+          <mat-select formControlName="taxCondition" appFocusOnEnter tabIndex="5">
+            <mat-option>None</mat-option>
+            @for (ltype of TaxConditions; track ltype) {
+              <mat-option [value]="ltype.viewValue">
+                {{ltype.viewValue}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'taxrates.sgst'"></mat-label>
+          <input matInput formControlName="sgst" maxlength="3"
+            appFocusOnEnter tabIndex="6">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'taxrates.cgst'"></mat-label>
+          <input matInput formControlName="cgst" maxlength="3"
+            appFocusOnEnter tabIndex="7">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'taxrates.igst'"></mat-label>
+          <input matInput formControlName="igst" maxlength="3"
+            appFocusOnEnter tabIndex="8">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'taxrates.ugst'"></mat-label>
+          <input matInput  formControlName="ugst" maxlength="3"
+            appFocusOnEnter tabIndex="9">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'taxrates.compositeCess'"></mat-label>
+          <input matInput  formControlName="compositeCess"
+            maxlength="3" appFocusOnEnter tabIndex="10">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'taxrates.effectiveFrom'"></mat-label>
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1" [nonEditable]="picker1" formControlName="effectiveFrom" appFocusOnEnter
+            tabIndex="3">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+      <mat-divider></mat-divider>
+    </form>
+  </mat-card-content>
+  <div class="form-element mt-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="11">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-green text-white mx-1" (click)="save()" appFocusOnEnter
+      tabIndex="12">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

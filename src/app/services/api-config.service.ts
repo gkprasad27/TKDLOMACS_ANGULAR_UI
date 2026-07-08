@@ -299,16 +299,94 @@ export class ApiConfigService {
   getPurchaseGlAccounts = `${environment.baseUrl}gl/AsignmentAcctoAccClass/GetPurchaseGlAccounts`;
   getInventoryGlAccounts = `${environment.baseUrl}gl/AsignmentAcctoAccClass/GetInventoryGlAccounts`;
 
+  getVoucherSeriesList = `${environment.baseUrl}VoucherSeries/GetVoucherSeriesList`;
+  registerVoucherSeries = `${environment.baseUrl}VoucherSeries/RegisterVoucherSeries`;
+  updateVoucherSeries = `${environment.baseUrl}VoucherSeries/UpdateVoucherSeries`;
+  deleteVoucherSeries = `${environment.baseUrl}VoucherSeries/DeleteVoucherSeries`;
+  getBranchList = `${environment.baseUrl}Common/GetBranchList`;
+  getPlantsList = `${environment.baseUrl}Common/GetPlantsList`;
+
+  getGLAccountListbyCatetory = `${environment.baseUrl}Common/GLAccountListbyCatetory`;
+  gettaxrateList = `${environment.baseUrl}Common/GetTaxRateList`;
+  getChartOfAccountList = `${environment.baseUrl}ChartOfAccount/GetChartOfAccountList`;
+  getAssignTaxacctoTaxcodeList = `${environment.baseUrl}AssignTaxacctoTaxcode/GetAssignTaxacctoTaxcodeList`;
+  registerAssignTaxacctoTaxcode = `${environment.baseUrl}AssignTaxacctoTaxcode/RegisterAssignTaxacctoTaxcode`;
+  updateAssignTaxacctoTaxcode = `${environment.baseUrl}AssignTaxacctoTaxcode/UpdateAssignTaxacctoTaxcode`;
+  deletAssignTaxacctoTaxcode = `${environment.baseUrl}AssignTaxacctoTaxcode/DeleteAssignTaxacctoTaxcode`;
+
+  getHsnSacList = `${environment.baseUrl}HsnSac/GetHsnSacList`;
+  registerHsnSac = `${environment.baseUrl}HsnSac/RegisterHsnSac`;
+  updateHsnSac = `${environment.baseUrl}HsnSac/UpdateHsnSac`;
+  deleteHsnSac = `${environment.baseUrl}HsnSac/DeleteHsnSac`;
+
+  getTDSRatesList = `${environment.baseUrl}TDSRates/GetTDSRatesList`;
+  registerTDSRates = `${environment.baseUrl}TDSRates/RegisterTDSRates`;
+  updateTDSRates = `${environment.baseUrl}TDSRates/UpdateTDSRates`
+  deleteTDSRates = `${environment.baseUrl}TDSRates/DeleteTDSRates`;
+
+  getIncomeTypeList = `${environment.baseUrl}IncomeType/GetIncomeTypeList`;
+  registerIncomeType = `${environment.baseUrl}IncomeType/RegisterIncomeType`;
+  updateIncomeType = `${environment.baseUrl}IncomeType/UpdateIncomeType`
+  deleteIncomeType = `${environment.baseUrl}IncomeType/DeleteIncomeType`;
+
+  getTDSRateList = `${environment.baseUrl}Common/GetTDSRateList`;
+  getPostingList = `${environment.baseUrl}Posting/GetPostingList`;
+  registerPosting = `${environment.baseUrl}Posting/RegisterPosting`;
+  updatePosting = `${environment.baseUrl}Posting/UpdatePosting`;
+  deletePosting = `${environment.baseUrl}Posting/DeletePosting`;
+
+
+  getTDStypeList = `${environment.baseUrl}TDStype/GetTDStypeList`;
+  registerTDStype = `${environment.baseUrl}TDStype/RegisterTDStype`;
+  updateTDStype = `${environment.baseUrl}TDStype/UpdateTDStype`
+  deleteTDStype = `${environment.baseUrl}TDStype/DeleteTDStype`;
+
+  getTaxTransactionList = `${environment.baseUrl}TaxTransaction/GetTaxTransactionList`;
+  registerTaxTransaction  = `${environment.baseUrl}TaxTransaction/RegisterTaxTransaction`;
+  updateTaxTransaction  = `${environment.baseUrl}TaxTransaction/UpdateTaxTransaction`;
+  deleteTaxTransaction  = `${environment.baseUrl}TaxTransaction/DeleteTaxTransaction`
+
+  getAssignmentVoucherSeriestoVoucherTypeList = `${environment.baseUrl}AssignmentVoucherSeriestoVoucherType/GetAssignmentVoucherSeriestoVoucherTypeList`;
+  registerAssignmentVoucherSeriestoVoucherType = `${environment.baseUrl}AssignmentVoucherSeriestoVoucherType/RegisterAssignmentVoucherSeriestoVoucherType`;
+  updateAssignmentVoucherSeriestoVoucherType = `${environment.baseUrl}AssignmentVoucherSeriestoVoucherType/UpdateAssignmentVoucherSeriestoVoucherType`
+  deleteAssignmentVoucherSeriestoVoucherType = `${environment.baseUrl}AssignmentVoucherSeriestoVoucherType/DeleteAssignmentVoucherSeriestoVoucherType`;
+  getVoucherTypesList = `${environment.baseUrl}Common/GetVoucherTypesList`;
+  getvochersseriesList = `${environment.baseUrl}Common/GetVouchersSeriesList`;
+
+  getTaxTypesList = `${environment.baseUrl}TaxTypes/GetTaxTypesList`;
+  registerTaxTypes = `${environment.baseUrl}TaxTypes/RegisterTaxTypes`;
+  updateTaxTypes = `${environment.baseUrl}TaxTypes/UpdateTaxTypes`;
+  deleteTaxTypes = `${environment.baseUrl}TaxTypes/DeleteTaxTypes`;
+
+  getTaxTransactionsList = `${environment.baseUrl}Common/GetTaxTransactionsList`;
+  getTaxRatesList = `${environment.baseUrl}TaxRates/GetTaxRatesList`;
+  registerTaxRates = `${environment.baseUrl}TaxRates/RegisterTaxRates`;
+  updateTaxRates = `${environment.baseUrl}TaxRates/UpdateTaxRates`;
+  deleteTaxRates = `${environment.baseUrl}TaxRates/DeleteTaxRates`;
+  // 
+  getvocherclassList = `${environment.baseUrl}VoucherClass/GetVoucherClassList`;
+  getVoucherTypeList = `${environment.baseUrl}gl/VoucherType/GetVoucherTypeList`;
+
+
+  registerVoucherTypes = `${environment.baseUrl}VoucherType/RegisterVoucherTypes`;
+  updateVoucherTypes = `${environment.baseUrl}VoucherType/UpdateVoucherTypes`;
+  deleteVoucherTypes = `${environment.baseUrl}VoucherType/DeleteVoucherTypes`;
 
   // Voucher Types //
-  getVoucherTypeList = `${environment.baseUrl}gl/VoucherType/GetVoucherTypeList`;
-  registerVoucherTypes = `${environment.baseUrl}gl/VoucherType/RegisterVoucherTypes`;
-  updateVoucherTypes = `${environment.baseUrl}gl/VoucherType/UpdateVoucherTypes`;
-  deleteVoucherTypes = `${environment.baseUrl}gl/VoucherType/DeleteVoucherTypes`;
-  getVoucherClassList = `${environment.baseUrl}gl/VoucherType/GetVoucherClassList`;
+  // getVoucherTypeList = `${environment.baseUrl}gl/VoucherType/GetVoucherTypeList`;
+  // registerVoucherTypes = `${environment.baseUrl}gl/VoucherType/RegisterVoucherTypes`;
+  // updateVoucherTypes = `${environment.baseUrl}gl/VoucherType/UpdateVoucherTypes`;
+  // deleteVoucherTypes = `${environment.baseUrl}gl/VoucherType/DeleteVoucherTypes`;
+  // getVoucherClassList = `${environment.baseUrl}gl/VoucherType/GetVoucherClassList`;
   getCompaniesList = `${environment.baseUrl}gl/VoucherType/GetCompaniesList`;
   getVoucherBranchesList = `${environment.baseUrl}gl/VoucherType/GetBranchesList`;
 
+
+  // voucherclass
+  getVoucherClassList = `${environment.baseUrl}payroll/VoucherClass/GetVoucherClassList`;
+  registerVoucherClass = `${environment.baseUrl}payroll/VoucherClass/RegisterVoucherClass`;
+  updateVoucherClass = `${environment.baseUrl}payroll/VoucherClass/UpdateVoucherClass`;
+  deleteVoucherClass = `${environment.baseUrl}payroll/VoucherClass/DeleteVoucherClass`;
   // ******************************** END GeneralLedger *********************************
 
   // *******************************  Inventory *****************************************
@@ -663,6 +741,7 @@ export class ApiConfigService {
   getConfigurationList = `${environment.baseUrl}payroll/ComponentMaster/GetConfigurationList`;
   updateComponent = `${environment.baseUrl}payroll/ComponentMaster/UpdateComponent`;
   deleteComponent = `${environment.baseUrl}payroll/ComponentMaster/DeleteComponent`;
+
 
 
   //PF Master

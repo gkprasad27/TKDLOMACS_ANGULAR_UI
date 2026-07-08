@@ -1,0 +1,67 @@
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'taxtypes.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+      <div class="row">
+
+        <!-- <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.taxKey.valid }">
+        <mat-label [translate]="'taxtypes.taxtypes'"></mat-label>
+        <input matInput  formControlName="taxKey" maxlength="4" appFocusOnEnter tabIndex="1">
+        <mat-error *ngIf="formControls.taxKey.errors" class="help-block">
+          <div *ngIf="formControls.taxKey.errors.required">code  is required </div>
+        </mat-error>
+      </mat-form-field> -->
+
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.taxKey.valid &&formControls.taxKey.status != 'DISABLED',
+            'ng--invalid': !formControls.taxKey.valid && formControls.taxKey.status != 'DISABLED' }">
+        <mat-label [translate]="'taxtypes.taxKey'"></mat-label>
+        <input matInput formControlName="taxKey" appFocusOnEnter
+          tabIndex="1">
+        @if (!formControls.taxKey.valid && formControls.taxKey.status != 'DISABLED') {
+          <mat-error
+            [ngClass]="{ 'ng--invalid': !formControls.taxKey.valid  }">code is required
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.description.valid }">
+        <mat-label [translate]="'taxtypes.description'"></mat-label>
+        <input matInput formControlName="description"
+          maxlength="30" appFocusOnEnter tabIndex="2">
+        @if (formControls.description.errors) {
+          <mat-error class="help-block">
+            @if (formControls.description.errors.required) {
+              <div>description is required </div>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="col-3">
+        <mat-label [translate]="'taxtypes.nature'"></mat-label>
+        <mat-select formControlName="nature" appFocusOnEnter tabIndex="5">
+          <mat-option>None</mat-option>
+          @for (taxtype of TaxTypess; track taxtype) {
+            <mat-option [value]="taxtype.viewValue">
+              {{taxtype.viewValue}}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+  </form>
+</mat-card-content>
+<div class="form-element mt-2 d-flex justify-content-end">
+  <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="3">
+    {{ 'COMMON.CANCEL' | translate }}
+  </button>
+  <button mat-raised-button type="submit" class="button-color-green text-white mx-1" (click)="save()" appFocusOnEnter
+    tabIndex="4">
+    {{ 'COMMON.SAVE' | translate }}
+  </button>
+</div>
+</div>

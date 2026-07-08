@@ -29,6 +29,19 @@ import { CTCBreakupComponent } from '../payroll/ctcbreakup/ctcbreakup.component'
 import { StructureCreationComponent } from '../payroll/structure-creation/structure-creation.component';
 import { PFMasterComponent } from '../payroll/pfmaster/pfmaster.component';
 import { SalaryProcessComponent } from '../payroll/salaryproces/salaryprocess.component';
+import { VoucherClassComponent } from './voucherclass/voucherclass.component';
+import { VoucherTypesComponent } from './vouchertypes/vouchertypes.component';
+import { VoucherSeriesComponents } from './voucherseries/voucherseries.component';
+import { AssignmentVoucherSeriestoVoucherTypesComponent } from './assignmentvoucherseriestovouchertype/assignmentvoucherseriestovouchertype.component';
+import { TaxIntegrationComponent } from './taxintegration/taxintegration.component';
+import { TaxRatesComponents } from './taxrates/taxrates.component';
+import { TaxTransactionComponent } from './taxtransaction/taxtransaction.component';
+import { AssignmentoftaxaccountstotaxcodesComponent } from './assignmentoftaxaccountstotaxcodes/assignmentoftaxaccountstotaxcodes.component';
+import { HsnSacComponent } from './hsnsac/hsnsac.component';
+import { TDSComponent } from './tdstype/tdstype.component';
+import { TdsRatesComponent } from './tdsrates/tdsrates.component';
+import { IncomeTypeComponent } from './incometypes/incometypes.component';
+import { PostingComponent } from './posting/posting.component';
 
 
 @Injectable({
@@ -329,6 +342,137 @@ export class MastersService {
         this.dynamicData.deleteUrl = this.apiConfigService.deletePF;
         this.dynamicData.listName = 'pfList';
         this.dynamicData.primaryKey = 'id';
+        return this.dynamicData;
+
+      case 'voucherclass':
+        this.dynamicData.url = this.apiConfigService.getVoucherTypeList;
+        this.dynamicData.component = VoucherClassComponent;
+        this.dynamicData.registerUrl = [this.apiConfigService.registerVoucherClass, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.updateUrl = [this.apiConfigService.updateVoucherClass, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteVoucherClass;
+        this.dynamicData.listName = 'vcList';
+        this.dynamicData.primaryKey = 'voucherKey';
+        return this.dynamicData;
+
+      case 'vouchertype':
+        this.dynamicData.url = this.apiConfigService.getVoucherTypeList;
+        this.dynamicData.component = VoucherTypesComponent;
+        this.dynamicData.registerUrl = [this.apiConfigService.registerVoucherTypes, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.updateUrl = [this.apiConfigService.updateVoucherTypes, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteVoucherClass;
+        this.dynamicData.listName = 'GLSubCodeList';
+        this.dynamicData.primaryKey = 'voucherTypeId';
+        return this.dynamicData;
+
+      case 'voucherseries':
+        this.dynamicData.url = this.apiConfigService.getVoucherSeriesList;
+        this.dynamicData.component = VoucherSeriesComponents;
+        this.dynamicData.registerUrl = [this.apiConfigService.registerVoucherSeries, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.updateUrl = [this.apiConfigService.updateVoucherSeries, user.companyCode ? user.companyCode : "0"].join('/');
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteVoucherSeries;
+        this.dynamicData.listName = 'vseriesList';
+        this.dynamicData.primaryKey = 'voucherSeriesKey';
+        return this.dynamicData;
+
+      case 'AssignVoucherseriestoVouchertype':
+        this.dynamicData.url = this.apiConfigService.getAssignmentVoucherSeriestoVoucherTypeList;
+        this.dynamicData.component = AssignmentVoucherSeriestoVoucherTypesComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerAssignmentVoucherSeriestoVoucherType;
+        this.dynamicData.updateUrl = this.apiConfigService.updateAssignmentVoucherSeriestoVoucherType;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteAssignmentVoucherSeriestoVoucherType;
+        this.dynamicData.listName = 'avsvsList';
+        this.dynamicData.primaryKey = 'id';
+        return this.dynamicData;
+
+
+      case 'taxtypes':
+        this.dynamicData.url = this.apiConfigService.getTaxTypesList;
+        this.dynamicData.component = TaxIntegrationComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerTaxTypes;
+        this.dynamicData.updateUrl = this.apiConfigService.updateTaxTypes;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteTaxTypes;
+        this.dynamicData.listName = 'TaxtypesList';
+        this.dynamicData.primaryKey = 'taxKey';
+        return this.dynamicData;
+
+      case 'taxrates':
+        this.dynamicData.url = this.apiConfigService.getTaxRatesList;
+        this.dynamicData.component = TaxRatesComponents;
+        this.dynamicData.registerUrl = this.apiConfigService.registerTaxRates;
+        this.dynamicData.updateUrl = this.apiConfigService.updateTaxRates;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteTaxRates;
+        this.dynamicData.listName = 'TaxratesList';
+        this.dynamicData.primaryKey = 'taxRateCode';
+        return this.dynamicData;
+
+      case 'taxtransactions':
+        this.dynamicData.url = this.apiConfigService.getTaxTransactionList;
+        this.dynamicData.component = TaxTransactionComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerTaxTransaction;
+        this.dynamicData.updateUrl = this.apiConfigService.updateTaxTransaction;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteTaxTransaction;
+        this.dynamicData.listName = 'TaxtransactionList';
+        this.dynamicData.primaryKey = 'code';
+        return this.dynamicData;
+
+      case 'assignmentoftaxaccountstotaxcodes':
+        this.dynamicData.url = this.apiConfigService.getAssignTaxacctoTaxcodeList;
+        this.dynamicData.component = AssignmentoftaxaccountstotaxcodesComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerAssignTaxacctoTaxcode;
+        this.dynamicData.updateUrl = this.apiConfigService.updateAssignTaxacctoTaxcode;
+        this.dynamicData.deleteUrl = this.apiConfigService.deletAssignTaxacctoTaxcode;
+        this.dynamicData.listName = 'taxcodesList';
+        this.dynamicData.primaryKey = 'code';
+        return this.dynamicData;
+
+      case 'hsnsac':
+        this.dynamicData.url = this.apiConfigService.getHsnSacList;
+        this.dynamicData.component = HsnSacComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerHsnSac;
+        this.dynamicData.updateUrl = this.apiConfigService.updateHsnSac;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteHsnSac;
+        this.dynamicData.listName = 'hsnsacList';
+        this.dynamicData.primaryKey = 'code';
+        return this.dynamicData;
+
+      case 'tdstypes':
+        this.dynamicData.url = this.apiConfigService.getTDStypeList;
+        this.dynamicData.component = TDSComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerTDStype;
+        this.dynamicData.updateUrl = this.apiConfigService.updateTDStype;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteTDStype;
+        this.dynamicData.listName = 'tdsList';
+        this.dynamicData.primaryKey = 'tdsCode';
+        return this.dynamicData;
+
+      case 'tdsrates':
+        this.dynamicData.url = this.apiConfigService.getTDSRatesList;
+        this.dynamicData.component = TdsRatesComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerTDSRates;
+        this.dynamicData.updateUrl = this.apiConfigService.updateTDSRates;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteTDSRates;
+        this.dynamicData.listName = 'tdsratesList';
+        this.dynamicData.primaryKey = 'code';
+        return this.dynamicData;
+
+      case 'incometypes':
+        this.dynamicData.url = this.apiConfigService.getIncomeTypeList;
+        this.dynamicData.component = IncomeTypeComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerIncomeType;
+        this.dynamicData.updateUrl = this.apiConfigService.updateIncomeType;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteIncomeType;
+        this.dynamicData.listName = 'incmList';
+        this.dynamicData.primaryKey = 'code';
+        return this.dynamicData;
+
+      case 'posting':
+        this.dynamicData.url = this.apiConfigService.getPostingList;
+        this.dynamicData.component = PostingComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerPosting;
+        this.dynamicData.updateUrl = this.apiConfigService.updatePosting;
+        this.dynamicData.deleteUrl = this.apiConfigService.deletePosting;
+        this.dynamicData.listName = 'psList';
+        this.dynamicData.primaryKey = 'code';
         return this.dynamicData;
 
       case 'salaryprocess':
