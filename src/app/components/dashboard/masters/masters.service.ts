@@ -42,6 +42,7 @@ import { TDSComponent } from './tdstype/tdstype.component';
 import { TdsRatesComponent } from './tdsrates/tdsrates.component';
 import { IncomeTypeComponent } from './incometypes/incometypes.component';
 import { PostingComponent } from './posting/posting.component';
+import { AccountchartComponent } from './chartofaccount/chartofaccount.component';
 
 
 @Injectable({
@@ -472,6 +473,16 @@ export class MastersService {
         this.dynamicData.updateUrl = this.apiConfigService.updatePosting;
         this.dynamicData.deleteUrl = this.apiConfigService.deletePosting;
         this.dynamicData.listName = 'psList';
+        this.dynamicData.primaryKey = 'code';
+        return this.dynamicData;
+
+      case 'accountchart':
+        this.dynamicData.url = this.apiConfigService.getChartOfAccountList;
+        this.dynamicData.component = AccountchartComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerChartOfAccount;
+        this.dynamicData.updateUrl = this.apiConfigService.updateChartOfAccount;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteChartOfAccount;
+        this.dynamicData.listName = 'coaList';
         this.dynamicData.primaryKey = 'code';
         return this.dynamicData;
 

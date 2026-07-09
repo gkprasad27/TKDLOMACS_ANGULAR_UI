@@ -308,7 +308,7 @@ export class ApiConfigService {
 
   getGLAccountListbyCatetory = `${environment.baseUrl}Common/GLAccountListbyCatetory`;
   gettaxrateList = `${environment.baseUrl}Common/GetTaxRateList`;
-  getChartOfAccountList = `${environment.baseUrl}ChartOfAccount/GetChartOfAccountList`;
+  // getChartOfAccountList = `${environment.baseUrl}ChartOfAccount/GetChartOfAccountList`;
   getAssignTaxacctoTaxcodeList = `${environment.baseUrl}AssignTaxacctoTaxcode/GetAssignTaxacctoTaxcodeList`;
   registerAssignTaxacctoTaxcode = `${environment.baseUrl}AssignTaxacctoTaxcode/RegisterAssignTaxacctoTaxcode`;
   updateAssignTaxacctoTaxcode = `${environment.baseUrl}AssignTaxacctoTaxcode/UpdateAssignTaxacctoTaxcode`;
@@ -334,6 +334,11 @@ export class ApiConfigService {
   registerPosting = `${environment.baseUrl}Posting/RegisterPosting`;
   updatePosting = `${environment.baseUrl}Posting/UpdatePosting`;
   deletePosting = `${environment.baseUrl}Posting/DeletePosting`;
+
+  getChartOfAccountList = `${environment.baseUrl}ChartOfAccount/GetChartOfAccountList`;
+  registerChartOfAccount = `${environment.baseUrl}ChartOfAccount/RegisterChartOfAccount`;
+  updateChartOfAccount = `${environment.baseUrl}ChartOfAccount/UpdateChartOfAccount`;
+  deleteChartOfAccount = `${environment.baseUrl}ChartOfAccount/DeleteChartOfAccount`;
 
 
   getTDStypeList = `${environment.baseUrl}TDStype/GetTDStypeList`;

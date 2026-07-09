@@ -2384,6 +2384,12 @@
     "tdsCode": "Code",
     "desctiption": "Description"
   },
+  "accountchart": {
+    "title": "Account chart",
+    "code": "Code",
+    "desctiption": "Description",
+    "type": "Type"
+  },
   
   "tdsrates": {
     "title": "TDS Rates",
