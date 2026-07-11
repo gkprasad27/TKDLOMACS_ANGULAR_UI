@@ -2299,6 +2299,16 @@
     "accountType": "Account Type",
     "printText": "PrintText"
   },
+  "AssignmentChartAccounttoCompany": {
+    "title": "Assignment ChartAccount to Company",
+    "code": "Code",
+    "company": "Company",
+    "operationCoa": "Operation COA",
+    "groupCoa": "Group COA",
+    "companyName": "Company",
+    "ochartAccountName": "Operation COA",
+    "gchartAccountName": "Group COA"
+  },
   "voucherseries": {
     "title": "Voucher Series",
     "voucherSeriesKey": "Voucher Series Key",

@@ -363,6 +363,11 @@ export class ApiConfigService {
   updateTDStype = `${environment.baseUrl}TDStype/UpdateTDStype`
   deleteTDStype = `${environment.baseUrl}TDStype/DeleteTDStype`;
 
+  getAssiignChartAcctoCompanyCodeList = `${environment.baseUrl}AssiignChartAcctoCompanyCode/GetAssiignChartAcctoCompanyCodeList`;
+  registerAssiignChartAcctoCompanyCode = `${environment.baseUrl}AssiignChartAcctoCompanyCode/RegisterAssiignChartAcctoCompanyCode`;
+  updateAssiignChartAcctoCompanyCode = `${environment.baseUrl}AssiignChartAcctoCompanyCode/UpdateAssiignChartAcctoCompanyCode`
+  deleteAssiignChartAcctoCompanyCode = `${environment.baseUrl}AssiignChartAcctoCompanyCode/DeleteAssiignChartAcctoCompanyCode`;
+
   getTaxTransactionList = `${environment.baseUrl}TaxTransaction/GetTaxTransactionList`;
   registerTaxTransaction  = `${environment.baseUrl}TaxTransaction/RegisterTaxTransaction`;
   updateTaxTransaction  = `${environment.baseUrl}TaxTransaction/UpdateTaxTransaction`;

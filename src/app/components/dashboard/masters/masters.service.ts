@@ -46,6 +46,7 @@ import { AccountchartComponent } from './chartofaccount/chartofaccount.component
 import { financialstatementComponent } from './financialstatement/financialstatement.component';
 import { UndersubGroupComponent } from './undersubgroup/undersubgroup.component';
 import { AssignGLaccounttoSubGroupComponent } from './assignglaccount/assignglaccount.component';
+import { AssignmentChartAccounttoCompanyComponent } from './AssignmentChartAccounttoCompany/AssignmentChartAccounttoCompany.component';
 
 
 @Injectable({
@@ -517,6 +518,16 @@ export class MastersService {
         this.dynamicData.deleteUrl = this.apiConfigService.deleteAssignGLaccounttoSubGroup;
         this.dynamicData.listName = 'assignacckeyList';
         this.dynamicData.primaryKey = 'id';
+        return this.dynamicData;
+
+      case 'AssignmentChartAccounttoCompany':
+        this.dynamicData.url = this.apiConfigService.getAssiignChartAcctoCompanyCodeList;
+        this.dynamicData.component = AssignmentChartAccounttoCompanyComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerAssiignChartAcctoCompanyCode;
+        this.dynamicData.updateUrl = this.apiConfigService.updateAssiignChartAcctoCompanyCode;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteAssiignChartAcctoCompanyCode;
+        this.dynamicData.listName = 'coaList';
+        this.dynamicData.primaryKey = 'code';
         return this.dynamicData;
 
       case 'salaryprocess':

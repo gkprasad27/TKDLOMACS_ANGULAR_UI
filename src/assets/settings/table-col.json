@@ -1881,5 +1881,167 @@
         "Amount": "Amount"
       }
     }
+  },
+  "assignglaccount": {
+    "title": "Assign GLaccount To SubGroup",
+    "compCode": "Company Code",
+    "toGl": "Structure Key",
+    "glgroup": "GL Group",
+    "underAccountName": "Sub Group",
+    "glAccountName": "GL Account",
+    "ext1": "Nature of Balance"
+  },
+   "financialstatement": {
+    "title": "Financial Statement",
+    "structureKey": "Financial Code",
+    "structureName": "Financial Name"
+  },
+  "glsubgroups": {
+    "title": "Financial Statement Grouping",
+    "accountGroupId": "Account Group ID",
+    "structureKey": "Structure Key",
+    "accountGroupName": "Account Group Name",
+    "nature": "Group",
+    "underAccountName": "Under Account",
+    "Undersubaccount": "Under Sub Account",
+    "narration": "Narration",
+    "note": "Note",
+    "structureType": "Structure Type"
+  },
+  "vouchertype": {
+    "title": "Voucher Type",
+    "voucherTypeId": "Voucher Type ID",
+    "voucherTypeName": "Voucher Type Name",
+    "voucherClass": "Voucher Class",
+    "voucherClassName": "Voucher Class",
+    "accountType": "Account Type",
+    "printText": "PrintText"
+  },
+  "voucherseries": {
+    "title": "Voucher Series",
+    "voucherSeriesKey": "Voucher Series Key",
+    "fromInterval": "From Interval",
+    "toInterval": "To Interval",
+    "branch": "Branch",
+    "company": "Company",
+    "plant": "Plant",
+    "branchName": "Branch",
+    "companyName": "Company",
+    "plantName": "Plant",
+    "suffix": "Suffix",
+    "prefix": "Prefix"
+  },
+  "AssignVoucherseriestoVouchertype": {
+    "title": "Assignment Voucher Series to Voucher Type",
+    "voucherType": "Voucher Type",
+    "voucherTypeName": "Voucher Type",
+    "voucherSeries": "Voucher Series",
+    "suffix": "Suffix",
+    "lastNumber": "lastNumber"
+  },
+  "taxtypes": {
+    "title": "Tax Types",
+    "taxKey": "Code",
+    "description": "Tax Type",
+    "nature": "Nature of Tax"
+  },
+  
+  "taxrates": {
+    "title": "Tax Rates",
+    "taxRateCode": "Code",
+    "description": "Description",
+    "taxType": "Tax Type",
+    "taxTransaction": "Tax Transaction",
+    "taxTransactionName": "Tax Transaction",
+    "taxCondition": "Tax Condition",
+    "sgst": "SGST %",
+    "cgst": "CGST %",
+    "igst": "IGST %",
+    "ugst": "UGST %",
+    "compositeCess": "Composite Cess",
+    "effectiveFrom": "Effective From"
+  },
+  
+  "taxtransactions": {
+    "title": "Tax Transaction",
+    "code": "Code",
+    "description": "Description",
+    "taxType": "Tax Type",
+    "taxTypeName": "Tax Type"
+  },
+  
+  "assignmentoftaxaccountstotaxcodes": {
+    "title": "Assignment of Taxaccounts to Taxcodes",
+    "code": "Code",
+    "sgstgl": "SGST GL",
+    "cgstgl": "CGST GL",
+    "igstgl": "IGST GL",
+    "ugstgl": "UGST GL",
+    "company": "Company",
+    "branch": "Branch",
+    "plant": "Plant",
+    "compositeAccount": "Composite GL",
+    "chartofAccount": "ChartofAccount",
+    "sgstName": "SGST GL",
+    "cgstName": "CGST GL",
+    "igstName": "IGST GL",
+    "ugstName": "UGST GL",
+    "companyName": "Company",
+    "branchName": "Branch",
+    "plantName": "Plant",
+    "CompositeAccountName": "Composite GL",
+    "chartAccountName": "ChartofAccount"
+  },
+  "hsnsac": {
+    "title": "Hsn Sac",
+    "code": "Code",
+    "description": "Description"
+  },
+  "tdstypes": {
+    "title": "TDS Types",
+    "tdsCode": "Code",
+    "desctiption": "Description"
+  },
+  
+  "tdsrates": {
+    "title": "TDS Rates",
+    "code": "Code",
+    "desctiption": "Description",
+    "tdstype": "Tdstype",
+    "incomeType": "Income Type",
+    "tdsTypeName": "Tdstype",
+    "incomeTypeName": "Income Type",
+    "tdsRate": "Tds Rate",
+    "baseAmount": "Base Amount %",
+    "status": "Status",
+    "effectiveFrom": "Effective From"
+  },
+  "posting": {
+    "title": "Posting",
+    "chartofAccount": "ChartofAccount",
+    "tdsrate": "TDS Rate",
+    "company": "Company",
+    "branch": "Branch",
+    "plant": "Plant",
+    "glaccount": "GL Account",
+    "chartAccountName": "ChartofAccount",
+    "tdsRatetName": "TDS Rate",
+    "companyName": "Company",
+    "branchName": "Branch",
+    "plantName": "Plant",
+    "glAccountName": "GL Account"
+  },
+  "AssignmentChartAccounttoCompany": {
+    "title": "Assignment ChartAccount to Company",
+    "code": "Code",
+    "companyName": "Company",
+    "ochartAccountName": "Operation COA",
+    "gchartAccountName": "Group COA"
+  },
+  "accountchart": {
+    "title": "Account chart",
+    "code": "Code",
+    "desctiption": "Description",
+    "type": "Type"
   }
 }
