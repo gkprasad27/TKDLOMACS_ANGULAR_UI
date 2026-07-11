@@ -2419,6 +2419,35 @@
     "plantName": "Plant",
     "glAccountName": "GL Account"
   },
+  "financialstatement": {
+    "title": "Financial Statement",
+    "structureKey": "Financial Code",
+    "structureName": "Financial Name"
+  },
+  "glsubgroups": {
+    "title": "Financial Statement Grouping",
+    "accountGroupId": "Account Group ID",
+    "structureKey": "Structure Key",
+    "accountGroupName": "Account Group Name",
+    "nature": "Group",
+    "groupUnder": "Under Account",
+    "underAccountName": "Under Account",
+    "Undersubaccount": "Under Sub Account",
+    "narration": "Narration",
+    "note": "Note",
+    "structureType": "Structure Type"
+  },
+  "assignglaccount": {
+    "title": "Assign GLaccount To SubGroup",
+    "compCode": "Company Code",
+    "toGl": "Structure Key",
+    "glgroup": "GL Group",
+    "subAccount": "Sub Group",
+    "fromGl": "GL Account",
+    "underAccountName": "Sub Group",
+    "glAccountName": "GL Account",
+    "ext1": "Nature of Balance"
+  },
   "incometypes": {
     "title": "Income Types",
     "code": "Code",

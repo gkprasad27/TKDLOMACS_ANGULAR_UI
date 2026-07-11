@@ -340,6 +340,23 @@ export class ApiConfigService {
   updateChartOfAccount = `${environment.baseUrl}ChartOfAccount/UpdateChartOfAccount`;
   deleteChartOfAccount = `${environment.baseUrl}ChartOfAccount/DeleteChartOfAccount`;
 
+  getFinancialStatement = `${environment.baseUrl}FinancialStatement/GetFinancialStatement`;
+  registerFinancestatement = `${environment.baseUrl}FinancialStatement/RegisterFinancestatement`;
+  updateFinancialStatement = `${environment.baseUrl}FinancialStatement/UpdateFinancialStatement`;
+  deleteFinancialStatement = `${environment.baseUrl}FinancialStatement/DeleteFinancialStatement`;
+
+  getStructurekeyList = `${environment.baseUrl}AssignGLaccounttoSubGroup/GetStructurekeyList`;
+  getTblAccountGroupList = `${environment.baseUrl}GLAccUnderSubGroup/GetTblAccountGroupList`;
+  registerTblAccGroup = `${environment.baseUrl}GLAccUnderSubGroup/RegisterTblAccGroup`;
+  updateTblAccountGroup = `${environment.baseUrl}GLAccUnderSubGroup/UpdateTblAccountGroup`;
+  deleteTblAccountGroup = `${environment.baseUrl}GLAccUnderSubGroup/DeleteTblAccountGroup`;
+
+  subgrouplist = `${environment.baseUrl}AssignGLaccounttoSubGroup/GetGLUnderSubGroupList`;
+  getAssignGLaccounttoSubGroupList = `${environment.baseUrl}AssignGLaccounttoSubGroup/GetAssignGLaccounttoSubGroupList`;
+  registerAssignGLaccounttoSubGroup = `${environment.baseUrl}AssignGLaccounttoSubGroup/RegisterAssignGLaccounttoSubGroup`;
+  updateAssignGLaccounttoSubGroup = `${environment.baseUrl}AssignGLaccounttoSubGroup/UpdateAssignGLaccounttoSubGroup`;
+  deleteAssignGLaccounttoSubGroup = `${environment.baseUrl}AssignGLaccounttoSubGroup/DeleteAssignGLaccounttoSubGroup`;
+
 
   getTDStypeList = `${environment.baseUrl}TDStype/GetTDStypeList`;
   registerTDStype = `${environment.baseUrl}TDStype/RegisterTDStype`;

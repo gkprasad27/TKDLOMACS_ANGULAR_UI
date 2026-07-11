@@ -1,0 +1,120 @@
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'glsubgroups.title' | translate }} </span>
+    <mat-icon class="my-2 cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto">
+    <form [formGroup]="modelFormData" autocomplete="off">
+      <div class="row">
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'glsubgroups.structureType'"></mat-label>
+          <mat-select formControlName="structureType" appFocusOnEnter tabIndex="1">
+            <mat-option>None</mat-option>
+            <mat-option value="Balance Sheet"> Balance Sheet </mat-option>
+            <mat-option value="Profit & Loss Account"> Profit & Loss Account </mat-option>
+            <mat-option value="Cash Flow"> Cash Flow </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'glsubgroups.structureKey'"></mat-label>
+          <mat-select formControlName="structureKey" appFocusOnEnter tabIndex="1">
+            <mat-option>None</mat-option>
+            @for (stkey of structkeyList; track stkey) {
+              <mat-option [value]="stkey.structureKey">
+                {{stkey.structureName}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3"
+          [ngClass]="{ 'ng--valid': formControls.nature.valid, 'ng--invalid': !formControls.nature.valid  }">
+          <mat-label>{{'glsubgroups.nature' | translate }}</mat-label>
+          <mat-select formControlName="nature" (selectionChange)="getAccountNamelist()" appFocusOnEnter tabIndex="2">
+            <mat-option>None</mat-option>
+            @for (accgrp of glAccgrpList; track accgrp) {
+              <mat-option [value]="accgrp.groupName">
+                {{accgrp.groupName}}
+              </mat-option>
+            }
+          </mat-select>
+          @if (!formControls.nature.valid) {
+            <mat-error [ngClass]="{ 'ng--invalid': !formControls.nature.valid  }"> GL
+            Account is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'glsubgroups.groupUnder' | translate }}</mat-label>
+          <mat-select formControlName="groupUnder" (selectionChange)="getGLUnderGroupList()" appFocusOnEnter
+            tabIndex="3">
+            <mat-option>None</mat-option>
+            @for (under of glAccNameList; track under) {
+              <mat-option [value]="under.accountGroupId">
+                {{under.accountGroupId}} - {{under.accountGroupName}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field  class="col-3" [hidden]="formData.item">
+          <mat-label>{{'glsubgroups.Undersubaccount' | translate }}</mat-label>
+          <mat-select formControlName="Undersubaccount" appFocusOnEnter tabIndex="4">
+            <mat-option>None</mat-option>
+            @for (under of getAccSubGrpList; track under) {
+              <mat-option [value]="under.accountGroupId">
+                {{under.accountGroupId}} - {{under.accountGroupName}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3" [ngClass]="{ 'ng--valid': formControls.accountGroupId.valid &&formControls.accountGroupId.status != 'DISABLED',
+           'ng--invalid': !formControls.accountGroupId.valid &&formControls.accountGroupId.status != 'DISABLED'  }">
+          <mat-label [translate]="'glsubgroups.accountGroupId'"></mat-label>
+          <input matInput disabled formControlName="accountGroupId" appFocusOnEnter tabIndex="5">
+          @if (!formControls.accountGroupId.valid  &&formControls.accountGroupId.status != 'DISABLED') {
+            <mat-error
+            [ngClass]="{ 'ng--invalid': !formControls.accountGroupId.valid  }"> Code is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3"
+          [ngClass]="{ 'ng--valid': formControls.accountGroupName.valid, 'ng--invalid': !formControls.accountGroupName.valid  }">
+          <mat-label [translate]="'glsubgroups.accountGroupName'"></mat-label>
+          <input matInput disabled formControlName="accountGroupName" appFocusOnEnter tabIndex="6">
+          @if (!formControls.accountGroupName.valid) {
+            <mat-error
+            [ngClass]="{ 'ng--invalid': !formControls.accountGroupName.valid  }"> Name is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'glsubgroups.narration'"></mat-label>
+          <input matInput formControlName="narration" appFocusOnEnter tabIndex="7">
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'glsubgroups.note'"></mat-label>
+          <input matInput formControlName="note" appFocusOnEnter tabIndex="7">
+        </mat-form-field>
+
+        <mat-slide-toggle class="col-3" formControlName="isDefault" style="margin-top: 25px;margin-left: 5px;"
+          appFocusOnEnter tabIndex="8">
+          No Further Group
+        </mat-slide-toggle>
+      </div>
+      <mat-divider></mat-divider>
+    </form>
+  </mat-card-content>
+  <div class="mt-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()" appFocusOnEnter tabIndex="9">
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-green text-white mx-1" (click)="save()" appFocusOnEnter
+      tabIndex="10">
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+</div>

@@ -43,6 +43,9 @@ import { TdsRatesComponent } from './tdsrates/tdsrates.component';
 import { IncomeTypeComponent } from './incometypes/incometypes.component';
 import { PostingComponent } from './posting/posting.component';
 import { AccountchartComponent } from './chartofaccount/chartofaccount.component';
+import { financialstatementComponent } from './financialstatement/financialstatement.component';
+import { UndersubGroupComponent } from './undersubgroup/undersubgroup.component';
+import { AssignGLaccounttoSubGroupComponent } from './assignglaccount/assignglaccount.component';
 
 
 @Injectable({
@@ -484,6 +487,36 @@ export class MastersService {
         this.dynamicData.deleteUrl = this.apiConfigService.deleteChartOfAccount;
         this.dynamicData.listName = 'coaList';
         this.dynamicData.primaryKey = 'code';
+        return this.dynamicData;
+
+      case 'financialstatement':
+        this.dynamicData.url = this.apiConfigService.getFinancialStatement;
+        this.dynamicData.component = financialstatementComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerFinancestatement;
+        this.dynamicData.updateUrl = this.apiConfigService.updateFinancialStatement;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteFinancialStatement;
+        this.dynamicData.listName = 'FSList';
+        this.dynamicData.primaryKey = 'ID';
+        return this.dynamicData;
+
+      case 'glsubgroups':
+        this.dynamicData.url = this.apiConfigService.getTblAccountGroupList;
+        this.dynamicData.component = UndersubGroupComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerTblAccGroup;
+        this.dynamicData.updateUrl = this.apiConfigService.updateTblAccountGroup;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteTblAccountGroup;
+        this.dynamicData.listName = 'FSList';
+        this.dynamicData.primaryKey = 'ID';
+        return this.dynamicData;
+
+      case 'assignglaccount':
+        this.dynamicData.url = this.apiConfigService.getAssignGLaccounttoSubGroupList;
+        this.dynamicData.component = AssignGLaccounttoSubGroupComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerAssignGLaccounttoSubGroup;
+        this.dynamicData.updateUrl = this.apiConfigService.updateAssignGLaccounttoSubGroup;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteAssignGLaccounttoSubGroup;
+        this.dynamicData.listName = 'assignacckeyList';
+        this.dynamicData.primaryKey = 'id';
         return this.dynamicData;
 
       case 'salaryprocess':
