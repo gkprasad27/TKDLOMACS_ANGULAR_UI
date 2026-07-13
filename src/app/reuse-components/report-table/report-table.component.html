@@ -1557,7 +1557,7 @@
       <div style="margin-bottom: 2px;display: flex;">
 
 
-        <div style="flex: 0 0 20%;">
+        <div style="flex: 0 0 40%;">
 
           <span style="
               display: inline-block;
@@ -1622,7 +1622,7 @@
       <div style="margin-bottom: 2px;display: flex;">
 
 
-        <div style="flex: 0 0 20%;">
+        <div style="flex: 0 0 40%;">
 
           <span style="
               display: inline-block;
@@ -1662,7 +1662,156 @@
       <div style="margin-bottom: 2px;display: flex;">
 
 
+        <div style="flex: 0 0 40%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Credit:
+
+            </strong>
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['CreditSales'] }}</span>
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    }
+
+
+    @if(routeParam == 'Salesanalysisbybranch' && dateForm.get('ReportName')?.value == 'Sales Analysis Sub Category Wise') {
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 40%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Grand Total:
+
+            </strong>
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['GrandTotalQty'] }}</span>
+
+          </span>
+
+        </div>
+
+
         <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['GrandTotalLiters'] }}</span>
+
+          </span>
+
+        </div>
+
+        <div style="flex: 0 0 20%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['GrandGrossAmount'] }}</span>
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 40%;">
+
+          <span style="
+              display: inline-block;
+              margin-bottom: 2px;
+            ">
+
+            <strong style="
+                min-width: 95px;
+                display: inline-block;
+              ">
+
+              Cash:
+
+            </strong>
+
+            <span style="padding-left: 10px;"> {{ footerData[0]['CashSales'] }}</span>
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <div style="
+        margin-bottom: 10px;
+        font-size: 13px;
+        margin-top: 20px;
+      ">
+
+
+      <div style="margin-bottom: 2px;display: flex;">
+
+
+        <div style="flex: 0 0 40%;">
 
           <span style="
               display: inline-block;

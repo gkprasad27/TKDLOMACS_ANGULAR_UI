@@ -1857,28 +1857,21 @@
     },
     "Sales Analysis Sub Category Wise": {
       "sno": "S No",
-      "BillDate": "Bill Date",
-      "BillNo": "Bill No",
-      "Code": "Code",
-      "ItemName": "Item Name",
-      "UOM": "UOM",
+      "ProductGroupName": "Product Group Name",
+      "ProductCode": "Product Code",
+      "ProductName": "Product Name",
+      "UnitName": "Unit Name",
       "Qty": "Qty",
       "Liters": "Liters",
-      "Sales": "Sales",
+      "Amount": "Amount",
       "headers": {
-        "GSTIN": "GSTIN",
         "BranchName": "Branch Name",
         "Address": "Address",
-        "ReportDate": "Report Date",
         "FromDate": "From Date",
         "ToDate": "To Date",
-        "CreatedBy": "Created By"
-      },
-      "footer": {
-        "colspan": 5,
-        "Qty": "Qty",
-        "Liters": "Liters",
-        "Amount": "Amount"
+        "ReportDate": "Report Date",
+        "CreatedBy": "Created By",
+        "GSTIN": "GSTIN"
       }
     }
   },
