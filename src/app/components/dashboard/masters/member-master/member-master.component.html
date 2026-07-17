@@ -218,6 +218,6 @@
 @if (!isMemberForm) {
 <div>
   <app-table [tableData]="tableData" (addOrUpdateEvent)="addOrUpdateEvent($event)" (searchEvent)="searchEvent($event)"
-    (addEvent)="formToggle()"></app-table>
+    (addEvent)="formToggle()" (printEvent)="printEvent($event)"></app-table>
 </div>
 }

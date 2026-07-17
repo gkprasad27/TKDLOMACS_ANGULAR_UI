@@ -57,6 +57,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   @Output() searchEvent = new EventEmitter();
   @Output() addEvent = new EventEmitter();
+  @Output() printEvent = new EventEmitter();
   @Output() editOrDeleteEvent = new EventEmitter();
   @Output() onLinkEmitEvent = new EventEmitter();
   @Output() tableCheckboxEvent = new EventEmitter();
@@ -362,6 +363,10 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   addMember() {
     this.addEvent.emit();
+  }
+
+  print() {
+    this.printEvent.emit();
   }
 
   

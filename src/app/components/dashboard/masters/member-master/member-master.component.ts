@@ -27,6 +27,8 @@ import { AdditionalShareTransferComponent } from './AdditionalShareTransfer/Addi
 import { ShareTransferComponent } from './ShareTransfer/ShareTransfer.component';
 import { GiftMasterComponent } from './Giftmaster/giftmaster.component';
 
+import { jsPDF } from 'jspdf';
+
 @Component({
   selector: 'app-member-master',
   templateUrl: './member-master.component.html',
@@ -384,4 +386,100 @@ export class MemberMasterComponent implements OnInit {
 
   }
 
+
+  printEvent(event: any) {
+
+    const filteredData = this.tableData.filter(
+      (item: any) => item.isActive === 1
+    );
+
+    const doc = new jsPDF({
+      orientation: 'landscape',
+      unit: 'mm',
+      format: 'a4'
+    });
+
+    const pageWidth = 297;
+    const pageHeight = 210;
+
+    const margin = 8;
+    const cols = 4;
+
+    const boxWidth = (pageWidth - (margin * 2)) / cols;
+    const boxHeight = 42;
+
+    const padding = 3;
+
+    let x = margin;
+    let y = margin;
+
+
+    filteredData.forEach((m: any, index: number) => {
+
+
+      // Red box
+      doc.setDrawColor(255, 0, 0);
+      doc.setLineWidth(0.5);
+
+      doc.rect(
+        x,
+        y,
+        boxWidth,
+        boxHeight
+      );
+
+
+      // Address wrap
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+
+
+      const addressLines = doc.splitTextToSize(
+        m.address || '',
+        boxWidth - (padding * 2)
+      );
+
+
+      // Keep text inside box
+      const maxLines = 8;
+
+      const displayLines = addressLines.slice(0, maxLines);
+
+
+      doc.text(
+        displayLines,
+        x + padding,
+        y + 8
+      );
+
+
+      // Next box
+      x += boxWidth;
+
+
+      // Next row
+      if ((index + 1) % cols === 0) {
+
+        x = margin;
+        y += boxHeight;
+
+      }
+
+
+      // New page
+      if (y + boxHeight > pageHeight - margin) {
+
+        doc.addPage();
+
+        x = margin;
+        y = margin;
+
+      }
+
+    });
+
+
+    doc.save('MemberAddress.pdf');
+
+  }
 }
