@@ -435,7 +435,7 @@ export class MemberMasterComponent implements OnInit {
 
 
       const addressLines = doc.splitTextToSize(
-        m.address || '',
+        m.memberCode + ', ' + m.memberName + ', ' + m.fatherOrHusbandName + ', ' + m.address + ', ' + m.city + ', ' + 'Pin ' + m.pinCode + ' Mobile ' + m.mobile || '',
         boxWidth - (padding * 2)
       );
 
