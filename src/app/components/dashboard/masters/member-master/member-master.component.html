@@ -7,7 +7,7 @@
           <div class="row">
             <mat-form-field class="col-2" [ngClass]="{ 'ng--valid': formControls.memberCode.valid }">
               <mat-label [translate]="'membermaster.memberCode'"></mat-label>
-              <input matInput type="number" formControlName="memberCode" appFocusOnEnter>
+              <input matInput type="number" readonly formControlName="memberCode" appFocusOnEnter>
               @if (formControls.memberCode.errors) {
               <mat-error class="help-block">
                 @if (formControls.memberCode.errors.required) {

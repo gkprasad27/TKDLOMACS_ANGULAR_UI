@@ -683,6 +683,7 @@ export class ApiConfigService {
   getStates = `${environment.baseUrl}MemberMaster/GetStates`;
   getPassbookStatuses = `${environment.baseUrl}MemberMaster/GetPassbookStatuses`;
   getRelations = `${environment.baseUrl}MemberMaster/GetRelations`;
+  geMemberCode = `${environment.baseUrl}MemberMaster/GeMemberCode`;
   getVehicleTypes = `${environment.baseUrl}MemberMaster/GetVehicleTypes`;
   getMembersList = `${environment.baseUrl}MemberMaster/GetMembersList`;
   registerMemberMaster = `${environment.baseUrl}MemberMaster/RegisterMemberMaster`;

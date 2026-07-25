@@ -131,7 +131,7 @@ export class MemberMasterComponent implements OnInit {
     this.getStates();
     this.getPassbookStatuses();
     this.getRelations();
-
+    this.geMemberCode();
     this.searchEvent({});
   }
 
@@ -215,6 +215,21 @@ export class MemberMasterComponent implements OnInit {
             if (res.response != null) {
               // console.log(res);
               this.relations = res.response['passbookStatuses'];
+            }
+          }
+        }
+      );
+  }
+
+  geMemberCode() {
+    this.apiService.apiGetRequest(this.apiConfigService.geMemberCode)
+      .subscribe(
+        response => {
+          const res = response;
+          if (res != null && res.status === StatusCodes.pass) {
+            if (res.response != null) {
+              // console.log(res);
+              this.modelFormData.patchValue({ memberCode: res.response['memberCode'] });
             }
           }
         }
