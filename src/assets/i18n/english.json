@@ -2220,6 +2220,7 @@
     "invoiceNo": "Invoice No",
     "Vehicle": "Vehicle",
     "invoiceDate": "Bill Date",
+    "productName": "Product Name",
     "nPAmount": "Others",
     "pAmount": "HSD/MSD",
     "Qty": "Qty",

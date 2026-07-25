@@ -311,6 +311,21 @@ export class ReportTableComponent implements OnInit, OnChanges {
       }
     },
 
+    IntimateSale: {
+      Qty: {
+        width: '50px',
+        whiteSpace: 'normal'
+      },
+      PQty: {
+        width: '50px',
+        whiteSpace: 'normal'
+      },
+      nPAmount: {
+        width: '50px',
+        whiteSpace: 'normal'
+      }
+    },
+
     VehicalEnquiry: {
       vehicleRegNo: {
         width: '80px',

@@ -1081,10 +1081,9 @@ export class SalesInvoiceComponent implements OnInit {
         this.dataSource.data[d]['invoiceNo'] = this.branchFormData.get('invoiceNo').value;
         tableData.push(this.dataSource.data[d]);
       }
-    }
+    } 
     let content = '';
     let availStock = tableData.filter(stock => {
-    console.log(stock.availStock);
 
       if (stock.availStock == 0) {
         content = '0 Availablilty Stock';
@@ -1107,6 +1106,12 @@ export class SalesInvoiceComponent implements OnInit {
       if (stock.productCode == 'D' || stock.productCode == 'P' || stock.productCode == 'XP' || stock.productCode == 'CNG' || stock.productCode == 'XG' || stock.productCode == 'X1') {
         if ((stock.pumpNo == null)) {
           content = 'PumpNo is null';
+          return stock;
+        }
+      }
+      if (!(stock.productCode == 'D' || stock.productCode == 'P' || stock.productCode == 'XP' || stock.productCode == 'CNG' || stock.productCode == 'XG' || stock.productCode == 'X1')) {
+        if ((stock.igst == null && stock.cgst == null && stock.sgst == null)) {
+          content = 'For Selected Product IGST/CGST/SGST cannot be null';
           return stock;
         }
       }
@@ -1201,7 +1206,12 @@ export class SalesInvoiceComponent implements OnInit {
     let obj = { ...this.branchFormData.getRawValue() };
     obj.invoiceDate = this.commonService.formatDate(this.branchFormData.get('invoiceDate').value);
     obj.paymentMode = 0;
-    data.map(val => val.qty = val.qty != null && val.qty != '' ? +val.qty : 0);
+    data.forEach(val => {
+      val.qty = val.qty != null && val.qty != '' ? +val.qty : 0;
+      val.cgst = this.branchFormData.get('stateCode').value === 37 || this.branchFormData.get('stateCode').value === '37' ? +val.cgst : 0;
+      val.sgst = this.branchFormData.get('stateCode').value === 37 || this.branchFormData.get('stateCode').value === '37' ? +val.sgst : 0;
+      val.igst = this.branchFormData.get('stateCode').value !== 37 && this.branchFormData.get('stateCode').value !== '37' ? +val.igst : 0;
+    });
     const registerInvoiceUrl = (this.user.role === '1' && this.routeUrl !== '') ? this.apiConfigService.updateInvoice : this.apiConfigService.registerInvoice;
     const requestObj = { InvoiceHdr: obj, InvoiceDetail: data, Branches: this.branchesList, BranchCode: this.branchFormData.get('branchCode').value };
     this.apiService.apiPostRequest(registerInvoiceUrl, requestObj).subscribe(

@@ -62,16 +62,16 @@
           @for (detail of invoiceDetail; track detail; let i = $index) {
             <tr>
               <td style="padding-left: 62px; font-size: 9px; font-family: Verdana; white-space: nowrap;max-width:50px;min-width:50px;"> {{ detail.hsnNo}} </td>
-              @if (invoiceHdr.stateCode == '37') {
+              @if (invoiceHdr.stateCode == '37' || invoiceHdr.stateCode == 37) {
                 <td  style="padding-left: 26px; font-size: 9px; font-family: Verdana; white-space: nowrap;max-width:57px;min-width:57px;">  {{ detail.cgst}}% + {{ detail.sgst}}% </td>
               }
-              @if (invoiceHdr.stateCode != '37') {
+              @if (invoiceHdr.stateCode != '37' || invoiceHdr.stateCode != 37) {
                 <td style="padding-left: 26px; font-size: 9px; font-family: Verdana; white-space: nowrap;max-width:57px;min-width:57px;">  {{ detail.igst}}% </td>
               }
               <td style="padding-left: 13px; font-size: 9px; font-family: Verdana; white-space: nowrap;max-width:38px;min-width:38px;"> {{ (detail.grossAmount)*100/(100+(detail.cgst + detail.sgst))| number: '1.2-2'}} </td>
-              <td style="padding-left: 15px; font-size: 9px; font-family: Verdana; white-space: nowrap;max-width:38px;min-width:38px;"> {{(detail.stateCode!=37 || (detail.cgst == 0 && detail.sgst == 0) || (detail.cgst == '0' && detail.sgst == '0'))?(0| number: '1.2-2'): (detail.grossAmount)*100/(100+(detail.cgst + detail.sgst))*(18/100)/2| number: '1.2-2'}} </td>
-              <td style="padding-left: 10px; font-size: 9px; font-family: Verdana; white-space: nowrap;max-width:38px;min-width:38px;"> {{(detail.stateCode!=37 || (detail.cgst == 0 && detail.sgst == 0) || (detail.cgst == '0' && detail.sgst == '0'))?(0| number: '1.2-2'):(detail.grossAmount)*100/(100+(detail.cgst + detail.sgst))*(18/100)/2| number: '1.2-2'}} </td>
-              <td style="padding-left: 7px; font-size: 9px; font-family: Verdana; white-space: nowrap;max-width:38px;min-width:38px;">  {{(detail.stateCode==37 || (detail.igst == 0) || (detail.igst == '0'))?(0| number: '1.2-2'):(detail.grossAmount)*100/(100+(detail.igst))*18/100| number: '1.2-2'}} </td>
+              <td style="padding-left: 15px; font-size: 9px; font-family: Verdana; white-space: nowrap;max-width:38px;min-width:38px;"> {{(invoiceHdr.stateCode!=37 || (detail.cgst == 0 && detail.sgst == 0) || (detail.cgst == '0' && detail.sgst == '0'))?(0| number: '1.2-2'): (detail.grossAmount)*100/(100+(detail.cgst + detail.sgst))*(18/100)/2| number: '1.2-2'}} </td>
+              <td style="padding-left: 10px; font-size: 9px; font-family: Verdana; white-space: nowrap;max-width:38px;min-width:38px;"> {{(invoiceHdr.stateCode!=37 || (detail.cgst == 0 && detail.sgst == 0) || (detail.cgst == '0' && detail.sgst == '0'))?(0| number: '1.2-2'):(detail.grossAmount)*100/(100+(detail.cgst + detail.sgst))*(18/100)/2| number: '1.2-2'}} </td>
+              <td style="padding-left: 7px; font-size: 9px; font-family: Verdana; white-space: nowrap;max-width:38px;min-width:38px;">  {{(invoiceHdr.stateCode==37)?(0| number: '1.2-2'):(detail.grossAmount)*100/(100+(detail.igst))*18/100| number: '1.2-2'}} </td>
             </tr>
           }
         </tbody>
