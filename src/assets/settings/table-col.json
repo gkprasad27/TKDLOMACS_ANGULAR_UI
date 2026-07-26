@@ -1313,39 +1313,33 @@
     }
   },
   "SalesGST": {
-    "sno":"S No",
+    "sno": "S No",
     "customerGSTIN": "Receiver GSTIN/UINSTIN GSTIN",
-    "customerName":"Receiver Name",
-    "invoiceNo":"Invoice No",
+    "customerName": "Receiver Name",
+    "invoiceNo": "Invoice No",
     "invoiceDate": "Invoice Date",
     "TotalInvoiceValue": "Total Invoice Value",
     "TaxableValue": "Taxable Value",
-
     "0TaxAmt": "Tax Amount",
     "0IGST": "IGST",
     "0CGST": "CGST",
     "0SGST": "SGST",
-
     "5TaxAmt": "Tax Amount",
     "5IGST": "IGST",
     "5CGST": "CGST",
     "5SGST": "SGST",
-
     "12TaxAmt": "Tax Amount",
     "12IGST": "IGST",
     "12CGST": "CGST",
     "12SGST": "SGST",
-
     "18TaxAmt": "Tax Amount",
     "18IGST": "IGST",
     "18CGST": "CGST",
     "18SGST": "SGST",
-
     "28TaxAmt": "Tax Amount",
     "28IGST": "IGST",
     "28CGST": "CGST",
     "28SGST": "SGST",
-    
     "headers": {
       "Branch": "Branch Name",
       "ReportDate": "Report Date",
@@ -1811,6 +1805,49 @@
       "TotalGrossAmount": "TotalGrossAmount"
     }
   },
+  "purchaseinvoicereport": {
+    "sno": "S No",
+    "Branch Name": "Branch Name",
+    "Ledger Name": "Ledger Name",
+    "Goods Received No": "Goods Received No",
+    "Purchase Invoice No": "Purchase Invoice No",
+    "Purchase Received Date": "Purchase Received Date",
+    "Purchase Invoice Date": "Purchase Invoice Date",
+    "Indent No": "Indent No",
+    "Product Code": "Product Code",
+    "Product Name": "Product Name",
+    "Qty": "Qty",
+    "F/Qty": "F/Qty",
+    "Rate": "Rate",
+    "Total Ltrs": "Total Ltrs",
+    "Discount": "Discount",
+    "Gross Amount": "Gross Amount",
+    "CGST": "CGST",
+    "SGST": "SGST",
+    "IGST": "IGST",
+    "Total Tax": "Total Tax",
+    "Grand Total": "Grand Total",
+    "headers": {
+      "BranchName": "Branch Name",
+      "GSTIN": "GSTIN",
+      "ReportDate": "Report Date",
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "CreatedBy": "Report Created By",
+      "Address": "Address"
+    },
+    "footer": {
+      "colspan": 12,
+      "TotalLtrs": "Total Ltrs",
+      "TotalDiscount": "Total Discount",
+      "TotalGrossAmount": "Total Gross Amount",
+      "TotalCGST": "Total CGST",
+      "TotalSGST": "Total SGST",
+      "TotalIGST": "Total IGST",
+      "TotalTax": "Total Tax",
+      "GrandTotal": "Grand Total"
+    }
+  },
   "Salesanalysisbybranch": {
     "Detailed Sales Analysis": {
       "sno": "S No",
@@ -1885,7 +1922,7 @@
     "glAccountName": "GL Account",
     "ext1": "Nature of Balance"
   },
-   "financialstatement": {
+  "financialstatement": {
     "title": "Financial Statement",
     "structureKey": "Financial Code",
     "structureName": "Financial Name"
@@ -1939,7 +1976,6 @@
     "description": "Tax Type",
     "nature": "Nature of Tax"
   },
-  
   "taxrates": {
     "title": "Tax Rates",
     "taxRateCode": "Code",
@@ -1955,7 +1991,6 @@
     "compositeCess": "Composite Cess",
     "effectiveFrom": "Effective From"
   },
-  
   "taxtransactions": {
     "title": "Tax Transaction",
     "code": "Code",
@@ -1963,7 +1998,6 @@
     "taxType": "Tax Type",
     "taxTypeName": "Tax Type"
   },
-  
   "assignmentoftaxaccountstotaxcodes": {
     "title": "Assignment of Taxaccounts to Taxcodes",
     "code": "Code",
@@ -1996,7 +2030,6 @@
     "tdsCode": "Code",
     "desctiption": "Description"
   },
-  
   "tdsrates": {
     "title": "TDS Rates",
     "code": "Code",

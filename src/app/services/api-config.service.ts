@@ -848,6 +848,7 @@ export class ApiConfigService {
 
   getAccountLedger = `${environment.baseUrl}Reports/AccountLedgerReport/GetAccountLedgerReportData`;
   getAccountLedgersList = `${environment.baseUrl}Reports/AccountLedgerReport/GetAccountLedgersList`;
+  getPurchaseRegisterReportData = `${environment.baseUrl}Reports/DailySalesReport/GetPurchaseRegisterReportData`;
 
   getSaleValueReport = `${environment.baseUrl}Reports/SaleValueReport/GetSaleValueReportData`;
   getReportBranchList = `${environment.baseUrl}Reports/SaleValueReport/GetReportBranchList`;

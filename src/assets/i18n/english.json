@@ -1730,7 +1730,7 @@
     "TotalInvoiceValue": "Total Invoice Value",
     "cgst": "CGST",
     "customerGSTIN": "Receiver GSTIN/UINSTIN GSTIN",
-    "customerName":"Receiver Name",
+    "customerName": "Receiver Name",
     "grossAmount": "Gross Amount",
     "invoiceDate": "Invoice Date",
     "invoiceMasterId": "Invoice Master ID",
@@ -1741,7 +1741,7 @@
     "CreatedBy": "Created By",
     "FromDate": "From Date",
     "ReportDate": "Report Date",
-    "Branch":"Branch Name",
+    "Branch": "Branch Name",
     "ToDate": "To Date"
   },
   "TrialBalance": {
@@ -2338,7 +2338,6 @@
     "description": "Tax Type",
     "nature": "Nature of Tax"
   },
-  
   "taxrates": {
     "title": "Tax Rates",
     "taxRateCode": "Code",
@@ -2354,7 +2353,6 @@
     "compositeCess": "Composite Cess",
     "effectiveFrom": "Effective From"
   },
-  
   "taxtransactions": {
     "title": "Tax Transaction",
     "code": "Code",
@@ -2362,7 +2360,6 @@
     "taxType": "Tax Type",
     "taxTypeName": "Tax Type"
   },
-  
   "assignmentoftaxaccountstotaxcodes": {
     "title": "Assignment of Taxaccounts to Taxcodes",
     "code": "Code",
@@ -2401,7 +2398,6 @@
     "desctiption": "Description",
     "type": "Type"
   },
-  
   "tdsrates": {
     "title": "TDS Rates",
     "code": "Code",
@@ -2466,5 +2462,44 @@
     "sectionCode": "Section Code",
     "thresholdLimit": "Threshold  Aggregate Limit",
     "thresholdContract": "Threshold Limit Per Contract"
+  },
+  "purchaseinvoicereport": {
+    "title": "Purchase Invoice Report",
+    "sno": "S No",
+    "Branch Name": "Branch Name",
+    "Ledger Name": "Ledger Name",
+    "Goods Received No": "Goods Received No",
+    "Purchase Invoice No": "Purchase Invoice No",
+    "Purchase Received Date": "Purchase Received Date",
+    "Purchase Invoice Date": "Purchase Invoice Date",
+    "Indent No": "Indent No",
+    "Product Code": "Product Code",
+    "Product Name": "Product Name",
+    "Qty": "Qty",
+    "F/Qty": "F/Qty",
+    "Rate": "Rate",
+    "Total Ltrs": "Total Ltrs",
+    "Discount": "Discount",
+    "Gross Amount": "Gross Amount",
+    "CGST": "CGST",
+    "SGST": "SGST",
+    "IGST": "IGST",
+    "Total Tax": "Total Tax",
+    "Grand Total": "Grand Total",
+    "BranchName": "Branch Name",
+    "GSTIN": "GSTIN",
+    "ReportDate": "Report Date",
+    "FromDate": "From Date",
+    "ToDate": "To Date",
+    "CreatedBy": "Report Created By",
+    "Address": "Address",
+    "TotalLtrs": "Total Ltrs",
+    "TotalDiscount": "Total Discount",
+    "TotalGrossAmount": "Total Gross Amount",
+    "TotalCGST": "Total CGST",
+    "TotalSGST": "Total SGST",
+    "TotalIGST": "Total IGST",
+    "TotalTax": "Total Tax",
+    "GrandTotal": "Grand Total"
   }
 }

@@ -146,6 +146,10 @@ export class ReportsService {
         this.dynamicData.url = this.apiConfigService.getEInvoiceReportData;
         this.dynamicData.listName = 'eInvoice';
         return this.dynamicData;
+      case 'purchaseinvoicereport':
+        this.dynamicData.url = this.apiConfigService.getPurchaseRegisterReportData;
+        this.dynamicData.listName = 'dailySalesList';
+        return this.dynamicData;
       default:
     }
   }

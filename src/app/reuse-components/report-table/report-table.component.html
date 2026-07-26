@@ -9,7 +9,7 @@
         ||routeParam=='ProductPriceList'||routeParam=='ReceiptsAndPaymentsDetailed'||routeParam=='ReceiptsAndPaymentsSummary'||routeParam=='SMSSummary'||routeParam=='SalesGST'||routeParam=='24HrsSaleValue6AmTo6Am'
         ||routeParam=='TrialBalance'||routeParam=='24HrsMeterReading'||routeParam=='ClosingBalance'||routeParam=='BankReconciliation'||routeParam=='StockValuation'||routeParam=='FourColumnCashBook'
         ||routeParam=='BranchWiseMonthlySalesByLiters'||routeParam=='BranchWiseStockStatementLtrs'||routeParam=='BranchWiseStockStatementQty'
-        ||routeParam=='ProductMonthWisePurchaseLtrs'||routeParam=='einvoice') {
+        ||routeParam=='ProductMonthWisePurchaseLtrs'||routeParam=='einvoice'|| routeParam=='purchaseinvoicereport') {
         <mat-form-field class="col-3">
           <mat-label> {{ 'report.formDate' | translate }} </mat-label>
           <mat-date-range-input [rangePicker]="picker">
@@ -66,7 +66,7 @@
         @if(routeParam=='24HrsSaleValue'||routeParam=='24HrsSalesStock'||routeParam=='StockVerification'||routeParam=='StockLedger'||routeParam=='Salesanalysisbybranch'||routeParam=='DailySales'
         ||routeParam=='ProductPriceList'||routeParam=='24HrsSaleValue6AmTo6Am'||routeParam=='AccountLedger'||routeParam=='24HrsMeterReading'||routeParam=='FourColumnCashBook'
         ||routeParam=='BranchWiseMonthlySalesByLiters'||routeParam=='BranchWiseStockStatementLtrs'||routeParam=='BranchWiseStockStatementQty'
-        ||routeParam=='ProductMonthWisePurchaseLtrs') {
+        ||routeParam=='ProductMonthWisePurchaseLtrs'||routeParam=='purchaseinvoicereport') {
         <mat-form-field class="col-3">
           <mat-label> {{ 'report.selectedBranch' | translate }} </mat-label>
           <mat-select formControlName="selectedBranch">
@@ -203,7 +203,7 @@
         ||routeParam=='Salesanalysisbybranch'||routeParam=='ProductWiseMonthlyPurchase'||routeParam=='DailySales'||routeParam=='Shift'||routeParam=='ProductPriceList'
         ||routeParam=='ReceiptsAndPaymentsDetailed'||routeParam=='ReceiptsAndPaymentsSummary'||routeParam=='SMSSummary'||routeParam=='SalesGST'||routeParam=='24HrsSaleValue6AmTo6Am'
         ||routeParam=='TrialBalance'||routeParam=='24HrsMeterReading'||routeParam=='ClosingBalance'||routeParam=='BankReconciliation'||routeParam=='StockValuation'||routeParam=='FourColumnCashBook'||routeParam=='FourColumnCashBook'||routeParam=='ProductMonthWisePurchaseLtrs'
-        ||routeParam=='BranchWiseMonthlySalesByLiters'||routeParam=='BranchWiseStockStatementLtrs'||routeParam=='BranchWiseStockStatementQty'||routeParam=='einvoice')
+        ||routeParam=='BranchWiseMonthlySalesByLiters'||routeParam=='BranchWiseStockStatementLtrs'||routeParam=='BranchWiseStockStatementQty'||routeParam=='einvoice'||routeParam=='purchaseinvoicereport')
         {
         <div class="d-flex align-items-center">
           <button mat-raised-button class="button-color-bule text-white ml-2"
