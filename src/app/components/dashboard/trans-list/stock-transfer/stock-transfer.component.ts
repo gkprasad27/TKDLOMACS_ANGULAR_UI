@@ -153,7 +153,7 @@ export class StockTransferComponent implements OnInit {
     let flag = false;
     const branchList = JSON.parse(localStorage.getItem('branchList'));
     for (let b = 0; b < branchList.length; b++) {
-      if (this.formData.get('fromBranchCode').value == branchList[b]) {
+      if (this.formData.get('fromBranchCode').value == branchList[b] || this.formData.get('toBranchCode').value == branchList[b]) {
         flag = true;
       }
     }
