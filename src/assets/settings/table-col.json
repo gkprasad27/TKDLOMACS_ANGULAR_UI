@@ -1759,6 +1759,7 @@
     "sno": "S No",
     "LedgerName": "Ledger Name",
     "InvoiceNo": "Invoice No",
+    "InvoiceDate":"Invoice Date",
     "VehicleRegNo": "Vehicle Reg No",
     "ProductCode": "Product Code",
     "PumpNo": "Pump No",

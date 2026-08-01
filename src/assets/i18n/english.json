@@ -2247,6 +2247,7 @@
     "Qty": "Qty",
     "SlipNo": "Slip No",
     "TotalAmount": "Total Amount",
+    "InvoiceDate": "Invoice Date",
     "VehicleRegNo": "Vehicle RegNo",
     "Address": "Address",
     "BranchName": "Branch Name",

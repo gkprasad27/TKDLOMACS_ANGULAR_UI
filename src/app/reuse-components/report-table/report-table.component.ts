@@ -587,6 +587,9 @@ export class ReportTableComponent implements OnInit, OnChanges {
     if (this.user?.role != '1') {
       this.dateForm.controls['selectedBranch'].disable();
     }
+    if (this.user?.role == '75') {
+      this.dateForm.controls['selectedBranch'].enable();
+    }
   }
 
   selectionChange() {
@@ -686,7 +689,12 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
         if (!this.commonService.checkNullOrUndefined(res.reportBranchList) && res.reportBranchList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(res.reportBranchList.response)) {
-            this.ReportBranches = [{ branchCode: null, branchName: null }, ...res.reportBranchList.response['reportBranchesList']];
+            if (this.user?.role == '75') {
+              const obj = res.reportBranchList.response['reportBranchesList'].filter(branch => branch.branchCode === +this.user.branchCode);
+              this.ReportBranches = [{ branchCode: null, branchName: null }, ...obj];
+            } else {
+              this.ReportBranches = [{ branchCode: null, branchName: null }, ...res.reportBranchList.response['reportBranchesList']];
+            }
           }
         }
 
@@ -805,6 +813,13 @@ export class ReportTableComponent implements OnInit, OnChanges {
     if (this.routeParam == 'Salesanalysisbybranch') {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value]?.footer;
     }
+    if (this.routeParam == 'DailySales') {
+      const obj = JSON.parse(JSON.stringify(this.runtimeConfigService.tableColumnsData[this.routeParam]));
+      if (obj && !this.dateForm.get('selectedBranch')?.value) {
+        obj.footer.colspan = 5;
+        return obj.footer;
+      }
+    }
     return this.runtimeConfigService.tableColumnsData[this.routeParam].footer;
   }
 
@@ -814,6 +829,18 @@ export class ReportTableComponent implements OnInit, OnChanges {
     }
     if (this.routeParam == 'Salesanalysisbybranch') {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value];
+    }
+    if (this.routeParam == 'DailySales') {
+      const obj = JSON.parse(JSON.stringify(this.runtimeConfigService.tableColumnsData[this.routeParam]));
+      if (obj && !this.dateForm.get('selectedBranch')?.value) {
+        delete obj.PumpNo;
+        delete obj.SlipNo;
+        return obj;
+      }
+      if (obj && this.dateForm.get('selectedBranch')?.value) {
+        delete obj.InvoiceDate;
+        return obj;
+      }
     }
     return this.runtimeConfigService.tableColumnsData[this.routeParam];
   }
