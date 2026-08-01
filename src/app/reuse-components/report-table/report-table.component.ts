@@ -1038,7 +1038,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
             this.getTranslationKey(rightKey)
           );
 
-          valueRowData[columns.length - 1] =
+          valueRowData[2] =
             `${rightLabel}: ${headerObj[rightKey] ?? ''}`;
         }
 
