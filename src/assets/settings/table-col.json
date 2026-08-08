@@ -1869,12 +1869,15 @@
   "Salesanalysisbybranch": {
     "Detailed Sales Analysis": {
       "sno": "S No",
+      "Branch Name": "Branch Name",
+      "Product Supplier Name": "Product Supplier Name",
       "BillDate": "Bill Date",
       "BillNo": "Bill No",
       "Code": "Code",
       "ItemName": "Item Name",
       "UOM": "UOM",
       "Qty": "Qty",
+      "Rate": "Rate",
       "Liters": "Liters",
       "Sales": "Sales",
       "headers": {

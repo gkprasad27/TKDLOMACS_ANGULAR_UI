@@ -828,7 +828,13 @@ export class ReportTableComponent implements OnInit, OnChanges {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value];
     }
     if (this.routeParam == 'Salesanalysisbybranch') {
-      return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value];
+      const obj = JSON.parse(JSON.stringify(this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value]));
+      if (obj && this.dateForm.get('selectedBranch')?.value && this.dateForm.get('ReportName')?.value == 'Detailed Sales Analysis') {
+        delete obj['Branch Name'];
+        delete obj['Rate'];
+        delete obj['Product Supplier Name'];
+      }
+      return obj;
     }
     if (this.routeParam == 'DailySales') {
       const obj = JSON.parse(JSON.stringify(this.runtimeConfigService.tableColumnsData[this.routeParam]));
