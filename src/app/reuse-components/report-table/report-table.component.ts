@@ -839,8 +839,30 @@ export class ReportTableComponent implements OnInit, OnChanges {
       }
       if (obj && this.dateForm.get('selectedBranch')?.value) {
         delete obj.InvoiceDate;
+         delete obj.LedgerCode;
+        delete obj.ProductName;
+        delete obj['liters'];
+        delete obj['Rate'];
         return obj;
       }
+    }
+    if (this.routeParam == 'ProductPriceList') {
+      const obj = JSON.parse(JSON.stringify(this.runtimeConfigService.tableColumnsData[this.routeParam]));
+      if (obj && this.dateForm.get('selectedReportType')?.value == '2') {
+        delete obj.GOLLAPUDI;
+        delete obj['NIDAMANURU,VIJAYAWADA'];
+        delete obj.CHINAKAKANI;
+        delete obj['AUTONAGAR GODOWN'];
+        delete obj['AUTONAGAR 1 EDILS & SPARES'];
+        delete obj['AUTONAGAR-2'];
+        delete obj['SALES WING'];
+        delete obj['GUDIVADA'];
+        delete obj['GANGURU'];
+        delete obj['VUYYURU'];
+        delete obj['KANCHIKACHERLA'];
+        delete obj['TIRUVURU'];
+      }
+      return obj;
     }
     return this.runtimeConfigService.tableColumnsData[this.routeParam];
   }
