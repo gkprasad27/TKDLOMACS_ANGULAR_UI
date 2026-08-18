@@ -1002,6 +1002,34 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     // ================= TITLE =================
 
+    
+    
+    let mainTitleRow = worksheet.addRow([
+      'The Krishna District Lorry Owners Mutually Aided Cooperative Stores Ltd.'
+    ]);
+
+    mainTitleRow.font = {
+      name: 'Calibri',
+      family: 4,
+      size: 16,
+      underline: 'single',
+      bold: true
+    };
+
+    mainTitleRow.alignment = {
+      horizontal: 'center',
+      vertical: 'middle'
+    };
+
+    worksheet.mergeCells(
+      mainTitleRow.number,
+      1,
+      mainTitleRow.number,
+      columns.length
+    );
+
+    worksheet.addRow([]);
+
     let titleRow = worksheet.addRow([
       this.routeParam + ' Report'
     ]);
@@ -1015,10 +1043,16 @@ export class ReportTableComponent implements OnInit, OnChanges {
     };
 
     titleRow.alignment = {
-      horizontal: 'center'
+      horizontal: 'center',
+      vertical: 'middle'
     };
 
-    worksheet.mergeCells(1, 1, 2, columns.length);
+    worksheet.mergeCells(
+      titleRow.number,
+      1,
+      titleRow.number,
+      columns.length
+    );
 
     worksheet.addRow([]);
 
