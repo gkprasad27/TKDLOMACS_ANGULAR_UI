@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-content>
     <form [formGroup]="dateForm" autocomplete="off" class="d-flex justify-content-between align-items-center">
-      <div class="row">
+      <div class="row" style="width: 60%;">
         <mat-form-field class="col-3">
           <mat-label>Choose date</mat-label>
           <mat-date-range-input [rangePicker]="picker">
@@ -31,6 +31,9 @@
           </button>
           <button mat-raised-button class="button-color-red text-white m-2" (click)="reset()">
             {{ "COMMON.RESET" | translate }}
+          </button>
+           <button mat-raised-button class="button-color-red text-white m-2" (click)="print()">
+            {{ "COMMON.PRINT" | translate }}
           </button>
         </div>
       </div>
@@ -120,3 +123,150 @@
 
   </mat-card-content>
 </mat-card>
+
+
+<!-- ===== PRINTABLE TEMPLATE (Hidden until PDF export) ===== -->
+<div id="printableReport" *ngIf="showPrintableReport">
+
+  <div style="
+      padding: 6px;
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #000;
+      width: 100%;
+    ">
+
+    <!-- HEADER -->
+    <div style="
+        text-align: center;
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid #d9d9d9;
+      ">
+
+      <div style="
+          font-size: 14px;
+          font-weight: 600;
+        ">
+
+       Cash Payment
+
+      </div>
+
+    </div>
+
+    
+
+    <table style="
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+      ">
+
+      <!-- TABLE HEADER -->
+      <thead style="display: table-header-group;">
+
+        <tr style="background: #fafafa;">
+
+          <th  rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+             {{ "cashpayment.branchCode" | translate }}
+          </th>
+
+          <th  rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            {{ "cashpayment.branchName" | translate }}
+          </th>
+
+          <th  rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            {{ "cashpayment.fromLedgerCode" | translate }}
+          </th>
+
+          <th  rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000;  word-wrap: break-word; font-size: 10px;">
+            {{ "cashpayment.fromLedgerName" | translate }}
+          </th>
+
+          <th  rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+             {{ "cashpayment.voucherNo" | translate }}
+          </th>
+
+          <th rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+             {{ "cashpayment.cashPaymentDate" | translate }}
+          </th>
+
+          <th rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+             {{ "cashpayment.totalAmount" | translate }}
+          </th>
+
+         
+          <th rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+             {{ "cashpayment.userId" | translate }}
+          </th>
+
+          <th rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+             {{ "cashpayment.shiftId" | translate }}
+          </th>
+
+
+        </tr>
+
+
+      </thead>
+
+      <!-- TABLE BODY -->
+      <tbody>
+
+        @for(row of dataSource.data; track $index; let i = $index) {
+
+        <tr>
+
+
+          <td style="border: 0.4px solid #d9d9d9;padding: 3px 2px;color: #000;font-size: 10px;word-break: break-word;">
+            {{ row.branchCode }}
+          </td>
+
+            <td style="border: 0.4px solid #d9d9d9;padding: 3px 2px;color: #000;font-size: 10px;word-break: break-word;">
+            {{ row.branchName }}
+          </td>
+
+            <td style="border: 0.4px solid #d9d9d9;padding: 3px 2px;color: #000;font-size: 10px;word-break: break-word;">
+            {{ row.fromLedgerCode }}
+          </td>
+
+            <td style="border: 0.4px solid #d9d9d9;padding: 3px 2px;color: #000;font-size: 10px;word-break: break-word;">
+            {{ row.fromLedgerName }}
+          </td>
+
+            <td style="border: 0.4px solid #d9d9d9;padding: 3px 2px;color: #000;font-size: 10px;word-break: break-word;">
+            {{ row.voucherNo }}
+          </td>
+
+            <td style="border: 0.4px solid #d9d9d9;padding: 3px 2px;color: #000;font-size: 10px;word-break: break-word;">
+            {{ row.cashPaymentDate | date: 'dd/MM/yyyy hh:mm:ss' }}
+          </td>
+
+            <td style="border: 0.4px solid #d9d9d9;padding: 3px 2px;color: #000;font-size: 10px;word-break: break-word;">
+            {{ row.totalAmount }}
+          </td>
+
+          <td style="border: 0.4px solid #d9d9d9;padding: 3px 2px;color: #000;font-size: 10px;word-break: break-word;">
+            {{ row.userId }}
+          </td>
+
+          <td style="border: 0.4px solid #d9d9d9;padding: 3px 2px;color: #000;font-size: 10px;word-break: break-word;">
+            {{ row.shiftId }}
+          </td>
+
+
+        </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+    
+
+  </div>
+
+</div>

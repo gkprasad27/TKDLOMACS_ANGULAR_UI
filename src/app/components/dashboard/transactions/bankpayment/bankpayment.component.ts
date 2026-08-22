@@ -33,6 +33,8 @@ export class BankPaymentComponent implements OnInit {
   displayedColumns: string[] = ['branchCode', 'branchName','bankLedgerCode','bankLedgerName','voucherNo','bankPaymentDate',  
   'totalAmount','userId', 'shiftId'
 ];
+showPrintableReport: boolean = false;
+
 branchCode:any;
   constructor(
     private formBuilder: FormBuilder,
@@ -59,6 +61,48 @@ branchCode:any;
     this.dateForm.patchValue({role:this.branchCode.role})
     this.getBankpaymentList();
     this.getBankPaymentBranchesList();
+  }
+
+
+  print() {
+    if (!this.dataSource || this.dataSource.data.length === 0) {
+      this.alertService.openSnackBar(
+        'No report data to print',
+        Static.Close,
+        SnackBar.error
+      );
+      return;
+    }
+     this.spinner.show();
+    setTimeout(() => {
+      this.showPrintableReport = true;
+
+      setTimeout(() => {
+
+        const element = document.getElementById('printableReport');
+        const elementHtml = document.getElementById('printableReport').innerHTML;
+
+        if (!element) {
+
+          this.alertService.openSnackBar(
+            'No report data to export',
+            Static.Close,
+            SnackBar.error
+          );
+
+          return;
+
+        }
+
+          var w = window.open('', '_blank');
+          w.document.body.innerHTML = elementHtml;
+          this.showPrintableReport = false;
+          this.spinner.hide();
+          w.print();
+
+      });
+    }, 500);
+
   }
 
   getBankPaymentBranchesList() {

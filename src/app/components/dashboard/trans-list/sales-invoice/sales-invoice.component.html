@@ -94,7 +94,7 @@
 
           <mat-form-field class="col-2">
             <mat-label>{{ 'salesInvoice.customerGstin' | translate }}</mat-label>
-            <input matInput formControlName="customerGstin" maxlength="15" id="customerGstin" >
+            <input matInput formControlName="customerGstin" maxlength="15" id="customerGstin" (blur)="onFieldBlur($event)" >
           </mat-form-field>
 
           <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
@@ -246,7 +246,7 @@
           <ng-container matColumnDef="unitName">
             <th mat-header-cell *matHeaderCellDef> {{ 'salesInvoice.unitName' | translate }} </th>
             <td mat-cell *matCellDef="let element;">
-              <input matInput [disabled]="element.text != 'obj'" [value]="element.unitName"
+              <input matInput disabled [value]="element.unitName"
                 (input)="element.unitName = $event.target.value; setToFormModel(element.text, 'unitName', element.unitName)"
                  />
             </td>

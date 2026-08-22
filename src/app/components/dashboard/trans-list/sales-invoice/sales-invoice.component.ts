@@ -234,6 +234,18 @@ export class SalesInvoiceComponent implements OnInit {
     }
   }
 
+  onFieldBlur(event: Event) {
+    debugger
+    const value = (event?.target as HTMLInputElement)?.value;
+    if(value && this.branchFormData.value.stateCode != value.substring(0, 2)){
+      this.branchFormData.get('customerGstin').setErrors({ stateMismatch: true });
+      this.alertService.openSnackBar(`GSTIN error GST Not matching with selected state code`, Static.Close, SnackBar.error);
+    } else {
+      this.branchFormData.get('customerGstin').setErrors(null);
+    }
+      this.branchFormData.updateValueAndValidity();
+  }
+
   resetData() {
     this.addTableRow();
     // this.getCashPartyAccountList("100");
