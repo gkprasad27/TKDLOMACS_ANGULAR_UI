@@ -1193,6 +1193,7 @@
     "branchCode": "Branch Code",
     "branchName": "Branch Name",
     "cashPaymentDate": "Cash Payment Date",
+    "journalVoucherDate": "Voucher Date",
     "totalAmount": "Total Amount",
     "newcashpayment": "New Cash Payment",
     "fromLedgerCode": "From Ledger Code",
