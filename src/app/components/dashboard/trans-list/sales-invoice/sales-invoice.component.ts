@@ -235,7 +235,6 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   onFieldBlur(event: Event) {
-    debugger
     const value = (event?.target as HTMLInputElement)?.value;
     if(value && this.branchFormData.value.stateCode != value.substring(0, 2)){
       this.branchFormData.get('customerGstin').setErrors({ stateMismatch: true });
@@ -1084,7 +1083,7 @@ export class SalesInvoiceComponent implements OnInit {
       this.registerInvoiceReturn();
       return;
     }
-    if ((this.routeUrl != '' && this.user?.role != '1') || this.dataSource.data.length == 0) {
+    if ((this.routeUrl != '' && this.user?.role != '1') || this.dataSource.data.length == 0 || this.branchFormData.invalid) {
       return;
     }
     let tableData = [];

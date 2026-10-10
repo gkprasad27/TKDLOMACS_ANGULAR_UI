@@ -226,6 +226,24 @@
         </div>
         }
 
+        @if(routeParam=='AccountLedger') {
+          
+         <div class="col-6">
+          <span style="margin-right: 30px; margin-bottom: 5px;">
+            <strong style="min-width: 150px; display: inline-block;"> Total Debit  </strong>
+            : {{ footerData[0]?.DebitToal }}
+          </span>
+        </div>
+
+        <div class="col-6">
+          <span style="margin-right: 30px; margin-bottom: 5px;">
+            <strong style="min-width: 150px; display: inline-block;"> Total Credit  </strong>
+            : {{ footerData[0]?.CreditTotal }}
+          </span>
+        </div>
+
+        }
+
       </div>
     </div>
 
