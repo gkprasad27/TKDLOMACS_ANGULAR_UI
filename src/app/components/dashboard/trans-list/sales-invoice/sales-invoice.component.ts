@@ -1208,6 +1208,7 @@ export class SalesInvoiceComponent implements OnInit {
     this.getVechielsArray = [];
     this.formDataGroup();
     this.resetData();
+    this.getSelectedState();
   }
 
   registerInvoice(data) {
