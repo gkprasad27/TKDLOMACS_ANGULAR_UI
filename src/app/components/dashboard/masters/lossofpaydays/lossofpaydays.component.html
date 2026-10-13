@@ -1,0 +1,75 @@
+<div class="position-relative popup-class">
+  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
+    <span> {{'branches.title' | translate }} </span>
+    <mat-icon class="p-2  cursor--pointer" (click)="cancel()">close</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content class="pt-5 p-2 m-0 overflow-auto ">
+    <form [formGroup]="modelFormData" autocomplete="off">
+      <div class="d--flex">
+
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'lossofpaydays.empCode'"></mat-label>
+          <mat-select formControlName="empCode" (selectionChange)="onEmpChange($event)">
+            @for (comp of employeeList; track comp) {
+            <mat-option [value]="comp.id">
+              {{comp.text}}
+            </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>{{'lossofpaydays.month' | translate }}</mat-label>
+          <mat-select formControlName="month">
+            @for (conflist of months; track conflist) {
+            <mat-option [value]="conflist.value">
+              {{conflist.viewValue}}
+            </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'lossofpaydays.year'"></mat-label> 
+          <mat-select formControlName="year">
+            @for (yr of yearArr; track yr) {
+            <mat-option [value]="yr" > {{yr}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field class="col-3">
+          <mat-label [translate]="'lossofpaydays.day'"></mat-label> 
+          <mat-select formControlName="year">
+            @for (yr of yearArr; track yr) {
+            <mat-option [value]="yr" > {{yr}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <input matInput placeholder="{{'lossofpaydays.remarks' | translate }}" formControlName="remarks" appFocusOnEnter
+            tabIndex="7">
+        </mat-form-field>
+        
+      </div>
+      <mat-divider></mat-divider>
+    </form>
+  </mat-card-content>
+
+  <div class="form-element p-2 d-flex justify-content-end">
+    <button mat-raised-button class="button-color-red text-white mr-1" (click)="cancel()">
+
+      {{ 'COMMON.CANCEL' | translate }}
+    </button>
+    <button mat-raised-button type="submit" class="button-color-bule text-white ml-1" (click)="save()" appFocusOnEnter
+      tabIndex="25">
+
+      {{ 'COMMON.SAVE' | translate }}
+    </button>
+  </div>
+
+</div>

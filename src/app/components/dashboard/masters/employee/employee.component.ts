@@ -46,7 +46,7 @@ export class EmployeeComponent implements OnInit {
 
   companyList: any[] = [];
   companiesList: any[] = [];
-  // branchesList: any[] = [];
+  branchesList: any[] = [];
   bankList: any[] = [];
   employeesList: any[] = [];
   designationsList: any[] = [];
@@ -115,6 +115,7 @@ export class EmployeeComponent implements OnInit {
 
       pfNumber: [''],
       esiNumber: [''],
+      branchCode: [''],
 
     });
 
@@ -219,7 +220,7 @@ export class EmployeeComponent implements OnInit {
   allApis() {
     let obj = JSON.parse(localStorage.getItem("user"));
     const getCompanyList = this.apiConfigService.getCompanyList;
-    // const getBranchesList = this.apiConfigService.getBranchesList);
+    const getBranchesList = this.apiConfigService.getBranchesList;
     const getEmployeeList = [this.apiConfigService.getEmployeeList, '6'].join('/');;
     const getBankMastersList = this.apiConfigService.getBankMasterLists;
     const getDesignationsList = this.apiConfigService.getDesignationsList;
@@ -230,13 +231,13 @@ export class EmployeeComponent implements OnInit {
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
         this.apiService.apiGetRequest(getCompanyList),
-        // this.apiService.apiGetRequest(getBranchesList),
+        this.apiService.apiGetRequest(getBranchesList),
         this.apiService.apiGetRequest(getEmployeeList),
         this.apiService.apiGetRequest(getBankMastersList),
         this.apiService.apiGetRequest(getDesignationsList),
         // this.apiService.apiGetRequest(getCountryList),
         this.apiService.apiGetRequest(getstateList),
-      ]).subscribe(([companyList, employeeList, bankMastersList, designationsList, stateList]) => {
+      ]).subscribe(([companyList, branchesList, employeeList, bankMastersList, designationsList, stateList]) => {
         this.spinner.hide();
 
         if (!this.commonService.checkNullOrUndefined(companyList) && companyList.status === StatusCodes.pass) {
@@ -245,11 +246,11 @@ export class EmployeeComponent implements OnInit {
           }
         }
 
-        // if (!this.commonService.checkNullOrUndefined(branchesList) && branchesList.status === StatusCodes.pass) {
-        //   if (!this.commonService.checkNullOrUndefined(branchesList.response)) {
-        //     this.branchesList = branchesList.response['branchesList'];
-        //   }
-        // }
+        if (!this.commonService.checkNullOrUndefined(branchesList) && branchesList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(branchesList.response)) {
+            this.branchesList = branchesList.response['branchesList'];
+          }
+        }
 
         if (!this.commonService.checkNullOrUndefined(employeeList) && employeeList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(employeeList.response)) {

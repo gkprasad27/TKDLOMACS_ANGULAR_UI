@@ -47,6 +47,7 @@ import { financialstatementComponent } from './financialstatement/financialstate
 import { UndersubGroupComponent } from './undersubgroup/undersubgroup.component';
 import { AssignGLaccounttoSubGroupComponent } from './assignglaccount/assignglaccount.component';
 import { AssignmentChartAccounttoCompanyComponent } from './AssignmentChartAccounttoCompany/AssignmentChartAccounttoCompany.component';
+import { LossOfPayDaysComponent } from './lossofpaydays/lossofpaydays.component';
 
 
 @Injectable({
@@ -93,6 +94,16 @@ export class MastersService {
         this.dynamicData.deleteUrl = this.apiConfigService.deleteBranches;
         this.dynamicData.listName = 'branchesList';
         this.dynamicData.primaryKey = 'branchCode';
+        return this.dynamicData;
+        break;
+      case 'lossofpaydays':
+        this.dynamicData.url = this.apiConfigService.getLOPList;
+        this.dynamicData.component = LossOfPayDaysComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerLOP;
+        this.dynamicData.updateUrl = this.apiConfigService.updateLOP;
+        this.dynamicData.deleteUrl = this.apiConfigService.deleteLOP;
+        this.dynamicData.listName = 'LOPList';
+        this.dynamicData.primaryKey = 'lopId';
         return this.dynamicData;
         break;
       case 'designation':

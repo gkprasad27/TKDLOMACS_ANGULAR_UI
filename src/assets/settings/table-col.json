@@ -260,6 +260,15 @@
     "active": "Active",
     "addDate": "Date"
   },
+  "lossofpaydays": {
+    "title": "Loss Of Pay Days",
+    "empCode": "Emp Code",
+    "empName": "Emp Name",
+    "month": "Month",
+    "year": "Year",
+    "days": "Days",
+    "remarks": "Remarks"
+  },
   "vouchertypes": {
     "title": "Voucher Type",
     "voucherCode": "Voucher Code",

@@ -1187,6 +1187,15 @@
     "roundOffPlus": "Round Off Plus",
     "roundOffMinus": "Round Off Minus"
   },
+  "lossofpaydays": {
+    "title": "Loss Of Pay Days",
+    "empCode": "Emp Code",
+    "empName": "Emp Name",
+    "month": "Month",
+    "year": "Year",
+    "days": "Days",
+    "remarks": "Remarks"
+  },
   "cashpayment": {
     "title": "Cash Payment",
     "voucherNo": "Voucher No",

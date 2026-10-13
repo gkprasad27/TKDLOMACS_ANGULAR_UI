@@ -651,7 +651,7 @@ export class SalesInvoiceComponent implements OnInit {
     if(ledgerCode != this.branchFormData.get('ledgerCode').value) {
       this.getCashPartyAccount();
     }
-    this.commonService.setFocus('vehicleRegNo');
+    // this.commonService.setFocus('vehicleRegNo');
   }
 
   @HostListener('document:keydown', ['$event'])

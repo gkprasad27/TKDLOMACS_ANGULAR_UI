@@ -484,6 +484,15 @@ export class ApiConfigService {
   deleteBranches = `${environment.baseUrl}masters/Branches/DeleteBranches`;
   // --- designation
 
+  getLOPList = `${environment.baseUrl}masters/LOP/GetLOPList`;
+  registerLOP = `${environment.baseUrl}masters/LOP/RegisterLOP`;
+  updateLOP = `${environment.baseUrl}masters/LOP/UpdateLOP`;
+  deleteLOP = `${environment.baseUrl}masters/LOP/DeleteLOP`;
+
+  getEmployeesListLOP = `${environment.baseUrl}Selfservice/PermissionRequest/GetEmployeesList`;
+
+
+
   getDesignationsList = `${environment.baseUrl}masters/Designation/GetDesignationsList`;
   registerDesignations = `${environment.baseUrl}masters/Designation/RegisterDesignation`;
   updateDesignations = `${environment.baseUrl}masters/Designation/UpdateDesignation`;
