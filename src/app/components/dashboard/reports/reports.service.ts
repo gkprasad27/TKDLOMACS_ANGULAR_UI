@@ -150,6 +150,10 @@ export class ReportsService {
         this.dynamicData.url = this.apiConfigService.getPurchaseRegisterReportData;
         this.dynamicData.listName = 'dailySalesList';
         return this.dynamicData;
+      case 'journalvoucherreport':
+        this.dynamicData.url = this.apiConfigService.getJournalVoucherReport;
+        this.dynamicData.listName = 'accountLedgerList';
+        return this.dynamicData;
       default:
     }
   }

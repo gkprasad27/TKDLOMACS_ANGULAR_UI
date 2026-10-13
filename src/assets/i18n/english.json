@@ -1193,7 +1193,7 @@
     "empName": "Emp Name",
     "month": "Month",
     "year": "Year",
-    "days": "Days",
+    "day": "Day",
     "remarks": "Remarks"
   },
   "cashpayment": {
@@ -2017,6 +2017,7 @@
     "vehicleRegNo": "Vehicle Reg.No",
     "selectedProduct": "Product",
     "selectedReport": "Shift Report Type",
+    "voucherCode": "Voucher Code",
     "selectedCriteria": "Search Criteria",
     "ReportName": "Report Name",
     "search": "Search",
@@ -2329,6 +2330,23 @@
     "voucherClassName": "Voucher Class",
     "accountType": "Account Type",
     "printText": "PrintText"
+  },
+  "journalvoucherreport": {
+    "title": "Journal Voucher Report",
+    "sno": "S No",
+    "Particulars": "Particulars",
+    "AccountCode": "Account Code",
+    "DebitAmount": "Debit Amount",
+    "CreditAmount": "Credit Amount",
+    "BranchName": "Branch Name",
+    "VoucherNo": "Voucher No",
+    "ReferenceDate": "Reference Date",
+    "ShiftID": "Shift ID",
+    "PreparedBy": "Prepared By",
+    "VoucherDate": "Voucher Date",
+    "TotalQty": "Total",
+    "TotalDebit": "TotalDebit",
+    "TotalCredit": "TotalCredit"
   },
   "AssignmentChartAccounttoCompany": {
     "title": "Assignment ChartAccount to Company",

@@ -570,6 +570,7 @@ export class CreateJournalvoucherComponent implements OnInit {
     this.dataSource.data.splice(index, 1);
     const obj = this.branchFormData.getRawValue();
     obj.journalVoucherDate = this.commonService.formatDate(this.branchFormData.get('journalVoucherDate').value);
+    obj.referenceDate = this.commonService.formatDate(this.branchFormData.get('referenceDate').value);
     obj.journalVoucherMasterId = 0;
     const registerJournalVoucherUrl = [this.apiConfigService.registerJournalVoucher].join('/');
     const requestObj = { JournalVoucherHdr: obj, JournalVoucherDetail: data };

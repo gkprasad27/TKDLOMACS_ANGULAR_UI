@@ -16,24 +16,24 @@ import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core';
 import moment from 'moment';
 
-@Component({ 
-    selector: 'app-stockshort',
-    templateUrl: './stockshort.component.html',
-    styleUrls: ['./stockshort.component.scss'],
+@Component({
+  selector: 'app-stockshort',
+  templateUrl: './stockshort.component.html',
+  styleUrls: ['./stockshort.component.scss'],
   standalone: true,
   imports: [SharedImportModule, TranslateModule]
 })
-export class StockshortComponent  implements OnInit {
+export class StockshortComponent implements OnInit {
   selectedDate = { start: moment().add(-1, 'day'), end: moment().add(0, 'day') };
   dateForm: FormGroup;
   // table
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  displayedColumns: string[] = ['branchCode', 'branchName','stockshortNo', 'stockshortDate', 'costCenter','userId',
+  displayedColumns: string[] = ['branchCode', 'branchName', 'stockshortNo', 'stockshortDate', 'costCenter', 'userId',
     'shiftId'
   ];
-    stockshortNo: any;
-    branchCode: any;
+  stockshortNo: any;
+  branchCode: any;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -53,8 +53,7 @@ export class StockshortComponent  implements OnInit {
     });
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.branchCode = JSON.parse(localStorage.getItem('user'));
     this.dateForm.patchValue({ role: this.branchCode.role })
     this.getInvoiceDetails();
@@ -86,7 +85,7 @@ export class StockshortComponent  implements OnInit {
     this.router.navigate(['dashboard/transactions/stockshort/CreateStocshorts', 'return']);
   }
 
-  
+
   //Search and datadisplay code
   search() {
     if ((this.dateForm.value.stockshortNo == null)) {
@@ -96,12 +95,15 @@ export class StockshortComponent  implements OnInit {
       }
       else {
         this.dateForm.patchValue({
-          fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
-          toDate: this.commonService.formatDate(this.dateForm.value.toDate),
           stockshortNo: this.dateForm.value.stockshortNo
         });
       }
     }
+
+    this.dateForm.patchValue({
+      fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
+      toDate: this.commonService.formatDate(this.dateForm.value.toDate),
+    });
     this.getStockshortList();
   }
   getStockshortList() {
@@ -124,11 +126,11 @@ export class StockshortComponent  implements OnInit {
 
 
 
- 
+
   reset() {
     this.dateForm.reset();
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator;
   }
- 
+
 }

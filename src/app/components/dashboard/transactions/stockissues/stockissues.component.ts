@@ -16,7 +16,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import moment from 'moment';
 
-@Component({ 
+@Component({
   selector: 'app-stockissues',
   templateUrl: './stockissues.component.html',
   styleUrls: ['./stockissues.component.scss'],
@@ -30,11 +30,11 @@ export class StockissuesComponent implements OnInit {
   // table
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  displayedColumns: string[] = ['fromBranchCode', 'fromBranchName', 'toBranchCode', 'toBranchName','issueNo', 'issueDate', 
-  'userId', 'shiftId'
+  displayedColumns: string[] = ['fromBranchCode', 'fromBranchName', 'toBranchCode', 'toBranchName', 'issueNo', 'issueDate',
+    'userId', 'shiftId'
   ];
-    fromBranchCode: any;
-    issueNo: any;
+  fromBranchCode: any;
+  issueNo: any;
   branchCode: any;
   user1: any;
 
@@ -47,8 +47,7 @@ export class StockissuesComponent implements OnInit {
     private alertService: AlertService,
     private spinner: NgxSpinnerService,
 
-  )
-  {
+  ) {
     this.dateForm = this.formBuilder.group({
       fromDate: [null],
       toDate: [null],
@@ -57,15 +56,13 @@ export class StockissuesComponent implements OnInit {
     });
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.branchCode = JSON.parse(localStorage.getItem('user'));
     this.dateForm.patchValue({ role: this.branchCode.role })
     this.getInvoiceDetails();
   }
 
-  getInvoiceDetails()
-  {
+  getInvoiceDetails() {
     ;
     const getInvoiceDetailstUrl = [this.apiConfigService.getStockissuesDeatilListLoad, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceDetailstUrl, this.dateForm.value).subscribe(
@@ -81,9 +78,8 @@ export class StockissuesComponent implements OnInit {
       });
   }
 
-  openStockissues(row)
-  {
-  //ebugger;
+  openStockissues(row) {
+    //ebugger;
     localStorage.setItem('selectedstockissues', JSON.stringify(row));
     this.router.navigate(['dashboard/transactions/stockissues/CreateStockissues', row.operatorStockIssueId]);
   }
@@ -102,24 +98,23 @@ export class StockissuesComponent implements OnInit {
       }
       else {
         this.dateForm.patchValue({
-          fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
-          toDate: this.commonService.formatDate(this.dateForm.value.toDate),
           issueNo: this.dateForm.value.issueNo
         });
       }
     }
-
+    this.dateForm.patchValue({
+      fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
+      toDate: this.commonService.formatDate(this.dateForm.value.toDate),
+    });
     this.getStockIssueList();
   }
-  getStockIssueList()
-  {
-   ;
+  getStockIssueList() {
+    ;
     const getInvoiceListUrl = [this.apiConfigService.getStockissuesList, this.branchCode.branchCode].join('/');
     this.apiService.apiPostRequest(getInvoiceListUrl, this.dateForm.value).subscribe(
       response => {
         const res = response;
-        if (res?.status === StatusCodes.pass)
-        {
+        if (res?.status === StatusCodes.pass) {
           if (res?.response?.StockIssueList?.length) {
             this.dataSource = new MatTableDataSource(res.response['StockIssueList']);
             this.dataSource.paginator = this.paginator;

@@ -8,7 +8,6 @@
     <form [formGroup]="modelFormData" autocomplete="off">
       <div class="d--flex">
 
-
         <mat-form-field class="col-3">
           <mat-label [translate]="'lossofpaydays.empCode'"></mat-label>
           <mat-select formControlName="empCode" (selectionChange)="onEmpChange($event)">
@@ -43,9 +42,9 @@
         
         <mat-form-field class="col-3">
           <mat-label [translate]="'lossofpaydays.day'"></mat-label> 
-          <mat-select formControlName="year">
-            @for (yr of yearArr; track yr) {
-            <mat-option [value]="yr" > {{yr}}</mat-option>
+          <mat-select formControlName="day">
+            @for (da of days; track da) {
+            <mat-option [value]="da.value" > {{da.viewValue}}</mat-option>
             }
           </mat-select>
         </mat-form-field>

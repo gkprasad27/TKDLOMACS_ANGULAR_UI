@@ -15,7 +15,7 @@ import { Static } from '../../../../enums/common/static';
 import { AlertService } from '../../../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-@Component({ 
+@Component({
   selector: 'app-cashreceipt',
   templateUrl: './cashreceipt.component.html',
   styleUrls: ['./cashreceipt.component.scss'],
@@ -24,17 +24,17 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class CashReceiptComponent implements OnInit {
   // selectedDate = {start : moment().add(-1, 'day'), end: moment().add(0, 'day')};
-  GetBranchesListArray:any;
+  GetBranchesListArray: any;
   dateForm: FormGroup;
   // table
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  displayedColumns: string[] = ['branchCode', 'branchName','fromLedgerCode','fromLedgerName','voucherNo','cashReceiptDate',  
-   'totalAmount','userId', 'shiftId'
-];
-showPrintableReport: boolean = false;
+  displayedColumns: string[] = ['branchCode', 'branchName', 'fromLedgerCode', 'fromLedgerName', 'voucherNo', 'cashReceiptDate',
+    'totalAmount', 'userId', 'shiftId'
+  ];
+  showPrintableReport: boolean = false;
 
-branchCode:any;
+  branchCode: any;
   constructor(
     private formBuilder: UntypedFormBuilder,
     private commonService: CommonService,
@@ -49,15 +49,15 @@ branchCode:any;
       fromDate: [null],
       toDate: [null],
       voucherNo: [null],
-      role:[null],
-      branchCode:[null]
+      role: [null],
+      branchCode: [null]
     });
   }
 
   ngOnInit() {
     this.branchCode = JSON.parse(localStorage.getItem('user'));
-    
-    this.dateForm.patchValue({role:this.branchCode.role})
+
+    this.dateForm.patchValue({ role: this.branchCode.role })
     this.getCashReceiptList();
     this.getCashReceiptBranchesList();
   }
@@ -88,7 +88,7 @@ branchCode:any;
       );
       return;
     }
-     this.spinner.show();
+    this.spinner.show();
     setTimeout(() => {
       this.showPrintableReport = true;
 
@@ -109,17 +109,17 @@ branchCode:any;
 
         }
 
-          var w = window.open('', '_blank');
-          w.document.body.innerHTML = elementHtml;
-          this.showPrintableReport = false;
-          this.spinner.hide();
-          w.print();
+        var w = window.open('', '_blank');
+        w.document.body.innerHTML = elementHtml;
+        this.showPrintableReport = false;
+        this.spinner.hide();
+        w.print();
 
       });
     }, 500);
 
   }
-  
+
 
   getCashReceiptList() {
     const getCashReceiptListUrl = [this.apiConfigService.getCashReceiptList, this.branchCode.branchCode].join('/');
@@ -127,12 +127,12 @@ branchCode:any;
       response => {
         const res = response;
         if (res != null && res.status === StatusCodes.pass) {
-        if (res?.response?.CashReceiptList?.length) {
-          this.dataSource = new MatTableDataSource( res.response['CashReceiptList']);
-          this.dataSource.paginator = this.paginator;
-          this.spinner.hide();
+          if (res?.response?.CashReceiptList?.length) {
+            this.dataSource = new MatTableDataSource(res.response['CashReceiptList']);
+            this.dataSource.paginator = this.paginator;
+            this.spinner.hide();
+          }
         }
-      }
       });
   }
   openSale(row) {
@@ -148,16 +148,17 @@ branchCode:any;
           return;
         } else {
           this.dateForm.patchValue({
-            fromDate:  this.commonService.formatDate(this.dateForm.value.fromDate),
-            toDate:  this.commonService.formatDate(this.dateForm.value.toDate),
-            voucherNo:this.dateForm.value.voucherNo,
-            role:this.branchCode.role,
-            branchCode:this.dateForm.value.branchCode
+            voucherNo: this.dateForm.value.voucherNo,
+            role: this.branchCode.role,
+            branchCode: this.dateForm.value.branchCode
           });
         }
+      }
     }
-  }
-
+    this.dateForm.patchValue({
+      fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
+      toDate: this.commonService.formatDate(this.dateForm.value.toDate),
+    });
     this.getCashReceiptList();
   }
 

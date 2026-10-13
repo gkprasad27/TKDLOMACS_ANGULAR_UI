@@ -379,16 +379,16 @@ export class SalesInvoiceComponent implements OnInit {
 
   getCashPartyAccountList(event, flag = true) {
     const value = event?.target?.value;
-    const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, value ? value : this.branchFormData.get('ledgerCode').value].join('/');
-    this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
+    const getAccountLedgersListUrl = [this.apiConfigService.getAccountLedgersList].join('/');
+    this.apiService.apiGetRequest(getAccountLedgersListUrl).subscribe(
       response => {
         const res = response;
         this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
-            if (res?.response?.CashPartyAccountList?.length > 0) {
-              res.response['CashPartyAccountList'].forEach((a: any) => a.display = a.id + ' - ' + a.text);
-              this.getCashPartyAccountListArray = res.response['CashPartyAccountList'];
+            if (res?.response?.accountLedgerList?.length > 0) {
+              // res.response['accountLedgerList'].forEach((a: any) => a.display = a.ledgerCode + ' - ' + a.ledgerName);
+              this.getCashPartyAccountListArray = res.response['accountLedgerList'];
               if (flag) {
                 this.getCashPartyAccount();
               }
@@ -628,7 +628,7 @@ export class SalesInvoiceComponent implements OnInit {
   setLedgerName(event) {
     const ledgerCode = this.branchFormData.get('ledgerCode').value;
     const value = (event?.value || event?.target?.value)?.split(' -')[0];
-    const lname = this.getCashPartyAccountListArray.find(lCode => lCode.id == value);
+    const lname = this.getCashPartyAccountListArray.find(lCode => lCode.id == event?.value);
     this.branchFormData.patchValue({
       ledgerName: lname ? lname.text : null,
       ledgerCode: lname ? lname.id : null,

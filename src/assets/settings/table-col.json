@@ -1978,6 +1978,27 @@
     "accountType": "Account Type",
     "printText": "PrintText"
   },
+  "journalvoucherreport": {
+    "sno": "S No",
+    "Particulars": "Particulars",
+    "AccountCode": "Account Code",
+    "DebitAmount": "Debit Amount",
+    "CreditAmount": "Credit Amount",
+    "headers": {
+      "BranchName": "Branch Name",
+      "VoucherNo": "Voucher No",
+      "ReferenceDate": "Reference Date",
+      "ShiftID": "Shift ID",
+      "PreparedBy": "Prepared By",
+      "VoucherDate": "Voucher Date"
+    },
+    "footer": {
+      "colspan": 1,
+      "TotalQty": "Total",
+      "TotalDebit": "TotalDebit",
+      "TotalCredit": "TotalCredit"
+    }
+  },
   "voucherseries": {
     "title": "Voucher Series",
     "voucherSeriesKey": "Voucher Series Key",

@@ -576,6 +576,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       selectedTrialReportType: [''],
       selectedClosingReportType: [''],
       fromAccountLedger: [''],
+      voucherCode: [null],
       toAccountLedger: [''],
       RO: [null],
       selectedFourColumnReportType: [''],
@@ -938,7 +939,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     // this.params = this.params.append('shiftId', this.dateForm.get('selectedReport')?.value);
 
     const lname = this.GetBankPAccountLedgerListArray.length && this.GetBankPAccountLedgerListArray.find(lCode => lCode.display == this.dateForm.get('selectedAccountLedger').value);
-    this.params = this.params.append('ledgerCode', lname?.id);
+    this.params = this.params.append('ledgerCode', lname?.id ?? null);
     this.params = this.params.append('ledgerName', this.dateForm.get('ledgerName')?.value);
     this.params = this.params.append('branchCode', +this.dateForm.get('selectedBranch')?.value);
     this.params = this.params.append('branchID', +this.dateForm.get('selectedBranch')?.value);
@@ -956,6 +957,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.params = this.params.append('fourColumnreportType', this.dateForm.get('selectedFourColumnReportType')?.value);
     this.params = this.params.append('GroupName', this.dateForm.get('selectedGroupName')?.value);
     this.params = this.params.append('SupplierGroup', this.dateForm.get('selectedSupplierGroup')?.value);
+    this.params = this.params.append('voucherCode', this.dateForm.get('voucherCode')?.value ?? null);
     if (this.dateForm.value.selectedCriteria == "shiftId") {
       this.params = this.params.append('shiftId', this.dateForm.value.search);
     } else {

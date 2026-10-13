@@ -92,13 +92,14 @@ export class OilconversionComponent implements OnInit {
       }
       else {
         this.dateForm.patchValue({
-          fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
-          toDate: this.commonService.formatDate(this.dateForm.value.toDate),
           oilConversionVchNo: this.dateForm.value.oilConversionVchNo
         });
       }
     }
-
+    this.dateForm.patchValue({
+      fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
+      toDate: this.commonService.formatDate(this.dateForm.value.toDate),
+    });
     this.getOilconversionList();
   }
   getOilconversionList() {

@@ -16,7 +16,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import moment from 'moment';
 
-@Component({ 
+@Component({
   selector: 'app-bankpayment',
   templateUrl: './bankpayment.component.html',
   styleUrls: ['./bankpayment.component.scss'],
@@ -24,18 +24,18 @@ import moment from 'moment';
   imports: [SharedImportModule, TranslateModule]
 })
 export class BankPaymentComponent implements OnInit {
-  selectedDate = {start : moment().add(-1, 'day'), end: moment().add(0, 'day')};
-  GetBranchesListArray:any;
+  selectedDate = { start: moment().add(-1, 'day'), end: moment().add(0, 'day') };
+  GetBranchesListArray: any;
   dateForm: FormGroup;
   // table
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  displayedColumns: string[] = ['branchCode', 'branchName','bankLedgerCode','bankLedgerName','voucherNo','bankPaymentDate',  
-  'totalAmount','userId', 'shiftId'
-];
-showPrintableReport: boolean = false;
+  displayedColumns: string[] = ['branchCode', 'branchName', 'bankLedgerCode', 'bankLedgerName', 'voucherNo', 'bankPaymentDate',
+    'totalAmount', 'userId', 'shiftId'
+  ];
+  showPrintableReport: boolean = false;
 
-branchCode:any;
+  branchCode: any;
   constructor(
     private formBuilder: FormBuilder,
     private commonService: CommonService,
@@ -50,15 +50,15 @@ branchCode:any;
       fromDate: [null],
       toDate: [null],
       voucherNo: [null],
-      role:[null],
-      branchCode:[null]
+      role: [null],
+      branchCode: [null]
     });
   }
 
   ngOnInit() {
     this.branchCode = JSON.parse(localStorage.getItem('user'));
     // this.search();
-    this.dateForm.patchValue({role:this.branchCode.role})
+    this.dateForm.patchValue({ role: this.branchCode.role })
     this.getBankpaymentList();
     this.getBankPaymentBranchesList();
   }
@@ -73,7 +73,7 @@ branchCode:any;
       );
       return;
     }
-     this.spinner.show();
+    this.spinner.show();
     setTimeout(() => {
       this.showPrintableReport = true;
 
@@ -94,11 +94,11 @@ branchCode:any;
 
         }
 
-          var w = window.open('', '_blank');
-          w.document.body.innerHTML = elementHtml;
-          this.showPrintableReport = false;
-          this.spinner.hide();
-          w.print();
+        var w = window.open('', '_blank');
+        w.document.body.innerHTML = elementHtml;
+        this.showPrintableReport = false;
+        this.spinner.hide();
+        w.print();
 
       });
     }, 500);
@@ -127,12 +127,12 @@ branchCode:any;
       response => {
         const res = response;
         if (res != null && res.status === StatusCodes.pass) {
-        if (res?.response?.BankPaymentList?.length) {
-          this.dataSource = new MatTableDataSource( res.response['BankPaymentList']);
-          this.dataSource.paginator = this.paginator;
-          this.spinner.hide();
+          if (res?.response?.BankPaymentList?.length) {
+            this.dataSource = new MatTableDataSource(res.response['BankPaymentList']);
+            this.dataSource.paginator = this.paginator;
+            this.spinner.hide();
+          }
         }
-      }
       });
   }
 
@@ -149,15 +149,18 @@ branchCode:any;
           return;
         } else {
           this.dateForm.patchValue({
-            fromDate:  this.commonService.formatDate(this.dateForm.value.fromDate),
-            toDate:  this.commonService.formatDate(this.dateForm.value.toDate),
-            voucherNo:this.dateForm.value.voucherNo,
-            role:this.branchCode.role,
-            branchCode:this.dateForm.value.branchCode
+            voucherNo: this.dateForm.value.voucherNo,
+            role: this.branchCode.role,
+            branchCode: this.dateForm.value.branchCode
           });
         }
+      }
     }
-  }
+
+    this.dateForm.patchValue({
+      fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
+      toDate: this.commonService.formatDate(this.dateForm.value.toDate),
+    });
 
     this.getBankpaymentList();
   }

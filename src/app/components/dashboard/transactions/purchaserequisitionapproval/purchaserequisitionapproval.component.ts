@@ -16,7 +16,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import moment from 'moment';
 
-@Component({ 
+@Component({
   selector: 'app-purchaserequisitionapproval',
   templateUrl: './purchaserequisitionapproval.component.html',
   styleUrls: ['./purchaserequisitionapproval.component.scss'],
@@ -96,13 +96,14 @@ export class PurchaserequisitionapprovalComponent implements OnInit {
       }
       else {
         this.dateForm.patchValue({
-          fromDate: this.commonService.formatDate(this.dateForm.value.selected.start._d),
-          toDate: this.commonService.formatDate(this.dateForm.value.selected.end._d),
           issueNo: this.dateForm.value.issueNo
         });
       }
     }
-
+    this.dateForm.patchValue({
+      fromDate: this.commonService.formatDate(this.dateForm.value.selected.start._d),
+      toDate: this.commonService.formatDate(this.dateForm.value.selected.end._d),
+    });
     this.getpurchaserequisitionList();
   }
   getpurchaserequisitionList() {

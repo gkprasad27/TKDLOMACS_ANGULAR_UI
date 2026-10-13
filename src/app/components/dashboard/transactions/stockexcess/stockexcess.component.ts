@@ -16,7 +16,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import moment from 'moment';
 
-@Component({ 
+@Component({
   selector: 'app-stockexcess',
   templateUrl: './stockexcess.component.html',
   styleUrls: ['./stockexcess.component.scss'],
@@ -24,15 +24,15 @@ import moment from 'moment';
   imports: [SharedImportModule, TranslateModule]
 })
 export class StockExcessComponent implements OnInit {
-  selectedDate = {start : moment().add(-1, 'day'), end: moment().add(0, 'day')};
+  selectedDate = { start: moment().add(-1, 'day'), end: moment().add(0, 'day') };
 
   dateForm: FormGroup;
   // table
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  displayedColumns: string[] = ['branchCode','branchName','stockExcessNo','stockExcessDate', 'costCenter','userId','shiftId'
-];
-branchCode: any;
+  displayedColumns: string[] = ['branchCode', 'branchName', 'stockExcessNo', 'stockExcessDate', 'costCenter', 'userId', 'shiftId'
+  ];
+  branchCode: any;
   constructor(
     private formBuilder: UntypedFormBuilder,
     private commonService: CommonService,
@@ -48,14 +48,14 @@ branchCode: any;
       fromDate: [null],
       toDate: [null],
       stockExcessNo: [null],
-      role:[null]
+      role: [null]
     });
   }
 
   ngOnInit() {
-      this.branchCode = JSON.parse(localStorage.getItem('user'));
-      this.dateForm.patchValue({role:this.branchCode.role})
-      this.getStockexcessList();
+    this.branchCode = JSON.parse(localStorage.getItem('user'));
+    this.dateForm.patchValue({ role: this.branchCode.role })
+    this.getStockexcessList();
   }
 
 
@@ -66,12 +66,12 @@ branchCode: any;
       response => {
         const res = response;
         if (res != null && res.status === StatusCodes.pass) {
-        if (res?.response?.StockexcessList?.length) {
-          this.dataSource = new MatTableDataSource( res.response['StockexcessList']);
-          this.dataSource.paginator = this.paginator;
-          this.spinner.hide();
+          if (res?.response?.StockexcessList?.length) {
+            this.dataSource = new MatTableDataSource(res.response['StockexcessList']);
+            this.dataSource.paginator = this.paginator;
+            this.spinner.hide();
+          }
         }
-      }
       });
   }
 
@@ -82,18 +82,20 @@ branchCode: any;
 
   search() {
     if ((this.dateForm.value.stockExcessNo == null)) {
-        if (this.dateForm?.value?.selected == null) {
-          this.alertService.openSnackBar('Select StockExcess No or Date', Static.Close, SnackBar.error);
-          return;
-        } else {
-          this.dateForm.patchValue({
-            fromDate:  this.commonService.formatDate(this.dateForm.value.selected.start._d),
-            toDate:  this.commonService.formatDate(this.dateForm.value.selected.end._d),
-            stockExcessNo:this.dateForm.value.stockExcessNo
-          });
-        }
+      if (this.dateForm?.value?.selected == null) {
+        this.alertService.openSnackBar('Select StockExcess No or Date', Static.Close, SnackBar.error);
+        return;
+      } else {
+        this.dateForm.patchValue({
+          stockExcessNo: this.dateForm.value.stockExcessNo
+        });
+      }
     }
 
+    this.dateForm.patchValue({
+      fromDate: this.commonService.formatDate(this.dateForm.value.selected.start._d),
+      toDate: this.commonService.formatDate(this.dateForm.value.selected.end._d),
+    });
     this.getStockexcessList();
   }
 

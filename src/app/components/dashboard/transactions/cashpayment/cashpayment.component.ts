@@ -149,17 +149,20 @@ branchCode: any;
           this.alertService.openSnackBar('Select VoucherNo or Date', Static.Close, SnackBar.error);
           return;
         }
-         else {
+        else {
           this.dateForm.patchValue({
-            fromDate:  this.commonService.formatDate(this.dateForm.value.fromDate),
-            toDate:  this.commonService.formatDate(this.dateForm.value.toDate),
-            voucherNo:this.dateForm.value.voucherNo,
-            role:this.branchCode.role,
-            branchCode:this.dateForm.value.branchCode
+            voucherNo: this.dateForm.value.voucherNo,
+            role: this.branchCode.role,
+            branchCode: this.dateForm.value.branchCode
           });
         }
       }
     }
+
+    this.dateForm.patchValue({
+      fromDate: this.commonService.formatDate(this.dateForm.value.fromDate),
+      toDate: this.commonService.formatDate(this.dateForm.value.toDate),
+    });
 
     this.getCashPaymentList();
   }

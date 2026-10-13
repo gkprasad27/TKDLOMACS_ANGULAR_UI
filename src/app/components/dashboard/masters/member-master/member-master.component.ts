@@ -113,6 +113,7 @@ export class MemberMasterComponent implements OnInit {
       totalShares: [null],
       createdDate: [null],
       isActive: [0],
+      isExpired: [0],
       aadharNumber: [null],
       dob: [null],
       giftIssued: [null],
@@ -311,6 +312,7 @@ export class MemberMasterComponent implements OnInit {
       this.formData = value.item;
       if (this.formData != null) {
         this.formData.isActive = this.formData.isActive == 1 ? true : false;
+        this.formData.isExpired = this.formData.isExpired == 1 ? true : false;
         this.modelFormData.patchValue(this.formData);
         this.modelFormData.controls['memberCode'].disable();
         this.formToggle();
@@ -339,7 +341,8 @@ export class MemberMasterComponent implements OnInit {
         giftIssuedDate: this.commonService.formatDate(this.modelFormData.get('giftIssuedDate').value),
         dob: this.commonService.formatDate(this.modelFormData.get('dob').value),
         joinDate: this.commonService.formatDate(this.modelFormData.get('joinDate').value),
-        isActive: this.modelFormData.get('isActive').value ? 1 : 0
+        isActive: this.modelFormData.get('isActive').value ? 1 : 0,
+        isExpired: this.modelFormData.get('isExpired').value ? 1 : 0
       };
       this.apiService.apiPostRequest(this.tableUrl.registerUrl, formValue)
         .subscribe(
@@ -366,7 +369,8 @@ export class MemberMasterComponent implements OnInit {
         giftIssuedDate: this.commonService.formatDate(this.modelFormData.get('giftIssuedDate').value),
         dob: this.commonService.formatDate(this.modelFormData.get('dob').value),
         joinDate: this.commonService.formatDate(this.modelFormData.get('joinDate').value),
-        isActive: this.modelFormData.get('isActive').value ? 1 : 0
+        isActive: this.modelFormData.get('isActive').value ? 1 : 0,
+        isExpired: this.modelFormData.get('isExpired').value ? 1 : 0
       };
 
       this.apiService.apiUpdateRequest(this.tableUrl.updateUrl, formValue)

@@ -100,7 +100,7 @@ export class CreateBankpaymentComponent implements OnInit {
 
     const user = JSON.parse(localStorage.getItem('user'));
 
-    if (user?.role != '1') {
+    if (user?.role != '1' || user?.role != '86') {
       this.branchFormData.controls['branchCode'].disable();
     }
 
