@@ -65,6 +65,7 @@ export class MastersService {
 
   getRouteUrls(data) {
     const user = JSON.parse(localStorage.getItem('user'));
+    this.dynamicData = { url: '', component: null, registerUrl: '', listName: '', updateUrl: '', primaryKey: '', deleteUrl: '', tabScreen: '' };
     switch (data) {
       case 'company':
         this.dynamicData.url = this.apiConfigService.getCompanysList;

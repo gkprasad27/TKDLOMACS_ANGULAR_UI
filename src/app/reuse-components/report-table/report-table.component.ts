@@ -542,12 +542,12 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.model();
 
     activatedRoute.params.subscribe(params => {
-      this.routeParam = params.id;
       this.tableHeaders = [];
       this.headerData = [];
       this.footerData = [];
       this.defaultValues();
       this.dateForm.reset();
+      this.routeParam = params.id;
       setTimeout(() => {
         this.model();
       });
@@ -798,23 +798,23 @@ export class ReportTableComponent implements OnInit, OnChanges {
   }
 
   get getHeaders() {
-    if (this.routeParam == 'Shift') {
+    if (this.routeParam == 'Shift' && this.dateForm.get('selectedReport')?.value) {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value]?.headers;
     }
-    if (this.routeParam == 'Salesanalysisbybranch') {
+    if (this.routeParam == 'Salesanalysisbybranch' && this.dateForm.get('ReportName')?.value) {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value]?.headers;
     }
     return this.runtimeConfigService.tableColumnsData[this.routeParam].headers;
   }
 
   get getFooter() {
-    if (this.routeParam == 'Shift') {
+    if (this.routeParam == 'Shift' && this.dateForm.get('selectedReport')?.value) {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value]?.footer;
     }
-    if (this.routeParam == 'Salesanalysisbybranch') {
+    if (this.routeParam == 'Salesanalysisbybranch' && this.dateForm.get('ReportName')?.value) {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value]?.footer;
     }
-    if (this.routeParam == 'DailySales') {
+    if (this.routeParam == 'DailySales' && this.runtimeConfigService.tableColumnsData[this.routeParam]) {
       const obj = JSON.parse(JSON.stringify(this.runtimeConfigService.tableColumnsData[this.routeParam]));
       if (obj && !this.dateForm.get('selectedBranch')?.value) {
         obj.footer.colspan = 5;
@@ -825,10 +825,10 @@ export class ReportTableComponent implements OnInit, OnChanges {
   }
 
   get getBody() {
-    if (this.routeParam == 'Shift') {
+    if (this.routeParam == 'Shift' && this.dateForm.get('selectedReport')?.value) {
       return this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('selectedReport')?.value];
     }
-    if (this.routeParam == 'Salesanalysisbybranch') {
+    if (this.routeParam == 'Salesanalysisbybranch' && this.dateForm.get('ReportName')?.value) {
       const obj = JSON.parse(JSON.stringify(this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value]));
       if (obj && this.dateForm.get('selectedBranch')?.value && this.dateForm.get('ReportName')?.value == 'Detailed Sales Analysis') {
         delete obj['Branch Name'];
@@ -837,7 +837,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       }
       return obj;
     }
-    if (this.routeParam == 'DailySales') {
+    if (this.routeParam == 'DailySales' && this.runtimeConfigService.tableColumnsData[this.routeParam]) {
       const obj = JSON.parse(JSON.stringify(this.runtimeConfigService.tableColumnsData[this.routeParam]));
       if (obj && !this.dateForm.get('selectedBranch')?.value) {
         delete obj.PumpNo;
@@ -853,7 +853,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
         return obj;
       }
     }
-    if (this.routeParam == 'ProductPriceList') {
+    if (this.routeParam == 'ProductPriceList' && this.runtimeConfigService.tableColumnsData[this.routeParam]) {
       const obj = JSON.parse(JSON.stringify(this.runtimeConfigService.tableColumnsData[this.routeParam]));
       if (obj && this.dateForm.get('selectedReportType')?.value == '2') {
         delete obj.GOLLAPUDI;
@@ -875,10 +875,10 @@ export class ReportTableComponent implements OnInit, OnChanges {
   }
 
   get getName() {
-    if (this.routeParam == 'Shift') {
+    if (this.routeParam == 'Shift' && this.dateForm.get('selectedReport')?.value) {
       return this.Reports.find(r => r.id == this.dateForm.get('selectedReport')?.value)?.reportName;
     }
-    if (this.routeParam == 'Salesanalysisbybranch') {
+    if (this.routeParam == 'Salesanalysisbybranch' && this.dateForm.get('ReportName')?.value) {
       return this.dateForm.get('ReportName')?.value;
     }
     return null;

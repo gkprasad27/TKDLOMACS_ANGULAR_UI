@@ -29,7 +29,7 @@
         </button>
       </div>
       <div class="mx-1">
-        <button mat-raised-button class="button-color-green text-white1" (click)="newTransOpen()"><i
+        <button mat-raised-button [disabled]="routeParam === 'salesReturn'" class="button-color-green text-white1" (click)="newTransOpen()"><i
         class="fa-solid fa-pen"></i>
         {{ "COMMON.NEW" | translate }}
       </button>
