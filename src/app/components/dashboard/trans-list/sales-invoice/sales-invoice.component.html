@@ -47,10 +47,10 @@
             <label> {{ 'salesInvoice.ledgerCode' | translate }} </label>
             <input placeholder=" " formControlName="ledgerValue" id="ledgerValue" shortcutkey="f2"
               autocomplete="off" [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray"
-              typeaheadOptionField='ledgerCode' class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
-              (typeaheadOnSelect)="setLedgerName($event)" (focusout)="setLedgerName($event)" [typeaheadWaitMs]="200" >
+              typeaheadOptionField='display' class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
+              (typeaheadOnSelect)="setLedgerName($event)" [typeaheadWaitMs]="200" >
             <ng-template #customItemTemplate let-model="item">
-              <span><strong>{{model.ledgerCode}}</strong> - {{model.ledgerName}}</span>
+              <span><strong>{{model.id}}</strong> - {{model.text}}</span>
             </ng-template>
           </div>
 
