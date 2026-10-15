@@ -644,6 +644,10 @@ export class ReportTableComponent implements OnInit, OnChanges {
   getDisplayedColumns(): string[] {
     if (this.tableData != null) {
 
+      if(!this.getBody) {
+        return;
+      }
+
       const columnOrder = Object.keys(this.getBody)
         .filter(key => key !== 'headers' && key !== 'footer');
 

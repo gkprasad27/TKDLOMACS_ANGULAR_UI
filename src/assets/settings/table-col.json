@@ -821,6 +821,31 @@
         "ToDate": "To Date",
         "CreatedBy": "Created By"
       }
+    },
+    "9": {
+      "sno": "S No",
+      "DATE": "DATE",
+      "Voucher No": "Voucher No",
+      "Description": "Description",
+      "Debit": "Debit",
+      "Credit": "Credit",
+      "headers": {
+        "LedgerCode": "Ledger Code",
+        "LedgerName": "Ledger Name",
+        "ReportDate": "Report Date",
+        "UserName": "User Name",
+        "ShiftId": "Shift Id",
+        "ReportCreatedBy":"Report Created By",
+        "FromDate": "From Date",
+        "ToDate": "To Date",
+        "OpeningBalance": "Opening Balance",
+        "ClosingBalance": "Closing Balance"
+      },
+      "footer": {
+        "colspan": 3,
+        "TotalDebit": "TotalDebit",
+        "TotalCredits": "TotalCredits"
+      }
     }
   },
   "BankReconciliation": {
@@ -1552,7 +1577,8 @@
       "ReportDate": "Report Date",
       "FromDate": "From Date",
       "ToDate": "To Date",
-      "CreatedBy": "Created By"
+      "CreatedBy": "Created By",
+      "ClosingBalance": "Closing Balance"
     },
     "footer": {
       "colspan": 2,
