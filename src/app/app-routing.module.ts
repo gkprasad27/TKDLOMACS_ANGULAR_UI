@@ -8,7 +8,7 @@ import { EmployeeComponent, MastersComponent } from './components/dashboard/mast
 import { PayrollComponent } from './components/dashboard/payroll/index';
 import { SelfserviceComponent } from './components/dashboard/selfservice/index';
 // import { TransactionsComponent } from './components/dashboard/transactions';
-import { TransactionsComponent,CreateCashpaymentComponent,CreateCashreceiptComponent,CreateBankpaymentComponent,CreateBankreceiptComponent,CreateJournalvoucherComponent,CreateStockissuesComponent, CreateStockreceiptsComponent, CreateStockshortsComponent, CreateOilconversionsComponent,CreateStockExcessComponent } from './components/dashboard/transactions';
+import { TransactionsComponent,CreateCashpaymentComponent,CreateCashreceiptComponent,CreateBankpaymentComponent,CreateBankreceiptComponent,CreateJournalvoucherComponent,CreateStockissuesComponent, CreateStockreceiptsComponent, CreateStockshortsComponent, CreateOilconversionsComponent,CreateStockExcessComponent, CreatePurchaseRequisitionapprovalComponent } from './components/dashboard/transactions';
 
 import {
   SettingsComponent
@@ -55,6 +55,8 @@ const routes: Routes = [
       { path: 'transactions/:id/CreateOilconversions/:id1', component: CreateOilconversionsComponent, data: { title: 'Create Oilconversions' } },
       { path: 'transactions/:id/createStockExcess', component: CreateStockExcessComponent, data: { title: 'Create StockExcess' } },
       { path: 'transactions/:id/createStockExcess/:id1', component: CreateStockExcessComponent, data: { title: 'Create StockExcess' } },
+      { path: 'transactions/:id/CreatePurchaserequisitionapproval', component: CreatePurchaseRequisitionapprovalComponent, data: { title: 'Purchase Requisition Approval' } },
+      { path: 'transactions/:id/CreatePurchaserequisitionapproval/:id1', component: CreatePurchaseRequisitionapprovalComponent, data: { title: 'Purchase Requisition Approval' } },
       { path: 'payroll/:id', component: PayrollComponent, data: { title: 'Payroll' } },
       { path: 'settings/:id', component: SettingsComponent, data: { title: 'Payroll' } },
       { path: 'reports/:id', component: ReportsComponent, data: { title: 'Report' }  }

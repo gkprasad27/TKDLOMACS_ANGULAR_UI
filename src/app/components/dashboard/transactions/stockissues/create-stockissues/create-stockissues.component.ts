@@ -100,8 +100,9 @@ export class CreateStockissuesComponent implements OnInit {
       })
     }
 
+    const allowedRoles = ['1', '86', '87', '88', '89', '90', '97', '100'];
 
-    if (user?.role != '1') {
+    if (!allowedRoles.includes(String(user?.role))) {
       this.branchFormData.controls['fromBranchCode'].disable();
     }
   }

@@ -1,48 +1,44 @@
 
 @import "../../../../../../reuse";
 
+::ng-deep typeahead-container {
+  max-height: 300px !important;
+}
+
 :host ::ng-deep table {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-
   & > thead {
     & th {
       text-align: center;
     }
   }
-
-  & > tbody {
+  & > tbody  {
     & tr {
       border-bottom: 1px solid $color-ddd;
     }
-
     & td {
       font-size: 12px;
       vertical-align: middle;
-      // border: none !important;
+            // border: none !important;
       border: 1px solid $color-gray;
       text-align: center;
     }
-
     & th {
       vertical-align: middle;
       // border: none !important;
     }
-
     & tr:nth-child(even) {
-      background-color: $color-f9f9f9
+    background-color: $color-f9f9f9
     }
-
     & tr:nth-child(odd) {
       background-color: $color-white
-    }
-
-    & tr:nth-child(even):hover {
-      background-color: $color-f9f9f9
-    }
-
-    & tr:nth-child(odd):hover {
-      background-color: $color-f9f9f9
-    }
+      }
+      & tr:nth-child(even):hover {
+        background-color: $color-f9f9f9
+        }
+        & tr:nth-child(odd):hover {
+          background-color: $color-f9f9f9
+          }
   }
 }
 
@@ -58,7 +54,6 @@
 .table th {
   background-color: $color-blue;
   color: $color-white;
-  width: 900px;
 }
 
 .table tr {
@@ -66,12 +61,12 @@
   cursor: pointer;
 }
 
+  .mat-form-field-height {
+    .mat-form-field {
+      margin: 5px;
+      flex: 0 0 19%;
+      height: 40px;
 
-.mat-form-field-height {
-  .mat-form-field {
-    margin: 5px;
-    flex: 0 0 19%;
-    height: 40px;
     //   & .mat-form-field-wrapper {
     //     padding-bottom: 0em !important;
     // }
@@ -81,21 +76,19 @@
     // & .mat-form-field-infix {
     //   border: none;
     // }
+    }
   }
-}
 
-.d--flex {
-  padding: 1% 0% 3% 1%;
-}
+  .d--flex {
+    padding: 1% 0% 1% 1%;
+  }
 
 .bill--width {
   display: flex;
   justify-content: space-between;
-
   & mat-card:first-child {
     width: 61%;
   }
-
   & mat-card:last-child {
     width: 38%;
   }
@@ -104,4 +97,7 @@
 .delete-icon {
   font-size: 17px;
   color: #337ab7;
+}
+#LedgerName{
+  width:500px;
 }

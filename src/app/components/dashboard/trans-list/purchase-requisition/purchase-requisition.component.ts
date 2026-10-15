@@ -61,7 +61,7 @@ export class PurchaseRequisitionComponent implements OnInit {
   receiptNo: any;
   GettoBranchesListArray: any;
   toBranchCode: any;
-  compiniesList: any;
+  // compiniesList: any;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -75,7 +75,7 @@ export class PurchaseRequisitionComponent implements OnInit {
     this.branchFormData = this.formBuilder.group
       ({
         //receiptNo: [null],
-        company: [null],
+        // company: [null],
         branch: [null],
         requisitionNo: [null],
         requisitionDate: [(new Date()).toISOString()],
@@ -96,23 +96,23 @@ export class PurchaseRequisitionComponent implements OnInit {
   }
 
   allApis() {
-    const getCompiniesListList = this.apiConfigService.getCompaniesList;
+    // const getCompiniesListList = this.apiConfigService.getCompaniesList;
     const getCashPaymentBranchesListUrl = this.apiConfigService.getCashPaymentBranchesList;
 
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
-        this.apiService.apiGetRequest(getCompiniesListList),
+        // this.apiService.apiGetRequest(getCompiniesListList),
         this.apiService.apiGetRequest(getCashPaymentBranchesListUrl),
-      ]).subscribe(([companiesList, branchesList]) => {
+      ]).subscribe(([branchesList]) => {
         this.spinner.hide();
 
-        if (!this.commonService.checkNullOrUndefined(companiesList) && companiesList.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(companiesList.response)) {
-            this.compiniesList = companiesList.response['CompaniesList'];
-            this.setBranchCode();
-          }
-        }
+        // if (!this.commonService.checkNullOrUndefined(companiesList) && companiesList.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(companiesList.response)) {
+        //     this.compiniesList = companiesList.response['CompaniesList'];
+        //     this.setBranchCode();
+        //   }
+        // }
 
         if (!this.commonService.checkNullOrUndefined(branchesList) && branchesList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(branchesList.response)) {
@@ -448,7 +448,7 @@ export class PurchaseRequisitionComponent implements OnInit {
         requisitionDate: [(new Date()).toISOString()],
         //fromBranchCode: (user.branchCode != null) ? user.branchCode : user.branchCode,
         branch: (user.branchCode != null) ? user.branchCode : user.branchCode,
-        company: [null],
+        // company: [null],
         requisitionNo: [null]
       });
 

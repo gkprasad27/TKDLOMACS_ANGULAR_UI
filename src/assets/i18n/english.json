@@ -1032,7 +1032,7 @@
     "narration": "Narration"
   },
   "purchaserequisition": {
-    "title": "Purchase Requisition",
+    "title": "Purchase Indent",
     "id": "Requisition Id",
     "requisitionNo": "Requisition No",
     "requisitionDate": "Date",
@@ -1045,6 +1045,21 @@
     "qty": "Qty",
     "availbleQtyinBranch": "Available Qty in Branch",
     "branch": "Branch"
+  },
+  "purchaserequisitionapproval": {
+    "title": "Purchase Indent Approval",
+    "requisitionNo": "Requisition No",
+    "create": "Create New PurchaseRequisitionApproval",
+    "requisitionId": "Requisition Id",
+    "requisitionDate": "Requisition Date",
+    "company": "Company",
+    "branch": "Branch",
+    "productCode": "Product Code",
+    "productName": "Product Name",
+    "qty": "Qty",
+    "availbleQtyinBranch": "Available Qty in Branch",
+    "availbleQtyinGowdown": "Available Qty in Gowdown",
+    "approvedQty": "Approved Qty"
   },
   "purchaseInvoice": {
     "title": "Purchase Invoice",

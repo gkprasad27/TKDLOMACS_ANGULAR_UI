@@ -142,7 +142,9 @@ export class SalesInvoiceComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('user'));
     this.user = user;
 
-    if (this.user?.role != '1') {
+    const allowedRoles = ['1', '86', '87', '88', '89', '90', '97', '100'];
+
+    if (!allowedRoles.includes(String(user?.role))) {
       this.branchFormData.controls['invoiceDate'].disable();
       this.branchFormData.controls['branchCode'].disable();
       this.minDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
@@ -217,7 +219,10 @@ export class SalesInvoiceComponent implements OnInit {
         if (params.value != null) {
           this.getInvoiceDeatilList(params.value);
         }
-        if (this.user?.role != '1') {
+
+    const allowedRoles = ['1', '86', '87', '88', '89', '90', '97', '100'];
+
+        if (!allowedRoles.includes(String(this.user?.role))) {
           this.disableForm(params.id1);
         }
       } else {
@@ -1083,7 +1088,10 @@ export class SalesInvoiceComponent implements OnInit {
       this.registerInvoiceReturn();
       return;
     }
-    if ((this.routeUrl != '' && this.user?.role != '1') || this.dataSource.data.length == 0 || this.branchFormData.invalid) {
+
+    const allowedRoles = ['1', '86', '87', '88', '89', '90', '97', '100'];
+
+    if ((this.routeUrl != '' && (!allowedRoles.includes(String(this.user?.role)))) || this.dataSource.data.length == 0 || this.branchFormData.invalid) {
       return;
     }
     let tableData = [];

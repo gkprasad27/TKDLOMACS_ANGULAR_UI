@@ -79,11 +79,11 @@ export class PurchaserequisitionapprovalComponent implements OnInit {
 
   openStockissues(row) {
     localStorage.setItem('selectedstockissues', JSON.stringify(row));
-    this.router.navigate(['dashboard/transactions/purchaserequisition/CreatePurchaserequisitionapproval', row.id]);
+    this.router.navigate(['dashboard/transactions/purchaserequisitionapproval/CreatePurchaserequisitionapproval', row.id]);
   }
 
   returnSdeale() {
-    this.router.navigate(['dashboard/transactions/purchaserequisition/CreatePurchaserequisitionapproval', 'return']);
+    this.router.navigate(['dashboard/transactions/purchaserequisitionapproval/CreatePurchaserequisitionapproval', 'return']);
   }
 
 

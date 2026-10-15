@@ -127,7 +127,9 @@ export class PurchaseComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('user'));
       // this.branchFormData.controls['purchaseInvDate'].disable();
 
-    if (user?.role != '1') {
+    const allowedRoles = ['1', '86', '87', '88', '89', '90', '97', '100'];
+
+    if (!allowedRoles.includes(String(user?.role))) {
       this.branchFormData.controls['branchCode'].disable();
     }
   }
@@ -200,7 +202,10 @@ export class PurchaseComponent implements OnInit {
       if (params.id1 != 'New') {
         this.routeUrl = params.id1;
         const user = JSON.parse(localStorage.getItem('user'));
-        if (user?.role != '1') {
+
+        const allowedRoles = ['1', '86', '87', '88', '89', '90', '97', '100'];
+
+        if (!allowedRoles.includes(String(user?.role))) {
           this.disableForm(params.id1);
         }
         this.getPurchaseInvoiceDeatilList(params.value);
