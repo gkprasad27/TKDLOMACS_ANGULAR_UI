@@ -28,6 +28,7 @@
             [typeahead]="employeeList" typeaheadOptionField='text' class="form-control typeahead"
             (typeaheadOnSelect)="onEmpChange($event)" (focusout)="onEmpChange($event)"
             [typeaheadItemTemplate]="customItemTemplate" [typeaheadWaitMs]="200">
+          <ng-template #customItemTemplate let-model="item">
             <span> {{model.text}}</span>
           </ng-template>
         </div>
