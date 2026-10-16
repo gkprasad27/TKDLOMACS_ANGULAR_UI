@@ -45,8 +45,7 @@
          <div class="mat-mdc-form-field typeahead floating-dropdown col-2"
             [class.filled]="branchFormData.get('ledgerValue')?.value">
             <label> {{ 'salesInvoice.ledgerCode' | translate }} </label>
-            <input placeholder=" " formControlName="ledgerValue"
-              (input)="getCashPartyAccountList($event, false)" id="ledgerValue" shortcutkey="f2"
+            <input placeholder=" " formControlName="ledgerValue" id="ledgerValue" shortcutkey="f2" [typeaheadMinLength]="0"
               autocomplete="off" [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray"
               typeaheadOptionField='display' class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
               (typeaheadOnSelect)="setLedgerName($event)" [typeaheadWaitMs]="200" >

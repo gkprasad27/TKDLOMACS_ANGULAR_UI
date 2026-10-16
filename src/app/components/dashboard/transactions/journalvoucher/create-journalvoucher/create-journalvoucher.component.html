@@ -42,11 +42,11 @@
 
 
           <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
-            [class.filled]="branchFormData.get('fromLedgerCode')?.value">
+            [class.filled]="branchFormData.get('fromLedgerValue')?.value">
             <label> {{ 'journalvoucher.fromLedgerName' | translate }} </label>
-            <input placeholder=" " formControlName="fromLedgerCode" (typeaheadOnSelect)="setLedgerName($event)"
-              (input)="getJournalVoucherAccountLedgerList($event.target.value)" id="fromLedgerCode" [typeahead]="GetJournalVoucherListArray"
-              autocomplete="off" [typeaheadOptionsLimit]="100000" typeaheadOptionField='id' [typeaheadItemTemplate]="customItemTemplate"
+            <input placeholder=" " formControlName="fromLedgerValue" (typeaheadOnSelect)="setLedgerName($event)"
+              (input)="getJournalVoucherAccountLedgerList($event.target.value)" id="fromLedgerValue" [typeahead]="GetJournalVoucherListArray"
+              autocomplete="off" [typeaheadOptionsLimit]="100000" typeaheadOptionField='display' [typeaheadItemTemplate]="customItemTemplate"
               class="form-control typeahead" [typeaheadWaitMs]="200">
             <ng-template #customItemTemplate let-model="item">
               <span><strong>{{model.id}}</strong> - {{model.text}}</span>

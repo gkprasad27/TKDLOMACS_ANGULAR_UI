@@ -384,16 +384,20 @@ export class SalesInvoiceComponent implements OnInit {
 
   getCashPartyAccountList(event, flag = true) {
     const value = event?.target?.value;
-    const getCashPartyAccountListUrl = [this.apiConfigService.getCashPartyAccountList, value ? value : this.branchFormData.get('ledgerCode').value].join('/');
+    const getCashPartyAccountListUrl = this.apiConfigService.getAccountLedgersList;
     this.apiService.apiGetRequest(getCashPartyAccountListUrl).subscribe(
       response => {
         const res = response;
         this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res.response != null) {
-            if (res?.response?.CashPartyAccountList?.length > 0) {
-              res.response['CashPartyAccountList'].forEach((a: any) => a.display = a.id + ' - ' + a.text);
-              this.getCashPartyAccountListArray = res.response['CashPartyAccountList'];
+            if (res?.response?.accountLedgerList?.length > 0) {
+              res.response['accountLedgerList'].forEach((a: any) => {
+                a.id = a.ledgerCode;
+                a.text = a.ledgerName;
+                a.display = a.ledgerCode + ' - ' + a.ledgerName;
+              });
+              this.getCashPartyAccountListArray = res.response['accountLedgerList'];
               if (flag) {
                 this.getCashPartyAccount();
               }

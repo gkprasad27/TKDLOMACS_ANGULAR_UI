@@ -52,7 +52,7 @@ export class CreateJournalvoucherComponent implements OnInit {
   branchesList = [];
   getmemberNamesArray = [];
   getJVAccountLedgerListArray = [];
-  GetJournalVoucherListArray = [];
+  GetJournalVoucherListArray: any[] = [];
 
   displayedColumns: string[] = ['SlNo', 'toLedgerCode', 'toLedgerName', 'amount', 'delete'
   ];
@@ -102,6 +102,7 @@ export class CreateJournalvoucherComponent implements OnInit {
       narration: [null],
       fromLedgerCode: [null, [Validators.required]],
       fromLedgerName: [null],
+      fromLedgerValue: [null],
       fromLedgerId: [null],
       referenceNo: [null],
       journalVchNo: [null],
@@ -121,7 +122,7 @@ export class CreateJournalvoucherComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    this.commonService.setFocus('fromLedgerName');
+    this.commonService.setFocus('fromLedgerValue');
   }
   loadData() {
     this.getJournalVoucherBranchesList();
@@ -171,7 +172,8 @@ export class CreateJournalvoucherComponent implements OnInit {
           if (res?.response?.journalVoucherData) {
             this.branchFormData.patchValue(res.response['journalVoucherData']);
             this.branchFormData.patchValue({
-              branchCode: +res?.response?.journalVoucherData['branchCode']
+              branchCode: +res?.response?.journalVoucherData['branchCode'],
+              fromLedgerValue: res?.response?.journalVoucherData['fromLedgerCode'] + ' - ' + res?.response?.journalVoucherData['fromLedgerName']
             })
           }
         }
@@ -180,6 +182,7 @@ export class CreateJournalvoucherComponent implements OnInit {
 
   disableForm(route?) {
     if (route != null) {
+      this.branchFormData.controls['fromLedgerValue'].disable();
       this.branchFormData.controls['voucherNo'].disable();
       this.branchFormData.controls['referenceDate'].disable();
       this.branchFormData.controls['branchCode'].disable();
@@ -255,6 +258,7 @@ export class CreateJournalvoucherComponent implements OnInit {
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
               if (res?.response?.AccountLedgerList?.length > 0) {
+                res.response['AccountLedgerList'].forEach((a: any) => a.display = a.id + ' - ' + a.text);
                 this.GetJournalVoucherListArray = res.response['AccountLedgerList'];
                 //this.getCashPartyAccount();
               } else {
@@ -289,15 +293,27 @@ export class CreateJournalvoucherComponent implements OnInit {
     }
   }
 
-  setLedgerName(value) {
-    const lname = this.GetJournalVoucherListArray.filter(lCode => {
-      if (lCode.id == this.branchFormData.get('fromLedgerCode').value) {
-        return lCode;
-      }
-    });
+  setLedgerName(event) {
+    const value = (event?.value || event?.target?.value)?.split(' -')[0];
+
+    const lname = this.GetJournalVoucherListArray.find(lCode => lCode.id == value);
+
     this.branchFormData.patchValue({
-      fromLedgerName: lname?.[0] != null ? lname[0].text : null
+      fromLedgerName: lname ? lname.text : null,
+      fromLedgerCode: lname ? lname.id : null,
     });
+    if (!lname) {
+      this.branchFormData.patchValue({
+        fromLedgerValue: '',
+      });
+      this.alertService.openSnackBar(`Please select Ledger Code`, Static.Close, SnackBar.error);
+      return;
+    } else {
+      this.branchFormData.patchValue({
+        fromLedgerValue: this.branchFormData.get('fromLedgerCode').value + ' - ' + this.branchFormData.get('fromLedgerName').value
+      });
+    }
+
   }
 
   setAccountCode(value) {

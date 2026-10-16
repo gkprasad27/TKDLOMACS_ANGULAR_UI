@@ -42,7 +42,7 @@ export class PurchaseRequisitionComponent implements OnInit {
   //displayedColumns: string[] = ['productCode', 'productName', 'hsnNo', 'unitName', 'qty', 'availbleQtyinBranch','rate', 'grossAmount', 'availStock','batchNo', 'delete'
   //];
 
-  displayedColumns: string[] = ['productCode', 'productName', 'qty', 'availbleQtyinBranch', 'availbleQtyinGowdown', 'approvedQty', 'delete'
+  displayedColumns: string[] = ['productCode', 'productName', 'qty', 'availbleQtyinBranch', 'availbleQtyinGowdown', 'last30Daysqty',  'approvedQty', 'delete'
   ];
 
   dataSource: MatTableDataSource<any>;
@@ -222,7 +222,7 @@ export class PurchaseRequisitionComponent implements OnInit {
   addTableRow() {
     const tableObj =
     {
-      productCode: '', productName: '', qty: '', availbleQtyinBranch: '', availbleQtyinGowdown: '', approvedQty: '', delete: '', text: 'obj'
+      productCode: '', productName: '', qty: '', availbleQtyinBranch: '', availbleQtyinGowdown: '', last30Daysqty: '', approvedQty: '', delete: '', text: 'obj'
     };
 
     if (this.dataSource != null) {
@@ -241,7 +241,8 @@ export class PurchaseRequisitionComponent implements OnInit {
       productName: [null, [Validators.required]],
       qty: [null],
       availbleQtyinBranch: [null],
-      AvailbleQtyinGowdown: [null],
+      availbleQtyinGowdown: [null],
+      last30Daysqty: [null],
       ApprovedQty: [null],
       availStock: [null],
       delete: [null],

@@ -1044,6 +1044,8 @@
     "productName": "Product Name",
     "qty": "Qty",
     "availbleQtyinBranch": "Available Qty in Branch",
+    "availbleQtyinGowdown": "Available Qty in Gowdown",
+    "last30Daysqty": "Last 30 Days Qty",
     "branch": "Branch"
   },
   "purchaserequisitionapproval": {

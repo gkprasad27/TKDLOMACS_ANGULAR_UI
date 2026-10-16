@@ -14,6 +14,7 @@ import { CommonService } from '../../../../services/common.service';
 
 import { SharedImportModule } from 'src/app/shared/shared-import';
 import { TranslateModule } from '@ngx-translate/core'; 
+import { TypeaheadDirective } from 'ngx-bootstrap/typeahead';
 
 interface specificMonth {
   value: string;
@@ -102,7 +103,7 @@ export class LossOfPayDaysComponent implements OnInit {
 
     this.modelFormData = this.formBuilder.group({
       id: 0,
-      empCode: 0,
+      empCode:[],
       empName: [null],
       month: [null],
       year: [null],
@@ -139,11 +140,27 @@ export class LossOfPayDaysComponent implements OnInit {
   }
 
   onEmpChange(event: any) {
-    const selectedEmp = this.employeeList.find((emp: any) => emp.id === event.value);
+    const selectedEmp = this.employeeList.find((emp: any) => emp.id === event.target.value);
     if (selectedEmp) {
       this.modelFormData.patchValue({
-        empName: selectedEmp.text
+        empCode: selectedEmp.id
       });
+    }
+  }
+
+    // Forces the dropdown to open only on an explicit mouse click
+  openTypeaheadOnManualClick(typeaheadInstance: TypeaheadDirective): void {
+    if (typeaheadInstance && !typeaheadInstance.isOpen) {
+      // Temporarily lower minLength to 0, trigger the search stream, then restore it
+      const currentMinLength = typeaheadInstance.typeaheadMinLength;
+      typeaheadInstance.typeaheadMinLength = 0;
+      
+      // Pass the current value or an empty string to trigger evaluation
+      const currentValue = this.modelFormData.get('empName')?.value || '';
+      typeaheadInstance.onChange({ target: { value: currentValue } } as any);
+      
+      // Restore default behavior
+      typeaheadInstance.typeaheadMinLength = 0;
     }
   }
 

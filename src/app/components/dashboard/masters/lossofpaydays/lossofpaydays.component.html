@@ -8,7 +8,7 @@
     <form [formGroup]="modelFormData" autocomplete="off">
       <div class="d--flex">
 
-        <mat-form-field class="col-3">
+        <!-- <mat-form-field class="col-3">
           <mat-label [translate]="'lossofpaydays.empCode'"></mat-label>
           <mat-select formControlName="empCode" (selectionChange)="onEmpChange($event)">
             @for (comp of employeeList; track comp) {
@@ -17,7 +17,20 @@
             </mat-option>
             }
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
+
+        <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+          [class.filled]="modelFormData.get('empName')?.value">
+          <label> {{ 'lossofpaydays.empCode' | translate }} </label>
+          <input placeholder=" " #instance="bs-typeahead" 
+          (click)="openTypeaheadOnManualClick(instance)" formControlName="empName" id="empCode" 
+            shortcutkey="f2" autocomplete="off" [typeaheadOptionsLimit]="100000" 
+            [typeahead]="employeeList" typeaheadOptionField='text' class="form-control typeahead"
+            (typeaheadOnSelect)="onEmpChange($event)" (focusout)="onEmpChange($event)"
+            [typeaheadItemTemplate]="customItemTemplate" [typeaheadWaitMs]="200">
+            <span> {{model.text}}</span>
+          </ng-template>
+        </div>
 
         <mat-form-field class="col-3">
           <mat-label>{{'lossofpaydays.month' | translate }}</mat-label>

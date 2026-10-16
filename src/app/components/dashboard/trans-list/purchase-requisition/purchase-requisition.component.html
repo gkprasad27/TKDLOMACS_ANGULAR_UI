@@ -90,7 +90,7 @@
           <ng-container matColumnDef="availbleQtyinBranch">
             <th mat-header-cell *matHeaderCellDef>{{ 'purchaserequisition.availbleQtyinBranch' | translate }}</th>
             <td mat-cell *matCellDef="let element">
-              <input matInput [value]="element.availbleQtyinBranch" [(ngModel)]="element.availbleQtyinBranch" (input)="
+              <input matInput [value]="element.availbleQtyinBranch" disabled [(ngModel)]="element.availbleQtyinBranch" (input)="
                   setToFormModel(
                     element.text,
                     'availbleQtyinBranch',
@@ -100,11 +100,11 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="availbleQtyinGowdown" hidden="hidden">
-            <th mat-header-cell *matHeaderCellDef hidden="hidden">{{ 'purchaserequisition.availbleQtyinGowdown' |
+          <ng-container matColumnDef="availbleQtyinGowdown" >
+            <th mat-header-cell *matHeaderCellDef >{{ 'purchaserequisition.availbleQtyinGowdown' |
               translate }}</th>
-            <td mat-cell *matCellDef="let element" hidden="hidden">
-              <input matInput [value]="element.availbleQtyinGowdown" [(ngModel)]="element.availbleQtyinGowdown" (input)="
+            <td mat-cell *matCellDef="let element" >
+              <input matInput [value]="element.availbleQtyinGowdown" disabled [(ngModel)]="element.availbleQtyinGowdown" (input)="
                   setToFormModel(
                     element.text,
                     'availbleQtyinGowdown',
@@ -113,6 +113,22 @@
                 " />
             </td>
           </ng-container>
+
+
+          <ng-container matColumnDef="last30Daysqty" >
+            <th mat-header-cell *matHeaderCellDef >{{ 'purchaserequisition.last30Daysqty' |
+              translate }}</th>
+            <td mat-cell *matCellDef="let element" >
+              <input matInput [value]="element.last30Daysqty" disabled [(ngModel)]="element.last30Daysqty" (input)="
+                  setToFormModel(
+                    element.text,
+                    'last30Daysqty',
+                    element.last30Daysqty
+                  )
+                " />
+            </td>
+          </ng-container>
+
           <ng-container matColumnDef="approvedQty" hidden="hidden">
             <th mat-header-cell *matHeaderCellDef hidden="hidden">{{ 'purchaserequisition.approvedQty' | translate }}
             </th>
