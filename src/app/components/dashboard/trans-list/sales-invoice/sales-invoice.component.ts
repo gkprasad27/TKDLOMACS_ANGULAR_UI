@@ -44,6 +44,7 @@ export class SalesInvoiceComponent implements OnInit {
   disablePump: any[] = [];
   itemsLength: any[] = [];
   getCashPartyAccountListArray: any[] = [];
+  getCashPartyAccountListArrayOriginal: any[] = [];
 
   routeUrl = '';
 
@@ -397,16 +398,46 @@ export class SalesInvoiceComponent implements OnInit {
                 a.text = a.ledgerName;
                 a.display = a.ledgerCode + ' - ' + a.ledgerName;
               });
+              this.getCashPartyAccountListArrayOriginal = res.response['accountLedgerList'];
               this.getCashPartyAccountListArray = res.response['accountLedgerList'];
               if (flag) {
                 this.getCashPartyAccount();
               }
             } else {
+              this.getCashPartyAccountListArrayOriginal = [];
               this.getCashPartyAccountListArray = [];
             }
           }
         }
       });
+  }
+
+
+  filterCashPartyAccountList(event: any) {
+    const value = event?.target?.value?.trim();
+    this.getCashPartyAccountListArray = [];
+
+      if (value != null && value !== '') {
+        const searchValue = value.toLowerCase();
+
+        // Check for exact match first
+        const exactMatch = this.getCashPartyAccountListArrayOriginal.filter(
+          (item) => item.id.toLowerCase() === searchValue
+        );
+
+        if (exactMatch.length > 0) {
+          this.getCashPartyAccountListArray = exactMatch;
+        } else {
+          // Otherwise, perform partial matching
+          this.getCashPartyAccountListArray =
+            this.getCashPartyAccountListArrayOriginal.filter((item) =>
+              item.id.toLowerCase().includes(searchValue)
+            );
+        }
+      } else {
+        this.getCashPartyAccountListArray =
+          this.getCashPartyAccountListArrayOriginal;
+      }
   }
 
 

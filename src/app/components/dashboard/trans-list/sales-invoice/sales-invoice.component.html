@@ -46,7 +46,8 @@
             [class.filled]="branchFormData.get('ledgerValue')?.value">
             <label> {{ 'salesInvoice.ledgerCode' | translate }} </label>
             <input placeholder=" " formControlName="ledgerValue" id="ledgerValue" shortcutkey="f2" [typeaheadMinLength]="0"
-              autocomplete="off" [typeaheadOptionsLimit]="100000" [typeahead]="getCashPartyAccountListArray"
+              autocomplete="off" [typeaheadOptionsLimit]="50" 
+              [typeahead]="getCashPartyAccountListArray" (input)="filterCashPartyAccountList($event)"
               typeaheadOptionField='display' class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
               (typeaheadOnSelect)="setLedgerName($event)" [typeaheadWaitMs]="200" >
             <ng-template #customItemTemplate let-model="item">

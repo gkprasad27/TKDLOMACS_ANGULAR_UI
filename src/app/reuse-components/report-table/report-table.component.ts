@@ -585,7 +585,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
     }, { validator: this.checkDates });
 
 
-    if (this.user?.role != '1') {
+    const allowedRoles = ['1', '77', '84', '86', '87', '88', '89', '90', '95', '96', '97', '100'];
+    if (!allowedRoles.includes(String(this.user?.role))) {
       this.dateForm.controls['selectedBranch'].disable();
     }
     if (this.user?.role == '75') {
