@@ -787,6 +787,8 @@ export class ApiConfigService {
   registerPF = `${environment.baseUrl}payroll/PFMaster/RegisterPF`;
   updatePF = `${environment.baseUrl}payroll/PFMaster/UpdatePF`;
   deletePF = `${environment.baseUrl}payroll/PFMaster/DeletePF`;
+  getpfTypesList = `${environment.baseUrl}PFMaster/GetpfTypesList`;
+  getptTypesList = `${environment.baseUrl}PTMaster/GetptTypesList`;
 
   //approvaltype
   getempList = `${environment.baseUrl}Selfservice/ApprovalType/GetEmployeesList`;

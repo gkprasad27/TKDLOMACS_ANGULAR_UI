@@ -1,83 +1,255 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit, Optional, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonService } from '../../../../services/common.service';
-
 import { ApiConfigService } from '../../../../services/api-config.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ApiService } from '../../../../services/api.service';
 import { StatusCodes } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { SharedImportModule } from 'src/app/shared/shared-import';
-import { TranslateModule } from '@ngx-translate/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
-@Component({ 
+@Component({
   selector: 'app-ctcbreakup',
+  imports: [FormsModule, ReactiveFormsModule, TranslateModule, TypeaheadModule, MatInputModule, MatTableModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './ctcbreakup.component.html',
   styleUrls: ['./ctcbreakup.component.scss'],
-  standalone: true,
-  imports: [SharedImportModule, TranslateModule]
+  providers: [ DatePipe ]
 })
 export class CTCBreakupComponent implements OnInit {
+  structure: any;
+  ctc: any;
   modelFormData: FormGroup;
-  structureList:any;
-  filteredOptions:any;
-  displayedColumns: string[] = ['componentCode','componentName','amount','duration','specificMonth'];
+  PfList: any;
+  PtList: any;
+  filteredOptions: any;
+  displayedColumns: string[] = ['componentCode', 'componentName', 'EarnDednAmount', 'duration', 'specificMonth'];
+  GetEmployeeListArray: [];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  formData: any;
+  routeEdit = '';
+
   constructor(
-    private formBuilder: UntypedFormBuilder,
-    private commonService: CommonService,
+    private formBuilder: FormBuilder,
+    public commonService: CommonService,
     private apiConfigService: ApiConfigService,
     private apiService: ApiService,
     private spinner: NgxSpinnerService,
+    public route: ActivatedRoute,
+    private router: Router,
+    private datepipe: DatePipe,
+    public dialogRef: MatDialogRef<CTCBreakupComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+    // public dialogRef: MatDialogRef<CTCBreakupComponent>,
   ) {
+    let obj = JSON.parse(localStorage.getItem("user"));
     this.modelFormData = this.formBuilder.group({
-      myControl: [null],
-      effectFrom: [null],
-      structureName: [null],
-      ctc: [null]
+      empCode: [null],
+      effectFrom: [null, Validators.required],
+      pfType: [null, Validators.required],
+      ptSlab: [null, Validators.required],
+      id: 0,
+      ctc: [null, Validators.required],
     });
+    this.modelFormData.controls['id'].disable();
 
-   }
+    this.formData = { ...this.data };
+    if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
+      this.modelFormData.patchValue(this.formData.item);
+    }
+    if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
+      this.routeEdit = this.route.snapshot.params.value;
+    }
 
-  ngOnInit() {
-    this.getStructureList();
-    this.getctcComponentsList();
   }
 
-  getStructureList() {
-    const getStructureList = [this.apiConfigService.getStructureList].join('/');
-    this.apiService.apiGetRequest(getStructureList)
+  ngOnInit() {
+    this.getPFTypeList();
+  }
+
+  getPFTypeList() {
+    const getPfList = this.apiConfigService.getpfTypesList;
+    this.apiService.apiGetRequest(getPfList)
       .subscribe(
         response => {
-        const res = response;
-        if (res != null && res.status === StatusCodes.pass) {
-          if (res.response != null) {
-            this.structureList = res.response['ComponentsList'];
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.PfList = res.response['PFTypesList'];
+            }
           }
-        }
-        this.spinner.hide();
-      });
+          this.getPTSlabList();
+          this.spinner.hide();
+        });
+  }
+
+  getPTSlabList() {
+    const getPtList = this.apiConfigService.getptTypesList;
+    this.apiService.apiGetRequest(getPtList)
+      .subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              this.PtList = res.response['PTTypesList'];
+            }
+          }
+          if (this.routeEdit) {
+            this.getctcComponentsList();
+          }
+          this.spinner.hide();
+        });
   }
 
   getctcComponentsList() {
-    const getctcComponentsListUrl = [this.apiConfigService.getctcComponentsList].join('/');
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.paginator = this.paginator;
+    if (this.modelFormData.invalid) {
+      return;
+    }
+    const getctcComponentsListUrl = this.apiConfigService.getPfComponentsList;
     this.apiService.apiGetRequest(getctcComponentsListUrl)
       .subscribe(
         response => {
-        const res = response;
-        if (res != null && res.status === StatusCodes.pass) {
-          if (res.response != null) {
-            this.dataSource = new MatTableDataSource(res.response['componentsList']);
-            this.dataSource.paginator = this.paginator;
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+
+              const arr = res.response['ComponentTypesList'];
+
+              arr.forEach(element => {
+                if (element.componentName == "Basic") {
+                  element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                }
+                if (element.componentName == "PF") {
+                  const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
+                  if ((+this.modelFormData.value.ctc) / 12 < obj.amount) {
+                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * obj.employeeContribution) / 100);
+                  }
+                  else {
+                    // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
+                    element.EarnDednAmount = (12 * ((+obj.amount) * obj.employeeContribution) / 100);
+                  }
+                }
+                if (element.componentName == "Employer PF") {
+                  const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
+                  if ((+this.modelFormData.value.ctc) / 12 < obj.amount) {
+                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * obj.employerContribution) / 100);
+                  }
+                  else {
+                    // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
+                    element.EarnDednAmount = (12 * ((+obj.amount) * obj.employerContribution) / 100);
+                  }
+                }
+                if (element.componentName == "PT") {
+                  const obj = this.PtList.find((p: any) => p.ptslab == this.modelFormData.value.ptSlab)
+                  if ((+this.modelFormData.value.ctc) / 12 < obj.ptlowerLimit) {
+                    element.EarnDednAmount = 0;
+                  }
+                  else {
+                    element.EarnDednAmount = (12 * obj.ptamt);
+                  }
+
+                }
+                if (element.componentName == "ESI") {
+                  
+                  if ((+this.modelFormData.value.ctc) / 12 < element.amount) {
+                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                  } else {
+                    element.EarnDednAmount = 0;
+                  }
+                }
+                if (element.componentName == "Employer ESI") {
+                  
+                  if ((+this.modelFormData.value.ctc) / 12 < element.amount) {
+                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                  } else {
+                    element.EarnDednAmount = 0;
+                  }
+                }
+                // if (element.componentName == "ESI") {
+                //   if ((((+this.modelFormData.value.ctc) * element.percentage) / 100) / 12 < element.amount) {
+                //     element.EarnDednAmount =  (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                //   } else {
+                //     element.EarnDednAmount = 0;
+                //   }
+                // }
+              });
+
+              this.dataSource = new MatTableDataSource(res.response['ComponentTypesList']);
+              this.dataSource.paginator = this.paginator;
+
+            }
           }
-        }
-        this.spinner.hide();
-      });
+          this.spinner.hide();
+        });
+  }
+
+  getctcEmployeeList(empCode: string) {
+    if (!this.commonService.checkNullOrUndefined(empCode) && empCode !== '') {
+      const getctcEmployeeListUrl = [this.apiConfigService.getEmployeeList, empCode].join('/');
+      this.apiService.apiGetRequest(getctcEmployeeListUrl).subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              if (!this.commonService.checkNullOrUndefined(res.response['EmployeeList']) && res.response['EmployeeList'].length) {
+                this.GetEmployeeListArray = res.response['EmployeeList'];
+              } else {
+                this.GetEmployeeListArray = [];
+              }
+            }
+            this.spinner.hide();
+          }
+        });
+    } else {
+      this.GetEmployeeListArray = [];
+    }
   }
 
   save() {
-    
+    const arr = this.dataSource.data.filter((d: any) => d.EarnDednAmount !== undefined && d.EarnDednAmount !== null);
+    const obj = {
+      item: {
+        structure: {
+          // structureName: this.modelFormData.value.structureName,
+          ctc: this.modelFormData.value.ctc,
+          empcode: this.modelFormData.value.empCode,
+          effectfrom: this.modelFormData.value.effectFrom ? this.datepipe.transform(this.modelFormData.value.effectFrom, 'yyyy-MM-dd') : '',
+          id: this.modelFormData.value.id,
+          pftype: this.modelFormData.value.pfType,
+          ptslab: this.modelFormData.value.ptSlab,
+          companyCode:this.modelFormData.controls.companyCode.value
+        },
+        components: arr
+      }
+    }
+    this.formData.item = this.modelFormData.value;
+    // this.addOrEditService[this.formData.action](obj, (res) => {
+    //   if (res) {
+    //     this.router.navigate(['/dashboard/master/CTCBreakup']);
+    //   }
+    // });
+    this.dialogRef.close(this.formData);
   }
+  cancel() {
+    // this.router.navigate(['dashboard/master/CTCBreakup'])
+    this.dialogRef.close();
+  }
+
 }

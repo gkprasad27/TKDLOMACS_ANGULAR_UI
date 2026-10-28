@@ -19,7 +19,8 @@
     "CHOOSEDATE": "Choose Date",
     "STARTDATE": "Start Date",
     "ENDDATE": "End Date",
-    "COMPANYCODE": "Company Code"
+    "COMPANYCODE": "Company Code",
+    "CALCULATE": "Calculate"
   },
   "login": {
     "title": "Login",
@@ -785,6 +786,9 @@
   },
   "CTCBreakup": {
     "title": "CTC Breakup",
+    "companyName": "Company Name",
+    "ptslab": "PT Slab",
+    "pftype": "PF Type",
     "companyCode": "Company Code",
     "empCode": "Emp Code",
     "effectFrom": "Effect From",
