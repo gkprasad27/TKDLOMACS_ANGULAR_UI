@@ -16,18 +16,20 @@ import { ApiConfigService } from '../../../../services/api-config.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ApiService } from '../../../../services/api.service';
-import { StatusCodes } from '../../../../enums/common/common';
+import { SnackBar, StatusCodes } from '../../../../enums/common/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { AlertService } from 'src/app/services/alert.service';
+import { Static } from 'src/app/enums/common/static';
 
 @Component({
   selector: 'app-ctcbreakup',
   imports: [FormsModule, ReactiveFormsModule, TranslateModule, TypeaheadModule, MatInputModule, MatTableModule, MatFormFieldModule, MatCardModule, MatTabsModule, MatDividerModule, MatSelectModule, MatDatepickerModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './ctcbreakup.component.html',
   styleUrls: ['./ctcbreakup.component.scss'],
-  providers: [ DatePipe ]
+  providers: [DatePipe]
 })
 export class CTCBreakupComponent implements OnInit {
   structure: any;
@@ -36,8 +38,8 @@ export class CTCBreakupComponent implements OnInit {
   PfList: any;
   PtList: any;
   filteredOptions: any;
-  displayedColumns: string[] = ['componentCode', 'componentName', 'EarnDednAmount', 'duration', 'specificMonth'];
-  GetEmployeeListArray: [];
+  displayedColumns: string[] = ['id', 'text', 'EarnDednAmount', 'duration', 'specificMonth'];
+  GetEmployeeListArray: any[] = [];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -53,6 +55,7 @@ export class CTCBreakupComponent implements OnInit {
     public route: ActivatedRoute,
     private router: Router,
     private datepipe: DatePipe,
+    private alertService: AlertService,
     public dialogRef: MatDialogRef<CTCBreakupComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
     // public dialogRef: MatDialogRef<CTCBreakupComponent>,
@@ -60,6 +63,7 @@ export class CTCBreakupComponent implements OnInit {
     let obj = JSON.parse(localStorage.getItem("user"));
     this.modelFormData = this.formBuilder.group({
       empCode: [null],
+      empCodeName: [null, Validators.required],
       effectFrom: [null, Validators.required],
       pfType: [null, Validators.required],
       ptSlab: [null, Validators.required],
@@ -79,41 +83,39 @@ export class CTCBreakupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getPFTypeList();
+    this.allApis();
   }
 
-  getPFTypeList() {
-    const getPfList = this.apiConfigService.getpfTypesList;
-    this.apiService.apiGetRequest(getPfList)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.PfList = res.response['PFTypesList'];
-            }
-          }
-          this.getPTSlabList();
-          this.spinner.hide();
-        });
-  }
+  allApis() {
+    const getctcpf = this.apiConfigService.getctcpf;
+    const getctcpt = this.apiConfigService.getctcpt;
 
-  getPTSlabList() {
-    const getPtList = this.apiConfigService.getptTypesList;
-    this.apiService.apiGetRequest(getPtList)
-      .subscribe(
-        response => {
-          const res = response;
-          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
-            if (!this.commonService.checkNullOrUndefined(res.response)) {
-              this.PtList = res.response['PTTypesList'];
-            }
+    // Use forkJoin to run both APIs in parallel
+    import('rxjs').then(rxjs => {
+      rxjs.forkJoin([
+        this.apiService.apiGetRequest(getctcpf),
+        this.apiService.apiGetRequest(getctcpt),
+      ]).subscribe(([getctcpf, getctcpt]) => {
+        this.spinner.hide();
+
+        if (!this.commonService.checkNullOrUndefined(getctcpf) && getctcpf.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(getctcpf.response)) {
+            this.PfList = getctcpf.response['PFList'];
           }
-          if (this.routeEdit) {
-            this.getctcComponentsList();
+        }
+
+        if (!this.commonService.checkNullOrUndefined(getctcpt) && getctcpt.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(getctcpt.response)) {
+            this.PtList = getctcpt.response['PTList'];
           }
-          this.spinner.hide();
-        });
+        }
+
+        if (this.routeEdit) {
+          this.getctcComponentsList();
+        }
+
+      });
+    });
   }
 
   getctcComponentsList() {
@@ -130,59 +132,57 @@ export class CTCBreakupComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
 
-              const arr = res.response['ComponentTypesList'];
+              const arr = res.response['ComponentList'];
 
               arr.forEach(element => {
-                if (element.componentName == "Basic") {
-                  element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
-                }
-                if (element.componentName == "PF") {
-                  const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
-                  if ((+this.modelFormData.value.ctc) / 12 < obj.amount) {
-                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * obj.employeeContribution) / 100);
-                  }
-                  else {
-                    // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
-                    element.EarnDednAmount = (12 * ((+obj.amount) * obj.employeeContribution) / 100);
-                  }
-                }
-                if (element.componentName == "Employer PF") {
-                  const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
-                  if ((+this.modelFormData.value.ctc) / 12 < obj.amount) {
-                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * obj.employerContribution) / 100);
-                  }
-                  else {
-                    // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
-                    element.EarnDednAmount = (12 * ((+obj.amount) * obj.employerContribution) / 100);
-                  }
-                }
-                if (element.componentName == "PT") {
-                  const obj = this.PtList.find((p: any) => p.ptslab == this.modelFormData.value.ptSlab)
-                  if ((+this.modelFormData.value.ctc) / 12 < obj.ptlowerLimit) {
+                // if (element.text == "Basic") {
+                //   element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                // }
+                // if (element.text == "PF") {
+                //   const obj = this.PfList.find((p: any) => p.pftypeName == this.modelFormData.value.pfType)
+                //   if ((+this.modelFormData.value.ctc) / 12 < obj.amount) {
+                //     element.EarnDednAmount = (((+this.modelFormData.value.ctc) * obj.employeeContribution) / 100);
+                //   } else {
+                //     // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
+                //     element.EarnDednAmount = (12 * ((+obj.amount) * obj.employeeContribution) / 100);
+                //   }
+                // }
+                // if (element.text == "Employer PF") {
+                //   const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
+                //   if ((+this.modelFormData.value.ctc) / 12 < obj.amount) {
+                //     element.EarnDednAmount = (((+this.modelFormData.value.ctc) * obj.employerContribution) / 100);
+                //   }
+                //   else {
+                //     // const obj = this.PfList.find((p: any) => p.pfName == this.modelFormData.value.pfType)
+                //     element.EarnDednAmount = (12 * ((+obj.amount) * obj.employerContribution) / 100);
+                //   }
+                // }
+                if (element.id == "TKD_D05") {
+                  const obj = this.PtList.find((p: any) => p.text == this.modelFormData.value.ptSlab)
+                  if ((+this.modelFormData.value.ctc) / 12 < obj.ptLowerLimit) {
                     element.EarnDednAmount = 0;
                   }
                   else {
-                    element.EarnDednAmount = (12 * obj.ptamt);
+                    element.EarnDednAmount = (12 * obj.ptAmt);
                   }
+                }
+                // if (element.text == "ESI") {
 
-                }
-                if (element.componentName == "ESI") {
-                  
-                  if ((+this.modelFormData.value.ctc) / 12 < element.amount) {
-                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
-                  } else {
-                    element.EarnDednAmount = 0;
-                  }
-                }
-                if (element.componentName == "Employer ESI") {
-                  
-                  if ((+this.modelFormData.value.ctc) / 12 < element.amount) {
-                    element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
-                  } else {
-                    element.EarnDednAmount = 0;
-                  }
-                }
-                // if (element.componentName == "ESI") {
+                //   if ((+this.modelFormData.value.ctc) / 12 < element.amount) {
+                //     element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                //   } else {
+                //     element.EarnDednAmount = 0;
+                //   }
+                // }
+                // if (element.text == "Employer ESI") {
+
+                //   if ((+this.modelFormData.value.ctc) / 12 < element.amount) {
+                //     element.EarnDednAmount = (((+this.modelFormData.value.ctc) * element.percentage) / 100);
+                //   } else {
+                //     element.EarnDednAmount = 0;
+                //   }
+                // }
+                // if (element.text == "ESI") {
                 //   if ((((+this.modelFormData.value.ctc) * element.percentage) / 100) / 12 < element.amount) {
                 //     element.EarnDednAmount =  (((+this.modelFormData.value.ctc) * element.percentage) / 100);
                 //   } else {
@@ -191,7 +191,7 @@ export class CTCBreakupComponent implements OnInit {
                 // }
               });
 
-              this.dataSource = new MatTableDataSource(res.response['ComponentTypesList']);
+              this.dataSource = new MatTableDataSource(res.response['ComponentList']);
               this.dataSource.paginator = this.paginator;
 
             }
@@ -202,13 +202,16 @@ export class CTCBreakupComponent implements OnInit {
 
   getctcEmployeeList(empCode: string) {
     if (!this.commonService.checkNullOrUndefined(empCode) && empCode !== '') {
-      const getctcEmployeeListUrl = [this.apiConfigService.getEmployeeList, empCode].join('/');
+      const getctcEmployeeListUrl = [this.apiConfigService.getEmployee, empCode].join('/');
       this.apiService.apiGetRequest(getctcEmployeeListUrl).subscribe(
         response => {
           const res = response;
           if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
             if (!this.commonService.checkNullOrUndefined(res.response)) {
               if (!this.commonService.checkNullOrUndefined(res.response['EmployeeList']) && res.response['EmployeeList'].length) {
+                res.response['EmployeeList'].forEach((a: any) => {
+                  a.display = a.id + ' - ' + a.text;
+                });
                 this.GetEmployeeListArray = res.response['EmployeeList'];
               } else {
                 this.GetEmployeeListArray = [];
@@ -222,6 +225,28 @@ export class CTCBreakupComponent implements OnInit {
     }
   }
 
+  selectempcode(event: any) {
+    const empCode = this.modelFormData.get('empCode').value;
+    const value = (event?.value || event?.target?.value)?.split(' -')[0];
+    const lname = this.GetEmployeeListArray.find(lCode => lCode.id == value);
+    this.modelFormData.patchValue({
+      empCode: lname ? lname.id : null,
+    });
+    if (!lname) {
+      this.modelFormData.patchValue({
+        empCode: '',
+        empCodeName: ''
+      });
+      this.alertService.openSnackBar(`Please select Employee Code`, Static.Close, SnackBar.error);
+      return;
+    } else {
+      // this.modelFormData.patchValue({
+      //   empCodeName: this.modelFormData.get('id').value + ' - ' + this.modelFormData.get('text').value
+      // });
+    }
+  }
+
+
   save() {
     const arr = this.dataSource.data.filter((d: any) => d.EarnDednAmount !== undefined && d.EarnDednAmount !== null);
     const obj = {
@@ -233,13 +258,12 @@ export class CTCBreakupComponent implements OnInit {
           effectfrom: this.modelFormData.value.effectFrom ? this.datepipe.transform(this.modelFormData.value.effectFrom, 'yyyy-MM-dd') : '',
           id: this.modelFormData.value.id,
           pftype: this.modelFormData.value.pfType,
-          ptslab: this.modelFormData.value.ptSlab,
-          companyCode:this.modelFormData.controls.companyCode.value
+          ptslab: this.modelFormData.value.ptSlab
         },
         components: arr
       }
     }
-    this.formData.item = this.modelFormData.value;
+    this.formData.item = obj.item;
     // this.addOrEditService[this.formData.action](obj, (res) => {
     //   if (res) {
     //     this.router.navigate(['/dashboard/master/CTCBreakup']);

@@ -10,10 +10,10 @@
       <div class="d--flex">
 
         <div class="mat-mdc-form-field typeahead floating-dropdown " style="width: 24.5%;"
-          [class.filled]="modelFormData.value?.empCode?.length > 0">
+          [class.filled]="modelFormData.value?.empCodeName?.length > 0">
           <label> {{ 'CTCBreakup.empCode' | translate }} </label>
-          <input placeholder=" " formControlName="empCode" (input)="getctcEmployeeList($event.target.value)"
-            [typeaheadOptionsLimit]="100000" [typeahead]="GetEmployeeListArray" typeaheadOptionField='id'
+          <input placeholder=" " formControlName="empCodeName" (input)="getctcEmployeeList($event.target.value)"
+            [typeaheadOptionsLimit]="100000" [typeahead]="GetEmployeeListArray" typeaheadOptionField='display' (typeaheadOnSelect)="selectempcode($event)"
             appFocusOnEnter tabIndex="2" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
             [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200">
           <ng-template #customItemTemplate let-model="item">
@@ -40,8 +40,8 @@
           <mat-select formControlName="pfType" appFocusOnEnter
             tabIndex="5">
             @for (List of PfList; track List) {
-            <mat-option [value]="List.pfName">
-              {{List.pfName}}
+            <mat-option [value]="List.pftypeName">
+              {{List.pftypeName}}
             </mat-option>
             }
           </mat-select>
@@ -52,8 +52,8 @@
           <mat-select formControlName="ptSlab" appFocusOnEnter
             tabIndex="6">
             @for (List of PtList; track List) {
-            <mat-option [value]="List.ptslab">
-              {{List.ptslab}}
+            <mat-option [value]="List.text">
+              {{List.text}}
             </mat-option>
             }
           </mat-select>
@@ -71,18 +71,18 @@
 
 
 
-    <mat-card-content class="m-2">
+    <mat-card-content class="p-0">
       <div>
         <div class="table">
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
 
-            <ng-container matColumnDef="componentCode">
+            <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef> Component Code </th>
-              <td mat-cell *matCellDef="let element;"> {{element.componentCode}} </td>
+              <td mat-cell *matCellDef="let element;"> {{element.id}} </td>
             </ng-container>
-            <ng-container matColumnDef="componentName">
+            <ng-container matColumnDef="text">
               <th mat-header-cell *matHeaderCellDef> Component Name </th>
-              <td mat-cell *matCellDef="let element;"> {{element.componentName}} </td>
+              <td mat-cell *matCellDef="let element;"> {{element.text}} </td>
             </ng-container>
             <ng-container matColumnDef="EarnDednAmount">
               <th mat-header-cell *matHeaderCellDef> Amount </th>

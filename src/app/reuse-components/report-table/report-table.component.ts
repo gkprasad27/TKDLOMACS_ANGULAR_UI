@@ -55,6 +55,7 @@ import { Static } from 'src/app/enums/common/static';
 export class ReportTableComponent implements OnInit, OnChanges {
   selectedDate = { start: moment().add(-1, 'day'), end: moment().add(0, 'day') };
   GetBankPAccountLedgerListArray = [];
+  GetEmployeeListArray = [];
   GetProductListArray = [];
   public tableMultiCtrl: FormControl = new FormControl();
   public filteredTableMulti: ReplaySubject<any> = new ReplaySubject<any>(1);
@@ -780,6 +781,28 @@ export class ReportTableComponent implements OnInit, OnChanges {
         });
     } else {
       this.GetBankPAccountLedgerListArray = [];
+    }
+  }
+
+  getctcEmployeeList(empCode: string) {
+    if (!this.commonService.checkNullOrUndefined(empCode) && empCode !== '') {
+      const getctcEmployeeListUrl = [this.apiConfigService.getEmployee, empCode].join('/');
+      this.apiService.apiGetRequest(getctcEmployeeListUrl).subscribe(
+        response => {
+          const res = response;
+          if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.pass) {
+            if (!this.commonService.checkNullOrUndefined(res.response)) {
+              if (!this.commonService.checkNullOrUndefined(res.response['EmployeeList']) && res.response['EmployeeList'].length) {
+                this.GetEmployeeListArray = res.response['EmployeeList'];
+              } else {
+                this.GetEmployeeListArray = [];
+              }
+            }
+            this.spinner.hide();
+          }
+        });
+    } else {
+      this.GetEmployeeListArray = [];
     }
   }
 

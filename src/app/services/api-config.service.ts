@@ -790,6 +790,10 @@ export class ApiConfigService {
   getpfTypesList = `${environment.baseUrl}PFMaster/GetpfTypesList`;
   getptTypesList = `${environment.baseUrl}PTMaster/GetptTypesList`;
 
+  getctcpt = `${environment.baseUrl}payroll/CTCBreakup/GetPTMasterList`;
+  getctcpf = `${environment.baseUrl}payroll/CTCBreakup/GetPFMasterList`;
+  getEmployee = `${environment.baseUrl}payroll/CTCBreakup/GetEmployeeList`;
+
   //approvaltype
   getempList = `${environment.baseUrl}Selfservice/ApprovalType/GetEmployeesList`;
   getapprovaltypeList = `${environment.baseUrl}Selfservice/ApprovalType/GetApprovalTypesList`;
@@ -802,6 +806,8 @@ export class ApiConfigService {
   getCTCList = `${environment.baseUrl}payroll/CTCBreakup/GetCTCList`;
   getStructureList = `${environment.baseUrl}payroll/CTCBreakup/GetStructureList`;
   getctcComponentsList = `${environment.baseUrl}payroll/ComponentMaster/GetComponentsList`;
+  registerCTC = `${environment.baseUrl}payroll/CTCBreakup/RegisterCTC`;
+  updateCTC = `${environment.baseUrl}payroll/CTCBreakup/UpdateCTC`;
 
   // Structure Creation
   getStructuresList = `${environment.baseUrl}payroll/StructureCreation/GetStructuresList`;

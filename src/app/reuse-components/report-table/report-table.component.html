@@ -34,6 +34,19 @@
           </ng-template>
         </div>
         }
+        @if(routeParam=='payslip') {
+        <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
+          [class.filled]="dateForm.get('empCode')?.value">
+          <label> {{ 'report.empCode' | translate }} </label>
+          <input placeholder=" " formControlName="empCode" (input)="getctcEmployeeList($event.target.value)"
+            [typeaheadOptionsLimit]="100000" [typeahead]="GetEmployeeListArray" typeaheadOptionField='id'
+            appFocusOnEnter tabIndex="2" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
+            [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200">
+          <ng-template #customItemTemplate let-model="item">
+            <span><strong>{{model.id}}</strong> - {{model.text}}</span>
+          </ng-template>
+        </div>
+        }
         @if(routeParam=='ClosingBalance') {
 
         <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
@@ -209,7 +222,7 @@
         ||routeParam=='Salesanalysisbybranch'||routeParam=='ProductWiseMonthlyPurchase'||routeParam=='DailySales'||routeParam=='Shift'||routeParam=='ProductPriceList'
         ||routeParam=='ReceiptsAndPaymentsDetailed'||routeParam=='ReceiptsAndPaymentsSummary'||routeParam=='SMSSummary'||routeParam=='SalesGST'||routeParam=='24HrsSaleValue6AmTo6Am'
         ||routeParam=='TrialBalance'||routeParam=='24HrsMeterReading'||routeParam=='ClosingBalance'||routeParam=='BankReconciliation'||routeParam=='StockValuation'||routeParam=='FourColumnCashBook'||routeParam=='FourColumnCashBook'||routeParam=='ProductMonthWisePurchaseLtrs'
-        ||routeParam=='BranchWiseMonthlySalesByLiters'||routeParam=='BranchWiseStockStatementLtrs'||routeParam=='BranchWiseStockStatementQty'||routeParam=='einvoice'||routeParam=='purchaseinvoicereport'||routeParam=='journalvoucherreport')
+        ||routeParam=='BranchWiseMonthlySalesByLiters'||routeParam=='BranchWiseStockStatementLtrs'||routeParam=='BranchWiseStockStatementQty'||routeParam=='einvoice'||routeParam=='purchaseinvoicereport'||routeParam=='journalvoucherreport'||routeParam=='payslip')
         {
         <div class="d-flex align-items-center">
           <button mat-raised-button class="button-color-bule text-white ml-2"

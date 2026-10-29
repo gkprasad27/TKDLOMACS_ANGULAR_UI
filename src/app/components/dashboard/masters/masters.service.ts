@@ -337,6 +337,9 @@ export class MastersService {
       case 'CTCBreakup':
         this.dynamicData.url = this.apiConfigService.getCTCList;
         this.dynamicData.component = CTCBreakupComponent;
+        this.dynamicData.registerUrl = this.apiConfigService.registerCTC;
+        this.dynamicData.updateUrl = this.apiConfigService.updateCTC;
+        // this.dynamicData.deleteUrl = this.apiConfigService.deleteCTC;
         this.dynamicData.listName = 'structuresList';
         this.dynamicData.primaryKey = 'structureCode';
         return this.dynamicData;
