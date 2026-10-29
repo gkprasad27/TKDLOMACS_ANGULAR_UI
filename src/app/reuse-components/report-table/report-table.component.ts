@@ -579,6 +579,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       fromAccountLedger: [''],
       voucherCode: [null],
       toAccountLedger: [''],
+      empCode: [null],
       RO: [null],
       selectedFourColumnReportType: [''],
       selectedGroupName: [''],
@@ -912,6 +913,28 @@ export class ReportTableComponent implements OnInit, OnChanges {
     return null;
   }
 
+  salaryProcess() {
+    this.spinner.show();
+    const obj = {
+      EmpCode: this.dateForm.get('empCode')?.value,
+      FromDate: this.commonService.formatReportDate(this.dateForm.get('formDate')?.value),
+      ToDate: this.commonService.formatReportDate(this.dateForm.get('toDate')?.value)
+    }
+    this.apiService.apiReportGetRequest(this.apiConfigService.salaryProcess, obj)
+      .subscribe(
+        response => {
+          const res = response['body'];
+          if (res != null && res.status === StatusCodes.pass) {
+            if (res.response != null) {
+              this.alertService.openSnackBar('Salary Processed Successfully..', Static.Close, SnackBar.success);
+            }
+          }
+          this.spinner.hide();
+        }, error => {
+          this.spinner.hide();
+      });
+  }
+
   GenerateReport() {
 
     if (this.dateForm.invalid) {
@@ -954,9 +977,17 @@ export class ReportTableComponent implements OnInit, OnChanges {
       toAccountLedger: this.dateForm.get('toAccountLedger').value,
       RO: this.dateForm.get('RO').value,
       selectedFourColumnReportType: this.dateForm.get('selectedFourColumnReportType').value,
+      empCode: this.dateForm.get('empCode').value,
       selectedGroupName: this.dateForm.get('selectedGroupName').value,
       selectedSupplierGroup: this.dateForm.get('selectedSupplierGroup').value,
     })
+
+
+    if (this.routeParam == 'salaryprocess') {
+      this.salaryProcess();
+      return;
+    }
+
     this.params = new HttpParams();
     this.params = this.params.append('UserID', this.user.userName);//this.user.userName);
     this.params = this.params.append('userName', this.user.userName);//this.user.userName);

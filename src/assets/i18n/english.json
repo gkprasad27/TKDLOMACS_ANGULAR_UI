@@ -2026,6 +2026,11 @@
     "TOTDECEMBER": "Total December",
     "GrandTotal": "Grand Total"
   },
+  "salaryprocess": {
+    "title": "Salary Process",
+    "sal_Month": "Month",
+    "sal_Year": "Year"
+  },
   "report": {
     "selectedAccountLedger": "Account Ledger",
     "formDate": "Choose date",

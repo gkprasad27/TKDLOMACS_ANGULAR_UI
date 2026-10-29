@@ -227,6 +227,11 @@
     "meterReading": "MeterReading",
     "isWorking": "IsWorking"
   },
+  "salaryprocess": {
+    "title": "Salary Process",
+    "sal_Month": "Month",
+    "sal_Year": "Year"
+  },
   "mshsdrates": {
     "title": "MSHSD Rates",
     "branchName": "Branch Name",

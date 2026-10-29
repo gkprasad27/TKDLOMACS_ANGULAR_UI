@@ -816,6 +816,7 @@ export class ApiConfigService {
   deleteStructure = `${environment.baseUrl}payroll/StructureCreation/DeleteStructure`;
   getStructureComponentsList = `${environment.baseUrl}payroll/StructureCreation/GetComponentsList`;
   getPFList = `${environment.baseUrl}payroll/StructureCreation/GetPFList`;
+  salaryProcess = `${environment.baseUrl}payroll/SalaryProcess/SalaryProcess`;
 
   //OdApproval
   getOdApplDetailsList = `${environment.baseUrl}Selfservice/OdApproval/GetOdApprovalApplDetailsList`;
