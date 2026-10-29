@@ -932,7 +932,7 @@ export class ApiConfigService {
 
   getEInvoiceReportData = `${environment.baseUrl}Reports/EInvoiceReport/GetEInvoiceReportData`;
 
-
+  getPayslipReportData = `${environment.baseUrl}Reports/PayslipReport/GetPayslipReportData`;
 
   /****************************** Settings *********************************************************** */
   getRoles = `${environment.baseUrl}Auth/getRoles`;

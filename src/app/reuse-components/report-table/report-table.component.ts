@@ -104,6 +104,24 @@ export class ReportTableComponent implements OnInit, OnChanges {
   ];
 
 
+  // GST Upload Month and Year
+  gstYears: any[] = [2025, 2026, 2027];
+  gstMonths: any[] = [
+    { id: 1, name: 'January' },
+    { id: 2, name: 'February' },
+    { id: 3, name: 'March' },
+    { id: 4, name: 'April' },
+    { id: 5, name: 'May' },
+    { id: 6, name: 'June' },
+    { id: 7, name: 'July' },
+    { id: 8, name: 'August' },
+    { id: 9, name: 'September' },
+    { id: 10, name: 'October' },
+    { id: 11, name: 'November' },
+    { id: 12, name: 'December' }
+  ];
+
+
   AccountLedgers = [];
   ReportBranches = [];
   ReportPGList = [];
@@ -562,8 +580,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.dateForm = this.formBuilder.group({
       selected: [null],
-      formDate: ['', Validators.required],
-      toDate: ['', Validators.required],
+      formDate: [''],
+      toDate: [''],
       selectedReport: [''],
       selectedAccountLedger: [''],
       ledgerName: [''],
@@ -580,6 +598,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
       voucherCode: [null],
       toAccountLedger: [''],
       empCode: [null],
+      month: [null],
+      year: [null],
       RO: [null],
       selectedFourColumnReportType: [''],
       selectedGroupName: [''],
@@ -960,8 +980,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
     }
 
     this.dateForm.patchValue({
-      formDate: this.commonService.formatReportDate(this.dateForm.value.formDate),
-      toDate: this.commonService.formatReportDate(this.dateForm.value.toDate),
+      formDate: this.dateForm.value.formDate ? this.commonService.formatReportDate(this.dateForm.value.formDate) : null,
+      toDate: this.dateForm.value.toDate ? this.commonService.formatReportDate(this.dateForm.value.toDate) : null,
       selectedReport: this.dateForm.get('selectedReport').value,
       selectedAccountLedger: this.dateForm.get('selectedAccountLedger').value,
       selectedBranch: this.dateForm.get('selectedBranch').value,
@@ -992,8 +1012,8 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.params = this.params.append('UserID', this.user.userName);//this.user.userName);
     this.params = this.params.append('userName', this.user.userName);//this.user.userName);
     this.params = this.params.append('companyId', 0);//this.user.userName);this.params = this.params.append('fromDate', this.dateForm.get('formDate')?.value);
-    this.params = this.params.append('fromDate', this.dateForm.get('formDate').value);
-    this.params = this.params.append('toDate', this.dateForm.get('toDate')?.value);
+    this.params = this.params.append('fromDate', this.dateForm.value.formDate ? this.dateForm.get('formDate').value : null);
+    this.params = this.params.append('toDate', this.dateForm.value.toDate ? this.dateForm.get('toDate').value : null);
     this.params = this.params.append('reportID', this.dateForm.get('selectedReport')?.value);
     // this.params = this.params.append('shiftId', this.dateForm.get('selectedReport')?.value);
 
@@ -1017,6 +1037,10 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.params = this.params.append('GroupName', this.dateForm.get('selectedGroupName')?.value);
     this.params = this.params.append('SupplierGroup', this.dateForm.get('selectedSupplierGroup')?.value);
     this.params = this.params.append('voucherCode', this.dateForm.get('voucherCode')?.value ?? null);
+    this.params = this.params.append('empCode', this.dateForm.get('empCode')?.value ?? null);
+    this.params = this.params.append('salMonth', this.dateForm.get('month')?.value ?? null);
+    this.params = this.params.append('salYear', this.dateForm.get('year')?.value ?? null);
+
     if (this.dateForm.value.selectedCriteria == "shiftId") {
       this.params = this.params.append('shiftId', this.dateForm.value.search);
     } else {

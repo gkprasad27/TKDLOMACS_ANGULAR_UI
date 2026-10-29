@@ -9,12 +9,13 @@
         ||routeParam=='ProductPriceList'||routeParam=='ReceiptsAndPaymentsDetailed'||routeParam=='ReceiptsAndPaymentsSummary'||routeParam=='SMSSummary'||routeParam=='SalesGST'||routeParam=='24HrsSaleValue6AmTo6Am'
         ||routeParam=='TrialBalance'||routeParam=='24HrsMeterReading'||routeParam=='ClosingBalance'||routeParam=='BankReconciliation'||routeParam=='StockValuation'||routeParam=='FourColumnCashBook'
         ||routeParam=='BranchWiseMonthlySalesByLiters'||routeParam=='BranchWiseStockStatementLtrs'||routeParam=='BranchWiseStockStatementQty'
-        ||routeParam=='ProductMonthWisePurchaseLtrs'||routeParam=='einvoice'|| routeParam=='purchaseinvoicereport'|| routeParam=='journalvoucherreport'|| routeParam=='salaryprocess') {
+        ||routeParam=='ProductMonthWisePurchaseLtrs'||routeParam=='einvoice'|| routeParam=='purchaseinvoicereport'||
+        routeParam=='journalvoucherreport'|| routeParam=='salaryprocess') {
         <mat-form-field class="col-3">
           <mat-label> {{ 'report.formDate' | translate }} </mat-label>
           <mat-date-range-input [rangePicker]="picker">
-            <input matInput matStartDate placeholder="Start date" formControlName="formDate">
-            <input matInput matEndDate placeholder="End date" formControlName="toDate">
+            <input matInput matStartDate placeholder="Start date" required formControlName="formDate">
+            <input matInput matEndDate placeholder="End date" required formControlName="toDate">
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
@@ -34,6 +35,32 @@
           </ng-template>
         </div>
         }
+
+
+        @if(routeParam=='payslip') {
+
+        <mat-form-field class="col-3">
+          <mat-label>Select Month</mat-label>
+          <mat-select formControlName="month" required appFocusOnEnter tabIndex="1">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let month of gstMonths" [value]="month.id">
+              {{month.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-3">
+          <mat-label>Select Year</mat-label>
+          <mat-select formControlName="year" required appFocusOnEnter tabIndex="2">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let year of gstYears" [value]="year">
+              {{year}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        }
+
         @if(routeParam=='payslip'||routeParam=='salaryprocess') {
         <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
           [class.filled]="dateForm.get('empCode')?.value">
@@ -47,6 +74,7 @@
           </ng-template>
         </div>
         }
+
         @if(routeParam=='ClosingBalance') {
 
         <div class="mat-mdc-form-field typeahead floating-dropdown col-3"
@@ -246,17 +274,17 @@
         }
 
         @if(routeParam=='AccountLedger') {
-          
-         <div class="col-6">
+
+        <div class="col-6">
           <span style="margin-right: 30px; margin-bottom: 5px;">
-            <strong style="min-width: 150px; display: inline-block;"> Total Debit  </strong>
+            <strong style="min-width: 150px; display: inline-block;"> Total Debit </strong>
             : {{ footerData[0]?.DebitToal }}
           </span>
         </div>
 
         <div class="col-6">
           <span style="margin-right: 30px; margin-bottom: 5px;">
-            <strong style="min-width: 150px; display: inline-block;"> Total Credit  </strong>
+            <strong style="min-width: 150px; display: inline-block;"> Total Credit </strong>
             : {{ footerData[0]?.CreditTotal }}
           </span>
         </div>
@@ -364,7 +392,8 @@
           font-weight: 600;
         ">
 
-        {{ routeParam === 'Shift' || routeParam === 'Salesanalysisbybranch' ? getName : (routeParam + '.title') | translate : '' }} Report
+        {{ routeParam === 'Shift' || routeParam === 'Salesanalysisbybranch' ? getName : (routeParam + '.title') |
+        translate : '' }} Report
 
       </div>
 
@@ -438,136 +467,168 @@
 
         <tr style="background: #fafafa;">
 
-          <th  rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             S.No
+          <th rowspan="2"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            S.No
           </th>
 
-          <th  rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; width: 100px; word-wrap: break-word; font-size: 10px;">
-             Receiver GSTIN/UINSTIN GSTIN
+          <th rowspan="2"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; width: 100px; word-wrap: break-word; font-size: 10px;">
+            Receiver GSTIN/UINSTIN GSTIN
           </th>
 
-          <th  rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; width: 100px; word-wrap: break-word; font-size: 10px;">
-             Receiver Name
+          <th rowspan="2"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; width: 100px; word-wrap: break-word; font-size: 10px;">
+            Receiver Name
           </th>
 
-          <th  rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; width: 50px; word-wrap: break-word; font-size: 10px;">
-             Invoice No
+          <th rowspan="2"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; width: 50px; word-wrap: break-word; font-size: 10px;">
+            Invoice No
           </th>
 
-          <th  rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; width: 60px; word-wrap: break-word; font-size: 10px;">
-             Invoice Date
+          <th rowspan="2"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; width: 60px; word-wrap: break-word; font-size: 10px;">
+            Invoice Date
           </th>
 
-          <th rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             Total Invoice Value
+          <th rowspan="2"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            Total Invoice Value
           </th>
 
-          <th rowspan="2" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             Taxable Value
+          <th rowspan="2"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            Taxable Value
           </th>
 
-          <th colspan="4" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             0%
+          <th colspan="4"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            0%
           </th>
 
-          <th colspan="4" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             5%
+          <th colspan="4"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            5%
           </th>
 
-          <th colspan="4" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             12%
+          <th colspan="4"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            12%
           </th>
 
-          <th colspan="4" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             18%
+          <th colspan="4"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            18%
           </th>
 
-          <th colspan="4" style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             28%
+          <th colspan="4"
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            28%
           </th>
 
         </tr>
 
         <tr style="background: #fafafa;">
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             Tax Amount
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            Tax Amount
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             IGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            IGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             CGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            CGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             SGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            SGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             Tax Amount
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            Tax Amount
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             IGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            IGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             CGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            CGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             SGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            SGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             Tax Amount
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            Tax Amount
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             IGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            IGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             CGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            CGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             SGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            SGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             Tax Amount
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            Tax Amount
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             IGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            IGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             CGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            CGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             SGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            SGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             Tax Amount
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            Tax Amount
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             IGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            IGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             CGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            CGST
           </th>
 
-          <th style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
-             SGST
+          <th
+            style=" border: 0.4px solid #d9d9d9; padding: 3px 2px; text-align: center; font-weight: bold; color: #000; word-wrap: break-word; font-size: 10px;">
+            SGST
           </th>
 
         </tr>
@@ -689,7 +750,8 @@
               padding: 3px 2px;
               font-size: 12px;
               text-align: end;
-            "  [style.font-weight]="routeParam !== 'BranchWiseStockStatementLtrs' && routeParam !== 'BranchWiseStockStatementQty' ? 'bold' : 'normal'">
+            "
+            [style.font-weight]="routeParam !== 'BranchWiseStockStatementLtrs' && routeParam !== 'BranchWiseStockStatementQty' ? 'bold' : 'normal'">
 
             Totals
 
@@ -703,7 +765,8 @@
               border: 0.4px solid #d9d9d9;
               padding: 3px 2px;
               font-size: 12px;
-            " [style.textAlign]="getColumnAlignment(foot['key'].toString())" [style.font-weight]="routeParam !== 'BranchWiseStockStatementLtrs' && routeParam !== 'BranchWiseStockStatementQty' ? 'bold' : 'normal'">
+            " [style.textAlign]="getColumnAlignment(foot['key'].toString())"
+            [style.font-weight]="routeParam !== 'BranchWiseStockStatementLtrs' && routeParam !== 'BranchWiseStockStatementQty' ? 'bold' : 'normal'">
 
             {{ formatCellValue(footerData[0][foot['key']], foot['key']) }}
 
@@ -1307,7 +1370,7 @@
               display: inline-block;
               margin-bottom: 2px;
             ">
-            
+
             <strong style="
                 min-width: 95px;
                 display: inline-block;
@@ -1582,7 +1645,8 @@
     }
 
 
-    @if(routeParam == 'Salesanalysisbybranch' && dateForm.get('ReportName')?.value == 'Sales Analysis Sub Category Branch Wise') {
+    @if(routeParam == 'Salesanalysisbybranch' && dateForm.get('ReportName')?.value == 'Sales Analysis Sub Category
+    Branch Wise') {
 
     <div style="
         margin-bottom: 10px;
@@ -1731,7 +1795,8 @@
     }
 
 
-    @if(routeParam == 'Salesanalysisbybranch' && dateForm.get('ReportName')?.value == 'Sales Analysis Sub Category Wise') {
+    @if(routeParam == 'Salesanalysisbybranch' && dateForm.get('ReportName')?.value == 'Sales Analysis Sub Category
+    Wise') {
 
     <div style="
         margin-bottom: 10px;
@@ -1879,7 +1944,7 @@
 
     }
 
-    
+
     @if(routeParam == 'ReceiptsAndPaymentsDetailed' || routeParam == 'ReceiptsAndPaymentsSummary') {
 
     <div style="
@@ -1893,33 +1958,33 @@
 
 
 
-          <span style="
+        <span style="
               display: inline-block;
               margin-bottom: 2px;
             ">
 
-            <strong style="
+          <strong style="
                 min-width: 150px;
                 width: 150px;
                 display: inline-block;
               ">
 
-              Cash Closing Balance:
+            Cash Closing Balance:
 
-            </strong>
+          </strong>
 
-            <span style="padding-left: 10px;"> {{ footerData[0]['CashClosingBalance'] }}</span>
+          <span style="padding-left: 10px;"> {{ footerData[0]['CashClosingBalance'] }}</span>
 
-          </span>
-
-
+        </span>
 
 
-          <span style="
+
+
+        <span style="
               display: inline-block;
               margin-bottom: 2px;
             ">
-            <!-- 
+          <!-- 
             <strong style="
                 min-width: 95px;
                 display: inline-block;
@@ -1929,9 +1994,9 @@
 
             </strong> -->
 
-            <!-- <span style="padding-left: 10px;"> {{ footerData[0]['ClosingTotalPayments'] }}</span> -->
+          <!-- <span style="padding-left: 10px;"> {{ footerData[0]['ClosingTotalPayments'] }}</span> -->
 
-          </span>
+        </span>
 
 
       </div>
@@ -1947,34 +2012,34 @@
 
       <div style="margin-bottom: 2px;display: flex;">
 
-          <span style="
+        <span style="
               display: inline-block;
               margin-bottom: 2px;
             ">
 
-            <strong style="
+          <strong style="
                 min-width: 150px;
                 width: 145px;
                 display: inline-block;
               ">
 
-              Closing Total:
+            Closing Total:
 
-            </strong>
+          </strong>
 
-            <span style="padding-left: 10px;"> {{ footerData[0]['ClosingTotalReceipts'] }}</span>
+          <span style="padding-left: 10px;"> {{ footerData[0]['ClosingTotalReceipts'] }}</span>
 
-          </span>
+        </span>
 
 
-        
 
-          <span style="
+
+        <span style="
               display: inline-block;
               margin-bottom: 2px;
             ">
 
-            <!-- <strong style="
+          <!-- <strong style="
                 min-width: 95px;
                 display: inline-block;
               ">
@@ -1983,9 +2048,9 @@
 
             </strong> -->
 
-            <span style="padding-left: 10px;"> {{ footerData[0]['ClosingTotalPayments'] }}</span>
+          <span style="padding-left: 10px;"> {{ footerData[0]['ClosingTotalPayments'] }}</span>
 
-          </span>
+        </span>
 
 
 
@@ -1999,9 +2064,9 @@
 
 
     @if(routeParam == 'StockValuation') {
-    
+
     @for(row of footerData; track $index; let i = $index) {
-    
+
     <div style="
                   margin-bottom: 10px;
                   font-size: 13px;
@@ -2009,48 +2074,48 @@
                   display: flex;
                 ">
 
-                <div style="width: 40%;"></div>
-    
-    
+      <div style="width: 40%;"></div>
+
+
       <div style="margin-bottom: 2px;display: flex; width: 60%;">
-    
+
         <span style="
                         display: inline-block;
                         margin-bottom: 2px;
                       ">
-    
+
           <strong style="
                           min-width: 250px;
                           width: 250px;
                           display: inline-block;
                         ">
-    
+
             {{ row.branchName }}
-    
+
           </strong>
-    
-    
-        </span> 
-    
+
+
+        </span>
+
         <span style="
                         display: inline-block;
                         margin-bottom: 2px;
                       ">
-    
+
           <span style="padding-left: 10px;"> {{ row.TotalVal }}</span>
-    
+
         </span>
-    
-    
+
+
       </div>
-    
-    
+
+
     </div>
-    
-    
+
+
     }
-    
-    
+
+
     }
 
 

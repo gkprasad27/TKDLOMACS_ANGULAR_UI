@@ -154,6 +154,10 @@ export class ReportsService {
         this.dynamicData.url = this.apiConfigService.getJournalVoucherReport;
         this.dynamicData.listName = 'accountLedgerList';
         return this.dynamicData;
+      case 'payslip':
+        this.dynamicData.url = this.apiConfigService.getPayslipReportData;
+        this.dynamicData.listName = 'payslipList';
+        return this.dynamicData;
       default:
     }
   }
