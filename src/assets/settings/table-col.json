@@ -2152,5 +2152,16 @@
     "code": "Code",
     "desctiption": "Description",
     "type": "Type"
+  },
+  "payslip" : {
+
+    "headers": {
+      "Branch_Name": "Branch",
+      "Sal_Month": "Month",
+      "Address": "Address",
+      "Report_Date": "Date",
+      "Company_Phone": "Phone",
+      "Created_By": "Created By"
+    }
   }
 }

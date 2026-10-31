@@ -2576,5 +2576,14 @@
     "TotalIGST": "Total IGST",
     "TotalTax": "Total Tax",
     "GrandTotal": "Grand Total"
+  },
+  "payslip": {
+    "title": "Pay Slip",
+      "Branch_Name": "Branch",
+      "Sal_Month": "Month",
+      "Company_Address": "Address",
+      "Report_Date": "Report Date",
+      "Company_Phone": "Phone",
+      "Created_By": "Created By"
   }
 }

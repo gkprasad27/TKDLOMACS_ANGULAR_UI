@@ -1,7 +1,8 @@
 
 import {
   Component, OnInit, ViewChild, Input, OnChanges,
-  ChangeDetectorRef, Output, EventEmitter, AfterViewInit, OnDestroy
+  ChangeDetectorRef, Output, EventEmitter, AfterViewInit, OnDestroy,
+  ElementRef
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
@@ -1714,6 +1715,17 @@ export class ReportTableComponent implements OnInit, OnChanges {
 
     if (this.isDateColumn(columnName)) {
       try {
+        if(this.routeParam == 'payslip' && columnName == 'Report_Date') {
+          const date = new Date(value);
+
+          const formattedDate = date.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: '2-digit'
+          }).replace(/ /g, '-');
+
+          return formattedDate
+        }
         // Check if value is a valid date
         // const date = new Date(value);
         // if (!isNaN(date.getTime())) {
@@ -1725,8 +1737,17 @@ export class ReportTableComponent implements OnInit, OnChanges {
       console.warn(value, 'is not a valid date');
       return value;
     }
+    if (this.routeParam == 'payslip' && columnName == 'Sal_Month') {
+      return this.getMonthName(value);
+    }
 
     return value;
+  }
+
+  getMonthName(value) {
+       const obj = this.gstMonths.find((m: any) => m.id === +value);
+       console.log(value, obj)
+      return obj.name
   }
 
   /**

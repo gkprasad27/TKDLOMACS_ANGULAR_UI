@@ -667,6 +667,202 @@
     </table>
     }
 
+    @else if (routeParam === 'payslip') {
+
+    <div style="
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-top: 3px solid black;
+        padding-top: 10px;
+      ">
+
+      <div style="
+        text-align: center;
+          font-size: 15px;
+          font-weight: bold;
+          margin-bottom: 3px;
+        ">
+
+        K.D.L.O.M.A.C.S,MUSEUM ROAD, GOVERNORPET,VIJAYAWADA 520 002 WAGESLIP (FORM XI)
+
+      </div>
+
+      <div style="font-size: 15px;
+          margin-bottom: 3px;">
+        <ol>
+          <li style="padding-bottom: 8px;">
+            <div style="display: flex;"> <span style="width: 300px; min-width: 300px; font-weight: bold;"> Name of the
+                Employee </span> <span> {{ (headerData && headerData.length) ? headerData[0].Emp_Name : '' }} </span>
+            </div>
+          </li>
+          <li style="padding-bottom: 8px;">
+            <div style="display: flex;"> <span style="width: 300px; min-width: 300px; font-weight: bold;"> Designation
+              </span> <span> {{ (headerData && headerData.length) ? headerData[0].Designation_Name : '' }}, {{
+                (headerData && headerData.length) ? headerData[0].Branch_Name : '' }} </span> </div>
+          </li>
+          <li style="padding-bottom: 8px;">
+            <div style="display: flex;"> <span style="width: 300px; min-width: 300px; font-weight: bold;"> No. of days
+                worked </span> <span> {{ (headerData && headerData.length) ? headerData[0].Days_Worked : '' }} </span>
+            </div>
+          </li>
+          <li style="padding-bottom: 8px;">
+            <div style="display: flex;"> <span style="width: 300px; min-width: 300px; font-weight: bold;"> Overtime
+                wages earned </span> <span> {{ (headerData && headerData.length) ? headerData[0].Overtime_Wages_Earned :
+                '' }} </span> </div>
+          </li>
+          <li style="padding-bottom: 8px;">
+            <div style="display: flex;"> <span style="width: 300px; min-width: 300px; font-weight: bold;"> Gross wages
+                earned </span> <span> {{ (footerData && footerData.length) ? footerData[0].Gross_Earnings : '' }}
+              </span> </div>
+          </li>
+        </ol>
+      </div>
+
+      <div style="display: flex; margin: 0px 24px;">
+        <div style="width: 50%; ">
+
+          <div style="font-weight: bold;padding-bottom: 8px;"> 6. Details of Earnings </div>
+          <div> a] Nature of Earnings </div>
+
+          <ol style="padding: 0px 18px; margin-bottom: 0px;">
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[0].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[0].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[1].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[1].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[2].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[2].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[3].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[3].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[4].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[4].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[5].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[5].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <!-- <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[5].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[5].Component_Amount : '' }} </span>
+              </div> -->
+            </li>
+          </ol>
+
+          <div style="display: flex;padding-bottom: 8px;"> <span style="width: 300px; min-width: 300px; "> a] Total Earnings
+            </span> <span> {{ (footerData && footerData.length) ? footerData[0].Gross_Earnings : '' }} </span>
+          </div>
+
+          <div style="display: flex;padding-bottom: 8px;"> <span style="width: 300px; min-width: 300px; font-weight: bold; "> 8. Net wage
+              payable
+            </span> <span> {{ (footerData && footerData.length) ? footerData[0].Net_Salary : '' }} </span>
+          </div>
+
+          <div style="display: flex;padding-bottom: 8px;"> <span style="width: 300px; min-width: 300px; font-weight: bold; "> 9. Date of
+              Issue of Wage Slip
+            </span> <span> {{ (headerData && headerData.length) ? (headerData[0].Report_Date | date: 'dd-MMM-yy') : '' }} </span>
+          </div>
+
+          <div style="display: flex;padding-bottom: 8px;"> <span style="width: 300px; min-width: 300px; font-weight: bold; "> 10. Signature
+              of the pay in-charge
+            </span> <span> </span>
+          </div>
+
+        </div>
+        <div style="width: 50%; ">
+
+          <div style="font-weight: bold;padding-bottom: 8px;"> 7. Details of Deductions </div>
+          <div> a] Nature of Deductions </div>
+
+          <ol style="padding: 0px 18px; margin-bottom: 0px;">
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[6].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[6].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[7].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[7].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[8].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[8].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[9].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[9].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[10].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[10].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[11].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[11].Component_Amount : '' }} </span>
+              </div>
+            </li>
+            <li style="padding-bottom: 8px;">
+              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[12].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[12].Component_Amount : '' }} </span>
+              </div>
+            </li>
+          </ol>
+
+          <div style="display: flex;padding-bottom: 8px;"> <span style="width: 300px; min-width: 300px; "> b] Total Deductions
+            </span> <span> {{ (footerData && footerData.length) ? footerData[0].Total_Deductions : '' }} </span>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="display: flex; margin: 0px 24px;">
+        <div style="width: 50%;">
+          <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> Received wage slip for the month of
+            </span> <span> {{ (headerData && headerData.length) ? getMonthName(headerData[0].Sal_Month) : '' }} </span>
+          </div>
+        </div>
+         <div style="width: 50%;">
+          <div style="display: flex;"> <span style="width: 300px; min-width: 300px; text-align: center; font-weight: bold;"> Signature of the employee
+            </span> <span> </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    }
+
     @else {
 
 

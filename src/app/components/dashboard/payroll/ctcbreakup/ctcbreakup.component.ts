@@ -157,15 +157,15 @@ export class CTCBreakupComponent implements OnInit {
                 //     element.EarnDednAmount = (12 * ((+obj.amount) * obj.employerContribution) / 100);
                 //   }
                 // }
-                if (element.id == "TKD_D05") {
-                  const obj = this.PtList.find((p: any) => p.text == this.modelFormData.value.ptSlab)
-                  if ((+this.modelFormData.value.ctc) / 12 < obj.ptLowerLimit) {
-                    element.EarnDednAmount = 0;
-                  }
-                  else {
-                    element.EarnDednAmount = (12 * obj.ptAmt);
-                  }
-                }
+                // if (element.id == "TKD_D05") {
+                //   const obj = this.PtList.find((p: any) => p.text == this.modelFormData.value.ptSlab)
+                //   if ((+this.modelFormData.value.ctc) / 12 < obj.ptLowerLimit) {
+                //     element.EarnDednAmount = 0;
+                //   }
+                //   else {
+                //     element.EarnDednAmount = (12 * obj.ptAmt);
+                //   }
+                // }
                 // if (element.text == "ESI") {
 
                 //   if ((+this.modelFormData.value.ctc) / 12 < element.amount) {
