@@ -14,24 +14,25 @@ import { AlertService } from '../../../services/alert.service';
 import { SnackBar } from '../../../enums/common/common';
 
 import { SharedImportModule } from 'src/app/shared/shared-import';
-import { TranslateModule } from '@ngx-translate/core'; 
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonService } from 'src/app/services/common.service';
 import { Static } from 'src/app/enums/common/static';
 
-@Component({ 
-    selector: 'app-reports',
-    templateUrl: './reports.component.html',
-    styleUrls: ['./reports.component.scss'],
-    standalone: true,
-    imports: [SharedImportModule, TranslateModule, ReportTableComponent]
+@Component({
+  selector: 'app-reports',
+  templateUrl: './reports.component.html',
+  styleUrls: ['./reports.component.scss'],
+  standalone: true,
+  imports: [SharedImportModule, TranslateModule, ReportTableComponent]
 })
 export class ReportsComponent implements OnInit {
 
   tableData: any;
-  headerData:any;
-  footerData:any;
+  headerData: any;
+  footerData: any;
   tableUrl: any;
   route: any;
+  initialData: any;
   @ViewChild(ReportTableComponent) reportTableComponent: ReportTableComponent;
 
   constructor(
@@ -42,10 +43,10 @@ export class ReportsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
     private commonService: CommonService,
-  ) { 
+  ) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.reportsService.branchCode = user.branchCode;
-    
+
     activatedRoute.params.subscribe(params => {
       this.tableUrl = reportsService.getRouteUrls(params.id);
       this.route = params.id;
@@ -68,28 +69,32 @@ export class ReportsComponent implements OnInit {
     this.headerData = null;
     this.footerData = null;
 
-    this.apiService.apiReportGetRequest(getUrl,value)
+    this.apiService.apiReportGetRequest(getUrl, value)
       .subscribe(
         response => {
           const res = response['body'];
           this.spinner.hide();
           if (res != null && res.status === StatusCodes.pass) {
             if (res.response != null) {
-              if (this.route == 'Intimate Sale') {
-                this.tableData = this.removeDuplicate(res.response[this.tableUrl.listName])
+              if (this.route == 'payslip') {
+                this.initialData = res.response;
               } else {
-                this.tableData = res.response[this.tableUrl.listName];
+                if (this.route == 'Intimate Sale') {
+                  this.tableData = this.removeDuplicate(res.response[this.tableUrl.listName])
+                } else {
+                  this.tableData = res.response[this.tableUrl.listName];
+                }
+                if (this.tableData === null || this.tableData.length < 0) {
+                  this.alertService.openSnackBar('No data found', Static.Close, SnackBar.error);
+                }
+                this.headerData = res.response['headerList'];
+                this.footerData = res.response['footerList'];
               }
-              if(this.tableData === null || this.tableData.length < 0) {
-                this.alertService.openSnackBar('No data found', Static.Close, SnackBar.error);
-              }
-              this.headerData = res.response['headerList'];
-              this.footerData = res.response['footerList'];
             }
           }
         }, error => {
           this.spinner.hide();
-      });
+        });
   }
   getTableData() {
     this.spinner.show();
@@ -106,7 +111,7 @@ export class ReportsComponent implements OnInit {
               } else {
                 this.tableData = res.response[this.tableUrl.listName];
               }
-              if(this.tableData === null || this.tableData.length < 0) {
+              if (this.tableData === null || this.tableData.length < 0) {
                 this.alertService.openSnackBar('No data found', Static.Close, SnackBar.error);
               }
               this.headerData = res.response['headerList'];
@@ -116,7 +121,7 @@ export class ReportsComponent implements OnInit {
           this.spinner.hide();
         }, error => {
 
-      });
+        });
   }
 
   removeDuplicate(data) {
@@ -136,7 +141,7 @@ export class ReportsComponent implements OnInit {
             vehicle = data[i].Vehicle;
             array.push(JSON.parse(JSON.stringify(data[i])));
             array[i].Vehicle = null;
-          }          
+          }
           array[i].Qty = null;
           array[i].Amount = null;
         }

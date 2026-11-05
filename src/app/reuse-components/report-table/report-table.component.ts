@@ -69,6 +69,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
   @Input() tableData: any;
   @Input() headerData: any = [];
   @Input() footerData: any;
+  @Input() initialData: any;
   @Output() generateTable = new EventEmitter();
 
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
