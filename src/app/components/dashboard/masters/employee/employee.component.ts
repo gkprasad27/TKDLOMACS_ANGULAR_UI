@@ -36,6 +36,11 @@ import { NonEditableDatepicker } from 'src/app/directives/format-datepicker';
 })
 export class EmployeeComponent implements OnInit {
 
+maxDob: Date = new Date(
+  new Date().getFullYear() - 18,
+  new Date().getMonth(),
+  new Date().getDate()
+);
 
   modelFormData: FormGroup;
   modelFormData1: FormGroup;

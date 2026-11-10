@@ -60,7 +60,7 @@
           </mat-form-field>
           <mat-form-field class="col-2">
             <mat-label [translate]="'employee.dob'"></mat-label>
-            <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
+            <input matInput [matDatepickerFilter]="commonService.disableFuture" [max]="maxDob" [matDatepicker]="picker1"
               [nonEditable]="picker1" formControlName="dob" appFocusOnEnter tabIndex="6">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
@@ -100,7 +100,11 @@
           </mat-form-field>
           <mat-form-field class="col-2">
             <mat-label [translate]="'employee.mobileNumber'"></mat-label>
-            <input matInput type="number" formControlName="mobileNumber" appFocusOnEnter tabIndex="12">
+            <input matInput type="text" formControlName="mobileNumber" (keypress)="commonService.numberOnly($event)" minlength="10" maxlength="10" appFocusOnEnter tabIndex="12">
+             @if (!formControls.mobileNumber.valid && formControls.mobileNumber.status != 'DISABLED') {
+                <mat-error
+                [ngClass]="{ 'ng--invalid': !formControls.mobileNumber.errors.minlength  }">Mobile number must be at least 10 digits long.</mat-error>
+              }
           </mat-form-field>
           <mat-form-field class="col-2">
             <mat-label [translate]="'employee.email'"></mat-label>
