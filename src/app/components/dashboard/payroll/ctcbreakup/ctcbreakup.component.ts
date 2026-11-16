@@ -35,8 +35,8 @@ export class CTCBreakupComponent implements OnInit {
   structure: any;
   ctc: any;
   modelFormData: FormGroup;
-  PfList: any;
-  PtList: any;
+  // PfList: any;
+  // PtList: any;
   filteredOptions: any;
   displayedColumns: string[] = ['id', 'text', 'EarnDednAmount', 'duration', 'specificMonth'];
   GetEmployeeListArray: any[] = [];
@@ -45,6 +45,12 @@ export class CTCBreakupComponent implements OnInit {
 
   formData: any;
   routeEdit = '';
+
+  isSubmitted = false;
+
+  componentList: any[] = [];
+
+    get formControls() { return this.modelFormData.controls; }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,10 +71,10 @@ export class CTCBreakupComponent implements OnInit {
       empCode: [null],
       empCodeName: [null, Validators.required],
       effectFrom: [null, Validators.required],
-      pfType: [null, Validators.required],
-      ptSlab: [null, Validators.required],
+      // pfType: [null, Validators.required],
+      // ptSlab: [null, Validators.required],
       id: 0,
-      ctc: [null, Validators.required],
+      // ctc: [null, Validators.required],
     });
     this.modelFormData.controls['id'].disable();
 
@@ -87,32 +93,42 @@ export class CTCBreakupComponent implements OnInit {
   }
 
   allApis() {
-    const getctcpf = this.apiConfigService.getctcpf;
-    const getctcpt = this.apiConfigService.getctcpt;
+    // const getctcpf = this.apiConfigService.getctcpf;
+    // const getctcpt = this.apiConfigService.getctcpt;
+    const getctcComponentsListUrl = this.apiConfigService.getPfComponentsList;
 
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
-        this.apiService.apiGetRequest(getctcpf),
-        this.apiService.apiGetRequest(getctcpt),
-      ]).subscribe(([getctcpf, getctcpt]) => {
+        // this.apiService.apiGetRequest(getctcpf),
+        // this.apiService.apiGetRequest(getctcpt),
+        this.apiService.apiGetRequest(getctcComponentsListUrl)
+      ]).subscribe(([getctcComponentsList]) => {
         this.spinner.hide();
 
-        if (!this.commonService.checkNullOrUndefined(getctcpf) && getctcpf.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(getctcpf.response)) {
-            this.PfList = getctcpf.response['PFList'];
+        // if (!this.commonService.checkNullOrUndefined(getctcpf) && getctcpf.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(getctcpf.response)) {
+        //     this.PfList = getctcpf.response['PFList'];
+        //   }
+        // }
+
+        // if (!this.commonService.checkNullOrUndefined(getctcpt) && getctcpt.status === StatusCodes.pass) {
+        //   if (!this.commonService.checkNullOrUndefined(getctcpt.response)) {
+        //     this.PtList = getctcpt.response['PTList'];
+        //   }
+        // }
+
+        // if (this.routeEdit) {
+        //   this.getctcComponentsList();
+        // }
+
+        if (!this.commonService.checkNullOrUndefined(getctcComponentsList) && getctcComponentsList.status === StatusCodes.pass) {
+          if (!this.commonService.checkNullOrUndefined(getctcComponentsList.response)) {
+            this.componentList = getctcComponentsList.response['ComponentList'];
+            console.log('componentList', this.componentList);
           }
         }
 
-        if (!this.commonService.checkNullOrUndefined(getctcpt) && getctcpt.status === StatusCodes.pass) {
-          if (!this.commonService.checkNullOrUndefined(getctcpt.response)) {
-            this.PtList = getctcpt.response['PTList'];
-          }
-        }
-
-        if (this.routeEdit) {
-          this.getctcComponentsList();
-        }
 
       });
     });
@@ -248,19 +264,25 @@ export class CTCBreakupComponent implements OnInit {
 
 
   save() {
-    const arr = this.dataSource.data.filter((d: any) => d.EarnDednAmount !== undefined && d.EarnDednAmount !== null);
+   this.isSubmitted = true;
+
+    if (this.modelFormData.invalid) {
+      this.modelFormData.markAllAsTouched();
+      return;
+    }
+    // const arr = this.dataSource.data.filter((d: any) => d.EarnDednAmount !== undefined && d.EarnDednAmount !== null);
     const obj = {
       item: {
         structure: {
           // structureName: this.modelFormData.value.structureName,
-          ctc: this.modelFormData.value.ctc,
+          // ctc: this.modelFormData.value.ctc,
           empcode: this.modelFormData.value.empCode,
           effectfrom: this.modelFormData.value.effectFrom ? this.datepipe.transform(this.modelFormData.value.effectFrom, 'yyyy-MM-dd') : '',
           id: this.modelFormData.value.id,
-          pftype: this.modelFormData.value.pfType,
-          ptslab: this.modelFormData.value.ptSlab
+          // pftype: this.modelFormData.value.pfType,
+          // ptslab: this.modelFormData.value.ptSlab
         },
-        components: arr
+        // components: arr
       }
     }
     this.formData.item = obj.item;

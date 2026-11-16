@@ -1,35 +1,51 @@
 <div class="position-relative popup-class">
 
   <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
-    <span> {{'company.title' | translate }} </span>
+    <span> {{'CTCBreakup.title' | translate }} </span>
     <mat-icon class="p-2  cursor--pointer" (click)="cancel()">close</mat-icon>
   </mat-card-title>
 
-  <mat-card-content class="pt-5 p-2 m-0 overflow-auto" style="height: 90vh; max-height: 90vh;">
+  <mat-card-content class="pt-5 p-3 m-2 overflow-auto" style="height: 60vh; max-height: 60vh;">
     <form [formGroup]="modelFormData" autocomplete="off">
-      <div class="d--flex">
+      <div class="row">
 
-        <div class="mat-mdc-form-field typeahead floating-dropdown " style="width: 24.5%;"
-          [class.filled]="modelFormData.value?.empCodeName?.length > 0">
+        <div class="col-4 mat-mdc-form-field typeahead floating-dropdown " style="width: 24.5%;"
+          [class.filled]="modelFormData.value?.empCodeName?.length > 0" >
           <label> {{ 'CTCBreakup.empCode' | translate }} </label>
           <input placeholder=" " formControlName="empCodeName" (input)="getctcEmployeeList($event.target.value)"
-            [typeaheadOptionsLimit]="100000" [typeahead]="GetEmployeeListArray" typeaheadOptionField='display' (typeaheadOnSelect)="selectempcode($event)"
-            appFocusOnEnter tabIndex="2" class="form-control typeahead" [typeaheadItemTemplate]="customItemTemplate"
-            [typeaheadMinLength]="0" [minLength]="1" [typeaheadWaitMs]="200">
+            [typeaheadOptionsLimit]="100000" [typeahead]="GetEmployeeListArray" typeaheadOptionField='display'
+            (typeaheadOnSelect)="selectempcode($event)" appFocusOnEnter tabIndex="1" class="form-control typeahead"
+            [typeaheadItemTemplate]="customItemTemplate" [typeaheadMinLength]="0" [minLength]="1"
+            [typeaheadWaitMs]="200" [ngClass]="{ 'ng--valid': formControls.empCodeName.valid }">
           <ng-template #customItemTemplate let-model="item">
             <span><strong>{{model.id}}</strong> - {{model.text}}</span>
           </ng-template>
+            @if (isSubmitted && formControls.empCodeName.errors) {
+              <div class="help-block">
+                @if (formControls.empCodeName.errors.required) {
+                  Employee Code is required
+                }
+              </div>
+            }
         </div>
 
-        <mat-form-field class="form-element">
+        <mat-form-field class="col-4">
           <mat-label>{{'CTCBreakup.effectFrom' | translate }}</mat-label>
-          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"  formControlName="effectFrom" appFocusOnEnter
-            tabIndex="3">
+          <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
+            formControlName="effectFrom" appFocusOnEnter tabIndex="2" [ngClass]="{ 'ng--valid': formControls.effectFrom.valid }">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
+          @if (isSubmitted && formControls.effectFrom.errors) {
+            <mat-error class="help-block">
+              @if (formControls.effectFrom.errors.required) {
+                Effective Date is required
+              }
+            </mat-error>
+          }
         </mat-form-field>
 
-        <mat-form-field class="form-element">
+
+        <!-- <mat-form-field class="form-element">
           <mat-label>{{'CTCBreakup.ctc' | translate }}</mat-label>
           <input matInput formControlName="ctc" appFocusOnEnter
             tabIndex="4">
@@ -57,21 +73,79 @@
             </mat-option>
             }
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <div class="form-element p-2 d-flex justify-content-end align-items-center">
+        <!-- <div class="form-element p-2 d-flex justify-content-end align-items-center">
           <button mat-raised-button type="submit" class="button-color-bule text-white mx-1"
             (click)="getctcComponentsList()" appFocusOnEnter tabIndex="5">
             {{ 'COMMON.CALCULATE' | translate }}
           </button>
-        </div>
+        </div> -->
 
       </div>
     </form>
 
+    <div class="row">
+      <div class="col-6 px-5">
+        <div class="row">
+          <div class="col-12">
+            <div class="row p-2">
+              <div class="col-6">
 
+              </div>
+              <div class="col-6 text-center">
+                Earnings
+              </div>
+            </div>
+          </div>
+          @for (item of componentList; track item) {
+          @if (item.id.includes('TKD_E')) {
+          <div class="col-12">
+            <div class="row py-2">
+              <div class="col-6">
+                {{ ('CTCBreakup.' + item.id) | translate }}
+              </div>
+              <div class="col-6">
+                <input matInput class="w-100" [value]="item.value" [(ngModel)]="item.value" />
+              </div>
+            </div>
+          </div>
+          }
+          }
+        </div>
+      </div>
+      <div class="col-6 px-5">
+        <div class="row">
+          <div class="col-12">
+            <div class="row p-2">
+              <div class="col-6">
 
-    <mat-card-content class="p-0">
+              </div>
+              <div class="col-6 text-center">
+                Deductions
+              </div>
+            </div>
+          </div>
+          @for (item of componentList; track item) {
+
+          @if (item.id.includes('TKD_D')) {
+          <div class="col-12">
+            <div class="row py-2">
+              <div class="col-6">
+                {{ ('CTCBreakup.' + item.id) | translate }}
+              </div>
+              <div class="col-6">
+                <input matInput class="w-100" [value]="item.value" [(ngModel)]="item.value" />
+              </div>
+            </div>
+          </div>
+          }
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- <mat-card-content class="p-0">
       <div>
         <div class="table">
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
@@ -107,10 +181,11 @@
           </table>
         </div>
       </div>
-    </mat-card-content>
+    </mat-card-content> -->
+
   </mat-card-content>
 
-  <div class="form-element mt-2 d-flex justify-content-end">
+  <div class="form-element m-3 d-flex justify-content-end">
     <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
       {{ 'COMMON.CANCEL' | translate }}
     </button>
