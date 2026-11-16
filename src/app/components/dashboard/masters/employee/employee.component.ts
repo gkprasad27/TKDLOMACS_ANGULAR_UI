@@ -88,7 +88,7 @@ maxDob: Date = new Date(
     this.modelFormData = this.formBuilder.group({
       branchId: [''],
       // employeeId: [0],
-      employeeCode: ['', Validators.required],
+      employeeCode: [0],
       companyCode: ['', Validators.required],
       // branchCode: [''],
       designationId: [10, Validators.required],
@@ -206,7 +206,9 @@ maxDob: Date = new Date(
       this.modelFormData.patchValue(this.formData.item);
       this.modelFormData.patchValue({
         designationId: this.formData.item.designationId ? +this.formData.item.designationId : 0,
-        companyCode: this.formData.item.companyCode ? +this.formData.item.companyCode : '',
+        companyCode: this.formData.item.companyCode ? +this.formData.item.companyCode : 0,
+        employeeCode: this.formData.item.employeeCode ? +this.formData.item.employeeCode : 0,
+        branchCode: this.formData.item.branchCode ? +this.formData.item.branchCode : 0, 
       });
       this.modelFormData.controls['employeeCode'].disable();
       // this.modelFormData.controls['employeeId'].disable();

@@ -881,7 +881,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     }
     if (this.routeParam == 'Salesanalysisbybranch' && this.dateForm.get('ReportName')?.value) {
       const obj = JSON.parse(JSON.stringify(this.runtimeConfigService.tableColumnsData[this.routeParam][this.dateForm.get('ReportName')?.value]));
-      if (obj && this.dateForm.get('selectedBranch')?.value && this.dateForm.get('ReportName')?.value == 'Detailed Sales Analysis') {
+      if (obj && this.dateForm.get('selectedBranch')?.value && this.dateForm.get('ReportName')?.value == '2') {
         delete obj['Branch Name'];
         delete obj['Rate'];
         delete obj['Product Supplier Name'];
@@ -980,7 +980,6 @@ export class ReportTableComponent implements OnInit, OnChanges {
         return;
       }
     }
-
     this.dateForm.patchValue({
       formDate: this.dateForm.value.formDate ? this.commonService.formatReportDate(this.dateForm.value.formDate) : null,
       toDate: this.dateForm.value.toDate ? this.commonService.formatReportDate(this.dateForm.value.toDate) : null,
@@ -1009,6 +1008,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
       this.salaryProcess();
       return;
     }
+    const obj = this.ReportNames.find(r => r.id == this.dateForm.get('ReportName')?.value);
 
     this.params = new HttpParams();
     this.params = this.params.append('UserID', this.user.userName);//this.user.userName);
@@ -1029,7 +1029,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.params = this.params.append('search', this.dateForm.get('search')?.value);
     this.params = this.params.append('vehicleRegNo', this.dateForm.get('vehicleRegNo')?.value);
     this.params = this.params.append('reportType', this.dateForm.get('selectedReportType')?.value);
-    this.params = this.params.append('ReportName', this.dateForm.get('ReportName')?.value);
+    this.params = this.params.append('ReportName', obj ? obj.reportName : null);
     this.params = this.params.append('TrialreportType', this.dateForm.get('selectedTrialReportType')?.value);
     this.params = this.params.append('ClosingreportType', this.dateForm.get('selectedClosingReportType')?.value);
     this.params = this.params.append('fromLedgerCode', this.dateForm.get('fromAccountLedger')?.value);

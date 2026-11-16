@@ -199,7 +199,7 @@
         <mat-form-field class="col-3">
           <mat-label>{{ 'report.ReportName' | translate }}</mat-label>
           <mat-select required formControlName="ReportName" (selectionChange)="selectionChange()">
-            <mat-option *ngFor="let report of ReportNames" [value]="report.reportName">
+            <mat-option *ngFor="let report of ReportNames" [value]="report.id">
               {{report.reportName}}
             </mat-option>
           </mat-select>
@@ -1945,8 +1945,7 @@
     }
 
 
-    @if(routeParam == 'Salesanalysisbybranch' && dateForm.get('ReportName')?.value == 'Sales Analysis Sub Category
-    Branch Wise') {
+    @if(routeParam == 'Salesanalysisbybranch' && dateForm.get('ReportName')?.value == '3') {
 
     <div style="
         margin-bottom: 10px;
@@ -2095,8 +2094,7 @@
     }
 
 
-    @if(routeParam == 'Salesanalysisbybranch' && dateForm.get('ReportName')?.value == 'Sales Analysis Sub Category
-    Wise') {
+    @if(routeParam == 'Salesanalysisbybranch' && dateForm.get('ReportName')?.value == '4') {
 
     <div style="
         margin-bottom: 10px;

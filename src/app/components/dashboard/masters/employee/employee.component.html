@@ -14,7 +14,7 @@
               [ngClass]="{ 'ng--valid': formControls.employeeCode.valid&& formControls.employeeCode.status != 'DISABLED', 
                    'ng--invalid': !formControls.employeeCode.valid && formControls.employeeCode.status != 'DISABLED' }">
               <mat-label [translate]="'employee.employeeCode'"></mat-label>
-              <input matInput formControlName="employeeCode" maxlength="5" appFocusOnEnter tabIndex="1">
+              <input matInput readonly formControlName="employeeCode" maxlength="5" appFocusOnEnter tabIndex="1">
               @if (!formControls.employeeCode.valid && formControls.employeeCode.status != 'DISABLED') {
                 <mat-error
                 [ngClass]="{ 'ng--invalid': !formControls.employeeCode.valid  }">Employee is required</mat-error>

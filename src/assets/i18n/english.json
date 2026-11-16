@@ -799,7 +799,7 @@
     "structureName": "Structure Name"
   },
   "leaveopeningbalance": {
-    "title": "Leaveopening Balances",
+    "title": "Leave Opening Balances",
     "empCode": "EmpCode",
     "year": "Year",
     "leaveCode": "LeaveCode",
@@ -1631,7 +1631,11 @@
     "ProductGroupName": "Product Group Name",
     "ProductCode": "Product Code",
     "ProductName": "Product Name",
-    "UnitName": "Unit Name"
+    "UnitName": "Unit Name",
+
+        "GrandTotalQty": "Qty",
+        "GrandTotalLiters": "Liters",
+        "GrandGrossAmount": "Amount"
   },
   "ProductWiseMonthlyPurchase": {
     "title": "Product Wise Monthly Purchase",

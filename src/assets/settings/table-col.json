@@ -561,7 +561,7 @@
     "userName": "User Name"
   },
   "leaveopeningbalance": {
-    "title": "Leaveopening Balances",
+    "title": "Leave Opening Balances",
     "empCode": "EmpCode",
     "leaveCode": "LeaveCode",
     "opbal": "Op Balance",
@@ -1907,7 +1907,7 @@
     }
   },
   "Salesanalysisbybranch": {
-    "Detailed Sales Analysis": {
+    "2": {
       "sno": "S No",
       "Branch Name": "Branch Name",
       "Product Supplier Name": "Product Supplier Name",
@@ -1936,7 +1936,7 @@
         "Amount": "Amount"
       }
     },
-    "Sales Analysis Sub Category Branch Wise": {
+    "3": {
       "sno": "S No",
       "ProductGroupName": "Product Group Name",
       "ProductCode": "Product Code",
@@ -1954,7 +1954,7 @@
         "CreatedBy": "Created By"
       }
     },
-    "Sales Analysis Sub Category Wise": {
+    "4": {
       "sno": "S No",
       "ProductGroupName": "Product Group Name",
       "ProductCode": "Product Code",
