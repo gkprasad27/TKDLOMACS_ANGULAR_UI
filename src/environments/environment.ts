@@ -7,7 +7,7 @@ export const environment = {
   //baseUrl: `http://183.82.48.82:89`
   //baseUrl: `http://192.168.2.26:89`
   baseUrl: `http://36.255.255.13:9443/api/`//Testing
-  // baseUrl: `http://36.255.255.13:8443/api/` Prod
+  // baseUrl: `https://kdlomacs.in:8443/api/` Prod
  
 };
 
