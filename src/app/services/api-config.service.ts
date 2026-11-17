@@ -789,6 +789,7 @@ export class ApiConfigService {
   deletePF = `${environment.baseUrl}payroll/PFMaster/DeletePF`;
   getpfTypesList = `${environment.baseUrl}PFMaster/GetpfTypesList`;
   getptTypesList = `${environment.baseUrl}PTMaster/GetptTypesList`;
+  getCTCListBYEMP = `${environment.baseUrl}payroll/CTCBreakup/GetCTCListBYEMP`;
 
   getctcpt = `${environment.baseUrl}payroll/CTCBreakup/GetPTMasterList`;
   getctcpf = `${environment.baseUrl}payroll/CTCBreakup/GetPFMasterList`;

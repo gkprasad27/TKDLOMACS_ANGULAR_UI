@@ -341,7 +341,7 @@ export class MastersService {
         this.dynamicData.updateUrl = this.apiConfigService.updateCTC;
         // this.dynamicData.deleteUrl = this.apiConfigService.deleteCTC;
         this.dynamicData.listName = 'ctcList';
-        this.dynamicData.primaryKey = 'id';
+        this.dynamicData.primaryKey = 'empCode';
         return this.dynamicData;
 
       case 'structureCreation':

@@ -110,7 +110,6 @@ export class MastersComponent implements OnInit {
         if (value.action == 'Add') {
           this.router.navigate([this.activatedRoute.snapshot['_routerState'].url, value.action]);
         } else if (value.action == 'Edit') {
-          console.log(value.item[this.tableUrl.primaryKey], value.item, this.tableUrl.primaryKey)
           this.router.navigate([this.activatedRoute.snapshot['_routerState'].url, value.action, { value: value.item[this.tableUrl.primaryKey] }]);
         }
       } else {

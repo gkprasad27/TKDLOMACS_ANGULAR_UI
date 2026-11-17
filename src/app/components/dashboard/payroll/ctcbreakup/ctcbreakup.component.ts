@@ -50,7 +50,7 @@ export class CTCBreakupComponent implements OnInit {
 
   componentList: any[] = [];
 
-    get formControls() { return this.modelFormData.controls; }
+  get formControls() { return this.modelFormData.controls; }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -96,14 +96,15 @@ export class CTCBreakupComponent implements OnInit {
     // const getctcpf = this.apiConfigService.getctcpf;
     // const getctcpt = this.apiConfigService.getctcpt;
     const getctcComponentsListUrl = this.apiConfigService.getPfComponentsList;
-
+    const getCTCListBYEMP = [this.apiConfigService.getCTCListBYEMP, this.data?.item?.empCode].join('/');
     // Use forkJoin to run both APIs in parallel
     import('rxjs').then(rxjs => {
       rxjs.forkJoin([
         // this.apiService.apiGetRequest(getctcpf),
         // this.apiService.apiGetRequest(getctcpt),
-        this.apiService.apiGetRequest(getctcComponentsListUrl)
-      ]).subscribe(([getctcComponentsList]) => {
+        this.apiService.apiGetRequest(getctcComponentsListUrl),
+        this.apiService.apiGetRequest(getCTCListBYEMP)
+      ]).subscribe(([getctcComponentsList, cTCListBYEMP]) => {
         this.spinner.hide();
 
         // if (!this.commonService.checkNullOrUndefined(getctcpf) && getctcpf.status === StatusCodes.pass) {
@@ -124,14 +125,88 @@ export class CTCBreakupComponent implements OnInit {
 
         if (!this.commonService.checkNullOrUndefined(getctcComponentsList) && getctcComponentsList.status === StatusCodes.pass) {
           if (!this.commonService.checkNullOrUndefined(getctcComponentsList.response)) {
-            this.componentList = getctcComponentsList.response['ComponentList'];
-            console.log('componentList', this.componentList);
+            if (!this.commonService.checkNullOrUndefined(getctcComponentsList.response['ComponentList']) && getctcComponentsList.response['ComponentList'].length) {
+              getctcComponentsList.response['ComponentList'].forEach(element => {
+                element.earnDednAmount = null;
+                if (element.id === 'TKD_D01') {
+                  element.esiAmount = 0.75;
+                } else if (element.id === 'TKD_D03') {
+                  element.pfAmount = 12;
+                } else if (element.id === 'TKD_E02') {
+                  element.earnDednAmount = 8710;
+                }
+              });
+              getctcComponentsList.response['ComponentList'].push({ id: 'TKD_E06', text: 'Gross Salary', earnDednAmount: 0 });
+              this.componentList = getctcComponentsList.response['ComponentList'];
+              const arr = cTCListBYEMP?.response?.['ctcList'] || [];
+              if (this.data?.item && arr && arr.length) {
+                this.componentList.forEach(c => {
+                  const matchedComponent = arr.find((comp: any) => comp.earnDednCode.trim() == c.id);
+                  if (matchedComponent) {
+                    c.earnDednAmount = matchedComponent.earnDednAmount;
+                    console.log('matchedComponent', matchedComponent.earnDednAmount, c.earnDednAmount);
+                  }
+                });
+              }
+              console.log('componentList', this.componentList);
+              //  this.calculatePfAmount();
+            }
           }
         }
 
 
       });
     });
+  }
+
+  calculatePfAmount() {
+    const da = this.componentList.find(c => c.id === 'TKD_E02');
+    const basic = this.componentList.find(c => c.id === 'TKD_E01');
+    const pf = this.componentList.find(c => c.id === 'TKD_D03');
+    this.componentList.forEach((c: any, index: number) => {
+      if (c.id === 'TKD_D03') {
+        c.earnDednAmount = Math.ceil(((((+da.earnDednAmount || 0) + (+basic.earnDednAmount || 0)) * (pf.pfAmount || 0)) / 100));
+      }
+    });
+
+    let grossAmount = 0;
+    this.componentList.forEach(c => {
+      if (c.id.includes('TKD_E') && c.id !== 'TKD_E06') {
+        grossAmount += (+c.earnDednAmount) || 0;
+      }
+      if (c.id === 'TKD_E06') {
+        c.earnDednAmount = grossAmount || 0;
+      }
+    });
+
+    this.componentList.forEach((c: any, index: number) => {
+      if (c.id === 'TKD_D03' && ((+da.earnDednAmount || 0) + (+basic.earnDednAmount || 0)) > 25000) {
+        c.earnDednAmount = (25000 * 12) / 100;
+      }
+      if (c.id === 'TKD_D01') {
+        if (grossAmount <= 21000) {
+          const esi = this.componentList.find(c => c.id === 'TKD_D01');
+          console.log(esi.esiAmount)
+          c.earnDednAmount = Math.ceil((((+grossAmount) * (esi.esiAmount || 0)) / 100));
+        } else {
+          c.earnDednAmount = 0;
+        }
+      }
+    });
+
+    this.componentList.forEach((c: any, index: number) => {
+      if (c.id === 'TKD_D05') {
+        if (grossAmount <= 15000) {
+          c.earnDednAmount = 0;
+        } else if (grossAmount > 15000 && grossAmount <= 20000) {
+          c.earnDednAmount = 150;
+        } else if (grossAmount > 20000) {
+          c.earnDednAmount = 200;
+        }
+      }
+    });
+    console.log(this.componentList);
+
   }
 
   getctcComponentsList() {
@@ -264,7 +339,7 @@ export class CTCBreakupComponent implements OnInit {
 
 
   save() {
-   this.isSubmitted = true;
+    this.isSubmitted = true;
 
     if (this.modelFormData.invalid) {
       this.modelFormData.markAllAsTouched();
