@@ -671,15 +671,9 @@
     "specificMonth": "Specific Month"
   },
   "CTCBreakup": {
-    "title": "CTC Breakup",
-    "companyCode": "Company Code",
     "empCode": "Emp Code",
-    "effectFrom": "Effect From",
-    "earnDednCode": "Earn Dedn Code",
-    "earnDednAmount": "Earn Dedn Amount",
-    "ctc": "CTC",
-    "earnDednName": "Earn Dedn Name",
-    "structureName": "Structure Name"
+    "employeeName": "employeeName",
+    "effectFrom": "Date"
   },
   "salesInvoice": {
     "invoiceNo": "Invoice No",

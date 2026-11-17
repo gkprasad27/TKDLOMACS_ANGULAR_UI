@@ -76,7 +76,6 @@ export class StockshortComponent implements OnInit {
   }
 
   openStockissues(row) {
-    ;
     localStorage.setItem('selectedStockshort', JSON.stringify(row));
     this.router.navigate(['dashboard/transactions/stockshort/CreateStocshorts', row.stockshortMasterId]);
   }

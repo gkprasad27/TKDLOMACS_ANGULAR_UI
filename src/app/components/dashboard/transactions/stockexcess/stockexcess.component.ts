@@ -44,7 +44,6 @@ export class StockExcessComponent implements OnInit {
 
   ) {
     this.dateForm = this.formBuilder.group({
-      selected: [null],
       fromDate: [null],
       toDate: [null],
       stockExcessNo: [null],
@@ -62,14 +61,17 @@ export class StockExcessComponent implements OnInit {
 
   getStockexcessList() {
     const getStockexcessListUrl = [this.apiConfigService.getStockexcessList, this.branchCode.branchCode].join('/');
-    this.apiService.apiPostRequest(getStockexcessListUrl, this.dateForm.value).subscribe(
+    const obj = this.dateForm.value;
+    obj.fromDate = this.commonService.formatDate(this.dateForm.value.fromDate),
+    obj.toDate = this.commonService.formatDate(this.dateForm.value.toDate),
+    this.apiService.apiPostRequest(getStockexcessListUrl, obj).subscribe(
       response => {
         const res = response;
+        this.spinner.hide();
         if (res != null && res.status === StatusCodes.pass) {
           if (res?.response?.StockexcessList?.length) {
             this.dataSource = new MatTableDataSource(res.response['StockexcessList']);
             this.dataSource.paginator = this.paginator;
-            this.spinner.hide();
           }
         }
       });
@@ -81,26 +83,25 @@ export class StockExcessComponent implements OnInit {
   }
 
   search() {
-    if ((this.dateForm.value.stockExcessNo == null)) {
-      if (this.dateForm?.value?.selected == null) {
-        this.alertService.openSnackBar('Select StockExcess No or Date', Static.Close, SnackBar.error);
-        return;
-      } else {
-        this.dateForm.patchValue({
-          stockExcessNo: this.dateForm.value.stockExcessNo
-        });
-      }
-    }
-
-    this.dateForm.patchValue({
-      fromDate: this.commonService.formatDate(this.dateForm.value.selected.start._d),
-      toDate: this.commonService.formatDate(this.dateForm.value.selected.end._d),
-    });
+    // if ((this.dateForm.value.stockExcessNo == null)) {
+    //   if (this.dateForm?.value?.selected == null) {
+    //     this.alertService.openSnackBar('Select StockExcess No or Date', Static.Close, SnackBar.error);
+    //     return;
+    //   } else {
+    //     this.dateForm.patchValue({
+    //       stockExcessNo: this.dateForm.value.stockExcessNo
+    //     });
+    //   }
+    // }
     this.getStockexcessList();
   }
 
   reset() {
-    this.dateForm.reset();
+    this.dateForm = this.formBuilder.group({
+      fromDate: [null],
+      toDate: [null],
+      stockExcessNo: [null],
+    });
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator;
   }

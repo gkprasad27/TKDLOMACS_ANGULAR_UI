@@ -242,6 +242,12 @@ export class SalesInvoiceComponent implements OnInit {
 
   onFieldBlur(event: Event) {
     const value = (event?.target as HTMLInputElement)?.value;
+    this.checkError(value);
+  }
+
+
+
+  checkError(value) {
     if(value && this.branchFormData.value.stateCode != value.substring(0, 2)){
       this.branchFormData.get('customerGstin').setErrors({ stateMismatch: true });
       this.alertService.openSnackBar(`GSTIN error GST Not matching with selected state code`, Static.Close, SnackBar.error);
@@ -342,6 +348,7 @@ export class SalesInvoiceComponent implements OnInit {
                 this.taxPercentage = false;
               }
               this.calculateAmount();
+              this.checkError(this.branchFormData.value.customerGstin);
             }
           }
         }

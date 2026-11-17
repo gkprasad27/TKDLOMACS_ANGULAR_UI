@@ -5,7 +5,7 @@
         <div class="d-flex">
 
 
-          <mat-form-field class="col-4">
+          <mat-form-field class="col-6">
             <mat-label>{{ 'COMMON.CHOOSEDATE' | translate }}</mat-label>
             <mat-date-range-input [rangePicker]="picker">
               <input matInput matStartDate placeholder="{{ 'COMMON.STARTDATE' | translate }}"
@@ -16,7 +16,7 @@
             <mat-date-range-picker #picker></mat-date-range-picker>
           </mat-form-field>
 
-          <mat-form-field class="col-4">
+          <mat-form-field class="col-6">
             <mat-label>{{ 'stockexcess.stockExcessNo' | translate }}</mat-label>
             <input matInput formControlName="stockExcessNo" appFocusOnEnter tabIndex="3" />
           </mat-form-field>

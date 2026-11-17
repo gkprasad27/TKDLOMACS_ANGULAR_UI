@@ -790,6 +790,7 @@
     "ptslab": "PT Slab",
     "pftype": "PF Type",
     "companyCode": "Company Code",
+    "employeeName":"Employee Name",
     "empCode": "Emp Code",
     "effectFrom": "Effect From",
     "earnDednCode": "Earn Dedn Code",
