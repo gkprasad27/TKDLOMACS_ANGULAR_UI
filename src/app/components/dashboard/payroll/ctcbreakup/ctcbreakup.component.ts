@@ -282,7 +282,7 @@ export class CTCBreakupComponent implements OnInit {
           // pftype: this.modelFormData.value.pfType,
           // ptslab: this.modelFormData.value.ptSlab
         },
-        // components: arr
+        components: this.componentList
       }
     }
     this.formData.item = obj.item;
