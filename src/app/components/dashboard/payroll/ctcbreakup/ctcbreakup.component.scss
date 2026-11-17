@@ -1,0 +1,415 @@
+
+/* =========================================
+   CTC BREAKUP - MAIN POPUP
+========================================= */
+
+.popup-class {
+  border: 1px solid #cbdaf5 !important;
+  border-radius: 14px !important;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 8px 25px rgba(31, 78, 121, 0.18);
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* =========================================
+   HEADER - BLUE GRADIENT
+========================================= */
+
+.popup-class > mat-card-title {
+  min-height: 68px;
+  padding: 14px 24px !important;
+  background: linear-gradient(110deg, #0755a6, #1684e5) !important;
+  color: #ffffff;
+  border-bottom: none !important;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.popup-class > mat-card-title span {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.popup-class > mat-card-title mat-icon {
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 26px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.popup-class > mat-card-title mat-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* =========================================
+   CONTENT AREA
+========================================= */
+
+.ctc-content {
+  height: 75vh;
+  max-height: 75vh;
+  min-height: 300px;
+  padding: 20px !important;
+  background: #ffffff;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+
+.ctc-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ctc-content::-webkit-scrollbar-track {
+  background: #f1f4f9;
+  border-radius: 10px;
+}
+
+.ctc-content::-webkit-scrollbar-thumb {
+  background: #a8c5e8;
+  border-radius: 10px;
+}
+
+.ctc-content::-webkit-scrollbar-thumb:hover {
+  background: #6b9bd0;
+}
+
+/* =========================================
+   EMPLOYEE DETAILS SECTION
+========================================= */
+
+.ctc-content form > .row {
+  background: linear-gradient(120deg, #edf4ff, #e5efff) !important;
+  border: 1px solid #c9dbf8 !important;
+  border-radius: 10px !important;
+  padding: 18px !important;
+  margin-bottom: 20px !important;
+}
+
+.ctc-content form label {
+  color: #263d5c;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Employee code input */
+
+.ctc-content form input.form-control {
+  height: 44px;
+  border: 1px solid #bdcce2;
+  border-radius: 7px;
+  background: #ffffff;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #263b58;
+  transition: all 0.2s ease;
+}
+
+.ctc-content form input.form-control:focus {
+  border-color: #2479d0;
+  box-shadow: 0 0 0 3px rgba(36, 121, 208, 0.12);
+  outline: none;
+}
+
+/* =========================================
+   ANGULAR MATERIAL DATE PICKER
+========================================= */
+
+.ctc-content mat-form-field {
+  width: 100%;
+}
+
+:host ::ng-deep .ctc-content .mat-mdc-text-field-wrapper {
+  background: #ffffff;
+  border-radius: 7px;
+}
+
+:host ::ng-deep .ctc-content .mat-mdc-form-field-infix {
+  min-height: 44px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+:host ::ng-deep .ctc-content .mat-mdc-form-field-focus-overlay {
+  background: transparent;
+}
+
+:host ::ng-deep .ctc-content .mat-mdc-form-field-subscript-wrapper {
+  height: auto;
+}
+
+:host ::ng-deep .ctc-content .mat-mdc-form-field.mat-focused
+.mat-mdc-form-field-flex {
+  border-radius: 7px;
+}
+
+:host ::ng-deep .ctc-content .mat-datepicker-toggle {
+  color: #42678f;
+}
+
+:host ::ng-deep .ctc-content .mat-mdc-form-field-error {
+  font-size: 12px;
+}
+
+/* =========================================
+   EARNINGS & DEDUCTIONS CARDS
+========================================= */
+
+.ctc-content > .row > .col-md-6 > .border {
+  border: 1px solid #dce5ed !important;
+  border-radius: 11px !important;
+  background: #ffffff;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.ctc-content > .row > .col-md-6 > .border:hover {
+  box-shadow: 0 4px 14px rgba(42, 72, 110, 0.08);
+}
+
+/* =========================================
+   EARNINGS HEADER - GREEN
+========================================= */
+
+.ctc-content > .row > .col-md-6:first-child
+> .border > .d-flex {
+  min-height: 57px;
+  padding: 13px 20px !important;
+  background: linear-gradient(110deg, #20b34b, #159b40) !important;
+  border-bottom: none !important;
+}
+
+.ctc-content > .row > .col-md-6:first-child
+> .border > .d-flex span {
+  color: #ffffff !important;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* =========================================
+   DEDUCTIONS HEADER - RED
+========================================= */
+
+.ctc-content > .row > .col-md-6:last-child
+> .border > .d-flex {
+  min-height: 57px;
+  padding: 13px 20px !important;
+  background: linear-gradient(110deg, #f02f3d, #df2636) !important;
+  border-bottom: none !important;
+}
+
+.ctc-content > .row > .col-md-6:last-child
+> .border > .d-flex span {
+  color: #ffffff !important;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* =========================================
+   EARNINGS CARD BODY
+========================================= */
+
+.ctc-content > .row > .col-md-6:first-child
+> .border > .p-2 {
+  background: linear-gradient(180deg, #f5fff8, #ffffff);
+}
+
+/* =========================================
+   DEDUCTIONS CARD BODY
+========================================= */
+
+.ctc-content > .row > .col-md-6:last-child
+> .border > .p-2 {
+  background: linear-gradient(180deg, #fff7f7, #ffffff);
+}
+
+/* =========================================
+   COMPONENT ROWS
+========================================= */
+
+.ctc-component-row {
+  min-height: 63px;
+  padding: 9px 10px !important;
+  margin: 0 !important;
+  border-bottom: 1px solid #e9eef3 !important;
+  transition: background 0.2s ease;
+}
+
+.ctc-component-row:hover {
+  background: #f6f9fd;
+}
+
+.ctc-component-row:last-child {
+  border-bottom: none !important;
+}
+
+.ctc-component-row label {
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #33445b !important;
+}
+
+/* =========================================
+   COMPONENT INPUTS
+========================================= */
+
+.ctc-component-row input {
+  width: 100%;
+  height: 43px !important;
+  padding: 8px 12px;
+  border: 1px solid #cbd6e3 !important;
+  border-radius: 7px !important;
+  background: #ffffff;
+  color: #263b58;
+  font-size: 14px !important;
+  font-weight: 500;
+  text-align: right;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.ctc-component-row input:hover {
+  border-color: #8baed5 !important;
+}
+
+.ctc-component-row input:focus {
+  border-color: #2378d0 !important;
+  box-shadow: 0 0 0 3px rgba(35, 120, 208, 0.12) !important;
+  outline: none;
+}
+
+/* =========================================
+   FOOTER BUTTON SECTION
+========================================= */
+
+.popup-class > .form-element {
+  min-height: 76px;
+  margin: 0 !important;
+  padding: 12px 22px;
+  background: linear-gradient(110deg, #f5f8ff, #ffffff);
+  border-top: 1px solid #dce6f5;
+  align-items: center;
+}
+
+/* Cancel Button */
+
+.popup-class .button-color-red {
+  min-width: 110px;
+  height: 44px;
+  border-radius: 7px;
+  background: linear-gradient(110deg, #d83b43, #b92332) !important;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 3px 7px rgba(185, 35, 50, 0.2);
+  transition: all 0.2s ease;
+}
+
+.popup-class .button-color-red:hover {
+  background: #a91d2b !important;
+  box-shadow: 0 4px 10px rgba(185, 35, 50, 0.3);
+}
+
+/* Save Button */
+
+.popup-class .button-color-bule {
+  min-width: 110px;
+  height: 44px;
+  border-radius: 7px;
+  background: linear-gradient(110deg, #0873d1, #0756b4) !important;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 3px 7px rgba(7, 86, 180, 0.2);
+  transition: all 0.2s ease;
+}
+
+.popup-class .button-color-bule:hover {
+  background: #064b9c !important;
+  box-shadow: 0 4px 10px rgba(7, 86, 180, 0.3);
+}
+
+/* Remove default Material button elevation */
+
+:host ::ng-deep .popup-class .mat-mdc-raised-button {
+  box-shadow: none;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 767px) {
+
+  .popup-class {
+    border-radius: 9px !important;
+  }
+
+  .popup-class > mat-card-title {
+    min-height: 55px;
+    font-size: 19px;
+    padding: 10px 15px !important;
+  }
+
+  .ctc-content {
+    height: auto;
+    max-height: 65vh;
+    min-height: 250px;
+    padding: 12px !important;
+  }
+
+  .ctc-content form > .row {
+    padding: 12px !important;
+  }
+
+  .ctc-content form > .row > div {
+    margin-bottom: 15px;
+  }
+
+  .ctc-content form > .row > div:last-child {
+    margin-bottom: 0;
+  }
+
+  .ctc-content > .row > .col-md-6 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .ctc-component-row {
+    min-height: 58px;
+    padding: 8px 5px !important;
+  }
+
+  .ctc-component-row label {
+    font-size: 12px;
+  }
+
+  .ctc-component-row input {
+    font-size: 12px !important;
+    height: 38px !important;
+  }
+
+  .popup-class > .form-element {
+    padding: 10px 12px;
+    min-height: 65px;
+  }
+
+  .popup-class .button-color-red,
+  .popup-class .button-color-bule {
+    min-width: 90px;
+    height: 40px;
+  }
+}

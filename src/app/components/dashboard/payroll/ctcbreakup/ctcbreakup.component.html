@@ -1,15 +1,30 @@
-<div class="position-relative popup-class">
 
-  <mat-card-title class="boader--color d-flex justify-content-between position-absolute w-100">
-    <span> {{'CTCBreakup.title' | translate }} </span>
-    <mat-icon class="p-2  cursor--pointer" (click)="cancel()">close</mat-icon>
+<div class="position-relative popup-class border rounded bg-white">
+
+  <!-- Header -->
+  <mat-card-title class="d-flex justify-content-between align-items-center px-3 py-2 mb-0 ctc-header">
+
+    <span class="d-flex align-items-center">
+      <mat-icon class="mr-2">account_balance_wallet</mat-icon>
+      {{ 'CTCBreakup.title' | translate }}
+    </span>
+
+    <mat-icon class="cursor-pointer close-icon" (click)="cancel()">
+      close
+    </mat-icon>
+
   </mat-card-title>
 
-  <mat-card-content class="pt-5 p-3 m-2 overflow-auto" style="height: 60vh; max-height: 60vh;">
+  <!-- Content -->
+  <mat-card-content class="p-3 m-0 overflow-auto ctc-content">
+
     <form [formGroup]="modelFormData" autocomplete="off">
+
+      <!-- Employee Details -->
       <div class="row">
 
-        <div class="col-4 mat-mdc-form-field typeahead floating-dropdown " style="width: 24.5%;"
+        <!-- Employee Code -->
+        <div class="col-md-6 mat-mdc-form-field typeahead floating-dropdown " style="width: 24.5%;"
           [class.filled]="modelFormData.value?.empCodeName?.length > 0" >
           <label> {{ 'CTCBreakup.empCode' | translate }} </label>
           <input placeholder=" " formControlName="empCodeName" (input)="getctcEmployeeList($event.target.value)"
@@ -28,8 +43,8 @@
               </div>
             }
         </div>
-
-        <mat-form-field class="col-4">
+<div class="col-md-6 ">
+         <mat-form-field >
           <mat-label>{{'CTCBreakup.effectFrom' | translate }}</mat-label>
           <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
             formControlName="effectFrom" appFocusOnEnter tabIndex="2" [ngClass]="{ 'ng--valid': formControls.effectFrom.valid }">
@@ -43,159 +58,149 @@
             </mat-error>
           }
         </mat-form-field>
-
-
-        <!-- <mat-form-field class="form-element">
-          <mat-label>{{'CTCBreakup.ctc' | translate }}</mat-label>
-          <input matInput formControlName="ctc" appFocusOnEnter
-            tabIndex="4">
-        </mat-form-field>
-
-        <mat-form-field class="form-element">
-          <mat-label>{{'CTCBreakup.pftype' | translate }}</mat-label>
-          <mat-select formControlName="pfType" appFocusOnEnter
-            tabIndex="5">
-            @for (List of PfList; track List) {
-            <mat-option [value]="List.pftypeName">
-              {{List.pftypeName}}
-            </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="form-element">
-          <mat-label>{{'CTCBreakup.ptslab' | translate }}</mat-label>
-          <mat-select formControlName="ptSlab" appFocusOnEnter
-            tabIndex="6">
-            @for (List of PtList; track List) {
-            <mat-option [value]="List.text">
-              {{List.text}}
-            </mat-option>
-            }
-          </mat-select>
-        </mat-form-field> -->
-
-        <!-- <div class="form-element p-2 d-flex justify-content-end align-items-center">
-          <button mat-raised-button type="submit" class="button-color-bule text-white mx-1"
-            (click)="getctcComponentsList()" appFocusOnEnter tabIndex="5">
-            {{ 'COMMON.CALCULATE' | translate }}
-          </button>
-        </div> -->
+        </div>
 
       </div>
+
     </form>
 
-    <div class="row">
-      <div class="col-6 px-5">
-        <div class="row">
-          <div class="col-12">
-            <div class="row p-2">
-              <div class="col-6">
+    <!-- Earnings and Deductions -->
+    <div class="row mx-0">
 
-              </div>
-              <div class="col-6 text-center">
-                Earnings
-              </div>
-            </div>
+      <!-- Earnings -->
+      <div class="col-md-6 px-2 mb-3">
+
+        <div class="border rounded h-100 ctc-earnings-card">
+
+          <!-- Earnings Header -->
+          <div class="d-flex justify-content-between align-items-center px-3 py-2 earnings-header">
+
+            <span class="d-flex align-items-center">
+              <mat-icon class="section-icon">savings</mat-icon>
+              Earnings
+            </span>
+
+            <mat-icon class="header-side-icon">trending_up</mat-icon>
+
           </div>
-          @for (item of componentList; track item) {
-          @if (item.id.includes('TKD_E')) {
-          <div class="col-12">
-            <div class="row py-2">
-              <div class="col-6">
-                {{ ('CTCBreakup.' + item.id) | translate }}
-              </div>
-              <div class="col-6">
-                <input matInput class="w-100" [value]="item.value" [(ngModel)]="item.value" />
-              </div>
-            </div>
+
+          <!-- Earnings List -->
+          <div class="p-2">
+
+            @for (item of componentList; track item) {
+              @if (item.id.includes('TKD_E')) {
+
+                <div class="row align-items-center mx-0 py-2 border-bottom ctc-component-row">
+
+                  <div class="col-6 pr-2">
+                    <label class="mb-0 text-secondary">
+                      {{ ('CTCBreakup.' + item.id) | translate }}
+                    </label>
+                  </div>
+
+                  <div class="col-6 pl-2">
+
+                    <input
+                      matInput
+                      class="form-control form-control-sm text-right"
+                      [value]="item.value"
+                      [(ngModel)]="item.value">
+
+                  </div>
+
+                </div>
+
+              }
+            }
+
           </div>
-          }
-          }
+
         </div>
+
       </div>
-      <div class="col-6 px-5">
-        <div class="row">
-          <div class="col-12">
-            <div class="row p-2">
-              <div class="col-6">
 
-              </div>
-              <div class="col-6 text-center">
-                Deductions
-              </div>
-            </div>
-          </div>
-          @for (item of componentList; track item) {
+      <!-- Deductions -->
+      <div class="col-md-6 px-2 mb-3">
 
-          @if (item.id.includes('TKD_D')) {
-          <div class="col-12">
-            <div class="row py-2">
-              <div class="col-6">
-                {{ ('CTCBreakup.' + item.id) | translate }}
-              </div>
-              <div class="col-6">
-                <input matInput class="w-100" [value]="item.value" [(ngModel)]="item.value" />
-              </div>
-            </div>
+        <div class="border rounded h-100 ctc-deductions-card">
+
+          <!-- Deductions Header -->
+          <div class="d-flex justify-content-between align-items-center px-3 py-2 deductions-header">
+
+            <span class="d-flex align-items-center">
+              <mat-icon class="section-icon">percent</mat-icon>
+              Deductions
+            </span>
+
+            <mat-icon class="header-side-icon">trending_down</mat-icon>
+
           </div>
-          }
-          }
+
+          <!-- Deductions List -->
+          <div class="p-2">
+
+            @for (item of componentList; track item) {
+              @if (item.id.includes('TKD_D')) {
+
+                <div class="row align-items-center mx-0 py-2 border-bottom ctc-component-row">
+
+                  <div class="col-6 pr-2">
+                    <label class="mb-0 text-secondary">
+                      {{ ('CTCBreakup.' + item.id) | translate }}
+                    </label>
+                  </div>
+
+                  <div class="col-6 pl-2">
+
+                    <input
+                      matInput
+                      class="form-control form-control-sm text-right"
+                      [value]="item.value"
+                      [(ngModel)]="item.value">
+
+                  </div>
+
+                </div>
+
+              }
+            }
+
+          </div>
+
         </div>
+
       </div>
+
     </div>
-
-    <!-- <mat-card-content class="p-0">
-      <div>
-        <div class="table">
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
-
-            <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef> Component Code </th>
-              <td mat-cell *matCellDef="let element;"> {{element.id}} </td>
-            </ng-container>
-            <ng-container matColumnDef="text">
-              <th mat-header-cell *matHeaderCellDef> Component Name </th>
-              <td mat-cell *matCellDef="let element;"> {{element.text}} </td>
-            </ng-container>
-            <ng-container matColumnDef="EarnDednAmount">
-              <th mat-header-cell *matHeaderCellDef> Amount </th>
-              <td mat-cell *matCellDef="let element;">
-                <input matInput [value]="element.EarnDednAmount" [(ngModel)]="element.EarnDednAmount" />
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="duration">
-              <th mat-header-cell *matHeaderCellDef> Duration </th>
-              <td mat-cell *matCellDef="let element;">
-                <input matInput [value]="element.duration" [(ngModel)]="element.duration" />
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="specificMonth">
-              <th mat-header-cell *matHeaderCellDef> Specific Month </th>
-              <td mat-cell *matCellDef="let element;">
-                <input matInput [value]="element.specificMonth" [(ngModel)]="element.specificMonth" />
-              </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-        </div>
-      </div>
-    </mat-card-content> -->
 
   </mat-card-content>
 
-  <div class="form-element m-3 d-flex justify-content-end">
-    <button mat-raised-button class="button-color-red text-white mx-1" (click)="cancel()">
+  <!-- Footer -->
+  <div class="form-element m-0 d-flex justify-content-end ctc-footer">
+
+    <button
+      mat-raised-button
+      class="button-color-red text-white mx-1"
+      (click)="cancel()">
+
+      <mat-icon>close</mat-icon>
       {{ 'COMMON.CANCEL' | translate }}
+
     </button>
-    <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
+
+    <button
+      mat-raised-button
+      type="submit"
+      class="button-color-bule text-white mx-1"
+      (click)="save()"
+      appFocusOnEnter
       tabIndex="5">
 
+      <mat-icon>save</mat-icon>
       {{ 'COMMON.SAVE' | translate }}
+
     </button>
+
   </div>
-
-
 
 </div>
