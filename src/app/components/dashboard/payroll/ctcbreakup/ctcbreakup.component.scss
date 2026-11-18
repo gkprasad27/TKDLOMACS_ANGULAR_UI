@@ -3,14 +3,6 @@
    CTC BREAKUP - MAIN POPUP
 ========================================= */
 
-.popup-class {
-  border: 1px solid #cbdaf5 !important;
-  border-radius: 14px !important;
-  overflow: hidden;
-  background: #ffffff;
-  box-shadow: 0 8px 25px rgba(31, 78, 121, 0.18);
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
 
 /* =========================================
    HEADER - BLUE GRADIENT
@@ -43,10 +35,6 @@
   transition: all 0.2s ease;
 }
 
-.popup-class > mat-card-title mat-icon:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(90deg);
-}
 
 .cursor-pointer {
   cursor: pointer;
@@ -116,8 +104,8 @@
   // border: 1px solid #bdcce2;
   // border-radius: 7px;
  background: transparent;
-  padding: 8px 12px;
-  font-size: 12px;
+  padding: 8px 0px;
+  // font-size: 12px;
 }
 
 .ctc-content form input.form-control:focus {
@@ -130,41 +118,41 @@
    ANGULAR MATERIAL DATE PICKER
 ========================================= */
 
-.ctc-content mat-form-field {
-  width: 100%;
-}
+// .ctc-content mat-form-field {
+//   width: 100%;
+// }
 
-:host ::ng-deep .ctc-content .mat-mdc-text-field-wrapper {
-  background: #ffffff;
-  border-radius: 7px;
-}
+// :host ::ng-deep .ctc-content .mat-mdc-text-field-wrapper {
+//   background: #ffffff;
+//   border-radius: 7px;
+// }
 
-:host ::ng-deep .ctc-content .mat-mdc-form-field-infix {
-  min-height: 44px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
+// :host ::ng-deep .ctc-content .mat-mdc-form-field-infix {
+//   min-height: 44px;
+//   padding-top: 10px;
+//   padding-bottom: 10px;
+// }
 
-:host ::ng-deep .ctc-content .mat-mdc-form-field-focus-overlay {
-  background: transparent;
-}
+// :host ::ng-deep .ctc-content .mat-mdc-form-field-focus-overlay {
+//   background: transparent;
+// }
 
-:host ::ng-deep .ctc-content .mat-mdc-form-field-subscript-wrapper {
-  height: auto;
-}
+// :host ::ng-deep .ctc-content .mat-mdc-form-field-subscript-wrapper {
+//   height: auto;
+// }
 
-:host ::ng-deep .ctc-content .mat-mdc-form-field.mat-focused
-.mat-mdc-form-field-flex {
-  border-radius: 7px;
-}
+// :host ::ng-deep .ctc-content .mat-mdc-form-field.mat-focused
+// .mat-mdc-form-field-flex {
+//   border-radius: 7px;
+// }
 
-:host ::ng-deep .ctc-content .mat-datepicker-toggle {
-  color: #42678f;
-}
+// :host ::ng-deep .ctc-content .mat-datepicker-toggle {
+//   color: #42678f;
+// }
 
-:host ::ng-deep .ctc-content .mat-mdc-form-field-error {
-  font-size: 12px;
-}
+// :host ::ng-deep .ctc-content .mat-mdc-form-field-error {
+//   font-size: 12px;
+// }
 
 /* =========================================
    EARNINGS & DEDUCTIONS CARDS
@@ -314,11 +302,6 @@
   transition: all 0.2s ease;
 }
 
-.popup-class .button-color-red:hover {
-  background: #a91d2b !important;
-  box-shadow: 0 4px 10px rgba(185, 35, 50, 0.3);
-}
-
 /* Save Button */
 
 .popup-class .button-color-bule {
@@ -333,16 +316,12 @@
   transition: all 0.2s ease;
 }
 
-.popup-class .button-color-bule:hover {
-  background: #064b9c !important;
-  box-shadow: 0 4px 10px rgba(7, 86, 180, 0.3);
-}
 
 /* Remove default Material button elevation */
 
-:host ::ng-deep .popup-class .mat-mdc-raised-button {
-  box-shadow: none;
-}
+// :host ::ng-deep .popup-class .mat-mdc-raised-button {
+//   box-shadow: none;
+// }
 
 /* =========================================
    RESPONSIVE DESIGN

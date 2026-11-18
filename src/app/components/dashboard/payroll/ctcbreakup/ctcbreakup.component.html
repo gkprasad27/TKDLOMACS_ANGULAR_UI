@@ -1,4 +1,4 @@
-<div class="position-relative popup-class border rounded bg-white">
+<div class="position-relative popup-class rounded-0">
 
   <!-- Header -->
   <mat-card-title class="d-flex justify-content-between align-items-center px-3 py-2 mb-0 ctc-header">
@@ -20,7 +20,7 @@
     <form [formGroup]="modelFormData" autocomplete="off">
 
       <!-- Employee Details -->
-      <div class="row">
+      <div class="row mx-2">
 
         <!-- Employee Code -->
         <div class="col-md-6 mat-mdc-form-field typeahead floating-dropdown " 
@@ -43,7 +43,7 @@
           }
         </div>
         <div class="col-md-6 ">
-          <mat-form-field>
+          <mat-form-field class="w-100">
             <mat-label>{{'CTCBreakup.effectFrom' | translate }}</mat-label>
             <input matInput [matDatepickerFilter]="commonService.disableFuture" [matDatepicker]="picker1"
               formControlName="effectFrom" appFocusOnEnter tabIndex="2"
@@ -85,7 +85,7 @@
           </div>
 
           <!-- Earnings List -->
-          <div >
+          <div class="p-2">
 
             @for (item of componentList; track item) {
             @if (item.id.includes('TKD_E')) {
@@ -221,9 +221,8 @@
 
     <button mat-raised-button type="submit" class="button-color-bule text-white mx-1" (click)="save()" appFocusOnEnter
       tabIndex="5">
-
       <mat-icon>save</mat-icon>
-      {{ 'COMMON.SAVE' | translate }}
+     {{ formData.action == 'Add' ? ('COMMON.SAVE' | translate) : ('COMMON.UPDATE' | translate) }}
 
     </button>
 
