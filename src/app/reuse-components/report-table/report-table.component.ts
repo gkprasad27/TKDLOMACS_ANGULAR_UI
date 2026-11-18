@@ -1044,7 +1044,7 @@ export class ReportTableComponent implements OnInit, OnChanges {
     this.params = this.params.append('salMonth', this.dateForm.get('month')?.value ?? null);
     this.params = this.params.append('salYear', this.dateForm.get('year')?.value ?? null);
     }
-     if(this.routeParam == 'ptstatement') {
+     if(this.routeParam == 'ptstatement' || this.routeParam == 'glsireport' || this.routeParam == 'esireport') {
     this.params = this.params.append('Month', this.dateForm.get('month')?.value ?? null);
     this.params = this.params.append('Year', this.dateForm.get('year')?.value ?? null);
     }

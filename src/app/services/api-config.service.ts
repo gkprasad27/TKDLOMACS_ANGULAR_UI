@@ -936,6 +936,10 @@ export class ApiConfigService {
   getPayslipReportData = `${environment.baseUrl}Reports/PayslipReport/GetPayslipReportData`;
   
   getPTReportData = `${environment.baseUrl}Reports/PayrollReport/GetPTReportData`;
+  
+  getGetGSLIReport = `${environment.baseUrl}Reports/PayrollReport/GetGetGSLIReport`;
+
+  getGetESIReport = `${environment.baseUrl}Reports/PayrollReport/GetGetESIReport`;
 
   /****************************** Settings *********************************************************** */
   getRoles = `${environment.baseUrl}Auth/getRoles`;

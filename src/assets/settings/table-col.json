@@ -834,7 +834,7 @@
         "ReportDate": "Report Date",
         "UserName": "User Name",
         "ShiftId": "Shift Id",
-        "ReportCreatedBy":"Report Created By",
+        "ReportCreatedBy": "Report Created By",
         "FromDate": "From Date",
         "ToDate": "To Date",
         "OpeningBalance": "Opening Balance",
@@ -1807,7 +1807,7 @@
     "LedgerCode": "Ledger Code",
     "LedgerName": "Ledger Name",
     "InvoiceNo": "Invoice No",
-    "InvoiceDate":"Invoice Date",
+    "InvoiceDate": "Invoice Date",
     "VehicleRegNo": "Vehicle Reg No",
     "ProductCode": "Product Code",
     "ProductName": "Product Name",
@@ -2147,8 +2147,7 @@
     "desctiption": "Description",
     "type": "Type"
   },
-  "payslip" : {
-
+  "payslip": {
     "headers": {
       "Branch_Name": "Branch",
       "Sal_Month": "Month",
@@ -2156,6 +2155,75 @@
       "Report_Date": "Date",
       "Company_Phone": "Phone",
       "Created_By": "Created By"
+    }
+  },
+  "ptstatement": {
+    "Sno": "Sno",
+    "EmpNo": "Emp. No",
+    "EmployeeName": "Name of the Employee",
+    "NOWD": "N.O.W.D",
+    "Gross": "Gross",
+    "PT": "PT",
+    "Remarks": "Remarks",
+    "headers": {
+      "BranchName": "BranchName",
+      "MonthName": "Month",
+      "BranchAddress": "Address",
+      "ReportDate": "Date",
+      "Phone": "Phone",
+      "CreatedBy": "Created By"
+    },
+    "footer": {
+      "colspan": 3,
+      "TotalGross": "TotalGross",
+      "TotalPT": "TotalPT",
+      "sdfsd": ""
+    }
+  },
+  "glsireport": {
+    "Sno": "Sno",
+    "EmpNo": "Emp. No",
+    "EmployeeName": "Name of the Employee",
+    "DOB": "D.O.B",
+    "Scale": "Scale",
+    "Category": "Category",
+    "Amount": "Amount",
+    "headers": {
+      "BranchName": "BranchName",
+      "MonthName": "Month",
+      "BranchAddress": "Address",
+      "ReportDate": "Date",
+      "Phone": "Phone",
+      "CreatedBy": "Created By"
+    },
+    "footer": {
+      "colspan": 3,
+      "TotalScale": "TotalScale",
+      "sdfsdf": "",
+      "TotalAmount": "TotalAmount"
+    }
+  },
+  "esireport": {
+    "Sno": "Sno",
+    "EmpNo": "Emp. No",
+    "EmployeeName": "Name of the Employee",
+    "NOWD": "N.O.W.D",
+    "Gross": "Gross",
+    "ESI": "ESI",
+    "Remarks": "Remarks",
+    "headers": {
+      "BranchName": "BranchName",
+      "MonthName": "Month",
+      "BranchAddress": "Address",
+      "ReportDate": "Date",
+      "Phone": "Phone",
+      "CreatedBy": "Created By"
+    },
+    "footer": {
+      "colspan": 3,
+      "TotalGross": "TotalGross",
+      "TotalESI": "TotalESI",
+      "sdfsd": ""
     }
   }
 }

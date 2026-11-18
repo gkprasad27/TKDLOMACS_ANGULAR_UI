@@ -160,7 +160,15 @@ export class ReportsService {
         return this.dynamicData;
       case 'ptstatement':
         this.dynamicData.url = this.apiConfigService.getPTReportData;
-        this.dynamicData.listName = 'payslipList';
+        this.dynamicData.listName = 'accountLedgerList';
+        return this.dynamicData;
+      case 'glsireport':
+        this.dynamicData.url = this.apiConfigService.getGetGSLIReport;
+        this.dynamicData.listName = 'accountLedgerList';
+        return this.dynamicData;
+      case 'esireport':
+        this.dynamicData.url = this.apiConfigService.getGetESIReport;
+        this.dynamicData.listName = 'accountLedgerList';
         return this.dynamicData;
       default:
     }

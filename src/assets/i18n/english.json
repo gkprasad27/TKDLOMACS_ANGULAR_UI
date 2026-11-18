@@ -790,7 +790,7 @@
     "ptslab": "PT Slab",
     "pftype": "PF Type",
     "companyCode": "Company Code",
-    "employeeName":"Employee Name",
+    "employeeName": "Employee Name",
     "empCode": "Emp Code",
     "effectFrom": "Effect From",
     "earnDednCode": "Earn Dedn Code",
@@ -1647,10 +1647,9 @@
     "ProductCode": "Product Code",
     "ProductName": "Product Name",
     "UnitName": "Unit Name",
-
-        "GrandTotalQty": "Qty",
-        "GrandTotalLiters": "Liters",
-        "GrandGrossAmount": "Amount"
+    "GrandTotalQty": "Qty",
+    "GrandTotalLiters": "Liters",
+    "GrandGrossAmount": "Amount"
   },
   "ProductWiseMonthlyPurchase": {
     "title": "Product Wise Monthly Purchase",
@@ -2598,15 +2597,66 @@
   },
   "payslip": {
     "title": "Pay Slip",
-      "Branch_Name": "Branch",
-      "Sal_Month": "Month",
-      "Company_Address": "Address",
-      "Report_Date": "Report Date",
-      "Company_Phone": "Phone",
-      "Created_By": "Created By"
+    "Branch_Name": "Branch",
+    "Sal_Month": "Month",
+    "Company_Address": "Address",
+    "Report_Date": "Report Date",
+    "Company_Phone": "Phone",
+    "Created_By": "Created By"
   },
   "ptstatement": {
-        "title": "Pt Statement"
-
+    "title": "PT Statement",
+    "Sno": "Sno",
+    "EmpNo": "Emp. No",
+    "EmployeeName": "Name of the Employee",
+    "NOWD": "N.O.W.D",
+    "Gross": "Gross",
+    "PT": "PT",
+    "Remarks": "Remarks",
+    "BranchName": "BranchName",
+    "MonthName": "Month",
+    "BranchAddress": "Address",
+    "ReportDate": "Date",
+    "Phone": "Phone",
+    "CreatedBy": "Created By",
+    "TotalGross": "Total Gross",
+    "TotalPT": "Total PT"
+  },
+  "glsireport": {
+    "title": "GLSI Report",
+    "Sno": "Sno",
+    "EmpNo": "Emp. No",
+    "EmployeeName": "Name of the Employee",
+    "DOB": "D.O.B",
+    "Scale": "Scale",
+    "Category": "Category",
+    "Amount": "Amount",
+    "BranchName": "BranchName",
+    "MonthName": "Month",
+    "BranchAddress": "Address",
+    "ReportDate": "Date",
+    "Phone": "Phone",
+    "CreatedBy": "Created By",
+    "TotalScale": "Total Scale",
+    "TotalAmount": "Total Amount"
+  },
+  "esireport": {
+    "title": "ESI Report",
+    "Sno": "Sno",
+    "EmpNo": "Emp. No",
+    "EmployeeName": "Name of the Employee",
+    "NOWD": "N.O.W.D",
+    "Gross": "Gross",
+    "ESI": "ESI",
+    "Remarks": "Remarks",
+    "BranchName": "BranchName",
+    "MonthName": "Month",
+    "BranchAddress": "Address",
+    "ReportDate": "Date",
+    "Phone": "Phone",
+    "CreatedBy": "Created By",
+    "TotalGross": "Total Gross",
+    "TotalESI": "Total ESI",
+    "sdfsd": ""
   }
 }
