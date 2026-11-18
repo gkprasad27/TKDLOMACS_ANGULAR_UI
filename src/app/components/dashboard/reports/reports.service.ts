@@ -158,6 +158,10 @@ export class ReportsService {
         this.dynamicData.url = this.apiConfigService.getPayslipReportData;
         this.dynamicData.listName = 'payslipList';
         return this.dynamicData;
+      case 'ptstatement':
+        this.dynamicData.url = this.apiConfigService.getPTReportData;
+        this.dynamicData.listName = 'payslipList';
+        return this.dynamicData;
       default:
     }
   }
