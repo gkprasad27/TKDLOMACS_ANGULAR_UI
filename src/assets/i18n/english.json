@@ -1229,6 +1229,7 @@
     "month": "Month",
     "year": "Year",
     "day": "Day",
+    "days": "Days",
     "remarks": "Remarks"
   },
   "cashpayment": {

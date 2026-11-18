@@ -23,7 +23,7 @@
       <div class="row">
 
         <!-- Employee Code -->
-        <div class="col-md-6 mat-mdc-form-field typeahead floating-dropdown " style="width: 24.5%;"
+        <div class="col-md-6 mat-mdc-form-field typeahead floating-dropdown " 
           [class.filled]="modelFormData.value?.empCodeName?.length > 0">
           <label> {{ 'CTCBreakup.empCode' | translate }} </label>
           <input placeholder=" " formControlName="empCodeName" (input)="getctcEmployeeList($event.target.value)"
@@ -85,12 +85,12 @@
           </div>
 
           <!-- Earnings List -->
-          <div class="p-2">
+          <div >
 
             @for (item of componentList; track item) {
             @if (item.id.includes('TKD_E')) {
 
-            <div class="row align-items-center mx-0 py-2 border-bottom ctc-component-row">
+            <div class="row align-items-center mx-0 py-1 border-bottom ctc-component-row">
 
               <div class="col-6 pr-2">
                 <label class="mb-0 text-secondary">
@@ -149,7 +149,7 @@
             @for (item of componentList; track item) {
             @if (item.id.includes('TKD_D')) {
 
-            <div class="row align-items-center mx-0 py-2 border-bottom ctc-component-row">
+            <div class="row align-items-center mx-0 py-1 border-bottom ctc-component-row">
 
               <div class="col-6 pr-2">
                 <label class="mb-0 text-secondary">

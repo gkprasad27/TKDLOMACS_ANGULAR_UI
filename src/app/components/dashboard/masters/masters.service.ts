@@ -103,7 +103,7 @@ export class MastersService {
         this.dynamicData.registerUrl = this.apiConfigService.registerLOP;
         this.dynamicData.updateUrl = this.apiConfigService.updateLOP;
         this.dynamicData.deleteUrl = this.apiConfigService.deleteLOP;
-        this.dynamicData.listName = 'LOPList';
+        this.dynamicData.listName = 'lopList';
         this.dynamicData.primaryKey = 'lopId';
         return this.dynamicData;
         break;

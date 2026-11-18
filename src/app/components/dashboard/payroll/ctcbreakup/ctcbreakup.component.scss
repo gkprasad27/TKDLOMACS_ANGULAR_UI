@@ -94,27 +94,30 @@
   background: linear-gradient(120deg, #edf4ff, #e5efff) !important;
   border: 1px solid #c9dbf8 !important;
   border-radius: 10px !important;
-  padding: 18px !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 15px !important;
 }
 
-.ctc-content form label {
-  color: #263d5c;
-  font-size: 15px;
-  font-weight: 600;
+.floating-dropdown label {
+  top: 0px;
+  left: 15px;
+  background-color: transparent;
+}
+
+.floating-dropdown.filled label,
+.floating-dropdown:focus-within label {
+  top: -20px;
+  font-size: 12px !important;
+  color: rgb(0 0 0 / 60%);
 }
 
 /* Employee code input */
 
 .ctc-content form input.form-control {
-  height: 44px;
-  border: 1px solid #bdcce2;
-  border-radius: 7px;
-  background: #ffffff;
+  // border: 1px solid #bdcce2;
+  // border-radius: 7px;
+ background: transparent;
   padding: 8px 12px;
-  font-size: 14px;
-  color: #263b58;
-  transition: all 0.2s ease;
+  font-size: 12px;
 }
 
 .ctc-content form input.form-control:focus {
@@ -239,13 +242,6 @@
    COMPONENT ROWS
 ========================================= */
 
-.ctc-component-row {
-  min-height: 63px;
-  padding: 9px 10px !important;
-  margin: 0 !important;
-  border-bottom: 1px solid #e9eef3 !important;
-  transition: background 0.2s ease;
-}
 
 .ctc-component-row:hover {
   background: #f6f9fd;

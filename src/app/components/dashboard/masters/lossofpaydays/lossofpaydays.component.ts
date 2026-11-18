@@ -47,7 +47,7 @@ export class LossOfPayDaysComponent implements OnInit {
       { value: '07', viewValue: 'July' },
       { value: '08', viewValue: 'August' },
       { value: '09', viewValue: 'September' },
-      { value: '10', viewValue: 'Octomber' },
+      { value: '10', viewValue: 'October' },
       { value: '11', viewValue: 'November' },
       { value: '12', viewValue: 'December' }
     ];
@@ -117,6 +117,10 @@ export class LossOfPayDaysComponent implements OnInit {
        this.modelFormData.controls['id'].disable();
       }
 
+  }
+
+    get daysInput() {
+    return this.modelFormData.get('days');
   }
 
   ngOnInit() {

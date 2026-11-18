@@ -49,7 +49,7 @@ export class CTCBreakupComponent implements OnInit {
   isSubmitted = false;
 
   componentList: any[] = [];
-
+  cTCListBYEMP: any[] = [];
   get formControls() { return this.modelFormData.controls; }
 
   constructor(
@@ -66,7 +66,6 @@ export class CTCBreakupComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
     // public dialogRef: MatDialogRef<CTCBreakupComponent>,
   ) {
-    let obj = JSON.parse(localStorage.getItem("user"));
     this.modelFormData = this.formBuilder.group({
       empCode: [null],
       empCodeName: [null, Validators.required],
@@ -81,6 +80,7 @@ export class CTCBreakupComponent implements OnInit {
     this.formData = { ...this.data };
     if (!this.commonService.checkNullOrUndefined(this.formData.item)) {
       this.modelFormData.patchValue(this.formData.item);
+      this.modelFormData.patchValue({ empCodeName: this.formData.item.empCode + ' - ' + this.formData.item.employeeName });
     }
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
@@ -139,6 +139,7 @@ export class CTCBreakupComponent implements OnInit {
               getctcComponentsList.response['ComponentList'].push({ id: 'TKD_E06', text: 'Gross Salary', earnDednAmount: 0 });
               this.componentList = getctcComponentsList.response['ComponentList'];
               const arr = cTCListBYEMP?.response?.['ctcList'] || [];
+              this.cTCListBYEMP = cTCListBYEMP?.response?.['ctcList'];
               if (this.data?.item && arr && arr.length) {
                 this.componentList.forEach(c => {
                   const matchedComponent = arr.find((comp: any) => comp.earnDednCode.trim() == c.id);
@@ -346,6 +347,13 @@ export class CTCBreakupComponent implements OnInit {
       this.modelFormData.markAllAsTouched();
       return;
     }
+    const arr = JSON.parse(JSON.stringify(this.componentList));
+    arr.forEach((a: any) => {
+      const obj = this.cTCListBYEMP.find((c: any) => c.earnDednCode.trim() == a.id);
+      a.id = obj.id;
+      a.earnDednCode = obj.earnDednCode.trim();
+    })
+    
     // const arr = this.dataSource.data.filter((d: any) => d.EarnDednAmount !== undefined && d.EarnDednAmount !== null);
     const obj = {
       item: {
@@ -358,7 +366,7 @@ export class CTCBreakupComponent implements OnInit {
           // pftype: this.modelFormData.value.pfType,
           // ptslab: this.modelFormData.value.ptSlab
         },
-        components: this.componentList
+        components: arr
       }
     }
     this.formData.item = obj.item;

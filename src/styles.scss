@@ -385,7 +385,7 @@ mat-tab-header {
 .floating-dropdown.filled label,
 .floating-dropdown:focus-within label {
   top: -20px;
-  font-size: 12px;
+  font-size: 12px !important;
   color: rgb(0 0 0 / 60%);
 }
 
