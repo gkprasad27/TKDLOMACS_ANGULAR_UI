@@ -127,7 +127,7 @@ export class CTCBreakupComponent implements OnInit {
           if (!this.commonService.checkNullOrUndefined(getctcComponentsList.response)) {
             if (!this.commonService.checkNullOrUndefined(getctcComponentsList.response['ComponentList']) && getctcComponentsList.response['ComponentList'].length) {
               getctcComponentsList.response['ComponentList'].forEach(element => {
-                element.earnDednAmount = null;
+                element.earnDednAmount = 0;
                 if (element.id === 'TKD_D01') {
                   element.esiAmount = 0.75;
                 } else if (element.id === 'TKD_D03') {
@@ -143,13 +143,11 @@ export class CTCBreakupComponent implements OnInit {
                 this.componentList.forEach(c => {
                   const matchedComponent = arr.find((comp: any) => comp.earnDednCode.trim() == c.id);
                   if (matchedComponent) {
-                    c.earnDednAmount = matchedComponent.earnDednAmount;
-                    console.log('matchedComponent', matchedComponent.earnDednAmount, c.earnDednAmount);
+                    c.earnDednAmount = matchedComponent.earnDednAmount || 0;
                   }
                 });
               }
-              console.log('componentList', this.componentList);
-              //  this.calculatePfAmount();
+              this.calculatePfAmount();
             }
           }
         }
