@@ -145,6 +145,9 @@ export class CTCBreakupComponent implements OnInit {
                   if (matchedComponent) {
                     c.earnDednAmount = matchedComponent.earnDednAmount || 0;
                   }
+                  if (c.id === 'TKD_D01' && c.earnDednAmount == 0) {
+                    c.esiAmount = 0;
+                  }
                 });
               }
               this.calculatePfAmount();
@@ -163,7 +166,7 @@ export class CTCBreakupComponent implements OnInit {
     const pf = this.componentList.find(c => c.id === 'TKD_D03');
     this.componentList.forEach((c: any, index: number) => {
       if (c.id === 'TKD_D03') {
-        c.earnDednAmount = Math.ceil(((((+da.earnDednAmount || 0) + (+basic.earnDednAmount || 0)) * (pf.pfAmount || 0)) / 100));
+        c.earnDednAmount = Math.round(((((+da.earnDednAmount || 0) + (+basic.earnDednAmount || 0)) * (pf.pfAmount || 0)) / 100));
       }
     });
 
