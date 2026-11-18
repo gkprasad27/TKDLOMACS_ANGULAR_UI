@@ -46,13 +46,14 @@ export class ApiService {
     
     setTimeout(() => this.spinner.show());
     return this.http.get(url, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), observe: 'response', params:obj })
-      .pipe((tap<any>(res => {
+      .pipe((tap<any>(response => {
+        const res = response['body'];
         if (!this.commonService.checkNullOrUndefined(res) && res.status === StatusCodes.fail) {
           this.alertService.openSnackBar(res.response, Static.Close, SnackBar.error);
           setTimeout(() => this.spinner.hide());
           return;
         }
-        return res['body']['response'];
+        return res['response'];
       })),
         catchError(this.handleError('apiGetRequest')));
   }

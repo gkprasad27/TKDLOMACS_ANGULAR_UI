@@ -98,13 +98,17 @@ export class CTCBreakupComponent implements OnInit {
     const getctcComponentsListUrl = this.apiConfigService.getPfComponentsList;
     const getCTCListBYEMP = [this.apiConfigService.getCTCListBYEMP, this.data?.item?.empCode].join('/');
     // Use forkJoin to run both APIs in parallel
+
+    const apiCalls = [
+  this.apiService.apiGetRequest(getctcComponentsListUrl),
+  ...(this.data?.item?.empCode
+    ? [this.apiService.apiGetRequest(getCTCListBYEMP)]
+    : [])
+];
+
+
     import('rxjs').then(rxjs => {
-      rxjs.forkJoin([
-        // this.apiService.apiGetRequest(getctcpf),
-        // this.apiService.apiGetRequest(getctcpt),
-        this.apiService.apiGetRequest(getctcComponentsListUrl),
-        this.apiService.apiGetRequest(getCTCListBYEMP)
-      ]).subscribe(([getctcComponentsList, cTCListBYEMP]) => {
+      rxjs.forkJoin(apiCalls).subscribe(([getctcComponentsList, cTCListBYEMP]) => {
         this.spinner.hide();
 
         // if (!this.commonService.checkNullOrUndefined(getctcpf) && getctcpf.status === StatusCodes.pass) {
@@ -139,7 +143,7 @@ export class CTCBreakupComponent implements OnInit {
               getctcComponentsList.response['ComponentList'].push({ id: 'TKD_E06', text: 'Gross Salary', earnDednAmount: 0 });
               this.componentList = getctcComponentsList.response['ComponentList'];
               const arr = cTCListBYEMP?.response?.['ctcList'] || [];
-              this.cTCListBYEMP = cTCListBYEMP?.response?.['ctcList'];
+              this.cTCListBYEMP = cTCListBYEMP?.response?.['ctcList'] || [];
               if (this.data?.item && arr && arr.length) {
                 this.componentList.forEach(c => {
                   const matchedComponent = arr.find((comp: any) => comp.earnDednCode.trim() == c.id);
@@ -347,12 +351,16 @@ export class CTCBreakupComponent implements OnInit {
       this.modelFormData.markAllAsTouched();
       return;
     }
-    const arr = JSON.parse(JSON.stringify(this.componentList));
+    let arr = JSON.parse(JSON.stringify(this.componentList));
+    arr = arr.filter((r: any) => r.id != 'TKD_E06');
     arr.forEach((a: any) => {
-      const obj = this.cTCListBYEMP.find((c: any) => c.earnDednCode.trim() == a.id);
+      const obj = this.cTCListBYEMP.length && this.cTCListBYEMP.find((c: any) => c.earnDednCode.trim() == a.id);
       if (obj) {
+        a.earnDednCode = a.id;
         a.id = obj.id;
-        a.earnDednCode = obj.earnDednCode.trim();
+      } else {
+        a.earnDednCode = a.id;
+        a.id = 0;
       }
     })
 
