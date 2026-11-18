@@ -85,6 +85,10 @@ export class CTCBreakupComponent implements OnInit {
     if (!this.commonService.checkNullOrUndefined(this.route.snapshot.params.value)) {
       this.routeEdit = this.route.snapshot.params.value;
     }
+    if (this.formData.action == 'Edit') {
+      this.modelFormData.get('empCodeName')?.disable();
+      this.modelFormData.get('effectFrom')?.disable();
+    }
 
   }
 
