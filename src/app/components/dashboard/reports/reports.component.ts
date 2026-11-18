@@ -91,6 +91,7 @@ export class ReportsComponent implements OnInit {
                 this.footerData = res.response['footerList'];
               }
             }
+            this.alertService.openSnackBar("Data received successfully.", Static.Close, SnackBar.success);
           }
         }, error => {
           this.spinner.hide();

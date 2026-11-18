@@ -575,6 +575,10 @@
           margin-bottom: 3px;">
         <ol>
           <li style="padding-bottom: 8px;">
+            <div style="display: flex;"> <span style="width: 300px; min-width: 300px; font-weight: bold;">   Employee Code </span> <span> {{ row?.header?.Emp_Code }} </span>
+            </div>
+          </li>
+           <li style="padding-bottom: 8px;">
             <div style="display: flex;"> <span style="width: 300px; min-width: 300px; font-weight: bold;"> Name of the
                 Employee </span> <span> {{ row?.header?.Emp_Name }} </span>
             </div>
@@ -608,46 +612,52 @@
           <ol style="padding: 0px 18px; margin-bottom: 0px;">
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[0].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[0].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[0]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[0]?.Component_Amount : '' }} </span>
               </div>
             </li>
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[1].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[1].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[1]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[1]?.Component_Amount : '' }} </span>
               </div>
             </li>
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[2].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[2].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[2]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[2]?.Component_Amount : '' }} </span>
               </div>
             </li>
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[3].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[3].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[3]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[3]?.Component_Amount : '' }} </span>
               </div>
             </li>
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[4].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[4].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[4]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[4]?.Component_Amount : '' }} </span>
               </div>
             </li>
-            <li style="padding-bottom: 8px;">
-              <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[5].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[5].Component_Amount : '' }} </span>
-              </div>
+            <li style="padding-bottom: 8px; list-style: none; min-height: 20px;">
+              <!-- <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[5]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[5]?.Component_Amount : '' }} </span>
+              </div> -->
             </li>
-            <li style="padding-bottom: 8px;">
+            <li style="padding-bottom: 8px; list-style: none; min-height: 20px;">
               <!-- <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
                   (tableData && tableData.length) ? tableData[5].Component_Name : '' }}
                 </span> <span> {{ (tableData && tableData.length) ? tableData[5].Component_Amount : '' }} </span>
               </div> -->
             </li>
+              <!-- <li style="padding-bottom: 8px; list-style: none; min-height: 20px;"> -->
+              <!-- <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (tableData && tableData.length) ? tableData[5].Component_Name : '' }}
+                </span> <span> {{ (tableData && tableData.length) ? tableData[5].Component_Amount : '' }} </span>
+              </div> -->
+            <!-- </li> -->
           </ol>
 
           <div style="display: flex;padding-bottom: 8px;"> <span style="width: 300px; min-width: 300px; "> a] Total Earnings
@@ -678,46 +688,52 @@
           <ol style="padding: 0px 18px; margin-bottom: 0px;">
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[6].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[6].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[5]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[5]?.Component_Amount : '' }} </span>
               </div>
             </li>
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[7].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[7].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[6]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[6]?.Component_Amount : '' }} </span>
               </div>
             </li>
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[8].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[8].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[7]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[7]?.Component_Amount : '' }} </span>
               </div>
             </li>
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[9].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[9].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[8]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[8]?.Component_Amount : '' }} </span>
               </div>
             </li>
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[10].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[10].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[9]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[9]?.Component_Amount : '' }} </span>
               </div>
             </li>
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[11].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[11].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[10]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[10]?.Component_Amount : '' }} </span>
               </div>
             </li>
             <li style="padding-bottom: 8px;">
               <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
-                  (row?.payslipList && row?.payslipList.length) ? row?.payslipList[12].Component_Name : '' }}
-                </span> <span> {{ (row?.payslipList && row?.payslipList.length) ? row?.payslipList[12].Component_Amount : '' }} </span>
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[11]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[11]?.Component_Amount : '' }} </span>
               </div>
             </li>
+            <!-- <li style="padding-bottom: 8px; list-style: none; min-height: 20px;"> -->
+              <!-- <div style="display: flex;"> <span style="width: 300px; min-width: 300px; "> {{
+                  (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[12]?.Component_Name : '' }}
+                </span> <span> {{ (row?.payslipList && row?.payslipList?.length) ? row?.payslipList[12]?.Component_Amount : '' }} </span>
+              </div> -->
+            <!-- </li> -->
           </ol>
 
           <div style="display: flex;padding-bottom: 8px;"> <span style="width: 300px; min-width: 300px; "> b] Total Deductions
