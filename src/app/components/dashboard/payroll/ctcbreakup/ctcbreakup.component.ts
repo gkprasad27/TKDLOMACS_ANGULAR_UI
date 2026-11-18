@@ -350,10 +350,12 @@ export class CTCBreakupComponent implements OnInit {
     const arr = JSON.parse(JSON.stringify(this.componentList));
     arr.forEach((a: any) => {
       const obj = this.cTCListBYEMP.find((c: any) => c.earnDednCode.trim() == a.id);
-      a.id = obj.id;
-      a.earnDednCode = obj.earnDednCode.trim();
+      if (obj) {
+        a.id = obj.id;
+        a.earnDednCode = obj.earnDednCode.trim();
+      }
     })
-    
+
     // const arr = this.dataSource.data.filter((d: any) => d.EarnDednAmount !== undefined && d.EarnDednAmount !== null);
     const obj = {
       item: {
