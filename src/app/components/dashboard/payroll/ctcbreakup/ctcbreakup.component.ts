@@ -87,7 +87,7 @@ export class CTCBreakupComponent implements OnInit {
     }
     if (this.formData.action == 'Edit') {
       this.modelFormData.get('empCodeName')?.disable();
-      this.modelFormData.get('effectFrom')?.disable();
+      // this.modelFormData.get('effectFrom')?.disable();
     }
 
   }

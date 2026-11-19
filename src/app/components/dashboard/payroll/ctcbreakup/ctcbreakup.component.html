@@ -24,7 +24,7 @@
 
         <!-- Employee Code -->
         <div class="col-md-6 mat-mdc-form-field typeahead floating-dropdown " 
-          [class.filled]="modelFormData.value?.empCodeName?.length > 0">
+          [class.filled]="formControls?.empCodeName?.value?.length > 0">
           <label> {{ 'CTCBreakup.empCode' | translate }} </label>
           <input placeholder=" " formControlName="empCodeName" (input)="getctcEmployeeList($event.target.value)"
             [typeaheadOptionsLimit]="100000" [typeahead]="GetEmployeeListArray" typeaheadOptionField='display'
