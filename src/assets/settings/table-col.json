@@ -571,7 +571,7 @@
     "timeStamp": "Date"
   },
   "Leaverequest": {
-    "title": "LeaveRequest",
+    "title": "Leave Request",
     "empCode": "EmpCode",
     "empName": "EmpName",
     "applDate": "Date",
@@ -2224,6 +2224,51 @@
       "TotalGross": "TotalGross",
       "TotalESI": "TotalESI",
       "sdfsd": ""
+    }
+  },
+  "epfstatement": {
+    "Sno": "Sno",
+    "AccNo": "Acc No",
+    "EmployeeName": "Name of the Employee",
+    "Basic+DA": "Basic+DA",
+    "EMP.CONT EPF 12%": "EMP.CONT EPF 12%",
+    "EMR.CONT EPF 3.67%": "EMR.CONT EPF 3.67%",
+    "TOTAL EPF 15.67%": "TOTAL EPF 15.67%",
+    "FPF 8.33%": "FPF 8.33%",
+    "headers": {
+      "BranchName": "Branch Name",
+      "MonthName": "Month",
+      "BranchAddress": "Address",
+      "ReportDate": "Date",
+      "Phone": "Phone",
+      "CreatedBy": "Created By"
+    },
+    "footer": {
+      "colspan": 2,
+      "TotalBasicDA": "TotalBasicDA",
+      "TotalEmployeeEPF": "TotalEmployeeEPF",
+      "TotalEmployerEPF": "TotalEmployerEPF",
+      "TotalFPF": "TotalFPF",
+      "TotalEPF": "TotalEPF"
+    }
+  },
+  "salarybankstatement": {
+    "Sno": "Sno",
+    "EmpNo": "Emp. No",
+    "EmployeeName": "Name of the Employee",
+    "Designation": "Designation",
+    "Bank A/c no.": "Bank A/c no.",
+    "Net Salary": "Net Salary",
+    "headers": {
+      "MonthName": "Month",
+      "Address": "Address",
+      "ReportDate": "Date",
+      "Phone": "Phone",
+      "CreatedBy": "Created By"
+    },
+    "footer": {
+      "colspan": 4,
+      "TotalNetSalary": "TotalNetSalary"
     }
   }
 }

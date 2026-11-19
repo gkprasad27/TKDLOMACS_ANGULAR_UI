@@ -170,6 +170,14 @@ export class ReportsService {
         this.dynamicData.url = this.apiConfigService.getGetESIReport;
         this.dynamicData.listName = 'accountLedgerList';
         return this.dynamicData;
+      case 'epfstatement':
+        this.dynamicData.url = this.apiConfigService.getEPFContributionReport;
+        this.dynamicData.listName = 'accountLedgerList';
+        return this.dynamicData;
+      case 'salarybankstatement':
+        this.dynamicData.url = this.apiConfigService.getBankStatementReport;
+        this.dynamicData.listName = 'accountLedgerList';
+        return this.dynamicData;
       default:
     }
   }

@@ -836,7 +836,7 @@
     "leaveName": "leaveName"
   },
   "Leaverequest": {
-    "title": "LeaveRequest",
+    "title": "Leave Request",
     "empCode": "EmpCode",
     "empName": "EmpName",
     "sno": "Sno",
@@ -2658,5 +2658,44 @@
     "TotalGross": "Total Gross",
     "TotalESI": "Total ESI",
     "sdfsd": ""
+  },
+  "epfstatement": {
+    "title": "EPF statement",
+    "Sno": "Sno",
+    "AccNo": "Acc No",
+    "EmployeeName": "Name of the Employee",
+    "Basic+DA": "Basic+DA",
+    "EMP.CONT EPF 12%": "EMP.CONT EPF 12%",
+    "EMR.CONT EPF 3.67%": "EMR.CONT EPF 3.67%",
+    "TOTAL EPF 15.67%": "TOTAL EPF 15.67%",
+    "FPF 8.33%": "FPF 8.33%",
+    "BranchName": "Branch Name",
+    "MonthName": "Month",
+    "BranchAddress": "Address",
+    "ReportDate": "Date",
+    "Phone": "Phone",
+    "CreatedBy": "Created By",
+    "TotalBasicDA": "TotalBasicDA",
+    "TotalEPF": "TotalEPF",
+    "TotalEmployeeEPF": "TotalEmployeeEPF",
+    "TotalEmployees": "TotalEmployees",
+    "TotalEmployerEPF": "TotalEmployerEPF",
+    "TotalFPF": "TotalFPF"
+  },
+  "salarybankstatement": {
+    "title": "Salary Bank Statement",
+    "Sno": "Sno",
+    "EmpNo": "Emp. No",
+    "EmployeeName": "Name of the Employee",
+    "Designation": "Designation",
+    "Bank A/c no.": "Bank A/c no.",
+    "Net Salary": "Net Salary",
+    "BranchName": "BranchName",
+    "MonthName": "Month",
+    "Address": "Address",
+    "ReportDate": "Date",
+    "Phone": "Phone",
+    "CreatedBy": "Created By",
+    "TotalNetSalary": "TotalNetSalary"
   }
 }

@@ -941,6 +941,10 @@ export class ApiConfigService {
 
   getGetESIReport = `${environment.baseUrl}Reports/PayrollReport/GetGetESIReport`;
 
+  getEPFContributionReport = `${environment.baseUrl}Reports/PayrollReport/GetEPFContributionReport`;
+
+  getBankStatementReport = `${environment.baseUrl}Reports/PayrollReport/GetBankStatementReport`;
+
   /****************************** Settings *********************************************************** */
   getRoles = `${environment.baseUrl}Auth/getRoles`;
   getParentMenus = `${environment.baseUrl}Auth/getParentMenu`;
