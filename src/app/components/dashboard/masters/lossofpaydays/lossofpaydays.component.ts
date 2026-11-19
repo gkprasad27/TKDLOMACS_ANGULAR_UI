@@ -144,7 +144,7 @@ export class LossOfPayDaysComponent implements OnInit {
   }
 
   onEmpChange(event: any) {
-    const selectedEmp = this.employeeList.find((emp: any) => emp.id === event.target.value);
+    const selectedEmp = this.employeeList.find((emp: any) => emp.text === event.target.value);
     if (selectedEmp) {
       this.modelFormData.patchValue({
         empCode: selectedEmp.id
